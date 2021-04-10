@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="SDE\Interface\" />
+    <Folder Include="SDE\Service\" />
+    <Folder Include="Shared\Interface\" />
+    <Folder Include="Shared\Service\" />
+  </ItemGroup>
+
+</Project>
