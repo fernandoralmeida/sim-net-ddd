@@ -7,14 +7,6 @@ using System.Threading.Tasks;
 namespace Sim.Domain.SDE.Entity
 {
     using Domain.Shared.Entity;
-    public class QSA
-    {
-        public int QSA_Id { get; set; }
-        public string Nome { get; set; }
-        public string Qualificacao { get; set; }
-        public int Empresa_Id { get; set; }
-        public virtual Empresa Empresa { get; set; }
-    }
 
     public class Empresa
     {
@@ -48,7 +40,6 @@ namespace Sim.Domain.SDE.Entity
 
         //Registros relacionais
         public virtual ICollection<QSA> QSA { get; set; }
-
         public virtual ICollection<Atendimento> Atendimento { get; set; }
 
     }

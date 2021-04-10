@@ -8,5 +8,9 @@ namespace Sim.Domain.Shared.Entity
 {
     public class Setor
     {
+        public int Setor_Id { get; set; }
+        public string Nome { get; set; }
+        public string Owner { get; set; }
+        public bool Ativo { get; set; }
     }
 }
