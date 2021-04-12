@@ -9,7 +9,11 @@ namespace Sim.Domain.SDE.Entity
     using Domain.Shared.Entity;
     public class QSA
     {
-        public int QSA_Id { get; set; }
+        public QSA()
+        {
+
+        }
+        public int Id { get; set; }
         public string Nome { get; set; }
         public string Qualificacao { get; set; }
         public int Empresa_Id { get; set; }

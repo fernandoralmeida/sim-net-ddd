@@ -10,7 +10,11 @@ namespace Sim.Domain.SDE.Entity
 
     public class Empresa
     {
-        public int Empresa_Id { get; set; }
+        public Empresa()
+        {
+
+        }
+        public int Id { get; set; }
         public string CNPJ { get; set; }
         public string Tipo { get; set; }
         public DateTime? Data_Abertura { get; set; }

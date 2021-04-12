@@ -24,11 +24,12 @@ namespace Sim.Domain.Service
         public void Dispose()
         {
             _repositoryBase.Dispose();
+            GC.SuppressFinalize(this);
         }
 
         public IEnumerable<TEntity> GetAll()
         {
-            return _repositoryBase.GetAll();
+            return  _repositoryBase.GetAll();
         }
 
         public TEntity GetById(int id)

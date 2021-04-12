@@ -1,0 +1,27 @@
+﻿@page
+@model LogoutModel
+@{
+    ViewData["Title"] = "Sair";
+}
+
+
+<div class="text-center">
+    <h5 class="display-4">MSDE</h5>    
+
+    @{if (User.Identity.IsAuthenticated)
+        {
+            <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+                <p class="text-center">
+                    Módulo Desenvolvimento Econômico - <button type="submit" class="btn btn-link border-0">Clique aqui para sair</button>
+                </p>
+            </form>
+        }
+        else
+        {
+            <p>Você saiu do aplicativo com sucesso.</p>
+        }
+    }
+
+</div>
+
+

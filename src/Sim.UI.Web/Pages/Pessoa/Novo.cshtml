@@ -1,0 +1,193 @@
+﻿@page
+@model Sim.UI.Web.Pages.Pessoa.NovoModel
+@{
+    ViewData["Title"] = "Novo";
+}
+
+<h5>Novo</h5>
+
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+
+<hr />
+<h6>Identificação</h6>
+
+
+<div>
+
+    <form method="post" novalidate>
+
+        <div class="mb-3 row">
+
+            <div class="col-md-5">
+                <label asp-for="Input.Nome" class="form-label" for="inputNome"></label>
+                <input asp-for="Input.Nome" class="form-control" id="inputNome" required />
+            </div>
+            <div class="col-md-5">
+                <label asp-for="Input.Nome_Social" class="form-label" for="inputSocial"></label>
+                <input asp-for="Input.Nome_Social" class="form-control" id="inputSocial" />
+            </div>
+            <div class="col-md-2">
+                <label asp-for="Input.Genero" class="form-label" for="selectGenero"></label>
+                <select asp-for="Input.Genero" class="form-select" id="selectGenero">
+                    <option selected></option>
+                    <option>Feminino</option>
+                    <option>Masculino</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <div class="col-md-3">
+                <label asp-for="Input.Data_Nascimento" class="form-label" for="inputNascimento"></label>
+                <input asp-for="Input.Data_Nascimento" class="form-control" id="inputNascimento" required />
+            </div>
+            <div class="col-md-3">
+                <label asp-for="Input.CPF" class="form-label" for="inputCPF"></label>
+                <input asp-for="Input.CPF" class="form-control" id="inputCPF" required />
+            </div>
+            <div class="col-md-3">
+                <label asp-for="Input.RG" class="form-label" for="inputRG"></label>
+                <input asp-for="Input.RG" class="form-control" id="inputRG" />
+            </div>
+            <div class="col-md-2">
+                <label asp-for="Input.RG_Emissor" class="form-label" for="inputEmissor"></label>
+                <input asp-for="Input.RG_Emissor" class="form-control text-uppercase" id="inputEmissor" />
+            </div>
+            <div class="col-md-1">
+                <label asp-for="Input.RG_Emissor_UF" class="form-label" for="inputEmissorUF"></label>
+                <input asp-for="Input.RG_Emissor_UF" class="form-control text-uppercase" id="inputEmissorUF" />
+            </div>
+        </div>
+        <hr />
+        <h6>
+            <label asp-for="Input.Deficiencia" class="form-label"></label>
+            <input asp-for="Input.Deficiencia" class="form-control" hidden />
+        </h6>
+
+        <div class="mb-3 row">
+
+            <div class="col-md-2">
+                <div class="form-switch">
+                    <input asp-for="Label.Fisica" type="checkbox" class="form-check-input" id="customSwitch1">
+                    <label asp-for="Label.Fisica" class="custom-control-label" for="customSwitch1"></label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-switch">
+                    <input asp-for="Label.Visual" type="checkbox" class="form-check-input" id="customSwitch2">
+                    <label asp-for="Label.Visual" class="custom-control-label" for="customSwitch2"></label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-switch">
+                    <input asp-for="Label.Auditiva" type="checkbox" class="form-check-input" id="customSwitch3">
+                    <label asp-for="Label.Auditiva" class="custom-control-label" for="customSwitch3"></label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-switch">
+                    <input asp-for="Label.Intelectual" type="checkbox" class="form-check-input" id="customSwitch4">
+                    <label asp-for="Label.Intelectual" class="custom-control-label" for="customSwitch4"></label>
+                </div>
+            </div>
+
+        </div>
+
+        <hr />
+        <h6>Endereço</h6>
+
+        <div class="mb-3 row">
+            <div class="col-md-2">
+                <label asp-for="Input.CEP" class="form-label" for="cep"></label>
+                <input asp-for="Input.CEP" class="form-control" id="cep" />
+            </div>
+            <div class="col-md-8">
+                <label asp-for="Input.Logradouro" class="form-label" for="rua"></label>
+                <input asp-for="Input.Logradouro" class="form-control" id="rua" />
+            </div>
+            <div class="col-md-2">
+                <label asp-for="Input.Numero" class="form-label"></label>
+                <input asp-for="Input.Numero" class="form-control" />
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <div class="col-md-3">
+                <label asp-for="Input.Complemento" class="form-label"></label>
+                <input asp-for="Input.Complemento" class="form-control" />
+            </div>
+            <div class="col-md-5">
+                <label asp-for="Input.Bairro" class="form-label" for="bairro"></label>
+                <input asp-for="Input.Bairro" class="form-control" id="bairro" />
+            </div>
+            <div class="col-md-3">
+                <label asp-for="Input.Cidade" class="form-label" for="cidade"></label>
+                <input asp-for="Input.Cidade" class="form-control" id="cidade" />
+            </div>
+            <div class="col-md-1">
+                <label asp-for="Input.UF" class="form-label" for="uf"></label>
+                <input asp-for="Input.UF" class="form-control" id="uf" />
+            </div>
+        </div>
+
+        <hr />
+        <h6>Contato</h6>
+
+        <div class="mb-3 row">
+
+            <div class="col-md-3">
+                <label asp-for="Input.Tel_Movel" class="form-label"></label>
+                <input asp-for="Input.Tel_Movel" class="form-control" id="txtmobile" />
+            </div>
+            <div class="col-md-3">
+                <label asp-for="Input.Tel_Fixo" class="form-label"></label>
+                <input asp-for="Input.Tel_Fixo" class="form-control" id="txtphone" />
+            </div>
+            <div class="col-md-6">
+                <label asp-for="Input.Email" class="form-label"></label>
+                <input asp-for="Input.Email" class="form-control" />
+            </div>
+        </div>
+
+        <hr />
+        <h6>Informações</h6>
+        <div class="mb-3 row">
+
+            <div class="col-md-3">
+                <label asp-for="Input.Data_Cadastro" class="form-label"></label>
+                <input asp-for="Input.Data_Cadastro" class="form-control" disabled />
+            </div>
+            <div class="col-md-3">
+                <label asp-for="Input.Ultima_Alteracao" class="form-label"></label>
+                <input asp-for="Input.Ultima_Alteracao" class="form-control" disabled />
+            </div>
+            <div class="col-md-3">
+                <label asp-for="Input.Ativo" class="form-label"></label>
+                <div class="custom-control custom-switch">
+                    <input asp-for="Input.Ativo" type="checkbox" class="form-check-input" id="customSwitch5">
+                    <label class="custom-control-label" for="customSwitch5">Ativo?</label>
+                </div>
+            </div>
+            <p />
+            <div class="d-grid gap-2 d-md-block">
+                <a asp-page="/Pessoa/Index" role="button" type="button" class="btn btn-secondary">Voltar</a>
+                <button type="submit" role="button" class="btn btn-primary">Gravar</button>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/jquery.cep.js"></script>
+    <script src="~/js/jquery.mask.min.js"></script>
+    <script src="~/js/jquery.validation.js"></script>
+    <script>
+        $('#inputCPF').mask('000.000.000-00', { placeholder: "___.___.___-__" });
+        $('#txtphone').mask('(00) 0000-0000', { placeholder: "(__) ____-____" });
+        $('#txtmobile').mask('(00) 00000-0000', { placeholder: "(__) _____-____" });
+        $('#cep').mask('00000-000', { placeholder: "_____-___" });
+    </script>
+
+}
+

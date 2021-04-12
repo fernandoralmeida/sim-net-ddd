@@ -8,7 +8,11 @@ namespace Sim.Domain.Shared.Entity
 {
     public class Evento
     {
-        public int Evento_Id { get; set; }
+        public Evento()
+        {
+
+        }
+        public int Id { get; set; }
         public string Tipo { get; set; }
         public string Nome { get; set; }
         public DateTime? Data { get; set; }

@@ -9,7 +9,11 @@ namespace Sim.Domain.SDE.Entity
     using Shared.Entity;
     public class Pessoa
     {
-        public int Pessoa_Id { get; set; }
+        public Pessoa()
+        {
+
+        }
+        public int Id { get; set; }
         // Pessoal
         public string Nome { get; set; }
         public string Nome_Social { get; set; }

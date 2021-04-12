@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 
 namespace Sim.UI.Web
 {
+
+    using Sim.Cross.Ioc;
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -23,6 +26,9 @@ namespace Sim.UI.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            new Container().RegisterApplicationService(services, Configuration, "App_____ContextConnection");
+
+            services.AddControllersWithViews();
             services.AddRazorPages();
         }
 
@@ -45,7 +51,9 @@ namespace Sim.UI.Web
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
+            
 
             app.UseEndpoints(endpoints =>
             {

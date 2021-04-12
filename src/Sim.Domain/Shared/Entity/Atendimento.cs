@@ -9,7 +9,11 @@ namespace Sim.Domain.Shared.Entity
     using SDE.Entity;
     public class Atendimento
     {
-        public int Atendimento_Id { get; set; }
+        public Atendimento()
+        {
+
+        }
+        public int Id { get; set; }
         public int Protocolo { get; set; }
         public DateTime? Data { get; set; }
         public DateTime? Inicio { get; set; }

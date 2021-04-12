@@ -8,7 +8,11 @@ namespace Sim.Domain.Shared.Entity
 {
     public class Planer
     {
-        public int Planer_Id { get; set; }
+        public Planer()
+        {
+
+        }
+        public int Id { get; set; }
         public string Segunda { get; set; }
         public string Terca { get; set; }
         public string Quarta { get; set; }

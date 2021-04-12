@@ -8,7 +8,11 @@ namespace Sim.Domain.Shared.Entity
 {
     public class Servico
     {
-        public int Servico_Id { get; set; }
+        public Servico()
+        {
+
+        }
+        public int Id { get; set; }
         public string Nome { get; set; }
         public string Owner { get; set; }
         public bool Ativo { get; set; }

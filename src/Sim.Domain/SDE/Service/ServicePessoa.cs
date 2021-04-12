@@ -29,7 +29,20 @@ namespace Sim.Domain.SDE.Service
 
         public IEnumerable<Pessoa> ConsultarPessoaByNameOrCPF(string cpf, string nome)
         {
-            return _repositoryPessoa.ConsultarPessoaByNameOrCPF(cpf, nome);
+            var _cpf = _repositoryPessoa.ConsultaByCPF(cpf).ToList();
+            var _nome = _repositoryPessoa.ConsultaByNome(nome).ToList();
+
+            if (_cpf.Count > 0)
+
+                return _cpf;
+
+            else if (_nome.Count > 0)
+
+                return _nome;
+
+            else
+
+                return null;
         }
     }
 }

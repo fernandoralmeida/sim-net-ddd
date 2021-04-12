@@ -10,8 +10,8 @@ namespace Sim.Domain.SDE.Interface
     using Domain.Interface;
     public interface IRepositoryEmpresa : IRepositoryBase<Empresa>
     {
-        IEnumerable<Empresa> ConsultaByCNPJ(string _cnpj);
-        IEnumerable<Empresa> ConsultaByCNAE(string _cnae);
-        IEnumerable<Empresa> ConsultaByRazaoSocial(string _name);
+        IEnumerable<Empresa> ConsultaByCNPJ(string cnpj);
+        IEnumerable<Empresa> ConsultaByCNAE(string cnae);
+        IEnumerable<Empresa> ConsultaByRazaoSocial(string name);
     }
 }

@@ -24,6 +24,7 @@ namespace Sim.Application
         public void Dispose()
         {
             _serviceBase.Dispose();
+            GC.SuppressFinalize(this);
         }
 
         public IEnumerable<TEntity> GetAll()

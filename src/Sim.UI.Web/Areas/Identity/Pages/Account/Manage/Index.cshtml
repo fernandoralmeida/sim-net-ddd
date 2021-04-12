@@ -1,0 +1,51 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Perfil";
+    ViewData["ActivePage"] = ManageNavPages.Index;
+}
+
+<h5>@ViewData["Title"]</h5>
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+<div>
+        <form id="profile-form" method="post" class="row g-3 col-md-6">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="col-md-12">
+                <label asp-for="UserName" class="form-label"></label>
+                <input asp-for="UserName" class="form-control" disabled />
+            </div>
+            
+                <div class="col-md-5">
+                    <label asp-for="Input.Name" class="form-label"></label>
+                    <input asp-for="Input.Name" class="form-control" />
+                    <span asp-validation-for="Input.Name" class="text-danger"></span>
+                </div>
+                <div class="col-md-7">
+                    <label asp-for="Input.LastName" class="form-label"></label>
+                    <input asp-for="Input.LastName" class="form-control" />
+                    <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                </div>
+            
+            <div class="col-md-12">
+                <label asp-for="Input.Genero" class="form-label"></label>
+                <select asp-for="Input.Genero" class="form-select">
+                    <option selected></option>
+                    <option>Feminino</option>
+                    <option>Masculino</option>
+                </select>
+                <span asp-validation-for="Input.Genero" class="text-danger"></span>
+            </div>
+            <div class="col-md-12">
+                <label asp-for="Input.PhoneNumber" class="form-label"></label>
+                <input asp-for="Input.PhoneNumber" class="form-control" />
+                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="col-md-7">
+                <button id="update-profile-button" type="submit" class="btn btn-primary">Gravar</button>
+            </div>            
+        </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

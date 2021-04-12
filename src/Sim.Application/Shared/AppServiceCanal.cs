@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sim.Application.Shared.Service
+namespace Sim.Application.Shared
 {
     using Domain.Shared.Entity;
     using Domain.Shared.Interface;
