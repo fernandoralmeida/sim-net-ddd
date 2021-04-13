@@ -1,37 +1,36 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using global::AutoMapper;
+
 
 namespace Sim.UI.Web.Pages.Pessoa
 {
     using Sim.Domain.SDE.Entity;
     using Sim.Application.SDE.Interface;
     using System.ComponentModel.DataAnnotations;
-    using global::AutoMapper;
+    using System.ComponentModel;
 
-    public class NovoModel : PageModel
+    public class EditModel : PageModel
     {
         private readonly IAppServicePessoa _pessoa;
         private readonly IMapper _mapper;
-        public NovoModel(IAppServicePessoa appServicePessoa, IMapper mapper)
+
+        public EditModel(IAppServicePessoa pessoa, IMapper mapper)
         {
-            _pessoa = appServicePessoa;
+            _pessoa = pessoa;
             _mapper = mapper;
         }
 
         [TempData]
         public string StatusMessage { get; set; }
 
-        //[BindProperty]
-        //public Pessoa Input { get; set; }
-
         [BindProperty]
         public InputModel Input { get; set; }
-        public class InputModel 
+        public class InputModel
         {
             [Key]
             [HiddenInput(DisplayValue = false)]
@@ -109,50 +108,8 @@ namespace Sim.UI.Web.Pages.Pessoa
             public bool Ativo { get; set; }
         }
 
-        public IActionResult OnGet()
+        public void OnGet()
         {
-            Input = new InputModel
-            {
-                Data_Cadastro = DateTime.Now,
-                Ultima_Alteracao = DateTime.Now,
-                Ativo = true
-            };
-            return Page();
-        }
-
-        public IActionResult OnPost()
-        {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    var pessoa = _mapper.Map<Pessoa>(Input);
-
-                    if (Input.Fisica)
-                        pessoa.Deficiencia += "Física;";
-
-                    if (Input.Visual)
-                        pessoa.Deficiencia += "Visual;";
-
-                    if (Input.Auditiva)
-                        pessoa.Deficiencia += "Auditiva;";
-
-                    if (Input.Intelectual)
-                        pessoa.Deficiencia += "Intelectual;";
-
-                    _pessoa.Add(pessoa);
-
-                    return RedirectToPage("/Pessoa/Index");
-                }
-
-                return Page();
-            }
-            catch(Exception ex)
-            {
-                StatusMessage = "Erro: " + ex.Message;
-                return Page();
-            }
-
 
         }
 

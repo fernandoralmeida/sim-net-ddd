@@ -10,6 +10,8 @@ namespace Sim.UI.Web.Pages.Pessoa
 {
     using Sim.Domain.SDE.Entity;
     using Sim.Application.SDE.Interface;
+    using System.ComponentModel.DataAnnotations;
+
     public class IndexModel : PageModel
     {
         private readonly IAppServicePessoa _pessoaApp;
@@ -26,7 +28,8 @@ namespace Sim.UI.Web.Pages.Pessoa
         public InputModel Input { get; set; }
         public class InputModel
         {
-            [DisplayName("Nome ou CPF")]
+         
+            [DisplayName("Nome ou CPF")]            
             public string CPF { get; set; }
 
             [DisplayName("Nome ou CPF")]
@@ -56,14 +59,25 @@ namespace Sim.UI.Web.Pages.Pessoa
 
         public IActionResult OnPost()
         {
-            var pessoa = _pessoaApp.ConsultaByCPF(Input.CPF);
-
-            Input = new InputModel
+            try
             {
-                ListaPessoas = pessoa
-            };
+                if (ModelState.IsValid)
+                {
+                    var pessoa = _pessoaApp.ConsultarPessoaByNameOrCPF(Input.CPF, Input.Nome);
 
-            return Page();
+                    Input = new InputModel
+                    {
+                        ListaPessoas = pessoa
+                    };
+                }
+
+            }
+            catch(Exception ex)
+            {
+                StatusMessage = "Erro: " + ex.Message;
+            }
+            
+            return Page();          
         }
 
     }

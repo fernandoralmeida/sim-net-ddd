@@ -27,8 +27,9 @@ namespace Sim.UI.Web
         public void ConfigureServices(IServiceCollection services)
         {
             new Container().RegisterApplicationService(services, Configuration, "App_____ContextConnection");
-
-            services.AddControllersWithViews();
+            
+            services.AddAutoMapper(typeof(Startup));
+            
             services.AddRazorPages();
         }
 

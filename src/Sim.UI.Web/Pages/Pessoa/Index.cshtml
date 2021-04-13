@@ -31,16 +31,20 @@
             <div class="form-row">
                 <div class="form-group">
                     <div class="input-group mb-3">
-                        <input asp-for="Input.CPF" class="form-control" placeholder="CPF" aria-describedby="button-addon2" id="inputCPF">
-                        <input asp-for="Input.Nome" class="form-control" placeholder="Nome" aria-describedby="button-addon2">
 
-                        @if (Model.Input.ListaPessoas.Count() == 0)
+                        @if (Model.Input.ListaPessoas != null)
                         {
-                            <a asp-area="" asp-page="/Pessoa/Novo" class="btn btn-success" title="Adicionar Nova Pessoa"> + <i class="fa fa-user"></i></a>
+
+                            if (Model.Input.ListaPessoas.Count() > 0)
+                            {
+                                <input asp-for="Input.CPF" class="form-control" placeholder="CPF" aria-describedby="button-addon2" id="inputCPF">
+                                <input asp-for="Input.Nome" class="form-control" placeholder="Nome" aria-describedby="button-addon2">
+                                <button class="btn btn-primary" type="submit" role="button" id="button-addon2"><i class="fa fa-search"></i></button>
+                            }
                         }
                         else
                         {
-                            <button class="btn btn-primary" type="submit" role="button" id="button-addon2"><i class="fa fa-search"></i></button>
+                            <a asp-area="" asp-page="/Pessoa/Novo" class="btn btn-success" title="Adicionar Nova Pessoa"> + <i class="fa fa-user"></i></a>
                         }
 
                     </div>
@@ -79,40 +83,45 @@
     </thead>
     <tbody>
 
-        @foreach (var item in Model.Input.ListaPessoas)
+        @if (Model.Input.ListaPessoas == null)
+        { }
+        else
         {
-            <tr class="border-bottom">
-                <td>
-                    <a href="" class="btn btn-sm btn-secondary" title="Iniciar atendimento"><i class="far fa-clock"></i></a>
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nome)
-                </td>
+            foreach (var item in Model.Input.ListaPessoas)
+            {
+                <tr class="border-bottom">
+                    <td>
+                        <a href="" class="btn btn-sm btn-outline-info" title="Iniciar atendimento"><i class="far fa-clock"></i></a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.CPF)
-                </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CPF)
+                    </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.Tel_Movel)
-                </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Tel_Movel)
+                    </td>
 
-                <td>
-                    <a href="@Url.Action("Details", "Pessoa", new { id = item.Id })" class="btn btn-sm btn-secondary" title="Detalhar informações"><i class="far fa-list-alt"></i></a>
+                    <td>
+                        <a href="@Url.Action("Details", "Pessoa", new { id = item.Id })" class="btn btn-sm btn-outline-secondary" title="Detalhar informações"><i class="far fa-list-alt"></i></a>
 
-                    <a href="@Url.Action("Edit", "Pessoa", new { id = item.Id })" class="btn btn-sm btn-secondary" title="Alterar informações"><i class="far fa-edit"></i></a>
+                        <a href="@Url.Action("Edit", "Pessoa", new { id = item.Id })" class="btn btn-sm btn-outline-secondary" title="Alterar informações"><i class="far fa-edit"></i></a>
 
-                    <a href="@Url.Action("Delete", "Pessoa", new { id = item.Id })" class="btn btn-sm btn-secondary" title="Excluir informações"><i class="far fa-window-close"></i></a>
-                </td>
-                <!--
+                        <a href="@Url.Action("Delete", "Pessoa", new { id = item.Id })" class="btn btn-sm btn-outline-danger" title="Excluir informações"><i class="far fa-window-close"></i></a>
+                    </td>
+                    <!--
                 Html.ActionLink("Edit", "Edit", new { id = item.Pessoa_Id }) |
                 Html.ActionLink("Details", "Details", new { id = item.Pessoa_Id }) |
                 Html.ActionLink("Delete", "Delete", new { id = item.Pessoa_Id })-->
-            </tr>
+                </tr>
+            }
         }
 
     </tbody>
