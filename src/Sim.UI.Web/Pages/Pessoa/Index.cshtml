@@ -110,11 +110,11 @@
                     </td>
 
                     <td>
-                        <a href="@Url.Action("Details", "Pessoa", new { id = item.Id })" class="btn btn-sm btn-outline-secondary" title="Detalhar informações"><i class="far fa-list-alt"></i></a>
+                        <a asp-page="./Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary" title="Detalhar informações"><i class="far fa-list-alt"></i></a>
 
-                        <a href="@Url.Action("Edit", "Pessoa", new { id = item.Id })" class="btn btn-sm btn-outline-secondary" title="Alterar informações"><i class="far fa-edit"></i></a>
+                        <a asp-page="./Edit" asp-route-id="@item.Id"  class="btn btn-sm btn-outline-secondary" title="Alterar informações"><i class="far fa-edit"></i></a>
 
-                        <a href="@Url.Action("Delete", "Pessoa", new { id = item.Id })" class="btn btn-sm btn-outline-danger" title="Excluir informações"><i class="far fa-window-close"></i></a>
+                        <a asp-page="./Delete" asp-route-id="@item.Id"  class="btn btn-sm btn-outline-danger" title="Excluir informações"><i class="far fa-window-close"></i></a>
                     </td>
                     <!--
                 Html.ActionLink("Edit", "Edit", new { id = item.Pessoa_Id }) |

@@ -100,3 +100,9 @@ body {
     image-rendering:optimizeQuality;
 }
 
+.sedemp {
+    margin: 0px 0px 0px 0px;
+    background-image: url(imgs/n_logo_sedemp.jpeg);
+    image-rendering:optimizeQuality;
+}
+

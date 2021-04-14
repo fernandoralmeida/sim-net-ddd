@@ -1,16 +1,19 @@
 ﻿@page
 @model Sim.UI.Web.Pages.Pessoa.EditModel
-{
+@{
     ViewData["Title"] = "Novo";
 }
 
-<h5>Novo</h5>
+<h5>Edit</h5>
 
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
 <hr />
-<h6>Identificação</h6>
+Ultima atualização: @Html.DisplayFor(model => model.Input.Ultima_Alteracao)
+<hr />
 
+
+<h6>Identificação</h6>
 
 <div>
     <form method="post" novalidate>
@@ -18,6 +21,7 @@
         <div class="mb-3 row">
 
             <div class="col-md-5">
+                <input asp-for="Input.Id" hidden />
                 <label asp-for="Input.Nome" class="form-label" for="inputNome"></label>
                 <input asp-for="Input.Nome" class="form-control" id="inputNome" required />
             </div>

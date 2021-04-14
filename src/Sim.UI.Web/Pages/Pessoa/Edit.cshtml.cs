@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using global::AutoMapper;
+using AutoMapper;
 
 
 namespace Sim.UI.Web.Pages.Pessoa
@@ -34,7 +34,7 @@ namespace Sim.UI.Web.Pages.Pessoa
         {
             [Key]
             [HiddenInput(DisplayValue = false)]
-            public int Pessoa_Id { get; set; }
+            public int Id { get; set; }
 
             // Pessoal
             [Required(ErrorMessage = "Preencha campo Nome")]
@@ -108,11 +108,99 @@ namespace Sim.UI.Web.Pages.Pessoa
             public bool Ativo { get; set; }
         }
 
-        public void OnGet()
+        public async Task<IActionResult> OnGetAsync(int? id)
         {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
+            var t = Task.Run(
+                () => _pessoa.GetById((int)id));
+
+            await t;
+
+
+            Input = _mapper.Map<InputModel>(t.Result);
+
+            if (Input.Deficiencia != null)
+            {
+
+                if (t.Result.Deficiencia.Contains("Física"))
+                    Input.Fisica = true;
+
+                if (t.Result.Deficiencia.Contains("Visual"))
+                    Input.Visual = true;
+
+                if (t.Result.Deficiencia.Contains("Auditiva"))
+                    Input.Auditiva = true;
+
+                if (t.Result.Deficiencia.Contains("Intelectual"))
+                    Input.Intelectual = true;
+            }
+
+
+            if (Input == null)
+            {
+                return NotFound();
+            }
+            return Page();
         }
 
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see https://aka.ms/RazorPagesCRUD.
+        public async Task<IActionResult> OnPostAsync()
+        {
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+
+            try
+            {
+                if (ModelState.IsValid)
+                {
+
+                    var task = Task.Run(() => {
+
+                        var pessoa = _mapper.Map<Pessoa>(Input);
+
+                        pessoa.Deficiencia = string.Empty;
+
+                        if (Input.Fisica)
+                            pessoa.Deficiencia += "Física;";
+
+                        if (Input.Visual)
+                            pessoa.Deficiencia += "Visual;";
+
+                        if (Input.Auditiva)
+                            pessoa.Deficiencia += "Auditiva;";
+
+                        if (Input.Intelectual)
+                            pessoa.Deficiencia += "Intelectual;";
+
+                        _pessoa.Update(pessoa);
+
+                    });
+
+                    await task;
+
+                    return RedirectToPage("./Index");
+                }
+
+                return Page();
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = "Erro: " + ex.Message;
+                return Page();
+            }
+        }
+
+        private Pessoa PessoaExists(int id)
+        {
+            return _pessoa.GetById(id);
+        }
 
     }
 }

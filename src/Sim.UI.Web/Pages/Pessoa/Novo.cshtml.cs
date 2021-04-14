@@ -124,7 +124,7 @@ namespace Sim.UI.Web.Pages.Pessoa
         {
             try
             {
-                if (ModelState.IsValid)
+                if (!ModelState.IsValid)
                 {
                     var pessoa = _mapper.Map<Pessoa>(Input);
 
