@@ -31,4 +31,10 @@
     <ProjectReference Include="..\Sim.Domain\Sim.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Admin\" />
+    <Folder Include="Areas\System\" />
+    <Folder Include="Pages\Atendimento\" />
+  </ItemGroup>
+
 </Project>

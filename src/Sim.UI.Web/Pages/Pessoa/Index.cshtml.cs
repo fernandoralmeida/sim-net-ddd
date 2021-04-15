@@ -5,12 +5,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Sim.UI.Web.Pages.Pessoa
 {
     using Sim.Domain.SDE.Entity;
     using Sim.Application.SDE.Interface;
 
+    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly IAppServicePessoa _pessoaApp;

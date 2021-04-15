@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using AutoMapper;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace Sim.UI.Web.Pages.Pessoa
 {
@@ -14,6 +14,7 @@ namespace Sim.UI.Web.Pages.Pessoa
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel;
 
+    [Authorize]
     public class EditModel : PageModel
     {
         private readonly IAppServicePessoa _pessoa;
