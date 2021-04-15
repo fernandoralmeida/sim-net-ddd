@@ -18,7 +18,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Sim.Application\Sim.Application.csproj" />
     <ProjectReference Include="..\Sim.Cross.Data\Sim.Cross.Data.csproj" />
-    <ProjectReference Include="..\Sim.Cross.Identity\Sim.Cross.Identity.csproj" />
     <ProjectReference Include="..\Sim.Domain\Sim.Domain.csproj" />
   </ItemGroup>
 

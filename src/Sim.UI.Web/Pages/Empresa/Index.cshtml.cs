@@ -6,18 +6,17 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Sim.UI.Web.Pages.Pessoa
+namespace Sim.UI.Web.Pages.Empresa
 {
     using Sim.Domain.SDE.Entity;
     using Sim.Application.SDE.Interface;
-
     public class IndexModel : PageModel
     {
-        private readonly IAppServicePessoa _pessoaApp;
+        private readonly IAppServiceEmpresa _empresaApp;
 
-        public IndexModel(IAppServicePessoa appServicePessoa)
+        public IndexModel(IAppServiceEmpresa appServiceEmpresa)
         {
-            _pessoaApp = appServicePessoa;
+            _empresaApp = appServiceEmpresa;
         }
 
         [TempData]
@@ -27,58 +26,62 @@ namespace Sim.UI.Web.Pages.Pessoa
         public InputModel Input { get; set; }
         public class InputModel
         {
-         
-            [DisplayName("Nome ou CPF")]            
-            public string CPF { get; set; }
 
-            [DisplayName("Nome ou CPF")]
-            public string Nome { get; set; }
+            [DisplayName("CNPJ")]
+            public string CNPJ { get; set; }
 
-            public IEnumerable<Pessoa> ListaPessoas { get; set; }
+            [DisplayName("Razao Social")]
+            public string RazaoSocial { get; set; }
+
+            public IEnumerable<Empresa> ListaEmpresas { get; set; }
 
             [TempData]
             public string StatusMessage { get; set; }
+
+            public string CNPJRes { get; set; }
         }
 
-        private void Load()
+        private async Task Load()
         {
-            var pessoa = _pessoaApp.GetAll();
+            var t = Task.Run(() => _empresaApp.GetAll());
+
+            await t;
 
             Input = new InputModel
             {
-                ListaPessoas = pessoa
+                ListaEmpresas = t.Result
             };
         }
 
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
-            Load();
+            await Load();
             return Page();
         }
 
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPostAsync()
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    var pessoa = _pessoaApp.ConsultarPessoaByNameOrCPF(Input.CPF, Input.Nome);
+                    var emp = Task.Run(()=>  _empresaApp.ConsultaByCNPJ(Input.CNPJ));
+
+                    await emp;
 
                     Input = new InputModel
                     {
-                        ListaPessoas = pessoa
+                        ListaEmpresas = emp.Result
                     };
                 }
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 StatusMessage = "Erro: " + ex.Message;
             }
-            
-            return Page();          
-        }
 
+            return Page();
+        }
     }
 }
-

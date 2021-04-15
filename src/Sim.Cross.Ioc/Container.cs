@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Sim.Cross.Ioc
 {
-    using Sim.Cross.Identity;
+    //using Sim.Cross.Identity;
     using Sim.Cross.Data.Context;
     using Sim.Cross.Data.Repository;
 
@@ -33,55 +33,6 @@ namespace Sim.Cross.Ioc
 
     public class Container
     {
-        
-        public void RegisterApplicationUserService(IServiceCollection services, IConfiguration config, string connection)
-        {
-            //registra dbcontext identity
-            services.AddDbContext<IdentityContext>(options => {
-
-                options.UseSqlServer(config.GetConnectionString(connection));
-
-            });
-
-            //registra o dbcontext padrão do identity
-            services.AddDefaultIdentity<ApplicationUser>()
-                .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<IdentityContext>();
-
-            //registra automapper identity
-            RegisterUsuario(services);
-
-            //configura o identity
-            services.Configure<IdentityOptions>(options => {
-
-                //define regras de login
-                options.SignIn.RequireConfirmedAccount = true;
-                options.SignIn.RequireConfirmedEmail = false;
-                options.SignIn.RequireConfirmedPhoneNumber = false;
-
-                //define users
-                options.User.RequireUniqueEmail = true;
-
-                //define regras senhas
-                options.Password.RequireDigit = true;
-                options.Password.RequireLowercase = true;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireUppercase = false;
-                options.Password.RequiredLength = 6;
-                options.Password.RequiredUniqueChars = 0;
-
-                //define Lockout
-                options.Lockout.AllowedForNewUsers = false;
-                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-                options.Lockout.MaxFailedAccessAttempts = 5;
-
-            });
-        }
-
-        private void RegisterUsuario(IServiceCollection services)
-        {
-            services.AddScoped<IAppServiceUser, RepositoryUser>();
-        }
 
         public void RegisterApplicationService(IServiceCollection services, IConfiguration config, string connection)
         {
@@ -92,7 +43,7 @@ namespace Sim.Cross.Ioc
             services.AddScoped<DbContext, ApplicationContext>();
 
             RegisterPessoa(services);
-            //RegisterEmpresa(services);
+            RegisterEmpresa(services);
             //RegisterAtendimento(services);
         }
 

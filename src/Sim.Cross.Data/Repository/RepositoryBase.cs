@@ -42,6 +42,7 @@ namespace Sim.Cross.Data.Repository
         public void Remove(TEntity obj)
         {
             _db.Set<TEntity>().Remove(obj);
+            _db.SaveChanges();
         }
 
         public void Update(TEntity obj)

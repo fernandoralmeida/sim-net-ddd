@@ -20,6 +20,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,10 +29,6 @@
     <ProjectReference Include="..\Sim.Cross.Identity\Sim.Cross.Identity.csproj" />
     <ProjectReference Include="..\Sim.Cross.Ioc\Sim.Cross.Ioc.csproj" />
     <ProjectReference Include="..\Sim.Domain\Sim.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Pages\Empresa\" />
   </ItemGroup>
 
 </Project>

@@ -1,20 +1,19 @@
 ﻿@page
-@model Sim.UI.Web.Pages.Pessoa.DetailsModel
-
+@model Sim.UI.Web.Pages.Pessoa.DeleteModel
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Delete";
 }
 
-<h5>Detalhes</h5>
+<h5>Apagar Registro</h5>
 
 <div>
     <h6>Pessoas</h6>
     <hr />
     <dl class="row">
-        <dt class="col-sm-2">
+        <dt class="col-sm-2" hidden>
             @Html.DisplayNameFor(model => model.Input.Id)
         </dt>
-        <dd class="col-sm-10">
+        <dd class="col-sm-10" hidden>
             @Html.DisplayFor(model => model.Input.Id)
         </dd>
         <dt class="col-sm-2">
@@ -155,7 +154,10 @@
     </dl>
 </div>
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.Input.Id" class="btn btn-primary" title="Alterar informações">Alterar</a> |
+    <form method="post">
+        <input type="hidden" asp-for="Input.Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-page="./Index" class="btn btn-secondary">Voltar</a>
+    </form>
 
-    <a asp-page="./Index" class="btn btn-secondary" title="Voltar">Voltar</a>
 </div>

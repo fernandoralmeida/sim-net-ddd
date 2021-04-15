@@ -8,59 +8,34 @@
 
 <h5>Pessoas</h5>
 
-<!--
-<p>
-    <a asp-action="Novo">Adicionar Pessoa</a>
-</p>-->
+
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
-@if (ViewBag.IsMessage == true)
-{
-    <div class="alert alert-danger alert-dismissable fade show" role="alert">
-        @ViewBag.Message
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-}
-
 <hr />
-<pre>Buscar por CPF ou Nome</pre>
+<pre>Informar Nome ou CPF!</pre>
 
 <div class="form-row mb-3">
-    <div class="form-group col-md-6">
-        <form asp-action="Index">
-            <div class="form-row">
-                <div class="form-group">
-                    <div class="input-group mb-3">
-
-                        @if (Model.Input.ListaPessoas != null)
-                        {
-
-                            if (Model.Input.ListaPessoas.Count() > 0)
-                            {
-                                <input asp-for="Input.CPF" class="form-control" placeholder="CPF" aria-describedby="button-addon2" id="inputCPF">
-                                <input asp-for="Input.Nome" class="form-control" placeholder="Nome" aria-describedby="button-addon2">
-                                <button class="btn btn-primary" type="submit" role="button" id="button-addon2"><i class="fa fa-search"></i></button>
-                            }
-                        }
-                        else
-                        {
-                            <a asp-area="" asp-page="/Pessoa/Novo" class="btn btn-success" title="Adicionar Nova Pessoa"> + <i class="fa fa-user"></i></a>
-                        }
-
-                    </div>
+    <form asp-action="Index">
+        <div class="row">
+            <div class="col-md-auto">
+                <div class="input-group mb-3">
+                    <input asp-for="Input.Nome" class="form-control" placeholder="Nome" aria-describedby="button-addon2">
+                    <input asp-for="Input.CPF" class="form-control" placeholder="CPF" aria-describedby="button-addon2" id="inputCPF">
+                    <button class="btn btn-outline-primary" type="submit" role="button" id="button-addon2"><i class="fa fa-search"></i></button>
                 </div>
             </div>
-        </form>
-    </div>
-    <div class="form-group col-md-6">
-    </div>
+            <div class="col-md"></div>
+            <div class="col-md-auto">
+                <a asp-area="" asp-page="/Pessoa/Novo" class="btn btn-outline-success" title="Adicionar Nova Pessoa"> + <i class="fa fa-user"></i></a>
+            </div>
+        </div>
+    </form>
 </div>
-
 
 <table class="table table-borderless bg-white">
     <caption>Lista de pessoas</caption>
     <thead>
-        <tr class="border-bottom shadow-sm">
+        <tr class="border-bottom shadow-sm col-md">
             <th></th>
             <th>
                 Nome
