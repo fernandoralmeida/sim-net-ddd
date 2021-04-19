@@ -24,12 +24,12 @@ namespace Sim.Cross.Data.Repository.SDE
 
         public IEnumerable<Ambulante> GetByAuxiliar(string nome)
         {  
-            return _db.Ambulante.Where(u => u.Auxiliar.Contains(nome)).ToList();
+            return _db.Ambulante.Where(u => u.Auxiliar.Nome == nome).ToList();
         }
 
         public IEnumerable<Ambulante> GetByTitular(string nome)
         {
-            return _db.Ambulante.Where(u => u.Titular.Contains(nome)).ToList();
+            return _db.Ambulante.Where(u => u.Titular.Nome == nome).ToList();
         }
     }
 }

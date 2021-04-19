@@ -12,6 +12,5 @@ namespace Sim.Domain.SDE.Interface
     {
         IEnumerable<QSA> GetBySocio(string nome);
 
-        IEnumerable<QSA> GetByCPFSocio(string cpf);
     }
 }

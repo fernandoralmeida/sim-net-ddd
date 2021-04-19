@@ -2,7 +2,7 @@
 @model Sim.UI.Web.Pages.Empresa.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Lista";
 }
 
 <h5>Empresas</h5>
@@ -17,7 +17,7 @@
 <pre>Informar o CNPJ!</pre>
 
 <div class="form-row mb-3">
-    <form asp-action="Index">
+    <form method="post">
         <div class="row">
             <div class="col-md-auto">
                 <input asp-for="Input.CNPJRes" hidden>
@@ -29,7 +29,7 @@
             </div>
             <div class="col-md"></div>
             <div class="col-md-auto">
-                <a href="@Url.Action("Create", "Empresa", new { id = Model.Input.CNPJRes })" class="btn btn-outline-success" title="Adicionar Nova Empresa"> + <i class="fa fa-industry"></i></a>
+                <a asp-area="" asp-page="/Empresa/Add" asp-route-id="@Model.Input.CNPJRes" class="btn btn-outline-success" title="Adicionar Nova Empresa"> + <i class="fa fa-industry"></i></a>
             </div>
         </div>
     </form>
@@ -65,7 +65,7 @@
         {
             <tr class="border-bottom">
                 <td>
-                    <a href="" class="btn btn-sm btn-secondary" title="Iniciar atendimento"><i class="far fa-clock"></i></a>
+                    <a href="" class="btn btn-sm btn-outline-secondary" title="Iniciar atendimento"><i class="far fa-clock"></i></a>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.CNPJ)
@@ -84,11 +84,11 @@
                 </td>
 
                 <td>
-                    <a href="@Url.Action("Details", "Empresa", new { id = item.Id })" class="btn btn-sm btn-secondary" title="Detalhar informações"><i class="far fa-list-alt"></i></a>
+                    <a asp-page="./Perfil" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary" title="Detalhar informações"><i class="far fa-list-alt"></i></a>
 
-                    <a href="@Url.Action("Edit", "Empresa", new { id = item.Id })" class="btn btn-sm btn-secondary" title="Alterar informações"><i class="far fa-edit"></i></a>
+                    <a asp-page="./Perfil" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary" title="Alterar informações"><i class="far fa-edit"></i></a>
 
-                    <a href="@Url.Action("Delete", "Empresa", new { id = item.Id })" class="btn btn-sm btn-secondary" title="Excluir informações"><i class="far fa-window-close"></i></a>
+                    <a asp-page="./Remove" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger" title="Excluir informações"><i class="far fa-window-close"></i></a>
                 </td>
                 <!--
                 Html.ActionLink("Edit", "Edit", new { id = item.Pessoa_Id }) |

@@ -17,8 +17,7 @@ namespace Sim.Cross.Data.Config.Entity
             builder.HasIndex(c => c.Autorizacao).IsUnique();
             builder.Property(c => c.Autorizacao)
                 .HasColumnType("varchar(256)").IsRequired();
-            builder.Property(c => c.Titular).HasColumnType("varchar(150)");
-            builder.Property(c => c.Auxiliar).HasColumnType("varchar(150)");
+
             builder.Property(c => c.Atividade)
                 .HasColumnType("varchar(256)");
             builder.Property(c => c.FormaAtuacao)

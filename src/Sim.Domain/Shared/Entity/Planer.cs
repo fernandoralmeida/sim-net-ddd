@@ -12,7 +12,7 @@ namespace Sim.Domain.Shared.Entity
         {
 
         }
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Segunda { get; set; }
         public string Terca { get; set; }
         public string Quarta { get; set; }
@@ -24,6 +24,7 @@ namespace Sim.Domain.Shared.Entity
         public string Anotacao { get; set; }
         public DateTime? Data { get; set; }
         public DateTime? Ultima_Alteracao { get; set; }
+        public Guid Owner_AppUser_Id { get; set; }
         public bool Ativo { get; set; }
     }
 }

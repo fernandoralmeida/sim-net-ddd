@@ -33,12 +33,12 @@ namespace Sim.Cross.Data.Repository.SDE
 
         public IEnumerable<DIA> GetByAuxiliar(string nome)
         {
-            return _db.DIA.Where(c => c.Auxiliar.Contains(nome));
+            return _db.DIA.Where(c => c.Auxiliar.Nome.Contains(nome));
         }
 
         public IEnumerable<DIA> GetByTitular(string nome)
         {
-            return _db.DIA.Where(c => c.Titular.Contains(nome));
+            return _db.DIA.Where(c => c.Titular.Nome.Contains(nome));
         }
 
         public IEnumerable<DIA> GetVencidos()

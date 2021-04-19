@@ -23,6 +23,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sim.Cross.Identity", "src\S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sim.UI.Web", "src\Sim.UI.Web\Sim.UI.Web.csproj", "{027C0381-DEF4-4F5E-84DC-1602A34F59F4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 - Service", "5 - Service", "{7D5AA059-3F1E-460E-B7B9-326FF5061A81}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sim.Service", "src\Sim.Service\Sim.Service.csproj", "{3543A05A-C8D9-4B2D-8EDE-66B1D0AA8477}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +57,10 @@ Global
 		{027C0381-DEF4-4F5E-84DC-1602A34F59F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{027C0381-DEF4-4F5E-84DC-1602A34F59F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{027C0381-DEF4-4F5E-84DC-1602A34F59F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3543A05A-C8D9-4B2D-8EDE-66B1D0AA8477}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3543A05A-C8D9-4B2D-8EDE-66B1D0AA8477}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3543A05A-C8D9-4B2D-8EDE-66B1D0AA8477}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3543A05A-C8D9-4B2D-8EDE-66B1D0AA8477}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,6 +72,7 @@ Global
 		{3619C089-3442-4538-A838-79B9B35FBADB} = {440D571A-1F15-4D44-BA08-41B4EDA850BD}
 		{85BBC74D-BCC6-402B-8E06-CB3C12A3AA53} = {440D571A-1F15-4D44-BA08-41B4EDA850BD}
 		{027C0381-DEF4-4F5E-84DC-1602A34F59F4} = {592D3B3A-3F1F-4A0E-ACBC-AE473372D443}
+		{3543A05A-C8D9-4B2D-8EDE-66B1D0AA8477} = {7D5AA059-3F1E-460E-B7B9-326FF5061A81}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1B11FE2A-28CC-44F7-908B-ED73577CCCEE}

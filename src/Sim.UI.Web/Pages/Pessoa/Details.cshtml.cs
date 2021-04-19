@@ -32,7 +32,7 @@ namespace Sim.UI.Web.Pages.Pessoa
         [BindProperty]
         public EditModel.InputModel Input { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(Guid? id)
         {
             if (id == null)
             {
@@ -40,7 +40,7 @@ namespace Sim.UI.Web.Pages.Pessoa
             }
 
             var t = Task.Run(
-                () => _pessoa.GetById((int)id));
+                () => _pessoa.GetById((Guid)id));
 
             await t;
 

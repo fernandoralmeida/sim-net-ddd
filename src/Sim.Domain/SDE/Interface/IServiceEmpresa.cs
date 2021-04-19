@@ -12,6 +12,7 @@ namespace Sim.Domain.SDE.Interface
     {
         IEnumerable<Empresa> ConsultaByCNPJ(string _cnpj);
         IEnumerable<Empresa> ConsultaByCNAE(string _cnae);
-        IEnumerable<Empresa> ConsultaByRazaoSocial(string _name);
+        IEnumerable<Empresa> ConsultaByRazaoSocial(string _name);        
+
     }
 }

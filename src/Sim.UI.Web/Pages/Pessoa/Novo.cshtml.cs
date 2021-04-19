@@ -38,7 +38,7 @@ namespace Sim.UI.Web.Pages.Pessoa
         {
             [Key]
             [HiddenInput(DisplayValue = false)]
-            public int Pessoa_Id { get; set; }
+            public Guid Pessoa_Id { get; set; }
 
             // Pessoal
             [Required(ErrorMessage = "Preencha campo Nome")]
@@ -129,28 +129,31 @@ namespace Sim.UI.Web.Pages.Pessoa
             {
                 if (!ModelState.IsValid)
                 {
-                    var pessoa = _mapper.Map<Pessoa>(Input);
-
-                    if (Input.Fisica)
-                        pessoa.Deficiencia += "Física;";
-
-                    if (Input.Visual)
-                        pessoa.Deficiencia += "Visual;";
-
-                    if (Input.Auditiva)
-                        pessoa.Deficiencia += "Auditiva;";
-
-                    if (Input.Intelectual)
-                        pessoa.Deficiencia += "Intelectual;";
-
-                    _pessoa.Add(pessoa);
-
-                    return RedirectToPage("/Pessoa/Index");
+                    return Page();
                 }
 
-                return Page();
+                var pessoa = _mapper.Map<Pessoa>(Input);
+
+                if (Input.Fisica)
+                    pessoa.Deficiencia += "Física;";
+
+                if (Input.Visual)
+                    pessoa.Deficiencia += "Visual;";
+
+                if (Input.Auditiva)
+                    pessoa.Deficiencia += "Auditiva;";
+
+                if (Input.Intelectual)
+                    pessoa.Deficiencia += "Intelectual;";
+
+                _pessoa.Add(pessoa);
+
+                return RedirectToPage("/Pessoa/Index");
+
+
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 StatusMessage = "Erro: " + ex.Message;
                 return Page();

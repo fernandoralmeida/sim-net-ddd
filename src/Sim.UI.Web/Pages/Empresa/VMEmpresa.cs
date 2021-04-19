@@ -13,7 +13,7 @@ namespace Sim.UI.Web.Pages.Empresa
     {
         [Key]
         [HiddenInput(DisplayValue = false)]
-        public int Empresa_Id { get; set; }
+        public Guid Empresa_Id { get; set; }
 
         [Required(ErrorMessage = "CNPJ requerido")]
         public string CNPJ { get; set; }
@@ -30,7 +30,6 @@ namespace Sim.UI.Web.Pages.Empresa
         [DisplayName("Nome Empresarial")]
         public string Nome_Empresarial { get; set; }
 
-        [Required(ErrorMessage = "Nome fantasia requerido")]
         [DisplayName("Nome Fantasia")]
         public string Nome_Fantasia { get; set; }
 
@@ -105,14 +104,14 @@ namespace Sim.UI.Web.Pages.Empresa
 
         [DisplayName("Data da Situação Especial")]
         [DataType(DataType.Date)]
-        public DateTime Data_Situacao_Especial { get; set; }
+        public string Data_Situacao_Especial { get; set; }
 
         [DataType(DataType.Currency)]
         [DisplayName("Capital Social")]
         public string Capital_Social { get; set; }
 
         //Registros relacionais
-        public virtual IEnumerable<QSA> QsaList { get; set; }
+        public virtual List<QSA> QsaList { get; set; }
 
     }
 }

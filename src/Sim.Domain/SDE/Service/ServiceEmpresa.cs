@@ -18,6 +18,7 @@ namespace Sim.Domain.SDE.Service
         {
             _repositoryEmpresa = repositoryEmpresa;
         }
+
         public IEnumerable<Empresa> ConsultaByCNAE(string cnae)
         {
             return _repositoryEmpresa.ConsultaByCNAE(cnae);

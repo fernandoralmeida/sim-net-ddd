@@ -8,9 +8,8 @@ namespace Sim.Application.SDE.Interface
 {
     using Domain.SDE.Entity;
     using Application.Interface;
-    interface IAppServiceQSA : IAppServiceBase<QSA>
+   public interface IAppServiceQSA : IAppServiceBase<QSA>
     {
         IEnumerable<QSA> GetBySocio(string nome);
-        IEnumerable<QSA> GetByCPFSocio(string cpf);
     }
 }

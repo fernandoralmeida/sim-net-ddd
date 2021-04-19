@@ -29,6 +29,7 @@
     <ProjectReference Include="..\Sim.Cross.Identity\Sim.Cross.Identity.csproj" />
     <ProjectReference Include="..\Sim.Cross.Ioc\Sim.Cross.Ioc.csproj" />
     <ProjectReference Include="..\Sim.Domain\Sim.Domain.csproj" />
+    <ProjectReference Include="..\Sim.Service\Sim.Service.csproj" />
   </ItemGroup>
 
   <ItemGroup>

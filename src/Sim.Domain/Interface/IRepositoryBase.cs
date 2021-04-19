@@ -11,7 +11,7 @@ namespace Sim.Domain.Interface
         void Add(TEntity obj);
         void Update(TEntity obj);
         void Remove(TEntity obj);
-        TEntity GetById(int id);
+        TEntity GetById(Guid id);
         IEnumerable<TEntity> GetAll();
         void Dispose();
     }

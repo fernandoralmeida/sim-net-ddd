@@ -9,6 +9,7 @@ namespace Sim.UI.Web.AutoMapper
     using Sim.Domain.SDE.Entity;
     using Web.Pages.Pessoa;
     using Web.Pages.Empresa;
+    using Sim.Service.CNPJ.Entity;
 
     public class AutoMapperProfile : Profile
     {
@@ -20,8 +21,13 @@ namespace Sim.UI.Web.AutoMapper
             CreateMap<EditModel.InputModel, Pessoa>();
             CreateMap<Pessoa, EditModel.InputModel>().ReverseMap();
 
+            CreateMap<VMEmpresa, CNPJ>();
+            CreateMap<CNPJ, VMEmpresa>().ReverseMap();
+
             CreateMap<VMEmpresa, Empresa>();
             CreateMap<Empresa, VMEmpresa>().ReverseMap();
+
+
         }
     }
 }

@@ -18,10 +18,7 @@ namespace Sim.Cross.Data.Config.Entity
             builder.Property(c => c.Protocolo)
                 .HasColumnType("varchar(256)")
                 .IsRequired();
-            builder.Property(c => c.Titular)
-                .HasColumnType("varchar(256)");
-            builder.Property(c => c.Auxiliar)
-                .HasColumnType("varchar(256)");
+
             builder.Property(c => c.FormaAtuacao)
                 .HasColumnType("varchar(50)");
             builder.Property(c => c.Local)

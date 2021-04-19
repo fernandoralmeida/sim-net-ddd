@@ -14,7 +14,7 @@ namespace Sim.Application.Interface
 
         void Remove(TEntity obj);
 
-        TEntity GetById(int id);
+        TEntity GetById(Guid id);
 
         IEnumerable<TEntity> GetAll();
 

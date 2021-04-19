@@ -44,7 +44,7 @@ namespace Sim.UI.Web.Pages.Empresa
             public string CNPJRes { get; set; }
         }
 
-        private async Task Load()
+        private async Task LoadAsync()
         {
             var t = Task.Run(() => _empresaApp.GetAll());
 
@@ -58,7 +58,7 @@ namespace Sim.UI.Web.Pages.Empresa
 
         public async Task<IActionResult> OnGetAsync()
         {
-            await Load();
+            await LoadAsync();
             return Page();
         }
 
@@ -74,7 +74,9 @@ namespace Sim.UI.Web.Pages.Empresa
 
                     Input = new InputModel
                     {
-                        ListaEmpresas = emp.Result
+                        ListaEmpresas = emp.Result,
+                        CNPJRes = new Functions.Mask().Remove(Input.CNPJ)                       
+                        
                     };
                 }
 

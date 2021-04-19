@@ -32,7 +32,7 @@ namespace Sim.Domain.Service
             return  _repositoryBase.GetAll();
         }
 
-        public TEntity GetById(int id)
+        public TEntity GetById(Guid id)
         {
             return _repositoryBase.GetById(id);
         }

@@ -18,6 +18,7 @@ namespace Sim.Application.SDE
         {
             _empresa = empresa;
         }
+
         public IEnumerable<Empresa> ConsultaByCNAE(string cnae)
         {
             return _empresa.ConsultaByCNAE(cnae);

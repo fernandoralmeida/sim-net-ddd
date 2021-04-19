@@ -23,12 +23,6 @@ namespace Sim.Cross.Data.Config.Entity
                 .Property(c => c.Qualificacao)
                 .HasColumnType("varchar(50)");
 
-            builder
-                .HasOne(c => c.Empresa)
-                .WithMany(c => c.QSA)
-                .HasForeignKey(p => p.Empresa_Id)
-                .HasPrincipalKey(p => p.Id);
-
         }
     }
 }

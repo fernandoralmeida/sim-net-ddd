@@ -34,7 +34,7 @@ namespace Sim.Cross.Data.Repository
             return _db.Set<TEntity>().ToList();
         }
 
-        public TEntity GetById(int id)
+        public TEntity GetById(Guid id)
         {
             return _db.Set<TEntity>().Find(id);
         }

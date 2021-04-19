@@ -86,24 +86,9 @@ namespace Sim.Cross.Data.Config.Entity
             builder.Property(c => c.Situacao_Especial)
                 .HasColumnType("varchar(50)");
 
-            builder.Property(c => c.Data_Situacao_Especial);
+            builder.Property(c => c.Data_Situacao_Especial)
+                .HasColumnType("varchar(10)"); 
 
-            builder.Property(c => c.Capital_Social)
-                .HasColumnType("decimal");
-
-            builder
-                .HasMany(c => c.QSA)
-                .WithOne(c => c.Empresa)
-                .HasForeignKey(c => c.Empresa_Id)
-                .HasPrincipalKey(c => c.Id)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            builder
-                .HasMany(c => c.Atendimento)
-                .WithOne(c => c.Empresa)
-                .HasForeignKey(p => p.Empresa_Id)
-                .HasPrincipalKey(p => p.Id)
-                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

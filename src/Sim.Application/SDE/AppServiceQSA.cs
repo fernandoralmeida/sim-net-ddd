@@ -18,11 +18,6 @@ namespace Sim.Application.SDE
             _qsa = qsa;
         }
 
-        public IEnumerable<QSA> GetByCPFSocio(string cpf)
-        {
-            return _qsa.GetByCPFSocio(cpf);
-        }
-
         public IEnumerable<QSA> GetBySocio(string nome)
         {
             return _qsa.GetBySocio(nome);

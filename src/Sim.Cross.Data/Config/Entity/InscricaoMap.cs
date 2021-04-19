@@ -15,6 +15,8 @@ namespace Sim.Cross.Data.Config.Entity
         public void Configure(EntityTypeBuilder<Inscricao> builder)
         {
             builder.HasKey(c => c.Id);
+            builder.Property(c => c.Owner_Setor)
+                .HasColumnType("varchar(20)");
         }
     }
 }

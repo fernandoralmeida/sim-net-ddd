@@ -12,7 +12,7 @@ namespace Sim.Domain.Shared.Entity
         {
 
         }
-        public int Id { get; set; }
+        public int Guid { get; set; }
         public string Nome { get; set; }
         public string Owner { get; set; }
         public bool Ativo { get; set; }

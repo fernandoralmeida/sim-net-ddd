@@ -69,19 +69,6 @@ namespace Sim.Cross.Data.Config.Entity
             builder.Property(c => c.Email)
                 .HasColumnType("varchar(150)");
 
-            builder.Property(c => c.Data_Cadastro);
-
-            builder.Property(c => c.Ultima_Alteracao);
-
-            builder.Property(c => c.Ativo);
-
-            builder
-                .HasMany(c => c.Atendimento)
-                .WithOne(c => c.Pessoa)
-                .HasForeignKey(p => p.Pessoa_Id)
-                .HasPrincipalKey(p => p.Id)
-                .OnDelete(DeleteBehavior.Restrict);
-
         }
     }
 }

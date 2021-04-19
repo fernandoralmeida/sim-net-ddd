@@ -66,12 +66,18 @@ namespace Sim.Cross.Ioc
             //
             services.AddScoped<IAppServiceBase<Empresa>, AppServiceBase<Empresa>>();
             services.AddScoped<IAppServiceEmpresa, AppServiceEmpresa>();
+            services.AddScoped<IAppServiceBase<QSA>, AppServiceBase<QSA>>();
+            services.AddScoped<IAppServiceQSA, AppServiceQSA>();
 
             services.AddScoped<IServiceBase<Empresa>, ServiceBase<Empresa>>();
             services.AddScoped<IServiceEmpresa, ServiceEmpresa>();
+            services.AddScoped<IServiceBase<QSA>, ServiceBase<QSA>>();
+            services.AddScoped<IServiceQSA, ServiceQSA>();
 
             services.AddScoped<IRepositoryBase<Empresa>, RepositoryBase<Empresa>>();
             services.AddScoped<IRepositoryEmpresa, RepositoryEmpresa>();
+            services.AddScoped<IRepositoryBase<QSA>, RepositoryBase<QSA>>();
+            services.AddScoped<IRepositoryQSA, RepositoryQsa>();
         }
 
         private void RegisterAtendimento(IServiceCollection services)

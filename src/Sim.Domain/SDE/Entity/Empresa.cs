@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace Sim.Domain.SDE.Entity
 {
     using Domain.Shared.Entity;
+    using System.ComponentModel.DataAnnotations;
 
     public class Empresa
     {
@@ -14,7 +15,7 @@ namespace Sim.Domain.SDE.Entity
         {
 
         }
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string CNPJ { get; set; }
         public string Tipo { get; set; }
         public DateTime? Data_Abertura { get; set; }
@@ -39,12 +40,13 @@ namespace Sim.Domain.SDE.Entity
         public DateTime? Data_Situacao_Cadastral { get; set; }
         public string Motivo_Situacao_Cadastral { get; set; }
         public string Situacao_Especial { get; set; }
-        public DateTime? Data_Situacao_Especial { get; set; }
-        public decimal Capital_Social { get; set; }
+        public string Data_Situacao_Especial { get; set; }
+        public float Capital_Social { get; set; }
 
         //Registros relacionais
-        public virtual ICollection<QSA> QSA { get; set; }
-        public virtual ICollection<Atendimento> Atendimento { get; set; }
+        public virtual ICollection<QSA> QSAs { get; set; }
+        public virtual ICollection<Atendimento> Atendimentos { get; set; }
+        public virtual ICollection<Inscricao> Inscricoes { get; set; }
 
     }
 }

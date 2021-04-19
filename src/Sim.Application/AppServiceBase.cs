@@ -32,7 +32,7 @@ namespace Sim.Application
             return _serviceBase.GetAll();
         }
 
-        public TEntity GetById(int id)
+        public TEntity GetById(Guid id)
         {
             return _serviceBase.GetById(id);
         }

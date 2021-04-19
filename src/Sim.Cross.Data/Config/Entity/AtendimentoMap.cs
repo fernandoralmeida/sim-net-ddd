@@ -30,24 +30,6 @@ namespace Sim.Cross.Data.Config.Entity
             builder.Property(c => c.Status)
                 .HasColumnType("varchar(20)");
 
-            builder.Property(c => c.UserName)
-                .HasColumnType("varchar(256)");
-
-            builder
-                .HasOne(c => c.Empresa)
-                .WithMany(c => c.Atendimento)
-                .HasForeignKey(p => p.Empresa_Id)
-                .HasPrincipalKey(p => p.Id)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder
-                .HasOne(c => c.Pessoa)
-                .WithMany(c => c.Atendimento)
-                .HasForeignKey(p => p.Pessoa_Id)
-                .HasPrincipalKey(p => p.Id)
-                .OnDelete(DeleteBehavior.Restrict);
-
-
         }
     }
 }

@@ -3,19 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Sim.Cross.Data.Repository.SDE
 {
     using Sim.Domain.SDE.Entity;
     using Sim.Domain.SDE.Interface;
     using Context;
+   
+
     public class RepositoryEmpresa : RepositoryBase<Empresa>, IRepositoryEmpresa
     {
-
+        
         public RepositoryEmpresa(ApplicationContext dbContext)
             :base(dbContext)
         {
-
+            
         }
 
         public IEnumerable<Empresa> ConsultaByCNAE(string cnae)

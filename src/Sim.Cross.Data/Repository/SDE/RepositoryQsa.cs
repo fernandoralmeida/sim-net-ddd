@@ -17,11 +17,6 @@ namespace Sim.Cross.Data.Repository.SDE
 
         }
 
-        public IEnumerable<QSA> GetByCPFSocio(string cpf)
-        {
-            return _db.QSA.Where(c => c.Nome.Contains(cpf)).OrderBy(c => c.Nome);
-        }
-
         public IEnumerable<QSA> GetBySocio(string nome)
         {
             return _db.QSA.Where(c => c.Nome.Contains(nome)).OrderBy(c => c.Nome);

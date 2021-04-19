@@ -13,6 +13,7 @@ namespace Sim.UI.Web
 {
 
     using Sim.Cross.Ioc;
+    using Sim.Service.CNPJ.WebService;
 
     public class Startup
     {
@@ -27,7 +28,10 @@ namespace Sim.UI.Web
         public void ConfigureServices(IServiceCollection services)
         {
             new Container().RegisterApplicationService(services, Configuration, "App_____ContextConnection");
-            
+
+                        
+            services.AddScoped<IReceitaWS, ReceitaWS>();
+
             services.AddAutoMapper(typeof(Startup));
             
             services.AddRazorPages();

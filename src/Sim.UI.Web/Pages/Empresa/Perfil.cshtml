@@ -1,4 +1,233 @@
 ﻿@page
 @model Sim.UI.Web.Pages.Empresa.PerfilModel
+
 @{
+    ViewData["Title"] = "Edição";
+}
+
+<h5>Alterar Empresa</h5>
+
+
+<hr />
+
+<div class="row">
+    <form class="row" method="post">
+        <div class="col-md-8">
+
+            <div class="row g-2 mb-3" hidden>
+                <label asp-for="Input.Empresa_Id" class="control-label"></label>
+                <input asp-for="Input.Empresa_Id" class="form-control" />
+                <span asp-validation-for="Input.Empresa_Id" class="text-danger"></span>
+            </div>
+
+            <div class="row g-2 mb-2">
+                <div class="col-md-3">
+                    <label asp-for="Input.CNPJ" class="form-label" for="inputCNPJ"></label>
+                    <input asp-for="Input.CNPJ" class="form-control" id="inputCNPJ" />
+                    <span asp-validation-for="Input.CNPJ" class="text-danger"></span>
+                </div>
+                <div class="col-md-2">
+                    <label asp-for="Input.Tipo" class="form-label" for="inputTipo"></label>
+                    <input asp-for="Input.Tipo" class="form-control" id="inputTipo" />
+                    <span asp-validation-for="Input.Tipo" class="text-danger"></span>
+                </div>
+                <div class="col-md-3">
+                    <label asp-for="Input.Data_Abertura" class="form-label" for="inputAbertura"></label>
+                    <input asp-for="Input.Data_Abertura" class="form-control" id="inputAbertura" />
+                    <span asp-validation-for="Input.Data_Abertura" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row g-2 mb-2">
+                <div class="col-md">
+                    <label asp-for="Input.Nome_Empresarial" class="form-label" for="inputNome"></label>
+                    <input asp-for="Input.Nome_Empresarial" class="form-control" id="inputNome" />
+                    <span asp-validation-for="Input.Nome_Empresarial" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row g-2 mb-2">
+                <div class="col-md">
+                    <label asp-for="Input.Nome_Fantasia" class="form-label" for="inputFantasia"></label>
+                    <input asp-for="Input.Nome_Fantasia" class="form-control" id="inputFantasia" />
+                    <span asp-validation-for="Input.Nome_Fantasia" class="text-danger"></span>
+                </div>
+                <div class="col-md-2">
+                    <label asp-for="Input.Porte" class="form-label" for="inputPorte"></label>
+                    <input asp-for="Input.Porte" class="form-control" id="inputPorte" />
+                    <span asp-validation-for="Input.Porte" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row g-2 mb-2">
+                <div class="col-md-2">
+                    <label class="form-label" for="inputCNAE">Cnae</label>
+                    <input asp-for="Input.CNAE_Principal" class="form-control" id="inputCNAE" />
+                    <span asp-validation-for="Input.CNAE_Principal" class="text-danger"></span>
+                </div>
+                <div class="col-md">
+                    <label class="form-label" for="inputAtividade">Descrição</label>
+                    <input asp-for="Input.Atividade_Principal" class="form-control" id="inputAtividade" />
+                    <span asp-validation-for="Input.Atividade_Principal" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row g-2 mb-2">
+                <div class="col-md">
+                    <label asp-for="Input.Atividade_Secundarias" class="form-label" for="inputSecundaria"></label>
+                    <textarea asp-for="Input.Atividade_Secundarias" class="form-control" id="inputSecundaria"></textarea>
+                    <span asp-validation-for="Input.Atividade_Secundarias" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row g-2 mb-2">
+                <div class="col-md">
+                    <label asp-for="Input.Natureza_Juridica" class="form-label" for="inputNatureza"></label>
+                    <input asp-for="Input.Natureza_Juridica" class="form-control" id="inputNatureza" />
+                    <span asp-validation-for="Input.Natureza_Juridica" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row g-2 mb-2">
+                <div class="col-md-2">
+                    <label asp-for="Input.CEP" class="form-label" for="inputCEP"></label>
+                    <input asp-for="Input.CEP" class="form-control" id="inputCEP" />
+                    <span asp-validation-for="Input.CEP" class="text-danger"></span>
+                </div>
+                <div class="col-md">
+                    <label asp-for="Input.Logradouro" class="form-label" for="inputRua"></label>
+                    <input asp-for="Input.Logradouro" class="form-control" id="inputRua" />
+                    <span asp-validation-for="Input.Logradouro" class="text-danger"></span>
+                </div>
+                <div class="col-md-2">
+                    <label asp-for="Input.Numero" class="form-label" for="inputNumero"></label>
+                    <input asp-for="Input.Numero" class="form-control" id="inputNumero" />
+                    <span asp-validation-for="Input.Numero" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row g-2 mb-2">
+                <div class="col-md-2">
+                    <label asp-for="Input.Complemento" class="form-label" for="inputComp"></label>
+                    <input asp-for="Input.Complemento" class="form-control" id="inputComp" />
+                    <span asp-validation-for="Input.Complemento" class="text-danger"></span>
+                </div>
+                <div class="col-md">
+                    <label asp-for="Input.Bairro" class="form-label" for="inputBairro"></label>
+                    <input asp-for="Input.Bairro" class="form-control" id="inputBairro" />
+                    <span asp-validation-for="Input.Bairro" class="text-danger"></span>
+                </div>
+                <div class="col-md">
+                    <label asp-for="Input.Municipio" class="form-label" for="inputMunucipio"></label>
+                    <input asp-for="Input.Municipio" class="form-control" id="inputMunucipio" />
+                    <span asp-validation-for="Input.Municipio" class="text-danger"></span>
+                </div>
+                <div class="col-md-2">
+                    <label asp-for="Input.UF" class="form-label" for="inputUF"></label>
+                    <input asp-for="Input.UF" class="form-control" id="inputUF" />
+                    <span asp-validation-for="Input.UF" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row g-2 mb-2">
+                <div class="col-md">
+                    <label asp-for="Input.Email" class="form-label" for="inputEmail"></label>
+                    <input asp-for="Input.Email" class="form-control" id="inputEmail" />
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="Input.Telefone" class="form-label" for="inputTel"></label>
+                    <input asp-for="Input.Telefone" class="form-control" id="inputTel" />
+                    <span asp-validation-for="Input.Telefone" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row g-2 mb-2">
+                <div class="col-md">
+                    <label asp-for="Input.Ente_Federativo_Resp" class="form-label" for="inputEntF"></label>
+                    <input asp-for="Input.Ente_Federativo_Resp" class="form-control" id="inputEntF" />
+                    <span asp-validation-for="Input.Ente_Federativo_Resp" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row g-2 mb-2">
+                <div class="col-md">
+                    <label asp-for="Input.Situacao_Cadastral" class="form-label" for="inputSitCad"></label>
+                    <input asp-for="Input.Situacao_Cadastral" class="form-control" id="inputSitCad" />
+                    <span asp-validation-for="Input.Situacao_Cadastral" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="Input.Data_Situacao_Cadastral" class="form-label" for="inputSit"></label>
+                    <input asp-for="Input.Data_Situacao_Cadastral" class="form-control" id="inputSit" />
+                    <span asp-validation-for="Input.Data_Situacao_Cadastral" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row g-2 mb-2">
+                <div class="col-md">
+                    <label asp-for="Input.Motivo_Situacao_Cadastral" class="form-label" for="inputMotivositcad"></label>
+                    <input asp-for="Input.Motivo_Situacao_Cadastral" class="form-control" id="inputMotivositcad" />
+                    <span asp-validation-for="Input.Motivo_Situacao_Cadastral" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row g-2 mb-2">
+                <div class="col-md">
+                    <label asp-for="Input.Situacao_Especial" class="form-label" for="inputSitesp"></label>
+                    <input asp-for="Input.Situacao_Especial" class="form-control" id="inputSitesp" />
+                    <span asp-validation-for="Input.Situacao_Especial" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="Input.Data_Situacao_Especial" class="form-label" for="datasitespe"></label>
+                    <input asp-for="Input.Data_Situacao_Especial" class="form-control" id="datasitespe" />
+                    <span asp-validation-for="Input.Data_Situacao_Especial" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row g-2 mb-4">
+                <div class="col-md">
+                    <label asp-for="Input.Capital_Social" class="form-label" for="inputCapsoc"></label>
+                    <input asp-for="Input.Capital_Social" class="form-control" id="inputCapsoc" />
+                    <span asp-validation-for="Input.Capital_Social" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <table class="table table-borderless bg-white">
+                <caption>Lista de Sócios</caption>
+                <thead>
+                    <tr class="border-bottom shadow-sm">
+                        <th>Qualificacao</th>
+                        <th>Nome</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Input.QsaList != null)
+                    {
+
+                        foreach (var item in Model.Input.QsaList)
+                        {
+                            <tr class="border-bottom">
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Qualificacao)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Nome)
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="row g-2 mb-2">
+            <div class="d-grid gap-2 d-md-block">
+                <a asp-page="./Index" role="button" type="button" class="btn btn-secondary">Voltar</a>
+                <button type="submit" role="button" class="btn btn-primary">Gravar</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/jquery.cep.js"></script>
+    <script src="~/js/jquery.mask.min.js"></script>
+    <script src="~/js/jquery.validation.js"></script>
+    <script>
+        $('#inputCNPJ').mask('00.000.000/0000-00', { placeholder: "__.___.___/____-__" });
+        $('#inputTel').mask('(00) 0000-0000', { placeholder: "(__) ____-____" });
+        $('#inputCEP').mask('00000-000', { placeholder: "_____-___" });
+    </script>
 }
