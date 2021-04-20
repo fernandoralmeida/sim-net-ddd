@@ -94,7 +94,7 @@ namespace Sim.UI.Web.Pages.Empresa
 
         [DataType(DataType.Date)]
         [DisplayName("Data da Situação Cadastral")]
-        public DateTime Data_Situacao_Cadastral { get; set; }
+        public DateTime? Data_Situacao_Cadastral { get; set; }
 
         [DisplayName("Motivo da Situação Cadastral")]
         public string Motivo_Situacao_Cadastral { get; set; }

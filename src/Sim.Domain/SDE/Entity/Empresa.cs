@@ -45,8 +45,6 @@ namespace Sim.Domain.SDE.Entity
 
         //Registros relacionais
         public virtual ICollection<QSA> QSAs { get; set; }
-        public virtual ICollection<Atendimento> Atendimentos { get; set; }
-        public virtual ICollection<Inscricao> Inscricoes { get; set; }
 
     }
 }

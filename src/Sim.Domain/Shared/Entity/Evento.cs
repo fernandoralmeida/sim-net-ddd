@@ -19,8 +19,16 @@ namespace Sim.Domain.Shared.Entity
         public string Owner { get; set; }
         public int Lotacao { get; set; }
         public bool Ativo { get; set; }
-        public virtual int Inscricoes { get; set; }        
-        public virtual int Vagas { get; set; }
+
         public virtual ICollection<Inscricao> Inscritos { get; set; }
+
+        public int Inscricoes()
+        {
+            return 0;
+        }
+        public int Vagas()
+        {
+            return 0;
+        }
     }
 }

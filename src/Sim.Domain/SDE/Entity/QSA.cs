@@ -13,10 +13,8 @@ namespace Sim.Domain.SDE.Entity
         {
 
         }
-
         public Guid Id { get; set; }
         public string Nome { get; set; }
         public string Qualificacao { get; set; }
-        public Guid Empresa_Id { get; set; }
     }
 }

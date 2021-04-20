@@ -19,7 +19,7 @@ namespace Sim.Cross.Data.Repository.Shared
 
         public IEnumerable<Setor> GetByOwner(string secretaria)
         {
-            return _db.Setor.Where(u => u.Owner.Contains(secretaria));
+            return _db.Setor.Where(u => u.Secretaria.Nome.Contains(secretaria));
         }
     }
 }

@@ -41,11 +41,7 @@ namespace Sim.Domain.SDE.Entity
         public DateTime? Data_Cadastro { get; set; }
         public DateTime? Ultima_Alteracao { get; set; }
         public bool Ativo { get; set; }
-        
-        //Registro relacionais
-        public virtual ICollection<Empresa> Empresas { get; set; }
-        public virtual ICollection<Atendimento> Atendimentos { get; set; }
-        public virtual ICollection<Inscricao> Inscricoes { get; set; }
+     
 
     }
 }

@@ -14,7 +14,7 @@ namespace Sim.Domain.Shared.Entity
         }
         public int Id { get; set; }
         public string Nome { get; set; }
-        public string Owner { get; set; }
+        public Secretaria Secretaria { get; set; } //Secretaria
         public bool Ativo { get; set; }
     }
 }

@@ -28,7 +28,7 @@ namespace Sim.Cross.Data.Repository.Shared
             var query =
                from evento in _db.Evento
                from pessoa in _db.Pessoa
-               join inscricao in _db.Inscricao on evento.Id equals inscricao.Evento_Id
+               join inscricao in _db.Inscricao on evento.Id equals inscricao.Evento.Id
                where pessoa.Nome == nome
                select new { Inscricao = inscricao, Evento = evento, Pessoa = pessoa };
 

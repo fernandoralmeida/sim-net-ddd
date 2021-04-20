@@ -18,8 +18,6 @@ namespace Sim.Domain.Shared.Entity
         public DateTime? Data { get; set; }
         public DateTime? Inicio { get; set; }
         public DateTime? Fim { get; set; }
-        public Guid Pessoa_Id { get; set; }
-        public Guid Empresa_Id { get; set; }
         public string Setor { get; set; }
         public string Canal { get; set; }
         public string Servicos { get; set; }
