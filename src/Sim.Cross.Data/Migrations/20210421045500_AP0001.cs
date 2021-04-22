@@ -37,7 +37,7 @@ namespace Sim.Cross.Data.Migrations
                     Motivo_Situacao_Cadastral = table.Column<string>(type: "varchar(50)", nullable: true),
                     Situacao_Especial = table.Column<string>(type: "varchar(50)", nullable: true),
                     Data_Situacao_Especial = table.Column<string>(type: "varchar(10)", nullable: true),
-                    Capital_Social = table.Column<float>(type: "real", nullable: false)
+                    Capital_Social = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {

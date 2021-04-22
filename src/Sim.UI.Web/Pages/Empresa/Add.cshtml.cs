@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Authorization;
+using System.ComponentModel;
 using AutoMapper;
 using System.Text;
 
@@ -33,11 +34,16 @@ namespace Sim.UI.Web.Pages.Empresa
             _receitaWS = receitaWS;
         }
 
+
         [BindProperty]
         public VMEmpresa Input { get; set; }
 
         [TempData]
         public string StatusMessage { get; set; }
+
+        [BindProperty]
+        [DisplayName("Quadro Administrativo")]
+        public string Lista { get; set; }
 
         private async Task LoadAsync(string cnpj)
         {
@@ -58,13 +64,17 @@ namespace Sim.UI.Web.Pages.Empresa
             }
 
             Input.Atividade_Secundarias = sb.ToString().Trim();
-            Input.QsaList = new List<QSA>();
 
-            foreach (var qsa in rws.Qsa)
+            sb.Clear();
+            //Lista = new List<string>();
+            foreach(var q in rws.Qsa)
             {
-                Input.QsaList.Add(new QSA() { Qualificacao = qsa.Qual, Nome = qsa.Nome });
+                //Lista.Add(string.Format("{0} - {1};", q.Qual, q.Nome));
+                sb.AppendLine(string.Format("{0}: {1};", q.Qual, q.Nome));
             }
-                      
+
+            Lista = sb.ToString();
+            //Lista = new SelectList(rws.Qsa, "Qual", "Nome");                     
         }
 
         public async Task<IActionResult> OnGetAsync(string id)
@@ -80,29 +90,29 @@ namespace Sim.UI.Web.Pages.Empresa
             if (!ModelState.IsValid)
             { return Page(); }
 
-            await LoadAsync(new Functions.Mask().Remove(Input.CNPJ));
+            //await LoadAsync(new Functions.Mask().Remove(Input.CNPJ));
+            //Input.QsaList = obj.Input.QsaList;
 
             var t = Task.Run(() =>
-            {
+            {                
 
                 var empresa = _mapper.Map<Empresa>(Input);
 
                 var qsa = new List<QSA>();
 
-                foreach (var obj in Input.QsaList)
+                foreach (var obj in Lista)
                 {
-                    qsa.Add(new QSA() { Nome = obj.Nome, Qualificacao = obj.Qualificacao });
+                    string[] st = obj.ToString().Split(':');
+
+                    qsa.Add(new QSA() {Qualificacao = st[0].Trim(), Nome = st[1].Trim() });
                 }
 
-                empresa.QSAs = qsa;
-
+                empresa.QSAs = qsa;                
                 _appServiceEmpresa.Add(empresa);
 
             });
 
             await t;
-
-
 
             //StatusMessage = "Seu perfil foi atualizado";
             //return RedirectToPage("./Index");

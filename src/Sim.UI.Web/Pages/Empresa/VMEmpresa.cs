@@ -103,7 +103,7 @@ namespace Sim.UI.Web.Pages.Empresa
         public string Situacao_Especial { get; set; }
 
         [DisplayName("Data da Situação Especial")]
-        [DataType(DataType.Date)]
+        //[DataType(DataType.Date)]
         public string Data_Situacao_Especial { get; set; }
 
         [DataType(DataType.Currency)]
@@ -111,7 +111,7 @@ namespace Sim.UI.Web.Pages.Empresa
         public string Capital_Social { get; set; }
 
         //Registros relacionais
-        public virtual List<QSA> QsaList { get; set; }
+        public List<QSA> QsaList { get; set; }
 
     }
 }

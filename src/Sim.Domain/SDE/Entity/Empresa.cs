@@ -41,7 +41,7 @@ namespace Sim.Domain.SDE.Entity
         public string Motivo_Situacao_Cadastral { get; set; }
         public string Situacao_Especial { get; set; }
         public string Data_Situacao_Especial { get; set; }
-        public float Capital_Social { get; set; }
+        public decimal Capital_Social { get; set; }
 
         //Registros relacionais
         public virtual ICollection<QSA> QSAs { get; set; }

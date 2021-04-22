@@ -74,7 +74,7 @@
             <div class="row g-2 mb-2">
                 <div class="col-md">
                     <label asp-for="Input.Atividade_Secundarias" class="form-label" for="inputSecundaria"></label>
-                    <textarea asp-for="Input.Atividade_Secundarias" class="form-control" id="inputSecundaria"></textarea>
+                    <textarea asp-for="Input.Atividade_Secundarias" rows="4" class="form-control" id="inputSecundaria"></textarea>
                     <span asp-validation-for="Input.Atividade_Secundarias" class="text-danger"></span>
                 </div>
             </div>
@@ -162,7 +162,7 @@
                     <span asp-validation-for="Input.Motivo_Situacao_Cadastral" class="text-danger"></span>
                 </div>
             </div>
-            <div class="row g-2 mb-2">
+            <div class="row g-2 mb-4">
                 <div class="col-md">
                     <label asp-for="Input.Situacao_Especial" class="form-label" for="inputSitesp"></label>
                     <input asp-for="Input.Situacao_Especial" class="form-control" id="inputSitesp" />
@@ -174,47 +174,53 @@
                     <span asp-validation-for="Input.Data_Situacao_Especial" class="text-danger"></span>
                 </div>
             </div>
-            <div class="row g-2 mb-4">
+        </div>
+        <div class="col-md-4">
+            <div class="row g-2 mb-2">
                 <div class="col-md">
                     <label asp-for="Input.Capital_Social" class="form-label" for="inputCapsoc"></label>
                     <input asp-for="Input.Capital_Social" class="form-control" id="inputCapsoc" />
                     <span asp-validation-for="Input.Capital_Social" class="text-danger"></span>
                 </div>
             </div>
-        </div>
-        <div class="col-md-4">
-            <table class="table table-borderless bg-white">
-                <caption>Lista de Sócios</caption>
-                <thead>
-                    <tr class="border-bottom shadow-sm">
-                        <th>Qualificacao</th>
-                        <th>Nome</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @if (Model.Input.QsaList != null)
-                    {
-
-                        foreach (var item in Model.Input.QsaList)
+            <div class="row g-2" hidden>
+                <div class="col-md">
+                    <label asp-for="Lista" class="form-label"></label>
+                    <textarea asp-for="Lista" rows="20" readonly class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="row g-2">
+                <table class="table table-borderless">                    
+                    <thead>
+                        <tr>
+                            <th class="border-bottom"><label asp-for="Lista" class="form-label"></label></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Lista != null) 
                         {
-                            <tr class="border-bottom">
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Qualificacao)
-                                </td>
 
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Nome)
-                                </td>
-                            </tr>
+                            string[] s = Model.Lista.ToString().Split('\n');
+
+                            foreach (var item in s)
+                            {
+                                <tr>
+                                    <td >
+                                        @Html.DisplayFor(modelItem => item)
+                                    </td>
+                                </tr>
+                            }
                         }
-                    }
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <div class="row g-2 mb-2">
-            <div class="d-grid gap-2 d-md-block">
-                <a asp-page="./Index" role="button" type="button" class="btn btn-secondary">Voltar</a>
-                <button type="submit" role="button" class="btn btn-primary">Gravar</button>
+        <div class="col-md">
+            <div class="row g-2 mb-2">
+                <div class="d-grid gap-2 d-md-block">
+                    <a asp-page="./Index" role="button" type="button" class="btn btn-secondary">Voltar</a> |
+                    <button type="submit" role="button" class="btn btn-primary">Gravar</button>
+                </div>
             </div>
         </div>
     </form>

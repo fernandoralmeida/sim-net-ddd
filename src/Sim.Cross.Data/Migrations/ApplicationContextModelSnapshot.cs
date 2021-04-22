@@ -150,8 +150,8 @@ namespace Sim.Cross.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(18)");
 
-                    b.Property<float>("Capital_Social")
-                        .HasColumnType("real");
+                    b.Property<decimal>("Capital_Social")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Complemento")
                         .HasColumnType("varchar(20)");

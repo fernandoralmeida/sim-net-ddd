@@ -88,7 +88,7 @@ namespace Sim.Service.CNPJ.Entity
         public string Data_Situacao_Especial { get; set; }
 
         [JsonProperty("capital_social")]
-        public string Capital_Social { get; set; }
+        public decimal Capital_Social { get; set; }
 
         [JsonProperty("porte")]
         public string Porte { get; set; }

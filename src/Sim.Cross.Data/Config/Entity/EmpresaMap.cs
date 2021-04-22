@@ -87,7 +87,10 @@ namespace Sim.Cross.Data.Config.Entity
                 .HasColumnType("varchar(50)");
 
             builder.Property(c => c.Data_Situacao_Especial)
-                .HasColumnType("varchar(10)"); 
+                .HasColumnType("varchar(10)");
+
+            builder.Property(c => c.Capital_Social)
+                .HasColumnType("decimal(18,2)");
 
         }
     }

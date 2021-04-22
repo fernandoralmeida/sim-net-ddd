@@ -10,7 +10,7 @@ using Sim.Cross.Data.Context;
 namespace Sim.Cross.Data.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20210420150535_AP0001")]
+    [Migration("20210421045500_AP0001")]
     partial class AP0001
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -152,8 +152,8 @@ namespace Sim.Cross.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(18)");
 
-                    b.Property<float>("Capital_Social")
-                        .HasColumnType("real");
+                    b.Property<decimal>("Capital_Social")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Complemento")
                         .HasColumnType("varchar(20)");
