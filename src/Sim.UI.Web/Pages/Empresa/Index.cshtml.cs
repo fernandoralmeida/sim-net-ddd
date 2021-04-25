@@ -46,7 +46,7 @@ namespace Sim.UI.Web.Pages.Empresa
 
         private async Task LoadAsync()
         {
-            var t = Task.Run(() => _empresaApp.GetAll());
+            var t = Task.Run(() => _empresaApp.List());
 
             await t;
 

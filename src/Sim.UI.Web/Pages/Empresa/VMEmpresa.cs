@@ -111,7 +111,7 @@ namespace Sim.UI.Web.Pages.Empresa
         public string Capital_Social { get; set; }
 
         //Registros relacionais
-        public List<QSA> QsaList { get; set; }
+        public virtual ICollection<QSA> QsaList { get; set; }
 
     }
 }

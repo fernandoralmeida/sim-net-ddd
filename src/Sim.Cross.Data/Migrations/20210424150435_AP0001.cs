@@ -121,6 +121,19 @@ namespace Sim.Cross.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "QSA",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Nome = table.Column<string>(type: "varchar(150)", nullable: true),
+                    Qualificacao = table.Column<string>(type: "varchar(50)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_QSA", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Secretaria",
                 columns: table => new
                 {
@@ -133,26 +146,6 @@ namespace Sim.Cross.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Secretaria", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "QSA",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Nome = table.Column<string>(type: "varchar(150)", nullable: true),
-                    Qualificacao = table.Column<string>(type: "varchar(50)", nullable: true),
-                    EmpresaId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_QSA", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_QSA_Empresa_EmpresaId",
-                        column: x => x.EmpresaId,
-                        principalTable: "Empresa",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -258,6 +251,30 @@ namespace Sim.Cross.Data.Migrations
                         principalTable: "Pessoa",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "EmpresaQSA",
+                columns: table => new
+                {
+                    EmpresaId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    QSAsId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EmpresaQSA", x => new { x.EmpresaId, x.QSAsId });
+                    table.ForeignKey(
+                        name: "FK_EmpresaQSA_Empresa_EmpresaId",
+                        column: x => x.EmpresaId,
+                        principalTable: "Empresa",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_EmpresaQSA_QSA_QSAsId",
+                        column: x => x.QSAsId,
+                        principalTable: "QSA",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -449,6 +466,11 @@ namespace Sim.Cross.Data.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_EmpresaQSA_QSAsId",
+                table: "EmpresaQSA",
+                column: "QSAsId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Inscricao_EmpresaId",
                 table: "Inscricao",
                 column: "EmpresaId");
@@ -468,11 +490,6 @@ namespace Sim.Cross.Data.Migrations
                 table: "Pessoa",
                 column: "CPF",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_QSA_EmpresaId",
-                table: "QSA",
-                column: "EmpresaId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Servico_SecretariaId",
@@ -502,13 +519,13 @@ namespace Sim.Cross.Data.Migrations
                 name: "DIA");
 
             migrationBuilder.DropTable(
+                name: "EmpresaQSA");
+
+            migrationBuilder.DropTable(
                 name: "Inscricao");
 
             migrationBuilder.DropTable(
                 name: "Planer");
-
-            migrationBuilder.DropTable(
-                name: "QSA");
 
             migrationBuilder.DropTable(
                 name: "Servico");
@@ -517,10 +534,13 @@ namespace Sim.Cross.Data.Migrations
                 name: "Ambulante");
 
             migrationBuilder.DropTable(
-                name: "Evento");
+                name: "QSA");
 
             migrationBuilder.DropTable(
                 name: "Empresa");
+
+            migrationBuilder.DropTable(
+                name: "Evento");
 
             migrationBuilder.DropTable(
                 name: "Setor");

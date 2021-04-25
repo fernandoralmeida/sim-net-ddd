@@ -12,7 +12,7 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom shadow-sm fixed-top mb-3">
             <div class="container-fluid">
-                <a asp-area="" asp-page="/Index"><div class="badge" style="background-color:teal"><span style="font-display:block; font-size:x-large; font-family:Consolas;">SEDEMP</span></div></a>
+                <a asp-area="" asp-page="/Index"><div class="logo-sim"></div></a>
                 <!--<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><span class="badge bg-info mb-1">SDE</span></a>-->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -20,7 +20,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-page="/Index">Atedimentos</a>
+                            <a class="nav-link" asp-area="" asp-page="/Atendimento/Index">Atedimentos</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-page="/Pessoa/Index">Pessoas</a>
@@ -42,14 +42,18 @@
             </div>
         </nav>
     </header>
-    <hr class="strip-dot mb-3" /><!---->
-    <div class="container">
-        <main role="main" class="pb-3">
+    
+    <p class="strip-bg mb-3 border-0" /><!---->
+
+    <div class="container bg-light mb-4 shadow-sm">
+        <p class="strip-bg mb-0" />
+        <main role="main">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <p class="strip-bg mb-2 border-0" />
+    <footer class="footer text-muted">
         <div class="container-fluid">
             &copy; 2021 - Sim.Web - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>

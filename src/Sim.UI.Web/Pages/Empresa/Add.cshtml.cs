@@ -66,15 +66,13 @@ namespace Sim.UI.Web.Pages.Empresa
             Input.Atividade_Secundarias = sb.ToString().Trim();
 
             sb.Clear();
-            //Lista = new List<string>();
+
             foreach(var q in rws.Qsa)
             {
-                //Lista.Add(string.Format("{0} - {1};", q.Qual, q.Nome));
                 sb.AppendLine(string.Format("{0}: {1};", q.Qual, q.Nome));
             }
 
-            Lista = sb.ToString();
-            //Lista = new SelectList(rws.Qsa, "Qual", "Nome");                     
+            Lista = sb.ToString();                
         }
 
         public async Task<IActionResult> OnGetAsync(string id)
@@ -90,24 +88,32 @@ namespace Sim.UI.Web.Pages.Empresa
             if (!ModelState.IsValid)
             { return Page(); }
 
-            //await LoadAsync(new Functions.Mask().Remove(Input.CNPJ));
-            //Input.QsaList = obj.Input.QsaList;
-
             var t = Task.Run(() =>
             {                
 
                 var empresa = _mapper.Map<Empresa>(Input);
 
-                var qsa = new List<QSA>();
-
-                foreach (var obj in Lista)
+                if (Lista != null)
                 {
-                    string[] st = obj.ToString().Split(':');
+                    var qsa = new List<QSA>();
 
-                    qsa.Add(new QSA() {Qualificacao = st[0].Trim(), Nome = st[1].Trim() });
+                    string[] st = Lista.ToString().Split(';');
+
+                    foreach (var obj in st)
+                    {
+                        var s = obj.Trim();
+
+                        if(s != string.Empty)
+                        {
+                            string[] i = s.ToString().Split(':');
+                            qsa.Add(new QSA() { Qualificacao = i[0].Trim(), Nome = i[1].Trim() });
+                        }
+
+                    }
+
+                    empresa.QSAs = qsa;
                 }
 
-                empresa.QSAs = qsa;                
                 _appServiceEmpresa.Add(empresa);
 
             });
@@ -115,8 +121,8 @@ namespace Sim.UI.Web.Pages.Empresa
             await t;
 
             //StatusMessage = "Seu perfil foi atualizado";
-            //return RedirectToPage("./Index");
-            return Page();
+            return RedirectToPage("./Index");
+            //return Page();
         }
     }
 }

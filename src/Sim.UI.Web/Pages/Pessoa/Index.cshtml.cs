@@ -44,7 +44,7 @@ namespace Sim.UI.Web.Pages.Pessoa
 
         private void Load()
         {
-            var pessoa = _pessoaApp.GetAll();
+            var pessoa = _pessoaApp.List();
 
             Input = new InputModel
             {

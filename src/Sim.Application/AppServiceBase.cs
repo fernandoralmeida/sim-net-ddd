@@ -21,15 +21,20 @@ namespace Sim.Application
             _serviceBase.Add(obj);
         }
 
+        public void AddRange(IEnumerable<TEntity> obj)
+        {
+            _serviceBase.AddRange(obj);
+        }
+
         public void Dispose()
         {
             _serviceBase.Dispose();
             GC.SuppressFinalize(this);
         }
 
-        public IEnumerable<TEntity> GetAll()
+        public IEnumerable<TEntity> List()
         {
-            return _serviceBase.GetAll();
+            return _serviceBase.List();
         }
 
         public TEntity GetById(Guid id)
@@ -42,9 +47,19 @@ namespace Sim.Application
             _serviceBase.Remove(obj);
         }
 
+        public void RemoveRange(IEnumerable<TEntity> obj)
+        {
+            _serviceBase.RemoveRange(obj);
+        }
+
         public void Update(TEntity obj)
         {
             _serviceBase.Update(obj);
+        }
+
+        public void UpdateRange(IEnumerable<TEntity> obj)
+        {
+            _serviceBase.UpdateRange(obj);
         }
     }
 }

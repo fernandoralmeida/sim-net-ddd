@@ -33,5 +33,10 @@ namespace Sim.Domain.SDE.Service
         {
             return _repositoryEmpresa.ConsultaByRazaoSocial(name);
         }
+
+        public IEnumerable<Empresa> ListEmpresasQsa(Guid id)
+        {
+           return _repositoryEmpresa.ListEmpresasQsa(id);
+        }
     }
 }

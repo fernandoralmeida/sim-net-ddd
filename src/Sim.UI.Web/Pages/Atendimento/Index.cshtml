@@ -1,4 +1,92 @@
 ﻿@page
 @model Sim.UI.Web.Pages.Atendimento.IndexModel
+
 @{
+    ViewData["Title"] = "Index";
 }
+
+<h5>Lista de Atendimentos</h5>
+
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+
+<hr />
+<pre>Data do Atendimento</pre>
+
+<div class="row mb-3">
+    <div style="margin:auto; width:300px;">
+        <form asp-action="Index" method="post">
+            <div class="form-row">
+                <div class="form-group">
+                    <div class="input-group mb-3">
+                        <input asp-for="Input.DataAtendimento" class="form-control" placeholder="Nome" aria-describedby="button-addon2">
+                        <button class="btn btn-primary" type="submit" role="button" id="button-addon2"><i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<table class="table table-borderless bg-white">
+    <caption>Lista de atendimentos!</caption>
+    <thead>
+        <tr class="border-bottom shadow-sm">
+            <th>
+                Contador
+            </th>
+            <th>
+                Protocolo
+            </th>
+            <th>
+                Horário
+            </th>
+            <th>
+                Cliente
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Setor
+            </th>
+            <th>
+                Canal
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Input.ListaAtendimento)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Servicos)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Protocolo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Inicio)
+                    -
+                    @Html.DisplayFor(modelItem => item.Fim)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Pessoa.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Servicos)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Setor)
+                <td>
+                    @Html.DisplayFor(modelItem => item.Canal)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

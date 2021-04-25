@@ -24,12 +24,18 @@ namespace Sim.Cross.Data.Repository
             _db.SaveChanges();
         }
 
+        public void AddRange(IEnumerable<TEntity> obj)
+        {
+            _db.Set<TEntity>().AddRange(obj);
+            _db.SaveChanges();
+        }
+
         public void Dispose()
         {
             _db.Dispose();
         }
 
-        public IEnumerable<TEntity> GetAll()
+        public IEnumerable<TEntity> List()
         {
             return _db.Set<TEntity>().ToList();
         }
@@ -45,7 +51,19 @@ namespace Sim.Cross.Data.Repository
             _db.SaveChanges();
         }
 
+        public void RemoveRange(IEnumerable<TEntity> obj)
+        {
+            _db.Set<TEntity>().RemoveRange(obj);
+            _db.SaveChanges();
+        }
+
         public void Update(TEntity obj)
+        {
+            _db.Entry(obj).State = EntityState.Modified;
+            _db.SaveChanges();
+        }
+
+        public void UpdateRange(IEnumerable<TEntity> obj)
         {
             _db.Entry(obj).State = EntityState.Modified;
             _db.SaveChanges();

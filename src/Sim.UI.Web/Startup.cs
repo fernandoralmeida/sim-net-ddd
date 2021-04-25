@@ -28,7 +28,6 @@ namespace Sim.UI.Web
         public void ConfigureServices(IServiceCollection services)
         {
             new Container().RegisterApplicationService(services, Configuration, "App_____ContextConnection");
-
                         
             services.AddScoped<IReceitaWS, ReceitaWS>();
 

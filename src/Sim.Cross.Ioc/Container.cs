@@ -44,7 +44,7 @@ namespace Sim.Cross.Ioc
 
             RegisterPessoa(services);
             RegisterEmpresa(services);
-            //RegisterAtendimento(services);
+            RegisterAtendimento(services);
         }
 
         private void RegisterPessoa(IServiceCollection services)

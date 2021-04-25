@@ -11,7 +11,7 @@
 <hr />
 
 <div class="row">
-    <form class="row" method="post">
+    <form class="row" asp-action="SyncRWS">
         <div class="col-md-8">
 
             <div class="row g-2 mb-3" hidden>
@@ -21,9 +21,12 @@
             </div>
 
             <div class="row g-2 mb-2">
-                <div class="col-md-3">
+                <div class="col-md-5">
                     <label asp-for="Input.CNPJ" class="form-label" for="inputCNPJ"></label>
-                    <input asp-for="Input.CNPJ" class="form-control" id="inputCNPJ" />
+                    <div class="input-group mb-3">
+                        <input asp-for="Input.CNPJ" class="form-control" placeholder="CPF" aria-describedby="button-addon2" id="inputCNPJ">                        
+                        <a class="btn btn-outline-primary" asp-action="SyncRWS" role="button" id="button-addon2">Atualizar Dados</a>
+                    </div>                    
                     <span asp-validation-for="Input.CNPJ" class="text-danger"></span>
                 </div>
                 <div class="col-md-2">
@@ -73,7 +76,7 @@
             <div class="row g-2 mb-2">
                 <div class="col-md">
                     <label asp-for="Input.Atividade_Secundarias" class="form-label" for="inputSecundaria"></label>
-                    <textarea asp-for="Input.Atividade_Secundarias" class="form-control" id="inputSecundaria"></textarea>
+                    <textarea asp-for="Input.Atividade_Secundarias" rows="4" class="form-control" id="inputSecundaria"></textarea>
                     <span asp-validation-for="Input.Atividade_Secundarias" class="text-danger"></span>
                 </div>
             </div>
@@ -161,7 +164,7 @@
                     <span asp-validation-for="Input.Motivo_Situacao_Cadastral" class="text-danger"></span>
                 </div>
             </div>
-            <div class="row g-2 mb-2">
+            <div class="row g-2 mb-4">
                 <div class="col-md">
                     <label asp-for="Input.Situacao_Especial" class="form-label" for="inputSitesp"></label>
                     <input asp-for="Input.Situacao_Especial" class="form-control" id="inputSitesp" />
@@ -173,17 +176,17 @@
                     <span asp-validation-for="Input.Data_Situacao_Especial" class="text-danger"></span>
                 </div>
             </div>
-            <div class="row g-2 mb-4">
+        </div>
+        <div class="col-md-4">
+            <div class="row g-2 mb-2">
                 <div class="col-md">
                     <label asp-for="Input.Capital_Social" class="form-label" for="inputCapsoc"></label>
                     <input asp-for="Input.Capital_Social" class="form-control" id="inputCapsoc" />
                     <span asp-validation-for="Input.Capital_Social" class="text-danger"></span>
                 </div>
             </div>
-        </div>
-        <div class="col-md-4">
             <table class="table table-borderless bg-white">
-                <caption>Lista de Sócios</caption>
+                <caption>Quadro Social Administrativo</caption>
                 <thead>
                     <tr class="border-bottom shadow-sm">
                         <th>Qualificacao</th>
@@ -210,12 +213,15 @@
                 </tbody>
             </table>
         </div>
-        <div class="row g-2 mb-2">
-            <div class="d-grid gap-2 d-md-block">
-                <a asp-page="./Index" role="button" type="button" class="btn btn-secondary">Voltar</a>
-                <button type="submit" role="button" class="btn btn-primary">Gravar</button>
+        <div class="col-md">
+            <div class="row g-2 mb-2">
+                <div class="d-grid gap-2 d-md-block">
+                    <a asp-page="./Index" role="button" type="button" class="btn btn-secondary">Voltar</a>
+                    <button type="submit" role="button" class="btn btn-primary">Gravar</button>
+                </div>
             </div>
         </div>
+
     </form>
 </div>
 

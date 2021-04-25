@@ -39,11 +39,12 @@ html {
 
 body {
     /* Margin bottom by footer height */
-    margin-bottom: 60px;
-   
+    margin-bottom: 40px;
     /* Margin top by fixed navbar height */
     margin-top: 60px;
-    background-color: #ffffff;
+    background: url(imgs/bgios.jpg) no-repeat fixed;
+    background-size: cover;
+    /*background-color: #ffffff;*/
 }
 
 .footer {
@@ -51,7 +52,7 @@ body {
     bottom: 0;
     width: 100%;
     white-space: nowrap;
-    line-height: 60px; /* Vertically center the text there */
+    line-height: 40px; /* Vertically center the text there */
 }
 
 /* Login style */
@@ -83,6 +84,11 @@ body {
     }
 
 
+.strip-bg {
+    margin: 0px 0px 0px 0px;
+    height: 20px;
+}
+
 /* faixa pontilhada */
 .strip-dot {
     margin: 0px 0px 0px 0px;
@@ -93,7 +99,7 @@ body {
 /* Logo SIM */
 .logo-sim{
     margin: 0px 0px 0px 0px;
-    background-image: url(imgs/sim_logo.png);
+    background-image: url(imgs/sim-ico.ico);
     background-size: 38px 38px;
     height: 38px;
     width: 38px;

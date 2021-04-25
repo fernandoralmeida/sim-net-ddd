@@ -9,14 +9,13 @@ namespace Sim.Application.Interface
     public interface IAppServiceBase<TEntity> where TEntity : class
     {
         void Add(TEntity obj);
-
+        void AddRange(IEnumerable<TEntity> obj);
         void Update(TEntity obj);
-
+        void UpdateRange(IEnumerable<TEntity> obj);
         void Remove(TEntity obj);
-
+        void RemoveRange(IEnumerable<TEntity> obj);
         TEntity GetById(Guid id);
-
-        IEnumerable<TEntity> GetAll();
+        IEnumerable<TEntity> List();
 
     }
 }

@@ -21,15 +21,20 @@ namespace Sim.Domain.Service
             _repositoryBase.Add(obj);
         }
 
+        public void AddRange(IEnumerable<TEntity> obj)
+        {
+            _repositoryBase.AddRange(obj);
+        }
+
         public void Dispose()
         {
             _repositoryBase.Dispose();
             GC.SuppressFinalize(this);
         }
 
-        public IEnumerable<TEntity> GetAll()
+        public IEnumerable<TEntity> List()
         {
-            return  _repositoryBase.GetAll();
+            return  _repositoryBase.List();
         }
 
         public TEntity GetById(Guid id)
@@ -42,9 +47,19 @@ namespace Sim.Domain.Service
             _repositoryBase.Remove(obj);
         }
 
+        public void RemoveRange(IEnumerable<TEntity> obj)
+        {
+            _repositoryBase.RemoveRange(obj);
+        }
+
         public void Update(TEntity obj)
         {
             _repositoryBase.Update(obj);
+        }
+
+        public void UpdateRange(IEnumerable<TEntity> obj)
+        {
+            _repositoryBase.UpdateRange(obj);
         }
     }
 }

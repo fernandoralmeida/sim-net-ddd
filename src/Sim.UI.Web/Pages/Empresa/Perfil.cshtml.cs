@@ -38,74 +38,93 @@ namespace Sim.UI.Web.Pages.Empresa
         [TempData]
         public string StatusMessage { get; set; }
 
-        private async Task LoadAsync(Guid cnpj)
+        private async Task LoadAsync(Guid id)
         {
-            var emp = Task.Run(() => _appServiceEmpresa.GetById(cnpj));
-            await emp;
+            var t = Task.Run(() => {
 
-            Input = _mapper.Map<VMEmpresa>(emp.Result);
+                var emp = _appServiceEmpresa.ListEmpresasQsa(id).First();
+                
+                Input = _mapper.Map<VMEmpresa>(emp);
 
-            if (emp.Result.QSAs != null)
-                foreach (var obj in emp.Result.QSAs)
-                {
-                    //Input.QsaList.Add(new QSA() { Nome = obj.Nome, Qualificacao = obj.Qualificacao });
-                }
+                List<QSA> list = new List<QSA>();
+
+                if (emp.QSAs != null)
+                    foreach (var obj in emp.QSAs)
+                    {
+                        
+                        list.Add(new QSA() { Nome = obj.Nome, Qualificacao = obj.Qualificacao });
+                    }
+
+                Input.QsaList = list;
+            });
+
+            await t;
         }
 
         public async Task<IActionResult> OnGetAsync(Guid id)
         {
-
             await LoadAsync(id);
+            return Page();
+        }
+
+        [ActionName("SyncRWS")]
+        public async Task<IActionResult> SyncRWS()
+        {
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+
+            var rws = await _receitaWS.ConsultarCPNJAsync(new Functions.Mask().Remove(Input.CNPJ));
+            Input = _mapper.Map<VMEmpresa>(rws);
+
+            foreach (var at in rws.AtividadePrincipal)
+            {
+                Input.CNAE_Principal = at.Code;
+                Input.Atividade_Principal = at.Text;
+            }
+
+            StringBuilder sb = new StringBuilder();
+            foreach (var at in rws.AtividadesSecundarias)
+            {
+                sb.AppendLine(string.Format("{0} - {1}", at.Code, at.Text));
+            }
+
+            Input.Atividade_Secundarias = sb.ToString().Trim();
+
+            List<QSA> list = new List<QSA>();
+
+            if (rws.Qsa != null)
+                foreach (var obj in rws.Qsa)
+                {
+
+                    list.Add(new QSA() { Nome = obj.Nome, Qualificacao = obj.Qual });
+                }
+
+            Input.QsaList = list;
+
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var t = Task.Run(() => _appServiceEmpresa.Add(_mapper.Map<Empresa>(Input)));
-                await t;
-
-                var q = Task.Run(() => _appServiceEmpresa.ConsultaByCNPJ(Input.CNPJ));
-                await q;
-
-                var rws = await _receitaWS.ConsultarCPNJAsync(new Functions.Mask().Remove(Input.CNPJ));
-
-                Input.QsaList = new List<QSA>();
-
-                foreach (var qsa in rws.Qsa)
-                {
-                    Input.QsaList.Add(new QSA() { Qualificacao = qsa.Qual, Nome = qsa.Nome });
-                }
-
-                if (Input.QsaList != null)
-                {
-
-                    foreach (var qsa in Input.QsaList)
-                    {
-
-                        var qt = Task.Run(() =>
-                        {
-
-                            _appServiceQSA.Add(new QSA()
-                            {
-                                //Empresa_Id = q.Id,
-                                Nome = qsa.Nome,
-                                Qualificacao = qsa.Qualificacao
-                            });
-
-                        });
-                        await qt;
-
-                        StatusMessage = qsa.Nome;
-                    }
-                }
-
+                return Page();
             }
 
-            //StatusMessage = "Seu perfil foi atualizado";
-            //return RedirectToPage("./Index");
+            var t = Task.Run(() =>
+            {
+
+                var empresa = _mapper.Map<Empresa>(Input);
+
+                _appServiceEmpresa.Update(empresa);
+
+            });
+
+            await t;
+
             return Page();
         }
     }
