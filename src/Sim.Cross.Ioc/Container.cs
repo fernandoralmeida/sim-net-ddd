@@ -20,9 +20,12 @@ namespace Sim.Cross.Ioc
     using Sim.Domain.Interface;
     using Sim.Domain.Service;
 
-    using Sim.Application.Interface;
+
     using Sim.Application.Shared;
     using Sim.Application.Shared.Interface;
+    using Sim.Application.Shared.Service;
+
+    using Sim.Application.Interface;
 
     using Sim.Application.SDE;
     using Sim.Application.SDE.Interface;
@@ -30,6 +33,7 @@ namespace Sim.Cross.Ioc
 
     using Sim.Cross.Data.Repository.SDE;
     using Sim.Cross.Data.Repository.Shared;
+
 
     public class Container
     {
@@ -45,6 +49,11 @@ namespace Sim.Cross.Ioc
             RegisterPessoa(services);
             RegisterEmpresa(services);
             RegisterAtendimento(services);
+            RegisterSecretaria(services);
+            RegisterSetor(services);
+            RegisterServico(services);
+            RegisterEvento(services);
+            RegisterCanal(services);
         }
 
         private void RegisterPessoa(IServiceCollection services)
@@ -91,6 +100,71 @@ namespace Sim.Cross.Ioc
 
             services.AddScoped<IRepositoryBase<Atendimento>, RepositoryBase<Atendimento>>();
             services.AddScoped<IRepositoryAtendimento, RepositoryAtendimento>();
+        }
+
+        private void RegisterSecretaria(IServiceCollection services)
+        {
+            //
+            services.AddScoped<IAppServiceBase<Secretaria>, AppServiceBase<Secretaria>>();
+            services.AddScoped<IAppServiceSecretaria, AppServiceSecretaria>();
+
+            services.AddScoped<IServiceBase<Secretaria>, ServiceBase<Secretaria>>();
+            services.AddScoped<IServiceSecretaria, ServiceSecretaria>();
+
+            services.AddScoped<IRepositoryBase<Secretaria>, RepositoryBase<Secretaria>>();
+            services.AddScoped<IRepositorySecretaria, RepositorySecretaria>();
+        }
+
+        private void RegisterSetor(IServiceCollection services)
+        {
+            //
+            services.AddScoped<IAppServiceBase<Setor>, AppServiceBase<Setor>>();
+            services.AddScoped<IAppServiceSetor, AppServiceSetor>();
+
+            services.AddScoped<IServiceBase<Setor>, ServiceBase<Setor>>();
+            services.AddScoped<IServiceSetor, ServiceSetor>();
+
+            services.AddScoped<IRepositoryBase<Setor>, RepositoryBase<Setor>>();
+            services.AddScoped<IRepositorySetor, RepositorySetor>();
+        }
+
+        private void RegisterServico(IServiceCollection services)
+        {
+            //
+            services.AddScoped<IAppServiceBase<Servico>, AppServiceBase<Servico>>();
+            services.AddScoped<IAppServiceServico, AppServiceServico>();
+
+            services.AddScoped<IServiceBase<Servico>, ServiceBase<Servico>>();
+            services.AddScoped<IServiceServico, ServiceServico>();
+
+            services.AddScoped<IRepositoryBase<Servico>, RepositoryBase<Servico>>();
+            services.AddScoped<IRepositoryServico, RepositoryServico>();
+        }
+
+        private void RegisterEvento(IServiceCollection services)
+        {
+            //
+            services.AddScoped<IAppServiceBase<Evento>, AppServiceBase<Evento>>();
+            services.AddScoped<IAppServiceEvento, AppServiceEvento>();
+
+            services.AddScoped<IServiceBase<Evento>, ServiceBase<Evento>>();
+            services.AddScoped<IServiceEvento, ServiceEvento>();
+
+            services.AddScoped<IRepositoryBase<Evento>, RepositoryBase<Evento>>();
+            services.AddScoped<IRepositoryEvento, RepositoryEvento>();
+        }
+
+        private void RegisterCanal(IServiceCollection services)
+        {
+            //
+            services.AddScoped<IAppServiceBase<Canal>, AppServiceBase<Canal>>();
+            services.AddScoped<IAppServiceCanal, AppServiceCanal>();
+
+            services.AddScoped<IServiceBase<Canal>, ServiceBase<Canal>>();
+            services.AddScoped<IServiceCanal, ServiceCanal>();
+
+            services.AddScoped<IRepositoryBase<Canal>, RepositoryBase<Canal>>();
+            services.AddScoped<IRepositoryCanal, RepositoryCanal>();
         }
     }
 }

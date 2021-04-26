@@ -11,9 +11,9 @@ namespace Sim.UI.Web.Pages.Atendimento
 {
     using Sim.Domain.Shared.Entity;
     using Sim.Application.Shared.Interface;
+
     public class IndexModel : PageModel
     {
-
 
         private readonly IAppServiceAtendimento _appServiceAtendimento;
 
@@ -27,18 +27,38 @@ namespace Sim.UI.Web.Pages.Atendimento
 
         [BindProperty]
         public InputModel Input { get; set; }
+       
         public class InputModel
         {
-
             [DataType(DataType.Date)]
             public DateTime? DataAtendimento { get; set; }
 
             public ICollection<Atendimento> ListaAtendimento { get; set; }
         }
 
-        public async Task<IActionResult> OnGetAsync()
+        private async Task LoadAsync(DateTime? date)
         {
             Input = new();
+            Input.DataAtendimento = date;
+            var t = Task.Run(() => _appServiceAtendimento.GetByDate(Input.DataAtendimento));
+            await t;
+            Input.ListaAtendimento = t.Result.ToList();
+        }
+
+        public async Task<IActionResult> OnGetAsync()
+        {
+            await LoadAsync(DateTime.Now.Date);
+            return Page();
+        }
+
+        public async Task<IActionResult> OnPostAsync()
+        {
+            await LoadAsync(Input.DataAtendimento);
+
+            if(Input.ListaAtendimento.Count == 0)
+            {
+                StatusMessage = string.Format("Erro: Não há atendimentos para do {0}", Input.DataAtendimento);
+            }
 
             return Page();
         }

@@ -1,0 +1,74 @@
+﻿@page
+@model Sim.UI.Web.Areas.Settings.Pages.Common.IndexModel
+@{
+    Layout = "_Layout.cshtml";
+
+    ViewData["Title"] = "Index";
+
+    ViewData["ActivePage"] = SettingsNavPages.Secretarias;
+}
+
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+
+<div>
+    <form class="col-md-12 mb-4" method="post">
+        <div class="row g-2">
+            <!--<div asp-validation-summary="All" class="text-danger"></div>-->
+            <div class="col-md-12" hidden>
+                <label asp-for="Input.Id" class="form-label"></label>
+                <input asp-for="Input.Id" class="form-control" />
+                <span asp-validation-for="Input.Id" class="text-danger"></span>
+            </div>
+            <div class="col-md-7">
+                <label asp-for="Input.Nome" class="form-label"></label>
+                <input asp-for="Input.Nome" class="form-control" />
+                <span asp-validation-for="Input.Nome" class="text-danger"></span>
+            </div>
+            <div class="col-md-7 mb-4">
+                <label asp-for="Input.Owner" class="form-label"></label>
+                <select asp-for="Input.Owner" class="form-select">
+                    <option selected>Prefeitura do Município de Jahu</option>
+                </select>
+                <span asp-validation-for="Input.Owner" class="text-danger"></span>
+            </div>
+            <div class="col-md-10">
+                <button type="submit" class="btn btn-primary col-md-4">Incluir Secretaria</button>
+            </div>
+        </div>
+    </form>
+    <table class="table table-borderless bg-white">
+        <caption>Lista de Secretarias</caption>
+        <thead>
+            <tr class="border-bottom shadow-sm">
+
+                <th>
+                    Secretaria
+                </th>
+                <th>Unidade Responsável</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Input.Listar != null)
+            {
+                foreach (var item in Model.Input.Listar)
+                {
+                    <tr class="border-bottom">
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nome)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Owner)
+                        </td>
+
+                        <td>
+                            <a href="@Url.ActionLink("DeleteRole", "Home", new { id = item.Id })" class="btn btn-sm btn-danger" title="Excluir Role"><i class="far fa-window-close"></i></a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

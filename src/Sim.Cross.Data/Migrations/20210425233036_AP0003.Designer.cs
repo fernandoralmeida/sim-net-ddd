@@ -10,8 +10,8 @@ using Sim.Cross.Data.Context;
 namespace Sim.Cross.Data.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20210424150435_AP0001")]
-    partial class AP0001
+    [Migration("20210425233036_AP0003")]
+    partial class AP0003
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -397,10 +397,9 @@ namespace Sim.Cross.Data.Migrations
 
             modelBuilder.Entity("Sim.Domain.Shared.Entity.Canal", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("Ativo")
                         .HasColumnType("bit");
@@ -408,11 +407,11 @@ namespace Sim.Cross.Data.Migrations
                     b.Property<string>("Nome")
                         .HasColumnType("varchar(50)");
 
-                    b.Property<int?>("SecretariaId")
-                        .HasColumnType("int");
+                    b.Property<Guid?>("SecretariaId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int?>("SetorId")
-                        .HasColumnType("int");
+                    b.Property<Guid?>("SetorId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -548,19 +547,18 @@ namespace Sim.Cross.Data.Migrations
 
             modelBuilder.Entity("Sim.Domain.Shared.Entity.Secretaria", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("Ativo")
                         .HasColumnType("bit");
 
                     b.Property<string>("Nome")
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("varchar(128)");
 
                     b.Property<string>("Owner")
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("varchar(128)");
 
                     b.HasKey("Id");
 
@@ -569,10 +567,9 @@ namespace Sim.Cross.Data.Migrations
 
             modelBuilder.Entity("Sim.Domain.Shared.Entity.Servico", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("Ativo")
                         .HasColumnType("bit");
@@ -580,11 +577,11 @@ namespace Sim.Cross.Data.Migrations
                     b.Property<string>("Nome")
                         .HasColumnType("varchar(50)");
 
-                    b.Property<int?>("SecretariaId")
-                        .HasColumnType("int");
+                    b.Property<Guid?>("SecretariaId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int?>("SetorId")
-                        .HasColumnType("int");
+                    b.Property<Guid?>("SetorId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -597,10 +594,9 @@ namespace Sim.Cross.Data.Migrations
 
             modelBuilder.Entity("Sim.Domain.Shared.Entity.Setor", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("Ativo")
                         .HasColumnType("bit");
@@ -608,14 +604,34 @@ namespace Sim.Cross.Data.Migrations
                     b.Property<string>("Nome")
                         .HasColumnType("varchar(50)");
 
-                    b.Property<int?>("SecretariaId")
-                        .HasColumnType("int");
+                    b.Property<Guid?>("SecretariaId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
                     b.HasIndex("SecretariaId");
 
                     b.ToTable("Setor");
+                });
+
+            modelBuilder.Entity("Sim.Domain.Shared.Entity.Tipo", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("varchar(128)");
+
+                    b.Property<string>("Owner")
+                        .HasColumnType("varchar(128)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tipos");
                 });
 
             modelBuilder.Entity("EmpresaQSA", b =>
@@ -685,11 +701,11 @@ namespace Sim.Cross.Data.Migrations
             modelBuilder.Entity("Sim.Domain.Shared.Entity.Canal", b =>
                 {
                     b.HasOne("Sim.Domain.Shared.Entity.Secretaria", "Secretaria")
-                        .WithMany()
+                        .WithMany("Canais")
                         .HasForeignKey("SecretariaId");
 
                     b.HasOne("Sim.Domain.Shared.Entity.Setor", "Setor")
-                        .WithMany()
+                        .WithMany("Canais")
                         .HasForeignKey("SetorId");
 
                     b.Navigation("Secretaria");
@@ -721,11 +737,11 @@ namespace Sim.Cross.Data.Migrations
             modelBuilder.Entity("Sim.Domain.Shared.Entity.Servico", b =>
                 {
                     b.HasOne("Sim.Domain.Shared.Entity.Secretaria", "Secretaria")
-                        .WithMany()
+                        .WithMany("Servicos")
                         .HasForeignKey("SecretariaId");
 
                     b.HasOne("Sim.Domain.Shared.Entity.Setor", "Setor")
-                        .WithMany()
+                        .WithMany("Servicos")
                         .HasForeignKey("SetorId");
 
                     b.Navigation("Secretaria");
@@ -736,7 +752,7 @@ namespace Sim.Cross.Data.Migrations
             modelBuilder.Entity("Sim.Domain.Shared.Entity.Setor", b =>
                 {
                     b.HasOne("Sim.Domain.Shared.Entity.Secretaria", "Secretaria")
-                        .WithMany()
+                        .WithMany("Setores")
                         .HasForeignKey("SecretariaId");
 
                     b.Navigation("Secretaria");
@@ -750,6 +766,22 @@ namespace Sim.Cross.Data.Migrations
             modelBuilder.Entity("Sim.Domain.Shared.Entity.Evento", b =>
                 {
                     b.Navigation("Inscritos");
+                });
+
+            modelBuilder.Entity("Sim.Domain.Shared.Entity.Secretaria", b =>
+                {
+                    b.Navigation("Canais");
+
+                    b.Navigation("Servicos");
+
+                    b.Navigation("Setores");
+                });
+
+            modelBuilder.Entity("Sim.Domain.Shared.Entity.Setor", b =>
+                {
+                    b.Navigation("Canais");
+
+                    b.Navigation("Servicos");
                 });
 #pragma warning restore 612, 618
         }

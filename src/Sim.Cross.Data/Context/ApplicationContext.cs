@@ -30,6 +30,7 @@ namespace Sim.Cross.Data.Context
         public DbSet<Servico> Servico { get; set; }
         public DbSet<Setor> Setor { get; set; }
         public DbSet<Inscricao> Inscricao { get; set; }
+        public DbSet<Tipo> Tipos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -46,6 +47,7 @@ namespace Sim.Cross.Data.Context
             modelBuilder.Entity<Setor>().ToTable("Setor");
             modelBuilder.Entity<Servico>().ToTable("Servico");
             modelBuilder.Entity<Inscricao>().ToTable("Inscricao");
+            modelBuilder.Entity<Tipo>().ToTable("Tipos");
 
             modelBuilder.ApplyConfiguration(new Config.Entity.AmbulanteMap());
             modelBuilder.ApplyConfiguration(new Config.Entity.AtendimentoMap());
@@ -59,6 +61,7 @@ namespace Sim.Cross.Data.Context
             modelBuilder.ApplyConfiguration(new Config.Entity.ServicoMap());
             modelBuilder.ApplyConfiguration(new Config.Entity.SetorMap());
             modelBuilder.ApplyConfiguration(new Config.Entity.InscricaoMap());
+            modelBuilder.ApplyConfiguration(new Config.Entity.TipoMap());
 
             base.OnModelCreating(modelBuilder);
         }

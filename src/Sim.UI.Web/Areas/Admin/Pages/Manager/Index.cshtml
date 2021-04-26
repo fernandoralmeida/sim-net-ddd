@@ -1,0 +1,68 @@
+﻿@page
+@model Sim.UI.Web.Areas.Admin.Pages.Manager.IndexModel
+@{
+    Layout = "_Layout.cshtml";
+
+    ViewData["Title"] = "Contas";
+    ViewData["ActivePage"] = AdminNavPages.Index;
+}
+
+<h5>Usuários</h5>
+
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+
+<div>
+
+    <table class="table table-borderless bg-white">
+        <thead>
+            <tr class="border-bottom shadow-sm">
+                <th>
+                    User Name
+                </th>
+                <th>
+                    Nome
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Email Confirmado
+                </th>
+                <th>
+                    Bloqueado
+                </th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Input.Users)
+            {
+                <tr class="border-bottom">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EmailConfirmed)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LockoutEnabled)
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                        <a asp-page="./UserRoles" asp-route-id="@item.Id" class="btn btn-sm btn-outline-info" title="Editar"><i class="far fa-edit"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

@@ -12,7 +12,7 @@ namespace Sim.Domain.Shared.Entity
         {
 
         }
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Nome { get; set; }
         public Secretaria Secretaria { get; set; } //Secretaria
         public Setor Setor { get; set; } //Setor

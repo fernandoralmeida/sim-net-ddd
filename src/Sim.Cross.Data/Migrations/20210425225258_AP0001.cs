@@ -137,8 +137,7 @@ namespace Sim.Cross.Data.Migrations
                 name: "Secretaria",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Nome = table.Column<string>(type: "varchar(50)", nullable: true),
                     Owner = table.Column<string>(type: "varchar(50)", nullable: true),
                     Ativo = table.Column<bool>(type: "bit", nullable: false)
@@ -146,6 +145,20 @@ namespace Sim.Cross.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Secretaria", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Tipos",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Nome = table.Column<string>(type: "varchar(50)", nullable: true),
+                    Owner = table.Column<string>(type: "varchar(50)", nullable: true),
+                    Ativo = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tipos", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -281,10 +294,9 @@ namespace Sim.Cross.Data.Migrations
                 name: "Setor",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Nome = table.Column<string>(type: "varchar(50)", nullable: true),
-                    SecretariaId = table.Column<int>(type: "int", nullable: true),
+                    SecretariaId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     Ativo = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -344,11 +356,10 @@ namespace Sim.Cross.Data.Migrations
                 name: "Canal",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Nome = table.Column<string>(type: "varchar(50)", nullable: true),
-                    SecretariaId = table.Column<int>(type: "int", nullable: true),
-                    SetorId = table.Column<int>(type: "int", nullable: true),
+                    SecretariaId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    SetorId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     Ativo = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -372,11 +383,10 @@ namespace Sim.Cross.Data.Migrations
                 name: "Servico",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Nome = table.Column<string>(type: "varchar(50)", nullable: true),
-                    SecretariaId = table.Column<int>(type: "int", nullable: true),
-                    SetorId = table.Column<int>(type: "int", nullable: true),
+                    SecretariaId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    SetorId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     Ativo = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -529,6 +539,9 @@ namespace Sim.Cross.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Servico");
+
+            migrationBuilder.DropTable(
+                name: "Tipos");
 
             migrationBuilder.DropTable(
                 name: "Ambulante");

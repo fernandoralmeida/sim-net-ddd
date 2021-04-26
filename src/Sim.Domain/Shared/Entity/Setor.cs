@@ -12,9 +12,12 @@ namespace Sim.Domain.Shared.Entity
         {
 
         }
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Nome { get; set; }
         public Secretaria Secretaria { get; set; } //Secretaria
         public bool Ativo { get; set; }
+
+        public virtual ICollection<Canal> Canais { get; set; }
+        public virtual ICollection<Servico> Servicos { get; set; }
     }
 }

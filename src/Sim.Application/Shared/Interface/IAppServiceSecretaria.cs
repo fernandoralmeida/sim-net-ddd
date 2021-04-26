@@ -8,7 +8,7 @@ namespace Sim.Application.Shared.Interface
 {
     using Domain.Shared.Entity;
     using Application.Interface;
-    interface IAppServiceSecretaria : IAppServiceBase<Secretaria>
+    public interface IAppServiceSecretaria : IAppServiceBase<Secretaria>
     {
         IEnumerable<Secretaria> GetByOwner(string setor);
     }

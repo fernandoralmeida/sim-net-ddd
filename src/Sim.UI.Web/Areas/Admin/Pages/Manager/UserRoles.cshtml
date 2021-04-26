@@ -1,0 +1,115 @@
+﻿@page
+@model Sim.UI.Web.Areas.Admin.Pages.Manager.UserRolesModel
+@{
+    ViewData["Title"] = "Roles";
+}
+
+<h5>Controle de Acessos</h5>
+
+<div>
+    <h6>Usuário</h6>
+    <hr />
+
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Input.Id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Input.Id)
+        </dd>
+        <dt class="col-sm-2">
+            Identificador
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Input.UserName)
+        </dd>
+        <dt class="col-sm-2">
+            Nome
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Input.Name)
+            @Html.DisplayFor(model => model.Input.LastName)
+        </dd>
+        <dt class="col-sm-2">
+            Genero
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Input.Gender)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Input.Email)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Input.Email)
+        </dd>
+    </dl>
+    <div class="row">
+
+        <table class="table table-borderless bg-white">
+            <thead>
+                <tr class="border-bottom shadow-sm">
+                    <th>
+                        Role Name
+                    </th>
+                    <th>
+                        Role Id
+                    </th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Input.ListRoles != null)
+                {
+
+                    if (Model.Input.ListRoles.Count > 1)
+                    {
+                        foreach (var item in Model.Input.ListRoles)
+                        {
+                            <tr class="border-bottom">
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Id)
+                                </td>
+
+                                <td>
+                                </td>
+
+                                <td>
+                                    <a href="@Url.ActionLink("AddUserRoles", "Manager", new { x = Model.Input.Id, y = item.Name })" class="btn btn-sm btn-outline-info" title="Incluir Role"><i class="fas fa-plus-square"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        foreach (var item in Model.Input.ListRoles)
+                        {
+                            <tr class="border-bottom">
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Id)
+                                </td>
+
+                                <td>
+                                </td>
+
+                                <td>
+                                    <a href="@Url.ActionLink("RemoveUserRoles", "Manager", new { x = Model.Input.Id, y = item.Name })" class="btn btn-sm btn-outline-danger" title="Excluir Role"><i class="fas fa-minus-square"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<div class="row g-3 mb-3 col-md-1">
+    <a asp-area="Admin" asp-page="./Index" class="btn btn-sm btn-secondary">Voltar</a>
+</div>

@@ -1,0 +1,68 @@
+﻿@page
+@model Sim.UI.Web.Areas.Admin.Pages.Manager.RolesModel
+@{
+    Layout = "_Layout.cshtml";
+
+    ViewData["Title"] = "Roles";
+    ViewData["ActivePage"] = AdminNavPages.Roles;
+}
+
+<h5>Gerenciar Roles</h5>
+
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+
+<div>
+    <div class="col-md-5 mb-3">
+        <form method="post">
+            <div class="row g-3">
+                <div class="input-group mb-3">
+                    <input asp-for="Input.Name" class="form-control" placeholder="Nova Role" />
+                    <button class="btn btn-primary" type="submit">Adicionar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <p></p>
+    <div class="col-md">
+        <div class="row g-3">
+            <table class="table table-borderless bg-white">
+                <thead>
+                    <tr class="border-bottom shadow-sm">
+                        <th>
+                            Role Name
+                        </th>
+                        <th>
+                            Role Id
+                        </th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Input.Roles != null)
+                    {
+                        foreach (var item in Model.Input.Roles)
+                        {
+                            <tr class="border-bottom">
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Id)
+                                </td>
+
+                                <td>
+                                </td>
+
+                                <td>
+                                    <a href="@Url.ActionLink("DeleteRole", "Home", new { id = item.Id })" class="btn btn-sm btn-danger" title="Excluir Role"><i class="far fa-window-close"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,29 @@
+﻿@{
+    if (ViewData.TryGetValue("ParentLayout", out var parentLayout))
+    {
+        Layout = (string)parentLayout;
+    }
+    else
+    {
+        Layout = "/Pages/Shared/_Layout.cshtml";
+    }
+}
+
+<h5>Settings</h5>
+<hr />
+
+<div>   
+    <pre>Configurações do Sistema</pre>
+    <div class="row">
+        <div class="col-md-3">
+            <partial name="_SettingsNav" />
+        </div>
+        <div class="col-md-9">
+            @RenderBody()
+        </div>
+    </div>    
+</div>
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}

@@ -1,0 +1,8 @@
+﻿@using Sim.UI.Web.Areas.Admin.Pages.Manager
+
+<ul class="nav nav-pills flex-column">
+    <li class="nav-item"><a class="nav-link @AdminNavPages.IndexNavClass(ViewContext)" id="lusers" asp-page="./Index">Usuários</a></li>
+    <li class="nav-item"><a class="nav-link @AdminNavPages.RegisterNavClass(ViewContext)" id="regs" asp-page="./Register">Novo Usuário</a></li>
+    <li class="nav-item"><a class="nav-link @AdminNavPages.RolesNavClass(ViewContext)" id="roles" asp-page="./Roles">Roles</a></li>
+    <li class="nav-item"><a class="nav-link @AdminNavPages.ClaimsNavClass(ViewContext)" id="claims" asp-page="./Claims">Claims</a></li>
+</ul>

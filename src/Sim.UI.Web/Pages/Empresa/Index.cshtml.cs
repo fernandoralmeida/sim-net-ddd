@@ -11,6 +11,7 @@ namespace Sim.UI.Web.Pages.Empresa
 {
     using Sim.Domain.SDE.Entity;
     using Sim.Application.SDE.Interface;
+    using System.ComponentModel.DataAnnotations;
 
     [Authorize]
     public class IndexModel : PageModel
@@ -30,6 +31,7 @@ namespace Sim.UI.Web.Pages.Empresa
         public class InputModel
         {
 
+            [Required]
             [DisplayName("CNPJ")]
             public string CNPJ { get; set; }
 
