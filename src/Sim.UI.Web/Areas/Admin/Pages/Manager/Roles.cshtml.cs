@@ -41,7 +41,7 @@ namespace Sim.UI.Web.Areas.Admin.Pages.Manager
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsyn()
+        public async Task<IActionResult> OnPostAsync()
         {
             try
             {

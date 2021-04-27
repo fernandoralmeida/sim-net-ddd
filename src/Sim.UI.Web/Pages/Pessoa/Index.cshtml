@@ -32,76 +32,77 @@
     </form>
 </div>
 
-<table class="table table-borderless bg-white">
-    <caption>Lista de pessoas</caption>
-    <thead>
-        <tr class="border-bottom shadow-sm col-md">
-            <th></th>
-            <th>
-                Nome
-            </th>
+<div class="row">
+    <table class="table table-borderless bg-white">
+        <caption>Lista de pessoas</caption>
+        <thead>
+            <tr class="border-bottom shadow-sm col-md">
+                <th></th>
+                <th>
+                    Nome
+                </th>
 
-            <th>
-                CPF
-            </th>
+                <th>
+                    CPF
+                </th>
 
-            <th>
-                E-mail
-            </th>
+                <th>
+                    E-mail
+                </th>
 
-            <th>
-                Telefone
-            </th>
+                <th>
+                    Telefone
+                </th>
 
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
 
-        @if (Model.Input.ListaPessoas == null)
-        { }
-        else
-        {
-            foreach (var item in Model.Input.ListaPessoas)
+            @if (Model.Input.ListaPessoas == null)
+            { }
+            else
             {
-                <tr class="border-bottom">
-                    <td>
-                        <a asp-area="" asp-page="/Atendimento/Novo" asp-route-id="@item.Id" class="btn btn-sm btn-outline-info" title="Iniciar atendimento"><i class="far fa-clock"></i></a>
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Nome)
-                    </td>
+                foreach (var item in Model.Input.ListaPessoas)
+                {
+                    <tr class="border-bottom">
+                        <td>
+                            <a asp-area="" asp-page="/Atendimento/Novo" asp-route-id="@item.Id" class="btn btn-sm btn-outline-info" title="Iniciar atendimento"><i class="far fa-clock"></i></a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nome)
+                        </td>
 
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CPF)
-                    </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CPF)
+                        </td>
 
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Email)
-                    </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
 
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Tel_Movel)
-                    </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Tel_Movel)
+                        </td>
 
-                    <td>
-                        <a asp-page="./Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary" title="Detalhar informações"><i class="far fa-list-alt"></i></a>
+                        <td>
+                            <a asp-page="./Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary" title="Detalhar informações"><i class="far fa-list-alt"></i></a>
 
-                        <a asp-page="./Edit" asp-route-id="@item.Id"  class="btn btn-sm btn-outline-secondary" title="Alterar informações"><i class="far fa-edit"></i></a>
+                            <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary" title="Alterar informações"><i class="far fa-edit"></i></a>
 
-                        <a asp-page="./Delete" asp-route-id="@item.Id"  class="btn btn-sm btn-outline-danger" title="Excluir informações"><i class="far fa-window-close"></i></a>
-                    </td>
-                    <!--
-                Html.ActionLink("Edit", "Edit", new { id = item.Pessoa_Id }) |
-                Html.ActionLink("Details", "Details", new { id = item.Pessoa_Id }) |
-                Html.ActionLink("Delete", "Delete", new { id = item.Pessoa_Id })-->
-                </tr>
+                            <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger" title="Excluir informações"><i class="far fa-window-close"></i></a>
+                        </td>
+                        <!--
+                        Html.ActionLink("Edit", "Edit", new { id = item.Pessoa_Id }) |
+                        Html.ActionLink("Details", "Details", new { id = item.Pessoa_Id }) |
+                        Html.ActionLink("Delete", "Delete", new { id = item.Pessoa_Id })-->
+                    </tr>
+                }
             }
-        }
 
-    </tbody>
-</table>
-
+        </tbody>
+    </table>
+</div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script src="~/js/jquery.cep.js"></script>

@@ -6,11 +6,15 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
 
 namespace Sim.UI.Web.Areas.Admin.Pages.Manager
 {
     using ViewModel;
     using Sim.Cross.Identity;
+
+
     public class UserRolesModel : PageModel
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -29,34 +33,34 @@ namespace Sim.UI.Web.Areas.Admin.Pages.Manager
         [BindProperty]
         public VMUserRoles Input { get; set; }
 
+        [Required]
+        [BindProperty]   
+        public string Selecionado { get; set; }
+
+        public SelectList RoleList { get; set; }
+
         private async Task LoadAsync(string id)
         {
             var roles = _roleManager.Roles.ToList();
+            RoleList = new SelectList(roles, nameof(IdentityRole.Name));            
 
-            Input = new();
-
-            Input.ListRoles = roles;
 
             var u = _userManager.FindByIdAsync(id);
-            u.Wait();
+            await u;
 
             var r = _userManager.GetRolesAsync(u.Result);
             await r;
 
-            if (r.Result.Count > 0)
+            Input = new()
             {
-                var nr = _roleManager.Roles.AsQueryable();
-                nr = nr.Where(c => c.Name.Contains(r.Result[0]));
-
-                Input.ListRoles = nr.ToList();
-            }
-
-            Input.Id = u.Result.Id;
-            Input.UserName = u.Result.UserName;
-            Input.Name = u.Result.Name;
-            Input.LastName = u.Result.LastName;
-            Input.Gender = u.Result.Gender;
-            Input.Email = u.Result.Email;
+                Id = u.Result.Id,
+                UserName = u.Result.UserName,
+                Name = u.Result.Name,
+                LastName = u.Result.LastName,
+                Gender = u.Result.Gender,
+                Email = u.Result.Email,
+                ListRoles = r.Result
+            };
         }
 
         public async Task<IActionResult> OnGetAsync(string id)
@@ -65,31 +69,24 @@ namespace Sim.UI.Web.Areas.Admin.Pages.Manager
             return Page();
         }
 
-        public async Task<IActionResult> AddUserRoles(string x, string y)
+        public async Task<IActionResult> OnPostAddRoleAsync(string id)
         {
-            try
-            {
-                var user = await _userManager.FindByIdAsync(x);
+            var user = await _userManager.FindByIdAsync(id);
 
-                await _userManager.AddToRoleAsync(user, y);
+            await _userManager.AddToRoleAsync(user, Selecionado);
 
-                return Page();
-            }
-            catch
-            {
-                return Page();
-            }
+            return RedirectToPage("./UserRoles", new { id });
         }
 
-        public async Task<IActionResult> RemoveUserRoles(string x, string y)
+        public async Task<IActionResult> OnPostRemoveRoleAsync(string id, string role)
         {
             try
             {
-                var user = await _userManager.FindByIdAsync(x);
+                var user = await _userManager.FindByIdAsync(id);
 
-                await _userManager.RemoveFromRoleAsync(user, y);
+                await _userManager.RemoveFromRoleAsync(user, role);
 
-                return Page();
+                return RedirectToPage("./UserRoles", new { id = user.Id });
             }
             catch
             {

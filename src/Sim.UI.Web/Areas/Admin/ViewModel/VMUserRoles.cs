@@ -11,12 +11,8 @@ namespace Sim.UI.Web.Areas.Admin.ViewModel
     using Sim.Cross.Identity;
     public class VMUserRoles : ApplicationUser
     {
-        public string RoleId { get; set; }
 
-        [DisplayName("Role Name")]
-        public string RoleName { get; set; }
-
-        public List<IdentityRole> ListRoles { get; set; } 
+        public IEnumerable<string> ListRoles { get; set; } 
 
     }
 }

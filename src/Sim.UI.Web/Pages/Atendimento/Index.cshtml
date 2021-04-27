@@ -27,66 +27,68 @@
     </div>
 </div>
 
-<table class="table table-borderless bg-white">
-    <caption>Lista de atendimentos!</caption>
-    <thead>
-        <tr class="border-bottom shadow-sm">
-            <th>
-                Contador
-            </th>
-            <th>
-                Protocolo
-            </th>
-            <th>
-                Horário
-            </th>
-            <th>
-                Cliente
-            </th>
-            <th>
-                Email
-            </th>
-            <th>
-                Setor
-            </th>
-            <th>
-                Canal
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Input.ListaAtendimento)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Servicos)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Protocolo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Inicio)
-                    -
-                    @Html.DisplayFor(modelItem => item.Fim)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Pessoa.Nome)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Servicos)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Setor)
-                <td>
-                    @Html.DisplayFor(modelItem => item.Canal)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                </td>
+<div class="row">
+    <table class="table table-borderless bg-white">
+        <caption>Lista de atendimentos!</caption>
+        <thead>
+            <tr class="border-bottom shadow-sm">
+                <th>
+                    Contador
+                </th>
+                <th>
+                    Protocolo
+                </th>
+                <th>
+                    Horário
+                </th>
+                <th>
+                    Cliente
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Setor
+                </th>
+                <th>
+                    Canal
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Input.ListaAtendimento)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Servicos)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Protocolo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Inicio)
+                        -
+                        @Html.DisplayFor(modelItem => item.Fim)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Pessoa.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Servicos)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Setor)
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Canal)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
