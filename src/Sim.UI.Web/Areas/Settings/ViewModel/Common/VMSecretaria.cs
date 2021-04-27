@@ -15,7 +15,6 @@ namespace Sim.UI.Web.Areas.Settings.ViewModel.Common
         [HiddenInput(DisplayValue = false)]
         public Guid Id { get; set; }
 
-        [Required]
         [DisplayName("Nome")]
         public string Nome { get; set; }
 

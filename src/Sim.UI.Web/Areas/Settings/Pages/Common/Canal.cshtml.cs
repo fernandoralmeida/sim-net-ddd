@@ -113,5 +113,36 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
             }
 
         }
+
+        public async Task<IActionResult> OnPostRemoveAsync(Guid id)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                { return Page(); }
+
+                var t = Task.Run(() =>
+                {
+
+                    var canal = _appServiceCanal.GetById(id);                  
+
+                    _appServiceCanal.Remove(canal);
+
+                });
+
+                await t;
+
+                //StatusMessage = "Canal incluído com sucesso!";
+
+                return RedirectToPage();
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = "Erro ao tentar incluír novo canal!" + "\n" + ex.Message;
+
+                return RedirectToPage();
+            }
+
+        }
     }
 }

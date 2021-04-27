@@ -26,45 +26,46 @@
             </div>
             <div class="col-md-7 mb-4">
                 <label asp-for="Secretarias" class="form-label"></label>
-                <select asp-for="ItemSelecionado" class="form-select" asp-items="Model.Secretarias" ></select>
+                <select asp-for="ItemSelecionado" class="form-select" asp-items="Model.Secretarias"></select>
                 <span asp-validation-for="Input.Secretaria" class="text-danger"></span>
             </div>
             <div class="col-md-10">
                 <button type="submit" class="btn btn-primary col-md-4">Incluir Setor</button>
             </div>
         </div>
-    </form>
-    <table class="table table-borderless bg-white">
-        <caption>Lista de Setores</caption>
-        <thead>
-            <tr class="border-bottom shadow-sm">
-                <th>
-                    Setor
-                </th>
-                <th>Secretaria</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @if (Model.Input.Listar != null)
-            {
-                foreach (var item in Model.Input.Listar)
+
+        <table class="table table-borderless bg-white">
+            <caption>Lista de Setores</caption>
+            <thead>
+                <tr class="border-bottom shadow-sm">
+                    <th>
+                        Setor
+                    </th>
+                    <th>Secretaria</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Input.Listar != null)
                 {
-                    <tr class="border-bottom">
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Nome)
-                        </td>
+                    foreach (var item in Model.Input.Listar)
+                    {
+                        <tr class="border-bottom">
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nome)
+                            </td>
 
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Secretaria.Nome)
-                        </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Secretaria.Nome)
+                            </td>
 
-                        <td>
-                            <a href="@Url.ActionLink("DeleteRole", "Home", new { id = item.Id })" class="btn btn-sm btn-danger" title="Excluir Role"><i class="far fa-window-close"></i></a>
-                        </td>
-                    </tr>
+                            <td>
+                                <button type="submit" asp-page-handler="Remove" asp-route-id="@item.Id" class="btn btn-sm btn-danger" title="Excluir item"><i class="far fa-window-close"></i></button>
+                            </td>
+                        </tr>
+                    }
                 }
-            }
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </form>
 </div>

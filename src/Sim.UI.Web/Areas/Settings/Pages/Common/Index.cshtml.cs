@@ -66,6 +66,24 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
             return RedirectToPage();
         }
 
+        public async Task<IActionResult> OnPostRemoveAsync(Guid id)
+        {
+            if (!ModelState.IsValid)
+            { return Page(); }
 
+            var t = Task.Run(() =>
+            {
+                var sec = _appServiceSecretaria.GetById(id);
+
+                _appServiceSecretaria.Remove(sec);
+
+            });
+
+            await t;
+
+            //StatusMessage = "Secretaria incluída com sucesso!";
+
+            return RedirectToPage();
+        }
     }
 }

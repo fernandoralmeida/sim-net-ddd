@@ -113,5 +113,36 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
             }
 
         }
+
+        public async Task<IActionResult> OnPostRemoveAsync(Guid id)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                { return Page(); }
+
+                var t = Task.Run(() =>
+                {
+
+                    var serv =  _appServiceServico.GetById(id);
+                                      
+                    _appServiceServico.Remove(serv);
+
+                });
+
+                await t;
+
+                //StatusMessage = "Serviço incluído com sucesso!";
+
+                return RedirectToPage();
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = "Erro ao tentar incluí novo serviço!" + "\n" + ex.Message;
+
+                return RedirectToPage();
+            }
+
+        }
     }
 }

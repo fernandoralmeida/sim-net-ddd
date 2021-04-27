@@ -95,5 +95,36 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
             }
 
         }
+
+        public async Task<IActionResult> OnPostRemoveAsync(Guid id)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                { return Page(); }
+
+                var t = Task.Run(() =>
+                {
+
+                    var set = _appServiceSetor.GetById(id);
+                    
+                    _appServiceSetor.Remove(set);
+
+                });
+
+                await t;
+
+                StatusMessage = "Setor incluído com sucesso!";
+
+                return RedirectToPage();
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = "Erro ao tentar incluí novo setor!" + "\n" + ex.Message;
+
+                return RedirectToPage();
+            }
+
+        }
     }
 }
