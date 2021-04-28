@@ -8,9 +8,10 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Sim.UI.Web.Areas.Settings.Pages.Common
 {
-    using ViewModel.Common;
     using Sim.Application.Shared.Interface;
     using Sim.Domain.Shared.Entity;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel;
 
     public class CanalModel : PageModel
     {
@@ -26,11 +27,32 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
             _appServiceCanal = appServiceCanal;
         }
 
+        
+        public class InputModel
+        {
+            [Key]
+            [HiddenInput(DisplayValue = false)]
+            public Guid Id { get; set; }
+
+            [DisplayName("Nome")]
+            public string Nome { get; set; }
+
+            [DisplayName("Secretaria")]
+            public Secretaria Secretaria { get; set; } //Secretaria
+
+            [DisplayName("Setor")]
+            public Setor Setor { get; set; } //Setor
+
+            [DisplayName("Ativo")]
+            public bool Ativo { get; set; }
+            public virtual ICollection<Canal> Listar { get; set; }
+        }
+
         [TempData]
         public string StatusMessage { get; set; }
 
         [BindProperty]
-        public VMCanal Input { get; set; }
+        public InputModel Input { get; set; }
 
         [BindProperty]
         public Guid SecretariaSelecionada { get; set; }
@@ -51,7 +73,7 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
             var ca = Task.Run(() => _appServiceCanal.List());
             await ca;
 
-            Input = new VMCanal()
+            Input = new InputModel()
             {
                 Listar = ca.Result.ToList(),
                 Ativo = true
@@ -145,4 +167,6 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
 
         }
     }
+
+
 }

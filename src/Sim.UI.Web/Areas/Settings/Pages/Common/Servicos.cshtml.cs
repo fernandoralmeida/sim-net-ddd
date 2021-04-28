@@ -4,13 +4,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 
 namespace Sim.UI.Web.Areas.Settings.Pages.Common
 {
-    using ViewModel.Common;
+
     using Sim.Application.Shared.Interface;
     using Sim.Domain.Shared.Entity;
-    using Microsoft.AspNetCore.Mvc.Rendering;
 
     public class ServicosModel : PageModel
     {
@@ -26,11 +28,32 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
             _appServiceServico = appServiceServico;
         }
 
+        public class InputModel
+        {
+            [Key]
+            [HiddenInput(DisplayValue = false)]
+            public Guid Id { get; set; }
+
+            [DisplayName("Nome")]
+            public string Nome { get; set; }
+
+            [DisplayName("Secretaria")]
+            public Secretaria Secretaria { get; set; } //Secretaria
+
+            [DisplayName("Setor")]
+            public Setor Setor { get; set; } //Setor
+
+            [DisplayName("Ativo")]
+            public bool Ativo { get; set; }
+
+            public virtual ICollection<Servico> Listar { get; set; }
+        }
+
         [TempData]
         public string StatusMessage { get; set; }
 
         [BindProperty]
-        public VMServico Input { get; set; }
+        public InputModel Input { get; set; }
 
         [BindProperty]
         public Guid ItemSelecionado { get; set; }
@@ -51,7 +74,7 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
             var serv = Task.Run(() => _appServiceServico.List());
             await serv;
 
-            Input = new VMServico()
+            Input = new InputModel()
             {
                 Listar = serv.Result.ToList(),
                 Ativo = true

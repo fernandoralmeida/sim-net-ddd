@@ -4,13 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 
 namespace Sim.UI.Web.Areas.Settings.Pages.Common
 {
-    using ViewModel.Common;
     using Sim.Application.Shared.Interface;
     using Sim.Domain.Shared.Entity;
-    using Microsoft.AspNetCore.Mvc.Rendering;
 
     public class EventosModel : PageModel
     {
@@ -22,18 +23,36 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
             _appServiceEvento = appServiceEvento;
         }
 
+        public class InputModel
+        {
+            [Key]
+            [HiddenInput(DisplayValue = false)]
+            public Guid Id { get; set; }
+
+            [DisplayName("Nome")]
+            public string Nome { get; set; }
+
+            [DisplayName("Tipo")]
+            public string Tipo { get; set; } //Tipo
+
+            [DisplayName("Ativo")]
+            public bool Ativo { get; set; }
+
+            public virtual ICollection<Evento> Listar { get; set; }
+        }
+
         [TempData]
         public string StatusMessage { get; set; }
 
         [BindProperty]
-        public VMEvento Input { get; set; }
+        public InputModel Input { get; set; }
 
         private async Task OnLoad()
         {
             var eve = Task.Run(() => _appServiceEvento.List());
             await eve;
 
-            Input = new VMEvento()
+            Input = new InputModel()
             {
                 Listar = eve.Result.ToList(),
                 Ativo = true

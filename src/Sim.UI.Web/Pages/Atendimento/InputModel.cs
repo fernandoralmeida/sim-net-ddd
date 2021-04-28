@@ -6,19 +6,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel;
 
-namespace Sim.UI.Web.ViewModel
+namespace Sim.UI.Web.Pages.Atendimento
 {
     using Sim.Domain.SDE.Entity;
 
-
-    public class VMAtendimento
+    public class InputModel
     {
         [Key]
         [HiddenInput(DisplayValue = false)]
         public Guid Id { get; set; }
 
         [DisplayName("Protocolo")]
-        public int Protocolo { get; set; }
+        public string Protocolo { get; set; }
 
         [DisplayName("Data")]
         [DataType(DataType.Date)]

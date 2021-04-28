@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 
 namespace Sim.UI.Web.Areas.Settings.Pages.Common
 {
-    using ViewModel.Common;
+
     using Sim.Application.Shared.Interface;
     using Sim.Domain.Shared.Entity;
 
@@ -22,11 +24,30 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
             _appServiceSecretaria = appServiceSecretaria;
         }
 
+        public class InputModel
+        {
+            [Key]
+            [HiddenInput(DisplayValue = false)]
+            public Guid Id { get; set; }
+
+            [DisplayName("Nome")]
+            public string Nome { get; set; }
+
+            [DisplayName("Secretaria")]
+            public Secretaria Secretaria { get; set; } //Secretaria
+
+            [DisplayName("Ativo")]
+            public bool Ativo { get; set; }
+
+            public virtual ICollection<Setor> Listar { get; set; }
+
+        }
+
         [TempData]
         public string StatusMessage { get; set; }
 
         [BindProperty]
-        public VMSetor Input { get; set; }
+        public InputModel Input { get; set; }
 
         [BindProperty]
         public Guid ItemSelecionado { get; set; }
@@ -40,7 +61,7 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
             var t = Task.Run(() => _appServiceSetor.List());
             await t;
 
-            Input = new VMSetor()
+            Input = new InputModel()
             {
                 Listar = t.Result.ToList(),
                 Ativo = true

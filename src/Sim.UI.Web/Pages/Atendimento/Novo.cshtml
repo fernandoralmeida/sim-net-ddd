@@ -1,4 +1,105 @@
 ﻿@page
 @model Sim.UI.Web.Pages.Atendimento.NovoModel
 @{
+    ViewData["Title"] = "Atendimento";
 }
+
+<div class="row">
+    <div class="col-md-6">
+        <a asp-page="./Index" class="btn btn-sm btn-secondary"><i class="fas fa-arrow-left"></i></a> |
+        <b>Novo Atendimento</b>Nº :@Model.Input.Protocolo;
+    </div>
+</div>
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+<hr />
+
+<form method="post">
+    <div class="col-md-12">
+
+        @if (Model.ExistePessoa() == false)
+        {
+            <div class="row g-2 mb-2">
+                <div class="form-group col-md-4">
+                    <div class="input-group ">
+                        <input class="form-control" placeholder="CPF" aria-describedby="button-addon2">
+                        <button asp-page-handler="IncluirPessoa" class="btn btn-primary" type="submit"><i class="fa fa-plus-square" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+
+            <div class="row g-2 mb-2">
+                <div class="col-md-3">
+                    <label class="form-label">CPF</label>
+                    <input class="form-control" asp-for="Input.Pessoa.CPF" />
+                </div>
+                <div class="col-md-5">
+                    <label class="form-label">Nome</label>
+                    <input class="form-control" asp-for="Input.Pessoa.Nome" />
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">E-mail</label>
+                    <input class="form-control" asp-for="Input.Pessoa.Email" />
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Telefone</label>
+                    <input class="form-control" asp-for="Input.Pessoa.Tel_Movel" />
+                </div>
+            </div>
+        }
+
+        @if (Model.ExisteEmpresa() == false)
+        {
+            <div class="row g-2 mb-2">
+                <div class="form-group col-md-4">
+                    <div class="input-group ">
+                        <input class="form-control" placeholder="CNPJ" aria-describedby="button-addon2">
+                        <button asp-page-handler="IncluirEmpresa" class="btn btn-primary" type="submit"><i class="fa fa-plus-square" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="row g-2 mb-2">
+                <div class="col-md-3">
+                    <label class="form-label" asp-for="Input.Empresa.CNPJ"/>
+                    <input class="form-control" asp-for="Input.Empresa.CNPJ" />
+                </div>
+                <div class="col-md-5">
+                    <label class="form-label" asp-for="Input.Empresa.Nome_Empresarial" />
+                    <input class="form-control" asp-for="Input.Empresa.Nome_Empresarial" />
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label" asp-for="Input.Empresa.Email" />
+                    <input class="form-control" asp-for="Input.Empresa.Email" />
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label" asp-for="Input.Empresa.Telefone" />
+                    <input class="form-control" asp-for="Input.Empresa.Telefone" />
+                </div>
+            </div>
+        }
+
+        <div class="row g-2 mb-2">
+            <div class="col-md-3">
+                <label class="form-label" asp-for="Input.Setor" />
+                <section class="form-select" asp-for="Input.Setor" />
+            </div>
+            <div class="col-md-5">
+                <label class="form-label" asp-for="Input.Canal" />
+                <section class="form-select" asp-for="Input.Canal" />
+            </div>
+        </div>
+        <div class="row g-2 mb-2">
+            <div class="col-md-3">
+                <label class="form-label" asp-for="Input.Servicos" />
+                <textarea class="form-select" asp-for="Input.Servicos" rows="4"></textarea>            
+            </div>
+        </div>
+
+    </div>
+</form>
+<div class="strip-dot"></div>
