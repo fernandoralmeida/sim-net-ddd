@@ -68,22 +68,31 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
 
         public async Task<IActionResult> OnPostRemoveAsync(Guid id)
         {
-            if (!ModelState.IsValid)
-            { return Page(); }
-
-            var t = Task.Run(() =>
+            try
             {
-                var sec = _appServiceSecretaria.GetById(id);
+                if (!ModelState.IsValid)
+                { return Page(); }
 
-                _appServiceSecretaria.Remove(sec);
+                var t = Task.Run(() =>
+                {
+                    var sec = _appServiceSecretaria.GetById(id);
 
-            });
+                    _appServiceSecretaria.Remove(sec);
 
-            await t;
+                });
 
-            //StatusMessage = "Secretaria incluída com sucesso!";
+                await t;
 
-            return RedirectToPage();
+                StatusMessage = "Secretaria removida com sucesso!";
+
+                return RedirectToPage();
+            }
+            catch(Exception ex)
+            {
+                StatusMessage = "Erro ao tentar remover Secretaria!" + "\n" + ex.Message;
+
+                return Page();
+            }
         }
     }
 }

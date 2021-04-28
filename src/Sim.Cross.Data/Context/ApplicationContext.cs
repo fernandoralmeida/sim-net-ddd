@@ -68,6 +68,7 @@ namespace Sim.Cross.Data.Context
 
         public override int SaveChanges()
         {
+
             foreach (var entry in ChangeTracker.Entries().Where(entry => entry.Entity.GetType().GetProperty("Data_Cadastro") != null))
             {
 

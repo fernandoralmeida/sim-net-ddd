@@ -107,7 +107,7 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
             }
             catch (Exception ex)
             {
-                StatusMessage = "Erro ao tentar incluí novo serviço!" + "\n" + ex.Message;
+                StatusMessage = "Erro ao tentar incluír novo serviço!" + "\n" + ex.Message;
 
                 return RedirectToPage();
             }
@@ -132,13 +132,13 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
 
                 await t;
 
-                //StatusMessage = "Serviço incluído com sucesso!";
+                StatusMessage = "Serviço removido com sucesso!";
 
                 return RedirectToPage();
             }
             catch (Exception ex)
             {
-                StatusMessage = "Erro ao tentar incluí novo serviço!" + "\n" + ex.Message;
+                StatusMessage = "Erro ao tentar remover serviço!" + "\n" + ex.Message;
 
                 return RedirectToPage();
             }

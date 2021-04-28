@@ -89,7 +89,7 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
             }
             catch(Exception ex)
             {
-                StatusMessage = "Erro ao tentar incluí novo setor!" + "\n" + ex.Message;
+                StatusMessage = "Erro ao tentar incluír novo setor!" + "\n" + ex.Message;
 
                 return RedirectToPage();
             }
@@ -114,13 +114,13 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
 
                 await t;
 
-                StatusMessage = "Setor incluído com sucesso!";
+                StatusMessage = "Setor removido com sucesso!";
 
                 return RedirectToPage();
             }
             catch (Exception ex)
             {
-                StatusMessage = "Erro ao tentar incluí novo setor!" + "\n" + ex.Message;
+                StatusMessage = "Erro ao tentar remover setor!" + "\n" + ex.Message;
 
                 return RedirectToPage();
             }

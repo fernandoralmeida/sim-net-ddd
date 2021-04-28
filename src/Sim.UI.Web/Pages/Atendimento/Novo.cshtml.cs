@@ -33,17 +33,17 @@ namespace Sim.UI.Web.Pages.Atendimento
             };
         }
 
-        public async Task<IActionResult> OnPostIncluirPessoa()
+        public async Task<IActionResult> OnPostIncluirPessoaAsync()
         {
             return Page();
         }
 
-        public async Task<IActionResult> OnPostIncluirEmpresa()
+        public async Task<IActionResult> OnPostIncluirEmpresaAsync()
         {
             return Page();
         }
 
-        public async Task<IActionResult> OnPostSave()
+        public async Task<IActionResult> OnPostSaveAsync()
         {
             return Page();
         }

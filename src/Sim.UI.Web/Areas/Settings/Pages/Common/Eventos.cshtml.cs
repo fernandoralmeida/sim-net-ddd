@@ -75,7 +75,7 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
             }
             catch (Exception ex)
             {
-                StatusMessage = "Erro ao tentar incluí novo tipo!" + "\n" + ex.Message;
+                StatusMessage = "Erro ao tentar incluír novo tipo!" + "\n" + ex.Message;
 
                 return RedirectToPage();
             }
@@ -100,13 +100,13 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
 
                 await t;
 
-                //StatusMessage = "Tipo removido com sucesso!";
+                StatusMessage = "Tipo removido com sucesso!";
 
                 return RedirectToPage();
             }
             catch (Exception ex)
             {
-                StatusMessage = "Erro ao tentar incluí novo tipo!" + "\n" + ex.Message;
+                StatusMessage = "Erro ao tentar remover tipo!" + "\n" + ex.Message;
 
                 return RedirectToPage();
             }

@@ -16,32 +16,44 @@ namespace Sim.UI.Web.ViewModel
         [Key]
         [HiddenInput(DisplayValue = false)]
         public Guid Id { get; set; }
-        [DisplayName("Nome Empresarial")]
+
+        [DisplayName("Protocolo")]
         public int Protocolo { get; set; }
-        [DisplayName("Nome Empresarial")]
+
+        [DisplayName("Data")]
+        [DataType(DataType.Date)]
         public DateTime? Data { get; set; }
-        [DisplayName("Nome Empresarial")]
+
+        [DisplayName("Inicio")]
+        [DataType(DataType.Time)]
         public DateTime? Inicio { get; set; }
-        [DisplayName("Nome Empresarial")]
+        
+        [DisplayName("Fim")]
+        [DataType(DataType.Time)]
         public DateTime? Fim { get; set; }
-        [DisplayName("Nome Empresarial")]
+
+        [DisplayName("Setor")]
         public string Setor { get; set; }
-        [DisplayName("Nome Empresarial")]
+
+        [DisplayName("Canal do Atendimento")]
         public string Canal { get; set; }
-        [DisplayName("Nome Empresarial")]
+
+        [DisplayName("Serviços")]
         public string Servicos { get; set; }
-        [DisplayName("Nome Empresarial")]
+
+        [DisplayName("Descrição do Atendimento")]
         public string Descricao { get; set; }
-        [DisplayName("Nome Empresarial")]
+
+        [DisplayName("Status")]
         public string Status { get; set; }
         public DateTime? Ultima_Alteracao { get; set; }
         public bool Ativo { get; set; }
         public Guid Owner_AppUser_Id { get; set; }
 
-        [DisplayName("Nome Empresarial")]
+        [DisplayName("Pessoa")]
         public virtual Pessoa Pessoa { get; set; }
 
-        [DisplayName("Nome Empresarial")]
+        [DisplayName("Empresa")]
         public virtual Empresa Empresa { get; set; }
     }
 }

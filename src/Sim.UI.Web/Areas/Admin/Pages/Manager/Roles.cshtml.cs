@@ -69,7 +69,7 @@ namespace Sim.UI.Web.Areas.Admin.Pages.Manager
             }
         }
 
-        public async Task<IActionResult> DeleteRole(string id)
+        public async Task<IActionResult> OnPostRemoveAsync(string id)
         {
             try
             {
@@ -95,7 +95,7 @@ namespace Sim.UI.Web.Areas.Admin.Pages.Manager
                         StatusMessage = identityResult.Errors.First().ToString();
                         return Page();
                     }
-                    return Page();
+                    return RedirectToPage();
 
                 }
 

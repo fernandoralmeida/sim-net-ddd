@@ -107,7 +107,7 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
             }
             catch (Exception ex)
             {
-                StatusMessage = "Erro ao tentar incluí novo canal!" + "\n" + ex.Message;
+                StatusMessage = "Erro ao tentar incluír novo canal!" + "\n" + ex.Message;
 
                 return RedirectToPage();
             }
@@ -132,13 +132,13 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
 
                 await t;
 
-                //StatusMessage = "Canal incluído com sucesso!";
+                StatusMessage = "Canal removido com sucesso!";
 
                 return RedirectToPage();
             }
             catch (Exception ex)
             {
-                StatusMessage = "Erro ao tentar incluír novo canal!" + "\n" + ex.Message;
+                StatusMessage = "Erro ao tentar remover canal!" + "\n" + ex.Message;
 
                 return RedirectToPage();
             }
