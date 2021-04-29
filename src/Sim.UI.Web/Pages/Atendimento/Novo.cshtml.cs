@@ -34,8 +34,7 @@ namespace Sim.UI.Web.Pages.Atendimento
             _appServiceEmpresa = appServiceEmpresa;
             _appServiceCanal = appServiceCanal;
             _appServiceServico = appServiceServico;
-            _appServiceSetor = appServiceSetor;
-            Input = new();
+            _appServiceSetor = appServiceSetor;           
         }
 
         [BindProperty]
@@ -58,7 +57,7 @@ namespace Sim.UI.Web.Pages.Atendimento
 
         private static string GetProtoloco()
         {
-            return string.Format("{0}.{1}-{2}", DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+            return string.Format("{0}{1}{2}", DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
         }
 
         private async Task OnLoad()
@@ -86,19 +85,21 @@ namespace Sim.UI.Web.Pages.Atendimento
             }
         }
 
-        public async Task<IActionResult> OnGetAsync()
+        public async Task OnGetAsync()
         {
-            Input.Protocolo = GetProtoloco();
-            Input.Data = DateTime.Now.Date;
-            Input.Inicio = DateTime.Now;
-            Input.Status = "ATIVO";
+            Input = new()
+            {
+                Protocolo = Convert.ToInt32( GetProtoloco()),
+                Data = DateTime.Now.Date,
+                Inicio = DateTime.Now,
+                Status = "ATIVO"
+            };       
+
             await OnLoad();
-            return Page();
         }
 
-        public async Task<IActionResult> OnPostIncluirPessoaAsync()
+        public async Task OnPostIncluirPessoaAsync()
         {
-
             var t = Task.Run(() => _appServicePessoa.ConsultaByCPF(GetCPF));
             await t;
 
@@ -106,11 +107,9 @@ namespace Sim.UI.Web.Pages.Atendimento
             {
                 Input.Pessoa = p;
             }
-
-            return RedirectToPage();
         }
 
-        public async Task<IActionResult> OnPostIncluirEmpresaAsync()
+        public async Task OnPostIncluirEmpresaAsync()
         {
 
             var t = Task.Run(() => _appServiceEmpresa.ConsultaByCNPJ(GetCNPJ));
@@ -120,13 +119,11 @@ namespace Sim.UI.Web.Pages.Atendimento
             {
                 Input.Empresa = p;
             }
-
-            return RedirectToPage();
         }
 
-        public async Task<IActionResult> OnPostSaveAsync()
+        public async Task OnPostSaveAsync()
         {
-            return RedirectToPage();
+            
         }
 
     }

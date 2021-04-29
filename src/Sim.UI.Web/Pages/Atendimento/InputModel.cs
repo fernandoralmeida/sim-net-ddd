@@ -17,7 +17,7 @@ namespace Sim.UI.Web.Pages.Atendimento
         public Guid Id { get; set; }
 
         [DisplayName("Protocolo")]
-        public string Protocolo { get; set; }
+        public int Protocolo { get; set; }
 
         [DisplayName("Data")]
         [DataType(DataType.Date)]

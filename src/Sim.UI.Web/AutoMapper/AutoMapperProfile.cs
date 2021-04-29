@@ -7,6 +7,7 @@ using AutoMapper;
 namespace Sim.UI.Web.AutoMapper
 {
     using Sim.Domain.SDE.Entity;
+    using Sim.Domain.Shared.Entity;
     using Web.Pages.Pessoa;
     using Web.Pages.Empresa;
     using Sim.Service.CNPJ.Entity;
@@ -27,7 +28,8 @@ namespace Sim.UI.Web.AutoMapper
             CreateMap<VMEmpresa, Empresa>();
             CreateMap<Empresa, VMEmpresa>().ReverseMap();
 
-
+            CreateMap<Pages.Atendimento.InputModel, Atendimento>();
+            CreateMap<Atendimento, Pages.Atendimento.InputModel>().ReverseMap();
         }
     }
 }

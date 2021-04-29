@@ -1,7 +1,7 @@
 ﻿@page
-@model Sim.UI.Web.Pages.Atendimento.NovoModel
+@model Sim.UI.Web.Pages.Atendimento.IniciarModel
 @{
-    ViewData["Title"] = "Atendimento";
+    ViewData["Title"] = "Iniciar";
 }
 
 <div class="row">
@@ -82,37 +82,8 @@
             </div>
         }
 
-        <div class="row g-2 mb-4">
-            <div class="col-md-3">
-                <label class="form-label" asp-for="Input.Setor"></label>
-                <select class="form-select" asp-for="Input.Setor" asp-items="Model.Setores"></select>
-            </div>
-            <div class="col-md-5">
-                <label class="form-label" asp-for="Input.Canal"></label>
-                <select class="form-select" asp-for="Input.Canal" asp-items="Model.Canais"></select>
-            </div>
-        </div>
-        <div class="row g-2 mb-4">
-            <div class="col-md-4">
-                <label class="form-label" asp-for="Input.Servicos"></label>
-                <select class="form-control" asp-for="Input.Servicos" asp-items="Model.Servicos" multiple size="5"></select>
-            </div>
-            <div class="col-md-1">
-                <div class="row g-2 mb-2">
-                    <button type="submit" role="button" class="btn btn-primary"><i class="fas fa-arrow-right"></i></button>
-                </div>
-                <div class="row g-2 mb-2">
-                    <button type="submit" role="button" class="btn btn-secondary"><i class="fas fa-arrow-left"></i></button>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <label class="form-label" asp-for="Input.Servicos"></label>
-                <select class="form-control" asp-for="Input.Servicos" asp-items="Model.Servicos" multiple size="5"></select>
-            </div>
-        </div>
-
-    </div>   
-        <div class="d-grid gap-2 d-md-block">
-            <button type="submit" role="button" class="btn btn-primary">Gravar</button>
-        </div>
+    </div>
+    <div class="d-grid gap-2 d-md-block">
+        <button asp-page-handler="Save" type="submit" class="btn btn-primary">Gravar</button>
+    </div>
 </form>
