@@ -89,7 +89,7 @@ namespace Sim.UI.Web.Pages.Atendimento
         {
             Input = new()
             {
-                Protocolo = Convert.ToInt32( GetProtoloco()),
+                Protocolo = GetProtoloco(),
                 Data = DateTime.Now.Date,
                 Inicio = DateTime.Now,
                 Status = "ATIVO"
@@ -123,7 +123,13 @@ namespace Sim.UI.Web.Pages.Atendimento
 
         public async Task OnPostSaveAsync()
         {
-            
+            var t = Task.Run(() => _appServiceEmpresa.ConsultaByCNPJ(GetCNPJ));
+            await t;
+
+            foreach (var p in t.Result)
+            {
+                Input.Empresa = p;
+            }
         }
 
     }

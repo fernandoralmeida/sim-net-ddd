@@ -8,6 +8,24 @@ namespace Sim.Cross.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Ambulante",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Protocolo = table.Column<string>(type: "varchar(256)", nullable: false),
+                    FormaAtuacao = table.Column<string>(type: "varchar(50)", nullable: true),
+                    Local = table.Column<string>(type: "varchar(50)", nullable: true),
+                    Atividade = table.Column<string>(type: "varchar(256)", nullable: true),
+                    Data_Cadastro = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Ultima_Alteracao = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Ativo = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Ambulante", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Empresa",
                 columns: table => new
                 {
@@ -112,7 +130,7 @@ namespace Sim.Cross.Data.Migrations
                     Anotacao = table.Column<string>(type: "varchar(2000)", nullable: true),
                     Data = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Ultima_Alteracao = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Owner_AppUser_Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Owner_AppUser_Id = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Ativo = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -138,8 +156,8 @@ namespace Sim.Cross.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Nome = table.Column<string>(type: "varchar(50)", nullable: true),
-                    Owner = table.Column<string>(type: "varchar(50)", nullable: true),
+                    Nome = table.Column<string>(type: "varchar(128)", nullable: true),
+                    Owner = table.Column<string>(type: "varchar(128)", nullable: true),
                     Ativo = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -152,8 +170,8 @@ namespace Sim.Cross.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Nome = table.Column<string>(type: "varchar(50)", nullable: true),
-                    Owner = table.Column<string>(type: "varchar(50)", nullable: true),
+                    Nome = table.Column<string>(type: "varchar(128)", nullable: true),
+                    Owner = table.Column<string>(type: "varchar(128)", nullable: true),
                     Ativo = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -162,35 +180,53 @@ namespace Sim.Cross.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Ambulante",
+                name: "DIA",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Protocolo = table.Column<string>(type: "varchar(256)", nullable: false),
-                    FormaAtuacao = table.Column<string>(type: "varchar(50)", nullable: true),
-                    Local = table.Column<string>(type: "varchar(50)", nullable: true),
-                    Atividade = table.Column<string>(type: "varchar(256)", nullable: true),
-                    Data_Cadastro = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Ultima_Alteracao = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Ativo = table.Column<bool>(type: "bit", nullable: false),
-                    TitularId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    AuxiliarId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    InscricaoMunicipal = table.Column<int>(type: "int", nullable: false),
+                    Autorizacao = table.Column<string>(type: "varchar(256)", nullable: false),
+                    Veiculo = table.Column<string>(type: "varchar(50)", nullable: true),
+                    Emissao = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Validade = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Processo = table.Column<string>(type: "varchar(15)", nullable: true),
+                    Situacao = table.Column<string>(type: "varchar(20)", nullable: true),
+                    DiaDesde = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    AmbulanteId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Ambulante", x => x.Id);
+                    table.PrimaryKey("PK_DIA", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Ambulante_Pessoa_AuxiliarId",
-                        column: x => x.AuxiliarId,
-                        principalTable: "Pessoa",
+                        name: "FK_DIA_Ambulante_AmbulanteId",
+                        column: x => x.AmbulanteId,
+                        principalTable: "Ambulante",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AmbulantePessoa",
+                columns: table => new
+                {
+                    AmbulanteId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PessoasId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AmbulantePessoa", x => new { x.AmbulanteId, x.PessoasId });
                     table.ForeignKey(
-                        name: "FK_Ambulante_Pessoa_TitularId",
-                        column: x => x.TitularId,
+                        name: "FK_AmbulantePessoa_Ambulante_AmbulanteId",
+                        column: x => x.AmbulanteId,
+                        principalTable: "Ambulante",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AmbulantePessoa_Pessoa_PessoasId",
+                        column: x => x.PessoasId,
                         principalTable: "Pessoa",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -198,7 +234,7 @@ namespace Sim.Cross.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Protocolo = table.Column<int>(type: "int", nullable: false),
+                    Protocolo = table.Column<string>(type: "varchar(128)", nullable: false),
                     Data = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Inicio = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Fim = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -209,7 +245,7 @@ namespace Sim.Cross.Data.Migrations
                     Status = table.Column<string>(type: "varchar(20)", nullable: true),
                     Ultima_Alteracao = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Ativo = table.Column<bool>(type: "bit", nullable: false),
-                    Owner_AppUser_Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Owner_AppUser_Id = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PessoaId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     EmpresaId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
@@ -311,48 +347,6 @@ namespace Sim.Cross.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DIA",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    InscricaoMunicipal = table.Column<int>(type: "int", nullable: false),
-                    Autorizacao = table.Column<string>(type: "varchar(256)", nullable: false),
-                    Atividade = table.Column<string>(type: "varchar(256)", nullable: true),
-                    FormaAtuacao = table.Column<string>(type: "varchar(150)", nullable: true),
-                    Veiculo = table.Column<string>(type: "varchar(50)", nullable: true),
-                    Emissao = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Validade = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Processo = table.Column<string>(type: "varchar(15)", nullable: true),
-                    Situacao = table.Column<string>(type: "varchar(20)", nullable: true),
-                    DiaDesde = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    TitularId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    AuxiliarId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    AmbulanteId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_DIA", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_DIA_Ambulante_AmbulanteId",
-                        column: x => x.AmbulanteId,
-                        principalTable: "Ambulante",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_DIA_Pessoa_AuxiliarId",
-                        column: x => x.AuxiliarId,
-                        principalTable: "Pessoa",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_DIA_Pessoa_TitularId",
-                        column: x => x.TitularId,
-                        principalTable: "Pessoa",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Canal",
                 columns: table => new
                 {
@@ -407,20 +401,15 @@ namespace Sim.Cross.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Ambulante_AuxiliarId",
-                table: "Ambulante",
-                column: "AuxiliarId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Ambulante_Protocolo",
                 table: "Ambulante",
                 column: "Protocolo",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Ambulante_TitularId",
-                table: "Ambulante",
-                column: "TitularId");
+                name: "IX_AmbulantePessoa_PessoasId",
+                table: "AmbulantePessoa",
+                column: "PessoasId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Atendimento_EmpresaId",
@@ -458,16 +447,6 @@ namespace Sim.Cross.Data.Migrations
                 table: "DIA",
                 column: "Autorizacao",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_DIA_AuxiliarId",
-                table: "DIA",
-                column: "AuxiliarId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_DIA_TitularId",
-                table: "DIA",
-                column: "TitularId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Empresa_CNPJ",
@@ -520,6 +499,9 @@ namespace Sim.Cross.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "AmbulantePessoa");
+
+            migrationBuilder.DropTable(
                 name: "Atendimento");
 
             migrationBuilder.DropTable(
@@ -556,10 +538,10 @@ namespace Sim.Cross.Data.Migrations
                 name: "Evento");
 
             migrationBuilder.DropTable(
-                name: "Setor");
+                name: "Pessoa");
 
             migrationBuilder.DropTable(
-                name: "Pessoa");
+                name: "Setor");
 
             migrationBuilder.DropTable(
                 name: "Secretaria");

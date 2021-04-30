@@ -14,7 +14,7 @@ namespace Sim.Domain.Shared.Entity
 
         }
         public Guid Id { get; set; }
-        public int Protocolo { get; set; }
+        public string Protocolo { get; set; }
         public DateTime? Data { get; set; }
         public DateTime? Inicio { get; set; }
         public DateTime? Fim { get; set; }
@@ -25,7 +25,7 @@ namespace Sim.Domain.Shared.Entity
         public string Status { get; set; }
         public DateTime? Ultima_Alteracao { get; set; }
         public bool Ativo { get; set; }
-        public Guid Owner_AppUser_Id { get; set; }
+        public string Owner_AppUser_Id { get; set; }
 
         public virtual Pessoa Pessoa { get; set; }
         public virtual Empresa Empresa { get; set; }

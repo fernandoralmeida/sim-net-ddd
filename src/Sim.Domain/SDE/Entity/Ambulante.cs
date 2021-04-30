@@ -21,9 +21,8 @@ namespace Sim.Domain.SDE.Entity
         public DateTime? Ultima_Alteracao { get; set; }
         public bool Ativo { get; set; }
 
-        public virtual Pessoa Titular { get; set; }
-        public virtual Pessoa Auxiliar { get; set; }
+        //relacionais
+        public virtual ICollection<Pessoa> Pessoas { get; set; }
         public virtual ICollection<DIA> DIAs { get; set; }
-
     }
 }

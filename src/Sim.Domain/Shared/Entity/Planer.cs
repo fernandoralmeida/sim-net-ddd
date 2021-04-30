@@ -24,7 +24,7 @@ namespace Sim.Domain.Shared.Entity
         public string Anotacao { get; set; }
         public DateTime? Data { get; set; }
         public DateTime? Ultima_Alteracao { get; set; }
-        public Guid Owner_AppUser_Id { get; set; }
+        public string Owner_AppUser_Id { get; set; }
         public bool Ativo { get; set; }
     }
 }

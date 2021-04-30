@@ -10,8 +10,8 @@ using Sim.Cross.Data.Context;
 namespace Sim.Cross.Data.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20210425233036_AP0003")]
-    partial class AP0003
+    [Migration("20210430035402_AP0001")]
+    partial class AP0001
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,21 @@ namespace Sim.Cross.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.5")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("AmbulantePessoa", b =>
+                {
+                    b.Property<Guid>("AmbulanteId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("PessoasId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("AmbulanteId", "PessoasId");
+
+                    b.HasIndex("PessoasId");
+
+                    b.ToTable("AmbulantePessoa");
+                });
 
             modelBuilder.Entity("EmpresaQSA", b =>
                 {
@@ -48,9 +63,6 @@ namespace Sim.Cross.Data.Migrations
                     b.Property<bool>("Ativo")
                         .HasColumnType("bit");
 
-                    b.Property<Guid?>("AuxiliarId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime?>("Data_Cadastro")
                         .HasColumnType("datetime2");
 
@@ -64,20 +76,13 @@ namespace Sim.Cross.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(256)");
 
-                    b.Property<Guid?>("TitularId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime?>("Ultima_Alteracao")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AuxiliarId");
-
                     b.HasIndex("Protocolo")
                         .IsUnique();
-
-                    b.HasIndex("TitularId");
 
                     b.ToTable("Ambulante");
                 });
@@ -91,24 +96,15 @@ namespace Sim.Cross.Data.Migrations
                     b.Property<Guid?>("AmbulanteId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Atividade")
-                        .HasColumnType("varchar(256)");
-
                     b.Property<string>("Autorizacao")
                         .IsRequired()
                         .HasColumnType("varchar(256)");
-
-                    b.Property<Guid?>("AuxiliarId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("DiaDesde")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("Emissao")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("FormaAtuacao")
-                        .HasColumnType("varchar(150)");
 
                     b.Property<int>("InscricaoMunicipal")
                         .HasColumnType("int");
@@ -118,9 +114,6 @@ namespace Sim.Cross.Data.Migrations
 
                     b.Property<string>("Situacao")
                         .HasColumnType("varchar(20)");
-
-                    b.Property<Guid?>("TitularId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("Validade")
                         .HasColumnType("datetime2");
@@ -134,10 +127,6 @@ namespace Sim.Cross.Data.Migrations
 
                     b.HasIndex("Autorizacao")
                         .IsUnique();
-
-                    b.HasIndex("AuxiliarId");
-
-                    b.HasIndex("TitularId");
 
                     b.ToTable("DIA");
                 });
@@ -362,14 +351,15 @@ namespace Sim.Cross.Data.Migrations
                     b.Property<DateTime?>("Inicio")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("Owner_AppUser_Id")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("Owner_AppUser_Id")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid?>("PessoaId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("Protocolo")
-                        .HasColumnType("int");
+                    b.Property<string>("Protocolo")
+                        .IsRequired()
+                        .HasColumnType("varchar(128)");
 
                     b.Property<string>("Servicos")
                         .HasColumnType("varchar(150)");
@@ -510,8 +500,8 @@ namespace Sim.Cross.Data.Migrations
                     b.Property<DateTime?>("Data")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("Owner_AppUser_Id")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("Owner_AppUser_Id")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Prioridades")
                         .HasColumnType("varchar(2000)");
@@ -634,6 +624,21 @@ namespace Sim.Cross.Data.Migrations
                     b.ToTable("Tipos");
                 });
 
+            modelBuilder.Entity("AmbulantePessoa", b =>
+                {
+                    b.HasOne("Sim.Domain.SDE.Entity.Ambulante", null)
+                        .WithMany()
+                        .HasForeignKey("AmbulanteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Sim.Domain.SDE.Entity.Pessoa", null)
+                        .WithMany()
+                        .HasForeignKey("PessoasId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("EmpresaQSA", b =>
                 {
                     b.HasOne("Sim.Domain.SDE.Entity.Empresa", null)
@@ -649,48 +654,23 @@ namespace Sim.Cross.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Sim.Domain.SDE.Entity.Ambulante", b =>
-                {
-                    b.HasOne("Sim.Domain.SDE.Entity.Pessoa", "Auxiliar")
-                        .WithMany()
-                        .HasForeignKey("AuxiliarId");
-
-                    b.HasOne("Sim.Domain.SDE.Entity.Pessoa", "Titular")
-                        .WithMany()
-                        .HasForeignKey("TitularId");
-
-                    b.Navigation("Auxiliar");
-
-                    b.Navigation("Titular");
-                });
-
             modelBuilder.Entity("Sim.Domain.SDE.Entity.DIA", b =>
                 {
-                    b.HasOne("Sim.Domain.SDE.Entity.Ambulante", null)
+                    b.HasOne("Sim.Domain.SDE.Entity.Ambulante", "Ambulante")
                         .WithMany("DIAs")
                         .HasForeignKey("AmbulanteId");
 
-                    b.HasOne("Sim.Domain.SDE.Entity.Pessoa", "Auxiliar")
-                        .WithMany()
-                        .HasForeignKey("AuxiliarId");
-
-                    b.HasOne("Sim.Domain.SDE.Entity.Pessoa", "Titular")
-                        .WithMany()
-                        .HasForeignKey("TitularId");
-
-                    b.Navigation("Auxiliar");
-
-                    b.Navigation("Titular");
+                    b.Navigation("Ambulante");
                 });
 
             modelBuilder.Entity("Sim.Domain.Shared.Entity.Atendimento", b =>
                 {
                     b.HasOne("Sim.Domain.SDE.Entity.Empresa", "Empresa")
-                        .WithMany()
+                        .WithMany("Atendimentos")
                         .HasForeignKey("EmpresaId");
 
                     b.HasOne("Sim.Domain.SDE.Entity.Pessoa", "Pessoa")
-                        .WithMany()
+                        .WithMany("Atendimentos")
                         .HasForeignKey("PessoaId");
 
                     b.Navigation("Empresa");
@@ -716,7 +696,7 @@ namespace Sim.Cross.Data.Migrations
             modelBuilder.Entity("Sim.Domain.Shared.Entity.Inscricao", b =>
                 {
                     b.HasOne("Sim.Domain.SDE.Entity.Empresa", "Empresa")
-                        .WithMany()
+                        .WithMany("Inscricoes")
                         .HasForeignKey("EmpresaId");
 
                     b.HasOne("Sim.Domain.Shared.Entity.Evento", "Evento")
@@ -724,7 +704,7 @@ namespace Sim.Cross.Data.Migrations
                         .HasForeignKey("EventoId");
 
                     b.HasOne("Sim.Domain.SDE.Entity.Pessoa", "Participante")
-                        .WithMany()
+                        .WithMany("Inscricoes")
                         .HasForeignKey("ParticipanteId");
 
                     b.Navigation("Empresa");
@@ -761,6 +741,20 @@ namespace Sim.Cross.Data.Migrations
             modelBuilder.Entity("Sim.Domain.SDE.Entity.Ambulante", b =>
                 {
                     b.Navigation("DIAs");
+                });
+
+            modelBuilder.Entity("Sim.Domain.SDE.Entity.Empresa", b =>
+                {
+                    b.Navigation("Atendimentos");
+
+                    b.Navigation("Inscricoes");
+                });
+
+            modelBuilder.Entity("Sim.Domain.SDE.Entity.Pessoa", b =>
+                {
+                    b.Navigation("Atendimentos");
+
+                    b.Navigation("Inscricoes");
                 });
 
             modelBuilder.Entity("Sim.Domain.Shared.Entity.Evento", b =>

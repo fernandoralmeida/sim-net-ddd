@@ -17,7 +17,7 @@ namespace Sim.UI.Web.Pages.Atendimento
         public Guid Id { get; set; }
 
         [DisplayName("Protocolo")]
-        public int Protocolo { get; set; }
+        public string Protocolo { get; set; }
 
         [DisplayName("Data")]
         [DataType(DataType.Date)]
@@ -47,7 +47,7 @@ namespace Sim.UI.Web.Pages.Atendimento
         public string Status { get; set; }
         public DateTime? Ultima_Alteracao { get; set; }
         public bool Ativo { get; set; }
-        public Guid Owner_AppUser_Id { get; set; }
+        public string Owner_AppUser_Id { get; set; }
 
         [DisplayName("Pessoa")]
         public virtual Pessoa Pessoa { get; set; }

@@ -15,6 +15,8 @@ namespace Sim.Cross.Data.Config.Entity
         public void Configure(EntityTypeBuilder<Atendimento> builder)
         {
             builder.HasKey(c => c.Id);
+            builder.Property(c => c.Protocolo)
+                .HasColumnType("varchar(128)");
             builder.HasIndex(c => c.Protocolo).IsUnique();
             builder.Property(c => c.Protocolo)
                 .IsRequired();

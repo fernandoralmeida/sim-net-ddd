@@ -17,11 +17,12 @@ namespace Sim.Cross.Data.Config.Entity
             builder.HasIndex(c => c.Autorizacao).IsUnique();
             builder.Property(c => c.Autorizacao)
                 .HasColumnType("varchar(256)").IsRequired();
-
+            /*
             builder.Property(c => c.Atividade)
                 .HasColumnType("varchar(256)");
             builder.Property(c => c.FormaAtuacao)
                 .HasColumnType("varchar(150)");
+            */
             builder.Property(c => c.Veiculo)
                 .HasColumnType("varchar(50)");
             builder.Property(c => c.Processo)

@@ -15,8 +15,10 @@ namespace Sim.Domain.SDE.Entity
         public Guid Id { get; set; }
         public int InscricaoMunicipal { get; set; }
         public string Autorizacao { get; set; }
-        public string Atividade { get; set; }
-        public string FormaAtuacao { get; set; }
+
+        //public string Atividade { get; set; }
+        //public string FormaAtuacao { get; set; }
+
         public string Veiculo { get; set; }
         public DateTime? Emissao { get; set; }
         public DateTime? Validade { get; set; }
@@ -24,8 +26,8 @@ namespace Sim.Domain.SDE.Entity
         public string Situacao { get; set; }
         public DateTime? DiaDesde { get; set; }
 
-        public virtual Pessoa Titular { get; set; }
-        public virtual Pessoa Auxiliar { get; set; }
+        //relacional
+        public virtual Ambulante Ambulante { get; set; }
     }
 
 }

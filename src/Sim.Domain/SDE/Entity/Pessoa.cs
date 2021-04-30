@@ -42,6 +42,8 @@ namespace Sim.Domain.SDE.Entity
         public DateTime? Ultima_Alteracao { get; set; }
         public bool Ativo { get; set; }
      
-
+        public virtual ICollection<Atendimento> Atendimentos { get; set; }
+        public virtual ICollection<Ambulante> Ambulante { get; set; }
+        public virtual ICollection<Inscricao> Inscricoes { get; set; }
     }
 }

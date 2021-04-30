@@ -95,19 +95,42 @@ namespace Sim.UI.Web.Pages.Atendimento
             }
         }
 
-        public async Task OnPostSaveAsync()
+        public async Task<IActionResult> OnPostSaveAsync()
         {
             var user = await _userManager.GetUserAsync(User);
-            
-            Input.Protocolo = Convert.ToInt32(GetProtoloco());
-            Input.Data = DateTime.Now.Date;
-            Input.Inicio = DateTime.Now;
-            Input.Status = "ATIVO";
-            Input.Ativo = true;
-            Input.Owner_AppUser_Id = new Guid(user.Id);
 
-            var t = Task.Run(() => _appServiceAtendimento.Add(_mapper.Map<Atendimento>(Input)));
+            var t = Task.Run(() => {
+
+                var pessoa = _appServicePessoa.ConsultaByCPF(GetCPF);
+
+                foreach (var p in pessoa)
+                {
+                    Input.Pessoa = p;
+                }
+
+                var empresa = _appServiceEmpresa.ConsultaByCNPJ(GetCNPJ);
+
+                foreach (var e in empresa)
+                {
+                    Input.Empresa = e;
+                }
+
+                Input.Protocolo = GetProtoloco();
+                Input.Data = DateTime.Now.Date;
+                Input.Inicio = DateTime.Now;
+                Input.Status = "ATIVO";
+                Input.Ativo = true;
+                Input.Owner_AppUser_Id = user.Id;
+
+                StatusMessage = Input.Pessoa.Data_Nascimento.ToString();
+
+                //_appServiceAtendimento.Add(_mapper.Map<Atendimento>(Input)); 
+            
+            });
+            
             await t;
+
+            return RedirectToPage();
         }
         
 

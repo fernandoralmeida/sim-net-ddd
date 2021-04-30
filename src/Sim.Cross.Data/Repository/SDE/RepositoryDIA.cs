@@ -28,17 +28,17 @@ namespace Sim.Cross.Data.Repository.SDE
 
         public IEnumerable<DIA> GetByAtividade(string atividade)
         {
-            return _db.DIA.Where(c => c.Atividade.Contains(atividade));
+            return _db.DIA.Where(c => c.Ambulante.Atividade.Contains(atividade));
         }
 
         public IEnumerable<DIA> GetByAuxiliar(string nome)
         {
-            return _db.DIA.Where(c => c.Auxiliar.Nome.Contains(nome));
+            return _db.DIA.Where(c => c.Ambulante.Pessoas.ToList()[0].Nome.Contains(nome));
         }
 
         public IEnumerable<DIA> GetByTitular(string nome)
         {
-            return _db.DIA.Where(c => c.Titular.Nome.Contains(nome));
+            return _db.DIA.Where(c => c.Ambulante.Pessoas.ToList()[0].Nome.Contains(nome));
         }
 
         public IEnumerable<DIA> GetVencidos()
