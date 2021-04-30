@@ -69,7 +69,7 @@ namespace Sim.UI.Web.Pages.Atendimento
         public async Task OnGetAsync(Guid? id)
         {
             Input = new();
-            await OnLoad(id);
+            //await OnLoad(id);
         }
 
         public async Task OnPostIncluirPessoaAsync()
@@ -97,23 +97,7 @@ namespace Sim.UI.Web.Pages.Atendimento
 
         public async Task<IActionResult> OnPostSaveAsync()
         {
-            var user = await _userManager.GetUserAsync(User);
-
-            var t = Task.Run(() => {
-
-                var pessoa = _appServicePessoa.ConsultaByCPF(GetCPF);
-
-                foreach (var p in pessoa)
-                {
-                    Input.Pessoa = p;
-                }
-
-                var empresa = _appServiceEmpresa.ConsultaByCNPJ(GetCNPJ);
-
-                foreach (var e in empresa)
-                {
-                    Input.Empresa = e;
-                }
+            var user = await _userManager.GetUserAsync(User);          
 
                 Input.Protocolo = GetProtoloco();
                 Input.Data = DateTime.Now.Date;
@@ -122,17 +106,36 @@ namespace Sim.UI.Web.Pages.Atendimento
                 Input.Ativo = true;
                 Input.Owner_AppUser_Id = user.Id;
 
-                StatusMessage = Input.Pessoa.Data_Nascimento.ToString();
+            var atendimento = new Atendimento()
+            {
+                Protocolo = Input.Protocolo,
+                Data = Input.Data,
+                Inicio = DateTime.Now.ToLocalTime(),
+                Status = Input.Status,
+                Ativo = Input.Ativo,
+                Owner_AppUser_Id = Input.Owner_AppUser_Id
+            };
 
-                //_appServiceAtendimento.Add(_mapper.Map<Atendimento>(Input)); 
-            
-            });
-            
-            await t;
+            var pessoa = _appServicePessoa.ConsultaByCPF(GetCPF);
 
-            return RedirectToPage();
-        }
-        
+            foreach (var p in pessoa)
+            {
+                atendimento.Pessoa = p;
+            }
+
+            var empresa = _appServiceEmpresa.ConsultaByCNPJ(GetCNPJ);
+
+            foreach (var e in empresa)
+            {
+                atendimento.Empresa = e;
+            }
+
+            _appServiceAtendimento.Add(atendimento); 
+
+            StatusMessage = Input.Pessoa.Data_Nascimento.ToString();
+
+            return Page();
+        }        
 
     }
 }

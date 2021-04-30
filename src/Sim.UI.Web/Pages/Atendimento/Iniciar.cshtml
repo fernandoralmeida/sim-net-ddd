@@ -14,12 +14,12 @@
 <hr />
 
 <form method="post">
-    <div class="col-md-5 mb-6" style="margin:auto;">
+    <div class="col-md-8 mb-4" style="margin:auto;">
 
         @if (Model.Input.Pessoa == null)
         {
             <div class="row g-2 mb-4">
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-5">
                     <div class="input-group ">
                         <input class="form-control" asp-for="GetCPF" placeholder="CPF" aria-describedby="button-addon2">
                         <button asp-page-handler="IncluirPessoa" class="btn btn-primary" type="submit"><i class="fa fa-plus-square" aria-hidden="true"></i></button>
