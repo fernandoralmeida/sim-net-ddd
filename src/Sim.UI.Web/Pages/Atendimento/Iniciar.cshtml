@@ -29,24 +29,28 @@
         }
         else
         {
-            <div class="row g-2 mb-4">
-                <div class="col-md-2">
-                    <label class="form-label" asp-for="Input.Pessoa.CPF"></label>
-                    <input class="form-control" asp-for="Input.Pessoa.CPF" />
-                </div>
-                <div class="col-md-5">
-                    <label class="form-label" asp-for="Input.Pessoa.Nome"></label>
-                    <input class="form-control" asp-for="Input.Pessoa.Nome" />
-                </div>
-                <div class="col-md-3">
-                    <label class="form-label" asp-for="Input.Pessoa.Email"></label>
-                    <input class="form-control" asp-for="Input.Pessoa.Email" />
-                </div>
-                <div class="col-md-2">
-                    <label class="form-label" asp-for="Input.Pessoa.Tel_Movel"></label>
-                    <input class="form-control" asp-for="Input.Pessoa.Tel_Movel" />
-                </div>
-            </div>
+    <div class="row g-2 mb-4">
+        <div class="col-md-2">
+            <label class="form-label" asp-for="Input.Pessoa.Id"></label>
+            <input class="form-control" asp-for="Input.Pessoa.Id" />
+        </div>
+        <div class="col-md-2">
+            <label class="form-label" asp-for="Input.Pessoa.CPF"></label>
+            <input class="form-control" asp-for="Input.Pessoa.CPF" />
+        </div>
+        <div class="col-md-5">
+            <label class="form-label" asp-for="Input.Pessoa.Nome"></label>
+            <input class="form-control" asp-for="Input.Pessoa.Nome" />
+        </div>
+        <div class="col-md-3">
+            <label class="form-label" asp-for="Input.Pessoa.Email"></label>
+            <input class="form-control" asp-for="Input.Pessoa.Email" />
+        </div>
+        <div class="col-md-2">
+            <label class="form-label" asp-for="Input.Pessoa.Tel_Movel"></label>
+            <input class="form-control" asp-for="Input.Pessoa.Tel_Movel" />
+        </div>
+    </div>
         }
 
         @if (Model.Input.Empresa == null)
@@ -62,28 +66,32 @@
         }
         else
         {
-            <div class="row g-2 mb-4">
-                <div class="col-md-2">
-                    <label class="form-label" asp-for="Input.Empresa.CNPJ"></label>
-                    <input class="form-control" asp-for="Input.Empresa.CNPJ" />
-                </div>
-                <div class="col-md-5">
-                    <label class="form-label" asp-for="Input.Empresa.Nome_Empresarial"></label>
-                    <input class="form-control" asp-for="Input.Empresa.Nome_Empresarial" />
-                </div>
-                <div class="col-md-3">
-                    <label class="form-label" asp-for="Input.Empresa.Email"></label>
-                    <input class="form-control" asp-for="Input.Empresa.Email" />
-                </div>
-                <div class="col-md-2">
-                    <label class="form-label" asp-for="Input.Empresa.Telefone"></label>
-                    <input class="form-control" asp-for="Input.Empresa.Telefone" />
-                </div>
-            </div>
+    <div class="row g-2 mb-4">
+        <div class="col-md-2">
+            <label class="form-label" asp-for="Input.Empresa.Id"></label>
+            <input class="form-control" asp-for="Input.Empresa.Id" />
+        </div>
+        <div class="col-md-2">
+            <label class="form-label" asp-for="Input.Empresa.CNPJ"></label>
+            <input class="form-control" asp-for="Input.Empresa.CNPJ" />
+        </div>
+        <div class="col-md-5">
+            <label class="form-label" asp-for="Input.Empresa.Nome_Empresarial"></label>
+            <input class="form-control" asp-for="Input.Empresa.Nome_Empresarial" />
+        </div>
+        <div class="col-md-3">
+            <label class="form-label" asp-for="Input.Empresa.Email"></label>
+            <input class="form-control" asp-for="Input.Empresa.Email" />
+        </div>
+        <div class="col-md-2">
+            <label class="form-label" asp-for="Input.Empresa.Telefone"></label>
+            <input class="form-control" asp-for="Input.Empresa.Telefone" />
+        </div>
+    </div>
         }
 
     </div>
-    <div class="d-grid gap-2 d-md-block">
+    <div class="d-grid gap-2 d-md-block mb-3">
         <button asp-page-handler="Save" type="submit" class="btn btn-lg btn-success">Gravar</button>
     </div>
 </form>

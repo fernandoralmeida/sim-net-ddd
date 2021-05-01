@@ -6,20 +6,24 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Identity;
 
 namespace Sim.UI.Web.Pages.Atendimento
 {
+    using Sim.Cross.Identity;
     using Sim.Domain.Shared.Entity;
     using Sim.Application.Shared.Interface;
 
     public class IndexModel : PageModel
     {
-
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly IAppServiceAtendimento _appServiceAtendimento;
 
-        public IndexModel(IAppServiceAtendimento appServiceAtendimento)
+        public IndexModel(IAppServiceAtendimento appServiceAtendimento,
+            UserManager<ApplicationUser> userManager)
         {
             _appServiceAtendimento = appServiceAtendimento;
+            _userManager = userManager;
         }
 
         [TempData]
@@ -40,7 +44,9 @@ namespace Sim.UI.Web.Pages.Atendimento
         {
             Input = new();
             Input.DataAtendimento = date;
-            var t = Task.Run(() => _appServiceAtendimento.GetByDate(Input.DataAtendimento));
+            var user = await _userManager.GetUserAsync(User);
+
+            var t = Task.Run(() => _appServiceAtendimento.MeusAtendimentos(user.Id, date));
             await t;
             Input.ListaAtendimento = t.Result.ToList();
         }

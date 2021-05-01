@@ -16,5 +16,7 @@ namespace Sim.Application.Shared.Interface
         IEnumerable<Atendimento> GetByCanal(string canal);
         IEnumerable<Atendimento> GetByServicos(string servicos);
         IEnumerable<Atendimento> GetByDate(DateTime? dateTime);
+        IEnumerable<Atendimento> MeusAtendimentos(string userid, DateTime? date);
+        IEnumerable<Atendimento> AtendimentoAtivo(string userid);
     }
 }

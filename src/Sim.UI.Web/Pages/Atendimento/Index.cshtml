@@ -45,7 +45,7 @@
                     Cliente
                 </th>
                 <th>
-                    Email
+                    Servicos
                 </th>
                 <th>
                     Setor
@@ -67,12 +67,14 @@
                         @Html.DisplayFor(modelItem => item.Protocolo)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Inicio)
-                        -
-                        @Html.DisplayFor(modelItem => item.Fim)
+                        @Html.DisplayFor(modelItem => item.Data)
+                        <p>
+                            @Html.DisplayFor(modelItem => item.DataF)
+                        </p>
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Pessoa.Nome)
+                        <p>@Html.DisplayFor(modelItem => item.Empresa.Nome_Empresarial)</p>
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Servicos)

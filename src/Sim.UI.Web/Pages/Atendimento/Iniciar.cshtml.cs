@@ -48,28 +48,35 @@ namespace Sim.UI.Web.Pages.Atendimento
         [TempData]
         public string StatusMessage { get; set; }
 
-        private static string GetProtoloco()
-        {
+        private string GetProtoloco()
+        {      
             return string.Format("{0}{1}{2}", 
                 DateTime.Now.Year, 
                 DateTime.Now.Month, 
-                DateTime.Now.Day);
+                DateTime.Now.Second);
         }
 
-        private async Task OnLoad(Guid? id)
+        public async Task<IActionResult> OnGetAsync(Guid? id)
         {
+            Input = new();
+            var user = await _userManager.GetUserAsync(User);
+            var at_ativo = Task.Run(() => _appServiceAtendimento.AtendimentoAtivo(user.Id));
+            at_ativo.Wait();
+
+            foreach (var at in at_ativo.Result)
+            {
+                StatusMessage = "Um atendimento encontra-se ativo. Finalize antes de iniciar outro atendimento.";
+                return RedirectToPage("./Novo");
+            }
+
             if (id != null)
             {
                 var t = Task.Run(() => _appServicePessoa.GetById((Guid)id));
                 await t;
                 Input.Pessoa = t.Result;
             }
-        }
 
-        public async Task OnGetAsync(Guid? id)
-        {
-            Input = new();
-            //await OnLoad(id);
+            return Page();
         }
 
         public async Task OnPostIncluirPessoaAsync()
@@ -101,7 +108,6 @@ namespace Sim.UI.Web.Pages.Atendimento
 
                 Input.Protocolo = GetProtoloco();
                 Input.Data = DateTime.Now.Date;
-                Input.Inicio = DateTime.Now;
                 Input.Status = "ATIVO";
                 Input.Ativo = true;
                 Input.Owner_AppUser_Id = user.Id;
@@ -110,24 +116,23 @@ namespace Sim.UI.Web.Pages.Atendimento
             {
                 Protocolo = Input.Protocolo,
                 Data = Input.Data,
-                Inicio = DateTime.Now.ToLocalTime(),
                 Status = Input.Status,
                 Ativo = Input.Ativo,
                 Owner_AppUser_Id = Input.Owner_AppUser_Id
             };
 
-            var pessoa = _appServicePessoa.ConsultaByCPF(GetCPF);
+            var pessoa = _appServicePessoa.GetById(Input.Pessoa.Id);
+            
+            if(pessoa != null)
+                atendimento.Pessoa = pessoa;
 
-            foreach (var p in pessoa)
+            if (Input.Empresa != null)
             {
-                atendimento.Pessoa = p;
-            }
 
-            var empresa = _appServiceEmpresa.ConsultaByCNPJ(GetCNPJ);
+                var empresa = _appServiceEmpresa.GetById(Input.Empresa.Id);
 
-            foreach (var e in empresa)
-            {
-                atendimento.Empresa = e;
+                if (empresa != null)
+                    atendimento.Empresa = empresa;
             }
 
             _appServiceAtendimento.Add(atendimento); 

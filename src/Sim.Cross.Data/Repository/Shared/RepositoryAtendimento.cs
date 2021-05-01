@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Sim.Cross.Data.Repository.Shared
 {
@@ -14,6 +15,16 @@ namespace Sim.Cross.Data.Repository.Shared
         public RepositoryAtendimento(ApplicationContext dbContext)
             :base(dbContext)
         {   }
+
+        public IEnumerable<Atendimento> AtendimentoAtivo(string userid)
+        {
+            var ativo = _db.Atendimento
+                .Include(p => p.Pessoa)
+                .Include(e => e.Empresa)
+                .Where(s=>s.Owner_AppUser_Id == userid && s.Status=="ATIVO");
+
+            return ativo;
+        }
 
         public IEnumerable<Atendimento> GetByCanal(string canal)
         {
@@ -43,6 +54,16 @@ namespace Sim.Cross.Data.Repository.Shared
         public IEnumerable<Atendimento> GetBySetor(string setor)
         {
             return _db.Atendimento.Where(u => u.Setor == setor);
+        }
+
+        public IEnumerable<Atendimento> MeusAtendimentos(string userid, DateTime? date)
+        {
+            var lista = _db.Atendimento
+                .Include(u => u.Pessoa)
+                .Include(e => e.Empresa)
+                .Where(a => a.Owner_AppUser_Id == userid && a.Data == date);
+
+            return lista;
         }
     }
 }

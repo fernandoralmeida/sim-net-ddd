@@ -91,7 +91,6 @@ namespace Sim.UI.Web.Pages.Atendimento
             {
                 Protocolo = GetProtoloco(),
                 Data = DateTime.Now.Date,
-                Inicio = DateTime.Now,
                 Status = "ATIVO"
             };       
 

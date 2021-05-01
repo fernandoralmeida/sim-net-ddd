@@ -17,6 +17,12 @@ namespace Sim.Domain.Shared.Service
         {
             _atendimento = repositoryAtendimento;
         }
+
+        public IEnumerable<Atendimento> AtendimentoAtivo(string userid)
+        {
+            return _atendimento.AtendimentoAtivo(userid);
+        }
+
         public IEnumerable<Atendimento> GetByCanal(string canal)
         {
             return _atendimento.GetByCanal(canal);
@@ -45,6 +51,11 @@ namespace Sim.Domain.Shared.Service
         public IEnumerable<Atendimento> GetBySetor(string setor)
         {
             return _atendimento.GetBySetor(setor);
+        }
+
+        public IEnumerable<Atendimento> MeusAtendimentos(string userid, DateTime? date)
+        {
+            return _atendimento.MeusAtendimentos(userid, date);
         }
     }
 }

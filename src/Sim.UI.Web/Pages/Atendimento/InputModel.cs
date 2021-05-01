@@ -22,14 +22,10 @@ namespace Sim.UI.Web.Pages.Atendimento
         [DisplayName("Data")]
         [DataType(DataType.Date)]
         public DateTime? Data { get; set; }
-
-        [DisplayName("Inicio")]
-        [DataType(DataType.Time)]
-        public DateTime? Inicio { get; set; }
-        
+               
         [DisplayName("Fim")]
         [DataType(DataType.Time)]
-        public DateTime? Fim { get; set; }
+        public DateTime? DataF { get; set; }
 
         [DisplayName("Setor")]
         public string Setor { get; set; }
