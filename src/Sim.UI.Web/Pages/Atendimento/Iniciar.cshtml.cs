@@ -111,7 +111,7 @@ namespace Sim.UI.Web.Pages.Atendimento
             var user = await _userManager.GetUserAsync(User);          
 
                 Input.Protocolo = GetProtoloco();
-                Input.Data = DateTime.Now.Date;
+                Input.Data = DateTime.Now;
                 Input.Status = "ATIVO";
                 Input.Ativo = true;
                 Input.Owner_AppUser_Id = user.Id;

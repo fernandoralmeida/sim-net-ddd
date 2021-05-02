@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Identity;
 
 namespace Sim.UI.Web.Pages.Atendimento
 {
@@ -12,9 +13,11 @@ namespace Sim.UI.Web.Pages.Atendimento
     using Sim.Application.SDE.Interface;
     using Sim.Domain.Shared.Entity;
     using Sim.Domain.SDE.Entity;
+    using Sim.Cross.Identity;
 
     public class NovoModel : PageModel
     {
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly IAppServiceAtendimento _appServiceAtendimento;
         private readonly IAppServicePessoa _appServicePessoa;
         private readonly IAppServiceEmpresa _appServiceEmpresa;
@@ -27,21 +30,17 @@ namespace Sim.UI.Web.Pages.Atendimento
             IAppServiceEmpresa appServiceEmpresa,
             IAppServiceCanal appServiceCanal,
             IAppServiceServico appServiceServico,
-            IAppServiceSetor appServiceSetor)
+            IAppServiceSetor appServiceSetor,
+            UserManager<ApplicationUser> userManager)
         {
             _appServiceAtendimento = appServiceAtendimento;
             _appServicePessoa = appServicePessoa;
             _appServiceEmpresa = appServiceEmpresa;
             _appServiceCanal = appServiceCanal;
             _appServiceServico = appServiceServico;
-            _appServiceSetor = appServiceSetor;           
+            _appServiceSetor = appServiceSetor;
+            _userManager = userManager;
         }
-
-        [BindProperty]
-        public string GetCPF { get; set; }
-
-        [BindProperty]
-        public string GetCNPJ { get; set; }
 
         [BindProperty]
         public InputModel Input { get; set; }
@@ -55,10 +54,7 @@ namespace Sim.UI.Web.Pages.Atendimento
 
         public SelectList Canais { get; set; }
 
-        private static string GetProtoloco()
-        {
-            return string.Format("{0}{1}{2}", DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
-        }
+        public SelectList ServicosSelecionado { get; set; }
 
         private async Task OnLoad()
         {
@@ -85,50 +81,64 @@ namespace Sim.UI.Web.Pages.Atendimento
             }
         }
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
+            var user = await _userManager.GetUserAsync(User);
+
+            var atendimemnto_ativio = _appServiceAtendimento.AtendimentoAtivo(user.Id).FirstOrDefault();
+
+            if(atendimemnto_ativio == null)
+            {
+                return Redirect("Erro inesperado, contate o Administrador.");
+            }
+
             Input = new()
             {
-                Protocolo = GetProtoloco(),
-                Data = DateTime.Now.Date,
-                Status = "ATIVO"
+                Id= atendimemnto_ativio.Id,
+                Protocolo = atendimemnto_ativio.Protocolo,               
+                Data = atendimemnto_ativio.Data,
+                Pessoa = atendimemnto_ativio.Pessoa,
+                Empresa = atendimemnto_ativio.Empresa,
+                Status = atendimemnto_ativio.Status
             };       
 
             await OnLoad();
+            return Page();
         }
 
-        public async Task OnPostIncluirPessoaAsync()
+        public async Task<IActionResult> OnPostSyncServicesAsync()
         {
-            var t = Task.Run(() => _appServicePessoa.ConsultaByCPF(GetCPF));
-            await t;
+            var serv = Task.Run(() => _appServiceServico.GetByOwner(Input.Setor));
+            await serv;
 
-            foreach(var p in t.Result)
+            if (serv.Result != null)
             {
-                Input.Pessoa = p;
+                Servicos = new SelectList(serv.Result, nameof(Servico.Id), nameof(Servico.Nome), null);
             }
+            
+            return RedirectToPage();
         }
 
-        public async Task OnPostIncluirEmpresaAsync()
+        public IActionResult OnPostAddServiceAsync()
         {
 
-            var t = Task.Run(() => _appServiceEmpresa.ConsultaByCNPJ(GetCNPJ));
-            await t;
+            //StatusMessage = Input.Servicos;
 
-            foreach (var p in t.Result)
-            {
-                Input.Empresa = p;
-            }
+            return Page();
         }
 
-        public async Task OnPostSaveAsync()
+        public void OnPostRemoveServiceAsync()
         {
-            var t = Task.Run(() => _appServiceEmpresa.ConsultaByCNPJ(GetCNPJ));
-            await t;
 
-            foreach (var p in t.Result)
-            {
-                Input.Empresa = p;
-            }
+        }
+
+        public async Task<IActionResult> OnPostSaveAsync()
+        {
+            var t = Task.Run(() => { });
+            await t;
+            StatusMessage = "TESTE";
+
+            return RedirectToPagePreserveMethod();
         }
 
     }
