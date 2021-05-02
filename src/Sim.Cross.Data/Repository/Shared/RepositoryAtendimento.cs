@@ -61,7 +61,7 @@ namespace Sim.Cross.Data.Repository.Shared
             var lista = _db.Atendimento
                 .Include(u => u.Pessoa)
                 .Include(e => e.Empresa)
-                .Where(a => a.Owner_AppUser_Id == userid && a.Data == date);
+                .Where(a => a.Owner_AppUser_Id == userid && a.Data == date && a.Status == "FINALIZADO");
 
             return lista;
         }

@@ -407,6 +407,30 @@ namespace Sim.Cross.Data.Migrations
                     b.ToTable("Canal");
                 });
 
+            modelBuilder.Entity("Sim.Domain.Shared.Entity.Contador", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<DateTime?>("Data")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Modulo")
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("Numero")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("varchar(128)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Protocolos");
+                });
+
             modelBuilder.Entity("Sim.Domain.Shared.Entity.Evento", b =>
                 {
                     b.Property<Guid>("Id")

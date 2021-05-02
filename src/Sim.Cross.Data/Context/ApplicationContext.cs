@@ -4,13 +4,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Sim.Cross.Data.Context
 {
     using Sim.Domain.SDE.Entity;
     using Sim.Domain.Shared.Entity;
+
     public class ApplicationContext : DbContext
     {
+        public ApplicationContext()
+        {  }
+
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {  }
 
@@ -31,6 +37,31 @@ namespace Sim.Cross.Data.Context
         public DbSet<Setor> Setor { get; set; }
         public DbSet<Inscricao> Inscricao { get; set; }
         public DbSet<Tipo> Tipos { get; set; }
+        public DbSet<Contador> Contador { get; set; }
+       
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer(SqlServerConnect());
+            }
+        }
+
+        private static string _sqlserverconnect;
+        private static string SqlServerConnect()
+        {
+            return _sqlserverconnect;
+        }
+
+        //registra o dbcontext aos serviços
+        public void RegisterDataContext(IServiceCollection services, IConfiguration config, string connection)
+        {
+            _sqlserverconnect = config.GetConnectionString(connection);
+            
+            services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(config.GetConnectionString(connection)));
+
+            services.AddScoped<DbContext, ApplicationContext>();
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -48,6 +79,7 @@ namespace Sim.Cross.Data.Context
             modelBuilder.Entity<Servico>().ToTable("Servico");
             modelBuilder.Entity<Inscricao>().ToTable("Inscricao");
             modelBuilder.Entity<Tipo>().ToTable("Tipos");
+            modelBuilder.Entity<Contador>().ToTable("Protocolos");
 
             modelBuilder.ApplyConfiguration(new Config.Entity.AmbulanteMap());
             modelBuilder.ApplyConfiguration(new Config.Entity.AtendimentoMap());
@@ -62,6 +94,7 @@ namespace Sim.Cross.Data.Context
             modelBuilder.ApplyConfiguration(new Config.Entity.SetorMap());
             modelBuilder.ApplyConfiguration(new Config.Entity.InscricaoMap());
             modelBuilder.ApplyConfiguration(new Config.Entity.TipoMap());
+            modelBuilder.ApplyConfiguration(new Config.Entity.ContadorMap());
 
             base.OnModelCreating(modelBuilder);
         }

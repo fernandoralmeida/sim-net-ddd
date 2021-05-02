@@ -139,6 +139,21 @@ namespace Sim.Cross.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Protocolos",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Numero = table.Column<string>(type: "varchar(128)", nullable: true),
+                    Modulo = table.Column<string>(type: "varchar(50)", nullable: true),
+                    AppUserId = table.Column<string>(type: "nvarchar(128)", nullable: true),
+                    Data = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Protocolos", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "QSA",
                 columns: table => new
                 {
@@ -236,8 +251,7 @@ namespace Sim.Cross.Data.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Protocolo = table.Column<string>(type: "varchar(128)", nullable: false),
                     Data = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Inicio = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Fim = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DataF = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Setor = table.Column<string>(type: "varchar(50)", nullable: true),
                     Canal = table.Column<string>(type: "varchar(50)", nullable: true),
                     Servicos = table.Column<string>(type: "varchar(150)", nullable: true),
@@ -518,6 +532,9 @@ namespace Sim.Cross.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Planer");
+
+            migrationBuilder.DropTable(
+                name: "Protocolos");
 
             migrationBuilder.DropTable(
                 name: "Servico");

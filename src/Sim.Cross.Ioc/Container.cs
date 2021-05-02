@@ -37,15 +37,8 @@ namespace Sim.Cross.Ioc
 
     public class Container
     {
-
-        public void RegisterApplicationService(IServiceCollection services, IConfiguration config, string connection)
+        public void RegisterApplicationService(IServiceCollection services)
         {
-            //registra o dbcontext aos serviços
-            services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(config
-                .GetConnectionString(connection)));
-
-            services.AddScoped<DbContext, ApplicationContext>();
-
             RegisterPessoa(services);
             RegisterEmpresa(services);
             RegisterAtendimento(services);
@@ -54,6 +47,7 @@ namespace Sim.Cross.Ioc
             RegisterServico(services);
             RegisterEvento(services);
             RegisterCanal(services);
+            RegisterContador(services);
         }
 
         private void RegisterPessoa(IServiceCollection services)
@@ -165,6 +159,18 @@ namespace Sim.Cross.Ioc
 
             services.AddScoped<IRepositoryBase<Canal>, RepositoryBase<Canal>>();
             services.AddScoped<IRepositoryCanal, RepositoryCanal>();
+        }
+
+        private void RegisterContador(IServiceCollection services)
+        {
+            services.AddScoped<IAppServiceBase<Contador>, AppServiceBase<Contador>>();
+            services.AddScoped<IAppServiceContador, AppServiceContador>();
+
+            services.AddScoped<IServiceBase<Contador>, ServiceBase<Contador>>();
+            services.AddScoped<IServiceContador, ServiceContador>();
+
+            services.AddScoped<IRepositoryBase<Contador>, RepositoryBase<Contador>>();
+            services.AddScoped<IRepositoryContador, RepositoryContador>();
         }
     }
 }

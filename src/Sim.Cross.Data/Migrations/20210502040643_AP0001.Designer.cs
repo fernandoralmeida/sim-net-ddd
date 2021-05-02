@@ -10,8 +10,8 @@ using Sim.Cross.Data.Context;
 namespace Sim.Cross.Data.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20210501032224_AP0002")]
-    partial class AP0002
+    [Migration("20210502040643_AP0001")]
+    partial class AP0001
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -407,6 +407,30 @@ namespace Sim.Cross.Data.Migrations
                     b.HasIndex("SetorId");
 
                     b.ToTable("Canal");
+                });
+
+            modelBuilder.Entity("Sim.Domain.Shared.Entity.Contador", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<DateTime?>("Data")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Modulo")
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("Numero")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("varchar(128)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Protocolos");
                 });
 
             modelBuilder.Entity("Sim.Domain.Shared.Entity.Evento", b =>

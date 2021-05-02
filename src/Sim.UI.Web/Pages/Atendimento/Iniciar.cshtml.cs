@@ -22,11 +22,13 @@ namespace Sim.UI.Web.Pages.Atendimento
         private readonly IAppServiceAtendimento _appServiceAtendimento;
         private readonly IAppServicePessoa _appServicePessoa;
         private readonly IAppServiceEmpresa _appServiceEmpresa;
+        private readonly IAppServiceContador _appServiceContador;
         private readonly IMapper _mapper;
 
         public IniciarModel(IAppServiceAtendimento appServiceAtendimento,
             IAppServicePessoa appServicePessoa,
             IAppServiceEmpresa appServiceEmpresa,
+            IAppServiceContador appServiceContador,
             IMapper mapper, UserManager<ApplicationUser> userManager)
         {
             _appServiceAtendimento = appServiceAtendimento;
@@ -34,6 +36,7 @@ namespace Sim.UI.Web.Pages.Atendimento
             _appServiceEmpresa = appServiceEmpresa;
             _mapper = mapper;
             _userManager = userManager;
+            _appServiceContador = appServiceContador;
         }
 
         [BindProperty]
@@ -49,11 +52,12 @@ namespace Sim.UI.Web.Pages.Atendimento
         public string StatusMessage { get; set; }
 
         private string GetProtoloco()
-        {      
-            return string.Format("{0}{1}{2}", 
-                DateTime.Now.Year, 
-                DateTime.Now.Month, 
-                DateTime.Now.Second);
+        {
+            var user = _userManager.GetUserAsync(User);
+            user.Wait();
+            var t = _appServiceContador.GetProtocoloAsync(user.Result.Id, "Atendimento");
+            t.Wait();
+            return t.Result.ToString();
         }
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
