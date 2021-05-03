@@ -16,10 +16,10 @@
     <div style="margin:auto; width:300px;">
         <form method="post">
             <div class="col-md-12">
-                    <div class="input-group mb-3">
-                        <input asp-for="Input.DataAtendimento" class="form-control" placeholder="Nome" aria-describedby="button-addon2">
-                        <button class="btn btn-primary" type="submit" role="button" id="button-addon2"><i class="fas fa-sync-alt"></i></button>
-                    </div>
+                <div class="input-group mb-3">
+                    <input asp-for="Input.DataAtendimento" class="form-control" placeholder="Nome" aria-describedby="button-addon2">
+                    <button class="btn btn-primary" type="submit" role="button" id="button-addon2"><i class="fas fa-sync"></i></button>
+                </div>
             </div>
         </form>
     </div>
@@ -31,7 +31,7 @@
         <thead>
             <tr class="border-bottom shadow-sm">
                 <th>
-                    Contador
+                    N
                 </th>
                 <th>
                     Protocolo
@@ -55,11 +55,17 @@
             </tr>
         </thead>
         <tbody>
+            @{ 
+                int cont = 0;
+            }
+
+
             @foreach (var item in Model.Input.ListaAtendimento)
             {
-                <tr>
+                <tr class="border-bottom">
                     <td>
-                        @Html.DisplayFor(modelItem => item.Servicos)
+                        @{cont++;}
+                        @cont.ToString()
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Protocolo)
@@ -71,7 +77,7 @@
                         </p>
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Pessoa.Nome)
+                        <a asp-page="/Pessoa/Details" asp-route-id="@item.Pessoa.Id" class="btn-link"> @Html.DisplayFor(modelItem => item.Pessoa.Nome)</a>                       
                         <p>@Html.DisplayFor(modelItem => item.Empresa.Nome_Empresarial)</p>
                     </td>
                     <td>

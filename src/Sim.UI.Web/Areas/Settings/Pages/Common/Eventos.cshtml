@@ -23,20 +23,20 @@
                 <input asp-for="Input.Nome" class="form-control" />
                 <span asp-validation-for="Input.Nome" class="text-danger"></span>
             </div>
-            <div class="col-md-7 mb-4">
+            <div class="col-md-7 mb-2">
                 <label asp-for="Input.Tipo" class="form-label"></label>
                 <select asp-for="Input.Tipo" class="form-select">
                     <option selected>Evento</option>
                 </select>
                 <span asp-validation-for="Input.Tipo" class="text-danger"></span>
             </div>
-            <div class="col-md-10">
+            <div class="col-md-10 mb-3">
                 <button type="submit" class="btn btn-primary col-md-4">Incluir Evento</button>
             </div>
         </div>
 
         <table class="table table-borderless bg-white">
-            <caption>Lista de Setores</caption>
+            <caption>Lista de Tipos de Eventos</caption>
             <thead>
                 <tr class="border-bottom shadow-sm">
                     <th>

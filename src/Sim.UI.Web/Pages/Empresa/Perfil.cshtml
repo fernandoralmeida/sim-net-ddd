@@ -11,7 +11,7 @@
 <hr />
 
 <div class="row">
-    <form class="row" asp-action="SyncRWS">
+    <form class="row" method="post">
         <div class="col-md-8">
 
             <div class="row g-2 mb-3" hidden>
@@ -25,7 +25,7 @@
                     <label asp-for="Input.CNPJ" class="form-label" for="inputCNPJ"></label>
                     <div class="input-group mb-3">
                         <input asp-for="Input.CNPJ" class="form-control" placeholder="CPF" aria-describedby="button-addon2" id="inputCNPJ">                        
-                        <a class="btn btn-outline-primary" asp-action="SyncRWS" role="button" id="button-addon2">Atualizar Dados</a>
+                        <button class="btn btn-outline-primary" type="submit" asp-page-handler="RWS" role="button" id="button-addon2">Atualizar Dados</button>
                     </div>                    
                     <span asp-validation-for="Input.CNPJ" class="text-danger"></span>
                 </div>

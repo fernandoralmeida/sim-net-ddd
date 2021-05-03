@@ -35,7 +35,8 @@ namespace Sim.UI.Web
             services.AddScoped<IReceitaWS, ReceitaWS>();
 
             services.AddAutoMapper(typeof(Startup));
-            
+
+            services.AddMvc();
             services.AddRazorPages();
         }
 

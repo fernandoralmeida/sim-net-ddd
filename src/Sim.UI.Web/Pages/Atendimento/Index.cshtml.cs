@@ -18,12 +18,15 @@ namespace Sim.UI.Web.Pages.Atendimento
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IAppServiceAtendimento _appServiceAtendimento;
+        private static DateTime _date;
 
         public IndexModel(IAppServiceAtendimento appServiceAtendimento,
             UserManager<ApplicationUser> userManager)
         {
             _appServiceAtendimento = appServiceAtendimento;
             _userManager = userManager;
+            Input = new();
+            Input.DataAtendimento = DateTime.Now.Date;
         }
 
         [TempData]
@@ -42,7 +45,6 @@ namespace Sim.UI.Web.Pages.Atendimento
 
         private async Task LoadAsync(DateTime? date)
         {
-            Input = new();
             Input.DataAtendimento = date;
             var user = await _userManager.GetUserAsync(User);
 
@@ -53,17 +55,17 @@ namespace Sim.UI.Web.Pages.Atendimento
 
         public async Task<IActionResult> OnGetAsync()
         {
-            await LoadAsync(DateTime.Now.Date);
+            await LoadAsync(Input.DataAtendimento);
             return Page();
         }
+
 
         public async Task<IActionResult> OnPostAsync()
         {
             await LoadAsync(Input.DataAtendimento);
-
-            if(Input.ListaAtendimento.Count == 0)
+            if (Input.ListaAtendimento.Count == 0)
             {
-                StatusMessage = string.Format("Erro: Não há atendimentos para do {0}", Input.DataAtendimento);
+                StatusMessage = string.Format("Erro: Não há atendimentos para do {0}", Input.DataAtendimento.Value.Date);
             }
 
             return Page();

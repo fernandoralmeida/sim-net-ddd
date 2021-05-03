@@ -28,18 +28,18 @@
                 <select asp-for="SecretariaSelecionada" class="form-select" asp-items="Model.Secretarias"></select>
                 <span asp-validation-for="Input.Secretaria" class="text-danger"></span>
             </div>
-            <div class="col-md-7">
+            <div class="col-md-7 mb-2">
                 <label asp-for="Input.Setor" class="form-label"></label>
                 <select asp-for="SetorSelecionado" class="form-select" asp-items="Model.Setores"></select>
                 <span asp-validation-for="Input.Setor" class="text-danger"></span>
             </div>
-            <div class="col-md-10 mb-4">
+            <div class="col-md-10 mb-3">
                 <button type="submit" class="btn btn-primary col-md-4">Incluir Canal</button>
             </div>
         </div>
 
         <table class="table table-borderless bg-white">
-            <caption>Lista de Setores</caption>
+            <caption>Lista de Canais de Atendimento</caption>
             <thead>
                 <tr class="border-bottom shadow-sm">
                     <th>

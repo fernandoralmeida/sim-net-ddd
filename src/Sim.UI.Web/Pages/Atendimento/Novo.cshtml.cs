@@ -67,29 +67,32 @@ namespace Sim.UI.Web.Pages.Atendimento
 
             if (set.Result != null)
             {
-                Setores = new SelectList(set.Result, nameof(Setor.Id), nameof(Setor.Nome), null);
+                Setores = new SelectList(set.Result, nameof(Setor.Nome), nameof(Setor.Nome), null);
             }
 
             if (can.Result != null)
             {
-                Canais = new SelectList(can.Result, nameof(Canal.Id), nameof(Canal.Nome), null);
+                Canais = new SelectList(can.Result, nameof(Canal.Nome), nameof(Canal.Nome), null);
             }
 
             if (serv.Result != null)
             {
-                Servicos = new SelectList(serv.Result, nameof(Servico.Id), nameof(Servico.Nome), null);
+                Servicos = new SelectList(serv.Result, nameof(Servico.Nome), nameof(Servico.Nome), null);
+                //ViewData["ListaID"] = new SelectList(serv.Result, nameof(Servico.Nome), nameof(Servico.Nome), null);
             }
         }
 
         public async Task<IActionResult> OnGetAsync()
         {
+            await OnLoad();
+
             var user = await _userManager.GetUserAsync(User);
 
             var atendimemnto_ativio = _appServiceAtendimento.AtendimentoAtivo(user.Id).FirstOrDefault();
 
             if(atendimemnto_ativio == null)
             {
-                return Redirect("Erro inesperado, contate o Administrador.");
+                return RedirectToPage("./Index");
             }
 
             Input = new()
@@ -97,12 +100,20 @@ namespace Sim.UI.Web.Pages.Atendimento
                 Id= atendimemnto_ativio.Id,
                 Protocolo = atendimemnto_ativio.Protocolo,               
                 Data = atendimemnto_ativio.Data,
+                DataF = atendimemnto_ativio.DataF,
+                Setor = atendimemnto_ativio.Setor,
+                Canal = atendimemnto_ativio.Canal,
+                Servicos = atendimemnto_ativio.Servicos,
+                Descricao = atendimemnto_ativio.Descricao,
+                Status = atendimemnto_ativio.Status,
+                Ultima_Alteracao =atendimemnto_ativio.Ultima_Alteracao,
+                Ativo =atendimemnto_ativio.Ativo,
+                Owner_AppUser_Id = atendimemnto_ativio.Owner_AppUser_Id,
                 Pessoa = atendimemnto_ativio.Pessoa,
-                Empresa = atendimemnto_ativio.Empresa,
-                Status = atendimemnto_ativio.Status
+                Empresa = atendimemnto_ativio.Empresa
             };       
 
-            await OnLoad();
+            
             return Page();
         }
 
@@ -113,18 +124,24 @@ namespace Sim.UI.Web.Pages.Atendimento
 
             if (serv.Result != null)
             {
-                Servicos = new SelectList(serv.Result, nameof(Servico.Id), nameof(Servico.Nome), null);
+                Servicos = new SelectList(serv.Result, nameof(Servico.Nome), nameof(Servico.Nome), null);
             }
             
             return RedirectToPage();
         }
 
-        public IActionResult OnPostAddServiceAsync()
+        public IActionResult OnPostAddServiceAsync(InputModel obj)
         {
+            if(Input.Servicos != null)
+            {
+                var list = new List<string>();
 
-            //StatusMessage = Input.Servicos;
+                list.Add(obj.Servicos);
 
-            return Page();
+                ServicosSelecionado = new SelectList(list, obj.Servicos, obj.Servicos, null); ;
+            }
+
+            return RedirectToPage();
         }
 
         public void OnPostRemoveServiceAsync()
@@ -132,13 +149,53 @@ namespace Sim.UI.Web.Pages.Atendimento
 
         }
 
-        public async Task<IActionResult> OnPostSaveAsync()
+        public async Task<IActionResult> OnPostAsync(InputModel obj)
         {
-            var t = Task.Run(() => { });
-            await t;
-            StatusMessage = "TESTE";
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
 
-            return RedirectToPagePreserveMethod();
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var user = await _userManager.GetUserAsync(User);
+
+                    var t = Task.Run(() =>
+                    {
+
+                        var atendimemnto_ativio = _appServiceAtendimento.AtendimentoAtivo(user.Id).FirstOrDefault();
+
+                        var atold = _appServiceAtendimento.GetById(atendimemnto_ativio.Id);
+
+                        atold.DataF = DateTime.Now;
+                        atold.Setor = Input.Setor;
+                        atold.Canal = Input.Canal;
+                        atold.Servicos = Input.Servicos;
+                        atold.Descricao = Input.Descricao;
+                        atold.Status = "Finalizado";
+                        atold.Ultima_Alteracao = DateTime.Now;
+
+                        _appServiceAtendimento.Update(atold);
+
+                    });
+
+                    await t;
+
+                    return RedirectToPage("./Index");
+
+                }
+
+                return Page();
+
+            }
+            catch(Exception ex)
+            {
+                StatusMessage = "Erro: " + ex.Message;
+                return Page();
+            }
+
         }
 
     }

@@ -10,7 +10,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom shadow-sm fixed-top mb-3">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom fixed-top shadow-sm mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand badge bg-light border" asp-area="" asp-page="/Index"><div class="logo-sim-sm"></div></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,8 +18,14 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-page="/Atendimento/Index">Atedimentos</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Atedimentos
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" asp-area="" asp-page="/Atendimento/Index">Meus Atedimentos</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-page="/Atendimento/Novo">Voltar ao Atedimento</a></li>
+                            </ul>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-page="/Pessoa/Index">Pessoas</a>
@@ -27,18 +33,28 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-page="/Empresa/Index">Empresas</a>
                         </li>
-
-                        @if (User.IsInRole("Administrador"))
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="Settings" asp-page="/Common/Index"><i class="fas fa-cog"></i>Configurações</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="Admin" asp-page="/Manager/Index">Administrativo</a>
-                            </li>
-                        }
-
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-page="/Index">Ambulantes</a>
+                        </li>
                     </ul>
+                    @if (User.IsInRole("Administrador"))
+                    {
+                        <div class="d-flex">
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fas fa-cogs" style="width:32px;"></i>
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                                        <li><a class="dropdown-item" asp-area="Settings" asp-page="/Common/Index">Configurações</a></li>
+                                        <li><a class="dropdown-item" asp-area="Admin" asp-page="/Manager/Index">Central de Contas</a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item" href="#">...</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    }
                     <partial name="_LoginPartial" />
                 </div>
             </div>

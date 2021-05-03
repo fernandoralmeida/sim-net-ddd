@@ -21,7 +21,7 @@ namespace Sim.Cross.Data.Repository.Shared
             var ativo = _db.Atendimento
                 .Include(p => p.Pessoa)
                 .Include(e => e.Empresa)
-                .Where(s=>s.Owner_AppUser_Id == userid && s.Status=="ATIVO");
+                .Where(s=>s.Owner_AppUser_Id == userid && s.Status=="Ativo");
 
             return ativo;
         }
@@ -61,7 +61,7 @@ namespace Sim.Cross.Data.Repository.Shared
             var lista = _db.Atendimento
                 .Include(u => u.Pessoa)
                 .Include(e => e.Empresa)
-                .Where(a => a.Owner_AppUser_Id == userid && a.Data == date && a.Status == "FINALIZADO");
+                .Where(a => a.Owner_AppUser_Id == userid &&  a.Data.Value.Date == date.Value.Date &&  a.Status == "Finalizado");
 
             return lista;
         }

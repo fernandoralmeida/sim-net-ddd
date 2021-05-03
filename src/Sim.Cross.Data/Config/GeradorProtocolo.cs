@@ -30,7 +30,8 @@ namespace Sim.Cross.Data.Config
 
             var lastprotocol = _context.Contador
                 .AsNoTracking()
-                .FirstOrDefault()?.Numero;
+                .OrderBy(c => c.Numero)
+                .LastOrDefault()?.Numero;
 
             if (lastprotocol == null)
                 lastprotocol = startprotocol;

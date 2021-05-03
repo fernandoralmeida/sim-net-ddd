@@ -14,7 +14,7 @@
 <hr />
 
 <form method="post">
-    <div class="col-md-8 mb-4" style="margin:auto;">
+    <div class="col-md-12 mb-4">
 
         @if (Model.Input.Pessoa == null)
         {
@@ -30,7 +30,7 @@
         else
         {
     <div class="row g-2 mb-4">
-        <div class="col-md-2">
+        <div class="col-md-2" hidden>
             <label class="form-label" asp-for="Input.Pessoa.Id"></label>
             <input class="form-control" asp-for="Input.Pessoa.Id" />
         </div>
@@ -67,7 +67,7 @@
         else
         {
     <div class="row g-2 mb-4">
-        <div class="col-md-2">
+        <div class="col-md-2" hidden>
             <label class="form-label" asp-for="Input.Empresa.Id"></label>
             <input class="form-control" asp-for="Input.Empresa.Id" />
         </div>
@@ -92,6 +92,6 @@
 
     </div>
     <div class="d-grid gap-2 d-md-block mb-3">
-        <button asp-page-handler="Save" type="submit" class="btn btn-lg btn-success">Gravar</button>
+        <button asp-page-handler="Save" type="submit" class="btn btn-lg btn-success">Iniciar Atendimento</button>
     </div>
 </form>

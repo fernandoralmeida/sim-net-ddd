@@ -42,7 +42,7 @@ namespace Sim.UI.Web.Pages.Empresa
         {
             var t = Task.Run(() => {
 
-                var emp = _appServiceEmpresa.ListEmpresasQsa(id).First();
+                var emp = _appServiceEmpresa.ListEmpresasQsa(id).FirstOrDefault();
                 
                 Input = _mapper.Map<VMEmpresa>(emp);
 
@@ -67,8 +67,7 @@ namespace Sim.UI.Web.Pages.Empresa
             return Page();
         }
 
-        [ActionName("SyncRWS")]
-        public async Task<IActionResult> SyncRWS()
+        public async Task<IActionResult> OnPostRWSAsync()
         {
             if (!ModelState.IsValid)
             {
@@ -103,7 +102,7 @@ namespace Sim.UI.Web.Pages.Empresa
 
             Input.QsaList = list;
 
-            return Page();
+            return RedirectToPage();
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -125,7 +124,7 @@ namespace Sim.UI.Web.Pages.Empresa
 
             await t;
 
-            return Page();
+            return RedirectToPage();
         }
     }
 }

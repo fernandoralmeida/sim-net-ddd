@@ -117,7 +117,7 @@ namespace Sim.Cross.Data.Context
                 entry.Property("Ultima_Alteracao").CurrentValue = DateTime.Now;
             }
 
-            return base.SaveChanges();
+            return base.SaveChanges();            
         }
 
     }

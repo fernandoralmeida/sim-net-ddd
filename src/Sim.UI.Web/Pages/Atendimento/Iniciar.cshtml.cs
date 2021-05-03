@@ -112,7 +112,7 @@ namespace Sim.UI.Web.Pages.Atendimento
 
                 Input.Protocolo = GetProtoloco();
                 Input.Data = DateTime.Now;
-                Input.Status = "ATIVO";
+                Input.Status = "Ativo";
                 Input.Ativo = true;
                 Input.Owner_AppUser_Id = user.Id;
 
@@ -141,9 +141,7 @@ namespace Sim.UI.Web.Pages.Atendimento
 
             _appServiceAtendimento.Add(atendimento); 
 
-            StatusMessage = Input.Pessoa.Data_Nascimento.ToString();
-
-            return Page();
+            return RedirectToPage("./Novo");
         }        
 
     }
