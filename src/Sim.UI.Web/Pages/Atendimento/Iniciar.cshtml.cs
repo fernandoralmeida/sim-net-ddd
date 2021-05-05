@@ -6,7 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+
 
 namespace Sim.UI.Web.Pages.Atendimento
 {
@@ -16,6 +18,7 @@ namespace Sim.UI.Web.Pages.Atendimento
     using Sim.Domain.SDE.Entity;
     using Sim.Cross.Identity;
 
+    [Authorize]
     public class IniciarModel : PageModel
     {
         private readonly UserManager<ApplicationUser> _userManager;

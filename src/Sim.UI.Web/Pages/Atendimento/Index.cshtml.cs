@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Sim.UI.Web.Pages.Atendimento
 {
@@ -14,11 +15,11 @@ namespace Sim.UI.Web.Pages.Atendimento
     using Sim.Domain.Shared.Entity;
     using Sim.Application.Shared.Interface;
 
+    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IAppServiceAtendimento _appServiceAtendimento;
-        private static DateTime _date;
 
         public IndexModel(IAppServiceAtendimento appServiceAtendimento,
             UserManager<ApplicationUser> userManager)

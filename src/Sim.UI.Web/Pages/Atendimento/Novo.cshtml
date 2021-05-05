@@ -92,7 +92,7 @@
                     </div>
                     <div class="col-md-1">
                         <div class="col-md-12 g-2 mb-2">
-                            <button type="submit" asp-page-handler="AddService" class="btn btn-sm btn-outline-info"><i class="fas fa-arrow-right"></i></button>
+                            <button type="submit" value="AddService" asp-page-handler="AddService" asp-route-svc="@Model.Input.Servicos" class="btn btn-sm btn-outline-info"><i class="fas fa-arrow-right"></i></button>
                         </div>
                         <div class="col-md-12 g-2 mb-2">
                             <button type="submit" asp-page-handler="RemoveService" class="btn btn-sm btn-outline-danger"><i class="fas fa-arrow-left"></i></button>

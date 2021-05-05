@@ -51,7 +51,9 @@
                 <th>
                     Canal
                 </th>
-                <th></th>
+                <th>
+                    Ações
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -71,10 +73,15 @@
                         @Html.DisplayFor(modelItem => item.Protocolo)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Data)
-                        <p>
-                            @Html.DisplayFor(modelItem => item.DataF)
-                        </p>
+                        @{ 
+                            var d1 = Convert.ToDateTime(item.Data);
+                            var d2 = Convert.ToDateTime(item.DataF);
+                            var datainicial = d1.ToShortTimeString();
+                            var datafinal = d2.ToShortTimeString();
+                        }
+
+                        @Html.DisplayFor(modelItem => datainicial)
+                        @Html.DisplayFor(modelItem => datafinal)
                     </td>
                     <td>
                         <a asp-page="/Pessoa/Details" asp-route-id="@item.Pessoa.Id" class="btn-link"> @Html.DisplayFor(modelItem => item.Pessoa.Nome)</a>                       

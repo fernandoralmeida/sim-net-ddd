@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Sim.UI.Web.Pages.Atendimento
 {
@@ -15,6 +16,7 @@ namespace Sim.UI.Web.Pages.Atendimento
     using Sim.Domain.SDE.Entity;
     using Sim.Cross.Identity;
 
+    [Authorize]
     public class NovoModel : PageModel
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -130,26 +132,26 @@ namespace Sim.UI.Web.Pages.Atendimento
             return RedirectToPage();
         }
 
-        public IActionResult OnPostAddServiceAsync(InputModel obj)
+        public IActionResult OnPostAddService(string svc)
         {
             if(Input.Servicos != null)
             {
                 var list = new List<string>();
 
-                list.Add(obj.Servicos);
+                list.Add(svc);
 
-                ServicosSelecionado = new SelectList(list, obj.Servicos, obj.Servicos, null); ;
+                ServicosSelecionado = new SelectList(list, svc, svc, null); ;
             }
 
             return RedirectToPage();
         }
 
-        public void OnPostRemoveServiceAsync()
+        public void OnPostRemoveService()
         {
 
         }
 
-        public async Task<IActionResult> OnPostAsync(InputModel obj)
+        public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
