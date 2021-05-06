@@ -80,7 +80,7 @@ namespace Sim.UI.Web.Pages.Atendimento
             if (serv.Result != null)
             {
                 Servicos = new SelectList(serv.Result, nameof(Servico.Nome), nameof(Servico.Nome), null);
-                //ViewData["ListaID"] = new SelectList(serv.Result, nameof(Servico.Nome), nameof(Servico.Nome), null);
+                ViewData["ListaID"] = new SelectList(serv.Result, nameof(Servico.Nome), nameof(Servico.Nome), null);
             }
         }
 
@@ -143,12 +143,18 @@ namespace Sim.UI.Web.Pages.Atendimento
                 ServicosSelecionado = new SelectList(list, svc, svc, null); ;
             }
 
-            return RedirectToPage();
+            if (Input.Descricao != null)
+                StatusMessage = Input.Descricao;
+
+            return Page();
         }
 
         public void OnPostRemoveService()
         {
-
+            if (Input.Descricao != null)
+            {
+                StatusMessage = Input.Descricao;
+            }
         }
 
         public async Task<IActionResult> OnPostAsync()
