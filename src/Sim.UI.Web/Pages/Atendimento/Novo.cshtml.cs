@@ -122,12 +122,6 @@ namespace Sim.UI.Web.Pages.Atendimento
             return new JsonResult(_appServiceServico.GetByOwner(GetSetor));
         }
 
-        public IActionResult OnPostTeste()
-        {
-
-            return Page();
-        }
-
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -151,7 +145,7 @@ namespace Sim.UI.Web.Pages.Atendimento
                         atold.DataF = DateTime.Now;
                         atold.Setor = GetSetor;
                         atold.Canal = GetCanal;
-                        atold.Servicos = ServicosSelecionado;
+                        atold.Servicos = Input.Servicos;
                         atold.Descricao = Input.Descricao;
                         atold.Status = "Finalizado";
                         atold.Ultima_Alteracao = DateTime.Now;

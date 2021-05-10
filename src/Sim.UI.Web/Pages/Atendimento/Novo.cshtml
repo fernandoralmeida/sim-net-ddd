@@ -1,4 +1,5 @@
-﻿@page
+﻿
+@page
 @model Sim.UI.Web.Pages.Atendimento.NovoModel
 @{
     ViewData["Title"] = "Atendimento";
@@ -103,12 +104,12 @@
                 </div>
                 <div class="col-md-10 g-2 mb-3">
                     <textarea asp-for="Input.Descricao" class="form-control" rows="2"></textarea>
-                    <textarea asp-for="ServicosSelecionado" class="form-control" rows="2"></textarea>
+                    <textarea id="myservice" asp-for="Input.Servicos" class="form-control" hidden></textarea>
                 </div>
                 <div class="col-md-2 g-2 mb-3">
                     <div class="row justify-content-center">
                         <div class="col-5">
-                            <button id="addbtn" type="submit" asp-page-handler="Teste" role="button" class="btn btn-primary">Finalizar Atendimento</button>
+                            <button id="addbtn" type="submit" role="button" class="btn btn-primary">Finalizar Atendimento</button>
                         </div>
                     </div>
                 </div>
@@ -143,7 +144,7 @@
             var getServico = $(this).val();
             if (getServico !== null) {
                 $("#MeusServicos").append(`<option value="${getServico}">${getServico}</option>`);
-                $(`#GetServico option[value="${getServico}"]`).remove();                
+                $(`#GetServico option[value="${getServico}"]`).remove();
             }
         });
         //revome serviços
@@ -159,8 +160,7 @@
             var selected_val = $.map($(`#MeusServicos option`), function (a) {
                 return a.value;
             }).join(';');
-
-            alert(selected_val);
+            document.getElementById("myservice").value = selected_val;            
         });
     });
     </script>
