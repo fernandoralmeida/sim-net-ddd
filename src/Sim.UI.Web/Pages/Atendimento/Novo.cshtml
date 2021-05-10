@@ -7,16 +7,22 @@
 <div class="row">
     <div class="col-md-12 mb-2">
         <a asp-page="./Index" class="btn btn-sm btn-secondary"><i class="fas fa-arrow-left"></i></a> |
-        <b>Atendimento</b> : @Model.Input.Protocolo : @Model.Input.Data : @Model.Input.Status : @Model.Input.Id.ToString()
+        <b>Atendimento</b> : @Model.Input.Protocolo 
     </div>
     <hr />
 </div>
 
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
-<form class="mb-3" method="get">
-    <div hidden>
-        <b>Atendimento</b> : @Model.Input.Protocolo : @Model.Input.Data : @Model.Input.Status : @Model.Input.Id.ToString()
+<form class="mb-3" method="post">
+    <div class="col-md-12 mb-3">
+        <div class="input-group">
+            <span class="input-group-text">Info!</span>
+            <input type="text" asp-for="Input.Protocolo" class="form-control" readonly>
+            <input type="text" asp-for="Input.Data" class="form-control" readonly>
+            <input type="text" asp-for="Input.Status" class="form-control" readonly>
+            <input type="text" asp-for="Input.Id" class="form-control" readonly>
+        </div>
     </div>
     <div class="col-md-12 mb-4">
         <table class="table table-sm table-borderless bg-white">
@@ -71,40 +77,25 @@
             </tbody>
         </table>
         <div class="row col-md-12 g-2 mb-4">
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="col-mb-12 mb-2">
                     <label class="form-label" asp-for="Input.Setor" for="floatingsetor"></label>
-                    <div class="input-group mb-3">
-                        <select asp-for="Input.Setor" class="form-select" id="floatingsetor" placeholder="Setor" asp-items="Model.Setores"></select>
-                        <button asp-page-handler="SyncServices" class="btn btn-primary" type="submit" id="button-addon2"><i class="fas fa-sync-alt"></i></button>
-                    </div>
+                    <select asp-for="GetSetor" class="form-select" asp-items="Model.Setores">
+                        <option selected>-- Selecione um Setor --</option>
+                    </select>
                 </div>
                 <div class="col-mb-12">
-                    <label class="form-label" asp-for="Input.Canal" for="floatingcanal"></label>
-                    <select asp-for="Input.Canal" class="form-select" id="floatingcanal" placeholder="Setor" asp-items="Model.Canais"></select>
-                </div>
-            </div>
-            <div class="col-md-5">
-                <div class="row col-md-12">
-                    <label class="form-label" for="floatingservico">Serviços Disponível</label>
-                    <div class="col-md-11">
-                        <select asp-for="Input.Servicos" class="form-control" size="10" id="floatingservico" placeholder="Serviços Disponíveis" multiple asp-items="Model.Servicos"></select>
-                    </div>
-                    <div class="col-md-1">
-                        <div class="col-md-12 g-2 mb-2">
-                            <button type="submit" value="AddService" asp-page-handler="AddService" asp-route-svc="@Model.Input.Servicos" class="btn btn-sm btn-outline-info"><i class="fas fa-arrow-right"></i></button>
-                        </div>
-                        <div class="col-md-12 g-2 mb-2">
-                            <button type="submit" asp-page-handler="RemoveService" class="btn btn-sm btn-outline-danger"><i class="fas fa-arrow-left"></i></button>
-                        </div>
-                    </div>
+                    <label class="form-label" asp-for="Input.Canal" ></label>
+                    <select asp-for="GetCanal" class="form-select"></select>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="col-md-12">
-                    <label class="form-label">Serviços Realizado</label>
-                    <select asp-for="Input.Servicos" class="form-control" size="10" asp-items="Model.ServicosSelecionado"></select>
-                </div>
+                <label class="form-label" for="floatingservico">Serviços Disponível</label>
+                <select asp-for="GetServico" class="form-control" size="10"></select>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Serviços Realizado</label>
+                <select asp-for="MeusServicos" class="form-control" size="10"></select>
             </div>
             <div class="row">
                 <div class="col-md-12 g-2">
@@ -112,11 +103,12 @@
                 </div>
                 <div class="col-md-10 g-2 mb-3">
                     <textarea asp-for="Input.Descricao" class="form-control" rows="2"></textarea>
+                    <textarea asp-for="ServicosSelecionado" class="form-control" rows="2"></textarea>
                 </div>
                 <div class="col-md-2 g-2 mb-3">
                     <div class="row justify-content-center">
                         <div class="col-5">
-                            <button type="submit" role="button" class="btn btn-primary shadow-sm">Finalizar Atendimento</button>
+                            <button id="addbtn" type="submit" asp-page-handler="Teste" role="button" class="btn btn-primary">Finalizar Atendimento</button>
                         </div>
                     </div>
                 </div>
@@ -124,3 +116,52 @@
         </div>
     </div>
 </form>
+
+@section scripts{
+    <script>
+    $(function () {
+        $("#GetSetor").on("change", function() {
+            var getSetor = $(this).val();
+            //get canais de atendimento
+            $("#GetCanal").empty();
+            $("#GetCanal").append("<option value=''>-- Selecione um Canal --</option>");
+            $.getJSON(`?handler=Canais&getSetor=${getSetor}`, (data) => {
+                $.each(data, function (i, item) {
+                    $("#GetCanal").append(`<option value="${item.nome}">${item.nome}</option>`);
+                });
+            });
+            //get servicos por setor
+            $("#GetServico").empty();
+            $.getJSON(`?handler=Servicos&getSetor=${getSetor}`, (data) => {
+                $.each(data, function (i, item) {
+                    $("#GetServico").append(`<option value="${item.nome}">${item.nome}</option>`)
+                });
+            });
+        });
+        //adiciona serviços        
+        $("#GetServico").on("click", function () {
+            var getServico = $(this).val();
+            if (getServico !== null) {
+                $("#MeusServicos").append(`<option value="${getServico}">${getServico}</option>`);
+                $(`#GetServico option[value="${getServico}"]`).remove();                
+            }
+        });
+        //revome serviços
+        $("#MeusServicos").on("click", function () {
+            var meuServico = $(this).val();
+            if (meuServico !== null) {
+                $("#GetServico").append(`<option value="${meuServico}">${meuServico}</option>`);
+                $(`#MeusServicos option[value="${meuServico}"]`).remove();
+            }
+        });
+
+        $("#addbtn").on("click", function () {
+            var selected_val = $.map($(`#MeusServicos option`), function (a) {
+                return a.value;
+            }).join(';');
+
+            alert(selected_val);
+        });
+    });
+    </script>
+}

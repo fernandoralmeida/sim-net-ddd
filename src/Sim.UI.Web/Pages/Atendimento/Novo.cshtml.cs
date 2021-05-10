@@ -44,43 +44,37 @@ namespace Sim.UI.Web.Pages.Atendimento
             _userManager = userManager;
         }
 
-        [BindProperty]
+        [BindProperty(SupportsGet = true)]
         public InputModel Input { get; set; }
 
         [TempData]
         public string StatusMessage { get; set; }
 
+        [BindProperty(SupportsGet = true)]
+        public string GetSetor { get; set; }
+       
         public SelectList Setores { get; set; }
 
+        public string GetServico { get; set; }
         public SelectList Servicos { get; set; }
 
+        [BindProperty(SupportsGet = true)]
+        public string GetCanal { get;set; }
         public SelectList Canais { get; set; }
 
-        public SelectList ServicosSelecionado { get; set; }
+        public string MeusServicos { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public string ServicosSelecionado { get; set; }
 
         private async Task OnLoad()
         {
             var set = Task.Run(() => _appServiceSetor.List());
-            await set;
-            var serv = Task.Run(() => _appServiceServico.List());
-            await serv;
-            var can = Task.Run(() => _appServiceCanal.List());
-            await can;
+            await set;        
 
             if (set.Result != null)
             {
                 Setores = new SelectList(set.Result, nameof(Setor.Nome), nameof(Setor.Nome), null);
-            }
-
-            if (can.Result != null)
-            {
-                Canais = new SelectList(can.Result, nameof(Canal.Nome), nameof(Canal.Nome), null);
-            }
-
-            if (serv.Result != null)
-            {
-                Servicos = new SelectList(serv.Result, nameof(Servico.Nome), nameof(Servico.Nome), null);
-                ViewData["ListaID"] = new SelectList(serv.Result, nameof(Servico.Nome), nameof(Servico.Nome), null);
             }
         }
 
@@ -113,48 +107,25 @@ namespace Sim.UI.Web.Pages.Atendimento
                 Owner_AppUser_Id = atendimemnto_ativio.Owner_AppUser_Id,
                 Pessoa = atendimemnto_ativio.Pessoa,
                 Empresa = atendimemnto_ativio.Empresa
-            };       
-
-            
+            };     
+                        
             return Page();
         }
 
-        public async Task<IActionResult> OnPostSyncServicesAsync()
-        {
-            var serv = Task.Run(() => _appServiceServico.GetByOwner(Input.Setor));
-            await serv;
-
-            if (serv.Result != null)
-            {
-                Servicos = new SelectList(serv.Result, nameof(Servico.Nome), nameof(Servico.Nome), null);
-            }
-            
-            return RedirectToPage();
+        public JsonResult OnGetCanais()
+        {            
+            return new JsonResult(_appServiceCanal.GetByOwner(GetSetor));
         }
 
-        public IActionResult OnPostAddService(string svc)
+        public JsonResult OnGetServicos()
         {
-            if(Input.Servicos != null)
-            {
-                var list = new List<string>();
+            return new JsonResult(_appServiceServico.GetByOwner(GetSetor));
+        }
 
-                list.Add(svc);
-
-                ServicosSelecionado = new SelectList(list, svc, svc, null); ;
-            }
-
-            if (Input.Descricao != null)
-                StatusMessage = Input.Descricao;
+        public IActionResult OnPostTeste()
+        {
 
             return Page();
-        }
-
-        public void OnPostRemoveService()
-        {
-            if (Input.Descricao != null)
-            {
-                StatusMessage = Input.Descricao;
-            }
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -168,19 +139,19 @@ namespace Sim.UI.Web.Pages.Atendimento
             {
                 if (ModelState.IsValid)
                 {
-                    var user = await _userManager.GetUserAsync(User);
+                    //var user = await _userManager.GetUserAsync(User);
 
                     var t = Task.Run(() =>
                     {
 
-                        var atendimemnto_ativio = _appServiceAtendimento.AtendimentoAtivo(user.Id).FirstOrDefault();
+                        //var atendimemnto_ativio = _appServiceAtendimento.AtendimentoAtivo(user.Id).FirstOrDefault();
 
-                        var atold = _appServiceAtendimento.GetById(atendimemnto_ativio.Id);
+                        var atold = _appServiceAtendimento.GetById(Input.Id);
 
                         atold.DataF = DateTime.Now;
-                        atold.Setor = Input.Setor;
-                        atold.Canal = Input.Canal;
-                        atold.Servicos = Input.Servicos;
+                        atold.Setor = GetSetor;
+                        atold.Canal = GetCanal;
+                        atold.Servicos = ServicosSelecionado;
                         atold.Descricao = Input.Descricao;
                         atold.Status = "Finalizado";
                         atold.Ultima_Alteracao = DateTime.Now;

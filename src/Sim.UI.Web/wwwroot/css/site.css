@@ -14,7 +14,9 @@ a {
  */
 
 /* Sticky footer styles
--------------------------------------------------- */
+-------------------------------------------------- 
+@import "../lib/bootstrap/dist/css/bootstrap-utilities.min.css";*/
+
 html {
     font-size: 14px;
 }
@@ -136,30 +138,41 @@ body {
 
 /**** Modulos ****/
 
-.l-menu /* estrutura principal */ {
-    margin: 40px 20px;
-    padding: 10px;
-    height: 100px;
+.l-btn /* estrutura principal */ {
+    display: inline-block;
+    margin: 1px;
+    height: 200px;
     width: 200px;
-    background-color: #ffffff;
+    vertical-align: middle;
+    text-align: center;
+    color: #ffffff;
+    background-color: #20c997;
+    border:solid 2px #ffffff;
+    text-decoration: none;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
-    .l-menu:link:visited /* estado do link */ {
-        /*
-        color: #cccccc;
-        text-decoration: none;*/
+    .l-btn:link:visited /* estado do link */ {
+        text-decoration: none;
+        color: #ffffff;
+        background-color: #20c997;
     }
 
-    .l-menu:hover /* ao mover o mouse */ {
+    .l-btn:hover /* ao mover o mouse */ {
         /*
-        background-color: #b6ff00;
-        text-decoration: none;*/
+        box-shadow:#00ff90 5px inherit;*/
+        background-color: #1cb487;
+        color: #ffffff;
+        text-decoration: none;
     }
 
-.div-modulos /* div das seções free-hand, digital paint, comp grafica e web-dev */ {
-    margin: 0px;
+    .l-btn:active {
+        /*box-shadow: #36cea1 2px 2px;*/
+        border: solid 2px #b6ff00;
+    }
+
+.div-modulos /* div das seções free-hand, digital paint, comp grafica e web-dev */ { 
     text-align: center;
-    /**/
     background-image: url(imgs/dot.jpg);
 }
 

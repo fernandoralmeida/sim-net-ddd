@@ -19,7 +19,7 @@ namespace Sim.Cross.Data.Repository.Shared
 
         public IEnumerable<Canal> GetByOwner(string setor)
         {
-            return _db.Canal.Where(u => u.Setor.Nome.Contains(setor));
+            return _db.Canal.Where(u => u.Setor.Nome.Contains(setor) || u.Setor.Nome.Contains("Geral"));
         }
     }
 }
