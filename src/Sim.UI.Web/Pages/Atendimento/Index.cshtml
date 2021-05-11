@@ -5,7 +5,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h5>Lista de Atendimentos</h5>
+<h5>Atendimentos</h5>
 
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
@@ -42,7 +42,7 @@
                 <th>
                     Cliente
                 </th>
-                <th>
+                <th width="180px">
                     Servicos
                 </th>
                 <th>
@@ -84,8 +84,12 @@
                         @Html.DisplayFor(modelItem => datafinal)
                     </td>
                     <td>
-                        <a asp-page="/Pessoa/Details" asp-route-id="@item.Pessoa.Id"> @Html.DisplayFor(modelItem => item.Pessoa.Nome)</a>                       
-                        <p>@Html.DisplayFor(modelItem => item.Empresa.Nome_Empresarial)</p>
+                        @Html.DisplayFor(modelItem => item.Pessoa.Nome)
+                         <a asp-page="/Pessoa/Details" asp-route-id="@item.Pessoa.Id" ><i class="fa fa-user" aria-hidden="true"></i></a>
+                        @if (item.Empresa != null)
+                        {
+                        <a asp-page="/Empresa/Perfil" asp-route-id="@item.Empresa.Id" title="@item.Empresa.CNPJ"><i class="fa fa-industry" aria-hidden="true"></i></a>
+                        }
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Servicos)
@@ -96,9 +100,8 @@
                         @Html.DisplayFor(modelItem => item.Canal)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                        <a class="btn btn-sm btn-outline-secondary" title="Alterar informações"><i class="far fa-edit"></i></a>
+                        <a class="btn btn-sm btn-outline-danger" title="Excluir informações"><i class="far fa-window-close"></i></a>
                     </td>
                 </tr>
             }
