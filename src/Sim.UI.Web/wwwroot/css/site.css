@@ -172,8 +172,8 @@ body {
     }
 
 .div-modulos /* div das seções free-hand, digital paint, comp grafica e web-dev */ { 
-    text-align: center;
-    background-image: url(imgs/dot.jpg);
+    text-align: center;/*
+    background-image: url(imgs/dot.jpg);*/
 }
 
 
