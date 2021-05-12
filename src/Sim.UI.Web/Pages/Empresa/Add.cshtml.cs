@@ -22,26 +22,24 @@ namespace Sim.UI.Web.Pages.Empresa
     public class AddModel : PageModel
     {
         private readonly IAppServiceEmpresa _appServiceEmpresa;
-        private readonly IAppServiceQSA _appServiceQSA;
         private readonly IMapper _mapper;
         private readonly IReceitaWS _receitaWS;
 
-        public AddModel(IAppServiceEmpresa appServiceEmpresa, IAppServiceQSA appServiceQSA ,IMapper mapper, IReceitaWS receitaWS)
+        public AddModel(IAppServiceEmpresa appServiceEmpresa, IMapper mapper, IReceitaWS receitaWS)
         {
             _appServiceEmpresa = appServiceEmpresa;
-            _appServiceQSA = appServiceQSA;
             _mapper = mapper;
             _receitaWS = receitaWS;
         }
 
 
-        [BindProperty]
+        [BindProperty(SupportsGet = true)]
         public VMEmpresa Input { get; set; }
 
         [TempData]
         public string StatusMessage { get; set; }
 
-        [BindProperty]
+        [BindProperty(SupportsGet = true)]
         [DisplayName("Quadro Administrativo")]
         public string Lista { get; set; }
 
@@ -49,14 +47,14 @@ namespace Sim.UI.Web.Pages.Empresa
         {
 
             var rws = await _receitaWS.ConsultarCPNJAsync(cnpj);
-            Input = _mapper.Map<VMEmpresa>(rws);            
+            Input = _mapper.Map<VMEmpresa>(rws);
 
             foreach (var at in rws.AtividadePrincipal)
             {
                 Input.CNAE_Principal = at.Code;
                 Input.Atividade_Principal = at.Text;
             }
-            
+
             StringBuilder sb = new StringBuilder();
             foreach (var at in rws.AtividadesSecundarias)
             {
@@ -67,19 +65,26 @@ namespace Sim.UI.Web.Pages.Empresa
 
             sb.Clear();
 
-            foreach(var q in rws.Qsa)
+            foreach (var q in rws.Qsa)
             {
                 sb.AppendLine(string.Format("{0}: {1};", q.Qual, q.Nome));
             }
 
-            Lista = sb.ToString();                
+            Lista = sb.ToString();
         }
 
         public async Task<IActionResult> OnGetAsync(string id)
         {
-            
-            await LoadAsync(id);            
-            return Page();
+            try
+            {
+                await LoadAsync(id);
+                return Page();
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = "Erro: " + ex.Message;
+                return RedirectToPage("./Index");
+            }                     
         }
 
         public async Task<IActionResult> OnPostAsync()

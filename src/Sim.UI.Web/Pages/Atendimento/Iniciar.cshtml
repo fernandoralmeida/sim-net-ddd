@@ -5,13 +5,14 @@
 }
 
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-6 mb-2">
         <a asp-page="./Index" class="btn btn-sm btn-secondary"><i class="fas fa-arrow-left"></i></a> |
         <b>Novo Atendimento</b> @Model.Input.Protocolo
     </div>
+    <hr />
 </div>
+
 <partial name="_StatusMessage" model="Model.StatusMessage" />
-<hr />
 
 <form method="post">
     <div class="col-md-12 mb-4">
@@ -19,9 +20,10 @@
         @if (Model.Input.Pessoa == null)
         {
             <div class="row g-2 mb-4">
-                <div class="form-group col-md-5">
+                <div class="form-group col-md-3">
                     <div class="input-group ">
-                        <input class="form-control" asp-for="GetCPF" placeholder="CPF" aria-describedby="button-addon2">
+                        <span class="input-group-text">CPF</span>
+                        <input class="form-control" asp-for="GetCPF" id="inputCPF" aria-describedby="button-addon2">
                         <button asp-page-handler="IncluirPessoa" class="btn btn-primary" type="submit"><i class="fa fa-plus-square" aria-hidden="true"></i></button>
                     </div>
                 </div>
@@ -29,36 +31,40 @@
         }
         else
         {
-    <div class="row g-2 mb-4">
-        <div class="col-md-2" hidden>
-            <label class="form-label" asp-for="Input.Pessoa.Id"></label>
-            <input class="form-control" asp-for="Input.Pessoa.Id" />
-        </div>
-        <div class="col-md-2">
-            <label class="form-label" asp-for="Input.Pessoa.CPF"></label>
-            <input class="form-control" asp-for="Input.Pessoa.CPF" />
-        </div>
-        <div class="col-md-5">
-            <label class="form-label" asp-for="Input.Pessoa.Nome"></label>
-            <input class="form-control" asp-for="Input.Pessoa.Nome" />
-        </div>
-        <div class="col-md-3">
-            <label class="form-label" asp-for="Input.Pessoa.Email"></label>
-            <input class="form-control" asp-for="Input.Pessoa.Email" />
-        </div>
-        <div class="col-md-2">
-            <label class="form-label" asp-for="Input.Pessoa.Tel_Movel"></label>
-            <input class="form-control" asp-for="Input.Pessoa.Tel_Movel" />
-        </div>
-    </div>
+            <div class="row g-2 mb-4">
+                <div class="col-md-2" hidden>
+                    <label class="form-label" asp-for="Input.Pessoa.Id"></label>
+                    <input class="form-control" asp-for="Input.Pessoa.Id" />
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label" asp-for="Input.Pessoa.CPF"></label>
+                    <input class="form-control" asp-for="Input.Pessoa.CPF" />
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label" asp-for="Input.Pessoa.Nome"></label>
+                    <input class="form-control" asp-for="Input.Pessoa.Nome" />
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label" asp-for="Input.Pessoa.Email"></label>
+                    <input class="form-control" asp-for="Input.Pessoa.Email" />
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label" asp-for="Input.Pessoa.Tel_Movel"></label>
+                    <input class="form-control" asp-for="Input.Pessoa.Tel_Movel" />
+                </div>
+                <div class="col-md">
+                    <button class="form-control" type="submit" asp-page-handler="RemoverPessoa"></button>
+                </div>
+            </div>
         }
 
         @if (Model.Input.Empresa == null)
         {
             <div class="row g-2 mb-4">
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-3">
                     <div class="input-group ">
-                        <input class="form-control" asp-for="GetCNPJ" placeholder="CNPJ" aria-describedby="button-addon2">
+                        <span class="input-group-text">CNPJ</span>
+                        <input class="form-control" asp-for="GetCNPJ" id="inputCNPJ" aria-describedby="button-addon2">
                         <button asp-page-handler="IncluirEmpresa" class="btn btn-primary" type="submit"><i class="fa fa-plus-square" aria-hidden="true"></i></button>
                     </div>
                 </div>
@@ -66,7 +72,7 @@
         }
         else
         {
-    <div class="row g-2 mb-4">
+    <div class="row g-2 mb-3">
         <div class="col-md-2" hidden>
             <label class="form-label" asp-for="Input.Empresa.Id"></label>
             <input class="form-control" asp-for="Input.Empresa.Id" />
@@ -75,7 +81,7 @@
             <label class="form-label" asp-for="Input.Empresa.CNPJ"></label>
             <input class="form-control" asp-for="Input.Empresa.CNPJ" />
         </div>
-        <div class="col-md-5">
+        <div class="col-md-4">
             <label class="form-label" asp-for="Input.Empresa.Nome_Empresarial"></label>
             <input class="form-control" asp-for="Input.Empresa.Nome_Empresarial" />
         </div>
@@ -87,6 +93,9 @@
             <label class="form-label" asp-for="Input.Empresa.Telefone"></label>
             <input class="form-control" asp-for="Input.Empresa.Telefone" />
         </div>
+        <div class="col-md">
+            <button class="form-control" type="submit" asp-page-handler="RemoverEmpresa"></button>
+        </div>
     </div>
         }
 
@@ -95,3 +104,14 @@
         <button asp-page-handler="Save" type="submit" class="btn btn-lg btn-success">Iniciar Atendimento</button>
     </div>
 </form>
+
+@section Scripts {
+    <script src="~/js/jquery.cep.js"></script>
+    <script src="~/js/jquery.mask.min.js"></script>
+    <script>
+        $('#inputCPF').mask('000.000.000-00', { placeholder: "___.___.___-__" });
+        $('#txtphone').mask('(00) 0000-0000', { placeholder: "(__) ____-____" });
+        $('#txtmobile').mask('(00) 00000-0000', { placeholder: "(__) _____-____" });
+        $('#inputCNPJ').mask('00.000.000/0000-00', { placeholder: "__.___.___/____-__" });
+    </script>
+}

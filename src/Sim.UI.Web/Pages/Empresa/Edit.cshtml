@@ -2,13 +2,16 @@
 @model Sim.UI.Web.Pages.Empresa.PerfilModel
 
 @{
-    Layout = "/Pages/Shared/__LayoutModal.cshtml";
-    ViewData["Title"] = "Perfil";
+    ViewData["Title"] = "Edição";
 }
+
+<h5>Atualizar Empresa</h5>
+
+<hr />
 
 <div class="row">
     <form class="row" method="post">
-        <div class="col-md-12">
+        <div class="col-md-8">
 
             <div class="row g-2 mb-3" hidden>
                 <label asp-for="Input.Empresa_Id" class="control-label"></label>
@@ -18,8 +21,11 @@
 
             <div class="row g-2 mb-2">
                 <div class="col-md-5">
-                    <label asp-for="Input.CNPJ" class="form-label" for="inputCNPJ"></label>                    
-                    <input asp-for="Input.CNPJ" class="form-control" placeholder="CPF" aria-describedby="button-addon2" id="inputCNPJ">                                                                   
+                    <label asp-for="Input.CNPJ" class="form-label" for="inputCNPJ"></label>
+                    <div class="input-group mb-3">
+                        <input asp-for="Input.CNPJ" class="form-control" placeholder="CPF" aria-describedby="button-addon2" id="inputCNPJ">
+                        <button class="btn btn-outline-primary" type="submit" asp-page-handler="RWS">Atualizar Dados</button>
+                    </div>
                     <span asp-validation-for="Input.CNPJ" class="text-danger"></span>
                 </div>
                 <div class="col-md-2">
@@ -170,7 +176,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-4">
             <div class="row g-2 mb-2">
                 <div class="col-md">
                     <label asp-for="Input.Capital_Social" class="form-label" for="inputCapsoc"></label>
@@ -206,6 +212,15 @@
                 </tbody>
             </table>
         </div>
+        <div class="col-md">
+            <div class="row g-2 mb-2">
+                <div class="d-grid gap-2 d-md-block">
+                    <a asp-page="./Index" role="button" type="button" class="btn btn-secondary">Voltar</a>
+                    <button type="submit" role="button" class="btn btn-primary">Gravar</button>
+                </div>
+            </div>
+        </div>
+
     </form>
 </div>
 

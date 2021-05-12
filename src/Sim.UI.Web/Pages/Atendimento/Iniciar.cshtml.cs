@@ -45,7 +45,7 @@ namespace Sim.UI.Web.Pages.Atendimento
         [BindProperty]
         public string GetCNPJ { get; set; }
 
-        [BindProperty]
+        [BindProperty(SupportsGet = true)]
         public InputModel Input { get; set; }
 
         [TempData]
@@ -94,6 +94,11 @@ namespace Sim.UI.Web.Pages.Atendimento
             }
         }
 
+        public void OnPostRemoverPessoa()
+        {
+            Input.Pessoa = new();
+        }
+
         public async Task OnPostIncluirEmpresaAsync()
         {
 
@@ -104,6 +109,11 @@ namespace Sim.UI.Web.Pages.Atendimento
             {
                 Input.Empresa = p;
             }
+        }
+
+        public void OnPostRemoverEmpresa()
+        {
+            Input.Empresa = new();
         }
 
         public async Task<IActionResult> OnPostSaveAsync()

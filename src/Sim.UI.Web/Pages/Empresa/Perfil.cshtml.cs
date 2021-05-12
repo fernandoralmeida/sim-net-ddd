@@ -32,7 +32,7 @@ namespace Sim.UI.Web.Pages.Empresa
             _receitaWS = receitaWS;
         }
 
-        [BindProperty]
+        [BindProperty(SupportsGet = true)]
         public VMEmpresa Input { get; set; }
 
         [TempData]
@@ -67,7 +67,7 @@ namespace Sim.UI.Web.Pages.Empresa
             return Page();
         }
 
-        public async Task<IActionResult> OnPostRWSAsync()
+        public async Task<IActionResult> OnGetRWSAsync()
         {
             if (!ModelState.IsValid)
             {
@@ -102,7 +102,7 @@ namespace Sim.UI.Web.Pages.Empresa
 
             Input.QsaList = list;
 
-            return RedirectToPage();
+            return Page();
         }
 
         public async Task<IActionResult> OnPostAsync()
