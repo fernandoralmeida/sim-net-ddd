@@ -35,9 +35,9 @@ namespace Sim.Cross.Ioc
     using Sim.Cross.Data.Repository.Shared;
 
 
-    public class Container
+    public static class Container
     {
-        public void RegisterApplicationService(IServiceCollection services)
+        public static void RegisterApplicationService(IServiceCollection services)
         {
             RegisterPessoa(services);
             RegisterEmpresa(services);
@@ -50,7 +50,7 @@ namespace Sim.Cross.Ioc
             RegisterContador(services);
         }
 
-        private void RegisterPessoa(IServiceCollection services)
+        private static void RegisterPessoa(IServiceCollection services)
         {           
 
             //registra o aplicação, dominio, repositorio aos serviços.
@@ -64,7 +64,7 @@ namespace Sim.Cross.Ioc
             services.AddScoped<IRepositoryPessoa, RepositoryPessoa>();
         }
 
-        private void RegisterEmpresa(IServiceCollection services)
+        private static void RegisterEmpresa(IServiceCollection services)
         {
             //
             services.AddScoped<IAppServiceBase<Empresa>, AppServiceBase<Empresa>>();
@@ -83,7 +83,7 @@ namespace Sim.Cross.Ioc
             services.AddScoped<IRepositoryQSA, RepositoryQsa>();
         }
 
-        private void RegisterAtendimento(IServiceCollection services)
+        private static void RegisterAtendimento(IServiceCollection services)
         {
             //
             services.AddScoped<IAppServiceBase<Atendimento>, AppServiceBase<Atendimento>>();
@@ -96,7 +96,7 @@ namespace Sim.Cross.Ioc
             services.AddScoped<IRepositoryAtendimento, RepositoryAtendimento>();
         }
 
-        private void RegisterSecretaria(IServiceCollection services)
+        private static void RegisterSecretaria(IServiceCollection services)
         {
             //
             services.AddScoped<IAppServiceBase<Secretaria>, AppServiceBase<Secretaria>>();
@@ -109,7 +109,7 @@ namespace Sim.Cross.Ioc
             services.AddScoped<IRepositorySecretaria, RepositorySecretaria>();
         }
 
-        private void RegisterSetor(IServiceCollection services)
+        private static void RegisterSetor(IServiceCollection services)
         {
             //
             services.AddScoped<IAppServiceBase<Setor>, AppServiceBase<Setor>>();
@@ -122,7 +122,7 @@ namespace Sim.Cross.Ioc
             services.AddScoped<IRepositorySetor, RepositorySetor>();
         }
 
-        private void RegisterServico(IServiceCollection services)
+        private static void RegisterServico(IServiceCollection services)
         {
             //
             services.AddScoped<IAppServiceBase<Servico>, AppServiceBase<Servico>>();
@@ -135,7 +135,7 @@ namespace Sim.Cross.Ioc
             services.AddScoped<IRepositoryServico, RepositoryServico>();
         }
 
-        private void RegisterEvento(IServiceCollection services)
+        private static void RegisterEvento(IServiceCollection services)
         {
             //
             services.AddScoped<IAppServiceBase<Evento>, AppServiceBase<Evento>>();
@@ -148,7 +148,7 @@ namespace Sim.Cross.Ioc
             services.AddScoped<IRepositoryEvento, RepositoryEvento>();
         }
 
-        private void RegisterCanal(IServiceCollection services)
+        private static void RegisterCanal(IServiceCollection services)
         {
             //
             services.AddScoped<IAppServiceBase<Canal>, AppServiceBase<Canal>>();
@@ -161,7 +161,7 @@ namespace Sim.Cross.Ioc
             services.AddScoped<IRepositoryCanal, RepositoryCanal>();
         }
 
-        private void RegisterContador(IServiceCollection services)
+        private static void RegisterContador(IServiceCollection services)
         {
             services.AddScoped<IAppServiceBase<Contador>, AppServiceBase<Contador>>();
             services.AddScoped<IAppServiceContador, AppServiceContador>();

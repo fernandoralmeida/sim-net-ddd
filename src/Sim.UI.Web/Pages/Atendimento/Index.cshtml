@@ -57,7 +57,7 @@
             </tr>
         </thead>
         <tbody>
-            @{ 
+            @{
                 int cont = 0;
             }
 
@@ -73,7 +73,7 @@
                         @Html.DisplayFor(modelItem => item.Protocolo)
                     </td>
                     <td>
-                        @{ 
+                        @{
                             var d1 = Convert.ToDateTime(item.Data);
                             var d2 = Convert.ToDateTime(item.DataF);
                             var datainicial = d1.ToShortTimeString();
@@ -84,11 +84,10 @@
                         @Html.DisplayFor(modelItem => datafinal)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Pessoa.Nome)
-                         <a asp-page="/Pessoa/Details" asp-route-id="@item.Pessoa.Id" ><i class="fa fa-user" aria-hidden="true"></i></a>
+                        <a href="#" class="link-secondary viewbutton" data-secao="Pessoa"  data-acao="Details" data-id="@item.Pessoa.Id" data-bs-toggle="modal" data-bs-target="#viewmodal">@Html.DisplayFor(modelItem => item.Pessoa.Nome)</a>
                         @if (item.Empresa != null)
                         {
-                        <a asp-page="/Empresa/Perfil" asp-route-id="@item.Empresa.Id" title="@item.Empresa.CNPJ"><i class="fa fa-industry" aria-hidden="true"></i></a>
+                            <a href="#" class="link-secondary viewbutton" data-secao="Empresa"  data-acao="Perfil" data-id="@item.Empresa.Id" data-bs-toggle="modal" data-bs-target="#viewmodal">[@item.Empresa.CNPJ]</a>
                         }
                     </td>
                     <td>
@@ -108,3 +107,35 @@
         </tbody>
     </table>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="viewmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="viewmodalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title" id="viewmodalLabel">Detalhes</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="viewmodalData"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script type="text/javascript">
+    $(".viewbutton").on("click", function () {
+        var customerId = $(this).data('id');
+        var secao = $(this).data('secao');
+        var acao = $(this).data('acao');
+            $.ajax({
+                url: "/"+ secao +"/" + acao + "?id=" + customerId,
+                cache: false
+            }).done(function (data) {
+                var formatHtml = data;
+                $("#viewmodalData").html(formatHtml);
+            });
+        });</script>
+}

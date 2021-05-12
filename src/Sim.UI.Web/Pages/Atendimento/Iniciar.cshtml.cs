@@ -26,18 +26,15 @@ namespace Sim.UI.Web.Pages.Atendimento
         private readonly IAppServicePessoa _appServicePessoa;
         private readonly IAppServiceEmpresa _appServiceEmpresa;
         private readonly IAppServiceContador _appServiceContador;
-        private readonly IMapper _mapper;
 
         public IniciarModel(IAppServiceAtendimento appServiceAtendimento,
             IAppServicePessoa appServicePessoa,
             IAppServiceEmpresa appServiceEmpresa,
-            IAppServiceContador appServiceContador,
-            IMapper mapper, UserManager<ApplicationUser> userManager)
+            IAppServiceContador appServiceContador, UserManager<ApplicationUser> userManager)
         {
             _appServiceAtendimento = appServiceAtendimento;
             _appServicePessoa = appServicePessoa;
             _appServiceEmpresa = appServiceEmpresa;
-            _mapper = mapper;
             _userManager = userManager;
             _appServiceContador = appServiceContador;
         }

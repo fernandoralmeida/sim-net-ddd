@@ -30,7 +30,7 @@ namespace Sim.UI.Web
         {
             new ApplicationContext().RegisterDataContext(services, Configuration, "App_____ContextConnection");
 
-            new Container().RegisterApplicationService(services);
+            Container.RegisterApplicationService(services);
                         
             services.AddScoped<IReceitaWS, ReceitaWS>();
 
