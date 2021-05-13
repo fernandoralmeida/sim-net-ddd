@@ -53,6 +53,16 @@ namespace Sim.Domain.Shared.Service
             return _atendimento.GetBySetor(setor);
         }
 
+        public IEnumerable<Atendimento> ListAll()
+        {
+            return _atendimento.ListAll();
+        }
+
+        public IEnumerable<Atendimento> ListByPeriodo(DateTime? dataI, DateTime? dataF)
+        {
+            return _atendimento.ListByPeriodo(dataI, dataF);
+        }
+
         public IEnumerable<Atendimento> MeusAtendimentos(string userid, DateTime? date)
         {
             return _atendimento.MeusAtendimentos(userid, date);

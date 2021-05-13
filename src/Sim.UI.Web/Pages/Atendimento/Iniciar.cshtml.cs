@@ -96,7 +96,7 @@ namespace Sim.UI.Web.Pages.Atendimento
 
         public void OnPostRemoverPessoa()
         {
-            Input.Pessoa = new();
+            Input.Pessoa = null;
         }
 
         public async Task OnPostIncluirEmpresaAsync()
@@ -113,7 +113,7 @@ namespace Sim.UI.Web.Pages.Atendimento
 
         public void OnPostRemoverEmpresa()
         {
-            Input.Empresa = new();
+            Input.Empresa = null;
         }
 
         public async Task<IActionResult> OnPostSaveAsync()
