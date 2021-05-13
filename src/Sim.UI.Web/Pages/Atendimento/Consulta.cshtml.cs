@@ -44,10 +44,11 @@ namespace Sim.UI.Web.Pages.Atendimento
             _appServiceAtendimento = appServiceAtendimento;
             Input = new();
             Input.DataI = new DateTime(DateTime.Now.Year, 1, 1);
+            Input.DataF = DateTime.Now;
         }
 
         public async Task OnGetAsync()
-        {            
+        {
             var lista = Task.Run(() => _appServiceAtendimento.ListAll());
             await lista;
             Input.ListaAtendimento = lista.Result.ToList();
