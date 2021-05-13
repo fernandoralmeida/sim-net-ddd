@@ -53,12 +53,24 @@ namespace Sim.UI.Web.Pages.Atendimento
             Input.ListaAtendimento = lista.Result.ToList();
         }
 
-        public async Task OnGetListByDataAsync()
+        public async Task OnPostListByDataAsync()
         {
             var lista = Task.Run(() => _appServiceAtendimento.ListByPeriodo(Input.DataI, Input.DataF));
             await lista;
             Input.ListaAtendimento = lista.Result.ToList();
-            StatusMessage = "Teste submit";
+        }
+
+        public async Task OnPostListByPessoaAsync()
+        {
+            var lista = Task.Run(() => _appServiceAtendimento.GetByPessoa(Input.CPF));
+            await lista;
+            Input.ListaAtendimento = lista.Result.ToList();
+        }
+        public async Task OnPostListByEmpresaAsync()
+        {
+            var lista = Task.Run(() => _appServiceAtendimento.GetByEmpresa(Input.CNPJ));
+            await lista;
+            Input.ListaAtendimento = lista.Result.ToList();
         }
     }
 }

@@ -38,12 +38,18 @@ namespace Sim.Cross.Data.Repository.Shared
 
         public IEnumerable<Atendimento> GetByEmpresa(string cnpj)
         {
-            return _db.Atendimento.Where(u => u.Empresa.CNPJ == cnpj);
+            return _db.Atendimento
+                .Include(p => p.Pessoa)
+                .Include(e => e.Empresa)
+                .Where(u => u.Empresa.CNPJ == cnpj).OrderBy(d => d.Data);
         }
 
         public IEnumerable<Atendimento> GetByPessoa(string cpf)
         {
-            return _db.Atendimento.Where(u => u.Pessoa.CPF == cpf);
+            return _db.Atendimento
+                .Include(p => p.Pessoa)
+                .Include(e => e.Empresa)
+                .Where(u => u.Pessoa.CPF == cpf).OrderBy(d => d.Data);
         }
 
         public IEnumerable<Atendimento> GetByServicos(string servicos)
