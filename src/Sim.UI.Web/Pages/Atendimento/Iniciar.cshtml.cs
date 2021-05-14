@@ -69,7 +69,7 @@ namespace Sim.UI.Web.Pages.Atendimento
 
             foreach (var at in at_ativo.Result)
             {
-                StatusMessage = "Um atendimento encontra-se ativo. Finalize antes de iniciar outro atendimento.";
+                StatusMessage = "Um atendimento encontra-se ativo, finalize antes de iniciar outro atendimento.";
                 return RedirectToPage("./Novo");
             }
 
@@ -118,6 +118,11 @@ namespace Sim.UI.Web.Pages.Atendimento
 
         public async Task<IActionResult> OnPostSaveAsync()
         {
+            if(Input.Pessoa == null)
+            {
+                return Page();
+            }
+
             var user = await _userManager.GetUserAsync(User);          
 
                 Input.Protocolo = GetProtoloco();

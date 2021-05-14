@@ -11,8 +11,8 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light bg-gradient border-bottom fixed-top mb-3">
-            <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom fixed-top shadow-sm mb-4">
+            <div class="container">
                 <a class="navbar-brand badge bg-light border" asp-area="" asp-page="/Index"><div class="logo-sim-sm"></div></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -64,19 +64,15 @@
         </nav>
     </header>
     
-    <p class="strip-bg mb-3 border-0" /><!---->
-
-    <div class="container card bg-light border-0 mb-5 shadow-sm">
-        <p class="mb-2" />
+    <div class="container">
         <main role="main">
             @RenderBody()
         </main>
-        <p class="mb-3" />
     </div>
 
-    <footer class="footer text-muted">
-        <div class="container-fluid">
-            &copy; 2021 - Sim.Web - <a asp-area="" asp-page="/Privacy">Privacy</a>
+    <footer class="footer border-top bg-light text-muted">
+        <div class="container">
+            &copy; @DateTime.Now.Year - Sim.Web - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
     </footer>
 
