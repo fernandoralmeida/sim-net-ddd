@@ -9,19 +9,25 @@
     }
 }
 
-<h5>Settings</h5>
+
+<div class="row">
+    <div class="col-md-3">
+        <h5>Settings</h5>
+    </div>
+    <div class="col-md-9">
+        <partial name="_SettingsNav" />
+    </div>
+</div>
+
 <hr />
 
-<div>   
+<div>
     <pre>Configurações do Sistema</pre>
     <div class="row">
-        <div class="col-md-3">
-            <partial name="_SettingsNav" />
-        </div>
         <div class="col-md">
             @RenderBody()
         </div>
-    </div>    
+    </div>
 </div>
 
 @section Scripts {

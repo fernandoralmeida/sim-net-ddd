@@ -9,9 +9,9 @@
         <a asp-page="./Index" class="btn btn-sm btn-secondary"><i class="fas fa-arrow-left"></i></a> |
         <b>Novo Atendimento</b> @Model.Input.Protocolo
     </div>
-    <hr />
-</div>
 
+</div>
+<hr class="border" />
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
 <form method="post">
@@ -72,31 +72,31 @@
         }
         else
         {
-    <div class="row g-2 mb-3">
-        <div class="col-md-2" hidden>
-            <label class="form-label" asp-for="Input.Empresa.Id"></label>
-            <input class="form-control" asp-for="Input.Empresa.Id" />
-        </div>
-        <div class="col-md-2">
-            <label class="form-label" asp-for="Input.Empresa.CNPJ"></label>
-            <input class="form-control" asp-for="Input.Empresa.CNPJ" />
-        </div>
-        <div class="col-md-4">
-            <label class="form-label" asp-for="Input.Empresa.Nome_Empresarial"></label>
-            <input class="form-control" asp-for="Input.Empresa.Nome_Empresarial" />
-        </div>
-        <div class="col-md-3">
-            <label class="form-label" asp-for="Input.Empresa.Email"></label>
-            <input class="form-control" asp-for="Input.Empresa.Email" />
-        </div>
-        <div class="col-md-2">
-            <label class="form-label" asp-for="Input.Empresa.Telefone"></label>
-            <input class="form-control" asp-for="Input.Empresa.Telefone" />
-        </div>
-        <div class="col-md">
-            <button class="btn btn-danger" type="submit" asp-page-handler="RemoverEmpresa"><i class="fas fa-minus-square"></i></button>
-        </div>
-    </div>
+            <div class="row g-2 mb-3">
+                <div class="col-md-2" hidden>
+                    <label class="form-label" asp-for="Input.Empresa.Id"></label>
+                    <input class="form-control" asp-for="Input.Empresa.Id" />
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label" asp-for="Input.Empresa.CNPJ"></label>
+                    <input class="form-control" asp-for="Input.Empresa.CNPJ" />
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label" asp-for="Input.Empresa.Nome_Empresarial"></label>
+                    <input class="form-control" asp-for="Input.Empresa.Nome_Empresarial" />
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label" asp-for="Input.Empresa.Email"></label>
+                    <input class="form-control" asp-for="Input.Empresa.Email" />
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label" asp-for="Input.Empresa.Telefone"></label>
+                    <input class="form-control" asp-for="Input.Empresa.Telefone" />
+                </div>
+                <div class="col-md">
+                    <button class="btn btn-danger" type="submit" asp-page-handler="RemoverEmpresa"><i class="fas fa-minus-square"></i></button>
+                </div>
+            </div>
         }
 
     </div>
