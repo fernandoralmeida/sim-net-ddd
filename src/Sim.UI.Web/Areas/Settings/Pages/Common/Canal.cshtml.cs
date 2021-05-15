@@ -123,8 +123,6 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
 
                 await t;
 
-                StatusMessage = "Canal incluído com sucesso!";
-
                 return RedirectToPage();
             }
             catch (Exception ex)
@@ -154,8 +152,6 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
 
                 await t;
 
-                StatusMessage = "Canal removido com sucesso!";
-
                 return RedirectToPage();
             }
             catch (Exception ex)
@@ -164,7 +160,6 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
 
                 return RedirectToPage();
             }
-
         }
     }
 
