@@ -7,11 +7,11 @@
 
 <div class="row">
     <div class="col-md-12 mb-2">
-        <a asp-page="./Index" class="btn btn-sm btn-secondary"><i class="fas fa-arrow-left"></i></a> |
+        <a asp-page="./Index" class="link-primary">Voltar</a> |
         <b>Atendimento</b> : @Model.Input.Protocolo 
     </div>    
 </div>
-<hr class="border" />
+<hr />
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
 <form method="post">
@@ -25,10 +25,10 @@
         </div>
     </div>
     <div class="col-md-12">
-        <table class="table table-sm table-borderless bg-white">
+        <table class="table">
             <!--<caption>Informações do Cliente</caption>-->
             <thead>
-                <tr class="border-bottom shadow-sm">
+                <tr>
                     <th>
                         CPF/CNPJ
                     </th>
@@ -43,7 +43,7 @@
             <tbody>
                 @if (Model.Input.Pessoa != null)
                 {
-                    <tr class="border-bottom">
+                    <tr>
                         <td>
                             @Html.DisplayFor(modelItem => Model.Input.Pessoa.CPF)
                         </td>
@@ -59,7 +59,7 @@
                 }
                 @if (Model.Input.Empresa != null)
                 {
-                    <tr class="border-bottom">
+                    <tr>
                         <td>
                             @Html.DisplayFor(modelItem => Model.Input.Empresa.CNPJ)
                         </td>

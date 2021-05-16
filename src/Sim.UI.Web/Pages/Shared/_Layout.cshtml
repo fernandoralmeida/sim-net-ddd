@@ -5,15 +5,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewData["Title"] - Sim.Web</title>
+    <link rel="shortcut icon" href="~/favicon.ico" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="~/css/site.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom fixed-top shadow-sm mb-4">
+        <nav id="navbar_top" class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
-                <a class="navbar-brand badge bg-light border" asp-area="" asp-page="/Index"><div class="logo-sim-sm"></div></a>
+                <a class="logo-sim me-3" asp-area="" asp-page="/Index"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -60,11 +61,13 @@
                     }
                     <partial name="_LoginPartial" />
                 </div>
+                
             </div>
-        </nav>
+        </nav>     
+        <div class="strip-dot mb-5"></div>
     </header>
     
-    <div class="container">
+    <div class="container mt-5">
         <main role="main">
             @RenderBody()
         </main>
@@ -81,5 +84,8 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
+
+    
+
 </body>
 </html>

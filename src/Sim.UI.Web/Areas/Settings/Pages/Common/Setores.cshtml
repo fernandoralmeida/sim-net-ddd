@@ -12,32 +12,32 @@
 
 <div>
     <form class="col-md-12" method="post">
-        <div class="row g-2">
+        <div class="row mb-4">
             <!--<div asp-validation-summary="All" class="text-danger"></div>-->
             <div class="col-md-12" hidden>
                 <label asp-for="Input.Id" class="form-label"></label>
                 <input asp-for="Input.Id" class="form-control" />
                 <span asp-validation-for="Input.Id" class="text-danger"></span>
             </div>
-            <div class="col-md-7">
+            <div class="col-md-4">
                 <label asp-for="Input.Nome" class="form-label"></label>
                 <input asp-for="Input.Nome" class="form-control" />
                 <span asp-validation-for="Input.Nome" class="text-danger"></span>
             </div>
-            <div class="col-md-7 mb-2">
+            <div class="col-md-5">
                 <label asp-for="Secretarias" class="form-label"></label>
                 <select asp-for="ItemSelecionado" class="form-select" asp-items="Model.Secretarias"></select>
                 <span asp-validation-for="Input.Secretaria" class="text-danger"></span>
             </div>
-            <div class="col-md-10 mb-3">
-                <button type="submit" class="btn btn-primary col-md-4">Incluir Setor</button>
+            <div class="col-md-auto align-self-end mt-3">
+                <button type="submit" class="btn btn-primary">Incluir Setor</button>
             </div>
         </div>
 
-        <table class="table table-bordered">
+        <table class="table">
             <caption>Lista de Setores</caption>
             <thead>
-                <tr class="bg-white">
+                <tr>
                     <th>
                         Setor
                     </th>
@@ -50,7 +50,7 @@
                 {
                     foreach (var item in Model.Input.Listar)
                     {
-                        <tr class="border-bottom">
+                        <tr>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Nome)
                             </td>

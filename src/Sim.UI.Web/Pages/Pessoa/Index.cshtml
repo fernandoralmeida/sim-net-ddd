@@ -6,7 +6,7 @@
 }
 
 <h5>Pessoas</h5>
-<hr class="border" />
+<hr />
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
 
@@ -49,10 +49,10 @@
 </div>
 
 <div>
-    <table class="table table-bordered">
+    <table class="table">
         <caption>Lista Pessoas</caption>
         <thead>
-            <tr class="bg-white">
+            <tr>
                 <th></th>
                 <th>
                     Nome
@@ -81,7 +81,7 @@
             {
                 foreach (var item in Model.Input.ListaPessoas)
                 {
-                    <tr class="border-bottom">
+                    <tr>
                         <td>
                             <a asp-area="" asp-page="/Atendimento/Iniciar" asp-route-id="@item.Id" class="btn btn-sm btn-outline-info" title="Iniciar atendimento"><i class="far fa-clock"></i></a>
                         </td>

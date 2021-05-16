@@ -6,7 +6,7 @@
 }
 
 <h5>Atendimentos</h5>
-<hr class="border"/>
+<hr />
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
 <div class="row">
@@ -33,10 +33,10 @@
 </div>
 
 <div>
-    <table class="table table-bordered">
+    <table class="table">
         <caption>Lista de atendimentos!</caption>
         <thead>
-            <tr class="bg-white">
+            <tr>
                 <th>
                     N
                 </th>
@@ -71,7 +71,7 @@
 
             @foreach (var item in Model.Input.ListaAtendimento)
             {
-                <tr class="border-bottom">
+                <tr>
                     <td>
                         @{cont++;}
                         @cont.ToString()

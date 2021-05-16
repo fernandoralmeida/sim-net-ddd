@@ -6,8 +6,7 @@
 
 <div class="row">
     <div class="col-md-6">
-        <a asp-area="Admin" asp-page="./Index" class="btn btn-sm btn-secondary"><i class="fas fa-arrow-left"></i></a> | 
-        <b>Controle de Acessos</b>
+        <a asp-area="Admin" asp-page="./Index" class="link-primary">Voltar</a> | <b>Controle de Acessos</b>
     </div>
 </div>
 <partial name="_StatusMessage" model="Model.StatusMessage" />
@@ -48,7 +47,6 @@
                 @Html.DisplayFor(model => model.Input.Email)
             </dd>
         </dl>
-        <hr />
         <div class="col-md-5">
             <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">Nível de Acesso</span>
@@ -60,9 +58,9 @@
         </div>
 
         <div>
-            <table class="table table-bordered">
+            <table class="table">
                 <thead>
-                    <tr class="bg-white">
+                    <tr>
                         <th>
                             Perfil Habilitado
                         </th>
@@ -76,7 +74,7 @@
                                                 
                             foreach (var item in Model.Input.ListRoles)
                             {
-                                <tr class="border-bottom">
+                                <tr>
                                     <td>
                                         @Html.DisplayFor(modelItem => item)
                                     </td>

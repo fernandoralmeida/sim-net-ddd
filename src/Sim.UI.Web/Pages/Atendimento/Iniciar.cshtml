@@ -6,12 +6,12 @@
 
 <div class="row">
     <div class="col-md-6 mb-2">
-        <a asp-page="./Index" class="btn btn-sm btn-secondary"><i class="fas fa-arrow-left"></i></a> |
+        <a asp-page="./Index" class="link-primary">Voltar</a> |
         <b>Novo Atendimento</b> @Model.Input.Protocolo
     </div>
 
 </div>
-<hr class="border" />
+<hr />
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
 <form method="post">

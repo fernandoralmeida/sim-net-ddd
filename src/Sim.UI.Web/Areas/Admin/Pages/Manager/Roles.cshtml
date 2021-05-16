@@ -7,7 +7,6 @@
     ViewData["ActivePage"] = AdminNavPages.Roles;
 }
 
-<h5>Gerenciar Roles</h5>
 
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
@@ -25,9 +24,9 @@
     <p></p>
     <div class="col-md">
         <div class="row g-3">
-            <table class="table table-bordered">
+            <table class="table">
                 <thead>
-                    <tr class="bg-white">
+                    <tr>
                         <th>
                             Role Name
                         </th>
@@ -43,7 +42,7 @@
                     {
                         foreach (var item in Model.Input.Roles)
                         {
-                            <tr class="border-bottom">
+                            <tr>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Name)
                                 </td>

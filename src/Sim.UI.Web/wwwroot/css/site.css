@@ -41,13 +41,17 @@ html {
 
 body {
     /* Margin bottom by footer height */
-    margin-bottom: 65px;
-    /* Margin top by fixed navbar height */
-    margin-top: 75px;
+    margin-bottom: 70px;
+    /* Margin top by fixed navbar height 
+    margin-top: 90px;*/
     /* background: url(imgs/bgios.jpg) no-repeat fixed;
     background-size: cover;*/
     /**/
-    background-color: #f8f8f8;
+    background-color: #fff;
+}
+
+.bg-teal {
+    background-color: #20c997 !important;
 }
 
 .footer {
@@ -102,7 +106,7 @@ body {
 
 /* Logo SIM */
 .logo-sim-sm {
-    
+    display:flex;
     margin: 0px 0px 0px 0px;
     background-image: url(imgs/sim-ico.ico);
     background-size: 32px 32px;
@@ -112,12 +116,10 @@ body {
 }
 
 .logo-sim{
-    margin: 0px 0px 0px 0px;
-    background-image: url(imgs/sim-ico.ico);
-    background-size: 48px 48px;
-    height: 48px;
-    width: 48px;
-    image-rendering:optimizeQuality;
+    background-image: url(imgs/sim_logo_nb.png);
+    background-size: 40px 40px;
+    height: 40px;
+    width: 40px;
 }
 
 .logo-sim-lg {

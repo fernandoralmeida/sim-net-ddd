@@ -7,14 +7,13 @@
     ViewData["ActivePage"] = AdminNavPages.Index;
 }
 
-<h5>Usuários</h5>
-
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
 <div>
-    <table class="table table-bordered">
+    <table class="table">
+        <caption>Lista de Usuários</caption>
         <thead>
-            <tr class="bg-white">
+            <tr>
                 <th>
                     User Name
                 </th>
@@ -37,7 +36,7 @@
         <tbody>
             @foreach (var item in Model.Input.Users)
             {
-                <tr class="border-bottom">
+                <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.UserName)
                     </td>
