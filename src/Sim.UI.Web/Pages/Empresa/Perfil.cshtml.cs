@@ -67,14 +67,16 @@ namespace Sim.UI.Web.Pages.Empresa
             return Page();
         }
 
-        public async Task<IActionResult> OnGetRWSAsync()
+        public async Task<IActionResult> OnPostRWSAsync()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-
+                        
             var rws = await _receitaWS.ConsultarCPNJAsync(new Functions.Mask().Remove(Input.CNPJ));
+            
+            Input = new();
             Input = _mapper.Map<VMEmpresa>(rws);
 
             foreach (var at in rws.AtividadePrincipal)
@@ -101,6 +103,8 @@ namespace Sim.UI.Web.Pages.Empresa
                 }
 
             Input.QsaList = list;
+
+            await TryUpdateModelAsync<VMEmpresa>(Input, "", s => s.Nome_Empresarial, s => s.Nome_Fantasia);
 
             return Page();
         }

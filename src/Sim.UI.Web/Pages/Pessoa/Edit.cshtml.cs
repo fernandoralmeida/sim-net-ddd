@@ -29,7 +29,7 @@ namespace Sim.UI.Web.Pages.Pessoa
         [TempData]
         public string StatusMessage { get; set; }
 
-        [BindProperty]
+        [BindProperty(SupportsGet = true)]
         public InputModel Input { get; set; }
         public class InputModel
         {

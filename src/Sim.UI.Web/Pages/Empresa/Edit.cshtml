@@ -186,10 +186,10 @@
                     <span asp-validation-for="Input.Capital_Social" class="text-danger"></span>
                 </div>
             </div>
-            <table class="table table-borderless bg-white">
+            <table class="table">
                 <caption>Quadro Social Administrativo</caption>
                 <thead>
-                    <tr class="border-bottom shadow-sm">
+                    <tr>
                         <th>Qualificacao</th>
                         <th>Nome</th>
                     </tr>
@@ -200,7 +200,7 @@
 
                         foreach (var item in Model.Input.QsaList)
                         {
-                            <tr class="border-bottom">
+                            <tr>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Qualificacao)
                                 </td>
