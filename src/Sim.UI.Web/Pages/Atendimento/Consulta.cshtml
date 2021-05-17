@@ -44,7 +44,7 @@
 </div>
 
 <div>
-    <table class="table table-hover">
+    <table class="table">
         <caption>Lista de atendimentos!</caption>
         <thead>
             <tr>
@@ -60,7 +60,7 @@
                 <th>
                     Cliente
                 </th>
-                <th width="180px">
+                <th>
                     Servicos
                 </th>
                 <th>
@@ -68,9 +68,6 @@
                 </th>
                 <th>
                     Canal
-                </th>
-                <th>
-                    Ações
                 </th>
             </tr>
         </thead>
@@ -117,10 +114,6 @@
                             @Html.DisplayFor(modelItem => item.Setor)
                         <td>
                             @Html.DisplayFor(modelItem => item.Canal)
-                        </td>
-                        <td>
-                            <a href="#" class="link-secondary" title="Alterar informações"><i class="far fa-edit"></i></a>
-                            <a href="#" class="link-danger" title="Excluir informações"><i class="far fa-trash-alt"></i></a>
                         </td>
                     </tr>
                 }}

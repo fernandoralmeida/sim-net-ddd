@@ -25,6 +25,9 @@ namespace Sim.UI.Web.AutoMapper
             CreateMap<VMEmpresa, CNPJ>();
             CreateMap<CNPJ, VMEmpresa>().ReverseMap();
 
+            CreateMap<Qsa, QSA>();
+            CreateMap<QSA, Qsa>().ReverseMap();
+
             CreateMap<VMEmpresa, Empresa>();
             CreateMap<Empresa, VMEmpresa>().ReverseMap();
 

@@ -46,16 +46,6 @@ namespace Sim.UI.Web.Pages.Empresa
                 
                 Input = _mapper.Map<VMEmpresa>(emp);
 
-                List<QSA> list = new List<QSA>();
-
-                if (emp.QSAs != null)
-                    foreach (var obj in emp.QSAs)
-                    {
-                        
-                        list.Add(new QSA() { Nome = obj.Nome, Qualificacao = obj.Qualificacao });
-                    }
-
-                Input.QsaList = list;
             });
 
             await t;
@@ -67,49 +57,9 @@ namespace Sim.UI.Web.Pages.Empresa
             return Page();
         }
 
-        public async Task<IActionResult> OnPostRWSAsync()
-        {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-                        
-            var rws = await _receitaWS.ConsultarCPNJAsync(new Functions.Mask().Remove(Input.CNPJ));
-            
-            Input = new();
-            Input = _mapper.Map<VMEmpresa>(rws);
 
-            foreach (var at in rws.AtividadePrincipal)
-            {
-                Input.CNAE_Principal = at.Code;
-                Input.Atividade_Principal = at.Text;
-            }
 
-            StringBuilder sb = new StringBuilder();
-            foreach (var at in rws.AtividadesSecundarias)
-            {
-                sb.AppendLine(string.Format("{0} - {1}", at.Code, at.Text));
-            }
-
-            Input.Atividade_Secundarias = sb.ToString().Trim();
-
-            List<QSA> list = new List<QSA>();
-
-            if (rws.Qsa != null)
-                foreach (var obj in rws.Qsa)
-                {
-
-                    list.Add(new QSA() { Nome = obj.Nome, Qualificacao = obj.Qual });
-                }
-
-            Input.QsaList = list;
-
-            await TryUpdateModelAsync<VMEmpresa>(Input, "", s => s.Nome_Empresarial, s => s.Nome_Fantasia);
-
-            return Page();
-        }
-
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAtualizarAsync()
         {
 
             if (!ModelState.IsValid)
@@ -128,7 +78,7 @@ namespace Sim.UI.Web.Pages.Empresa
 
             await t;
 
-            return RedirectToPage();
+            return RedirectToPage("/Empresa/Index");
         }
     }
 }

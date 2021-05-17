@@ -15,23 +15,23 @@ namespace Sim.Cross.Data.Config.Entity
         {
             builder.HasKey(c => c.Id);
             builder.Property(c => c.Segunda)
-                .HasColumnType("varchar(2000)");
+                .HasColumnType("varchar(max)");
             builder.Property(c => c.Terca)
-                .HasColumnType("varchar(2000)");
+                .HasColumnType("varchar(max)");
             builder.Property(c => c.Quarta)
-                .HasColumnType("varchar(2000)");
+                .HasColumnType("varchar(max)");
             builder.Property(c => c.Quinta)
-                .HasColumnType("varchar(2000)");
+                .HasColumnType("varchar(max)");
             builder.Property(c => c.Sexta)
-                .HasColumnType("varchar(2000)");
+                .HasColumnType("varchar(max)");
             builder.Property(c => c.Sabado)
-                .HasColumnType("varchar(2000)");
+                .HasColumnType("varchar(max)");
             builder.Property(c => c.ProximaSemana)
-                .HasColumnType("varchar(2000)");
+                .HasColumnType("varchar(max)");
             builder.Property(c => c.Prioridades)
-                .HasColumnType("varchar(2000)");
+                .HasColumnType("varchar(max)");
             builder.Property(c => c.Anotacao)
-                .HasColumnType("varchar(2000)");
+                .HasColumnType("varchar(max)");
         }
     }
 }

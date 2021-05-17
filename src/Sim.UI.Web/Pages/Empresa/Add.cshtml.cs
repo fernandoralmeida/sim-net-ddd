@@ -39,10 +39,6 @@ namespace Sim.UI.Web.Pages.Empresa
         [TempData]
         public string StatusMessage { get; set; }
 
-        [BindProperty(SupportsGet = true)]
-        [DisplayName("Quadro Administrativo")]
-        public string Lista { get; set; }
-
         private async Task LoadAsync(string cnpj)
         {
 
@@ -63,14 +59,9 @@ namespace Sim.UI.Web.Pages.Empresa
 
             Input.Atividade_Secundarias = sb.ToString().Trim();
 
-            sb.Clear();
+            var empresa = _mapper.Map<Empresa>(Input);
 
-            foreach (var q in rws.Qsa)
-            {
-                sb.AppendLine(string.Format("{0}: {1};", q.Qual, q.Nome));
-            }
-
-            Lista = sb.ToString();
+            _appServiceEmpresa.Add(empresa);
         }
 
         public async Task<IActionResult> OnGetAsync(string id)
@@ -97,27 +88,6 @@ namespace Sim.UI.Web.Pages.Empresa
             {                
 
                 var empresa = _mapper.Map<Empresa>(Input);
-
-                if (Lista != null)
-                {
-                    var qsa = new List<QSA>();
-
-                    string[] st = Lista.ToString().Split(';');
-
-                    foreach (var obj in st)
-                    {
-                        var s = obj.Trim();
-
-                        if(s != string.Empty)
-                        {
-                            string[] i = s.ToString().Split(':');
-                            qsa.Add(new QSA() { Qualificacao = i[0].Trim(), Nome = i[1].Trim() });
-                        }
-
-                    }
-
-                    empresa.QSAs = qsa;
-                }
 
                 _appServiceEmpresa.Add(empresa);
 

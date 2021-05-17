@@ -38,7 +38,7 @@ namespace Sim.Cross.Data.Repository.SDE
 
         public IEnumerable<Empresa> ListEmpresasQsa(Guid id)
         {
-            var empresas = _db.Empresa.Include(d => d.QSAs).Where(c => c.Id == id);
+            var empresas = _db.Empresa.Include(d => d.QSA).Where(c => c.Id == id);
             return empresas;
         }
     }

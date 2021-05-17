@@ -24,11 +24,11 @@ namespace Sim.Cross.Data.Config.Entity
                 .HasColumnType("varchar(150)");
             */
             builder.Property(c => c.Veiculo)
-                .HasColumnType("varchar(50)");
+                .HasColumnType("varchar(max)");
             builder.Property(c => c.Processo)
-                .HasColumnType("varchar(15)");
+                .HasColumnType("varchar(max)");
             builder.Property(c => c.Situacao)
-                .HasColumnType("varchar(20)");
+                .HasColumnType("varchar(max)");
         }
     }
 }

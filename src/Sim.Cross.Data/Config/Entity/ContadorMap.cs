@@ -18,15 +18,15 @@ namespace Sim.Cross.Data.Config.Entity
             builder.Property(c => c.Numero)
                 .ValueGeneratedOnAdd()
                 .HasValueGenerator<GeradorProtocolo>()
-                .HasColumnType("varchar(128)"); 
+                .HasColumnType("varchar(max)"); 
 
             builder
                 .Property(c => c.Modulo)
-                .HasColumnType("varchar(50)");
+                .HasColumnType("varchar(max)");
 
             builder
                 .Property(c => c.AppUserId)
-                .HasColumnType("nvarchar(128)");
+                .HasColumnType("nvarchar(max)");
         }
 
     }

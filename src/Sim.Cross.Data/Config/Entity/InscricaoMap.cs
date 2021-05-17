@@ -16,7 +16,7 @@ namespace Sim.Cross.Data.Config.Entity
         {
             builder.HasKey(c => c.Id);
             builder.Property(c => c.Owner_Setor)
-                .HasColumnType("varchar(20)");
+                .HasColumnType("varchar(max)");
         }
     }
 }

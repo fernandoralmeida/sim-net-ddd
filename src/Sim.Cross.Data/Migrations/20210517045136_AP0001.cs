@@ -13,9 +13,9 @@ namespace Sim.Cross.Data.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Protocolo = table.Column<string>(type: "varchar(256)", nullable: false),
-                    FormaAtuacao = table.Column<string>(type: "varchar(50)", nullable: true),
-                    Local = table.Column<string>(type: "varchar(50)", nullable: true),
-                    Atividade = table.Column<string>(type: "varchar(256)", nullable: true),
+                    FormaAtuacao = table.Column<string>(type: "varchar(max)", nullable: true),
+                    Local = table.Column<string>(type: "varchar(max)", nullable: true),
+                    Atividade = table.Column<string>(type: "varchar(max)", nullable: true),
                     Data_Cadastro = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Ultima_Alteracao = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Ativo = table.Column<bool>(type: "bit", nullable: false)
@@ -33,12 +33,12 @@ namespace Sim.Cross.Data.Migrations
                     CNPJ = table.Column<string>(type: "varchar(18)", nullable: false),
                     Tipo = table.Column<string>(type: "varchar(20)", nullable: true),
                     Data_Abertura = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Nome_Empresarial = table.Column<string>(type: "varchar(150)", nullable: true),
-                    Nome_Fantasia = table.Column<string>(type: "varchar(150)", nullable: true),
+                    Nome_Empresarial = table.Column<string>(type: "varchar(max)", nullable: true),
+                    Nome_Fantasia = table.Column<string>(type: "varchar(max)", nullable: true),
                     Porte = table.Column<string>(type: "varchar(20)", nullable: true),
                     CNAE_Principal = table.Column<string>(type: "varchar(20)", nullable: true),
-                    Atividade_Principal = table.Column<string>(type: "varchar(999)", nullable: true),
-                    Atividade_Secundarias = table.Column<string>(type: "varchar(999)", nullable: true),
+                    Atividade_Principal = table.Column<string>(type: "varchar(max)", nullable: true),
+                    Atividade_Secundarias = table.Column<string>(type: "varchar(max)", nullable: true),
                     Natureza_Juridica = table.Column<string>(type: "varchar(150)", nullable: true),
                     CEP = table.Column<string>(type: "varchar(10)", nullable: true),
                     Logradouro = table.Column<string>(type: "varchar(150)", nullable: true),
@@ -86,25 +86,25 @@ namespace Sim.Cross.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Nome = table.Column<string>(type: "varchar(150)", nullable: false),
-                    Nome_Social = table.Column<string>(type: "varchar(150)", nullable: true),
+                    Nome = table.Column<string>(type: "varchar(max)", nullable: false),
+                    Nome_Social = table.Column<string>(type: "varchar(max)", nullable: true),
                     Data_Nascimento = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CPF = table.Column<string>(type: "varchar(14)", nullable: false),
-                    RG = table.Column<string>(type: "varchar(12)", nullable: true),
-                    RG_Emissor = table.Column<string>(type: "varchar(4)", nullable: true),
+                    RG = table.Column<string>(type: "varchar(max)", nullable: true),
+                    RG_Emissor = table.Column<string>(type: "varchar(max)", nullable: true),
                     RG_Emissor_UF = table.Column<string>(type: "varchar(2)", nullable: true),
                     Genero = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Deficiencia = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CEP = table.Column<string>(type: "varchar(10)", nullable: true),
-                    Logradouro = table.Column<string>(type: "varchar(150)", nullable: true),
-                    Numero = table.Column<string>(type: "varchar(5)", nullable: true),
-                    Complemento = table.Column<string>(type: "varchar(20)", nullable: true),
-                    Bairro = table.Column<string>(type: "varchar(50)", nullable: true),
-                    Cidade = table.Column<string>(type: "varchar(50)", nullable: true),
+                    CEP = table.Column<string>(type: "varchar(max)", nullable: true),
+                    Logradouro = table.Column<string>(type: "varchar(max)", nullable: true),
+                    Numero = table.Column<string>(type: "varchar(max)", nullable: true),
+                    Complemento = table.Column<string>(type: "varchar(max)", nullable: true),
+                    Bairro = table.Column<string>(type: "varchar(max)", nullable: true),
+                    Cidade = table.Column<string>(type: "varchar(max)", nullable: true),
                     UF = table.Column<string>(type: "varchar(2)", nullable: true),
-                    Tel_Movel = table.Column<string>(type: "varchar(15)", nullable: true),
-                    Tel_Fixo = table.Column<string>(type: "varchar(15)", nullable: true),
-                    Email = table.Column<string>(type: "varchar(150)", nullable: true),
+                    Tel_Movel = table.Column<string>(type: "varchar(max)", nullable: true),
+                    Tel_Fixo = table.Column<string>(type: "varchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "varchar(max)", nullable: true),
                     Data_Cadastro = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Ultima_Alteracao = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Ativo = table.Column<bool>(type: "bit", nullable: false)
@@ -119,15 +119,15 @@ namespace Sim.Cross.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Segunda = table.Column<string>(type: "varchar(2000)", nullable: true),
-                    Terca = table.Column<string>(type: "varchar(2000)", nullable: true),
-                    Quarta = table.Column<string>(type: "varchar(2000)", nullable: true),
-                    Quinta = table.Column<string>(type: "varchar(2000)", nullable: true),
-                    Sexta = table.Column<string>(type: "varchar(2000)", nullable: true),
-                    Sabado = table.Column<string>(type: "varchar(2000)", nullable: true),
-                    ProximaSemana = table.Column<string>(type: "varchar(2000)", nullable: true),
-                    Prioridades = table.Column<string>(type: "varchar(2000)", nullable: true),
-                    Anotacao = table.Column<string>(type: "varchar(2000)", nullable: true),
+                    Segunda = table.Column<string>(type: "varchar(max)", nullable: true),
+                    Terca = table.Column<string>(type: "varchar(max)", nullable: true),
+                    Quarta = table.Column<string>(type: "varchar(max)", nullable: true),
+                    Quinta = table.Column<string>(type: "varchar(max)", nullable: true),
+                    Sexta = table.Column<string>(type: "varchar(max)", nullable: true),
+                    Sabado = table.Column<string>(type: "varchar(max)", nullable: true),
+                    ProximaSemana = table.Column<string>(type: "varchar(max)", nullable: true),
+                    Prioridades = table.Column<string>(type: "varchar(max)", nullable: true),
+                    Anotacao = table.Column<string>(type: "varchar(max)", nullable: true),
                     Data = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Ultima_Alteracao = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Owner_AppUser_Id = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -143,9 +143,9 @@ namespace Sim.Cross.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Numero = table.Column<string>(type: "varchar(128)", nullable: true),
-                    Modulo = table.Column<string>(type: "varchar(50)", nullable: true),
-                    AppUserId = table.Column<string>(type: "nvarchar(128)", nullable: true),
+                    Numero = table.Column<string>(type: "varchar(max)", nullable: true),
+                    Modulo = table.Column<string>(type: "varchar(max)", nullable: true),
+                    AppUserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Data = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
@@ -154,25 +154,12 @@ namespace Sim.Cross.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "QSA",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Nome = table.Column<string>(type: "varchar(150)", nullable: true),
-                    Qualificacao = table.Column<string>(type: "varchar(50)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_QSA", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Secretaria",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Nome = table.Column<string>(type: "varchar(128)", nullable: true),
-                    Owner = table.Column<string>(type: "varchar(128)", nullable: true),
+                    Nome = table.Column<string>(type: "varchar(max)", nullable: true),
+                    Owner = table.Column<string>(type: "varchar(max)", nullable: true),
                     Ativo = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -185,8 +172,8 @@ namespace Sim.Cross.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Nome = table.Column<string>(type: "varchar(128)", nullable: true),
-                    Owner = table.Column<string>(type: "varchar(128)", nullable: true),
+                    Nome = table.Column<string>(type: "varchar(max)", nullable: true),
+                    Owner = table.Column<string>(type: "varchar(max)", nullable: true),
                     Ativo = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -201,11 +188,11 @@ namespace Sim.Cross.Data.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     InscricaoMunicipal = table.Column<int>(type: "int", nullable: false),
                     Autorizacao = table.Column<string>(type: "varchar(256)", nullable: false),
-                    Veiculo = table.Column<string>(type: "varchar(50)", nullable: true),
+                    Veiculo = table.Column<string>(type: "varchar(max)", nullable: true),
                     Emissao = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Validade = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Processo = table.Column<string>(type: "varchar(15)", nullable: true),
-                    Situacao = table.Column<string>(type: "varchar(20)", nullable: true),
+                    Processo = table.Column<string>(type: "varchar(max)", nullable: true),
+                    Situacao = table.Column<string>(type: "varchar(max)", nullable: true),
                     DiaDesde = table.Column<DateTime>(type: "datetime2", nullable: true),
                     AmbulanteId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
@@ -216,6 +203,29 @@ namespace Sim.Cross.Data.Migrations
                         name: "FK_DIA_Ambulante_AmbulanteId",
                         column: x => x.AmbulanteId,
                         principalTable: "Ambulante",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "QSA",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Nome = table.Column<string>(type: "varchar(max)", nullable: true),
+                    Qual = table.Column<string>(type: "varchar(max)", nullable: true),
+                    QualRepLegal = table.Column<string>(type: "varchar(max)", nullable: true),
+                    NomeRepLegal = table.Column<string>(type: "varchar(max)", nullable: true),
+                    PaisOrigem = table.Column<string>(type: "varchar(max)", nullable: true),
+                    EmpresaId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_QSA", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_QSA_Empresa_EmpresaId",
+                        column: x => x.EmpresaId,
+                        principalTable: "Empresa",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -249,14 +259,14 @@ namespace Sim.Cross.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Protocolo = table.Column<string>(type: "varchar(128)", nullable: false),
+                    Protocolo = table.Column<string>(type: "varchar(256)", nullable: false),
                     Data = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DataF = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Setor = table.Column<string>(type: "varchar(50)", nullable: true),
-                    Canal = table.Column<string>(type: "varchar(50)", nullable: true),
-                    Servicos = table.Column<string>(type: "varchar(150)", nullable: true),
-                    Descricao = table.Column<string>(type: "varchar(150)", nullable: true),
-                    Status = table.Column<string>(type: "varchar(20)", nullable: true),
+                    Setor = table.Column<string>(type: "varchar(max)", nullable: true),
+                    Canal = table.Column<string>(type: "varchar(max)", nullable: true),
+                    Servicos = table.Column<string>(type: "varchar(max)", nullable: true),
+                    Descricao = table.Column<string>(type: "varchar(max)", nullable: true),
+                    Status = table.Column<string>(type: "varchar(max)", nullable: true),
                     Ultima_Alteracao = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Ativo = table.Column<bool>(type: "bit", nullable: false),
                     Owner_AppUser_Id = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -286,7 +296,7 @@ namespace Sim.Cross.Data.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Numero = table.Column<int>(type: "int", nullable: false),
-                    Owner_Setor = table.Column<string>(type: "varchar(20)", nullable: true),
+                    Owner_Setor = table.Column<string>(type: "varchar(max)", nullable: true),
                     Owner_AppUser_Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Data_Inscricao = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ParticipanteId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
@@ -317,35 +327,11 @@ namespace Sim.Cross.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "EmpresaQSA",
-                columns: table => new
-                {
-                    EmpresaId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    QSAsId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_EmpresaQSA", x => new { x.EmpresaId, x.QSAsId });
-                    table.ForeignKey(
-                        name: "FK_EmpresaQSA_Empresa_EmpresaId",
-                        column: x => x.EmpresaId,
-                        principalTable: "Empresa",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_EmpresaQSA_QSA_QSAsId",
-                        column: x => x.QSAsId,
-                        principalTable: "QSA",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Setor",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Nome = table.Column<string>(type: "varchar(50)", nullable: true),
+                    Nome = table.Column<string>(type: "varchar(max)", nullable: true),
                     SecretariaId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     Ativo = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -365,7 +351,7 @@ namespace Sim.Cross.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Nome = table.Column<string>(type: "varchar(50)", nullable: true),
+                    Nome = table.Column<string>(type: "varchar(max)", nullable: true),
                     SecretariaId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     SetorId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     Ativo = table.Column<bool>(type: "bit", nullable: false)
@@ -392,7 +378,7 @@ namespace Sim.Cross.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Nome = table.Column<string>(type: "varchar(50)", nullable: true),
+                    Nome = table.Column<string>(type: "varchar(max)", nullable: true),
                     SecretariaId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     SetorId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     Ativo = table.Column<bool>(type: "bit", nullable: false)
@@ -469,11 +455,6 @@ namespace Sim.Cross.Data.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_EmpresaQSA_QSAsId",
-                table: "EmpresaQSA",
-                column: "QSAsId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Inscricao_EmpresaId",
                 table: "Inscricao",
                 column: "EmpresaId");
@@ -493,6 +474,11 @@ namespace Sim.Cross.Data.Migrations
                 table: "Pessoa",
                 column: "CPF",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_QSA_EmpresaId",
+                table: "QSA",
+                column: "EmpresaId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Servico_SecretariaId",
@@ -525,9 +511,6 @@ namespace Sim.Cross.Data.Migrations
                 name: "DIA");
 
             migrationBuilder.DropTable(
-                name: "EmpresaQSA");
-
-            migrationBuilder.DropTable(
                 name: "Inscricao");
 
             migrationBuilder.DropTable(
@@ -535,6 +518,9 @@ namespace Sim.Cross.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Protocolos");
+
+            migrationBuilder.DropTable(
+                name: "QSA");
 
             migrationBuilder.DropTable(
                 name: "Servico");
@@ -546,16 +532,13 @@ namespace Sim.Cross.Data.Migrations
                 name: "Ambulante");
 
             migrationBuilder.DropTable(
-                name: "QSA");
-
-            migrationBuilder.DropTable(
-                name: "Empresa");
-
-            migrationBuilder.DropTable(
                 name: "Evento");
 
             migrationBuilder.DropTable(
                 name: "Pessoa");
+
+            migrationBuilder.DropTable(
+                name: "Empresa");
 
             migrationBuilder.DropTable(
                 name: "Setor");

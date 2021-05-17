@@ -15,7 +15,7 @@ namespace Sim.Cross.Data.Config.Entity
         {
             builder.HasKey(c => c.Id);
             builder.Property(c => c.Nome)
-                .HasColumnType("varchar(50)");
+                .HasColumnType("varchar(max)");
         }
     }
 }

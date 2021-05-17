@@ -19,22 +19,13 @@
                     <span class="input-group-text">CNPJ</span>
                     <input asp-for="Input.CNPJ" class="form-control" placeholder="CPF" aria-describedby="button-addon2" id="inputCNPJ">
 
-                    @if (Model.Input.ListaEmpresas == null)
-                    {
+                   
                         <a asp-area="" asp-page="/Empresa/Add" asp-route-id="@Model.Input.CNPJRes" class="btn btn-success" title="Adicionar Nova Empresa"><i class="fa fa-plus"></i></a>
-                    }
-                    else
-                    {
-                        @if (Model.Input.ListaEmpresas.Count() == 0)
-
-                        {
+                    
                             <a asp-area="" asp-page="/Empresa/Add" asp-route-id="@Model.Input.CNPJRes" class="btn btn-success" title="Adicionar Nova Empresa"><i class="fa fa-plus"></i></a>
-                        }
-                        else
-                        {
+                        
                             <button class="btn btn-primary" type="submit" role="button" id="button-addon2"><i class="fa fa-search"></i></button>
-                        }
-                    }
+                        
                 </div>  
                 <span asp-validation-for="Input.CNPJ" class="text-danger"></span>
             </div>
@@ -102,7 +93,7 @@
                     </td>
 
                     <td>                        
-                        <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary" title="Alterar informações"><i class="far fa-edit"></i></a>
+                        <a asp-page="./Update" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary" title="Alterar informações"><i class="far fa-edit"></i></a>
                         <a asp-page="./Remove" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger" title="Excluir informações"><i class="fa fa-trash-alt" aria-hidden="true"></i></a>
                     </td>
                 </tr>

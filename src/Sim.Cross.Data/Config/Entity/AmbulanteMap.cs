@@ -14,17 +14,18 @@ namespace Sim.Cross.Data.Config.Entity
         public void Configure(EntityTypeBuilder<Ambulante> builder)
         {
             builder.HasKey(c => c.Id);
+            builder.Property(c => c.Protocolo)
+                .HasColumnType("varchar(256)");
             builder.HasIndex(c => c.Protocolo).IsUnique();
             builder.Property(c => c.Protocolo)
-                .HasColumnType("varchar(256)")
                 .IsRequired();
 
             builder.Property(c => c.FormaAtuacao)
-                .HasColumnType("varchar(50)");
+                .HasColumnType("varchar(max)");
             builder.Property(c => c.Local)
-                .HasColumnType("varchar(50)");
+                .HasColumnType("varchar(max)");
             builder.Property(c => c.Atividade)
-                .HasColumnType("varchar(256)");
+                .HasColumnType("varchar(max)");
 
         }
     }

@@ -16,9 +16,9 @@
         <div class="col-md-8">
 
             <div class="row g-2 mb-3" hidden>
-                <label asp-for="Input.Empresa_Id" class="control-label"></label>
-                <input asp-for="Input.Empresa_Id" class="form-control" />
-                <span asp-validation-for="Input.Empresa_Id" class="text-danger"></span>
+                <label asp-for="Input.Id" class="control-label"></label>
+                <input asp-for="Input.Id" class="form-control" />
+                <span asp-validation-for="Input.Id" class="text-danger"></span>
             </div>
 
             <div class="row g-2 mb-2">
@@ -37,7 +37,7 @@
                 </div>
                 <div class="col-md-3">
                     <label asp-for="Input.Data_Abertura" class="form-label" for="inputAbertura"></label>
-                    <input asp-for="Input.Data_Abertura" class="form-control" id="inputAbertura" />
+                    <label asp-for="Input.Data_Abertura" class="form-control" id="inputAbertura">@Model.Input.Data_Abertura.Value.Date</label>
                     <span asp-validation-for="Input.Data_Abertura" class="text-danger"></span>
                 </div>
             </div>
@@ -195,14 +195,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if (Model.Input.QsaList != null)
+                    @if (Model.Input.QSA != null)
                     {
 
-                        foreach (var item in Model.Input.QsaList)
+                        foreach (var item in Model.Input.QSA.ToList())
                         {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Qualificacao)
+                                    @Html.DisplayFor(modelItem => item.Qual)
                                 </td>
 
                                 <td>
@@ -218,7 +218,7 @@
             <div class="row g-2">
                 <div class="d-grid gap-2 d-md-block">
                     <a asp-page="./Index" role="button" type="button" class="btn btn-secondary">Voltar</a>
-                    <button type="submit" role="button" class="btn btn-primary">Gravar</button>
+                    <button type="submit" asp-page-handler="Atualizar" role="button" class="btn btn-primary">Gravar</button>
                 </div>
             </div>
         </div>

@@ -16,21 +16,21 @@ namespace Sim.Cross.Data.Config.Entity
         {
             builder.HasKey(c => c.Id);
             builder.Property(c => c.Protocolo)
-                .HasColumnType("varchar(128)");
+                .HasColumnType("varchar(256)");
             builder.HasIndex(c => c.Protocolo).IsUnique();
             builder.Property(c => c.Protocolo)
                 .IsRequired();
 
             builder.Property(c => c.Setor)
-                .HasColumnType("varchar(50)");
+                .HasColumnType("varchar(max)");
             builder.Property(c => c.Canal)
-                .HasColumnType("varchar(50)");
+                .HasColumnType("varchar(max)");
             builder.Property(c => c.Servicos)
-                .HasColumnType("varchar(150)");
+                .HasColumnType("varchar(max)");
             builder.Property(c => c.Descricao)
-                .HasColumnType("varchar(150)");
+                .HasColumnType("varchar(max)");
             builder.Property(c => c.Status)
-                .HasColumnType("varchar(20)");
+                .HasColumnType("varchar(max)");
 
         }
     }

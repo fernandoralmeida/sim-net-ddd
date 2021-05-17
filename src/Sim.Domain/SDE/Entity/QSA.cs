@@ -15,8 +15,9 @@ namespace Sim.Domain.SDE.Entity
         }
         public Guid Id { get; set; }
         public string Nome { get; set; }
-        public string Qualificacao { get; set; }
-
-        public virtual ICollection<Empresa> Empresa { get; set; }
+        public string Qual { get; set; }
+        public string QualRepLegal { get; set; }
+        public string NomeRepLegal { get; set; }
+        public string PaisOrigem { get; set; }
     }
 }

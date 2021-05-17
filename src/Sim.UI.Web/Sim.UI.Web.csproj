@@ -32,4 +32,9 @@
     <ProjectReference Include="..\Sim.Service\Sim.Service.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\Sde\" />
+    <Folder Include="Pages\SalaEmpreendedor\" />
+  </ItemGroup>
+
 </Project>

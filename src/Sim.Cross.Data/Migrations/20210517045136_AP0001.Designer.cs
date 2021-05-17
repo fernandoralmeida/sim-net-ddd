@@ -10,7 +10,7 @@ using Sim.Cross.Data.Context;
 namespace Sim.Cross.Data.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20210502040643_AP0001")]
+    [Migration("20210517045136_AP0001")]
     partial class AP0001
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -36,21 +36,6 @@ namespace Sim.Cross.Data.Migrations
                     b.ToTable("AmbulantePessoa");
                 });
 
-            modelBuilder.Entity("EmpresaQSA", b =>
-                {
-                    b.Property<Guid>("EmpresaId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("QSAsId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("EmpresaId", "QSAsId");
-
-                    b.HasIndex("QSAsId");
-
-                    b.ToTable("EmpresaQSA");
-                });
-
             modelBuilder.Entity("Sim.Domain.SDE.Entity.Ambulante", b =>
                 {
                     b.Property<Guid>("Id")
@@ -58,7 +43,7 @@ namespace Sim.Cross.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Atividade")
-                        .HasColumnType("varchar(256)");
+                        .HasColumnType("varchar(max)");
 
                     b.Property<bool>("Ativo")
                         .HasColumnType("bit");
@@ -67,10 +52,10 @@ namespace Sim.Cross.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("FormaAtuacao")
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("varchar(max)");
 
                     b.Property<string>("Local")
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("varchar(max)");
 
                     b.Property<string>("Protocolo")
                         .IsRequired()
@@ -110,16 +95,16 @@ namespace Sim.Cross.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Processo")
-                        .HasColumnType("varchar(15)");
+                        .HasColumnType("varchar(max)");
 
                     b.Property<string>("Situacao")
-                        .HasColumnType("varchar(20)");
+                        .HasColumnType("varchar(max)");
 
                     b.Property<DateTime?>("Validade")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Veiculo")
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("varchar(max)");
 
                     b.HasKey("Id");
 
@@ -138,10 +123,10 @@ namespace Sim.Cross.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Atividade_Principal")
-                        .HasColumnType("varchar(999)");
+                        .HasColumnType("varchar(max)");
 
                     b.Property<string>("Atividade_Secundarias")
-                        .HasColumnType("varchar(999)");
+                        .HasColumnType("varchar(max)");
 
                     b.Property<string>("Bairro")
                         .HasColumnType("varchar(50)");
@@ -190,10 +175,10 @@ namespace Sim.Cross.Data.Migrations
                         .HasColumnType("varchar(150)");
 
                     b.Property<string>("Nome_Empresarial")
-                        .HasColumnType("varchar(150)");
+                        .HasColumnType("varchar(max)");
 
                     b.Property<string>("Nome_Fantasia")
-                        .HasColumnType("varchar(150)");
+                        .HasColumnType("varchar(max)");
 
                     b.Property<string>("Numero")
                         .HasColumnType("varchar(5)");
@@ -234,20 +219,20 @@ namespace Sim.Cross.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Bairro")
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("varchar(max)");
 
                     b.Property<string>("CEP")
-                        .HasColumnType("varchar(10)");
+                        .HasColumnType("varchar(max)");
 
                     b.Property<string>("CPF")
                         .IsRequired()
                         .HasColumnType("varchar(14)");
 
                     b.Property<string>("Cidade")
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("varchar(max)");
 
                     b.Property<string>("Complemento")
-                        .HasColumnType("varchar(20)");
+                        .HasColumnType("varchar(max)");
 
                     b.Property<DateTime?>("Data_Cadastro")
                         .HasColumnType("datetime2");
@@ -260,38 +245,38 @@ namespace Sim.Cross.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
-                        .HasColumnType("varchar(150)");
+                        .HasColumnType("varchar(max)");
 
                     b.Property<string>("Genero")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Logradouro")
-                        .HasColumnType("varchar(150)");
+                        .HasColumnType("varchar(max)");
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnType("varchar(150)");
+                        .HasColumnType("varchar(max)");
 
                     b.Property<string>("Nome_Social")
-                        .HasColumnType("varchar(150)");
+                        .HasColumnType("varchar(max)");
 
                     b.Property<string>("Numero")
-                        .HasColumnType("varchar(5)");
+                        .HasColumnType("varchar(max)");
 
                     b.Property<string>("RG")
-                        .HasColumnType("varchar(12)");
+                        .HasColumnType("varchar(max)");
 
                     b.Property<string>("RG_Emissor")
-                        .HasColumnType("varchar(4)");
+                        .HasColumnType("varchar(max)");
 
                     b.Property<string>("RG_Emissor_UF")
                         .HasColumnType("varchar(2)");
 
                     b.Property<string>("Tel_Fixo")
-                        .HasColumnType("varchar(15)");
+                        .HasColumnType("varchar(max)");
 
                     b.Property<string>("Tel_Movel")
-                        .HasColumnType("varchar(15)");
+                        .HasColumnType("varchar(max)");
 
                     b.Property<string>("UF")
                         .HasColumnType("varchar(2)");
@@ -313,13 +298,27 @@ namespace Sim.Cross.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Nome")
-                        .HasColumnType("varchar(150)");
+                    b.Property<Guid?>("EmpresaId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Qualificacao")
-                        .HasColumnType("varchar(50)");
+                    b.Property<string>("Nome")
+                        .HasColumnType("varchar(max)");
+
+                    b.Property<string>("NomeRepLegal")
+                        .HasColumnType("varchar(max)");
+
+                    b.Property<string>("PaisOrigem")
+                        .HasColumnType("varchar(max)");
+
+                    b.Property<string>("Qual")
+                        .HasColumnType("varchar(max)");
+
+                    b.Property<string>("QualRepLegal")
+                        .HasColumnType("varchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EmpresaId");
 
                     b.ToTable("QSA");
                 });
@@ -334,7 +333,7 @@ namespace Sim.Cross.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Canal")
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("varchar(max)");
 
                     b.Property<DateTime?>("Data")
                         .HasColumnType("datetime2");
@@ -343,7 +342,7 @@ namespace Sim.Cross.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Descricao")
-                        .HasColumnType("varchar(150)");
+                        .HasColumnType("varchar(max)");
 
                     b.Property<Guid?>("EmpresaId")
                         .HasColumnType("uniqueidentifier");
@@ -356,16 +355,16 @@ namespace Sim.Cross.Data.Migrations
 
                     b.Property<string>("Protocolo")
                         .IsRequired()
-                        .HasColumnType("varchar(128)");
+                        .HasColumnType("varchar(256)");
 
                     b.Property<string>("Servicos")
-                        .HasColumnType("varchar(150)");
+                        .HasColumnType("varchar(max)");
 
                     b.Property<string>("Setor")
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("varchar(max)");
 
                     b.Property<string>("Status")
-                        .HasColumnType("varchar(20)");
+                        .HasColumnType("varchar(max)");
 
                     b.Property<DateTime?>("Ultima_Alteracao")
                         .HasColumnType("datetime2");
@@ -392,7 +391,7 @@ namespace Sim.Cross.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Nome")
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("varchar(max)");
 
                     b.Property<Guid?>("SecretariaId")
                         .HasColumnType("uniqueidentifier");
@@ -416,17 +415,17 @@ namespace Sim.Cross.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("AppUserId")
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("Data")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Modulo")
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("varchar(max)");
 
                     b.Property<string>("Numero")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varchar(128)");
+                        .HasColumnType("varchar(max)");
 
                     b.HasKey("Id");
 
@@ -490,7 +489,7 @@ namespace Sim.Cross.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Owner_Setor")
-                        .HasColumnType("varchar(20)");
+                        .HasColumnType("varchar(max)");
 
                     b.Property<Guid?>("ParticipanteId")
                         .HasColumnType("uniqueidentifier");
@@ -513,7 +512,7 @@ namespace Sim.Cross.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Anotacao")
-                        .HasColumnType("varchar(2000)");
+                        .HasColumnType("varchar(max)");
 
                     b.Property<bool>("Ativo")
                         .HasColumnType("bit");
@@ -525,28 +524,28 @@ namespace Sim.Cross.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Prioridades")
-                        .HasColumnType("varchar(2000)");
+                        .HasColumnType("varchar(max)");
 
                     b.Property<string>("ProximaSemana")
-                        .HasColumnType("varchar(2000)");
+                        .HasColumnType("varchar(max)");
 
                     b.Property<string>("Quarta")
-                        .HasColumnType("varchar(2000)");
+                        .HasColumnType("varchar(max)");
 
                     b.Property<string>("Quinta")
-                        .HasColumnType("varchar(2000)");
+                        .HasColumnType("varchar(max)");
 
                     b.Property<string>("Sabado")
-                        .HasColumnType("varchar(2000)");
+                        .HasColumnType("varchar(max)");
 
                     b.Property<string>("Segunda")
-                        .HasColumnType("varchar(2000)");
+                        .HasColumnType("varchar(max)");
 
                     b.Property<string>("Sexta")
-                        .HasColumnType("varchar(2000)");
+                        .HasColumnType("varchar(max)");
 
                     b.Property<string>("Terca")
-                        .HasColumnType("varchar(2000)");
+                        .HasColumnType("varchar(max)");
 
                     b.Property<DateTime?>("Ultima_Alteracao")
                         .HasColumnType("datetime2");
@@ -566,10 +565,10 @@ namespace Sim.Cross.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Nome")
-                        .HasColumnType("varchar(128)");
+                        .HasColumnType("varchar(max)");
 
                     b.Property<string>("Owner")
-                        .HasColumnType("varchar(128)");
+                        .HasColumnType("varchar(max)");
 
                     b.HasKey("Id");
 
@@ -586,7 +585,7 @@ namespace Sim.Cross.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Nome")
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("varchar(max)");
 
                     b.Property<Guid?>("SecretariaId")
                         .HasColumnType("uniqueidentifier");
@@ -613,7 +612,7 @@ namespace Sim.Cross.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Nome")
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("varchar(max)");
 
                     b.Property<Guid?>("SecretariaId")
                         .HasColumnType("uniqueidentifier");
@@ -635,10 +634,10 @@ namespace Sim.Cross.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Nome")
-                        .HasColumnType("varchar(128)");
+                        .HasColumnType("varchar(max)");
 
                     b.Property<string>("Owner")
-                        .HasColumnType("varchar(128)");
+                        .HasColumnType("varchar(max)");
 
                     b.HasKey("Id");
 
@@ -660,21 +659,6 @@ namespace Sim.Cross.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("EmpresaQSA", b =>
-                {
-                    b.HasOne("Sim.Domain.SDE.Entity.Empresa", null)
-                        .WithMany()
-                        .HasForeignKey("EmpresaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Sim.Domain.SDE.Entity.QSA", null)
-                        .WithMany()
-                        .HasForeignKey("QSAsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Sim.Domain.SDE.Entity.DIA", b =>
                 {
                     b.HasOne("Sim.Domain.SDE.Entity.Ambulante", "Ambulante")
@@ -682,6 +666,13 @@ namespace Sim.Cross.Data.Migrations
                         .HasForeignKey("AmbulanteId");
 
                     b.Navigation("Ambulante");
+                });
+
+            modelBuilder.Entity("Sim.Domain.SDE.Entity.QSA", b =>
+                {
+                    b.HasOne("Sim.Domain.SDE.Entity.Empresa", null)
+                        .WithMany("QSA")
+                        .HasForeignKey("EmpresaId");
                 });
 
             modelBuilder.Entity("Sim.Domain.Shared.Entity.Atendimento", b =>
@@ -769,6 +760,8 @@ namespace Sim.Cross.Data.Migrations
                     b.Navigation("Atendimentos");
 
                     b.Navigation("Inscricoes");
+
+                    b.Navigation("QSA");
                 });
 
             modelBuilder.Entity("Sim.Domain.SDE.Entity.Pessoa", b =>

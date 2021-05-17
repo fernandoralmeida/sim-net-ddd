@@ -13,7 +13,7 @@ namespace Sim.UI.Web.Pages.Empresa
     {
         [Key]
         [HiddenInput(DisplayValue = false)]
-        public Guid Empresa_Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required(ErrorMessage = "CNPJ requerido")]
         public string CNPJ { get; set; }
@@ -111,7 +111,7 @@ namespace Sim.UI.Web.Pages.Empresa
         public string Capital_Social { get; set; }
 
         //Registros relacionais
-        public virtual ICollection<QSA> QsaList { get; set; }
+        public virtual ICollection<QSA> QSA { get; set; }
 
     }
 }

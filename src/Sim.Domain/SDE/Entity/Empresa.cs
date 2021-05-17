@@ -44,7 +44,7 @@ namespace Sim.Domain.SDE.Entity
         public decimal Capital_Social { get; set; }
 
         //Registros relacionais
-        public virtual ICollection<QSA> QSAs { get; set; }
+        public virtual ICollection<QSA> QSA { get; set; }
         public virtual ICollection<Atendimento> Atendimentos { get; set; }
         public virtual ICollection<Inscricao> Inscricoes { get; set; }
     }

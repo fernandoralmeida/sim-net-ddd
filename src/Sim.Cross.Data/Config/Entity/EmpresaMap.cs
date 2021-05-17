@@ -20,71 +20,71 @@ namespace Sim.Cross.Data.Config.Entity
                 .IsRequired()
                 .HasColumnType("varchar(18)");
 
-            builder.Property(c => c.Tipo).HasColumnType("varchar(20)");
+            builder.Property(c => c.Tipo).HasColumnType("varchar(max)");
 
             builder.Property(c => c.Data_Abertura);
 
             builder.Property(c => c.Nome_Empresarial)
-                .HasColumnType("varchar(150)");
+                .HasColumnType("varchar(max)");
 
             builder.Property(c => c.Nome_Fantasia)
-                .HasColumnType("varchar(150)");
+                .HasColumnType("varchar(max)");
 
             builder.Property(c => c.Porte)
-                .HasColumnType("varchar(20)");
+                .HasColumnType("varchar(max)");
 
             builder.Property(c => c.CNAE_Principal)
-                .HasColumnType("varchar(20)");
+                .HasColumnType("varchar(max)");
 
             builder.Property(c => c.Atividade_Principal)
-                .HasColumnType("varchar(999)");
+                .HasColumnType("varchar(max)");
 
             builder.Property(c => c.Atividade_Secundarias)
-                .HasColumnType("varchar(999)");
+                .HasColumnType("varchar(max)");
 
             builder.Property(c => c.Natureza_Juridica)
-                .HasColumnType("varchar(150)");
+                .HasColumnType("varchar(max)");
 
             builder.Property(c => c.CEP)
                 .HasColumnType("varchar(10)");
 
             builder.Property(c => c.Logradouro)
-                .HasColumnType("varchar(150)");
+                .HasColumnType("varchar(max)");
 
             builder.Property(c => c.Numero)
-                .HasColumnType("varchar(5)");
+                .HasColumnType("varchar(max)");
 
             builder.Property(c => c.Complemento)
-                .HasColumnType("varchar(20)");
+                .HasColumnType("varchar(max)");
 
             builder.Property(c => c.Bairro)
-                .HasColumnType("varchar(50)");
+                .HasColumnType("varchar(max)");
 
             builder.Property(c => c.Municipio)
-                .HasColumnType("varchar(50)");
+                .HasColumnType("varchar(max)");
 
             builder.Property(c => c.UF)
                 .HasColumnType("varchar(2)");
 
             builder.Property(c => c.Telefone)
-                .HasColumnType("varchar(15)");
+                .HasColumnType("varchar(max)");
 
             builder.Property(c => c.Email)
-                .HasColumnType("varchar(150)");
+                .HasColumnType("varchar(max)");
 
             builder.Property(c => c.Ente_Federativo_Resp)
-                .HasColumnType("varchar(50)");
+                .HasColumnType("varchar(max)");
 
             builder.Property(c => c.Situacao_Cadastral)
-                .HasColumnType("varchar(50)");
+                .HasColumnType("varchar(max)");
 
             builder.Property(c => c.Data_Situacao_Cadastral);
 
             builder.Property(c => c.Motivo_Situacao_Cadastral)
-                .HasColumnType("varchar(50)");
+                .HasColumnType("varchar(max)");
 
             builder.Property(c => c.Situacao_Especial)
-                .HasColumnType("varchar(50)");
+                .HasColumnType("varchar(max)");
 
             builder.Property(c => c.Data_Situacao_Especial)
                 .HasColumnType("varchar(10)");

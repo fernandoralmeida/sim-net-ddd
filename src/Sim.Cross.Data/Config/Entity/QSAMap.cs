@@ -17,11 +17,20 @@ namespace Sim.Cross.Data.Config.Entity
 
             builder
                 .Property(c => c.Nome)
-                .HasColumnType("varchar(150)");
+                .HasColumnType("varchar(max)");
 
             builder
-                .Property(c => c.Qualificacao)
-                .HasColumnType("varchar(50)");
+                .Property(c => c.Qual)
+                .HasColumnType("varchar(max)");
+            builder
+                .Property(c => c.QualRepLegal)
+                .HasColumnType("varchar(max)");
+            builder
+                .Property(c => c.NomeRepLegal)
+                .HasColumnType("varchar(max)");
+            builder
+                .Property(c => c.PaisOrigem)
+                .HasColumnType("varchar(max)");
 
         }
     }

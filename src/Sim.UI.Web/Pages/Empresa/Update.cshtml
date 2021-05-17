@@ -1,28 +1,31 @@
 ﻿@page
-@model Sim.UI.Web.Pages.Empresa.AddModel
-
+@model Sim.UI.Web.Pages.Empresa.UpdateModel
 @{
-    ViewData["Title"] = "Novo";
+    ViewData["Title"] = "Edição";
 }
 
-<h5>Incluir Empresa</h5>
+<h5>Atualizar Empresa</h5>
+
 <hr />
+
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
 <div>
     <form class="row" method="post">
         <div class="col-md-8">
 
-            <div class="row g-2 mb-3" hidden>
-                <label asp-for="Input.Id" class="control-label"></label>
+            <div class="row g-2 mb-3">
+                <label asp-for="Input.Id" class="control-label">@Model.Input.Id</label>
                 <input asp-for="Input.Id" class="form-control" />
                 <span asp-validation-for="Input.Id" class="text-danger"></span>
             </div>
-
             <div class="row g-2 mb-2">
-                <div class="col-md-3">
+                <div class="col-md-5">
                     <label asp-for="Input.CNPJ" class="form-label" for="inputCNPJ"></label>
-                    <input asp-for="Input.CNPJ" class="form-control" id="inputCNPJ" />
+                    <div class="input-group mb-3">
+                        <input asp-for="Input.CNPJ" class="form-control" placeholder="CPF" aria-describedby="button-addon2" id="inputCNPJ">
+                        <button asp-page-handler="RWS" class="btn btn-primary" type="submit">Atualizar Dados</button>
+                    </div>
                     <span asp-validation-for="Input.CNPJ" class="text-danger"></span>
                 </div>
                 <div class="col-md-2">
@@ -212,11 +215,12 @@
         <div class="col-md">
             <div class="row g-2">
                 <div class="d-grid gap-2 d-md-block">
-                    <a asp-page="./Index" role="button" type="button" class="btn btn-secondary">Voltar</a> |
+                    <a asp-page="./Index" role="button" type="button" class="btn btn-secondary">Voltar</a>
                     <button type="submit" role="button" class="btn btn-primary">Gravar</button>
                 </div>
             </div>
         </div>
+
     </form>
 </div>
 
