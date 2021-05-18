@@ -18,19 +18,13 @@
                 <div class="input-group">
                     <span class="input-group-text">CNPJ</span>
                     <input asp-for="Input.CNPJ" class="form-control" placeholder="CPF" aria-describedby="button-addon2" id="inputCNPJ">
-
-                   
-                        <a asp-area="" asp-page="/Empresa/Add" asp-route-id="@Model.Input.CNPJRes" class="btn btn-success" title="Adicionar Nova Empresa"><i class="fa fa-plus"></i></a>
-                    
-                            <a asp-area="" asp-page="/Empresa/Add" asp-route-id="@Model.Input.CNPJRes" class="btn btn-success" title="Adicionar Nova Empresa"><i class="fa fa-plus"></i></a>
-                        
-                            <button class="btn btn-primary" type="submit" role="button" id="button-addon2"><i class="fa fa-search"></i></button>
-                        
+                    <button class="btn btn-primary" type="submit" role="button" id="button-addon2"><i class="fa fa-search"></i></button>
                 </div>  
                 <span asp-validation-for="Input.CNPJ" class="text-danger"></span>
             </div>
             <div class="col-md">
                 <div class="input-group">
+                    <a asp-area="" asp-page="/Empresa/Add" class="btn btn-success" title="Adicionar Nova Empresa"><i class="fa fa-plus"></i></a>
                     <a href="#" class="btn btn-primary" title="Consulta Avançada"><i class="fa fa-list-alt" aria-hidden="true"></i></a>
                     <a href="#" class="btn btn-primary" title="Relatórios"><i class="fa fa-file" aria-hidden="true"></i></a>
                 </div>

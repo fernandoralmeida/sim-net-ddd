@@ -41,7 +41,6 @@ namespace Sim.UI.Web.Pages.Empresa
 
         private async Task LoadAsync(string cnpj)
         {
-
             var rws = await _receitaWS.ConsultarCPNJAsync(cnpj);
             Input = _mapper.Map<VMEmpresa>(rws);
 
@@ -59,16 +58,22 @@ namespace Sim.UI.Web.Pages.Empresa
 
             Input.Atividade_Secundarias = sb.ToString().Trim();
 
-            var empresa = _mapper.Map<Empresa>(Input);
-
-            _appServiceEmpresa.Add(empresa);
+            var t = Task.Run(() =>
+            {
+                var empresa = _mapper.Map<Empresa>(Input);
+                _appServiceEmpresa.Add(empresa);
+            });
+            await t;
         }
 
         public async Task<IActionResult> OnGetAsync(string id)
         {
             try
             {
-                await LoadAsync(id);
+                if(id != null)
+                {
+                    await LoadAsync(id);
+                }
                 return Page();
             }
             catch (Exception ex)
@@ -76,6 +81,22 @@ namespace Sim.UI.Web.Pages.Empresa
                 StatusMessage = "Erro: " + ex.Message;
                 return RedirectToPage("./Index");
             }                     
+        }
+
+        public async Task<IActionResult> OnPostRWSAsync()
+        {
+            var emp = Task.Run(() => _appServiceEmpresa.ConsultaByCNPJ(Input.CNPJ).FirstOrDefault());
+            await emp;
+            if(emp.Result == null)
+            {
+                var cnpj = new Functions.Mask().Remove(Input.CNPJ);
+                
+                return RedirectToPage("./Add", new { id = cnpj });
+            }
+            else
+            {
+                return RedirectToPage("./Update", new { id = emp.Result.Id });
+            }            
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -92,12 +113,8 @@ namespace Sim.UI.Web.Pages.Empresa
                 _appServiceEmpresa.Add(empresa);
 
             });
-
             await t;
-
-            //StatusMessage = "Seu perfil foi atualizado";
             return RedirectToPage("./Index");
-            //return Page();
         }
     }
 }

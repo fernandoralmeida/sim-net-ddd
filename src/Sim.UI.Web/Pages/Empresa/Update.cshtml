@@ -14,8 +14,8 @@
     <form class="row" method="post">
         <div class="col-md-8">
 
-            <div class="row g-2 mb-3">
-                <label asp-for="Input.Id" class="control-label">@Model.Input.Id</label>
+            <div class="row g-2 mb-3" hidden>
+                <label asp-for="Input.Id" class="control-label"></label>
                 <input asp-for="Input.Id" class="form-control" />
                 <span asp-validation-for="Input.Id" class="text-danger"></span>
             </div>
