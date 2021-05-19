@@ -21,6 +21,7 @@ namespace Sim.Cross.Data.Repository.Shared
             var ativo = _db.Atendimento
                 .Include(p => p.Pessoa)
                 .Include(e => e.Empresa)
+                .Include(s => s.Sebrae)
                 .Where(s=>s.Owner_AppUser_Id == userid && s.Status=="Ativo");
 
             return ativo;
@@ -41,6 +42,7 @@ namespace Sim.Cross.Data.Repository.Shared
             return _db.Atendimento
                 .Include(p => p.Pessoa)
                 .Include(e => e.Empresa)
+                .Include(s => s.Sebrae)
                 .Where(u => u.Empresa.CNPJ == cnpj).OrderBy(d => d.Data);
         }
 
@@ -49,6 +51,7 @@ namespace Sim.Cross.Data.Repository.Shared
             return _db.Atendimento
                 .Include(p => p.Pessoa)
                 .Include(e => e.Empresa)
+                .Include(s => s.Sebrae)
                 .Where(u => u.Pessoa.CPF == cpf).OrderBy(d => d.Data);
         }
 
@@ -67,6 +70,7 @@ namespace Sim.Cross.Data.Repository.Shared
             var list = _db.Atendimento
                 .Include(p => p.Pessoa)
                 .Include(e => e.Empresa)
+                .Include(s => s.Sebrae)
                 .Where(a => a.Data >= dataI
                 && a.Data <= dataF).OrderBy(o => o.Data);
 
@@ -78,6 +82,7 @@ namespace Sim.Cross.Data.Repository.Shared
             var lista = _db.Atendimento
                 .Include(u => u.Pessoa)
                 .Include(e => e.Empresa)
+                .Include(s => s.Sebrae)
                 .Where(a => a.Owner_AppUser_Id == userid &&  a.Data.Value.Date == date.Value.Date &&  a.Status == "Finalizado");
 
             return lista;
@@ -88,6 +93,7 @@ namespace Sim.Cross.Data.Repository.Shared
             var lista = _db.Atendimento
                 .Include(u => u.Pessoa)
                 .Include(e => e.Empresa)
+                .Include(s => s.Sebrae)
                 .Where(a => a.Ativo == true).OrderBy(a => a.Data);
 
             return lista;

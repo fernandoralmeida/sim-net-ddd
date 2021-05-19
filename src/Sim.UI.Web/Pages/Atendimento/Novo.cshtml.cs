@@ -137,10 +137,11 @@ namespace Sim.UI.Web.Pages.Atendimento
 
                     var t = Task.Run(() =>
                     {
-
                         //var atendimemnto_ativio = _appServiceAtendimento.AtendimentoAtivo(user.Id).FirstOrDefault();
 
                         var atold = _appServiceAtendimento.GetById(Input.Id);
+
+                        var sebrae = new RaeSebrae() { Id= new Guid(), RAE = Input.Sebrae.RAE };
 
                         atold.DataF = DateTime.Now;
                         atold.Setor = GetSetor;
@@ -149,7 +150,7 @@ namespace Sim.UI.Web.Pages.Atendimento
                         atold.Descricao = Input.Descricao;
                         atold.Status = "Finalizado";
                         atold.Ultima_Alteracao = DateTime.Now;
-
+                        atold.Sebrae = sebrae;
                         _appServiceAtendimento.Update(atold);
 
                     });

@@ -28,5 +28,6 @@ namespace Sim.Domain.Shared.Entity
 
         public virtual Pessoa Pessoa { get; set; }
         public virtual Empresa Empresa { get; set; }
+        public virtual RaeSebrae Sebrae { get; set; }
     }
 }

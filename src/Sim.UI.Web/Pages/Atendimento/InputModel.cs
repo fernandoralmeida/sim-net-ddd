@@ -50,5 +50,8 @@ namespace Sim.UI.Web.Pages.Atendimento
 
         [DisplayName("Empresa")]
         public virtual Empresa Empresa { get; set; }
+
+        [DisplayName("N.o RAE")]
+        public virtual RaeSebrae Sebrae { get; set; }
     }
 }
