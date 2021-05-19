@@ -54,6 +54,10 @@ body {
     background-color: #20c997 !important;
 }
 
+.table > :not(:last-child) > :last-child > * {
+    border-bottom-color: #0094ff;
+}
+
 .footer {
     position: absolute;
     bottom: 0;
