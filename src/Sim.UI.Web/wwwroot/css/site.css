@@ -55,7 +55,8 @@ body {
 }
 
 .table > :not(:last-child) > :last-child > * {
-    border-bottom-color: #0094ff;
+    border-bottom-width: 4px;
+    border-bottom-color: #dfe0e1;
 }
 
 .footer {
@@ -147,35 +148,25 @@ body {
 
 .l-btn /* estrutura principal */ {
     display: inline-block;
-    margin: 1px;
     height: 200px;
     width: 200px;
-    vertical-align: middle;
-    text-align: center;
     color: #ffffff;
     background-color: #20c997;
-    border:solid 2px #ffffff;
     text-decoration: none;
+    border-radius:0px;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
-    .l-btn:link:visited /* estado do link */ {
-        text-decoration: none;
-        color: #ffffff;
-        background-color: #20c997;
-    }
+
 
     .l-btn:hover /* ao mover o mouse */ {
-        /*
-        box-shadow:#00ff90 5px inherit;*/
         background-color: #1cb487;
         color: #ffffff;
         text-decoration: none;
     }
 
     .l-btn:active {
-        /*box-shadow: #36cea1 2px 2px;*/
-        border: solid 2px #b6ff00;
+        background-color: #20c997;
     }
 
 .div-modulos /* div das seções free-hand, digital paint, comp grafica e web-dev */ { 

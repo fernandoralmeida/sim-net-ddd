@@ -92,13 +92,10 @@
                         <td>
                             @{
                                 var d1 = Convert.ToDateTime(item.Data);
-                                var d2 = Convert.ToDateTime(item.DataF);
-                                var datainicial = d1.ToShortTimeString();
-                                var datafinal = d2.ToShortTimeString();
+                                var datainicial = d1.ToShortDateString();
                             }
 
                             @Html.DisplayFor(modelItem => datainicial)
-                            @Html.DisplayFor(modelItem => datafinal)
                         </td>
                         <td>
                             <a href="#" class="link-secondary viewbutton" data-secao="Pessoa" data-acao="Details" data-id="@item.Pessoa.Id" data-bs-toggle="modal" data-bs-target="#viewmodal">@Html.DisplayFor(modelItem => item.Pessoa.Nome)</a>
@@ -153,8 +150,7 @@
                 url: "/" + secao + "/" + acao + "?id=" + customerId,
                 cache: false
             }).done(function (data) {
-                var formatHtml = data;
-                $("#viewmodalData").html(formatHtml);
+                $("#viewmodalData").html(data);
             });
         });</script>
 }

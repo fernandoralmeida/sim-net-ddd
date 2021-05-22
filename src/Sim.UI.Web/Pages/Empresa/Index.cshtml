@@ -5,30 +5,24 @@
     ViewData["Title"] = "Lista";
 }
 
-<h5>Empresas</h5>
-<hr />
+
 
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
-<div class="mb-3">
+<div class="mt-5 mb-5">
     <form method="post">
-        <div class="row">
+        <div class="row justify-content-center">
             <div class="col-md-auto">
                 <input asp-for="Input.CNPJRes" hidden>
                 <div class="input-group">
                     <span class="input-group-text">CNPJ</span>
                     <input asp-for="Input.CNPJ" class="form-control" placeholder="CPF" aria-describedby="button-addon2" id="inputCNPJ">
                     <button class="btn btn-primary" type="submit" role="button" id="button-addon2"><i class="fa fa-search"></i></button>
-                </div>  
-                <span asp-validation-for="Input.CNPJ" class="text-danger"></span>
-            </div>
-            <div class="col-md">
-                <div class="input-group">
-                    <a asp-area="" asp-page="/Empresa/Add" class="btn btn-success" title="Adicionar Nova Empresa"><i class="fa fa-plus"></i></a>
-                    <a href="#" class="btn btn-primary" title="Consulta Avançada"><i class="fa fa-list-alt" aria-hidden="true"></i></a>
-                    <a href="#" class="btn btn-primary" title="Relatórios"><i class="fa fa-file" aria-hidden="true"></i></a>
+                    <a asp-area="" asp-page="/Empresa/Add" class="btn btn-info" title="Adicionar Nova Empresa"><i class="fas fa-plus-square"></i></a>
+                    <a href="#" class="btn btn-warning" title="Consulta Avançada"><i class="fa fa-list-alt" aria-hidden="true"></i></a>
+                    <a href="#" class="btn btn-warning" title="Relatórios"><i class="fa fa-file" aria-hidden="true"></i></a>
                 </div>
-                
+                <span asp-validation-for="Input.CNPJ" class="text-danger"></span>
             </div>
         </div>
     </form>
