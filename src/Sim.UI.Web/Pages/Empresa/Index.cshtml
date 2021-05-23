@@ -15,10 +15,10 @@
             <div class="col-md-auto">
                 <input asp-for="Input.CNPJRes" hidden>
                 <div class="input-group">
+                    <a asp-area="" asp-page="/Empresa/Add" class="btn btn-info" title="Adicionar Nova Empresa"><i class="fas fa-plus-square"></i></a>
                     <span class="input-group-text">CNPJ</span>
                     <input asp-for="Input.CNPJ" class="form-control" placeholder="CPF" aria-describedby="button-addon2" id="inputCNPJ">
                     <button class="btn btn-primary" type="submit" role="button" id="button-addon2"><i class="fa fa-search"></i></button>
-                    <a asp-area="" asp-page="/Empresa/Add" class="btn btn-info" title="Adicionar Nova Empresa"><i class="fas fa-plus-square"></i></a>
                     <a href="#" class="btn btn-warning" title="Consulta Avançada"><i class="fa fa-list-alt" aria-hidden="true"></i></a>
                     <a href="#" class="btn btn-warning" title="Relatórios"><i class="fa fa-file" aria-hidden="true"></i></a>
                 </div>

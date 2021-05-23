@@ -11,13 +11,14 @@ namespace Sim.UI.Web.AutoMapper
     using Web.Pages.Pessoa;
     using Web.Pages.Empresa;
     using Sim.Service.CNPJ.Entity;
+    using Web.Pages.Agenda;
 
     public class AutoMapperProfile : Profile
     {
         public AutoMapperProfile()
         {
-            CreateMap<NovoModel.InputModel, Pessoa>();
-            CreateMap<Pessoa, NovoModel.InputModel>().ReverseMap();
+            CreateMap<Pages.Pessoa.NovoModel.InputModel, Pessoa>();
+            CreateMap<Pessoa, Pages.Pessoa.NovoModel.InputModel>().ReverseMap();
 
             CreateMap<EditModel.InputModel, Pessoa>();
             CreateMap<Pessoa, EditModel.InputModel>().ReverseMap();
@@ -33,6 +34,12 @@ namespace Sim.UI.Web.AutoMapper
 
             CreateMap<Pages.Atendimento.InputModel, Atendimento>();
             CreateMap<Atendimento, Pages.Atendimento.InputModel>().ReverseMap();
+
+            CreateMap<InputModelEvento, Evento>();
+            CreateMap<Evento, InputModelEvento>().ReverseMap();
+
+            CreateMap<InputModelInscricao, Inscricao>();
+            CreateMap<Inscricao, InputModelInscricao>().ReverseMap();
         }
     }
 }

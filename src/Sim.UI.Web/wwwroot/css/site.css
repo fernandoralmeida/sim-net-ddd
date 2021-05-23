@@ -47,12 +47,17 @@ body {
     /* background: url(imgs/bgios.jpg) no-repeat fixed;
     background-size: cover;*/
     /**/
-    background-color: #fff;
+    background-color: #fafafa;
 }
 
 .bg-teal {
     background-color: #20c997 !important;
 }
+
+.bg-silver {
+    background-color: #f8f8f8 !important;
+}
+
 
 .table > :not(:last-child) > :last-child > * {
     border-bottom-width: 4px;
@@ -148,19 +153,20 @@ body {
 
 .l-btn /* estrutura principal */ {
     display: inline-block;
+    margin: 5px;
     height: 200px;
     width: 200px;
     color: #ffffff;
     background-color: #20c997;
     text-decoration: none;
-    border-radius:0px;
+    border-radius: 0px;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 
 
     .l-btn:hover /* ao mover o mouse */ {
-        background-color: #1cb487;
+        background-color: #26dca6;
         color: #ffffff;
         text-decoration: none;
     }
@@ -171,7 +177,23 @@ body {
 
 .div-modulos /* div das seções free-hand, digital paint, comp grafica e web-dev */ { 
     text-align: center;/*
+       
     background-image: url(imgs/dot.jpg);*/
 }
 
+.agenda {
+    display: inline-block;
+    margin: 10px;
+    width: 300px;
+    background-color: #ffffff;
+    text-decoration: none;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
 
+    .agenda:hover /* ao mover o mouse */ {
+        background-color: #fafafa;
+    }
+
+    .agenda:active {
+        background-color: #fafafa;
+    }

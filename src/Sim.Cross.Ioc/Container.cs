@@ -48,6 +48,7 @@ namespace Sim.Cross.Ioc
             RegisterEvento(services);
             RegisterCanal(services);
             RegisterContador(services);
+            RegisterTiposEventos(services);
         }
 
         private static void RegisterPessoa(IServiceCollection services)
@@ -171,6 +172,18 @@ namespace Sim.Cross.Ioc
 
             services.AddScoped<IRepositoryBase<Contador>, RepositoryBase<Contador>>();
             services.AddScoped<IRepositoryContador, RepositoryContador>();
+        }
+
+        private static void RegisterTiposEventos(IServiceCollection services)
+        {
+            services.AddScoped<IAppServiceBase<Tipo>, AppServiceBase<Tipo>>();
+            services.AddScoped<IAppServiceTipo, AppServiceTipo>();
+
+            services.AddScoped<IServiceBase<Tipo>, ServiceBase<Tipo>>();
+            services.AddScoped<IServiceTipo, ServiceTipos>();
+
+            services.AddScoped<IRepositoryBase<Tipo>, RepositoryBase<Tipo>>();
+            services.AddScoped<IRepositoryTipo, RepositoryTipo>();
         }
     }
 }

@@ -17,9 +17,19 @@ namespace Sim.Cross.Data.Repository.Shared
 
         }
 
+        public IEnumerable<Evento> GetByNome(string nome)
+        {
+            return _db.Evento.Where(u => u.Nome.Contains(nome)).OrderBy(d => d.Data).ThenByDescending(d => d.Data);
+        }
+
         public IEnumerable<Evento> GetByOwner(string setor)
         {
             return _db.Evento.Where(u => u.Owner.Contains(setor));
+        }
+
+        public int LastCodigo()
+        {
+            return _db.Evento.Select(c => c.Codigo).FirstOrDefault();
         }
     }
 }

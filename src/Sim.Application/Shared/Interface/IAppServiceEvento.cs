@@ -11,5 +11,7 @@ namespace Sim.Application.Shared.Interface
     public interface IAppServiceEvento : IAppServiceBase<Evento>
     {
         IEnumerable<Evento> GetByOwner(string setor);
+        IEnumerable<Evento> GetByNome(string nome);
+        int LastCodigo();
     }
 }

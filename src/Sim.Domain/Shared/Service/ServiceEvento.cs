@@ -17,9 +17,20 @@ namespace Sim.Domain.Shared.Service
         {
             _evento = repositoryEvento;
         }
+
+        public IEnumerable<Evento> GetByNome(string nome)
+        {
+            return _evento.GetByNome(nome);
+        }
+
         public IEnumerable<Evento> GetByOwner(string setor)
         {
             return _evento.GetByOwner(setor);
+        }
+
+        public int LastCodigo()
+        {
+            return _evento.LastCodigo();
         }
     }
 }

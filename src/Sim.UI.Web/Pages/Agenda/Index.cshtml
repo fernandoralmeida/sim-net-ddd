@@ -1,0 +1,45 @@
+﻿@page
+@model Sim.UI.Web.Pages.Agenda.IndexModel
+@{
+    ViewData["Title"] = "Indice de Eventos";
+}
+
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+
+<div class="row mt-5 mb-5">
+    <form method="post">
+        <div class="row justify-content-center">
+            <div class="col-md-auto">
+                <div class="input-group">
+                    <a asp-area="" asp-page="./Novo" class="btn btn-info" title="Novo Evento"><i class="fas fa-plus-square"></i></a>
+                    <span class="input-group-text">Evento</span>
+                    <input asp-for="Input.Evento" class="form-control" placeholder="Nome" aria-describedby="button-addon2">
+                    <button class="btn btn-primary" type="submit" role="button" id="button-addon2"><i class="fas fa-search"></i></button>
+                    <a asp-area="" asp-page="./Consulta" class="btn btn-warning" title="Consultar"><i class="fas fa-user-check"></i></a>
+                    <a href="#" class="btn btn-warning" title="Relatórios"><i class="fas fa-clipboard-list"></i></a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<pre>Lista de Eventos</pre>
+<hr class="row border border-2 border-secondary"/>
+<div class="row justify-content-center">
+
+    @if (Model.Input.ListaEventos != null)
+    {
+        foreach (var item in Model.Input.ListaEventos)
+        {
+            <div class="btn col-md-3 bg-white shadow-sm mb-2 me-2 ms-2 mt-2">
+                <p>Código: @item.Codigo</p>
+                <p class="text-primary">@item.Tipo @item.Nome</p>
+                <p>@item.Formato @item.Data</p>
+                <div class="btn-group btn-group-sm mb-1">
+                    <a asp-page="./Index" asp-route-id="@item.Id" class="btn btn-primary">Inscrever</a>
+                    <a asp-page="./Index" asp-route-id="@item.Id" class="btn btn-primary">Inscritos</a>
+                </div>
+            </div>
+        }
+
+    }
+</div>

@@ -21,5 +21,6 @@ namespace Sim.Cross.Data.Repository.Shared
         {
             return _db.Tipos.Where(u => u.Owner.Contains(owner));
         }
+
     }
 }

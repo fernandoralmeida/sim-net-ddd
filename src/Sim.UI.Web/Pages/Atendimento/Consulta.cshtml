@@ -1,19 +1,17 @@
 ﻿@page
 @model Sim.UI.Web.Pages.Atendimento.ConsultaModel
-@{ViewData["Title"] = "Consulta";
+@{ViewData["Title"] = "Consultas";
 }
 
-<h5>Consulta Atendimentos</h5>
-<hr />
+
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
-<div class="row">
-    <div>
-        <div class="row justify-content-md-center">
-            <div class="col-md-4">
+
+        <div class="row justify-content-md-center mt-5 mb-5">
+            <div class="col-md-6">
                 <form method="post" asp-page-handler="ListByData">
-                    <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text">Data</span>
+                    <div class="input-group input-group mb-3">
+                        <span class="input-group-text">Atendimentos por Data</span>
                         <input asp-for="Input.DataI" class="form-control" />
                         <input asp-for="Input.DataF" class="form-control" />
                         <button asp-page-handler="ListByData" class="btn btn-primary" type="submit" role="button"><i class="fas fa-search"></i></button>
@@ -22,8 +20,8 @@
             </div>
             <div class="col-md-3">
                 <form method="post" asp-page-handler="ListByPessoa">
-                    <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text">CPF</span>
+                    <div class="input-group input-group mb-3">
+                        <span class="input-group-text">por CPF</span>
                         <input asp-for="Input.CPF" id="inputCPF" class="form-control" />
                         <button asp-page-handler="ListByPessoa" class="btn btn-primary" type="submit" role="button" ><i class="fas fa-search"></i></button>
                     </div>
@@ -31,17 +29,14 @@
             </div>
             <div class="col-md-3">
                 <form method="post" asp-page-handler="ListByEmpresa">
-                    <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text">CNPJ</span>
+                    <div class="input-group input-group mb-3">
+                        <span class="input-group-text">por CNPJ</span>
                         <input asp-for="Input.CNPJ" id="inputCNPJ" class="form-control" />
                         <button asp-page-handler="ListByEmpresa" class="btn btn-primary" type="submit" role="button" ><i class="fas fa-search"></i></button>
                     </div>
                 </form>
             </div>
         </div>
-
-    </div>
-</div>
 
 <div>
     <table class="table">

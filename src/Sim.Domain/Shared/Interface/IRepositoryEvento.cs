@@ -11,5 +11,7 @@ namespace Sim.Domain.Shared.Interface
     public interface IRepositoryEvento : IRepositoryBase<Evento>
     {
         IEnumerable<Evento> GetByOwner(string setor);
+        IEnumerable<Evento> GetByNome(string nome);
+        int LastCodigo();
     }
 }

@@ -14,10 +14,12 @@ namespace Sim.Domain.Shared.Entity
         public int Codigo { get; set; }
         public string Tipo { get; set; }
         public string Nome { get; set; }
+        public string Formato { get; set; }
         public DateTime? Data { get; set; }
         public string Descricao { get; set; }
         public string Owner { get; set; }
         public int Lotacao { get; set; }
+        public string Estado { get; set; }
         public bool Ativo { get; set; }
 
         public virtual ICollection<Inscricao> Inscritos { get; set; }

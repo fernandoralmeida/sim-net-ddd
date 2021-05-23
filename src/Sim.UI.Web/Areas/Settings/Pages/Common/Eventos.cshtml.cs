@@ -16,11 +16,11 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
     public class EventosModel : PageModel
     {
 
-        private readonly IAppServiceEvento _appServiceEvento;
-        public EventosModel(IAppServiceEvento appServiceEvento)
+        private readonly IAppServiceTipo _appServiceTipo;
+        public EventosModel(IAppServiceTipo appServiceTipo)
         {
 
-            _appServiceEvento = appServiceEvento;
+            _appServiceTipo = appServiceTipo;
         }
 
         public class InputModel
@@ -38,7 +38,7 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
             [DisplayName("Ativo")]
             public bool Ativo { get; set; }
 
-            public virtual ICollection<Evento> Listar { get; set; }
+            public virtual ICollection<Tipo> Listar { get; set; }
         }
 
         [TempData]
@@ -49,7 +49,7 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
 
         private async Task OnLoad()
         {
-            var eve = Task.Run(() => _appServiceEvento.List());
+            var eve = Task.Run(() => _appServiceTipo.List());
             await eve;
 
             Input = new InputModel()
@@ -75,14 +75,14 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
                 var t = Task.Run(() =>
                 {
 
-                    var input = new Evento()
+                    var input = new Tipo()
                     {
                         Nome = Input.Nome,
-                        Tipo = Input.Tipo,
+                        Owner = Input.Tipo,
                         Ativo = true
                     };
 
-                    _appServiceEvento.Add(input);
+                    _appServiceTipo.Add(input);
 
                 });
 
@@ -111,9 +111,9 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
                 var t = Task.Run(() =>
                 {
 
-                    var tipo = _appServiceEvento.GetById(id);
+                    var tipo = _appServiceTipo.GetById(id);
 
-                    _appServiceEvento.Remove(tipo);
+                    _appServiceTipo.Remove(tipo);
 
                 });
 
