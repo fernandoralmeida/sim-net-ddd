@@ -25,27 +25,45 @@ namespace Sim.Cross.Data.Repository.Shared
 
         public IEnumerable<Inscricao> GetByParticipante(string nome)
         {
-            var query =
-               from evento in _db.Evento
-               from pessoa in _db.Pessoa
-               join inscricao in _db.Inscricao on evento.Id equals inscricao.Evento.Id
-               where pessoa.Nome == nome
-               select new { Inscricao = inscricao, Evento = evento, Pessoa = pessoa };
+            var query = _db.Inscricao
+                .Include(p => p.Participante)
+                .Include(e => e.Empresa)
+                .Include(e => e.Evento)
+                .Where(s => s.Participante.CPF == nome).ToList();
 
-            var lista = new List<Inscricao>() { };
-
-            foreach(var i in query)
-            {               
-                lista.Add(i.Inscricao);
-            }
-
-
-            return lista; //_db.Inscricao.Select(r => r);
+            return query; //_db.Inscricao.Select(r => r);
         }
 
         public IEnumerable<Inscricao> GetByTipo(string evento)
         {
             return _db.Inscricao.Select(r => r);
+        }
+
+        public bool JaInscrito(string cpf, int evento)
+        {
+            var query = _db.Inscricao
+                .Include(p => p.Participante)
+                .Include(p => p.Evento)
+                .Where(p => p.Participante.CPF == cpf && p.Evento.Codigo == evento)
+                .FirstOrDefault();
+
+            if (query == null)
+                return false;
+            else
+                return true;
+        }
+
+        public int LastCodigo()
+        {
+            var cod = _db.Inscricao
+                .AsNoTracking()
+                .OrderBy(c => c.Numero)
+                .LastOrDefault()?.Numero;
+
+            if (cod == null)
+                return 0;
+            else
+                return (int)cod;
         }
     }
 }

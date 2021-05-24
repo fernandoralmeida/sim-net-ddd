@@ -1,8 +1,8 @@
 ﻿@page
-@model Sim.UI.Web.Pages.Agenda.NovoModel
+@model Sim.UI.Web.Pages.Agenda.EditModel
 @{
 
-    ViewData["Title"] = "Novo Evento";
+    ViewData["Title"] = "Alterar Evento";
 
 }
 
@@ -13,6 +13,10 @@
 <div class="row">
     <form method="post">
         <div class="row">
+            <div class="col-md-2 mb-3" hidden>
+                <label class="form-label" asp-for="Input.Id"></label>
+                <input asp-for="Input.Id" class="form-control" />
+            </div>
             <div class="col-md-2 mb-3" hidden>
                 <label class="form-label" asp-for="Input.Codigo"></label>
                 <input asp-for="Input.Codigo" class="form-control" />
@@ -61,7 +65,7 @@
 
             <div class="row">
                 <div class="col-md-4 mt-4">
-                    <button type="submit" class="btn btn-primary">Gravar Evento</button> |
+                    <button type="submit" class="btn btn-primary">Alterar Evento</button> |
                     <a asp-page="./Index" class="btn btn-secondary">Voltar</a>
                 </div>
             </div>

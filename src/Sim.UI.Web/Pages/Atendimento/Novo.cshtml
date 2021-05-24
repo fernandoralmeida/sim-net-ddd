@@ -77,7 +77,7 @@
 
             </tbody>
         </table>
-        <div class="row col-md-12 g-2">
+        <div class="row">
             <div class="col-md-4">
                 <div class="col-mb-12 mb-2">
                     <label class="form-label" asp-for="Input.Setor" for="floatingsetor"></label>
@@ -85,33 +85,31 @@
                         <option selected>-- Selecione um Setor --</option>
                     </select>
                 </div>
-                <div class="col-mb-12">
-                    <label class="form-label" asp-for="Input.Canal" ></label>
+                <div class="col-mb-12 mb-2">
+                    <label class="form-label" asp-for="Input.Canal"></label>
                     <select asp-for="GetCanal" class="form-select"></select>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 mb-2">
                 <label class="form-label" for="floatingservico">Serviços Disponível</label>
                 <select asp-for="GetServico" class="form-control" size="10"></select>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 mb-2">
                 <label class="form-label">Serviços Realizado</label>
                 <select asp-for="MeusServicos" class="form-control" size="10"></select>
             </div>
-            <div class="row">
-                <div class="col-md-12 g-2">
-                    <label asp-for="Input.Descricao"></label>
-                </div>
-                <div class="col-md-10 g-2">
-                    <textarea asp-for="Input.Descricao" class="form-control" rows="2"></textarea>
-                    <textarea id="myservice" asp-for="Input.Servicos" class="form-control" hidden></textarea>
-                </div>
-                <div class="col-md-2 g-2">
-                    <div class="row justify-content-center">
-                        <div class="col-5">
-                            <button id="addbtn" type="submit" role="button" class="btn btn-primary">Finalizar Atendimento</button>
-                        </div>
-                    </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <label asp-for="Input.Descricao"></label>
+            </div>
+            <div class="col-md-9 mb-2">
+                <textarea asp-for="Input.Descricao" class="form-control" rows="2"></textarea>
+                <textarea id="myservice" asp-for="Input.Servicos" class="form-control" hidden></textarea>
+            </div>
+            <div class="col-md-3">
+                <div class="d-grid gap-2">
+                    <button id="addbtn" type="submit" role="button" class="btn btn-primary">Finalizar<br /> Atendimento</button>             
                 </div>
             </div>
         </div>

@@ -19,18 +19,23 @@ namespace Sim.Domain.Shared.Entity
         public string Descricao { get; set; }
         public string Owner { get; set; }
         public int Lotacao { get; set; }
-        public string Estado { get; set; }
         public bool Ativo { get; set; }
 
         public virtual ICollection<Inscricao> Inscritos { get; set; }
 
         public int Inscricoes()
         {
-            return 0;
+            if (Inscritos == null)
+                return 0;
+            else
+                return Inscritos.Count();
         }
         public int Vagas()
         {
-            return 0;
+            if (Inscritos == null)
+                return Lotacao;
+            else
+                return Lotacao - Inscritos.Count();
         }
     }
 }

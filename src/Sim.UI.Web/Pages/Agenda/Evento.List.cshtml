@@ -1,0 +1,139 @@
+﻿@page
+@model Sim.UI.Web.Pages.Agenda.Evento_ListModel
+@{
+    ViewData["Title"] = "Lista Eventos";
+}
+
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+
+<div class="row mt-5 mb-5">
+    <form method="post">
+        <div class="row justify-content-center">
+            <div class="col-md-auto">
+                <div class="input-group">
+                    <a asp-area="" asp-page="./Novo" class="btn btn-info" title="Novo Evento"><i class="fas fa-plus-square"></i></a>
+                    <input asp-for="Input.GetCPF" class="form-control" id="inputCPF" aria-describedby="button-addon2">
+                    <button class="btn btn-primary" type="submit" role="button" id="button-addon2"><i class="fas fa-search"></i></button>
+                    <a asp-page="./Consulta" class="btn btn-warning" title="Relatórios"><i class="fas fa-clipboard-list"></i></a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<pre>Lista de Incrições por Pessoa</pre>
+
+<div class="mt-5">
+    <table class="table">
+        <caption>Lista de inscrições!</caption>
+        <thead>
+            <tr>
+                <th>
+                    N
+                </th>
+                <th>
+                    Inscrição
+                </th>
+                <th>
+                    Cliente
+                </th>
+                <th>
+                    Tipo
+                </th>
+                <th>
+                    Evento
+                </th>
+                <th>
+                    Formato
+                </th>
+                <th>
+                    Data
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int cont = 0;
+            }
+
+            @if (Model.Input.ListaInscricoes != null)
+            {
+
+                @foreach (var item in Model.Input.ListaInscricoes)
+                {
+            <tr>
+                <td>
+                    @{cont++;}
+                    @cont.ToString()
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Numero)
+                </td>
+
+                <td>
+                    <a href="#" class="link-secondary viewbutton" data-secao="Pessoa" data-acao="Details" data-id="@item.Participante.Id" data-bs-toggle="modal" data-bs-target="#viewmodal">@Html.DisplayFor(modelItem => item.Participante.Nome)</a>
+                    @if (item.Empresa != null)
+                    {
+                        <a href="#" class="link-secondary viewbutton" data-secao="Empresa" data-acao="Perfil" data-id="@item.Empresa.Id" data-bs-toggle="modal" data-bs-target="#viewmodal">[@item.Empresa.CNPJ]</a>
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Evento.Tipo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Evento.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Evento.Formato)
+                </td>
+                <td>
+                    @{
+                        var d1 = Convert.ToDateTime(item.Evento.Data);
+                        var datainicial = d1.ToShortDateString();
+                    }
+
+                    @Html.DisplayFor(modelItem => item.Evento.Data)
+                </td>
+            </tr>
+                }}
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="viewmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="viewmodalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title" id="viewmodalLabel">Detalhes</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="viewmodalData"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script src="~/js/jquery.cep.js"></script>
+    <script src="~/js/jquery.mask.min.js"></script>
+    <script>
+        $('#inputCPF').mask('000.000.000-00', { placeholder: "___.___.___-__" });
+        $('#txtphone').mask('(00) 0000-0000', { placeholder: "(__) ____-____" });
+        $('#txtmobile').mask('(00) 00000-0000', { placeholder: "(__) _____-____" });
+        $('#inputCNPJ').mask('00.000.000/0000-00', { placeholder: "__.___.___/____-__" });
+    </script>
+    <script type="text/javascript">
+        $(".viewbutton").on("click", function () {
+            var customerId = $(this).data('id');
+            var secao = $(this).data('secao');
+            var acao = $(this).data('acao');
+            $.ajax({
+                url: "/" + secao + "/" + acao + "?id=" + customerId,
+                cache: false
+            }).done(function (data) {
+                $("#viewmodalData").html(data);
+            });
+        });</script>
+}

@@ -9,16 +9,17 @@ using AutoMapper;
 
 namespace Sim.UI.Web.Pages.Agenda
 {
+
     using Sim.Application.Shared.Interface;
     using Sim.Domain.Shared.Entity;
-    public class NovoModel : PageModel
+    public class EditModel : PageModel
     {
         private readonly IAppServiceTipo _appServiceTipo;
         private readonly IAppServiceEvento _appServiceEvento;
         private readonly IAppServiceSetor _appServiceSetor;
         private readonly IMapper _mapper;
 
-        public NovoModel(IAppServiceEvento appServiceEvento,
+        public EditModel(IAppServiceEvento appServiceEvento,
             IAppServiceTipo appServiceTipo,
             IAppServiceSetor appServiceSetor,
             IMapper mapper)
@@ -38,7 +39,7 @@ namespace Sim.UI.Web.Pages.Agenda
         public SelectList TipoEventos { get; set; }
         public SelectList Setores { get; set; }
 
-        public async Task OnGet()
+        public async Task OnGet(Guid id)
         {
             var t = Task.Run(() => _appServiceTipo.List());
             await t;
@@ -55,32 +56,27 @@ namespace Sim.UI.Web.Pages.Agenda
             {
                 Setores = new SelectList(s.Result, nameof(Setor.Nome), nameof(Setor.Nome), null);
             }
+
+            var evento = Task.Run(() => _appServiceEvento.GetById(id));
+            await evento;
+
+            Input = _mapper.Map<InputModelEvento>(evento.Result);
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
             try
             {
-                if(!ModelState.IsValid)
+                if (!ModelState.IsValid)
                 { return Page(); }
-
-                var cod = Task.Run(()=> _appServiceEvento.LastCodigo());
-                await cod;
-
-                if (cod.Result < 1)
-                    Input.Codigo = 210001;
-                else
-                    Input.Codigo = cod.Result + 1;
-
-                Input.Ativo = true;
-
-                var t = Task.Run(() => _appServiceEvento.Add(_mapper.Map<Evento>(Input)));
+                               
+                var t = Task.Run(() => _appServiceEvento.Update(_mapper.Map<Evento>(Input)));
 
                 await t;
-                
+
                 return RedirectToPage("./Index");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 StatusMessage = "Erro: " + ex.Message;
                 return Page();
@@ -88,3 +84,4 @@ namespace Sim.UI.Web.Pages.Agenda
         }
     }
 }
+

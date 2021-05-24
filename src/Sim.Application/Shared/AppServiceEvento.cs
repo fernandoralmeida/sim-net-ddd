@@ -18,6 +18,11 @@ namespace Sim.Application.Shared
             _evento = evento;
         }
 
+        public Evento GetByCodigo(int codigo)
+        {
+            return _evento.GetByCodigo(codigo);
+        }
+
         public IEnumerable<Evento> GetByNome(string nome)
         {
             return _evento.GetByNome(nome);
@@ -31,6 +36,11 @@ namespace Sim.Application.Shared
         public int LastCodigo()
         {
             return _evento.LastCodigo();
+        }
+
+        public IEnumerable<Evento> ListAll()
+        {
+            return _evento.ListAll();
         }
     }
 }

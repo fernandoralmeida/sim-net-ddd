@@ -32,5 +32,15 @@ namespace Sim.Application.Shared
         {
             return _inscricao.GetByTipo(evento);
         }
+
+        public bool JaInscrito(string cpf, int evento)
+        {
+            return _inscricao.JaInscrito(cpf, evento);
+        }
+
+        public int LastCodigo()
+        {
+            return _inscricao.LastCodigo();
+        }
     }
 }

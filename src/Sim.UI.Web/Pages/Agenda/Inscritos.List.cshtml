@@ -1,0 +1,67 @@
+﻿@page
+@model Sim.UI.Web.Pages.Agenda.Inscritos_ListModel
+@{
+    Layout = "/Pages/Shared/__LayoutModal.cshtml";
+    ViewData["Title"] = "Lista Inscritos";
+}
+
+<div class="row">
+    <div class="col-md-12 mb-2">   
+        Código: @Model.Input.Codigo
+        <br /><span class="text-primary">@Model.Input.Tipo @Model.Input.Nome - @Model.Input.Formato</span>
+        <br />Data: @Model.Input.Data
+    </div>
+</div>
+
+<div>
+    <table class="table table-sm">
+        <caption>Lista de Inscritos!</caption>
+        <thead>
+            <tr>
+                <th>
+                    N
+                </th>
+                <th>
+                    Inscrição
+                </th>
+                <th>
+                    Cliente
+                </th>
+                <th>
+                    Empresa
+                </th>
+                <th>
+                    Contato
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int cont = 0;
+            }
+
+
+            @foreach (var item in Model.Input.Inscritos)
+            {
+            <tr>
+                <td>
+                    @{cont++;}
+                    @cont.ToString()
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Numero)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Participante.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Empresa.Nome_Empresarial)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Participante.Tel_Movel)
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

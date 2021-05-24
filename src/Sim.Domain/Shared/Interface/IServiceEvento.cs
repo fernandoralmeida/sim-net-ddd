@@ -10,8 +10,10 @@ namespace Sim.Domain.Shared.Interface
     using Domain.Interface;
     public interface IServiceEvento : IServiceBase<Evento>
     {
+        IEnumerable<Evento> ListAll();
         IEnumerable<Evento> GetByOwner(string setor);
         IEnumerable<Evento> GetByNome(string nome);
+        Evento GetByCodigo(int codigo);
         int LastCodigo();
     }
 }

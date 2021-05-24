@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Sim.Cross.Data.Repository.Shared
 {
@@ -17,6 +18,24 @@ namespace Sim.Cross.Data.Repository.Shared
 
         }
 
+        public Evento GetByCodigo(int codigo)
+        {
+            var eve = _db.Evento
+                .Include(i => i.Inscritos)
+                .Where(c => c.Codigo == codigo)
+                .FirstOrDefault();
+
+            var insc = _db.Inscricao
+                .Include(p => p.Participante)
+                .Include(e => e.Empresa)
+                .Include(e=>e.Evento)
+                .Where(s => s.Evento.Codigo == eve.Codigo);
+
+            eve.Inscritos = insc.ToList();
+
+            return eve;
+        }
+
         public IEnumerable<Evento> GetByNome(string nome)
         {
             return _db.Evento.Where(u => u.Nome.Contains(nome)).OrderBy(d => d.Data).ThenByDescending(d => d.Data);
@@ -29,7 +48,22 @@ namespace Sim.Cross.Data.Repository.Shared
 
         public int LastCodigo()
         {
-            return _db.Evento.Select(c => c.Codigo).FirstOrDefault();
+            var cod = _db.Evento
+                .AsNoTracking()
+                .OrderBy(c => c.Codigo)
+                .LastOrDefault()?.Codigo;
+
+            if (cod == null)
+                return 0;
+            else
+                return (int)cod;
+        }
+
+        public IEnumerable<Evento> ListAll()
+        {
+            return _db.Evento
+                .Include(i => i.Inscritos)
+                .ToList();
         }
     }
 }

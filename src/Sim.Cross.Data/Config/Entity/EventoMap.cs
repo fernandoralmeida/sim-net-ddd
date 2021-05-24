@@ -24,8 +24,7 @@ namespace Sim.Cross.Data.Config.Entity
                 .HasColumnType("varchar(max)");
             builder.Property(c => c.Formato)
                 .HasColumnType("varchar(255)");
-            builder.Property(c => c.Estado)
-                .HasColumnType("varchar(255)");
+
         }
     }
 }

@@ -1,0 +1,179 @@
+﻿@page
+@model Sim.UI.Web.Pages.Agenda.Inscricao_EventoModel
+@{
+    ViewData["Title"] = "Inscrição";
+}
+
+<pre>Nova Inscrição</pre>
+<hr />
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+<div class="row">
+    <form method="post">
+        <div class="row">
+            <div class="col-md-12">
+
+                @if (Model.Input.Evento == null)
+                {
+                    <div class="row g-2 mb-4">
+                        <div class="form-group col-md-3">
+                            <div class="input-group ">
+                                <span class="input-group-text">Numero Evento</span>
+                                <input class="form-control" asp-for="GetNumeroEvento" aria-describedby="button-addon2">
+                                <button asp-page-handler="IncluirEvento" class="btn btn-primary" type="submit"><i class="fa fa-plus-square" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="row g-2">
+                        <div class="col-md-2 mb-4" hidden>
+                            <label class="form-label" asp-for="Input.Evento.Id"></label>
+                            <input class="form-control" asp-for="Input.Evento.Id" />
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label" asp-for="Input.Evento.Tipo"></label>
+                            <input class="form-control" asp-for="Input.Evento.Tipo" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label" asp-for="Input.Evento.Nome"></label>
+                            <input class="form-control" asp-for="Input.Evento.Nome" />
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label" asp-for="Input.Evento.Formato"></label>
+                            <input class="form-control" asp-for="Input.Evento.Formato" />
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label" asp-for="Input.Evento.Data"></label>
+                            <input class="form-control" asp-for="Input.Evento.Data" />
+                        </div>
+                        <div class="col-md align-self-end">
+                            <button class="btn btn-danger" type="submit" asp-page-handler="RemoverEvento"><i class="fas fa-minus-square"></i></button>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <div>
+                <hr />
+            </div>
+
+            <div class="col-md-12">
+
+                @if (Model.Input.Participante == null)
+                {
+                    <div class="row g-2 mb-4">
+                        <div class="form-group col-md-3">
+                            <div class="input-group ">
+                                <span class="input-group-text">CPF</span>
+                                <input class="form-control" asp-for="GetCPF" id="inputCPF" aria-describedby="button-addon2">
+                                <button asp-page-handler="IncluirPessoa" class="btn btn-primary" type="submit"><i class="fa fa-plus-square" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="row g-2 mb-4">
+                        <div class="col-md-2" hidden>
+                            <label class="form-label" asp-for="Input.Participante.Id"></label>
+                            <input class="form-control" asp-for="Input.Participante.Id" />
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label" asp-for="Input.Participante.CPF"></label>
+                            <input class="form-control" asp-for="Input.Participante.CPF" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label" asp-for="Input.Participante.Nome"></label>
+                            <input class="form-control" asp-for="Input.Participante.Nome" />
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label" asp-for="Input.Participante.Email"></label>
+                            <input class="form-control" asp-for="Input.Participante.Email" />
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label" asp-for="Input.Participante.Tel_Movel"></label>
+                            <input class="form-control" asp-for="Input.Participante.Tel_Movel" />
+                        </div>
+                        <div class="col-md align-self-end">
+                            <button class="btn btn-danger" type="submit" asp-page-handler="RemoverPessoa"><i class="fas fa-minus-square"></i></button>
+                        </div>
+                    </div>
+                }
+
+                @if (Model.Input.Empresa == null)
+                {
+                    <div class="row g-2 mb-4">
+                        <div class="form-group col-md-3">
+                            <div class="input-group ">
+                                <span class="input-group-text">CNPJ</span>
+                                <input class="form-control" asp-for="GetCNPJ" id="inputCNPJ" aria-describedby="button-addon2">
+                                <button asp-page-handler="IncluirEmpresa" class="btn btn-primary" type="submit"><i class="fa fa-plus-square" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="row g-2 mb-4">
+                        <div class="col-md-2" hidden>
+                            <label class="form-label" asp-for="Input.Empresa.Id"></label>
+                            <input class="form-control" asp-for="Input.Empresa.Id" />
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label" asp-for="Input.Empresa.CNPJ"></label>
+                            <input class="form-control" asp-for="Input.Empresa.CNPJ" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label" asp-for="Input.Empresa.Nome_Empresarial"></label>
+                            <input class="form-control" asp-for="Input.Empresa.Nome_Empresarial" />
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label" asp-for="Input.Empresa.Email"></label>
+                            <input class="form-control" asp-for="Input.Empresa.Email" />
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label" asp-for="Input.Empresa.Telefone"></label>
+                            <input class="form-control" asp-for="Input.Empresa.Telefone" />
+                        </div>
+                        <div class="col-md align-self-end">
+                            <button class="btn btn-danger" type="submit" asp-page-handler="RemoverEmpresa"><i class="fas fa-minus-square"></i></button>
+                        </div>
+                    </div>
+                }
+
+            </div>
+            <div class="col-md-2" hidden>
+                <label class="form-label" asp-for="Input.Numero"></label>
+                <input asp-for="Input.Numero" class="form-control" />
+            </div>
+            <div class="col-md-4" hidden>
+                <label class="form-label" asp-for="Input.Data_Inscricao"></label>
+                <input asp-for="Input.Data_Inscricao" class="form-control" />
+                <span asp-validation-for="Input.Data_Inscricao" class="text-danger" />
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 mt-4">
+                    <button type="submit" asp-page-handler="Save" class="btn btn-primary">Realizar Inscrição</button> |
+                    <a asp-page="./Index" class="btn btn-secondary">Voltar</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/jquery.validation.js"></script>
+    <script src="~/js/jquery.cep.js"></script>
+    <script src="~/js/jquery.mask.min.js"></script>
+    <script>
+        $('#inputCPF').mask('000.000.000-00', { placeholder: "___.___.___-__" });
+        $('#txtphone').mask('(00) 0000-0000', { placeholder: "(__) ____-____" });
+        $('#txtmobile').mask('(00) 00000-0000', { placeholder: "(__) _____-____" });
+        $('#inputCNPJ').mask('00.000.000/0000-00', { placeholder: "__.___.___/____-__" });
+    </script>
+
+}

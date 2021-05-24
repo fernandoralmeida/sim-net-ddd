@@ -46,11 +46,30 @@ namespace Sim.UI.Web.Pages.Agenda
         [DisplayName("Lotação")]
         public int Lotacao { get; set; }
 
-        [DisplayName("Estado")]
-        public string Estado { get; set; }
-
         public bool Ativo { get; set; }
 
         public virtual ICollection<InputModelInscricao> Inscritos { get; set; }
+
+        public int NumeroInscritos
+        {
+            get
+            {
+                if (Inscritos == null) 
+                    return 0; 
+                else 
+                    return Inscritos.Count();
+            }
+        }
+
+        public int Vagas
+        {
+            get
+            {
+                if (Inscritos == null)
+                    return Lotacao;
+                else
+                    return Lotacao - Inscritos.Count();
+            }
+        }
     }
 }

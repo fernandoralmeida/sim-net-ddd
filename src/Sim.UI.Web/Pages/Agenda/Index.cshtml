@@ -12,18 +12,17 @@
             <div class="col-md-auto">
                 <div class="input-group">
                     <a asp-area="" asp-page="./Novo" class="btn btn-info" title="Novo Evento"><i class="fas fa-plus-square"></i></a>
-                    <span class="input-group-text">Evento</span>
-                    <input asp-for="Input.Evento" class="form-control" placeholder="Nome" aria-describedby="button-addon2">
+                    <input asp-for="Input.Evento" class="form-control" placeholder="Nome do Evento" aria-describedby="button-addon2">
                     <button class="btn btn-primary" type="submit" role="button" id="button-addon2"><i class="fas fa-search"></i></button>
-                    <a asp-area="" asp-page="./Consulta" class="btn btn-warning" title="Consultar"><i class="fas fa-user-check"></i></a>
-                    <a href="#" class="btn btn-warning" title="Relatórios"><i class="fas fa-clipboard-list"></i></a>
+                    <a asp-page="./Evento.List" class="btn btn-warning" title="Consultar"><i class="fas fa-user-check"></i></a>
+                    <a asp-page="./Evento.List" class="btn btn-warning" title="Relatórios"><i class="fas fa-clipboard-list"></i></a>
                 </div>
             </div>
         </div>
     </form>
 </div>
 <pre>Lista de Eventos</pre>
-<hr class="row border border-2 border-secondary"/>
+<hr class="row border border-2 border-secondary" />
 <div class="row justify-content-center">
 
     @if (Model.Input.ListaEventos != null)
@@ -32,14 +31,48 @@
         {
             <div class="btn col-md-3 bg-white shadow-sm mb-2 me-2 ms-2 mt-2">
                 <p>Código: @item.Codigo</p>
-                <p class="text-primary">@item.Tipo @item.Nome</p>
+
+                <a asp-page="./Edit" asp-route-id="@item.Id" class="btn-link link-primary"><p>@item.Tipo @item.Nome</p></a>
+                
                 <p>@item.Formato @item.Data</p>
-                <div class="btn-group btn-group-sm mb-1">
-                    <a asp-page="./Index" asp-route-id="@item.Id" class="btn btn-primary">Inscrever</a>
-                    <a asp-page="./Index" asp-route-id="@item.Id" class="btn btn-primary">Inscritos</a>
-                </div>
+                
+                    <a asp-page="./Inscricao.Evento" asp-route-id="@item.Codigo" class="btn btn-sm btn-info">Inscrever [@item.Vagas]</a>
+                    <a href="#" data-secao="Agenda" data-acao="Inscritos.List" data-id="@item.Codigo" class="btn btn-sm btn-info viewbutton" data-bs-toggle="modal" data-bs-target="#viewmodal">Inscritos [@item.NumeroInscritos]</a>
+                    <a asp-page="./Inscricao.Remove" asp-route-id="@item.Codigo" class="btn btn-sm btn-danger">Remover</a>
+                
             </div>
         }
-
     }
+
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="viewmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="viewmodalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title" id="viewmodalLabel">Detalhes</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="viewmodalData"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script type="text/javascript">
+    $(".viewbutton").on("click", function () {
+        var customerId = $(this).data('id');
+        var secao = $(this).data('secao');
+        var acao = $(this).data('acao');
+            $.ajax({
+                url: "/"+ secao +"/" + acao + "?id=" + customerId,
+                cache: false
+            }).done(function (data) {
+                $("#viewmodalData").html(data);
+            });
+        });</script>
+}

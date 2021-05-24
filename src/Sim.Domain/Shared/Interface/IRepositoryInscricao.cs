@@ -14,7 +14,10 @@ namespace Sim.Domain.Shared.Interface
 
         IEnumerable<Inscricao> GetByParticipante(string nome);
 
-        IEnumerable<Inscricao> GetByTipo(string evento);    
-    
+        IEnumerable<Inscricao> GetByTipo(string evento);
+
+        bool JaInscrito(string cpf, int evento);
+
+        int LastCodigo();
     }
 }

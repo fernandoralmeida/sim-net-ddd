@@ -20,8 +20,8 @@ namespace Sim.UI.Web.AutoMapper
             CreateMap<Pages.Pessoa.NovoModel.InputModel, Pessoa>();
             CreateMap<Pessoa, Pages.Pessoa.NovoModel.InputModel>().ReverseMap();
 
-            CreateMap<EditModel.InputModel, Pessoa>();
-            CreateMap<Pessoa, EditModel.InputModel>().ReverseMap();
+            CreateMap<Pages.Pessoa.EditModel.InputModel, Pessoa>();
+            CreateMap<Pessoa, Pages.Pessoa.EditModel.InputModel>().ReverseMap();
 
             CreateMap<VMEmpresa, CNPJ>();
             CreateMap<CNPJ, VMEmpresa>().ReverseMap();

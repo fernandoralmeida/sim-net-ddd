@@ -1,0 +1,81 @@
+﻿@page
+@model Sim.UI.Web.Pages.Agenda.Inscricao_RemoveModel
+@{
+    ViewData["Title"] = "Inscrição";
+}
+
+<div class="row">
+    <div class="col-md-12 mb-2">
+        Código: @Model.Input.Codigo
+        <br /><span class="text-primary">@Model.Input.Tipo @Model.Input.Nome - @Model.Input.Formato</span>
+        <br />Data: @Model.Input.Data
+    </div>
+</div>
+
+<div>
+    <form method="post">
+
+        <table class="table">
+            <caption>Lista de Inscritos!</caption>
+            <thead>
+                <tr>
+                    <th>
+                        N
+                    </th>
+                    <th>
+                        Inscrição
+                    </th>
+                    <th>
+                        Cliente
+                    </th>
+                    <th>
+                        Empresa
+                    </th>
+                    <th>
+                        Contato
+                    </th>
+                    <th>
+                        Ação
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int cont = 0;
+                }
+
+
+                @foreach (var item in Model.Input.Inscritos)
+                {
+                    <tr>
+                        <td>
+                            @{cont++;}
+                            @cont.ToString()
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Numero)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Participante.Nome)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Empresa.Nome_Empresarial)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Participante.Tel_Movel)
+                        </td>
+                        <td>
+                            <button asp-page-handler="Remove" asp-route-id="@item.Id" asp-route-ide="@Model.Input.Codigo" type="submit" class="btn btn-sm btn-danger">Remover</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </form>
+</div>
+
+<div class="row">
+    <div class="col-md-4 mt-4">
+        <a asp-page="./Index" class="btn btn-secondary">Voltar</a>
+    </div>
+</div>

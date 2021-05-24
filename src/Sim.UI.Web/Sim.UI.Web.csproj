@@ -33,8 +33,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\Sde\" />
-    <Folder Include="Pages\SalaEmpreendedor\" />
+    <Folder Include="Pages\BancodoPovo\" />
+    <Folder Include="Pages\SaladoEmpreendedor\" />
   </ItemGroup>
 
 </Project>
