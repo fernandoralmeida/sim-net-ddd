@@ -28,18 +28,22 @@
     @if (Model.Input.ListaEventos != null)
     {
         foreach (var item in Model.Input.ListaEventos)
-        {
-            <div class="btn col-md-3 bg-white shadow-sm mb-2 me-2 ms-2 mt-2">
-                <p>Código: @item.Codigo</p>
-
-                <a asp-page="./Edit" asp-route-id="@item.Id" class="btn-link link-primary"><p>@item.Tipo @item.Nome</p></a>
-                
-                <p>@item.Formato @item.Data</p>
-                
-                    <a asp-page="./Inscricao.Evento" asp-route-id="@item.Codigo" class="btn btn-sm btn-info">Inscrever [@item.Vagas]</a>
-                    <a href="#" data-secao="Agenda" data-acao="Inscritos.List" data-id="@item.Codigo" class="btn btn-sm btn-info viewbutton" data-bs-toggle="modal" data-bs-target="#viewmodal">Inscritos [@item.NumeroInscritos]</a>
-                    <a asp-page="./Inscricao.Remove" asp-route-id="@item.Codigo" class="btn btn-sm btn-danger">Remover</a>
-                
+        { 
+            <div class="col-sm-4">
+                <div class="card shadow">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        @item.Tipo: @item.Codigo
+                        <a href="#" data-secao="Agenda" data-acao="Inscritos.List" data-id="@item.Codigo" class="btn-link viewbutton" data-bs-toggle="modal" data-bs-target="#viewmodal">
+                            <span class="badge bg-primary">@item.NumeroInscritos - @item.Lotacao</span>
+                        </a>                       
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-title">@item.Nome</h6>
+                        <p class="card-text">@item.Formato @item.Data</p>
+                        <a asp-page="./Inscricao.Evento" asp-route-id="@item.Codigo" class="btn-link">Inscrever</a>
+                        <a asp-page="./Inscricao.Remove" asp-route-id="@item.Codigo" class="btn-link">Remover</a>                        
+                    </div>
+                </div>
             </div>
         }
     }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Authorization;
 using AutoMapper;
 
 namespace Sim.UI.Web.Pages.Agenda
@@ -11,6 +12,7 @@ namespace Sim.UI.Web.Pages.Agenda
 
     using Sim.Application.Shared.Interface;
 
+    [Authorize]
     public class Inscritos_ListModel : PageModel
     {
         private readonly IAppServiceEvento _appServiceEvento;

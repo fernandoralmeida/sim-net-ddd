@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 using AutoMapper;
 
 namespace Sim.UI.Web.Pages.Agenda
@@ -17,6 +18,7 @@ namespace Sim.UI.Web.Pages.Agenda
     using Sim.Application.SDE.Interface;
     using Sim.Cross.Identity;
 
+    [Authorize]
     public class Inscricao_EventoModel : PageModel
     {
         private readonly UserManager<ApplicationUser> _userManager;

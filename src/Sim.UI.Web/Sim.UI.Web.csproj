@@ -8,6 +8,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Pages\BancodoPovo\**" />
+    <Compile Remove="Pages\SaladoEmpreendedor\**" />
+    <Content Remove="Pages\BancodoPovo\**" />
+    <Content Remove="Pages\SaladoEmpreendedor\**" />
+    <EmbeddedResource Remove="Pages\BancodoPovo\**" />
+    <EmbeddedResource Remove="Pages\SaladoEmpreendedor\**" />
+    <None Remove="Pages\BancodoPovo\**" />
+    <None Remove="Pages\SaladoEmpreendedor\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.5" />
@@ -30,11 +41,6 @@
     <ProjectReference Include="..\Sim.Cross.Ioc\Sim.Cross.Ioc.csproj" />
     <ProjectReference Include="..\Sim.Domain\Sim.Domain.csproj" />
     <ProjectReference Include="..\Sim.Service\Sim.Service.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Pages\BancodoPovo\" />
-    <Folder Include="Pages\SaladoEmpreendedor\" />
   </ItemGroup>
 
 </Project>
