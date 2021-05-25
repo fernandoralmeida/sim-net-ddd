@@ -8,16 +8,16 @@
 
 <div class="row mt-5 mb-5">
     <form method="post">
-        <div class="row justify-content-center">
-            <div class="col-md-auto">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+            <a asp-area="" asp-page="./Novo" class="btn btn-primary" title="Novo Evento"><i class="fas fa-plus-square"></i></a>
+            <div class="col-md-4">
                 <div class="input-group">
-                    <a asp-area="" asp-page="./Novo" class="btn btn-info" title="Novo Evento"><i class="fas fa-plus-square"></i></a>
-                    <input asp-for="Input.Evento" class="form-control" placeholder="Nome do Evento" aria-describedby="button-addon2">
+                    <input asp-for="Input.Evento" class="form-control" placeholder="Cosultar Evento por Nome" aria-describedby="button-addon2">
                     <button class="btn btn-primary" type="submit" role="button" id="button-addon2"><i class="fas fa-search"></i></button>
-                    <a asp-page="./Evento.List" class="btn btn-warning" title="Consultar"><i class="fas fa-user-check"></i></a>
-                    <a asp-page="./Evento.List" class="btn btn-warning" title="Relatórios"><i class="fas fa-clipboard-list"></i></a>
                 </div>
             </div>
+            <a asp-page="./Evento.List" class="btn btn-secondary" title="Consultar"><i class="fas fa-user-check"></i></a>
+            <a asp-page="./Evento.List" class="btn btn-secondary" title="Relatórios"><i class="fas fa-clipboard-list"></i></a>
         </div>
     </form>
 </div>
@@ -40,8 +40,8 @@
                     <div class="card-body">
                         <h6 class="card-title">@item.Nome</h6>
                         <p class="card-text">@item.Formato @item.Data</p>
-                        <a asp-page="./Inscricao.Evento" asp-route-id="@item.Codigo" class="btn-link">Inscrever</a>
-                        <a asp-page="./Inscricao.Remove" asp-route-id="@item.Codigo" class="btn-link">Remover</a>                        
+                        <a asp-page="./Inscricao.Evento" asp-route-id="@item.Codigo" class="card-link">Inscrever</a>
+                        <a asp-page="./Inscricao.Remove" asp-route-id="@item.Codigo" class="card-link">Remover</a>                        
                     </div>
                 </div>
             </div>

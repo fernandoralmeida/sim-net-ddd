@@ -9,18 +9,17 @@
 
 <div class="mt-5 mb-5">
     <form method="post">
-        <div class="row justify-content-center">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+            <a asp-area="" asp-page="/Pessoa/Novo" class="btn btn-primary" title="Adicionar Nova Pessoa"><i class="fas fa-plus-square"></i></a>
             <div class="col-md-auto">
                 <div class="input-group">
-                    <a asp-area="" asp-page="/Pessoa/Novo" class="btn btn-info" title="Adicionar Nova Pessoa"><i class="fas fa-plus-square"></i></a>
-                    <span class="input-group-text">Cliente</span>
                     <input asp-for="Input.Nome" class="form-control" placeholder="Nome" aria-describedby="button-addon2">
                     <input asp-for="Input.CPF" class="form-control" placeholder="CPF" aria-describedby="button-addon2" id="inputCPF">
                     <button class="btn btn-primary" type="submit" role="button" id="button-addon2"><i class="fa fa-search"></i></button>
-                    <a href="#" class="btn btn-warning" title="Consulta Avançada"><i class="fa fa-list-alt" aria-hidden="true"></i></a>
-                    <a href="#" class="btn btn-warning" title="Relatórios"><i class="fa fa-file" aria-hidden="true"></i></a>
                 </div>
             </div>
+            <a href="#" class="btn btn-secondary" title="Consulta Avançada"><i class="fa fa-list-alt" aria-hidden="true"></i></a>
+            <a href="#" class="btn btn-secondary" title="Relatórios"><i class="fa fa-file" aria-hidden="true"></i></a>
         </div>
     </form>
 </div>

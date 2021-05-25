@@ -8,15 +8,17 @@
 
 <div class="row mt-5 mb-5">
     <form method="post">
-        <div class="row justify-content-center">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+            <a asp-area="" asp-page="./Novo" class="btn btn-primary" title="Novo Evento"><i class="fas fa-plus-square"></i></a>
             <div class="col-md-auto">
                 <div class="input-group">
-                    <a asp-area="" asp-page="./Novo" class="btn btn-info" title="Novo Evento"><i class="fas fa-plus-square"></i></a>
+
                     <input asp-for="Input.GetCPF" class="form-control" id="inputCPF" aria-describedby="button-addon2">
                     <button class="btn btn-primary" type="submit" role="button" id="button-addon2"><i class="fas fa-search"></i></button>
-                    <a asp-page="./Consulta" class="btn btn-warning" title="Relatórios"><i class="fas fa-clipboard-list"></i></a>
+
                 </div>
             </div>
+            <a asp-page="./Consulta" class="btn btn-secondary" title="Relatórios"><i class="fas fa-clipboard-list"></i></a>
         </div>
     </form>
 </div>
