@@ -2,6 +2,7 @@
 @model Sim.UI.Web.Pages.Agenda.IndexModel
 @{
     ViewData["Title"] = "Indice de Eventos";
+    ViewData["ActivePage"] = AgendaNavPages.Inicio;
 }
 
 <partial name="_StatusMessage" model="Model.StatusMessage" />
@@ -16,20 +17,18 @@
                     <button class="btn btn-primary" type="submit" role="button" id="button-addon2"><i class="fas fa-search"></i></button>
                 </div>
             </div>
-            <a asp-page="./Evento.List" class="btn btn-secondary" title="Consultar"><i class="fas fa-user-check"></i></a>
-            <a asp-page="./Evento.List" class="btn btn-secondary" title="Relatórios"><i class="fas fa-clipboard-list"></i></a>
         </div>
     </form>
 </div>
 <pre>Lista de Eventos</pre>
 <hr class="row border border-2 border-secondary" />
-<div class="row justify-content-center">
+<div class="row">
 
     @if (Model.Input.ListaEventos != null)
     {
         foreach (var item in Model.Input.ListaEventos)
         { 
-            <div class="col-sm-4">
+            <div class="col-sm-4 mt-4">
                 <div class="card shadow">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         @item.Tipo: @item.Codigo
@@ -38,10 +37,12 @@
                         </a>                       
                     </div>
                     <div class="card-body">
-                        <h6 class="card-title">@item.Nome</h6>
+                        <h6 class="card-title">@item.Nome <a class="text-decoration-none" asp-page="./Edit" asp-route-id="@item.Id">
+                            <i class="fas fa-edit"></i></a>
+                        </h6>                        
                         <p class="card-text">@item.Formato @item.Data</p>
                         <a asp-page="./Inscricao.Evento" asp-route-id="@item.Codigo" class="card-link">Inscrever</a>
-                        <a asp-page="./Inscricao.Remove" asp-route-id="@item.Codigo" class="card-link">Remover</a>                        
+                        <a asp-page="./Inscricao.Remove" asp-route-id="@item.Codigo" class="card-link">Remover</a>
                     </div>
                 </div>
             </div>

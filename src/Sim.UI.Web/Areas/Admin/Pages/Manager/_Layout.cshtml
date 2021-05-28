@@ -8,19 +8,12 @@
         Layout = "/Pages/Shared/_Layout.cshtml";
     }
 }
-<div class="row">
-    <div class="col-md-12">
+<div class="mb-5">
             <partial name="_AdminNav" />
-        </div>
 </div>
-<hr />
 <div>
     <pre>Altere as configurações das contas</pre>
-    <div class="row">
-        <div class="col-md">
-            @RenderBody()
-        </div>
-    </div>
+    @RenderBody()
 </div>
 
 @section Scripts {

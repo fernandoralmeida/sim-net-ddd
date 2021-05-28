@@ -2,23 +2,20 @@
 @model Sim.UI.Web.Pages.Atendimento.ConsultaModel
 @{
     Layout = "_Layout.cshtml";
-    ViewData["Title"] = "Consultas por Periodos";
-    ViewData["ActivePage"] = AtendimentoNavPages.Periodo;
+    ViewData["Title"] = "Consultas por PJ";
+    ViewData["ActivePage"] = AtendimentoNavPages.Empresa;
 }
 
 
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
-
 <div class="d-grid gap-2 d-md-flex justify-content-md-center mb-5">
-        <form method="post" asp-page-handler="ListByData">
+        <form method="post" asp-page-handler="ListByEmpresa">
             <div class="input-group input-group">
-                <input asp-for="Input.DataI" class="form-control" />
-                <input asp-for="Input.DataF" class="form-control" />
-                <button asp-page-handler="ListByData" class="btn btn-primary" type="submit" role="button"><i class="fas fa-search"></i></button>
+                <input asp-for="Input.CNPJ" id="inputCNPJ" class="form-control" />
+                <button asp-page-handler="ListByEmpresa" class="btn btn-primary" type="submit" role="button"><i class="fas fa-search"></i></button>
             </div>
         </form>
-
 </div>
 
 <div>

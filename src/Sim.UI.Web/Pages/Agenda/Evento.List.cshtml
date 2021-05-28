@@ -2,6 +2,7 @@
 @model Sim.UI.Web.Pages.Agenda.Evento_ListModel
 @{
     ViewData["Title"] = "Lista Eventos";
+    ViewData["ActivePage"] = AgendaNavPages.EventoList;
 }
 
 <partial name="_StatusMessage" model="Model.StatusMessage" />
@@ -18,7 +19,6 @@
 
                 </div>
             </div>
-            <a asp-page="./Consulta" class="btn btn-secondary" title="Relatórios"><i class="fas fa-clipboard-list"></i></a>
         </div>
     </form>
 </div>

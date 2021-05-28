@@ -1,0 +1,25 @@
+﻿@using Sim.UI.Web.Pages.Atendimento
+
+
+<ul class="nav nav-tabs justify-content-center">
+    <li class="nav-item">
+        <a class="nav-link @AtendimentoNavPages.InicioNavClass(ViewContext)" asp-page="./Index"><i class="fas fa-home"></i> Inicio</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link @AtendimentoNavPages.AtendiementoNavClass(ViewContext) @AtendimentoNavPages.AtendiementoNovoNavClass(ViewContext)" asp-page="./Iniciar"><i class="fas fa-stopwatch"></i> Atendimento</a>
+    </li>
+
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle @AtendimentoNavPages.ByPeriodoNavClass(ViewContext) @AtendimentoNavPages.ByCNPJNavClass(ViewContext) @AtendimentoNavPages.ByCPFNavClass(ViewContext)" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><i class="fas fa-search"></i></a>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" asp-page="./Consulta">Data</a></li>
+            <li><a class="dropdown-item" asp-page="./Consulta.ByPF">CPF</a></li>
+            <li><a class="dropdown-item" asp-page="./Consulta.ByPJ">CNPJ</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Separated link</a></li>
+        </ul>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#"><i class="fas fa-clipboard-list"></i> Relatórios</a>
+    </li>
+</ul>

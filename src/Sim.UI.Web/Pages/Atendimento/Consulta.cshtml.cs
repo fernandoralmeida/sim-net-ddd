@@ -47,11 +47,11 @@ namespace Sim.UI.Web.Pages.Atendimento
             Input.DataF = DateTime.Now;
         }
 
-        public async Task OnGetAsync()
+        public void OnGet()
         {
-            var lista = Task.Run(() => _appServiceAtendimento.ListAll());
-            await lista;
-            Input.ListaAtendimento = lista.Result.ToList();
+            //var lista = Task.Run(() => _appServiceAtendimento.ListAll());
+            //await lista;
+            //Input.ListaAtendimento = lista.Result.ToList();
         }
 
         public async Task OnPostListByDataAsync()

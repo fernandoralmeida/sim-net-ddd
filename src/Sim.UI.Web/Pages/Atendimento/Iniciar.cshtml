@@ -2,16 +2,9 @@
 @model Sim.UI.Web.Pages.Atendimento.IniciarModel
 @{
     ViewData["Title"] = "Iniciar";
+    ViewData["ActivePage"] = AtendimentoNavPages.Atendimento;
 }
 
-<div class="row">
-    <div class="col-md-6 mb-2">
-        <a asp-page="./Index" class="link-primary">Voltar</a> |
-        <b>Novo Atendimento</b> @Model.Input.Protocolo
-    </div>
-
-</div>
-<hr />
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
 <form method="post">

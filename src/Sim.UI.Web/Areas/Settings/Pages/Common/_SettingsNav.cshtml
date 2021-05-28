@@ -1,9 +1,19 @@
 ﻿@using Sim.UI.Web.Areas.Settings.Pages.Common
 
-<div class="input-group input-group justify-content-center">
-    <a class="btn btn-outline-secondary @SettingsNavPages.SecretariaNavClass(ViewContext)" id="secretaria" asp-page="./Index">Secretaria</a>
-    <a class="btn btn-outline-secondary @SettingsNavPages.SetoresNavClass(ViewContext)" id="setor" asp-page="./Setores">Setores</a>
-    <a class="btn btn-outline-secondary @SettingsNavPages.ServicosNavClass(ViewContext)" id="servico" asp-page="./Servicos">Serviços</a>
-    <a class="btn btn-outline-secondary @SettingsNavPages.EventosNavClass(ViewContext)" id="evento" asp-page="./Eventos">Eventos</a>
-    <a class="btn btn-outline-secondary @SettingsNavPages.CanalNavClass(ViewContext)" id="canal" asp-page="./Canal">Canal Atendimento</a>
-</div>
+<ul class="nav nav-tabs justify-content-center">
+    <li class="nav-item">
+        <a class="nav-link @SettingsNavPages.SecretariaNavClass(ViewContext)" id="secretaria" asp-page="./Index">Secretaria</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link @SettingsNavPages.SetoresNavClass(ViewContext)" id="setor" asp-page="./Setores">Setores</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link @SettingsNavPages.ServicosNavClass(ViewContext)" id="servico" asp-page="./Servicos">Serviços</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link @SettingsNavPages.EventosNavClass(ViewContext)" id="evento" asp-page="./Eventos">Eventos</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link @SettingsNavPages.CanalNavClass(ViewContext)" id="canal" asp-page="./Canal">Canais</a>
+    </li> 
+</ul>

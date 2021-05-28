@@ -110,12 +110,17 @@ namespace Sim.UI.Web.Pages.Agenda
 
         public async Task OnPostIncluirEventoAsync()
         {
+            try
+            {
+                var t = Task.Run(() => _appServiceEvento.GetByCodigo(GetNumeroEvento));
+                await t;
 
-            var t = Task.Run(() => _appServiceEvento.GetByCodigo(GetNumeroEvento));
-            await t;
-
-            Input.Evento = t.Result;
-
+                Input.Evento = t.Result;
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = "Erro: " + ex.Message;
+            }
         }
 
         public void OnPostRemoverEvento()

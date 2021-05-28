@@ -25,6 +25,9 @@ namespace Sim.Cross.Data.Repository.Shared
                 .Where(c => c.Codigo == codigo)
                 .FirstOrDefault();
 
+            if (eve == null)
+                return null;
+
             var insc = _db.Inscricao
                 .Include(p => p.Participante)
                 .Include(e => e.Empresa)

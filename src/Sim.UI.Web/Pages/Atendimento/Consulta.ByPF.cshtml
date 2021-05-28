@@ -2,8 +2,8 @@
 @model Sim.UI.Web.Pages.Atendimento.ConsultaModel
 @{
     Layout = "_Layout.cshtml";
-    ViewData["Title"] = "Consultas por Periodos";
-    ViewData["ActivePage"] = AtendimentoNavPages.Periodo;
+    ViewData["Title"] = "Consultas por PF";
+    ViewData["ActivePage"] = AtendimentoNavPages.Pessoas;
 }
 
 
@@ -11,14 +11,12 @@
 
 
 <div class="d-grid gap-2 d-md-flex justify-content-md-center mb-5">
-        <form method="post" asp-page-handler="ListByData">
+        <form method="post" asp-page-handler="ListByPessoa">
             <div class="input-group input-group">
-                <input asp-for="Input.DataI" class="form-control" />
-                <input asp-for="Input.DataF" class="form-control" />
-                <button asp-page-handler="ListByData" class="btn btn-primary" type="submit" role="button"><i class="fas fa-search"></i></button>
+                <input asp-for="Input.CPF" id="inputCPF" class="form-control" />
+                <button asp-page-handler="ListByPessoa" class="btn btn-primary" type="submit" role="button"><i class="fas fa-search"></i></button>
             </div>
         </form>
-
 </div>
 
 <div>

@@ -2,10 +2,9 @@
 @model Sim.UI.Web.Pages.Agenda.Inscricao_EventoModel
 @{
     ViewData["Title"] = "Inscrição";
+    ViewData["ActivePage"] = AgendaNavPages.NovaInscricao;
 }
 
-<pre>Nova Inscrição</pre>
-<hr />
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 <div class="row">
     <form method="post">
