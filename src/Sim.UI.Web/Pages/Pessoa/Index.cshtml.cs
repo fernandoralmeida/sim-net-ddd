@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Authorization;
+using System.ComponentModel.DataAnnotations;
 
 namespace Sim.UI.Web.Pages.Pessoa
 {
@@ -30,11 +31,11 @@ namespace Sim.UI.Web.Pages.Pessoa
         public class InputModel
         {
          
+            [Required]
             [DisplayName("Nome ou CPF")]            
             public string CPF { get; set; }
 
-            [DisplayName("Nome ou CPF")]
-            public string Nome { get; set; }
+            public string RouteCPF { get; set; }
 
             public IEnumerable<Pessoa> ListaPessoas { get; set; }
 
@@ -64,10 +65,12 @@ namespace Sim.UI.Web.Pages.Pessoa
             {
                 if (ModelState.IsValid)
                 {
-                    var pessoa = _pessoaApp.ConsultarPessoaByNameOrCPF(Input.CPF, Input.Nome);
+                    var pessoa = _pessoaApp.ConsultaByCPF(Input.CPF);
+
 
                     Input = new InputModel
                     {
+                        RouteCPF = new Functions.Mask().Remove(Input.CPF),
                         ListaPessoas = pessoa
                     };
                 }

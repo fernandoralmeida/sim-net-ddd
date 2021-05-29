@@ -112,13 +112,15 @@ namespace Sim.UI.Web.Pages.Pessoa
             public bool Ativo { get; set; }
         }
 
-        public IActionResult OnGet()
+        public IActionResult OnGet(string id)
         {
             Input = new InputModel
             {
+                CPF = id,
                 Data_Cadastro = DateTime.Now,
                 Ultima_Alteracao = DateTime.Now,
                 Ativo = true
+                
             };
             return Page();
         }

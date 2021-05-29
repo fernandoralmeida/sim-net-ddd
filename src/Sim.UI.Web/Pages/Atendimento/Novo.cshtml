@@ -6,19 +6,12 @@
     ViewData["ActivePage"] = AtendimentoNavPages.AtendimentoNovo;
 }
 
-<div class="row">
-    <div class="col-md-12 mb-2">
-        <a asp-page="./Index" class="link-primary">Voltar</a> |
-        <b>Atendimento</b> : @Model.Input.Protocolo 
-    </div>    
-</div>
-<hr />
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
 <form method="post">
     <div class="col-md-12 mb-3">
         <div class="input-group">
-            <span class="input-group-text">Info!</span>
+            <span class="input-group-text">Atendimento</span>
             <input type="text" asp-for="Input.Protocolo" class="form-control" readonly>
             <input type="text" asp-for="Input.Data" class="form-control" readonly>
             <input type="text" asp-for="Input.Status" class="form-control" readonly>
@@ -104,13 +97,13 @@
             <div class="col-md-12">
                 <label asp-for="Input.Descricao"></label>
             </div>
-            <div class="col-md-9 mb-2">
+            <div class="col-md-9 mb-3">
                 <textarea asp-for="Input.Descricao" class="form-control" rows="2"></textarea>
                 <textarea id="myservice" asp-for="Input.Servicos" class="form-control" hidden></textarea>
             </div>
             <div class="col-md-3">
                 <div class="d-grid gap-2">
-                    <button id="addbtn" type="submit" role="button" class="btn btn-primary">Finalizar<br /> Atendimento</button>             
+                    <button id="addbtn" type="submit" role="button" class="btn btn-primary">Finalizar<br /> Atendimento</button>
                 </div>
             </div>
         </div>

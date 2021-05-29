@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Authorization;
 namespace Sim.UI.Web.Pages.Empresa
 {
-    [Authorize]
+    [Authorize(Roles = "Administrador")]
     public class RemoveModel : PageModel
     {
         public void OnGet()

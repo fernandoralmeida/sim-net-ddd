@@ -1,19 +1,15 @@
 ﻿@page
 @model Sim.UI.Web.Pages.Pessoa.EditModel
 @{
-    ViewData["Title"] = "Novo";
+    ViewData["Title"] = "Edição";
 }
 
-<h5>Edit</h5>
-
 <partial name="_StatusMessage" model="Model.StatusMessage" />
-
 
 Ultima atualização: @Html.DisplayFor(model => model.Input.Ultima_Alteracao)
 <hr />
 
-
-<h6>Identificação</h6>
+<pre>Identificação</pre>
 
 <div>
     <form method="post" novalidate>
@@ -97,7 +93,7 @@ Ultima atualização: @Html.DisplayFor(model => model.Input.Ultima_Alteracao)
         </div>
 
         <hr />
-        <h6>Endereço</h6>
+        <pre>Endereço</pre>
 
         <div class="mb-3 row">
             <div class="col-md-2">
@@ -133,7 +129,7 @@ Ultima atualização: @Html.DisplayFor(model => model.Input.Ultima_Alteracao)
         </div>
 
         <hr />
-        <h6>Contato</h6>
+        <pre>Contato</pre>
 
         <div class="mb-3 row">
 
@@ -152,7 +148,7 @@ Ultima atualização: @Html.DisplayFor(model => model.Input.Ultima_Alteracao)
         </div>
 
         <hr />
-        <h6>Informações</h6>
+        <pre>Informações</pre>
         <div class="row">
 
             <div class="col-md-3">

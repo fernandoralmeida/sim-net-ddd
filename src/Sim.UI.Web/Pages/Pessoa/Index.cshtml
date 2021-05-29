@@ -3,6 +3,7 @@
 
 @{
     ViewData["Title"] = "Clientes";
+    ViewData["ActivePage"] = PessoaNavPages.Inicio;
 }
 
 <partial name="_StatusMessage" model="Model.StatusMessage" />
@@ -10,16 +11,17 @@
 <div class="mt-5 mb-5">
     <form method="post">
         <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-            <a asp-area="" asp-page="/Pessoa/Novo" class="btn btn-primary" title="Adicionar Nova Pessoa"><i class="fas fa-plus-square"></i></a>
             <div class="col-md-auto">
                 <div class="input-group">
-                    <input asp-for="Input.Nome" class="form-control" placeholder="Nome" aria-describedby="button-addon2">
                     <input asp-for="Input.CPF" class="form-control" placeholder="CPF" aria-describedby="button-addon2" id="inputCPF">
                     <button class="btn btn-primary" type="submit" role="button" id="button-addon2"><i class="fa fa-search"></i></button>
                 </div>
+                <span asp-validation-for="Input.CPF" class="text-danger"></span>
             </div>
-            <a href="#" class="btn btn-secondary" title="Consulta Avançada"><i class="fa fa-list-alt" aria-hidden="true"></i></a>
-            <a href="#" class="btn btn-secondary" title="Relatórios"><i class="fa fa-file" aria-hidden="true"></i></a>
+            @if(!Model.Input.ListaPessoas.Any())
+            {
+                <a asp-area="" asp-page="/Pessoa/Novo" asp-route-id="@Model.Input.RouteCPF" class="btn btn-primary" title="Adicionar Nova Pessoa"><i class="fas fa-user-plus"></i></a>
+            }            
         </div>
     </form>
 </div>
@@ -46,7 +48,7 @@
                     Telefone
                 </th>
 
-                <th></th>
+                <th>Ações</th>
             </tr>
         </thead>
         <tbody>
@@ -78,8 +80,6 @@
                         </td>
 
                         <td>
-                            <a asp-page="./Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary" title="Detalhar informações"><i class="far fa-list-alt"></i></a>
-
                             <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary" title="Alterar informações"><i class="far fa-edit"></i></a>
 
                             <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger" title="Excluir informações"><i class="far fa-trash-alt"></i></a>

@@ -15,7 +15,7 @@ namespace Sim.UI.Web.Pages.Pessoa
     using Sim.Domain.SDE.Entity;
     using Sim.Application.SDE.Interface;
 
-    [Authorize]
+    [Authorize(Roles = "Administrador")]
     public class DeleteModel : PageModel
     {
         private readonly IAppServicePessoa _pessoa;

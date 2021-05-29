@@ -6,10 +6,14 @@
         <a class="nav-link @AgendaNavPages.InicioNavClass(ViewContext)" asp-page="./Index"><i class="fas fa-home"></i> Inicio</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link @AgendaNavPages.NovoEventoNavClass(ViewContext)" asp-page="./Novo"><i class="fas fa-calendar-plus"></i> Evento</a>
+        <a class="nav-link dropdown-toggle @AgendaNavPages.NovoEventoNavClass(ViewContext)" data-bs-toggle="dropdown" href="#"><i class="fas fa-calendar"></i> Evento</a>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" asp-page="./Novo"><i class="fas fa-calendar-plus"></i> Novo</a></li>
+        </ul>
     </li>
     <li class="nav-item">
         <a class="nav-link @AgendaNavPages.NovaInscricaoNavClass(ViewContext)" asp-page="./Inscricao.Evento"><i class="fas fa-user-tie"></i> Inscrições</a>
+
     </li>
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle @AgendaNavPages.EventoListClass(ViewContext)" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><i class="fas fa-search"></i></a>
