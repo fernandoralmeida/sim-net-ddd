@@ -23,6 +23,16 @@ namespace Sim.Application.Shared
             return _atendimento.AtendimentoAtivo(userid);
         }
 
+        public IEnumerable<Atendimento> AtendimentosCancelados(string userid)
+        {
+            return _atendimento.AtendimentosCancelados(userid);
+        }
+
+        public Atendimento GetAtendimento(Guid id)
+        {
+            return _atendimento.GetAtendimento(id);
+        }
+
         public IEnumerable<Atendimento> GetByCanal(string canal)
         {
             return _atendimento.GetByCanal(canal);

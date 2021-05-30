@@ -6,17 +6,18 @@
         <a class="nav-link @AtendimentoNavPages.InicioNavClass(ViewContext)" asp-page="./Index"><i class="fas fa-home"></i> Inicio</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link @AtendimentoNavPages.AtendiementoNavClass(ViewContext) @AtendimentoNavPages.AtendiementoNovoNavClass(ViewContext)" asp-page="./Iniciar"><i class="fas fa-stopwatch"></i> Atendimento</a>
+        <a class="nav-link @AtendimentoNavPages.AtendiementoNavClass(ViewContext)" asp-page="./Iniciar"><i class="fas fa-stopwatch"></i> Atendimento</a>
     </li>
 
     <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle @AtendimentoNavPages.ByPeriodoNavClass(ViewContext) @AtendimentoNavPages.ByCNPJNavClass(ViewContext) @AtendimentoNavPages.ByCPFNavClass(ViewContext)" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><i class="fas fa-search"></i></a>
+        <a class="nav-link dropdown-toggle @AtendimentoNavPages.ConsultaNavClass(ViewContext)" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><i class="fas fa-search"></i></a>
         <ul class="dropdown-menu">
             <li><a class="dropdown-item" asp-page="./Consulta">Data</a></li>
             <li><a class="dropdown-item" asp-page="./Consulta.ByPF">CPF</a></li>
             <li><a class="dropdown-item" asp-page="./Consulta.ByPJ">CNPJ</a></li>
             <li class="dropdown-divider"></li>
-            <li><a class="dropdown-item" asp-page="./Consulta">Pendencias</a></li>
+            <li><a class="dropdown-item" asp-page="./Consulta.Pendencias">Pendencias</a></li>
+            <li><a class="dropdown-item" asp-page="./Consulta.Cancelados">Cancelados</a></li>
         </ul>
     </li>
     <li class="nav-item">

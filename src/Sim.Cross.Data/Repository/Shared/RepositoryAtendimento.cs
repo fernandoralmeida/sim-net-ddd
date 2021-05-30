@@ -22,7 +22,7 @@ namespace Sim.Cross.Data.Repository.Shared
                 .Include(p => p.Pessoa)
                 .Include(e => e.Empresa)
                 .Include(s => s.Sebrae)
-                .Where(s=>s.Owner_AppUser_Id == userid && s.Status=="Ativo");
+                .Where(s => s.Owner_AppUser_Id == userid && s.Status == "Ativo");
 
             return ativo;
         }
@@ -97,6 +97,28 @@ namespace Sim.Cross.Data.Repository.Shared
                 .Where(a => a.Ativo == true).OrderBy(a => a.Data);
 
             return lista;
+        }
+
+        public IEnumerable<Atendimento> AtendimentosCancelados(string userid)
+        {
+            var ativo = _db.Atendimento
+                .Include(p => p.Pessoa)
+                .Include(e => e.Empresa)
+                .Include(s => s.Sebrae)
+                .Where(s => s.Owner_AppUser_Id == userid && s.Status == "Cancelado");
+
+            return ativo;
+        }
+
+        public Atendimento GetAtendimento(Guid id)
+        {
+            var ativo = _db.Atendimento
+                .Include(p => p.Pessoa)
+                .Include(e => e.Empresa)
+                .Include(s => s.Sebrae)
+                .Where(i => i.Id == id).FirstOrDefault();
+
+            return ativo;
         }
     }
 }

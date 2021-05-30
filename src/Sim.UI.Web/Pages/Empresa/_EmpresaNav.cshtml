@@ -1,0 +1,19 @@
+﻿@using Sim.UI.Web.Pages.Empresa
+
+
+<ul class="nav nav-tabs justify-content-center">
+    <li class="nav-item">
+        <a class="nav-link @EmpresaNavPages.InicioNavClass(ViewContext)" asp-page="./Index"><i class="fas fa-home"></i> Inicio</a>
+    </li>
+
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle @EmpresaNavPages.ConsultaNomeNavClass(ViewContext) @EmpresaNavPages.ConsultaCNPJNavClass(ViewContext)" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><i class="fas fa-search"></i> Consulta</a>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" asp-page="./Consulta.nome">Razao Social</a></li>
+            <li><a class="dropdown-item" asp-page="./Consulta.cpf">CNPJ</a></li>
+        </ul>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#"><i class="fas fa-clipboard-list"></i> Relatórios</a>
+    </li>
+</ul>

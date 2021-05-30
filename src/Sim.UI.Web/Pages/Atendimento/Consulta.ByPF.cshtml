@@ -3,14 +3,14 @@
 @{
     Layout = "_Layout.cshtml";
     ViewData["Title"] = "Consultas por PF";
-    ViewData["ActivePage"] = AtendimentoNavPages.Pessoas;
+    ViewData["ActivePage"] = AtendimentoNavPages.Consulta;
 }
 
 
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
 
-<div class="d-grid gap-2 d-md-flex justify-content-md-center mb-5">
+<div class="d-grid gap-2 d-md-flex justify-content-md-center mt-5 mb-5">
         <form method="post" asp-page-handler="ListByPessoa">
             <div class="input-group input-group">
                 <input asp-for="Input.CPF" id="inputCPF" class="form-control" />

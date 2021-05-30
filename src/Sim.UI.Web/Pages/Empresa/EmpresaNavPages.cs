@@ -1,16 +1,18 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace Sim.UI.Web.Pages.Atendimento
+namespace Sim.UI.Web.Pages.Empresa
 {
-    public static class AtendimentoNavPages
+    public static class EmpresaNavPages
     {
         public static string Inicio => "Index";
-        public static string Atendimento => "Iniciar";
-        public static string Consulta => "Consulta";
+        public static string ConsultaNome => "Consulta.nome";
+        public static string ConsultaCnpj => "Consulta.cnpj";
+        public static string Relatórios => "Report";
         public static string InicioNavClass(ViewContext viewContext) => PageNavClass(viewContext, Inicio);
-        public static string AtendiementoNavClass(ViewContext viewContext) => PageNavClass(viewContext, Atendimento);
-        public static string ConsultaNavClass(ViewContext viewContext) => PageNavClass(viewContext, Consulta);
+        public static string ConsultaNomeNavClass(ViewContext viewContext) => PageNavClass(viewContext, ConsultaNome);
+        public static string ConsultaCNPJNavClass(ViewContext viewContext) => PageNavClass(viewContext, ConsultaCnpj);
+        public static string ReportNavClass(ViewContext viewContext) => PageNavClass(viewContext, Relatórios);
         private static string PageNavClass(ViewContext viewContext, string page)
         {
             var activePage = viewContext.ViewData["ActivePage"] as string

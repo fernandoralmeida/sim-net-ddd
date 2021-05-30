@@ -36,6 +36,7 @@ namespace Sim.UI.Web.Pages.Atendimento
         [DisplayName("Serviços")]
         public string Servicos { get; set; }
 
+        [Required]
         [DisplayName("Descrição do Atendimento")]
         public string Descricao { get; set; }
 

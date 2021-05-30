@@ -18,8 +18,10 @@ namespace Sim.Domain.Shared.Interface
         IEnumerable<Atendimento> GetByDate(DateTime? dateTime);
         IEnumerable<Atendimento> MeusAtendimentos(string userid, DateTime? date);
         IEnumerable<Atendimento> AtendimentoAtivo(string userid);
+        IEnumerable<Atendimento> AtendimentosCancelados(string userid);
         IEnumerable<Atendimento> ListByPeriodo(DateTime? dataI, DateTime? dataF);
         IEnumerable<Atendimento> ListAll();
+        Atendimento GetAtendimento(Guid id);
 
     }
 }
