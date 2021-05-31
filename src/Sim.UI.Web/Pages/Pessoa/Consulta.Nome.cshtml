@@ -1,9 +1,8 @@
 ﻿@page
-@model Sim.UI.Web.Pages.Pessoa.IndexModel
-
+@model Sim.UI.Web.Pages.Pessoa.ConsultaNomeModel
 @{
-    ViewData["Title"] = "Clientes";
-    ViewData["ActivePage"] = PessoaNavPages.Inicio;
+    ViewData["Title"] = "Consulta por Nome";
+    ViewData["ActivePage"] = PessoaNavPages.ConsultaNome;
 }
 
 <partial name="_StatusMessage" model="Model.StatusMessage" />
@@ -13,16 +12,12 @@
         <div class="d-grid gap-2 d-md-flex justify-content-md-center">
             <div class="col-md-auto">
                 <div class="input-group">
-                    <span class="input-group-text">CPF</span>
-                    <input asp-for="Input.CPF" class="form-control" placeholder="CPF" aria-describedby="button-addon2" id="inputCPF">
+                    <span class="input-group-text">Nome</span>
+                    <input asp-for="Input.Nome" class="form-control" aria-describedby="button-addon2">
                     <button class="btn btn-primary" type="submit" role="button" id="button-addon2"><i class="fa fa-search"></i></button>
                 </div>
-                <span asp-validation-for="Input.CPF" class="text-danger"></span>
+                <span asp-validation-for="Input.Nome" class="text-danger"></span>
             </div>
-            @if(!Model.Input.ListaPessoas.Any())
-            {
-                <a asp-area="" asp-page="/Pessoa/Novo" asp-route-id="@Model.Input.RouteCPF" class="btn btn-primary" title="Adicionar Nova Pessoa"><i class="fas fa-user-plus"></i></a>
-            }            
         </div>
     </form>
 </div>

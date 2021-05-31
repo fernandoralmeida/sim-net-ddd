@@ -13,5 +13,6 @@ namespace Sim.Domain.SDE.Interface
         IEnumerable<Pessoa> ConsultaByNome(string nome);
         IEnumerable<Pessoa> ConsultaByCPF(string cpf);
         //IEnumerable<Pessoa> ConsultarPessoaByNameOrCPF(string cpf, string nome);
+        IEnumerable<Pessoa> Top10();
     }
 }

@@ -44,5 +44,10 @@ namespace Sim.Domain.SDE.Service
 
                 return null;
         }
+
+        public IEnumerable<Pessoa> Top10()
+        {
+            return _repositoryPessoa.Top10();
+        }
     }
 }

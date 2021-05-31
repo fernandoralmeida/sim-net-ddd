@@ -5,15 +5,14 @@
     <li class="nav-item">
         <a class="nav-link @PessoaNavPages.InicioNavClass(ViewContext)" asp-page="./Index"><i class="fas fa-home"></i> Inicio</a>
     </li>
-
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle @PessoaNavPages.ConsultaNomeNavClass(ViewContext) @PessoaNavPages.ConsultaCPFNavClass(ViewContext)" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><i class="fas fa-search"></i> Consulta</a>
         <ul class="dropdown-menu">
-            <li><a class="dropdown-item" asp-page="./Consulta.nome">Nome</a></li>
-            <li><a class="dropdown-item" asp-page="./Consulta.cpf">CPF</a></li>
+            <li><a class="dropdown-item" asp-page="./Consulta.Nome">Nome</a></li>
         </ul>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="#"><i class="fas fa-clipboard-list"></i> Relatórios</a>
     </li>
 </ul>
+

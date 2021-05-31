@@ -13,6 +13,7 @@
 <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-5 mb-5">
         <form method="post" asp-page-handler="ListByPessoa">
             <div class="input-group input-group">
+                <span class="input-group-text">CPF</span>
                 <input asp-for="Input.CPF" id="inputCPF" class="form-control" />
                 <button asp-page-handler="ListByPessoa" class="btn btn-primary" type="submit" role="button"><i class="fas fa-search"></i></button>
             </div>

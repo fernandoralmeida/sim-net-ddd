@@ -16,7 +16,7 @@
                     Olá @DisplayName
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Meu Espaço</a></li>
+                    <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index" title="Meu Perfil">Meu Espaço</a></li>
                     @if (User.IsInRole("Administrador"))
                     {
                         <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Register">Registrar</a></li>

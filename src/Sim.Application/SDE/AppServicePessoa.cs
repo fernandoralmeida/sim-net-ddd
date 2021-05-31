@@ -31,5 +31,10 @@ namespace Sim.Application.SDE
         {
             return _pessoa.ConsultarPessoaByNameOrCPF(cpf, nome);
         }
+
+        public IEnumerable<Pessoa> Top10()
+        {
+            return _pessoa.Top10();
+        }
     }
 }

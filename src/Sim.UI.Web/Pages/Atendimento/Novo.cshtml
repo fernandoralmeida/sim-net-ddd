@@ -9,14 +9,13 @@
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
 <form method="post">
-    <div class="col-md-12 mb-3">
+    <div class="col-md-12 mb-3" hidden>
         <div class="input-group">
             <span class="input-group-text">Atendimento</span>
             <input type="text" asp-for="Input.Protocolo" class="form-control" readonly>
             <input type="text" asp-for="Input.Data" class="form-control" readonly>
             <input type="text" asp-for="Input.Status" class="form-control" readonly>
             <input type="text" asp-for="Input.Id" class="form-control" readonly>
-            <input type="text" asp-for="Input.Sebrae.RAE" class="form-control" >
         </div>
     </div>
     <div class="col-md-12">

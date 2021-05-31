@@ -7,28 +7,29 @@
 <h5>@ViewData["Title"]</h5>
 
 <div class="row">
-    <form class="col-md-4" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-        <h6>Criar uma nova conta.</h6>
+    
+    <form class="col-md-5 mb-4" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+        <h6>Criar nova conta de usuário</h6>
         <hr />
-        <div class="row g-3">
+        <div class="row">
             <!----><div asp-validation-summary="All" class="text-danger"></div>
-            <div class="col-md-12">
+            <div class="col-md-12 mb-2">
                 <label asp-for="Input.UserName" class="form-label"></label>
                 <input asp-for="Input.UserName" class="form-control" />
                 <span asp-validation-for="Input.UserName" class="text-danger"></span>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-5 mb-2">
                 <label asp-for="Input.Name" class="form-label"></label>
                 <input asp-for="Input.Name" class="form-control" />
                 <span asp-validation-for="Input.Name" class="text-danger"></span>
             </div>
-            <div class="col-md-7">
+            <div class="col-md-7 mb-2">
                 <label asp-for="Input.LastName" class="form-label"></label>
                 <input asp-for="Input.LastName" class="form-control" />
                 <span asp-validation-for="Input.LastName" class="text-danger"></span>
             </div>
 
-            <div class="col-md-12">
+            <div class="col-md-12 mb-2">
                 <label asp-for="Input.Genero" class="form-label"></label>
                 <select asp-for="Input.Genero" class="form-select">
                     <option selected></option>
@@ -37,17 +38,17 @@
                 </select>
                 <span asp-validation-for="Input.Genero" class="text-danger"></span>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12 mb-2">
                 <label asp-for="Input.Email" class="form-label"></label>
                 <input asp-for="Input.Email" class="form-control" />
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12 mb-2">
                 <label asp-for="Input.Password" class="form-label"></label>
                 <input asp-for="Input.Password" class="form-control" />
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12 mb-4">
                 <label asp-for="Input.ConfirmPassword" class="form-label"></label>
                 <input asp-for="Input.ConfirmPassword" class="form-control" />
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
@@ -58,18 +59,18 @@
         </div>
     </form>
 
-    <div class="col-md-5 col-md-offset-2">
+    <div class="col-md-7">
         <section>
-            <h4>Use outro serviço para se registrar.</h4>
+            <h6>Use outro serviço para se registrar.</h6>
             <hr />
             @{
                 if ((Model.ExternalLogins?.Count ?? 0) == 0)
                 {
                     <div>
-                                    <p>
-                                        Não há serviços de autenticação externa configurados. Consulte <a href="https://go.microsoft.com/fwlink/?LinkID=532715"> este artigo </a>
-                                        para obter detalhes sobre como configurar este aplicativo ASP.NET para dar suporte ao logon por meio de serviços externos.
-                                    </p>
+                        <p>
+                            Não há serviços de autenticação externa configurados. Consulte <a href="https://go.microsoft.com/fwlink/?LinkID=532715"> este artigo </a>
+                            para obter detalhes sobre como configurar este aplicativo ASP.NET para dar suporte ao logon por meio de serviços externos.
+                        </p>
                     </div>
                 }
                 else

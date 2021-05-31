@@ -1,0 +1,105 @@
+﻿@page
+@model Sim.UI.Web.Pages.Atendimento.DetailModel
+@{
+    //Layout = "/Pages/Shared/__LayoutModal.cshtml";
+    ViewData["Title"] = "Detalhes do Atendimento";
+    ViewData["ActivePage"] = AtendimentoNavPages.Atendimento;
+}
+
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+
+<form method="post">
+    <div class="col-md-12 mb-3">
+        <div class="input-group">
+            <span class="input-group-text">Atendimento</span>
+            <input type="text" asp-for="Input.Protocolo" class="form-control" readonly>
+            <input type="text" asp-for="Input.Data" class="form-control" readonly>
+            <input type="text" asp-for="Input.Status" class="form-control" readonly>
+            <input type="text" asp-for="Input.Id" class="form-control" readonly>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <table class="table">
+            <!--<caption>Informações do Cliente</caption>-->
+            <thead>
+                <tr>
+                    <th>
+                        CPF/CNPJ
+                    </th>
+                    <th>
+                        Pessoa/Empresa
+                    </th>
+                    <th>
+                        Contato
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Input.Pessoa != null)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => Model.Input.Pessoa.CPF)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => Model.Input.Pessoa.Nome)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => Model.Input.Pessoa.Email)
+
+                            @Html.DisplayFor(modelItem => Model.Input.Pessoa.Tel_Movel)
+                        </td>
+                    </tr>
+                }
+                @if (Model.Input.Empresa != null)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => Model.Input.Empresa.CNPJ)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => Model.Input.Empresa.Nome_Empresarial)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => Model.Input.Empresa.Email)
+
+                            @Html.DisplayFor(modelItem => Model.Input.Empresa.Telefone)
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+        <div class="row">
+            <div class="col-md-6 mb-2">
+                <label class="form-label" asp-for="Input.Setor" for="floatingsetor"></label>
+                <input asp-for="Input.Setor" class="form-control" readonly />
+            </div>
+            <div class="col-md-6 mb-2">
+                <label class="form-label" asp-for="Input.Canal"></label>
+                <input asp-for="Input.Canal" class="form-control" readonly />
+            </div>
+            <div class="col-md-6 mb-2">
+                <label class="form-label" asp-for="Input.Servicos"></label>
+                <textarea asp-for="Input.Servicos" class="form-control" rows="3" readonly></textarea>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label" asp-for="Input.Descricao"></label>
+                <textarea asp-for="Input.Descricao" class="form-control" rows="3" readonly></textarea>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-8">
+                <div class="input-group">
+                    <input asp-for="Input.Sebrae.RAE" class="form-control" placeholder="Numero Atendimento RAE">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="d-grid gap-2">
+                    <button type="submit" role="button" class="btn btn-primary">Lançar Atendimento do RAE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+

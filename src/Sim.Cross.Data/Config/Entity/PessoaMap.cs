@@ -17,7 +17,7 @@ namespace Sim.Cross.Data.Config.Entity
 
             builder.Property(c => c.Nome)
                 .IsRequired()
-                .HasColumnType("varchar(max)");
+                .HasColumnType("varchar(max)").UseCollation("Latin1_General_CI_AI");
 
             builder.Property(c => c.Nome_Social)
                 .HasColumnType("varchar(max)");
@@ -43,7 +43,7 @@ namespace Sim.Cross.Data.Config.Entity
                 .HasColumnType("varchar(max)");
 
             builder.Property(c => c.Logradouro)
-                .HasColumnType("varchar(max)");
+                .HasColumnType("varchar(max)").UseCollation("Latin1_General_CI_AI");
 
             builder.Property(c => c.Numero)
                 .HasColumnType("varchar(max)");
@@ -52,7 +52,7 @@ namespace Sim.Cross.Data.Config.Entity
                 .HasColumnType("varchar(max)");
 
             builder.Property(c => c.Bairro)
-                .HasColumnType("varchar(max)");
+                .HasColumnType("varchar(max)").UseCollation("Latin1_General_CI_AI");
 
             builder.Property(c => c.Cidade)
                 .HasColumnType("varchar(max)");

@@ -14,11 +14,11 @@ namespace Sim.UI.Web.Pages.Pessoa
     using Sim.Application.SDE.Interface;
 
     [Authorize]
-    public class IndexModel : PageModel
+    public class ConsultaNomeModel : PageModel
     {
         private readonly IAppServicePessoa _pessoaApp;
 
-        public IndexModel(IAppServicePessoa appServicePessoa)
+        public ConsultaNomeModel(IAppServicePessoa appServicePessoa)
         {
             _pessoaApp = appServicePessoa;
         }
@@ -30,12 +30,12 @@ namespace Sim.UI.Web.Pages.Pessoa
         public InputModel Input { get; set; }
         public class InputModel
         {
-         
+
             [Required]
-            [DisplayName("Nome ou CPF")]            
+            [DisplayName("Nome ou CPF")]
             public string CPF { get; set; }
 
-            public string RouteCPF { get; set; }
+            public string Nome { get; set; }
 
             public IEnumerable<Pessoa> ListaPessoas { get; set; }
 
@@ -55,35 +55,29 @@ namespace Sim.UI.Web.Pages.Pessoa
 
         public IActionResult OnGet()
         {
-            Load();
+            //Load();
+            Input = new InputModel
+            {
+                ListaPessoas = null
+            };
             return Page();
         }
 
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPostAsync()
         {
-            try
+
+
+            var t = Task.Run(() =>
             {
-                if (ModelState.IsValid)
-                {
-                    var pessoa = _pessoaApp.ConsultaByCPF(Input.CPF);
 
+                var pessoa = _pessoaApp.ConsultaByNome(Input.Nome);
 
-                    Input = new InputModel
-                    {
-                        RouteCPF = new Functions.Mask().Remove(Input.CPF),
-                        ListaPessoas = pessoa
-                    };
-                }
+                Input.ListaPessoas = pessoa;
+            });
 
-            }
-            catch(Exception ex)
-            {
-                StatusMessage = "Erro: " + ex.Message;
-            }
-            
-            return Page();          
+            await t;
+
+            return Page();
         }
-
     }
 }
-
