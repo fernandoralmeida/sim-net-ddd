@@ -1,67 +1,71 @@
 ﻿@page
 @model Sim.UI.Web.Pages.Planner.IndexModel
 @{
+
     ViewData["Title"] = "Planner";
+    ViewData["ActivePage"] = PlannerNavPages.Inicio;
 }
 
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
+<pre>Semana de 29.05 à 05.06</pre>
+
 <form method="post">
-    <div class="row mt-5 mb-2">
+    <div class="row mt-2 mb-2">
         <div class="col-md-2">
             <div class="form-floating">
-                <textarea class="form-control form-control-sm" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 300px;"></textarea>
-                <label for="floatingTextarea2">Segunda</label>
+                <textarea asp-for="Input.Segunda" class="form-control form-control-sm" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 300px;"></textarea>
+                <label asp-for="Input.Segunda" for="floatingTextarea2"></label>
             </div>
         </div>
         <div class="col-md-2">
             <div class="form-floating">
-                <textarea class="form-control form-control-sm" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 300px"></textarea>
-                <label for="floatingTextarea2">Terça</label>
+                <textarea asp-for="Input.Terca" class="form-control form-control-sm" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 300px"></textarea>
+                <label asp-for="Input.Terca" for="floatingTextarea2"></label>
             </div>
         </div>
         <div class="col-md-2">
             <div class="form-floating">
-                <textarea class="form-control form-control-sm" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 300px"></textarea>
-                <label for="floatingTextarea2">Quarta</label>
+                <textarea asp-for="Input.Quarta" class="form-control form-control-sm" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 300px"></textarea>
+                <label asp-for="Input.Quarta" for="floatingTextarea2"></label>
             </div>
         </div>
         <div class="col-md-2">
             <div class="form-floating">
-                <textarea class="form-control form-control-sm" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 300px"></textarea>
-                <label for="floatingTextarea2">Quinta</label>
+                <textarea asp-for="Input.Quinta" class="form-control form-control-sm" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 300px"></textarea>
+                <label asp-for="Input.Quinta" for="floatingTextarea2"></label>
             </div>
         </div>
         <div class="col-md-2">
             <div class="form-floating">
-                <textarea class="form-control form-control-sm" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 300px"></textarea>
-                <label for="floatingTextarea2">Sexta</label>
+                <textarea asp-for="Input.Sexta" class="form-control form-control-sm" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 300px"></textarea>
+                <label asp-for="Input.Sexta" for="floatingTextarea2"></label>
             </div>
         </div>
         <div class="col-md-2">
             <div class="form-floating">
-                <textarea class="form-control form-control-sm" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 300px"></textarea>
-                <label for="floatingTextarea2">Sábado</label>
+                <textarea asp-for="Input.Sabado" class="form-control form-control-sm" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 300px"></textarea>
+                <label asp-for="Input.Sabado" for="floatingTextarea2"></label>
             </div>
         </div>
     </div>
     <div class="row mb-5 mt-4">
         <div class="col-md-4">
             <div class="form-floating">
-                <textarea class="form-control form-control-sm" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 150px"></textarea>
-                <label for="floatingTextarea2">Semana que vem</label>
+                <textarea asp-for="Input.ProximaSemana" class="form-control form-control-sm" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 150px"></textarea>
+                <label asp-for="Input.ProximaSemana" for="floatingTextarea2"></label>
             </div>
         </div>
         <div class="col-md-4">
             <div class="form-floating">
-                <textarea class="form-control form-control-sm" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 150px"></textarea>
-                <label for="floatingTextarea2">Prioridades</label>
+                <textarea asp-for="Input.Prioridades" class="form-control form-control-sm" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 150px"></textarea>
+                <label asp-for="Input.Prioridades" for="floatingTextarea2"></label>
             </div>
         </div>
         <div class="col-md-4">
             <div class="form-floating">
-                <textarea class="form-control form-control-sm" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 150px"></textarea>
-                <label for="floatingTextarea2">Anotação</label>
+                <textarea asp-for="Input.Anotacao" class="form-control form-control-sm" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 150px"></textarea>
+                <label asp-for="Input.Anotacao" for="floatingTextarea2"></label>
             </div>
         </div>
     </div>
