@@ -77,5 +77,20 @@ namespace Sim.Application.Shared
         {
             return _atendimento.MeusAtendimentos(userid, date);
         }
+
+        public IEnumerable<Atendimento> MeusAtendimentosRae(string userid)
+        {
+            return _atendimento.MeusAtendimentosRae(userid);
+        }
+
+        public IEnumerable<Atendimento> ListarRaeLancados(string userid)
+        {
+            return _atendimento.ListarRaeLancados(MeusAtendimentosRae(userid));
+        }
+
+        public IEnumerable<Atendimento> ListarRaeNaoLancados(string userid)
+        {
+            return _atendimento.ListarRaeNaoLancados(MeusAtendimentosRae(userid));
+        }
     }
 }

@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Sim.UI.Web.Pages.Planner
 {
     using Domain.Shared.Entity;
-    public class VMPlanner
+    public class InputModelPlanner
     {
         [Key]
         [HiddenInput(DisplayValue = false)]

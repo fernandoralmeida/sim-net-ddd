@@ -10,5 +10,6 @@ namespace Sim.Domain.SDE.Entity
     {
         public Guid Id { get; set; }
         public string RAE { get; set; }
+
     }
 }

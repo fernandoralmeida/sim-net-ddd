@@ -66,8 +66,7 @@
                         @cont.ToString()
                     </td>
                     <td>
-                        <a class="link-secondary" asp-page="./Detail" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.Protocolo)</a>                        
-                        <p>@Html.DisplayFor(modelItem => item.Sebrae.RAE)</p>
+                        <a href="#" class="link-secondary viewbutton" data-secao="Atendimento" data-acao="Detail" data-id="@item.Id" data-bs-toggle="modal" data-bs-target="#viewmodal">@Html.DisplayFor(modelItem => item.Protocolo)</a>                        
                     </td>
                     <td>
                         @{
@@ -92,6 +91,7 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Setor)
+                    </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Canal)
                     </td>

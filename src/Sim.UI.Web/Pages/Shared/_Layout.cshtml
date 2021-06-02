@@ -20,6 +20,17 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Início
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-industry"></i> PAT</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-hand-holding-usd"></i> Banco do Povo</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-page="/SebraeAqui/Index"><i class="fas fa-handshake"></i> Sebrae Aqui</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-building"></i> Espaço do Empreendedor</a></li>
+                            </ul>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-page="/Atendimento/Index">Atedimento</a>
                         </li>
@@ -30,10 +41,10 @@
                             <a class="nav-link" asp-area="" asp-page="/Empresa/Index">Empresas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-page="/Planner/Index">Planner</a>
+                            <a class="nav-link" asp-area="" asp-page="/Agenda/Index">Agenda</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-page="/Agenda/Index">Agenda</a>
+                            <a class="nav-link" asp-area="" asp-page="/Planner/Index">e-Planner</a>
                         </li>
                     </ul>
                     @if (User.IsInRole("Administrador"))

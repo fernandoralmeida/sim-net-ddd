@@ -1,9 +1,8 @@
 ﻿@page
-@model Sim.UI.Web.Pages.Atendimento.DetailModel
+@model Sim.UI.Web.Pages.SebraeAqui.AdicionarRaeModel
 @{
-    Layout = "/Pages/Shared/__LayoutModal.cshtml";
-    ViewData["Title"] = "Detalhes do Atendimento";
-    ViewData["ActivePage"] = AtendimentoNavPages.Atendimento;
+    //Layout = "/Pages/Shared/__LayoutModal.cshtml";
+    ViewData["Title"] = "Lançar RAE";
 }
 
 <partial name="_StatusMessage" model="Model.StatusMessage" />
@@ -88,7 +87,7 @@
                 <textarea asp-for="Input.Descricao" class="form-control" rows="3" readonly></textarea>
             </div>
         </div>
-        <div class="row mt-3" hidden>
+        <div class="row mt-3">
             <div class="col-md-8">
                 <div class="input-group">
                     <input asp-for="Input.Sebrae.RAE" class="form-control" placeholder="Numero Atendimento RAE">
@@ -102,4 +101,3 @@
         </div>
     </div>
 </form>
-

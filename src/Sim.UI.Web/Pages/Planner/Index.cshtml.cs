@@ -17,7 +17,7 @@ namespace Sim.UI.Web.Pages.Planner
         public string StatusMessage { get; set; }
 
         [BindProperty(SupportsGet = true)]
-        public VMPlanner Input { get; set; }
+        public InputModelPlanner Input { get; set; }
 
         public void OnGet()
         {

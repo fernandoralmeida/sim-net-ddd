@@ -120,5 +120,16 @@ namespace Sim.Cross.Data.Repository.Shared
 
             return ativo;
         }
+
+        public IEnumerable<Atendimento> MeusAtendimentosRae(string userid)
+        {
+            var lista = _db.Atendimento
+                .Include(u => u.Pessoa)
+                .Include(e => e.Empresa)
+                .Include(s => s.Sebrae)
+                .Where(a => a.Owner_AppUser_Id == userid);
+
+            return lista;
+        }
     }
 }

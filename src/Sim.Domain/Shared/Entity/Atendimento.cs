@@ -29,5 +29,15 @@ namespace Sim.Domain.Shared.Entity
         public virtual Pessoa Pessoa { get; set; }
         public virtual Empresa Empresa { get; set; }
         public virtual RaeSebrae Sebrae { get; set; }
+
+        public bool RaeLancados(Atendimento obj)
+        {
+            return obj.Sebrae != null;
+        }
+
+        public bool RaeNaoLancados(Atendimento obj)
+        {
+            return obj.Sebrae == null;
+        }
     }
 }

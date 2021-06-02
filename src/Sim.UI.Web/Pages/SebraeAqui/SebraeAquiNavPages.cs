@@ -1,16 +1,14 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace Sim.UI.Web.Pages.Planner
+namespace Sim.UI.Web.Pages.SebraeAqui
 {
-    public static class PlannerNavPages
+    public static class SebraeAquiNavPages
     {
         public static string Inicio => "Index";
-        public static string Listar => "Listar";
-        public static string Ajuda => "Ajuda";
+        public static string RaeLancados => "Rae.Lancados";
         public static string InicioNavClass(ViewContext viewContext) => PageNavClass(viewContext, Inicio);
-        public static string ListarNavClass(ViewContext viewContext) => PageNavClass(viewContext, Listar);
-        public static string AjudaNavClass(ViewContext viewContext) => PageNavClass(viewContext, Ajuda);
+        public static string AtendiementoNavClass(ViewContext viewContext) => PageNavClass(viewContext, RaeLancados);
         private static string PageNavClass(ViewContext viewContext, string page)
         {
             var activePage = viewContext.ViewData["ActivePage"] as string

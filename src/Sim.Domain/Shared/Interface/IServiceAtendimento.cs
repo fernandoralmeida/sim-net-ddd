@@ -17,11 +17,16 @@ namespace Sim.Domain.Shared.Interface
         IEnumerable<Atendimento> GetByServicos(string servicos);
         IEnumerable<Atendimento> GetByDate(DateTime? dateTime);
         IEnumerable<Atendimento> MeusAtendimentos(string userid, DateTime? date);
+        IEnumerable<Atendimento> MeusAtendimentosRae(string userid);
         IEnumerable<Atendimento> AtendimentoAtivo(string userid);
         IEnumerable<Atendimento> AtendimentosCancelados(string userid);
         IEnumerable<Atendimento> ListByPeriodo(DateTime? dataI, DateTime? dataF);
         IEnumerable<Atendimento> ListAll();
         Atendimento GetAtendimento(Guid id);
+
+        IEnumerable<Atendimento> ListarRaeLancados(IEnumerable<Atendimento> atendimentos);
+        IEnumerable<Atendimento> ListarRaeNaoLancados(IEnumerable<Atendimento> atendimentos);
+
 
     }
 }
