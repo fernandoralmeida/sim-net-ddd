@@ -29,24 +29,18 @@
 
 <div>
     <table class="table">
-        <caption>Lista Pessoas</caption>
+        <caption>Lista Pessoas (ultimos 10 cadastros)</caption>
         <thead>
             <tr>
                 <th></th>
                 <th>
-                    Nome
-                </th>
-
-                <th>
                     CPF
                 </th>
-
                 <th>
-                    E-mail
+                    Nome
                 </th>
-
                 <th>
-                    Telefone
+                    Contato
                 </th>
 
                 <th>Ações</th>
@@ -65,25 +59,17 @@
                             <a asp-area="" asp-page="/Atendimento/Iniciar" asp-route-id="@item.Id" class="btn btn-sm btn-outline-info" title="Iniciar atendimento"><i class="far fa-clock"></i></a>
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Nome)
-                        </td>
-
-                        <td>
                             @Html.DisplayFor(modelItem => item.CPF)
                         </td>
-
                         <td>
-                            @Html.DisplayFor(modelItem => item.Email)
+                            @Html.DisplayFor(modelItem => item.Nome)
                         </td>
-
                         <td>
                             @Html.DisplayFor(modelItem => item.Tel_Movel)
+                            @Html.DisplayFor(modelItem => item.Email)
                         </td>
-
                         <td>
-                            <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary" title="Alterar informações"><i class="far fa-edit"></i></a>
-
-                            <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger" title="Excluir informações"><i class="far fa-trash-alt"></i></a>
+                            <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary" title="Alterar informações"><i class="far fa-edit"></i></a>                            
                         </td>
                     </tr>
                 }
