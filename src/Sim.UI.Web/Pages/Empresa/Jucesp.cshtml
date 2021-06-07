@@ -1,0 +1,101 @@
+﻿@page
+@model Sim.UI.Web.Pages.Empresa.JucespModel
+
+@{
+    Layout = "_Layout.cshtml";
+    ViewData["Title"] = "Lista";
+    ViewData["ActivePage"] = EmpresaNavPages.Jucesp;
+}
+
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+
+<div class="mt-5 mb-5">
+    <form method="post">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+            <div class="col-md-auto">
+                <div class="input-group">
+                    <span class="input-group-text">CNPJ</span>
+                    <input asp-for="Input.CNPJ" class="form-control" aria-describedby="button-addon2" id="inputCNPJ">
+                    <button class="btn btn-primary" type="submit" role="button" id="button-addon2"><i class="fa fa-search"></i></button>
+                </div>
+                <span asp-validation-for="Input.CNPJ" class="text-danger"></span>
+            </div>
+        </div>
+    </form>
+</div>
+<div>
+    <table class="table">
+        <caption>Lista de empresas @Model.Input.ListaEmpresas.Count()</caption>
+        <thead>
+            <tr>
+                <th></th>
+
+                <th>
+                    I.E.
+                </th>
+                <th>
+                    CNPJ
+                </th>
+
+                <th>
+                    Nome Empresarial
+                </th>
+
+                <th>
+                    Situação
+                </th>
+
+                <th>
+                    Regime
+                </th>
+
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int cont = 0;
+            }
+
+            @foreach (var item in Model.Input.ListaEmpresas)
+            {
+            <tr>
+                <td>
+                    @{ cont++; }
+                    @cont
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Inscricao_Estadual)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CNPJ)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome_Empresarial)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Situacao_Cadastral)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Regime_Apuracao)
+                </td>
+
+                <td>
+                    <a asp-page="./Update" asp-route-id="@item.CNPJ" class="btn btn-sm btn-outline-secondary" title="Alterar informações"><i class="fas fa-eye"></i></a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/jquery.mask.min.js"></script>
+    <script>
+        $('#inputCNPJ').mask('00.000.000/0000-00', { placeholder: "__.___.___/____-__" });
+    </script>
+}

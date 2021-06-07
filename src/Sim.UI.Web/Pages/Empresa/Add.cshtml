@@ -26,11 +26,6 @@
                     </div>
                     <span asp-validation-for="Input.CNPJ" class="text-danger"></span>
                 </div>
-                <div class="col-md-2">
-                    <label asp-for="Input.Tipo" class="form-label" for="inputTipo"></label>
-                    <input asp-for="Input.Tipo" class="form-control" id="inputTipo" />
-                    <span asp-validation-for="Input.Tipo" class="text-danger"></span>
-                </div>
                 <div class="col-md-3">
                     <label asp-for="Input.Data_Abertura" class="form-label" for="inputAbertura"></label>
                     <input asp-for="Input.Data_Abertura" class="form-control" id="inputAbertura" />
@@ -51,11 +46,6 @@
                     <input asp-for="Input.Nome_Fantasia" class="form-control" id="inputFantasia" />
                     <span asp-validation-for="Input.Nome_Fantasia" class="text-danger"></span>
                 </div>
-                <div class="col-md-2">
-                    <label asp-for="Input.Porte" class="form-label" for="inputPorte"></label>
-                    <input asp-for="Input.Porte" class="form-control" id="inputPorte" />
-                    <span asp-validation-for="Input.Porte" class="text-danger"></span>
-                </div>
             </div>
 
             <div class="row g-2 mb-2">
@@ -75,13 +65,6 @@
                     <label asp-for="Input.Atividade_Secundarias" class="form-label" for="inputSecundaria"></label>
                     <textarea asp-for="Input.Atividade_Secundarias" rows="4" class="form-control" id="inputSecundaria"></textarea>
                     <span asp-validation-for="Input.Atividade_Secundarias" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="row g-2 mb-2">
-                <div class="col-md">
-                    <label asp-for="Input.Natureza_Juridica" class="form-label" for="inputNatureza"></label>
-                    <input asp-for="Input.Natureza_Juridica" class="form-control" id="inputNatureza" />
-                    <span asp-validation-for="Input.Natureza_Juridica" class="text-danger"></span>
                 </div>
             </div>
             <div class="row g-2 mb-2">
@@ -136,11 +119,7 @@
                 </div>
             </div>
             <div class="row g-2 mb-2">
-                <div class="col-md">
-                    <label asp-for="Input.Ente_Federativo_Resp" class="form-label" for="inputEntF"></label>
-                    <input asp-for="Input.Ente_Federativo_Resp" class="form-control" id="inputEntF" />
-                    <span asp-validation-for="Input.Ente_Federativo_Resp" class="text-danger"></span>
-                </div>
+                
             </div>
             <div class="row g-2 mb-2">
                 <div class="col-md">
@@ -148,67 +127,13 @@
                     <input asp-for="Input.Situacao_Cadastral" class="form-control" id="inputSitCad" />
                     <span asp-validation-for="Input.Situacao_Cadastral" class="text-danger"></span>
                 </div>
-                <div class="col-md-4">
-                    <label asp-for="Input.Data_Situacao_Cadastral" class="form-label" for="inputSit"></label>
-                    <input asp-for="Input.Data_Situacao_Cadastral" class="form-control" id="inputSit" />
-                    <span asp-validation-for="Input.Data_Situacao_Cadastral" class="text-danger"></span>
-                </div>
             </div>
             <div class="row g-2 mb-2">
-                <div class="col-md">
-                    <label asp-for="Input.Motivo_Situacao_Cadastral" class="form-label" for="inputMotivositcad"></label>
-                    <input asp-for="Input.Motivo_Situacao_Cadastral" class="form-control" id="inputMotivositcad" />
-                    <span asp-validation-for="Input.Motivo_Situacao_Cadastral" class="text-danger"></span>
-                </div>
+                
             </div>
             <div class="row g-2 mb-4">
-                <div class="col-md">
-                    <label asp-for="Input.Situacao_Especial" class="form-label" for="inputSitesp"></label>
-                    <input asp-for="Input.Situacao_Especial" class="form-control" id="inputSitesp" />
-                    <span asp-validation-for="Input.Situacao_Especial" class="text-danger"></span>
-                </div>
-                <div class="col-md-4">
-                    <label asp-for="Input.Data_Situacao_Especial" class="form-label" for="datasitespe"></label>
-                    <input asp-for="Input.Data_Situacao_Especial" class="form-control" id="datasitespe" />
-                    <span asp-validation-for="Input.Data_Situacao_Especial" class="text-danger"></span>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="row g-2 mb-2">
-                <div class="col-md">
-                    <label asp-for="Input.Capital_Social" class="form-label" for="inputCapsoc"></label>
-                    <input asp-for="Input.Capital_Social" class="form-control" id="inputCapsoc" />
-                    <span asp-validation-for="Input.Capital_Social" class="text-danger"></span>
-                </div>
-            </div>
-            <table class="table">
-                <caption>Quadro Social Administrativo</caption>
-                <thead>
-                    <tr>
-                        <th>Qualificacao</th>
-                        <th>Nome</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @if (Model.Input.QSA != null)
-                    {
 
-                        foreach (var item in Model.Input.QSA)
-                        {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Qual)
-                                </td>
-
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Nome)
-                                </td>
-                            </tr>
-                        }
-                    }
-                </tbody>
-            </table>
+            </div>
         </div>
         <div class="col-md">
             <div class="row g-2">

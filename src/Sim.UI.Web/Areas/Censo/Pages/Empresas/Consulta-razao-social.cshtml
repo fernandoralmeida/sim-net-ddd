@@ -1,0 +1,94 @@
+﻿@page
+@model Sim.UI.Web.Areas.Censo.Pages.Empresas.Consulta_razao_socialModel
+@{
+    Layout = "_Layout.cshtml";
+    ViewData["Title"] = "Lista";
+    ViewData["ActivePage"] = EmpresaNavPages.ConsultaNome;
+}
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+
+<div class="mt-5 mb-5">
+    <form method="post">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+            <div class="col-md-auto">
+                <div class="input-group">
+                    <input asp-for="Input.RazaoSocial" class="form-control" aria-describedby="button-addon2" placeholder="Razão Social">
+                    <button class="btn btn-primary" type="submit" role="button" id="button-addon2"><i class="fa fa-search"></i></button>
+                </div>
+                <span asp-validation-for="Input.CNPJ" class="text-danger"></span>
+            </div>
+        </div>
+    </form>
+</div>
+<div>
+
+    <table class="table">
+        <caption>Lista de empresas @Model.Input.ListaEmpresas.Count()</caption>
+        <thead>
+            <tr>
+                <th></th>
+                <th>
+                    CNPJ
+                </th>
+
+                <th>
+                    Nome Empresarial
+                </th>
+
+                <th>
+                    Porte
+                </th>
+
+                <th>
+                    Regime Tributario
+                </th>
+
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int cont = 0;
+            }
+
+            @foreach (var item in Model.Input.ListaEmpresas)
+            {
+                <tr>
+                    <td>
+                        @{ cont++; }
+                        @cont
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CNPJ)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Empresa.RazaoSocial)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Empresa.PorteEmpresa)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SimplesNacional.OpcaoSimples)
+
+                        @Html.DisplayFor(modelItem => item.SimplesNacional.OpcaoMEI)
+                    </td>
+                    <td>
+                        <a asp-page="./Detalhe" asp-route-id="@item.CNPJ" class="btn btn-sm btn-outline-secondary" title="Ver informações"><i class="fas fa-eye"></i></a>
+                    </td>
+                </tr>
+                            }
+        </tbody>
+    </table>
+  
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/jquery.mask.min.js"></script>
+    <script>
+        $('#inputCNPJ').mask('00.000.000/0000-00', { placeholder: "__.___.___/____-__" });
+    </script>
+}

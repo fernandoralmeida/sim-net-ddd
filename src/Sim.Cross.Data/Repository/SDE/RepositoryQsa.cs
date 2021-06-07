@@ -19,7 +19,7 @@ namespace Sim.Cross.Data.Repository.SDE
 
         public IEnumerable<QSA> GetBySocio(string nome)
         {
-            return _db.QSA.Where(c => c.Nome.Contains(nome)).OrderBy(c => c.Nome);
+            return null;// _db.QSA.Where(c => c.Nome.Contains(nome)).OrderBy(c => c.Nome);
         }
     }
 }

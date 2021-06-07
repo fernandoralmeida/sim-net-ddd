@@ -25,7 +25,7 @@ namespace Sim.Cross.Data.Context
         public DbSet<DIA> DIA { get; set; }
         public DbSet<Empresa> Empresa { get; set; }
         public DbSet<Pessoa> Pessoa { get; set; }
-        public DbSet<QSA> QSA { get; set; }
+        //public DbSet<QSA> QSA { get; set; }
         public DbSet<RaeSebrae> Sebrae { get; set; }
 
         //Shared
@@ -70,7 +70,7 @@ namespace Sim.Cross.Data.Context
             modelBuilder.Entity<DIA>().ToTable("DIA");
             modelBuilder.Entity<Pessoa>().ToTable("Pessoa");
             modelBuilder.Entity<Empresa>().ToTable("Empresa");
-            modelBuilder.Entity<QSA>().ToTable("QSA");
+            //modelBuilder.Entity<QSA>().ToTable("QSA");
             modelBuilder.Entity<Atendimento>().ToTable("Atendimento");            
             modelBuilder.Entity<Canal>().ToTable("Canal");
             modelBuilder.Entity<Evento>().ToTable("Evento");
@@ -90,7 +90,7 @@ namespace Sim.Cross.Data.Context
             modelBuilder.ApplyConfiguration(new Config.Entity.EmpresaMap());
             modelBuilder.ApplyConfiguration(new Config.Entity.PessoaMap());
             modelBuilder.ApplyConfiguration(new Config.Entity.PlanerMap());
-            modelBuilder.ApplyConfiguration(new Config.Entity.QSAMap());
+            //modelBuilder.ApplyConfiguration(new Config.Entity.QSAMap());
             modelBuilder.ApplyConfiguration(new Config.Entity.SecretariaMap());
             modelBuilder.ApplyConfiguration(new Config.Entity.ServicoMap());
             modelBuilder.ApplyConfiguration(new Config.Entity.SetorMap());

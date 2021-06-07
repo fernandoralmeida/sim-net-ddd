@@ -139,37 +139,19 @@ namespace Sim.Cross.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(18)");
 
-                    b.Property<decimal>("Capital_Social")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<string>("Complemento")
                         .HasColumnType("varchar(max)");
 
                     b.Property<DateTime?>("Data_Abertura")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("Data_Situacao_Cadastral")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Data_Situacao_Especial")
-                        .HasColumnType("varchar(10)");
-
                     b.Property<string>("Email")
-                        .HasColumnType("varchar(max)");
-
-                    b.Property<string>("Ente_Federativo_Resp")
                         .HasColumnType("varchar(max)");
 
                     b.Property<string>("Logradouro")
                         .HasColumnType("varchar(max)");
 
-                    b.Property<string>("Motivo_Situacao_Cadastral")
-                        .HasColumnType("varchar(max)");
-
                     b.Property<string>("Municipio")
-                        .HasColumnType("varchar(max)");
-
-                    b.Property<string>("Natureza_Juridica")
                         .HasColumnType("varchar(max)");
 
                     b.Property<string>("Nome_Empresarial")
@@ -181,19 +163,10 @@ namespace Sim.Cross.Data.Migrations
                     b.Property<string>("Numero")
                         .HasColumnType("varchar(max)");
 
-                    b.Property<string>("Porte")
-                        .HasColumnType("varchar(max)");
-
                     b.Property<string>("Situacao_Cadastral")
                         .HasColumnType("varchar(max)");
 
-                    b.Property<string>("Situacao_Especial")
-                        .HasColumnType("varchar(max)");
-
                     b.Property<string>("Telefone")
-                        .HasColumnType("varchar(max)");
-
-                    b.Property<string>("Tipo")
                         .HasColumnType("varchar(max)");
 
                     b.Property<string>("UF")
@@ -291,37 +264,6 @@ namespace Sim.Cross.Data.Migrations
                         .IsUnique();
 
                     b.ToTable("Pessoa");
-                });
-
-            modelBuilder.Entity("Sim.Domain.SDE.Entity.QSA", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("EmpresaId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Nome")
-                        .HasColumnType("varchar(max)");
-
-                    b.Property<string>("NomeRepLegal")
-                        .HasColumnType("varchar(max)");
-
-                    b.Property<string>("PaisOrigem")
-                        .HasColumnType("varchar(max)");
-
-                    b.Property<string>("Qual")
-                        .HasColumnType("varchar(max)");
-
-                    b.Property<string>("QualRepLegal")
-                        .HasColumnType("varchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EmpresaId");
-
-                    b.ToTable("QSA");
                 });
 
             modelBuilder.Entity("Sim.Domain.SDE.Entity.RaeSebrae", b =>
@@ -691,13 +633,6 @@ namespace Sim.Cross.Data.Migrations
                     b.Navigation("Ambulante");
                 });
 
-            modelBuilder.Entity("Sim.Domain.SDE.Entity.QSA", b =>
-                {
-                    b.HasOne("Sim.Domain.SDE.Entity.Empresa", null)
-                        .WithMany("QSA")
-                        .HasForeignKey("EmpresaId");
-                });
-
             modelBuilder.Entity("Sim.Domain.Shared.Entity.Atendimento", b =>
                 {
                     b.HasOne("Sim.Domain.SDE.Entity.Empresa", "Empresa")
@@ -789,8 +724,6 @@ namespace Sim.Cross.Data.Migrations
                     b.Navigation("Atendimentos");
 
                     b.Navigation("Inscricoes");
-
-                    b.Navigation("QSA");
                 });
 
             modelBuilder.Entity("Sim.Domain.SDE.Entity.Pessoa", b =>

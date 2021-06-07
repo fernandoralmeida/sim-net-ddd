@@ -18,10 +18,6 @@ namespace Sim.UI.Web.Pages.Empresa
         [Required(ErrorMessage = "CNPJ requerido")]
         public string CNPJ { get; set; }
 
-       // [Required(ErrorMessage = "Tipo requerido")]
-        [DisplayName("Matriz/Filial")]
-        public string Tipo { get; set; }
-
         [DataType(DataType.Date)]
         [DisplayName("Data da Abertura")]
         public DateTime? Data_Abertura { get; set; }
@@ -32,10 +28,6 @@ namespace Sim.UI.Web.Pages.Empresa
 
         [DisplayName("Nome Fantasia")]
         public string Nome_Fantasia { get; set; }
-
-       // [Required(ErrorMessage = "Porte requerido")]
-        [DisplayName("Porte")]
-        public string Porte { get; set; }
 
         //[Required(ErrorMessage = "CNAE requerido")]
         [DisplayName("CNAE")]
@@ -49,13 +41,8 @@ namespace Sim.UI.Web.Pages.Empresa
         [DisplayName("Atividade Secundária")]
         public string Atividade_Secundarias { get; set; }
 
-        //[Required(ErrorMessage = "Naturza juridica requerido")]
-        [DisplayName("Natureza Jurídica")]
-        public string Natureza_Juridica { get; set; }
-
         //[Required(ErrorMessage = "CEP requerido")]
         public string CEP { get; set; }
-
 
         //[Required(ErrorMessage = "Endereço requerido")]
         [DisplayName("Endereço")]
@@ -85,33 +72,9 @@ namespace Sim.UI.Web.Pages.Empresa
         //[Required(ErrorMessage = "Telefone requerido")]
         public string Telefone { get; set; }
 
-        [DisplayName("Ente Federativo Responsável")]
-        public string Ente_Federativo_Resp { get; set; }
-
         //[Required(ErrorMessage = "Situação cadastral requerido")]
         [DisplayName("Situação Cadastral")]
         public string Situacao_Cadastral { get; set; }
-
-        [DataType(DataType.Date)]
-        [DisplayName("Data da Situação Cadastral")]
-        public DateTime? Data_Situacao_Cadastral { get; set; }
-
-        [DisplayName("Motivo da Situação Cadastral")]
-        public string Motivo_Situacao_Cadastral { get; set; }
-
-        [DisplayName("Situação Especial")]
-        public string Situacao_Especial { get; set; }
-
-        [DisplayName("Data da Situação Especial")]
-        //[DataType(DataType.Date)]
-        public string Data_Situacao_Especial { get; set; }
-
-        [DataType(DataType.Currency)]
-        [DisplayName("Capital Social")]
-        public string Capital_Social { get; set; }
-
-        //Registros relacionais
-        public virtual ICollection<QSA> QSA { get; set; }
 
     }
 }

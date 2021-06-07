@@ -16,7 +16,7 @@ namespace Sim.UI.Web.Pages.Empresa
     [Authorize]
     public class IndexModel : PageModel
     {
-        private readonly IAppServiceEmpresa _empresaApp;
+        private readonly IAppServiceEmpresa  _empresaApp;
 
         public IndexModel(IAppServiceEmpresa appServiceEmpresa)
         {
@@ -70,15 +70,15 @@ namespace Sim.UI.Web.Pages.Empresa
             {
                 if (ModelState.IsValid)
                 {
-                    var emp = Task.Run(()=>  _empresaApp.ConsultaByCNPJ(Input.CNPJ));
+                    var emp = Task.Run(() => _empresaApp.ConsultaByCNPJ(Input.CNPJ));
 
                     await emp;
 
                     Input = new InputModel
                     {
                         ListaEmpresas = emp.Result,
-                        CNPJRes = new Functions.Mask().Remove(Input.CNPJ)                       
-                        
+                        CNPJRes = new Functions.Mask().Remove(Input.CNPJ)
+
                     };
                 }
 

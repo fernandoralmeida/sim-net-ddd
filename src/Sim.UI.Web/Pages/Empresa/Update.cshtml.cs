@@ -110,22 +110,7 @@ namespace Sim.UI.Web.Pages.Empresa
                 {
 
                     var empresa = _mapper.Map<Empresa>(Input);
-
-                    StringBuilder sb = new StringBuilder();
-
-                    sb.AppendLine(Convert.ToString(empresa.Id));
-                    sb.AppendLine(Convert.ToString(empresa.Nome_Empresarial));
-                    sb.AppendLine(Convert.ToString(empresa.CNPJ));
-                    sb.AppendLine(Convert.ToString(empresa.CNAE_Principal));
-
-                    if (empresa.QSA != null)
-                        foreach (var q in empresa.QSA)
-                        {
-                            sb.AppendLine(q.Nome + " " + q.Qual);
-                        }
-
-                    StatusMessage = sb.ToString();
-
+                
                     _appServiceEmpresa.Update(empresa);
 
                 });

@@ -20,17 +20,12 @@ namespace Sim.Cross.Data.Config.Entity
                 .IsRequired()
                 .HasColumnType("varchar(18)");
 
-            builder.Property(c => c.Tipo).HasColumnType("varchar(max)");
-
             builder.Property(c => c.Data_Abertura);
 
             builder.Property(c => c.Nome_Empresarial)
                 .HasColumnType("varchar(max)");
 
             builder.Property(c => c.Nome_Fantasia)
-                .HasColumnType("varchar(max)");
-
-            builder.Property(c => c.Porte)
                 .HasColumnType("varchar(max)");
 
             builder.Property(c => c.CNAE_Principal)
@@ -40,9 +35,6 @@ namespace Sim.Cross.Data.Config.Entity
                 .HasColumnType("varchar(max)");
 
             builder.Property(c => c.Atividade_Secundarias)
-                .HasColumnType("varchar(max)");
-
-            builder.Property(c => c.Natureza_Juridica)
                 .HasColumnType("varchar(max)");
 
             builder.Property(c => c.CEP)
@@ -72,25 +64,8 @@ namespace Sim.Cross.Data.Config.Entity
             builder.Property(c => c.Email)
                 .HasColumnType("varchar(max)");
 
-            builder.Property(c => c.Ente_Federativo_Resp)
-                .HasColumnType("varchar(max)");
-
             builder.Property(c => c.Situacao_Cadastral)
                 .HasColumnType("varchar(max)");
-
-            builder.Property(c => c.Data_Situacao_Cadastral);
-
-            builder.Property(c => c.Motivo_Situacao_Cadastral)
-                .HasColumnType("varchar(max)");
-
-            builder.Property(c => c.Situacao_Especial)
-                .HasColumnType("varchar(max)");
-
-            builder.Property(c => c.Data_Situacao_Especial)
-                .HasColumnType("varchar(10)");
-
-            builder.Property(c => c.Capital_Social)
-                .HasColumnType("decimal(18,2)");
 
         }
     }

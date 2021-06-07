@@ -34,6 +34,10 @@ namespace Sim.Cross.Ioc
     using Sim.Cross.Data.Repository.SDE;
     using Sim.Cross.Data.Repository.Shared;
 
+    using Sim.Cross.Data.Repository.Cnpj;
+    using Sim.Domain.Cnpj.Interface;
+    using Sim.Domain.Cnpj.Entity;
+
 
     public static class Container
     {
@@ -68,21 +72,26 @@ namespace Sim.Cross.Ioc
 
         private static void RegisterEmpresa(IServiceCollection services)
         {
-            //
-            services.AddScoped<IAppServiceBase<Empresa>, AppServiceBase<Empresa>>();
+
+            services.AddScoped<ICNPJBase<BaseReceitaFederal>, RepositoryRFB>();
+            services.AddScoped<ICNPJBase<BaseJucesp>, RepositoryJucesp>();
+
+            /**/
+            services.AddScoped<IAppServiceBase<Domain.SDE.Entity.Empresa>, AppServiceBase<Domain.SDE.Entity.Empresa>>();
             services.AddScoped<IAppServiceEmpresa, AppServiceEmpresa>();
             services.AddScoped<IAppServiceBase<QSA>, AppServiceBase<QSA>>();
             services.AddScoped<IAppServiceQSA, AppServiceQSA>();
 
-            services.AddScoped<IServiceBase<Empresa>, ServiceBase<Empresa>>();
+            services.AddScoped<IServiceBase<Domain.SDE.Entity.Empresa>, ServiceBase<Domain.SDE.Entity.Empresa>>();
             services.AddScoped<IServiceEmpresa, ServiceEmpresa>();
             services.AddScoped<IServiceBase<QSA>, ServiceBase<QSA>>();
             services.AddScoped<IServiceQSA, ServiceQSA>();
 
-            services.AddScoped<IRepositoryBase<Empresa>, RepositoryBase<Empresa>>();
+            services.AddScoped<IRepositoryBase<Domain.SDE.Entity.Empresa>, RepositoryBase<Domain.SDE.Entity.Empresa>>();
             services.AddScoped<IRepositoryEmpresa, RepositoryEmpresa>();
             services.AddScoped<IRepositoryBase<QSA>, RepositoryBase<QSA>>();
             services.AddScoped<IRepositoryQSA, RepositoryQsa>();
+            
         }
 
         private static void RegisterAtendimento(IServiceCollection services)

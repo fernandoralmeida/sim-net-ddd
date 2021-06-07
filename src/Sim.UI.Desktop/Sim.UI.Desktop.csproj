@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Sim.Application\Sim.Application.csproj" />
+    <ProjectReference Include="..\Sim.Cross.Data\Sim.Cross.Data.csproj" />
+    <ProjectReference Include="..\Sim.Domain\Sim.Domain.csproj" />
+    <ProjectReference Include="..\Sim.Service\Sim.Service.csproj" />
+  </ItemGroup>
+
+</Project>
