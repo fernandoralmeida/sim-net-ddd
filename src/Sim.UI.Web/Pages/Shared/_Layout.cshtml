@@ -46,9 +46,12 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-page="/Planner/Index">e-Planner</a>
                         </li>
+                        @if (User.IsInRole("Administrador") || User.IsInRole("ModuloRFB"))
+                        {
                         <li class="nav-item">
                             <a class="nav-link" asp-area="Censo" asp-page="/Empresas/Index">Censo</a>
                         </li>
+                        }
                     </ul>
                     @if (User.IsInRole("Administrador"))
                     {

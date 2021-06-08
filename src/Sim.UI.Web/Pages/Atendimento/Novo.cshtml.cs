@@ -14,6 +14,7 @@ namespace Sim.UI.Web.Pages.Atendimento
     using Sim.Cross.Identity;
     using Sim.Domain.SDE.Entity;
     using Sim.Domain.Shared.Entity;
+    using System.ComponentModel.DataAnnotations;
 
     [Authorize]
     public class NovoModel : PageModel
@@ -48,6 +49,7 @@ namespace Sim.UI.Web.Pages.Atendimento
         [TempData]
         public string StatusMessage { get; set; }
 
+        [Required(ErrorMessage = "Selecione o setor do atendimento!")]
         [BindProperty(SupportsGet = true)]
         public string GetSetor { get; set; }
        
@@ -56,10 +58,12 @@ namespace Sim.UI.Web.Pages.Atendimento
         public string GetServico { get; set; }
         public SelectList Servicos { get; set; }
 
+        [Required(ErrorMessage = "Selecione o canal do atendimento!")]
         [BindProperty(SupportsGet = true)]
         public string GetCanal { get;set; }
         public SelectList Canais { get; set; }
 
+        [Required(ErrorMessage = "Selecione ao menos um Serviço!")]
         public string MeusServicos { get; set; }
 
         [BindProperty(SupportsGet = true)]
@@ -125,6 +129,10 @@ namespace Sim.UI.Web.Pages.Atendimento
             
             try
             {
+                if(!ModelState.IsValid)
+                {
+                    return Page();
+                }
                
                     //var user = await _userManager.GetUserAsync(User);
 
@@ -146,9 +154,7 @@ namespace Sim.UI.Web.Pages.Atendimento
 
                     await t;
 
-                    return RedirectToPage("./Index");
-
-                
+                    return RedirectToPage("./Index");                
 
             }
             catch(Exception ex)

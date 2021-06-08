@@ -77,10 +77,12 @@
                     <select asp-for="GetSetor" class="form-select" asp-items="Model.Setores">
                         <option selected>-- Selecione um Setor --</option>
                     </select>
+                    <span asp-validation-for="Input.Servicos" class="text-danger"></span>
                 </div>
                 <div class="col-mb-12 mb-2">
                     <label class="form-label" asp-for="Input.Canal"></label>
                     <select asp-for="GetCanal" class="form-select"></select>
+                    <span asp-validation-for="Input.Servicos" class="text-danger"></span>
                 </div>
             </div>
             <div class="col-md-4 mb-2">
@@ -90,6 +92,8 @@
             <div class="col-md-4 mb-2">
                 <label class="form-label">Serviços Realizado</label>
                 <select asp-for="MeusServicos" class="form-control" size="10"></select>
+                <textarea id="myservice" asp-for="Input.Servicos" class="form-control" hidden></textarea>
+                <span asp-validation-for="MeusServicos" class="text-danger"></span>
             </div>
         </div>
         <div class="row">
@@ -97,8 +101,7 @@
                 <label asp-for="Input.Descricao"></label>
             </div>
             <div class="col-md-9 mb-3">
-                <textarea asp-for="Input.Descricao" class="form-control" rows="2"></textarea>
-                <textarea id="myservice" asp-for="Input.Servicos" class="form-control" hidden></textarea>
+                <textarea asp-for="Input.Descricao" class="form-control" rows="2"></textarea>                
             </div>
             <div class="col-md-3">
                 <div class="d-grid gap-2">
@@ -111,48 +114,50 @@
 
 @section scripts{
     <script>
-    $(function () {
-        $("#GetSetor").on("change", function() {
-            var getSetor = $(this).val();
-            //get canais de atendimento
-            $("#GetCanal").empty();
-            $("#GetCanal").append("<option value=''>-- Selecione um Canal --</option>");
-            $.getJSON(`?handler=Canais&getSetor=${getSetor}`, (data) => {
-                $.each(data, function (i, item) {
-                    $("#GetCanal").append(`<option value="${item.nome}">${item.nome}</option>`);
+        $(function () {
+            $("#GetSetor").on("change", function () {
+                var getSetor = $(this).val();
+                //get canais de atendimento
+                $("#GetCanal").empty();
+                $("#GetCanal").append("<option value=''>-- Selecione um Canal --</option>");
+                $.getJSON(`?handler=Canais&getSetor=${getSetor}`, (data) => {
+                    $.each(data, function (i, item) {
+                        $("#GetCanal").append(`<option value="${item.nome}">${item.nome}</option>`);
+                    });
+                });
+                //get servicos por setor
+                $("#GetServico").empty();
+                $.getJSON(`?handler=Servicos&getSetor=${getSetor}`, (data) => {
+                    $.each(data, function (i, item) {
+                        $("#GetServico").append(`<option value="${item.nome}">${item.nome}</option>`)
+                    });
                 });
             });
-            //get servicos por setor
-            $("#GetServico").empty();
-            $.getJSON(`?handler=Servicos&getSetor=${getSetor}`, (data) => {
-                $.each(data, function (i, item) {
-                    $("#GetServico").append(`<option value="${item.nome}">${item.nome}</option>`)
-                });
+            //adiciona serviços
+            $("#GetServico").on("click", function () {
+                var getServico = $(this).val();
+                if (getServico !== null) {
+                    $("#MeusServicos").append(`<option value="${getServico}">${getServico}</option>`);
+                    $(`#GetServico option[value="${getServico}"]`).remove();
+                }
             });
-        });
-        //adiciona serviços        
-        $("#GetServico").on("click", function () {
-            var getServico = $(this).val();
-            if (getServico !== null) {
-                $("#MeusServicos").append(`<option value="${getServico}">${getServico}</option>`);
-                $(`#GetServico option[value="${getServico}"]`).remove();
-            }
-        });
-        //revome serviços
-        $("#MeusServicos").on("click", function () {
-            var meuServico = $(this).val();
-            if (meuServico !== null) {
-                $("#GetServico").append(`<option value="${meuServico}">${meuServico}</option>`);
-                $(`#MeusServicos option[value="${meuServico}"]`).remove();
-            }
-        });
+            //revome serviços
+            $("#MeusServicos").on("click", function () {
+                var meuServico = $(this).val();
+                if (meuServico !== null) {
+                    $("#GetServico").append(`<option value="${meuServico}">${meuServico}</option>`);
+                    $(`#MeusServicos option[value="${meuServico}"]`).remove();
+                }
+            });
 
-        $("#addbtn").on("click", function () {
-            var selected_val = $.map($(`#MeusServicos option`), function (a) {
-                return a.value;
-            }).join(';');
-            document.getElementById("myservice").value = selected_val;            
+            $("#addbtn").on("click", function () {
+                var selected_val = $.map($(`#MeusServicos option`), function (a) {
+                    return a.value;
+                }).join(';');
+                document.getElementById("myservice").value = selected_val;
+            });
         });
-    });
     </script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/jquery.validation.js"></script>
 }
