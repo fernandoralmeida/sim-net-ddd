@@ -58,7 +58,7 @@
         </div>
 
         <div>
-            <table class="table">
+            <table class="table table-light table-striped">
                 <thead>
                     <tr>
                         <th>
@@ -83,7 +83,7 @@
                                     </td>
 
                                     <td>
-                                        <button type="submit" asp-page-handler="RemoveRole" asp-route-id="@Model.Input.Id" asp-route-role="@item" class="btn btn-sm btn-outline-danger" title="Excluir Role"><i class="fas fa-minus-square"></i></button>
+                                        <button type="submit" asp-page-handler="RemoveRole" asp-route-id="@Model.Input.Id" asp-route-role="@item" class="btn btn-sm btn-danger" title="Excluir Role"><i class="fas fa-minus-square"></i></button>
                                     </td>
                                 </tr>
                             }

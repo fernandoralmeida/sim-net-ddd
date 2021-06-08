@@ -8,6 +8,8 @@ using Sim.Domain.Cnpj.Entity;
 namespace Sim.Cross.Data.Context
 {
     using Config.Cnpj;
+    
+
     public class JucespContext : DbContext
     {
         public JucespContext() { }
@@ -44,6 +46,7 @@ namespace Sim.Cross.Data.Context
 
             services.AddScoped<DbContext, JucespContext>();
         }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new BaseJucespMap());

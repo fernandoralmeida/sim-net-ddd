@@ -7,6 +7,7 @@ using Sim.Domain.Cnpj.Entity;
 namespace Sim.Cross.Data.Context
 {    
     using Config.Cnpj;
+    
 
     public class RFBContext : DbContext
     {
