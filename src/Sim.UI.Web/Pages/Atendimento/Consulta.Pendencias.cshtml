@@ -11,7 +11,7 @@
 <pre>Atendimentos com pendências</pre>
 
 <div>
-    <table class="table">
+    <table class="table table-light table-striped">
         <caption>Lista de atendimentos!</caption>
         <thead>
             <tr>
@@ -83,7 +83,7 @@
                     @Html.DisplayFor(modelItem => item.Canal)
                 </td>
                 <td>
-                    <a asp-page="./Atendimento.Cancelar" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger" title="Cancelar Atendimento"><i class="far fa-trash-alt"></i></a>
+                    <a asp-page="./Atendimento.Cancelar" asp-route-id="@item.Id" class="btn btn-sm btn-danger" title="Cancelar Atendimento"><i class="far fa-trash-alt"></i></a>
                 </td>
             </tr>
                 }}

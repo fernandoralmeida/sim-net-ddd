@@ -1,17 +1,18 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.IO;
-
+using Microsoft.Extensions.DependencyInjection;
 using Sim.Domain.Cnpj.Entity;
 
 namespace Sim.Cross.Data.Context
 {    
     using Config.Cnpj;
+    
 
     public class RFBContext : DbContext
     {
         public RFBContext() { }
-        public RFBContext(DbContextOptions options) : base(options) { }
+        public RFBContext(DbContextOptions<RFBContext> options) : base(options) { }
         
         public DbSet<CNAE> CNAEs { get; set; }
 
@@ -35,14 +36,34 @@ namespace Sim.Cross.Data.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            // get the configuration from the app settings
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer(SqlServerConnect());
+            }
+            /* get the configuration from the app settings
             var config = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json")
                 .Build();
 
             // define the database to use
-            optionsBuilder.UseSqlServer(config.GetConnectionString("RFB_____ContextConnection"));
+            optionsBuilder.UseSqlServer(config.GetConnectionString("RFB_____ContextConnection"));*/
+        }
+
+        private static string _sqlserverconnect;
+        private static string SqlServerConnect()
+        {
+            return _sqlserverconnect;
+        }
+
+        //registra o dbcontext aos serviços
+        public void RegisterDataContext(IServiceCollection services, IConfiguration config, string connection)
+        {
+            _sqlserverconnect = config.GetConnectionString(connection);
+
+            services.AddDbContext<RFBContext>(options => options.UseSqlServer(config.GetConnectionString(connection)));
+
+            services.AddScoped<DbContext, RFBContext>();
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

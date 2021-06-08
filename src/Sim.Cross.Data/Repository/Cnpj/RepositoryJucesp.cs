@@ -13,9 +13,9 @@ namespace Sim.Cross.Data.Repository.Cnpj
     {
         private readonly JucespContext db;
 
-        public RepositoryJucesp()
+        public RepositoryJucesp(JucespContext context)
         {
-            db = new();
+            db = context;
         }
 
         public void Dispose()

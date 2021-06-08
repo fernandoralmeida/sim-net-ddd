@@ -14,7 +14,7 @@ namespace Sim.Cross.Data.Repository.Cnpj
     {
         private readonly RFBContext db;
 
-        public RepositoryRFB() { db = new();  }
+        public RepositoryRFB(RFBContext context) { db = context;  }
 
         public void Dispose()
         {
