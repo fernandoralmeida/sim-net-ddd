@@ -21,7 +21,7 @@ namespace Sim.UI.Web.Pages.Atendimento
     [Authorize]
     public class IniciarModel : PageModel
     {
-        private readonly UserManager<ApplicationUser> _userManager;
+        //private readonly UserManager<ApplicationUser> _userManager;
         private readonly IAppServiceAtendimento _appServiceAtendimento;
         private readonly IAppServicePessoa _appServicePessoa;
         private readonly IAppServiceEmpresa _appServiceEmpresa;
@@ -30,12 +30,12 @@ namespace Sim.UI.Web.Pages.Atendimento
         public IniciarModel(IAppServiceAtendimento appServiceAtendimento,
             IAppServicePessoa appServicePessoa,
             IAppServiceEmpresa appServiceEmpresa,
-            IAppServiceContador appServiceContador, UserManager<ApplicationUser> userManager)
+            IAppServiceContador appServiceContador)
         {
             _appServiceAtendimento = appServiceAtendimento;
             _appServicePessoa = appServicePessoa;
             _appServiceEmpresa = appServiceEmpresa;
-            _userManager = userManager;
+            //_userManager = userManager;
             _appServiceContador = appServiceContador;
         }
 
@@ -51,20 +51,20 @@ namespace Sim.UI.Web.Pages.Atendimento
         [TempData]
         public string StatusMessage { get; set; }
 
-        private string GetProtoloco()
+        private async Task<string> GetProtoloco()
         {
-            var user = _userManager.GetUserAsync(User);
-            user.Wait();
-            var t = _appServiceContador.GetProtocoloAsync(user.Result.Id, "Atendimento");
-            t.Wait();
-            return t.Result.ToString();
+            //var user = _userManager.GetUserAsync(User);
+            //user.Wait();
+            var t = await _appServiceContador.GetProtocoloAsync(User.Identity.Name, "Atendimento");
+            
+            return t.ToString();
         }
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
             Input = new();
-            var user = await _userManager.GetUserAsync(User);
-            var at_ativo = Task.Run(() => _appServiceAtendimento.AtendimentoAtivo(user.Id));
+            //var user = await _userManager.GetUserAsync(User);
+            var at_ativo = Task.Run(() => _appServiceAtendimento.AtendimentoAtivo(User.Identity.Name));
             at_ativo.Wait();
 
             foreach (var at in at_ativo.Result)
@@ -123,13 +123,13 @@ namespace Sim.UI.Web.Pages.Atendimento
                 return Page();
             }
 
-            var user = await _userManager.GetUserAsync(User);          
+            //var user = await _userManager.GetUserAsync(User);          
 
-                Input.Protocolo = GetProtoloco();
+                Input.Protocolo = await GetProtoloco();
                 Input.Data = DateTime.Now;
                 Input.Status = "Ativo";
                 Input.Ativo = true;
-                Input.Owner_AppUser_Id = user.Id;
+                Input.Owner_AppUser_Id = User.Identity.Name;
 
             var atendimento = new Atendimento()
             {

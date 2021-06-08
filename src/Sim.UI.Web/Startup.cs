@@ -18,7 +18,6 @@ namespace Sim.UI.Web
     using Sim.Service.CNPJ.WebService;
     using Sim.Cross.Data.Context;
 
-
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -32,6 +31,8 @@ namespace Sim.UI.Web
         public void ConfigureServices(IServiceCollection services)
         {
             new ApplicationContext().RegisterDataContext(services, Configuration, "App_____ContextConnection");
+            new JucespContext().RegisterDataContext(services, Configuration, "Jucesp__ContextConnection");
+            new RFBContext().RegisterDataContext(services, Configuration, "RFB_____ContextConnection");
 
             Container.RegisterApplicationService(services);
                         

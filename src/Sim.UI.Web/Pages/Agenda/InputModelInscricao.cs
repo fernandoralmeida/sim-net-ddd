@@ -21,7 +21,7 @@ namespace Sim.UI.Web.Pages.Agenda
         [DisplayName("Numero")]
         public int Numero { get; set; }
 
-        public Guid AplicationUser_Id { get; set; }
+        public string AplicationUser_Id { get; set; }
 
         [DisplayName("Data")]
         [DataType(DataType.DateTime)]

@@ -18,14 +18,13 @@ namespace Sim.UI.Web.Pages.Atendimento
     [Authorize]
     public class IndexModel : PageModel
     {
-        private readonly UserManager<ApplicationUser> _userManager;
+        //private readonly UserManager<ApplicationUser> _userManager;
         private readonly IAppServiceAtendimento _appServiceAtendimento;
 
-        public IndexModel(IAppServiceAtendimento appServiceAtendimento,
-            UserManager<ApplicationUser> userManager)
+        public IndexModel(IAppServiceAtendimento appServiceAtendimento)
         {
             _appServiceAtendimento = appServiceAtendimento;
-            _userManager = userManager;
+            //_userManager = userManager;
             Input = new();
             Input.DataAtendimento = DateTime.Now.Date;
         }
@@ -47,9 +46,9 @@ namespace Sim.UI.Web.Pages.Atendimento
         private async Task LoadAsync(DateTime? date)
         {
             Input.DataAtendimento = date;
-            var user = await _userManager.GetUserAsync(User);
+            //var user = await _userManager.GetUserAsync(User);
 
-            var t = Task.Run(() => _appServiceAtendimento.MeusAtendimentos(user.Id, date));
+            var t = Task.Run(() => _appServiceAtendimento.MeusAtendimentos(User.Identity.Name, date));
             await t;
             Input.ListaAtendimento = t.Result.ToList();
         }

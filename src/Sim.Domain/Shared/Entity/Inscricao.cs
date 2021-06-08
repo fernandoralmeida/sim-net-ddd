@@ -15,7 +15,7 @@ namespace Sim.Domain.Shared.Entity
         }
         public Guid Id { get; set; }
         public int Numero { get; set; }
-        public Guid AplicationUser_Id { get; set; }
+        public string AplicationUser_Id { get; set; }
         public DateTime? Data_Inscricao { get; set; }
         public bool Presente { get; set; }
 

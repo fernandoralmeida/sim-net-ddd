@@ -19,7 +19,7 @@ namespace Sim.UI.Web.Pages.Atendimento
     [Authorize]
     public class AtendimentoCancelarModel : PageModel
     {
-        private readonly UserManager<ApplicationUser> _userManager;
+        //private readonly UserManager<ApplicationUser> _userManager;
         private readonly IAppServiceAtendimento _appServiceAtendimento;
         private readonly IAppServiceSetor _appServiceSetor;
         private readonly IAppServiceCanal _appServiceCanal;
@@ -28,14 +28,13 @@ namespace Sim.UI.Web.Pages.Atendimento
         public AtendimentoCancelarModel(IAppServiceAtendimento appServiceAtendimento,
             IAppServiceCanal appServiceCanal,
             IAppServiceServico appServiceServico,
-            IAppServiceSetor appServiceSetor,
-            UserManager<ApplicationUser> userManager)
+            IAppServiceSetor appServiceSetor)
         {
             _appServiceAtendimento = appServiceAtendimento;
             _appServiceCanal = appServiceCanal;
             _appServiceServico = appServiceServico;
             _appServiceSetor = appServiceSetor;
-            _userManager = userManager;
+            //_userManager = userManager;
         }
 
         [BindProperty(SupportsGet = true)]

@@ -18,7 +18,7 @@ namespace Sim.UI.Web.Pages.Atendimento
     [Authorize]
     public class NovoModel : PageModel
     {
-        private readonly UserManager<ApplicationUser> _userManager;
+        //private readonly UserManager<ApplicationUser> _userManager;
         private readonly IAppServiceAtendimento _appServiceAtendimento;
         private readonly IAppServicePessoa _appServicePessoa;
         private readonly IAppServiceEmpresa _appServiceEmpresa;
@@ -31,8 +31,7 @@ namespace Sim.UI.Web.Pages.Atendimento
             IAppServiceEmpresa appServiceEmpresa,
             IAppServiceCanal appServiceCanal,
             IAppServiceServico appServiceServico,
-            IAppServiceSetor appServiceSetor,
-            UserManager<ApplicationUser> userManager)
+            IAppServiceSetor appServiceSetor)
         {
             _appServiceAtendimento = appServiceAtendimento;
             _appServicePessoa = appServicePessoa;
@@ -40,7 +39,7 @@ namespace Sim.UI.Web.Pages.Atendimento
             _appServiceCanal = appServiceCanal;
             _appServiceServico = appServiceServico;
             _appServiceSetor = appServiceSetor;
-            _userManager = userManager;
+            //_userManager = userManager;
         }
 
         [BindProperty(SupportsGet = true)]
@@ -81,9 +80,9 @@ namespace Sim.UI.Web.Pages.Atendimento
         {
             await OnLoad();
 
-            var user = await _userManager.GetUserAsync(User);
+            //var user = await _userManager.GetUserAsync(User);
 
-            var atendimemnto_ativio = _appServiceAtendimento.AtendimentoAtivo(user.Id).FirstOrDefault();
+            var atendimemnto_ativio = _appServiceAtendimento.AtendimentoAtivo(User.Identity.Name).FirstOrDefault();
 
             if(atendimemnto_ativio == null)
             {

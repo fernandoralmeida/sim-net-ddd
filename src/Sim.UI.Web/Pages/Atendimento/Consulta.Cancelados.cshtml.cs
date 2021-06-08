@@ -19,12 +19,11 @@ namespace Sim.UI.Web.Pages.Atendimento
     [Authorize]
     public class ConsultaCanceladosModel : PageModel
     {
-        private readonly UserManager<ApplicationUser> _userManager;
+        //private readonly UserManager<ApplicationUser> _userManager;
         private readonly IAppServiceAtendimento _appServiceAtendimento;
-        public ConsultaCanceladosModel(IAppServiceAtendimento appServiceAtendimento,
-            UserManager<ApplicationUser> userManager)
+        public ConsultaCanceladosModel(IAppServiceAtendimento appServiceAtendimento)
         {
-            _userManager = userManager;
+            //_userManager = userManager;
             _appServiceAtendimento = appServiceAtendimento;
             Input = new();
             Input.DataI = new DateTime(DateTime.Now.Year, 1, 1);
@@ -32,8 +31,8 @@ namespace Sim.UI.Web.Pages.Atendimento
         }
         public async Task<IActionResult> OnGetAsync()
         {
-            var userId = await _userManager.GetUserAsync(User);
-            var lista = Task.Run(() => _appServiceAtendimento.AtendimentosCancelados(userId.Id));
+            //var userId = await _userManager.GetUserAsync(User);
+            var lista = Task.Run(() => _appServiceAtendimento.AtendimentosCancelados(User.Identity.Name));
             await lista;
             Input.ListaAtendimento = lista.Result.ToList();
 

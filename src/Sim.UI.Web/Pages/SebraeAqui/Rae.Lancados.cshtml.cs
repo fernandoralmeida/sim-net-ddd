@@ -18,14 +18,13 @@ namespace Sim.UI.Web.Pages.SebraeAqui
     [Authorize]
     public class RaeLancadosModel : PageModel
     {
-        private readonly UserManager<ApplicationUser> _userManager;
+        //private readonly UserManager<ApplicationUser> _userManager;
         private readonly IAppServiceAtendimento _appServiceAtendimento;
 
-        public RaeLancadosModel(IAppServiceAtendimento appServiceAtendimento,
-            UserManager<ApplicationUser> userManager)
+        public RaeLancadosModel(IAppServiceAtendimento appServiceAtendimento)
         {
             _appServiceAtendimento = appServiceAtendimento;
-            _userManager = userManager;
+            //_userManager = userManager;
             Input = new();
             Input.DataAtendimento = DateTime.Now.Date;
         }
@@ -46,8 +45,8 @@ namespace Sim.UI.Web.Pages.SebraeAqui
 
         private async Task LoadAsync()
         {
-            var user = await _userManager.GetUserAsync(User);
-            var t = Task.Run(() => _appServiceAtendimento.ListarRaeLancados(user.Id));
+            //var user = await _userManager.GetUserAsync(User);
+            var t = Task.Run(() => _appServiceAtendimento.ListarRaeLancados(User.Identity.Name));
             await t;
             Input.ListaAtendimento = t.Result.ToList();
         }

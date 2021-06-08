@@ -19,12 +19,11 @@ namespace Sim.UI.Web.Pages.Atendimento
     [Authorize]
     public class ConsultaPendenciasModel : PageModel
     {
-        private readonly UserManager<ApplicationUser> _userManager;
+        //private readonly UserManager<ApplicationUser> _userManager;
         private readonly IAppServiceAtendimento _appServiceAtendimento;
-        public ConsultaPendenciasModel(IAppServiceAtendimento appServiceAtendimento,
-            UserManager<ApplicationUser> userManager)
+        public ConsultaPendenciasModel(IAppServiceAtendimento appServiceAtendimento)
         {
-            _userManager = userManager;
+            //_userManager = userManager;
             _appServiceAtendimento = appServiceAtendimento;
             Input = new();
             Input.DataI = new DateTime(DateTime.Now.Year, 1, 1);
@@ -32,8 +31,8 @@ namespace Sim.UI.Web.Pages.Atendimento
         }
         public async Task<IActionResult> OnGetAsync()
         {
-            var userId = await _userManager.GetUserAsync(User);
-            var lista = Task.Run(() => _appServiceAtendimento.AtendimentoAtivo(userId.Id));
+            //var userId = await _userManager.GetUserAsync(User);
+            var lista = Task.Run(() => _appServiceAtendimento.AtendimentoAtivo(User.Identity.Name));
             await lista;
             Input.ListaAtendimento = lista.Result.ToList();
 
@@ -63,9 +62,9 @@ namespace Sim.UI.Web.Pages.Atendimento
 
         public async Task OnPostListPendenciasAsync()
         {
-            var userId = _userManager.Users.FirstOrDefault().Id;
+            //var userId = _userManager.Users.FirstOrDefault().Id;
 
-            var lista = Task.Run(() => _appServiceAtendimento.AtendimentoAtivo(userId));
+            var lista = Task.Run(() => _appServiceAtendimento.AtendimentoAtivo(User.Identity.Name));
             await lista;
             Input.ListaAtendimento = lista.Result.ToList();
         }

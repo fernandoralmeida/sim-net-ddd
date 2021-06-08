@@ -16,9 +16,10 @@ namespace Sim.Cross.Data.Repository.Shared
             :base(dbContext)
         {   }
 
-        public Task<string> GetProtocoloAsync(string appuserid, string moduloname)
+        public async Task<string> GetProtocoloAsync(string appuserid, string moduloname)
         {
-            var t = Task<string>.Run(() =>
+            var str = string.Empty;
+            var t = Task.Run(() =>
             {
                 var p = new Contador()
                 {
@@ -32,12 +33,12 @@ namespace Sim.Cross.Data.Repository.Shared
 
                 var protocolo = _db.Contador.Where(s => s.AppUserId == appuserid).OrderBy(c => c.Numero).LastOrDefault();
 
-                return protocolo.Numero.ToString();
+                str = protocolo.Numero.ToString();
             });
 
-            t.Wait();
+            await t;
 
-            return t;
+           return str;
         }
 
 

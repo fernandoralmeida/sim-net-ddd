@@ -21,7 +21,7 @@ namespace Sim.UI.Web.Pages.Agenda
     [Authorize]
     public class Inscricao_EventoModel : PageModel
     {
-        private readonly UserManager<ApplicationUser> _userManager;
+        //private readonly UserManager<ApplicationUser> _userManager;
         private readonly IAppServiceInscricao _appServiceInscricao;
         private readonly IAppServiceEvento _appServiceEvento;
         private readonly IAppServicePessoa _appServicePessoa;
@@ -30,14 +30,13 @@ namespace Sim.UI.Web.Pages.Agenda
         public Inscricao_EventoModel(IAppServiceInscricao appServiceInscricao,
             IAppServiceEvento appServiceEvento,
             IAppServiceEmpresa appServiceEmpresa,
-            IAppServicePessoa appServicePessoa,
-            UserManager<ApplicationUser> userManager)
+            IAppServicePessoa appServicePessoa)
         {
             _appServiceEvento = appServiceEvento;
             _appServiceInscricao = appServiceInscricao;
             _appServiceEmpresa = appServiceEmpresa;
             _appServicePessoa = appServicePessoa;
-            _userManager = userManager;
+            //_userManager = userManager;
         }
 
         [BindProperty]
@@ -140,11 +139,11 @@ namespace Sim.UI.Web.Pages.Agenda
             var t = Task.Run(() =>
             {
 
-                var user = _userManager.Users.FirstOrDefault(m => m.UserName == User.Identity.Name).Id;
+                //var user = _userManager.Users.FirstOrDefault(m => m.UserName == User.Identity.Name).Id;
 
                 var inscricao = new Inscricao()
                 {
-                    AplicationUser_Id = new Guid(user),
+                    AplicationUser_Id = User.Identity.Name,
                     Data_Inscricao = DateTime.Now,
                     Presente = false
                 };
