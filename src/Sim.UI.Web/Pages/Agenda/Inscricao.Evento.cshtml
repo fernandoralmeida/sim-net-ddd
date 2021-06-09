@@ -14,11 +14,11 @@
                 @if (Model.Input.Evento == null)
                 {
                     <div class="row g-2 mb-4">
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-4">
                             <div class="input-group ">
                                 <span class="input-group-text">Numero Evento</span>
                                 <input class="form-control" asp-for="GetNumeroEvento" aria-describedby="button-addon2">
-                                <button asp-page-handler="IncluirEvento" class="btn btn-primary" type="submit"><i class="fa fa-plus-square" aria-hidden="true"></i></button>
+                                <button asp-page-handler="IncluirEvento" class="btn btn-primary" type="submit"><i class="fa fa-plus-square" aria-hidden="true"></i> Incluir</button>
                             </div>
                         </div>
                     </div>
@@ -47,7 +47,7 @@
                             <input class="form-control" asp-for="Input.Evento.Data" />
                         </div>
                         <div class="col-md align-self-end">
-                            <button class="btn btn-danger" type="submit" asp-page-handler="RemoverEvento"><i class="fas fa-minus-square"></i></button>
+                            <button class="btn btn-danger" type="submit" asp-page-handler="RemoverEvento"><i class="fas fa-minus-square"></i> Remover</button>
                         </div>
                     </div>
                 }
@@ -62,11 +62,11 @@
                 @if (Model.Input.Participante == null)
                 {
                     <div class="row g-2 mb-4">
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-4">
                             <div class="input-group ">
                                 <span class="input-group-text">CPF</span>
                                 <input class="form-control" asp-for="GetCPF" id="inputCPF" aria-describedby="button-addon2">
-                                <button asp-page-handler="IncluirPessoa" class="btn btn-primary" type="submit"><i class="fa fa-plus-square" aria-hidden="true"></i></button>
+                                <button asp-page-handler="IncluirPessoa" class="btn btn-primary" type="submit"><i class="fa fa-plus-square" aria-hidden="true"></i> Incluir</button>
                             </div>
                         </div>
                     </div>
@@ -95,7 +95,7 @@
                             <input class="form-control" asp-for="Input.Participante.Tel_Movel" />
                         </div>
                         <div class="col-md align-self-end">
-                            <button class="btn btn-danger" type="submit" asp-page-handler="RemoverPessoa"><i class="fas fa-minus-square"></i></button>
+                            <button class="btn btn-danger" type="submit" asp-page-handler="RemoverPessoa"><i class="fas fa-minus-square"></i> Remover</button>
                         </div>
                     </div>
                 }
@@ -103,11 +103,11 @@
                 @if (Model.Input.Empresa == null)
                 {
                     <div class="row g-2 mb-4">
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-4">
                             <div class="input-group ">
                                 <span class="input-group-text">CNPJ</span>
                                 <input class="form-control" asp-for="GetCNPJ" id="inputCNPJ" aria-describedby="button-addon2">
-                                <button asp-page-handler="IncluirEmpresa" class="btn btn-primary" type="submit"><i class="fa fa-plus-square" aria-hidden="true"></i></button>
+                                <button asp-page-handler="IncluirEmpresa" class="btn btn-primary" type="submit"><i class="fa fa-plus-square" aria-hidden="true"></i> Incluir</button>
                             </div>
                         </div>
                     </div>
@@ -136,7 +136,7 @@
                             <input class="form-control" asp-for="Input.Empresa.Telefone" />
                         </div>
                         <div class="col-md align-self-end">
-                            <button class="btn btn-danger" type="submit" asp-page-handler="RemoverEmpresa"><i class="fas fa-minus-square"></i></button>
+                            <button class="btn btn-danger" type="submit" asp-page-handler="RemoverEmpresa"><i class="fas fa-minus-square"></i> Remover</button>
                         </div>
                     </div>
                 }

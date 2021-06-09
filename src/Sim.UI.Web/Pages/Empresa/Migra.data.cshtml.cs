@@ -85,33 +85,39 @@ namespace Sim.UI.Web.Pages.Empresa
 
         private async Task AddCNPJ(string cnpj)
         {
-            var rws = await _receitaWS.ConsultarCPNJAsync(cnpj);
-            Input = _mapper.Map<VMEmpresa>(rws);
 
-            if (rws.AtividadePrincipal != null)
-            {
+            var e = _appServiceEmpresa.ConsultaByCNPJ(cnpj);
 
-                foreach (var at in rws.AtividadePrincipal)
+           
+
+                var rws = await _receitaWS.ConsultarCPNJAsync(cnpj);
+                Input = _mapper.Map<VMEmpresa>(rws);
+
+                if (rws.AtividadePrincipal != null)
                 {
-                    Input.CNAE_Principal = at.Code;
-                    Input.Atividade_Principal = at.Text;
+
+                    foreach (var at in rws.AtividadePrincipal)
+                    {
+                        Input.CNAE_Principal = at.Code;
+                        Input.Atividade_Principal = at.Text;
+                    }
+
+                    StringBuilder sb = new StringBuilder();
+                    foreach (var at in rws.AtividadesSecundarias)
+                    {
+                        sb.AppendLine(string.Format("{0} - {1}", at.Code, at.Text));
+                    }
+
+                    Input.Atividade_Secundarias = sb.ToString().Trim();
+
+                    var t = Task.Run(() =>
+                    {
+                        var empresa = _mapper.Map<Domain.SDE.Entity.Empresa>(Input);
+                        _appServiceEmpresa.Add(empresa);
+                    });
+                    await t;
                 }
 
-                StringBuilder sb = new StringBuilder();
-                foreach (var at in rws.AtividadesSecundarias)
-                {
-                    sb.AppendLine(string.Format("{0} - {1}", at.Code, at.Text));
-                }
-
-                Input.Atividade_Secundarias = sb.ToString().Trim();
-
-                var t = Task.Run(() =>
-                {
-                    var empresa = _mapper.Map<Domain.SDE.Entity.Empresa>(Input);
-                    _appServiceEmpresa.Add(empresa);
-                });
-                await t;
-            }
         }
 
         public async Task<IActionResult> OnPostAsync()

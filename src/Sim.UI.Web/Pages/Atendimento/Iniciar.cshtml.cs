@@ -83,15 +83,23 @@ namespace Sim.UI.Web.Pages.Atendimento
             return Page();
         }
 
-        public async Task OnPostIncluirPessoaAsync()
+        public async Task<IActionResult> OnPostIncluirPessoaAsync()
         {
             var t = Task.Run(() => _appServicePessoa.ConsultaByCPF(GetCPF));
             await t;
 
+            if (t.Result.Count() == 0)
+            {
+                StatusMessage = "Erro: Cliente não cadastrado!";
+                return RedirectToPage("/Pessoa/Novo", new { id = GetCPF });
+            }
+
             foreach (var p in t.Result)
             {
-                Input.Pessoa = p;
+                Input.Pessoa = p;                
             }
+
+            return Page();
         }
 
         public void OnPostRemoverPessoa()
@@ -104,6 +112,9 @@ namespace Sim.UI.Web.Pages.Atendimento
 
             var t = Task.Run(() => _appServiceEmpresa.ConsultaByCNPJ(GetCNPJ));
             await t;
+
+            if (t.Result.Count() == 0)
+                StatusMessage = "Erro: Empresa não cadastrada!";
 
             foreach (var p in t.Result)
             {

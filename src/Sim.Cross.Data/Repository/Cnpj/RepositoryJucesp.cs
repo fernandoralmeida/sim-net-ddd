@@ -47,7 +47,7 @@ namespace Sim.Cross.Data.Repository.Cnpj
             {
 
                 var top = (from q in db.BaseJucesp.Where(s => s.Municipio == "Jau")
-                           orderby q.Data_Situacao_Cadastral descending
+                           orderby q.Data_Situacao_Cadastral ascending
                            select q);
 
                 list = top.ToList();
@@ -70,14 +70,18 @@ namespace Sim.Cross.Data.Repository.Cnpj
             return jsp;
         }
 
-        public Task<IEnumerable<BaseJucesp>> ListByCnpjAsync(string cnpj)
+        public async Task<IEnumerable<BaseJucesp>> ListByCnpjAsync(string cnpj)
         {
-            throw new NotImplementedException();
+            var t = Task.Run(() => db.BaseJucesp.Where(s => s.CNPJ.Contains(cnpj)).ToList());
+            await t;
+            return t.Result;
         }
 
-        public Task<IEnumerable<BaseJucesp>> ListByRazaoSocialAsync(string razaosocial)
+        public async Task<IEnumerable<BaseJucesp>> ListByRazaoSocialAsync(string razaosocial)
         {
-            throw new NotImplementedException();
+            var t = Task.Run(() => db.BaseJucesp.Where(s => s.Nome_Empresarial.Contains(razaosocial)).ToList());
+            await t;
+            return t.Result;
         }
     }
 }

@@ -31,6 +31,7 @@ namespace Sim.UI.Web.Pages.Pessoa
 
         //[BindProperty]
         //public Pessoa Input { get; set; }
+        public string ReturnUrl { get; set; }
 
         [BindProperty]
         public InputModel Input { get; set; }
@@ -112,7 +113,7 @@ namespace Sim.UI.Web.Pages.Pessoa
             public bool Ativo { get; set; }
         }
 
-        public IActionResult OnGet(string id)
+        public void OnGet(string id)
         {
             Input = new InputModel
             {
@@ -122,13 +123,13 @@ namespace Sim.UI.Web.Pages.Pessoa
                 Ativo = true
                 
             };
-            return Page();
         }
 
         public IActionResult OnPost()
         {
             try
             {
+                
                 if (!ModelState.IsValid)
                 {
                     return Page();
@@ -150,7 +151,7 @@ namespace Sim.UI.Web.Pages.Pessoa
 
                 _pessoa.Add(pessoa);
 
-                return RedirectToPage("/Pessoa/Index");
+                return RedirectToPage("./Index");
 
 
 

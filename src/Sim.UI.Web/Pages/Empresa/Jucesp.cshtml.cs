@@ -70,7 +70,7 @@ namespace Sim.UI.Web.Pages.Empresa
             {
                 if (ModelState.IsValid)
                 {
-                    var emp = await _empresaApp.ListByCnpjAsync(Input.CNPJ);
+                    var emp = await _empresaApp.ListByCnpjAsync(new Functions.Mask().Remove(Input.CNPJ));
 
                     Input = new InputModel
                     {
