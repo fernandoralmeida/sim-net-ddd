@@ -80,6 +80,7 @@ namespace Sim.UI.Web.Pages.Atendimento
 
             if(atendimemnto_ativio == null)
             {
+                StatusMessage = "Não existe atendimento ativo no momento!";
                 return RedirectToPage("./Index");
             }
 

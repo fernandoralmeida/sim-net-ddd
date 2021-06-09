@@ -33,7 +33,7 @@
                     <label class="form-label" asp-for="Input.Pessoa.CPF"></label>
                     <input class="form-control" asp-for="Input.Pessoa.CPF" />
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-5">
                     <label class="form-label" asp-for="Input.Pessoa.Nome"></label>
                     <input class="form-control" asp-for="Input.Pessoa.Nome" />
                 </div>
@@ -45,7 +45,7 @@
                     <label class="form-label" asp-for="Input.Pessoa.Tel_Movel"></label>
                     <input class="form-control" asp-for="Input.Pessoa.Tel_Movel" />
                 </div>
-                <div class="col-md align-self-end">
+                <div class="col-md align-self-end" hidden>
                     <button class="btn btn-danger" type="submit" asp-page-handler="RemoverPessoa"><i class="fas fa-minus-square"></i> Remover</button>
                 </div>
             </div>
@@ -125,6 +125,7 @@
 
     <div class="d-grid gap-2 d-md-block mb-3">
         <button asp-page-handler="Save" type="submit" class="btn btn-lg btn-success">Iniciar Atendimento</button>
+        <a asp-page="/Atendimento/Index" class="btn btn-lg btn-secondary">Cancelar</a>
     </div>
 </form>
 
