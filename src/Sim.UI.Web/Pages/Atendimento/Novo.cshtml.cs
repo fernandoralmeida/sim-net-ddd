@@ -56,18 +56,8 @@ namespace Sim.UI.Web.Pages.Atendimento
         public SelectList Setores { get; set; }
 
         public string GetServico { get; set; }
-        public SelectList Servicos { get; set; }
 
-        [Required(ErrorMessage = "Selecione o canal do atendimento!")]
-        [BindProperty(SupportsGet = true)]
-        public string GetCanal { get;set; }
-        public SelectList Canais { get; set; }
-
-        [Required(ErrorMessage = "Selecione ao menos um Serviço!")]
-        public string MeusServicos { get; set; }
-
-        [BindProperty(SupportsGet = true)]
-        public string ServicosSelecionado { get; set; }
+        public string ServicosSelecionados { get; set; }
 
         private async Task OnLoad()
         {
@@ -129,11 +119,14 @@ namespace Sim.UI.Web.Pages.Atendimento
             
             try
             {
-                if(!ModelState.IsValid)
+                
+                if(Input.Servicos == null || Input.Servicos == string.Empty)
                 {
-                    return Page();
+                    StatusMessage = "Erro: " + "Selecione um serviço ou mais!";
+                    await OnLoad();
+                    return RedirectToPage();
                 }
-               
+
                     //var user = await _userManager.GetUserAsync(User);
 
                     var t = Task.Run(() =>
@@ -142,9 +135,9 @@ namespace Sim.UI.Web.Pages.Atendimento
 
                         var atold = _appServiceAtendimento.GetById(Input.Id);
                         atold.DataF = DateTime.Now;
-                        atold.Setor = GetSetor;
-                        atold.Canal = GetCanal;
-                        atold.Servicos = Input.Servicos;
+                        atold.Setor = Input.Setor; //GetSetor;
+                        atold.Canal = Input.Canal;  //GetCanal;
+                        atold.Servicos = Input.Servicos; //MeusServicos;
                         atold.Descricao = Input.Descricao;
                         atold.Status = "Finalizado";
                         atold.Ultima_Alteracao = DateTime.Now;

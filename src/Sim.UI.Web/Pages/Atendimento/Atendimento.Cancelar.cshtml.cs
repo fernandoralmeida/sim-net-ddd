@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 
 namespace Sim.UI.Web.Pages.Atendimento
 {
@@ -15,6 +17,7 @@ namespace Sim.UI.Web.Pages.Atendimento
     using Sim.Domain.Shared.Entity;
     using Sim.Domain.SDE.Entity;
     using Sim.Cross.Identity;
+
 
     [Authorize]
     public class AtendimentoCancelarModel : PageModel
@@ -44,21 +47,9 @@ namespace Sim.UI.Web.Pages.Atendimento
         public string StatusMessage { get; set; }
 
         [BindProperty(SupportsGet = true)]
-        public string GetSetor { get; set; }
-
-        public SelectList Setores { get; set; }
-
-        public string GetServico { get; set; }
-        public SelectList Servicos { get; set; }
-
-        [BindProperty(SupportsGet = true)]
-        public string GetCanal { get; set; }
-        public SelectList Canais { get; set; }
-
-        public string MeusServicos { get; set; }
-
-        [BindProperty(SupportsGet = true)]
-        public string ServicosSelecionado { get; set; }
+        [Required(ErrorMessage = "Informe o motivo!")]
+        [DisplayName("Motivo")]
+        public string MotivoCancelamento { get; set; }
 
         public async Task<IActionResult> OnGetAsync(Guid id)
         {
@@ -90,15 +81,10 @@ namespace Sim.UI.Web.Pages.Atendimento
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
 
             try
             {
-                if (ModelState.IsValid)
-                {
+
 
                     var t = Task.Run(() =>
                     {
@@ -108,10 +94,10 @@ namespace Sim.UI.Web.Pages.Atendimento
                         var sebrae = new RaeSebrae() { Id = new Guid(), RAE = Input.Sebrae.RAE };
 
                         atold.DataF = DateTime.Now;
-                        atold.Setor = GetSetor;
-                        atold.Canal = GetCanal;
+                        atold.Setor = Input.Setor; 
+                        atold.Canal = Input.Canal; 
                         atold.Servicos = Input.Servicos;
-                        atold.Descricao = Input.Descricao;
+                        atold.Descricao = MotivoCancelamento;
                         atold.Status = "Cancelado";
                         atold.Ultima_Alteracao = DateTime.Now;
                         atold.Sebrae = sebrae;
@@ -123,9 +109,9 @@ namespace Sim.UI.Web.Pages.Atendimento
 
                     return RedirectToPage("./Consulta.Cancelados");
 
-                }
+                
 
-                return Page();
+                //return Page();
 
             }
             catch (Exception ex)

@@ -74,26 +74,33 @@
             <div class="col-md-4">
                 <div class="col-mb-12 mb-2">
                     <label class="form-label" asp-for="Input.Setor" for="floatingsetor"></label>
-                    <select asp-for="GetSetor" class="form-select" asp-items="Model.Setores">
+                    <select asp-for="Input.Setor" class="form-select" asp-items="Model.Setores">
                         <option selected>-- Selecione um Setor --</option>
                     </select>
-                    <span asp-validation-for="Input.Servicos" class="text-danger"></span>
+                    <span asp-validation-for="Input.Setor" class="text-danger"></span>
                 </div>
                 <div class="col-mb-12 mb-2">
                     <label class="form-label" asp-for="Input.Canal"></label>
-                    <select asp-for="GetCanal" class="form-select"></select>
-                    <span asp-validation-for="Input.Servicos" class="text-danger"></span>
+                    <select asp-for="Input.Canal" class="form-select"></select>
+                    <span asp-validation-for="Input.Canal" class="text-danger"></span>
                 </div>
             </div>
             <div class="col-md-4 mb-2">
                 <label class="form-label" for="floatingservico">Serviços Disponível</label>
                 <select asp-for="GetServico" class="form-control" size="10"></select>
+                
             </div>
             <div class="col-md-4 mb-2">
                 <label class="form-label">Serviços Realizado</label>
-                <select asp-for="MeusServicos" class="form-control" size="10"></select>
-                <textarea id="myservice" asp-for="Input.Servicos" class="form-control" hidden></textarea>
-                <span asp-validation-for="MeusServicos" class="text-danger"></span>
+                <select asp-for="ServicosSelecionados" class="form-control" size="10"></select>
+                <div class="row" hidden>
+                    <div class="col-md-1 mt-1">
+                        <input asp-for="Input.Servicos" class="form-control form-control-sm" />
+                    </div>
+                    <div class="col-md">
+                        <span asp-validation-for="Input.Servicos" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row">
@@ -115,14 +122,14 @@
 @section scripts{
     <script>
         $(function () {
-            $("#GetSetor").on("change", function () {
+            $("#Input_Setor").on("change", function () {
                 var getSetor = $(this).val();
                 //get canais de atendimento
-                $("#GetCanal").empty();
-                $("#GetCanal").append("<option value=''>-- Selecione um Canal --</option>");
+                $("#Input_Canal").empty();
+                $("#Input_Canal").append("<option value=''>-- Selecione um Canal --</option>");
                 $.getJSON(`?handler=Canais&getSetor=${getSetor}`, (data) => {
                     $.each(data, function (i, item) {
-                        $("#GetCanal").append(`<option value="${item.nome}">${item.nome}</option>`);
+                        $("#Input_Canal").append(`<option value="${item.nome}">${item.nome}</option>`);
                     });
                 });
                 //get servicos por setor
@@ -137,24 +144,24 @@
             $("#GetServico").on("click", function () {
                 var getServico = $(this).val();
                 if (getServico !== null) {
-                    $("#MeusServicos").append(`<option value="${getServico}">${getServico}</option>`);
+                    $("#ServicosSelecionados").append(`<option value="${getServico}">${getServico}</option>`);
                     $(`#GetServico option[value="${getServico}"]`).remove();
                 }
             });
             //revome serviços
-            $("#MeusServicos").on("click", function () {
+            $("#ServicosSelecionados").on("click", function () {
                 var meuServico = $(this).val();
                 if (meuServico !== null) {
                     $("#GetServico").append(`<option value="${meuServico}">${meuServico}</option>`);
-                    $(`#MeusServicos option[value="${meuServico}"]`).remove();
+                    $(`#ServicosSelecionados option[value="${meuServico}"]`).remove();
                 }
             });
-
+            
             $("#addbtn").on("click", function () {
-                var selected_val = $.map($(`#MeusServicos option`), function (a) {
+                var selected_val = $.map($(`#ServicosSelecionados option`), function (a) {
                     return a.value;
                 }).join(';');
-                document.getElementById("myservice").value = selected_val;
+                document.getElementById("Input_Servicos").value = selected_val;
             });
         });
     </script>
