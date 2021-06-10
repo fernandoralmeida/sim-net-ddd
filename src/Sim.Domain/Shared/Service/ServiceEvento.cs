@@ -18,6 +18,24 @@ namespace Sim.Domain.Shared.Service
             _evento = repositoryEvento;
         }
 
+        public async Task<IEnumerable<Evento>> EventosAtivos(IEnumerable<Evento> eventos)
+        {
+            var t = Task.Run(() => eventos.Where(s => s.EventosAtivos(s)));
+
+            await t;
+
+            return t.Result;
+        }
+
+        public async Task<IEnumerable<Evento>> EventosPassados(IEnumerable<Evento> eventos)
+        {
+            var t = Task.Run(() => eventos.Where(s => s.EventosPassados(s)));
+
+            await t;
+
+            return t.Result;
+        }
+
         public Evento GetByCodigo(int codigo)
         {
             return _evento.GetByCodigo(codigo);

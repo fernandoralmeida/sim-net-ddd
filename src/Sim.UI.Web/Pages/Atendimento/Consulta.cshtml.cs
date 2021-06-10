@@ -43,8 +43,6 @@ namespace Sim.UI.Web.Pages.Atendimento
         {            
             _appServiceAtendimento = appServiceAtendimento;
             Input = new();
-            Input.DataI = new DateTime(DateTime.Now.Year, 1, 1);
-            Input.DataF = DateTime.Now;
         }
 
         public void OnGet()
@@ -52,11 +50,13 @@ namespace Sim.UI.Web.Pages.Atendimento
             //var lista = Task.Run(() => _appServiceAtendimento.ListAll());
             //await lista;
             //Input.ListaAtendimento = lista.Result.ToList();
+            Input.DataI = new DateTime(DateTime.Now.Year, 1, 1);
+            Input.DataF = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
         }
 
         public async Task OnPostListByDataAsync()
         {
-            var lista = Task.Run(() => _appServiceAtendimento.ListByPeriodo(Input.DataI, Input.DataF));
+            var lista = Task.Run(() => _appServiceAtendimento.ListByPeriodo(Input.DataI.Value.Date, Input.DataF.Value.Date));
             await lista;
             Input.ListaAtendimento = lista.Result.ToList();
         }

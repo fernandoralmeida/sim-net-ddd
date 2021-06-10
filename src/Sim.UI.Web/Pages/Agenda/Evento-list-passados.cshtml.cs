@@ -1,5 +1,4 @@
 using System;
-using System.ComponentModel;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,12 +9,11 @@ using AutoMapper;
 
 namespace Sim.UI.Web.Pages.Agenda
 {
-    using Sim.Application.SDE;
     using Sim.Application.Shared.Interface;
-    using Sim.Domain.Shared.Entity;
+    using System.ComponentModel;
 
     [Authorize]
-    public class IndexModel : PageModel
+    public class Evento_list_passadosModel : PageModel
     {
         private readonly IAppServiceEvento _appServiceEvento;
         private readonly IMapper _mapper;
@@ -33,25 +31,24 @@ namespace Sim.UI.Web.Pages.Agenda
         [TempData]
         public string StatusMessage { get; set; }
 
-        public IndexModel(IAppServiceEvento appServiceEvento,
+        public Evento_list_passadosModel(IAppServiceEvento appServiceEvento,
             IMapper mapper)
         {
             _mapper = mapper;
             _appServiceEvento = appServiceEvento;
         }
 
-        public async Task OnGet()
+        public async Task OnGetAsync()
         {
             //var t = Task.Run(() => _appServiceEvento.ListAll());
-            var t = await _appServiceEvento.EventosAtivos();
+            var t = await _appServiceEvento.EventosPassados();
             Input.ListaEventos = _mapper.Map<IEnumerable<InputModelEvento>>(t);
         }
 
         public async Task OnPostAsync()
         {
-            var t = Task.Run(()=> _appServiceEvento.GetByNome(Input.Evento));
-            await t;
-            Input.ListaEventos = _mapper.Map<IEnumerable<InputModelEvento>>(t.Result);
+            var t = await _appServiceEvento.EventosPassados();
+            Input.ListaEventos = _mapper.Map<IEnumerable<InputModelEvento>>(t);
         }
     }
 }

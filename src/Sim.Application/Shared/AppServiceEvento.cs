@@ -18,6 +18,16 @@ namespace Sim.Application.Shared
             _evento = evento;
         }
 
+        public async Task<IEnumerable<Evento>> EventosAtivos()
+        {
+            return await _evento.EventosAtivos(ListAll());
+        }
+
+        public async Task<IEnumerable<Evento>> EventosPassados()
+        {
+            return await _evento.EventosPassados(ListAll());
+        }
+
         public Evento GetByCodigo(int codigo)
         {
             return _evento.GetByCodigo(codigo);

@@ -37,5 +37,15 @@ namespace Sim.Domain.Shared.Entity
             else
                 return Lotacao - Inscritos.Count();
         }
+
+        public bool EventosAtivos(Evento obj)
+        {
+            return obj.Data >=  DateTime.Now;
+        }
+
+        public bool EventosPassados(Evento obj)
+        {
+            return obj.Data < DateTime.Now;
+        }
     }
 }

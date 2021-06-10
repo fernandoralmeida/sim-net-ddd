@@ -65,7 +65,7 @@ namespace Sim.Cross.Data.Repository.Shared
         public IEnumerable<Evento> ListAll()
         {
             return _db.Evento
-                .Include(i => i.Inscritos)
+                .Include(i => i.Inscritos)                
                 .ToList();
         }
     }

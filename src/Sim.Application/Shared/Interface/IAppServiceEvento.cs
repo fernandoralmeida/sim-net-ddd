@@ -15,5 +15,8 @@ namespace Sim.Application.Shared.Interface
         IEnumerable<Evento> GetByNome(string nome);
         Evento GetByCodigo(int codigo);
         int LastCodigo();
+        Task<IEnumerable<Evento>> EventosAtivos();
+        Task<IEnumerable<Evento>> EventosPassados();
+
     }
 }

@@ -67,12 +67,14 @@ namespace Sim.Cross.Data.Repository.Shared
 
         public IEnumerable<Atendimento> ListByPeriodo(DateTime? dataI, DateTime? dataF)
         {
+
+
             var list = _db.Atendimento
                 .Include(p => p.Pessoa)
                 .Include(e => e.Empresa)
                 .Include(s => s.Sebrae)
-                .Where(a => a.Data >= dataI
-                && a.Data <= dataF).OrderBy(o => o.Data);
+                .Where(a => a.Data.Value.Date >= dataI
+                && a.Data.Value.Date <= dataF).OrderBy(o => o.Data);
 
             return list;
         }

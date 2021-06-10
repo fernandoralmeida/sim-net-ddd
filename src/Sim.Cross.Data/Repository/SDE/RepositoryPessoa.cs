@@ -24,13 +24,13 @@ namespace Sim.Cross.Data.Repository.SDE
 
         public IEnumerable<Pessoa> ConsultaByNome(string nome)
         {
-            return _db.Pessoa.Where(c => c.Nome.Contains(nome)).OrderBy(c => c.Nome);
+            return _db.Pessoa.Where(c => c.Nome.Contains(nome) || c.Nome_Social.Contains(nome)).OrderBy(c => c.Nome);
         }
 
         public IEnumerable<Pessoa> Top10()
         {
             var top = (from q in _db.Pessoa
-                       orderby q.Data_Cadastro descending
+                       orderby q.Ultima_Alteracao descending
                        select q).Take(10);
 
             return top;
