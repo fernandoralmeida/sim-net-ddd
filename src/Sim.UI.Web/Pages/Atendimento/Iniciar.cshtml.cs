@@ -77,7 +77,14 @@ namespace Sim.UI.Web.Pages.Atendimento
             {
                 var t = Task.Run(() => _appServicePessoa.GetById((Guid)id));
                 await t;
+                var e = Task.Run(() => _appServiceEmpresa.ConsultaByRazaoSocial(new Functions.Mask().Remove(t.Result.CPF)));
+                await e;
                 Input.Pessoa = t.Result;
+
+                foreach (var emp in e.Result)
+                {
+                    Input.Empresa = emp;
+                }
             }
 
             return Page();

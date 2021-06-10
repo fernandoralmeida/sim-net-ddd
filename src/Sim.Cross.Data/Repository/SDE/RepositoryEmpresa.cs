@@ -33,7 +33,7 @@ namespace Sim.Cross.Data.Repository.SDE
 
         public IEnumerable<Empresa> ConsultaByRazaoSocial(string name)
         {
-            return _db.Empresa.Where(p => p.Nome_Empresarial == name || p.Nome_Fantasia == name);
+            return _db.Empresa.Where(p => p.Nome_Empresarial.Contains(name) || p.Nome_Fantasia.Contains(name));
         }
 
         public IEnumerable<Empresa> ListEmpresasQsa(Guid id)
