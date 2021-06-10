@@ -8,19 +8,20 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Authorization;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace Sim.UI.Web.Pages.Empresa
 {
     using Sim.Domain.Cnpj.Entity;
     using Sim.Domain.Cnpj.Interface;
+
     using Sim.Application.Interface;
 
+
     [Authorize]
-    public class JucespModel : PageModel
+    public class Jucesp_consulta_bairroModel : PageModel
     {
         private readonly ICNPJBase<BaseJucesp> _empresaApp;
 
-        public JucespModel(ICNPJBase<BaseJucesp> appServiceEmpresa)
+        public Jucesp_consulta_bairroModel(ICNPJBase<BaseJucesp> appServiceEmpresa)
         {
             _empresaApp = appServiceEmpresa;
         }
@@ -33,35 +34,26 @@ namespace Sim.UI.Web.Pages.Empresa
         public class InputModel
         {
 
-            [Required]
+            
             [DisplayName("CNPJ")]
             public string CNPJ { get; set; }
 
-            [DisplayName("Razao Social")]
-            public string RazaoSocial { get; set; }
+            [Required]
+            [DisplayName("Bairro")]
+            public string Bairro { get; set; }
 
             public IEnumerable<BaseJucesp> ListaEmpresas { get; set; }
 
             [TempData]
             public string StatusMessage { get; set; }
 
-            public string CNPJRes { get; set; }
+            [Required]
+            public string Municipio { get; set; }
         }
 
-        private async Task LoadAsync()
+        public void OnGet()
         {
-            var t = await _empresaApp.ListTop10();
-
-            Input = new InputModel
-            {
-                ListaEmpresas = t
-            };
-        }
-
-        public async Task<IActionResult> OnGetAsync()
-        {
-            await LoadAsync();
-            return Page();
+            Input = new() { Municipio = "Jau" };
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -70,13 +62,13 @@ namespace Sim.UI.Web.Pages.Empresa
             {
                 if (ModelState.IsValid)
                 {
-                    var emp = await _empresaApp.ListByCnpjAsync(new Functions.Mask().Remove(Input.CNPJ));
+                    var emp = Task.Run(() => _empresaApp.ListByBairroAsync(Input.Bairro, Input.Municipio));
+
+                    await emp;
 
                     Input = new InputModel
                     {
-                        ListaEmpresas = emp,
-                        CNPJRes = new Functions.Mask().Remove(Input.CNPJ)
-
+                        ListaEmpresas = emp.Result,
                     };
                 }
 

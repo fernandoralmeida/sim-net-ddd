@@ -1,30 +1,31 @@
 ﻿@page
-@model Sim.UI.Web.Pages.Empresa.IndexModel
+@model Sim.UI.Web.Areas.Censo.Pages.Empresas.Consulta_socioModel
 
 @{
+    Layout = "_Layout.cshtml";
     ViewData["Title"] = "Lista";
-    ViewData["ActivePage"] = EmpresaNavPages.Inicio;
+    ViewData["ActivePage"] = EmpresaNavPages.ConsultaNome;
 }
-
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
 <div class="mt-5 mb-5">
     <form method="post">
         <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-            <a asp-area="" asp-page="/Empresa/Add" class="btn btn-primary" title="Adicionar Nova Empresa"><i class="fas fa-plus-circle"></i></a>
+            <div class="col-md-2">
+                <select asp-for="Input.Municipio" placeholder="Municipio" class="form-select" asp-items="@Model.ListaMunicipios"></select>
+            </div>
             <div class="col-md-auto">
-                <input asp-for="Input.CNPJRes" hidden>
                 <div class="input-group">
-                    <span class="input-group-text">CNPJ</span>
-                    <input asp-for="Input.CNPJ" class="form-control" aria-describedby="button-addon2" id="inputCNPJ">
+                    <span class="input-group-text">Sócio</span>
+                    <input asp-for="Input.Socios" class="form-control" placeholder="Razão Social" aria-describedby="button-addon2">
                     <button class="btn btn-primary" type="submit" role="button" id="button-addon2"><i class="fa fa-search"></i></button>
                 </div>
-                <span asp-validation-for="Input.CNPJ" class="text-danger"></span>
             </div>
         </div>
     </form>
 </div>
 <div>
+
     <table class="table table-light table-striped">
         <caption>Lista de empresas @Model.Input.ListaEmpresas.Count()</caption>
         <thead>
@@ -39,7 +40,11 @@
                 </th>
 
                 <th>
-                    Contato
+                    Porte
+                </th>
+
+                <th>
+                    Regime Tributario
                 </th>
 
                 <th>Ação</th>
@@ -62,27 +67,24 @@
                     </td>
 
                     <td>
-                        @Html.DisplayFor(modelItem => item.Nome_Empresarial)
+                        @Html.DisplayFor(modelItem => item.Empresa.RazaoSocial)
                     </td>
 
                     <td>
-                        @Html.DisplayFor(modelItem => item.Telefone)
-                        @Html.DisplayFor(modelItem => item.Email)
+                        @Html.DisplayFor(modelItem => item.Empresa.PorteEmpresa)
                     </td>
 
-                    <td>                        
-                        <a asp-page="./Update" asp-route-id="@item.Id" class="btn btn-sm btn-secondary" title="Alterar informações"><i class="fas fa-pen"></i></a>                        
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SimplesNacional.OpcaoSimples)
+
+                        @Html.DisplayFor(modelItem => item.SimplesNacional.OpcaoMEI)
+                    </td>
+                    <td>
+                        <a asp-page="./Detalhe" asp-route-id="@item.CNPJ" class="btn btn-sm btn-secondary" title="Ver informações"><i class="fas fa-eye"></i></a>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
-</div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <script src="~/js/jquery.mask.min.js"></script>
-    <script>
-        $('#inputCNPJ').mask('00.000.000/0000-00', { placeholder: "__.___.___/____-__" });
-    </script>
-}
+</div>

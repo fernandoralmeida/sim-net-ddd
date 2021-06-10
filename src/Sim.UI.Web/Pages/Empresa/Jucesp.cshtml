@@ -42,11 +42,11 @@
                 </th>
 
                 <th>
-                    Situação
+                    Regime
                 </th>
 
                 <th>
-                    Regime
+                    Data
                 </th>
 
                 <th>Ação</th>
@@ -76,15 +76,15 @@
                 </td>
 
                 <td>
-                    @Html.DisplayFor(modelItem => item.Situacao_Cadastral)
-                </td>
-
-                <td>
                     @Html.DisplayFor(modelItem => item.Regime_Apuracao)
                 </td>
 
                 <td>
-                    <a hidden asp-page="./Update" asp-route-id="@item.CNPJ" class="btn btn-sm btn-secondary" title="Alterar informações"><i class="fas fa-eye"></i></a>
+                    @Html.DisplayFor(modelItem => item.Data_Situacao_Cadastral)
+                </td>
+
+                <td>
+                    <a asp-page="./Jucesp-detail" asp-route-id="@item.CNPJ" class="btn btn-sm btn-secondary" title="Alterar informações"><i class="fas fa-eye"></i></a>
                 </td>
             </tr>
             }

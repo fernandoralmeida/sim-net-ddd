@@ -1,0 +1,100 @@
+﻿@page
+@model Sim.UI.Web.Pages.Empresa.Jucesp_consulta_atividadeModel
+
+@{
+    Layout = "_Layout.cshtml";
+    ViewData["Title"] = "Lista";
+    ViewData["ActivePage"] = EmpresaNavPages.Jucesp;
+}
+
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+
+<div class="mt-5 mb-5">
+    <form method="post">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+            <div class="col-md-1">
+                <input asp-for="Input.Municipio" placeholder="Municipio" class="form-control" />
+            </div>
+            <div class="col-md-5">
+                <div class="input-group">
+                    <span class="input-group-text">Atividade</span>
+                    <select asp-for="Input.Atividade" asp-items="@Model.ListaCnaes"  class="form-select" aria-describedby="button-addon2"></select>
+                    <button class="btn btn-primary" type="submit" role="button" id="button-addon2"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div>
+    <table class="table table-light table-striped">
+        <caption>Lista de empresas @if (Model.Input.ListaEmpresas != null) Model.Input.ListaEmpresas.Count();</caption>
+        <thead>
+            <tr>
+                <th></th>
+
+                <th>
+                    I.E.
+                </th>
+                <th>
+                    CNPJ
+                </th>
+
+                <th>
+                    Nome Empresarial
+                </th>
+
+                <th>
+                    Regime
+                </th>
+
+                <th>
+                    Data
+                </th>
+
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int cont = 0;
+            }
+
+            @if (Model.Input.ListaEmpresas != null)
+            {
+
+                foreach (var item in Model.Input.ListaEmpresas)
+                {
+                    <tr>
+                        <td>
+                            @{ cont++; }
+                            @cont
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Inscricao_Estadual)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CNPJ)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nome_Empresarial)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Regime_Apuracao)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Data_Situacao_Cadastral)
+                        </td>
+
+                        <td>
+                            <a asp-page="./Jucesp-detail" asp-route-id="@item.CNPJ" class="btn btn-sm btn-secondary" title="Alterar informações"><i class="fas fa-eye"></i></a>
+                        </td>
+                    </tr>
+                }
+
+            }
+        </tbody>
+    </table>
+</div>

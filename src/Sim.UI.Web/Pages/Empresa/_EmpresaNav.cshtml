@@ -14,7 +14,14 @@
         </ul>
     </li>
     <li class="nav-item">
-        <a class="nav-link @EmpresaNavPages.JucespNavClass(ViewContext)" asp-page="./Jucesp"><i class="fas fa-cubes"></i> Jucesp</a>
+        <a class="nav-link dropdown-toggle @EmpresaNavPages.JucespNavClass(ViewContext)" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><i class="fas fa-cubes"></i> Jucesp</a>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" asp-page="./Jucesp">CNPJ</a></li>
+            <li><a class="dropdown-item" asp-page="./Jucesp-consulta-razao">Razão Social</a></li>
+            <li><a class="dropdown-item" asp-page="./Jucesp-consulta-logradouro">Endereço</a></li>
+            <li><a class="dropdown-item" asp-page="./Jucesp-consulta-bairro">Bairro</a></li>
+            <li><a class="dropdown-item" asp-page="./Jucesp-consulta-atividade">Atividade</a></li>
+        </ul>
     </li>
     <li class="nav-item" hidden>
         <a class="nav-link" href="#"><i class="fas fa-clipboard-list"></i> Relatórios</a>

@@ -16,21 +16,26 @@ namespace Sim.UI.Web.Areas.Censo.Pages.Empresas
     using Sim.Application.Interface;
 
     [Authorize]
-    public class Consulta_razao_socialModel : PageModel
+    public class Consulta_cnaeModel : PageModel
     {
         private readonly ICNPJBase<BaseReceitaFederal> _empresaApp;
         private readonly IBase<Municipio> _municipios;
-        public Consulta_razao_socialModel(ICNPJBase<BaseReceitaFederal> appServiceEmpresa,
-            IBase<Municipio> municipios)
+        private readonly IBase<CNAE> _cnaes;
+        public Consulta_cnaeModel(ICNPJBase<BaseReceitaFederal> appServiceEmpresa,
+            IBase<Municipio> municipios,
+            IBase<CNAE> cnaes)
         {
             _empresaApp = appServiceEmpresa;
             _municipios = municipios;
+            _cnaes = cnaes;
         }
 
         [TempData]
         public string StatusMessage { get; set; }
 
         public SelectList ListaMunicipios { get; set; }
+
+        public SelectList ListaCnaes { get; set; }
 
         [BindProperty]
         public InputModel Input { get; set; }
@@ -40,8 +45,8 @@ namespace Sim.UI.Web.Areas.Censo.Pages.Empresas
             [DisplayName("CNPJ")]
             public string CNPJ { get; set; }
 
-            [DisplayName("Razao Social")]
-            public string RazaoSocial { get; set; }
+            [DisplayName("CNAE")]
+            public string CNAE { get; set; }
 
             public IEnumerable<BaseReceitaFederal> ListaEmpresas { get; set; }
 
@@ -51,7 +56,18 @@ namespace Sim.UI.Web.Areas.Censo.Pages.Empresas
             public string Municipio { get; set; }
         }
 
-        private async Task LoadMunicipios()        {
+        private async Task LoadCnaes()
+        {
+            var t = await _cnaes.ListAll();
+
+            if (t != null)
+            {
+                ListaCnaes = new SelectList(t, nameof(CNAE.Codigo), nameof(CNAE.Descricao), null);
+            }
+        }
+
+        private async Task LoadMunicipios()
+        {
 
             var t = await _municipios.ListAll();
 
@@ -62,6 +78,7 @@ namespace Sim.UI.Web.Areas.Censo.Pages.Empresas
         }
         public async Task<IActionResult> OnGetAsync()
         {
+            await LoadCnaes();
             await LoadMunicipios();
 
             var emp = await _empresaApp.ListByCnpjAsync("99999999999999");
@@ -81,8 +98,9 @@ namespace Sim.UI.Web.Areas.Censo.Pages.Empresas
                 if (ModelState.IsValid)
                 {
                     await LoadMunicipios();
+                    await LoadCnaes();
 
-                    var emp = await _empresaApp.ListByRazaoSocialAsync(Input.RazaoSocial, Input.Municipio);
+                    var emp = await _empresaApp.ListByAtividadeAsync(Input.CNAE, Input.Municipio);
 
                     Input = new InputModel
                     {

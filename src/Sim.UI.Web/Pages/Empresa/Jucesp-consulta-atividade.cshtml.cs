@@ -9,69 +9,67 @@ using Microsoft.AspNetCore.Authorization;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace Sim.UI.Web.Areas.Censo.Pages.Empresas
+namespace Sim.UI.Web.Pages.Empresa
 {
     using Sim.Domain.Cnpj.Entity;
     using Sim.Domain.Cnpj.Interface;
     using Sim.Application.Interface;
 
+
     [Authorize]
-    public class Consulta_razao_socialModel : PageModel
+    public class Jucesp_consulta_atividadeModel : PageModel
     {
-        private readonly ICNPJBase<BaseReceitaFederal> _empresaApp;
-        private readonly IBase<Municipio> _municipios;
-        public Consulta_razao_socialModel(ICNPJBase<BaseReceitaFederal> appServiceEmpresa,
-            IBase<Municipio> municipios)
+        private readonly ICNPJBase<BaseJucesp> _empresaApp;
+        private readonly IBase<CNAE> _cnaes;
+
+        public Jucesp_consulta_atividadeModel(ICNPJBase<BaseJucesp> appServiceEmpresa,
+            IBase<CNAE> cnaes)
         {
             _empresaApp = appServiceEmpresa;
-            _municipios = municipios;
+            _cnaes = cnaes;
         }
 
         [TempData]
         public string StatusMessage { get; set; }
 
-        public SelectList ListaMunicipios { get; set; }
+        public SelectList ListaCnaes { get; set; }
 
         [BindProperty]
         public InputModel Input { get; set; }
         public class InputModel
         {
 
+            
             [DisplayName("CNPJ")]
             public string CNPJ { get; set; }
 
-            [DisplayName("Razao Social")]
-            public string RazaoSocial { get; set; }
+            [Required]
+            [DisplayName("Atividade")]
+            public string Atividade { get; set; }
 
-            public IEnumerable<BaseReceitaFederal> ListaEmpresas { get; set; }
+            public IEnumerable<BaseJucesp> ListaEmpresas { get; set; }
 
             [TempData]
             public string StatusMessage { get; set; }
 
+            [Required]
             public string Municipio { get; set; }
         }
 
-        private async Task LoadMunicipios()        {
-
-            var t = await _municipios.ListAll();
+        private async Task LoadCnaes()
+        {
+            var t = await _cnaes.ListAll();
 
             if (t != null)
             {
-                ListaMunicipios = new SelectList(t, nameof(Municipio.Codigo), nameof(Municipio.Descricao), null);
+                ListaCnaes = new SelectList(t, nameof(CNAE.Codigo), nameof(CNAE.Descricao), null);
             }
         }
-        public async Task<IActionResult> OnGetAsync()
+
+        public async Task OnGetAsync()
         {
-            await LoadMunicipios();
-
-            var emp = await _empresaApp.ListByCnpjAsync("99999999999999");
-
-            Input = new InputModel
-            {
-                Municipio = "6607",
-                ListaEmpresas = emp
-            };
-            return Page();
+            await LoadCnaes();
+            Input = new() { Municipio = "Jau" };
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -80,13 +78,15 @@ namespace Sim.UI.Web.Areas.Censo.Pages.Empresas
             {
                 if (ModelState.IsValid)
                 {
-                    await LoadMunicipios();
+                    await LoadCnaes();
 
-                    var emp = await _empresaApp.ListByRazaoSocialAsync(Input.RazaoSocial, Input.Municipio);
+                    var emp = Task.Run(() => _empresaApp.ListByAtividadeAsync(Input.Atividade, Input.Municipio));
+
+                    await emp;
 
                     Input = new InputModel
                     {
-                        ListaEmpresas = emp
+                        ListaEmpresas = emp.Result,
                     };
                 }
 

@@ -1,0 +1,95 @@
+﻿@page
+@model Sim.UI.Web.Pages.Empresa.Jucesp_detailModel
+
+@{
+    Layout = "_Layout.cshtml";
+    ViewData["Title"] = "Detalhes";
+    ViewData["ActivePage"] = EmpresaNavPages.Jucesp;
+}
+
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+
+<table class="table table-light table-striped table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">IE</th>
+            <th scope="col">CNPJ</th>
+            <th scope="col">Razão Social</th>
+            <th scope="col">Natureza Jurídica</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Html.DisplayFor(modelitem => Model.Input.Inscricao_Estadual)</td>
+            <td>@Html.DisplayFor(modelitem => Model.Input.CNPJ)</td>
+            <td>@Html.DisplayFor(modelitem => Model.Input.Nome_Empresarial)</td>
+            <td>@Html.DisplayFor(modelitem => Model.Input.Natureza_Juridica)</td>
+        </tr>
+    </tbody>
+</table>
+
+<table class="table table-light table-striped table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">Nome Fantasia</th>
+            <th scope="col">Situação</th>
+            <th scope="col">Data</th>
+            <th scope="col">Atividade</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Html.DisplayFor(modelitem => Model.Input.Nome_Fantasia)</td>
+            <td>@Html.DisplayFor(modelitem => Model.Input.Situacao_Cadastral)</td>
+            <td>@Html.DisplayFor(modelitem => Model.Input.Data_Situacao_Cadastral)</td>
+            <td>@Html.DisplayFor(modelitem => Model.Input.Atividade_Economica)</td>
+        </tr>
+    </tbody>
+</table>
+
+<table class="table table-light table-striped table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">CEP</th>
+            <th scope="col">Endereço</th>
+            <th scope="col">Bairro</th>
+            <th scope="col">Municipio</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Html.DisplayFor(modelitem => Model.Input.CEP)</td>
+            <td>
+                @Html.DisplayFor(modelitem => Model.Input.Tipo_Logradouro)
+            @Html.DisplayFor(modelitem => Model.Input.Nome_Logradouro)
+            @Html.DisplayFor(modelitem => Model.Input.Numero_Logradouro)
+        </td>
+        <td>@Html.DisplayFor(modelitem => Model.Input.Bairro)</td>
+        <td>@Html.DisplayFor(modelitem => Model.Input.Municipio)</td>
+    </tr>
+</tbody>
+</table>
+
+<table class="table table-light table-striped table-bordered">
+    <caption>Informação Fiscal</caption>
+    <thead>
+        <tr>
+            <th scope="col">Ocorrência Fiscal</th>
+            <th scope="col">Regime Fiscal</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Html.DisplayFor(modelitem => Model.Input.Ocorrencia_Fiscal)</td>
+            <td>@Html.DisplayFor(modelitem => Model.Input.Regime_Apuracao)</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="mt-1 mb-5">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+        <div class="col-md-auto">
+            <a asp-page="./Jucesp" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Voltar</a>
+        </div>
+    </div>
+</div>

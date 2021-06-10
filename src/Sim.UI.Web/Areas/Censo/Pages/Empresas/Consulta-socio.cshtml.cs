@@ -9,18 +9,17 @@ using Microsoft.AspNetCore.Authorization;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
+
 namespace Sim.UI.Web.Areas.Censo.Pages.Empresas
 {
     using Sim.Domain.Cnpj.Entity;
     using Sim.Domain.Cnpj.Interface;
-    using Sim.Application.Interface;
 
-    [Authorize]
-    public class Consulta_razao_socialModel : PageModel
+    public class Consulta_socioModel : PageModel
     {
         private readonly ICNPJBase<BaseReceitaFederal> _empresaApp;
         private readonly IBase<Municipio> _municipios;
-        public Consulta_razao_socialModel(ICNPJBase<BaseReceitaFederal> appServiceEmpresa,
+        public Consulta_socioModel(ICNPJBase<BaseReceitaFederal> appServiceEmpresa,
             IBase<Municipio> municipios)
         {
             _empresaApp = appServiceEmpresa;
@@ -41,7 +40,7 @@ namespace Sim.UI.Web.Areas.Censo.Pages.Empresas
             public string CNPJ { get; set; }
 
             [DisplayName("Razao Social")]
-            public string RazaoSocial { get; set; }
+            public string Socios { get; set; }
 
             public IEnumerable<BaseReceitaFederal> ListaEmpresas { get; set; }
 
@@ -51,8 +50,8 @@ namespace Sim.UI.Web.Areas.Censo.Pages.Empresas
             public string Municipio { get; set; }
         }
 
-        private async Task LoadMunicipios()        {
-
+        private async Task LoadMunicipios()
+        {
             var t = await _municipios.ListAll();
 
             if (t != null)
@@ -60,6 +59,7 @@ namespace Sim.UI.Web.Areas.Censo.Pages.Empresas
                 ListaMunicipios = new SelectList(t, nameof(Municipio.Codigo), nameof(Municipio.Descricao), null);
             }
         }
+
         public async Task<IActionResult> OnGetAsync()
         {
             await LoadMunicipios();
@@ -82,7 +82,7 @@ namespace Sim.UI.Web.Areas.Censo.Pages.Empresas
                 {
                     await LoadMunicipios();
 
-                    var emp = await _empresaApp.ListByRazaoSocialAsync(Input.RazaoSocial, Input.Municipio);
+                    var emp = await _empresaApp.ListBySociosAsync(Input.Socios, Input.Municipio);
 
                     Input = new InputModel
                     {

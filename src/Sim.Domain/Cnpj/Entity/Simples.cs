@@ -34,8 +34,20 @@ namespace Sim.Domain.Cnpj.Entity
             get { return GetSimples(_opcsimples); }
             private set { _opcsimples = value; }
         }
-        public string DataOpcaoSimples { get; private set; }
-        public string DataExclusaoSimples { get; private set; }
+
+        private string _incsim = string.Empty;
+        public string DataOpcaoSimples
+        {
+            get { return StringDateTime(_incsim); }
+            private set { _incsim = value; }
+        }
+
+        private string _excsim = string.Empty;
+        public string DataExclusaoSimples
+        {
+            get { return StringDateTime(_excsim); }
+            private set { _excsim = value; }
+        }
 
         private string _opcmei = string.Empty;
         /// <summary>
@@ -45,25 +57,46 @@ namespace Sim.Domain.Cnpj.Entity
             get { return GetMEI(_opcmei); }
             private set { _opcmei = value; }
         }
-        public string DataOpcaoMEI { get; private set; }
-        public string DataExclusaoMEI { get; private set; }
+
+        private string _incmei = string.Empty;
+        public string DataOpcaoMEI
+        {
+            get { return StringDateTime(_incmei); }
+            private set { _incmei = value; }
+        }
+
+        private string _excmei = string.Empty;
+        public string DataExclusaoMEI
+        {
+            get { return StringDateTime(_excmei); }
+            private set { _excmei = value; }
+
+        }
+    
 
         private string GetSimples(string valor)
         {
             if (valor == "S")
-                return "Simples Nacional";
+                return "Sim";
 
             else
-                return "";
+                return "Não";
         }
 
         private string GetMEI(string valor)
         {
             if (valor == "S")
-                return "MEI";
+                return "Sim";
 
             else
-                return "";
+                return "Não";
+        }
+
+        private string StringDateTime(string valor)
+        {
+            valor = valor.Insert(4, "-");
+            valor = valor.Insert(7, "-");
+            return valor;
         }
     }
 }

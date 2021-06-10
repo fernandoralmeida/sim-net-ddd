@@ -75,6 +75,8 @@ namespace Sim.Cross.Ioc
 
             services.AddScoped<ICNPJBase<BaseReceitaFederal>, RepositoryRFB>();
             services.AddScoped<ICNPJBase<BaseJucesp>, RepositoryJucesp>();
+            services.AddScoped<IBase<CNAE>, RepositoryCNAEs>();
+            services.AddScoped<IBase<Municipio>, RepositoryMunicipios>();
 
             /**/
             services.AddScoped<IAppServiceBase<Domain.SDE.Entity.Empresa>, AppServiceBase<Domain.SDE.Entity.Empresa>>();

@@ -77,11 +77,37 @@ namespace Sim.Cross.Data.Repository.Cnpj
             return t.Result;
         }
 
-        public async Task<IEnumerable<BaseJucesp>> ListByRazaoSocialAsync(string razaosocial)
+        public async Task<IEnumerable<BaseJucesp>> ListByRazaoSocialAsync(string razaosocial, string muinicipio)
         {
-            var t = Task.Run(() => db.BaseJucesp.Where(s => s.Nome_Empresarial.Contains(razaosocial)).ToList());
+            var t = Task.Run(() => db.BaseJucesp.Where(s => s.Nome_Empresarial.Contains(razaosocial) && s.Municipio.Contains(muinicipio)).ToList());
             await t;
             return t.Result;
+        }
+
+        public async Task<IEnumerable<BaseJucesp>> ListByLogradouroAsync(string logradouro, string muinicipio)
+        {
+            var t = Task.Run(() => db.BaseJucesp.Where(s => s.Nome_Logradouro.Contains(logradouro) && s.Municipio.Contains(muinicipio)).ToList());
+            await t;
+            return t.Result;
+        }
+
+        public async Task<IEnumerable<BaseJucesp>> ListByBairroAsync(string bairro, string muinicipio)
+        {
+            var t = Task.Run(() => db.BaseJucesp.Where(s => s.Bairro.Contains(bairro) && s.Municipio.Contains(muinicipio)).ToList());
+            await t;
+            return t.Result;
+        }
+
+        public async Task<IEnumerable<BaseJucesp>> ListByAtividadeAsync(string atividade, string muinicipio)
+        {
+            var t = Task.Run(() => db.BaseJucesp.Where(s => s.Atividade_Economica.Contains(atividade) && s.Municipio.Contains(muinicipio)).ToList());
+            await t;
+            return t.Result;
+        }
+
+        public Task<IEnumerable<BaseJucesp>> ListBySociosAsync(string atividade, string municipio)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -13,7 +13,10 @@ namespace Sim.Domain.Cnpj.Interface
         Task<IEnumerable<TEntity>> ListAllAsync();
         Task<TEntity> GetCnpjAsync(string cnpj);
         Task<IEnumerable<TEntity>> ListByCnpjAsync(string cnpj);
-        Task<IEnumerable<TEntity>> ListByRazaoSocialAsync(string razaosocial);
-
+        Task<IEnumerable<TEntity>> ListByRazaoSocialAsync(string razaosocial, string municipio);
+        Task<IEnumerable<TEntity>> ListByLogradouroAsync(string logradouro, string municipio);
+        Task<IEnumerable<TEntity>> ListByBairroAsync(string bairro, string municipio);
+        Task<IEnumerable<TEntity>> ListByAtividadeAsync(string atividade, string municipio);
+        Task<IEnumerable<TEntity>> ListBySociosAsync(string atividade, string municipio);
     }
 }

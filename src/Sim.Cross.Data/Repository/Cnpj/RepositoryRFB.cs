@@ -180,7 +180,7 @@ namespace Sim.Cross.Data.Repository.Cnpj
             return brf;
         }
 
-        public async Task<IEnumerable<BaseReceitaFederal>> ListByRazaoSocialAsync(string razaosocial)
+        public async Task<IEnumerable<BaseReceitaFederal>> ListByRazaoSocialAsync(string razaosocial, string municipio)
         {
             var brf = new List<BaseReceitaFederal>();
 
@@ -190,7 +190,7 @@ namespace Sim.Cross.Data.Repository.Cnpj
                 var qry = (from est in db.Estabelecimentos
                            from emp in db.Empresas.Where(s => s.CNPJBase == est.CNPJBase)
                            select new { est, emp })
-                          .Where(s => s.emp.RazaoSocial.Contains(razaosocial)).Distinct();
+                          .Where(s => s.emp.RazaoSocial.Contains(razaosocial) && s.est.Municipio.Contains(municipio)).Distinct();
 
                 foreach (var e in qry)
                 {
@@ -202,6 +202,72 @@ namespace Sim.Cross.Data.Repository.Cnpj
                 }
 
             });
+            await t;
+
+            return brf;
+        }
+
+        public Task<IEnumerable<BaseReceitaFederal>> ListByLogradouroAsync(string logradouro, string muinicipio)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<BaseReceitaFederal>> ListByBairroAsync(string bairro, string muinicipio)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<IEnumerable<BaseReceitaFederal>> ListByAtividadeAsync(string atividade, string muinicipio)
+        {
+            var brf = new List<BaseReceitaFederal>();
+
+            var t = Task.Run(() =>
+            {
+
+                var qry = (from est in db.Estabelecimentos
+                           from emp in db.Empresas.Where(s => s.CNPJBase == est.CNPJBase)
+                           select new { est, emp })
+                          .Where(s => s.est.CnaeFiscalPrincipal.Contains(atividade) && s.est.Municipio.Contains(muinicipio)).Distinct();
+
+                foreach (var e in qry)
+                {
+                    var _cnpj = string.Format("{0}{1}{2}", e.est.CNPJBase, e.est.CNPJOrdem, e.est.CNPJDV);
+
+
+                    brf.Add(new BaseReceitaFederal(
+                        0, _cnpj, e.emp, e.est, null, null, null, null, null, null, null, null));
+                }
+
+            });
+            await t;
+
+            return brf;
+        }
+
+        public async Task<IEnumerable<BaseReceitaFederal>> ListBySociosAsync(string nomesocio, string municipio)
+        {
+            var brf = new List<BaseReceitaFederal>();
+
+            var t = Task.Run(() =>
+            {
+
+                var qry = (from sco in db.Socios
+                           from est in db.Estabelecimentos.Where(s => s.CNPJBase == sco.CNPJBase)
+                           from emp in db.Empresas.Where(s => s.CNPJBase == sco.CNPJBase)
+                           select new { est, emp, sco })
+                          .Where(s => s.sco.NomeRazaoSocio.Contains(nomesocio) || s.sco.NomeRepresentante.Contains(nomesocio) && s.est.Municipio.Contains(municipio)).Distinct();
+
+                foreach (var e in qry)
+                {
+                    var _cnpj = string.Format("{0}{1}{2}", e.est.CNPJBase, e.est.CNPJOrdem, e.est.CNPJDV);
+
+
+                    brf.Add(new BaseReceitaFederal(
+                        0, _cnpj, e.emp, e.est, null, null, null, null, null, null, null, null));
+                }
+
+            });
+
             await t;
 
             return brf;
