@@ -1,0 +1,93 @@
+﻿@page
+@model Sim.UI.Web.Areas.Censo.Pages.Empresas.Consulta_bairroModel
+
+@{
+    Layout = "_Layout.cshtml";
+    ViewData["Title"] = "Lista";
+    ViewData["ActivePage"] = EmpresaNavPages.ConsultaNome;
+}
+
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+
+<div class="mt-5 mb-5">
+    <form method="post">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+            <div class="col-md-1">
+                <select asp-for="Input.Municipio" placeholder="Municipio" class="form-select" asp-items="@Model.ListaMunicipios"></select>
+            </div>
+            <div class="col-md-auto">
+                <div class="input-group">
+                    <span class="input-group-text">Logradouro</span>
+                    <input asp-for="Input.Bairro" class="form-control" aria-describedby="button-addon2">
+                    <button class="btn btn-primary" type="submit" role="button" id="button-addon2"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div>
+    <table class="table table-light table-striped">
+        <caption>Lista de empresas @if (Model.Input.ListaEmpresas != null) Model.Input.ListaEmpresas.Count();</caption>
+        <thead>
+            <tr>
+                <th></th>
+                <th>
+                    CNPJ
+                </th>
+
+                <th>
+                    Nome Empresarial
+                </th>
+
+                <th>
+                    Porte
+                </th>
+
+                <th>
+                    Regime Tributario
+                </th>
+
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int cont = 0;
+            }
+
+            @if (Model.Input.ListaEmpresas != null)
+            {
+
+                @foreach (var item in Model.Input.ListaEmpresas)
+                {
+                    <tr>
+                        <td>
+                            @{ cont++; }
+                            @cont
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CNPJ)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Empresa.RazaoSocial)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Empresa.PorteEmpresa)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SimplesNacional.OpcaoSimples)
+
+                            @Html.DisplayFor(modelItem => item.SimplesNacional.OpcaoMEI)
+                        </td>
+                        <td>
+                            <a asp-page="./Detalhe" asp-route-id="@item.CNPJ" class="btn btn-sm btn-secondary" title="Ver informações"><i class="fas fa-eye"></i></a>
+                        </td>
+                    </tr>
+                                }
+                                }
+            </tbody>
+    </table>
+</div>

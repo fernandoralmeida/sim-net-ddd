@@ -207,14 +207,58 @@ namespace Sim.Cross.Data.Repository.Cnpj
             return brf;
         }
 
-        public Task<IEnumerable<BaseReceitaFederal>> ListByLogradouroAsync(string logradouro, string muinicipio)
+        public async Task<IEnumerable<BaseReceitaFederal>> ListByLogradouroAsync(string logradouro, string muinicipio)
         {
-            throw new NotImplementedException();
+            var brf = new List<BaseReceitaFederal>();
+
+            var t = Task.Run(() =>
+            {
+
+                var qry = (from est in db.Estabelecimentos
+                           from emp in db.Empresas.Where(s => s.CNPJBase == est.CNPJBase)
+                           select new { est, emp })
+                          .Where(s => s.est.Logradouro.Contains(logradouro) && s.est.Municipio.Contains(muinicipio)).Distinct();
+
+                foreach (var e in qry)
+                {
+                    var _cnpj = string.Format("{0}{1}{2}", e.est.CNPJBase, e.est.CNPJOrdem, e.est.CNPJDV);
+
+
+                    brf.Add(new BaseReceitaFederal(
+                        0, _cnpj, e.emp, e.est, null, null, null, null, null, null, null, null));
+                }
+
+            });
+            await t;
+
+            return brf;
         }
 
-        public Task<IEnumerable<BaseReceitaFederal>> ListByBairroAsync(string bairro, string muinicipio)
+        public async Task<IEnumerable<BaseReceitaFederal>> ListByBairroAsync(string bairro, string muinicipio)
         {
-            throw new NotImplementedException();
+            var brf = new List<BaseReceitaFederal>();
+
+            var t = Task.Run(() =>
+            {
+
+                var qry = (from est in db.Estabelecimentos
+                           from emp in db.Empresas.Where(s => s.CNPJBase == est.CNPJBase)
+                           select new { est, emp })
+                          .Where(s => s.est.Bairro.Contains(bairro) && s.est.Municipio.Contains(muinicipio)).Distinct();
+
+                foreach (var e in qry)
+                {
+                    var _cnpj = string.Format("{0}{1}{2}", e.est.CNPJBase, e.est.CNPJOrdem, e.est.CNPJDV);
+
+
+                    brf.Add(new BaseReceitaFederal(
+                        0, _cnpj, e.emp, e.est, null, null, null, null, null, null, null, null));
+                }
+
+            });
+            await t;
+
+            return brf;
         }
 
         public async Task<IEnumerable<BaseReceitaFederal>> ListByAtividadeAsync(string atividade, string muinicipio)
