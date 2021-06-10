@@ -3,7 +3,7 @@
 
 @{
     ViewData["Title"] = "Indice de Eventos passados";
-    ViewData["ActivePage"] = AgendaNavPages.Inicio;
+    ViewData["ActivePage"] = AgendaNavPages.EventoList;
 }
 
 <partial name="_StatusMessage" model="Model.StatusMessage" />
@@ -21,7 +21,7 @@
         </div>
     </form>
 </div>
-<pre>Lista de Eventos</pre>
+<pre>Lista de Eventos Anteriores a @DateTime.Now.Date</pre>
 <hr class="row border border-2 border-secondary" />
 <div class="row">
 
@@ -40,13 +40,13 @@
                     <div class="card-body">
                         <h6 class="card-title">
                             @item.Nome <a class="text-decoration-none" asp-page="./Edit" asp-route-id="@item.Id">
-                            <i class="fas fa-edit"></i>
-                        </a>
-                    </h6>
-                    <p class="card-text">@item.Formato @item.Data</p>
-                    <a asp-page="./Inscricao.Evento" asp-route-id="@item.Codigo" class="card-link">Inscrever</a>
-                    <a asp-page="./Inscricao.Remove" asp-route-id="@item.Codigo" class="card-link">Remover</a>
-                </div>
+                                <i class="fas fa-edit"></i>
+                            </a>
+                        </h6>
+                        <p class="card-text">@item.Formato @item.Data</p>
+                        <a asp-page="./Inscricao.Evento" asp-route-id="@item.Codigo" class="card-link">Inscrever</a>
+                        <a asp-page="./Inscricao.Remove" asp-route-id="@item.Codigo" class="card-link link-danger">Remover Inscrito</a>
+                    </div>
             </div>
         </div>
     }
@@ -72,12 +72,12 @@
 @section scripts
 {
     <script type="text/javascript">
-    $(".viewbutton").on("click", function () {
-        var customerId = $(this).data('id');
-        var secao = $(this).data('secao');
-        var acao = $(this).data('acao');
+        $(".viewbutton").on("click", function () {
+            var customerId = $(this).data('id');
+            var secao = $(this).data('secao');
+            var acao = $(this).data('acao');
             $.ajax({
-                url: "/"+ secao +"/" + acao + "?id=" + customerId,
+                url: "/" + secao + "/" + acao + "?id=" + customerId,
                 cache: false
             }).done(function (data) {
                 $("#viewmodalData").html(data);
