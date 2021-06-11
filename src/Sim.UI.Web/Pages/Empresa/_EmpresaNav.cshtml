@@ -2,27 +2,30 @@
 
 
 <ul class="nav nav-tabs justify-content-center">
-    <li class="nav-item">
+    <li class="nav-item" hidden>
         <a class="nav-link @EmpresaNavPages.InicioNavClass(ViewContext)" asp-page="./Index"><i class="fas fa-home"></i> Inicio</a>
     </li>
 
-    <li class="nav-item dropdown" hidden>
-        <a class="nav-link dropdown-toggle @EmpresaNavPages.ConsultaNomeNavClass(ViewContext) @EmpresaNavPages.ConsultaCNPJNavClass(ViewContext)" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><i class="fas fa-search"></i> Consulta</a>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle @EmpresaNavPages.ConsultaNomeNavClass(ViewContext)" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><i class="fas fa-search"></i> Consultar</a>
         <ul class="dropdown-menu">
-            <li><a class="dropdown-item" asp-page="./Consulta.nome">Razao Social</a></li>
-            <li><a class="dropdown-item" asp-page="./Consulta.cpf">CNPJ</a></li>
+            <li><a class="dropdown-item" asp-page="./Index">por CNPJ</a></li>
+            <li><a class="dropdown-item" asp-page="./Consulta-rs">por Razao Social</a></li>
         </ul>
     </li>
-    <li class="nav-item">
-        <a class="nav-link dropdown-toggle @EmpresaNavPages.JucespNavClass(ViewContext)" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><i class="fas fa-cubes"></i> Jucesp</a>
-        <ul class="dropdown-menu">
-            <li><a class="dropdown-item" asp-page="./Jucesp">CNPJ</a></li>
-            <li><a class="dropdown-item" asp-page="./Jucesp-consulta-razao">Razão Social</a></li>
-            <li><a class="dropdown-item" asp-page="./Jucesp-consulta-logradouro">Endereço</a></li>
-            <li><a class="dropdown-item" asp-page="./Jucesp-consulta-bairro">Bairro</a></li>
-            <li><a class="dropdown-item" asp-page="./Jucesp-consulta-atividade">Atividade</a></li>
-        </ul>
-    </li>
+
+
+        <li class="nav-item">
+            <a class="nav-link dropdown-toggle @EmpresaNavPages.JucespNavClass(ViewContext)" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><i class="fas fa-cubes"></i> Base Jucesp</a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" asp-page="./Jucesp">Consultar CNPJ</a></li>
+                <li><a class="dropdown-item" asp-page="./Jucesp-consulta-razao">Consultar por Razão Social</a></li>
+                <li><a class="dropdown-item" asp-page="./Jucesp-consulta-logradouro">Consultar por Endereço</a></li>
+                <li><a class="dropdown-item" asp-page="./Jucesp-consulta-bairro">Consultar por Bairro</a></li>
+                <li><a class="dropdown-item" asp-page="./Jucesp-consulta-atividade">Consultar por Atividade</a></li>
+            </ul>
+        </li>
+
     <li class="nav-item" hidden>
         <a class="nav-link" href="#"><i class="fas fa-clipboard-list"></i> Relatórios</a>
     </li>

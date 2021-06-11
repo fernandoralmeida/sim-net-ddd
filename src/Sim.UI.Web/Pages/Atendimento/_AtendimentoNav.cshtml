@@ -3,21 +3,21 @@
 
 <ul class="nav nav-tabs justify-content-center">
     <li class="nav-item">
-        <a class="nav-link @AtendimentoNavPages.InicioNavClass(ViewContext)" asp-page="./Index"><i class="fas fa-home"></i> Inicio</a>
+        <a class="nav-link @AtendimentoNavPages.InicioNavClass(ViewContext)" asp-page="./Index"><i class="fas fa-hourglass-start"></i> Meus Atendimentos</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link @AtendimentoNavPages.AtendiementoNavClass(ViewContext)" asp-page="./Novo"><i class="fas fa-stopwatch"></i> Atendimento</a>
+        <a class="nav-link @AtendimentoNavPages.AtendiementoNavClass(ViewContext)" asp-page="./Novo"><i class="fas fa-clock"></i> Atendimento Ativo</a>
     </li>
 
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle @AtendimentoNavPages.ConsultaNavClass(ViewContext)" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><i class="fas fa-search"></i> Consultar</a>
         <ul class="dropdown-menu">
-            <li><a class="dropdown-item" asp-page="./Consulta">por Data</a></li>
-            <li><a class="dropdown-item" asp-page="./Consulta.ByPF">por CPF</a></li>
-            <li><a class="dropdown-item" asp-page="./Consulta.ByPJ">por CNPJ</a></li>
+            <li><a class="dropdown-item" asp-page="./Consulta">Atendimentos por Data</a></li>
+            <li><a class="dropdown-item" asp-page="./Consulta.ByPF">Atendimentos por CPF</a></li>
+            <li><a class="dropdown-item" asp-page="./Consulta.ByPJ">Atendimentos por CNPJ</a></li>
             <li class="dropdown-divider"></li>
-            <li><a class="dropdown-item" asp-page="./Consulta.Pendencias">Pendencias</a></li>
-            <li><a class="dropdown-item" asp-page="./Consulta.Cancelados">Cancelados</a></li>
+            <li><a class="dropdown-item" asp-page="./Consulta.Pendencias">Atendimentos Pendentes</a></li>
+            <li><a class="dropdown-item" asp-page="./Consulta.Cancelados">Atendimentos Cancelados</a></li>
         </ul>
     </li>
     <li class="nav-item" hidden>

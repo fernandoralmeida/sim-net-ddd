@@ -6,14 +6,12 @@ namespace Sim.UI.Web.Pages.Empresa
     public static class EmpresaNavPages
     {
         public static string Inicio => "Index";
-        public static string ConsultaNome => "Consulta.nome";
-        public static string ConsultaCnpj => "Consulta.cnpj";
+        public static string Consulta => "Consulta";
         public static string Relatórios => "Report";
         public static string MigraData => "Migra.data";
         public static string Jucesp => "Jucesp";
         public static string InicioNavClass(ViewContext viewContext) => PageNavClass(viewContext, Inicio);
-        public static string ConsultaNomeNavClass(ViewContext viewContext) => PageNavClass(viewContext, ConsultaNome);
-        public static string ConsultaCNPJNavClass(ViewContext viewContext) => PageNavClass(viewContext, ConsultaCnpj);
+        public static string ConsultaNomeNavClass(ViewContext viewContext) => PageNavClass(viewContext, Consulta);
         public static string ReportNavClass(ViewContext viewContext) => PageNavClass(viewContext, Relatórios);
         public static string MigraDataNavClass(ViewContext viewContext) => PageNavClass(viewContext, MigraData);
         public static string JucespNavClass(ViewContext viewContext) => PageNavClass(viewContext, Jucesp);

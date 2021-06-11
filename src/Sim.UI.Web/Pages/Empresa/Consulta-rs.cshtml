@@ -1,5 +1,5 @@
 ﻿@page
-@model Sim.UI.Web.Pages.Empresa.IndexModel
+@model Sim.UI.Web.Pages.Empresa.Consulta_rsModel
 
 @{
     ViewData["Title"] = "Lista";
@@ -16,7 +16,7 @@
                 <input asp-for="Input.CNPJRes" hidden>
                 <div class="input-group">
                     <span class="input-group-text">CNPJ</span>
-                    <input asp-for="Input.CNPJ" class="form-control" aria-describedby="button-addon2" id="inputCNPJ">
+                    <input asp-for="Input.RazaoSocial" class="form-control" aria-describedby="button-addon2" id="inputCNPJ">
                     <button class="btn btn-primary" type="submit" role="button" id="button-addon2"><i class="fa fa-search"></i></button>
                 </div>
                 <span asp-validation-for="Input.CNPJ" class="text-danger"></span>

@@ -3,15 +3,15 @@
 
 <ul class="nav nav-tabs justify-content-center">
     <li class="nav-item">
-        <a class="nav-link @AgendaNavPages.InicioNavClass(ViewContext)" asp-page="./Index"><i class="fas fa-home"></i> Inicio</a>
+        <a class="nav-link @AgendaNavPages.InicioNavClass(ViewContext)" asp-page="./Index"><i class="fas fa-calendar"></i> Eventos</a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item" hidden>
         <a class="nav-link dropdown-toggle @AgendaNavPages.NovoEventoNavClass(ViewContext)" data-bs-toggle="dropdown" href="#"><i class="fas fa-calendar"></i> Evento</a>
         <ul class="dropdown-menu">
             <li><a class="dropdown-item" asp-page="./Novo"><i class="fas fa-calendar-plus"></i> Novo</a></li>
         </ul>
     </li>
-    <li class="nav-item">
+    <li class="nav-item" hidden>
         <a class="nav-link @AgendaNavPages.NovaInscricaoNavClass(ViewContext)" asp-page="./Inscricao.Evento"><i class="fas fa-user-tie"></i> Inscrições</a>
 
     </li>
@@ -19,7 +19,7 @@
         <a class="nav-link dropdown-toggle @AgendaNavPages.EventoListClass(ViewContext)" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><i class="fas fa-search"></i> Consultar</a>
         <ul class="dropdown-menu">
             <li><a class="dropdown-item" asp-page="./Evento-list-passados">Eventos Anteriores</a></li>
-            <li><a class="dropdown-item" asp-page="./Evento.List">Por Participante</a></li>
+            <li><a class="dropdown-item" asp-page="./Evento.List">Participantes</a></li>
         </ul>
     </li>
     <li class="nav-item" hidden>

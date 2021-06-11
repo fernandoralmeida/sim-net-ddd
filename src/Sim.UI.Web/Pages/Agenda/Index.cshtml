@@ -1,7 +1,7 @@
 ﻿@page
 @model Sim.UI.Web.Pages.Agenda.IndexModel
 @{
-    ViewData["Title"] = "Indice de Eventos";
+    ViewData["Title"] = "Eventos";
     ViewData["ActivePage"] = AgendaNavPages.Inicio;
 }
 
@@ -9,8 +9,8 @@
 
 <div class="row mt-5 mb-5">
     <form method="post">
-        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-            <a asp-area="" asp-page="./Novo" class="btn btn-primary" title="Novo Evento" hidden><i class="fas fa-plus-square"></i></a>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-center">      
+            <a asp-area="" asp-page="./Novo" class="btn btn-primary" title="Novo Evento"><i class="fas fa-plus-circle"></i> Novo Evento</a>
             <div class="col-md-4">
                 <div class="input-group">
                     <input asp-for="Input.Evento" class="form-control" placeholder="Cosultar Evento por Nome" aria-describedby="button-addon2">
@@ -40,9 +40,9 @@
                         <h6 class="card-title">@item.Nome <a class="text-decoration-none" asp-page="./Edit" asp-route-id="@item.Id">
                             <i class="fas fa-edit"></i></a>
                         </h6>                        
-                        <p class="card-text">@item.Formato @item.Data</p>
-                        <a asp-page="./Inscricao.Evento" asp-route-id="@item.Codigo" class="card-link">Adicionar</a>
-                        <a asp-page="./Inscricao.Remove" asp-route-id="@item.Codigo" class="card-link link-danger">Remover Inscrito</a>
+                        <p class="card-text">@item.Formato @item.Data</p>                        
+                        <a asp-page="./Inscricao.Evento" asp-route-id="@item.Codigo" class="card-link"><i class="fas fa-plus-circle"></i> Nova Inscrição</a>
+                        <a hidden asp-page="./Inscricao.Remove" asp-route-id="@item.Codigo" class="card-link link-danger"><i class="fas fa-minus-circle"></i> Remover Inscrito</a>
                     </div>
                 </div>
             </div>
