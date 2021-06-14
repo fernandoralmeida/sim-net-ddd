@@ -5,7 +5,7 @@
 
 document.addEventListener("DOMContentLoaded", function () {
     window.addEventListener('scroll', function () {
-        if (window.scrollY > 200) {
+        if (window.scrollY > 80) {
             document.getElementById('navbar_top').classList.add('fixed-top');
             document.getElementById('navbar_top').classList.add('shadow-sm');
             // add padding top to show content behind navbar

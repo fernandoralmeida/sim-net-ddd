@@ -1,28 +1,31 @@
 ﻿@using Sim.UI.Web.Pages.Agenda
 
+<nav class="navbar navbar-expand-lg navbar-light shadow">
+    <div class="container-fluid">
+        <span class="text-primary me-2">Agenda</span>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarScroll">
+            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                <li class="nav-item">
+                    <a class="nav-link @AgendaNavPages.InicioNavClass(ViewContext)" asp-page="./Index">Eventos</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle @AgendaNavPages.EventoListClass(ViewContext)" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Consultar</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" asp-page="./Evento-list-passados">Eventos Anteriores</a></li>
+                        <li><a class="dropdown-item" asp-page="./Evento.List">Participantes</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link @AgendaNavPages.EventoEditClass(ViewContext)" href="#">Relatórios</a>
+                </li>
+            </ul>
+            <form class="d-flex">
+                <a asp-area="" asp-page="./Novo" class="btn btn-sm btn-outline-primary" title="Novo Evento">Novo Evento</a>
+            </form>
+        </div>
+    </div>
+</nav>
 
-<ul class="nav nav-tabs justify-content-center">
-    <li class="nav-item">
-        <a class="nav-link @AgendaNavPages.InicioNavClass(ViewContext)" asp-page="./Index"><i class="fas fa-calendar"></i> Eventos</a>
-    </li>
-    <li class="nav-item" hidden>
-        <a class="nav-link dropdown-toggle @AgendaNavPages.NovoEventoNavClass(ViewContext)" data-bs-toggle="dropdown" href="#"><i class="fas fa-calendar"></i> Evento</a>
-        <ul class="dropdown-menu">
-            <li><a class="dropdown-item" asp-page="./Novo"><i class="fas fa-calendar-plus"></i> Novo</a></li>
-        </ul>
-    </li>
-    <li class="nav-item" hidden>
-        <a class="nav-link @AgendaNavPages.NovaInscricaoNavClass(ViewContext)" asp-page="./Inscricao.Evento"><i class="fas fa-user-tie"></i> Inscrições</a>
-
-    </li>
-    <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle @AgendaNavPages.EventoListClass(ViewContext)" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><i class="fas fa-search"></i> Consultar</a>
-        <ul class="dropdown-menu">
-            <li><a class="dropdown-item" asp-page="./Evento-list-passados">Eventos Anteriores</a></li>
-            <li><a class="dropdown-item" asp-page="./Evento.List">Participantes</a></li>
-        </ul>
-    </li>
-    <li class="nav-item" hidden>
-        <a class="nav-link @AgendaNavPages.EventoEditClass(ViewContext)" href="#"><i class="fas fa-clipboard-list"></i> Relatórios</a>
-    </li>
-</ul>

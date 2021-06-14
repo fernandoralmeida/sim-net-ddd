@@ -10,7 +10,7 @@
 
 <div class="row">
     <form method="post">
-        <div class="row">
+        <div class="row bg-light shadow-sm">
             <div class="col-md-2 mb-3" hidden>
                 <label class="form-label" asp-for="Input.Codigo"></label>
                 <input asp-for="Input.Codigo" class="form-control" />
@@ -57,11 +57,12 @@
                 <textarea asp-for="Input.Descricao" rows="2" asp- class="form-control"></textarea>
             </div>
 
-            <div class="row">
-                <div class="col-md-4 mt-4">
-                    <button type="submit" class="btn btn-primary">Gravar Novo Evento</button> |
-                    <a asp-page="./Index" class="btn btn-secondary">Voltar</a>
-                </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-4 mt-4">
+                <button type="submit" class="btn btn-primary">Gravar Novo Evento</button> |
+                <a asp-page="./Index" class="btn btn-secondary">Voltar</a>
             </div>
         </div>
     </form>

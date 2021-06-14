@@ -81,8 +81,7 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
             });
 
             await t;
-
-            StatusMessage = "Secretaria incluída com sucesso!";                        
+                      
             return RedirectToPage();
         }
 
@@ -101,7 +100,6 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
 
                 await t;
 
-                StatusMessage = "Secretaria removida com sucesso!";
                 return RedirectToPage();
             }
             catch(Exception ex)

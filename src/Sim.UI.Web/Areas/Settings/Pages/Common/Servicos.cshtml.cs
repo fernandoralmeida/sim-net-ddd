@@ -124,8 +124,6 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
 
                 await t;
 
-                StatusMessage = "Serviço incluído com sucesso!";
-
                 return RedirectToPage();
             }
             catch (Exception ex)
@@ -154,8 +152,6 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
                 });
 
                 await t;
-
-                StatusMessage = "Serviço removido com sucesso!";
 
                 return RedirectToPage();
             }

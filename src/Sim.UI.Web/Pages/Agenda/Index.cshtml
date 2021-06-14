@@ -7,12 +7,11 @@
 
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
-<div class="row mt-5 mb-5">
+<div class="row">
     <form method="post">
         <div class="d-grid gap-2 d-md-flex justify-content-md-center">      
-            <a asp-area="" asp-page="./Novo" class="btn btn-primary" title="Novo Evento"><i class="fas fa-plus-circle"></i> Novo Evento</a>
             <div class="col-md-4">
-                <div class="input-group">
+                <div class="input-group input-group-sm">
                     <input asp-for="Input.Evento" class="form-control" placeholder="Cosultar Evento por Nome" aria-describedby="button-addon2">
                     <button class="btn btn-primary" type="submit" role="button" id="button-addon2"><i class="fas fa-search"></i></button>
                 </div>
@@ -21,63 +20,38 @@
     </form>
 </div>
 <pre>Lista de Eventos</pre>
-<hr class="row border border-2 border-secondary" />
-<div class="row">
 
-    @if (Model.Input.ListaEventos != null)
-    {
-        foreach (var item in Model.Input.ListaEventos)
-        { 
-            <div class="col-sm-4 mt-4">
-                <div class="card shadow-sm">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        @item.Tipo: @item.Codigo
-                        <a href="#" data-secao="Agenda" data-acao="Inscritos.List" data-id="@item.Codigo" class="btn-link viewbutton" data-bs-toggle="modal" data-bs-target="#viewmodal">
-                            <span class="badge bg-primary">@item.NumeroInscritos - @item.Lotacao</span>
-                        </a>                       
-                    </div>
-                    <div class="card-body">
-                        <h6 class="card-title">@item.Nome <a class="text-decoration-none" asp-page="./Edit" asp-route-id="@item.Id">
-                            <i class="fas fa-edit"></i></a>
-                        </h6>                        
-                        <p class="card-text">@item.Formato @item.Data</p>                        
-                        <a asp-page="./Inscricao.Evento" asp-route-id="@item.Codigo" class="card-link"><i class="fas fa-plus-circle"></i> Nova Inscrição</a>
-                        <a hidden asp-page="./Inscricao.Remove" asp-route-id="@item.Codigo" class="card-link link-danger"><i class="fas fa-minus-circle"></i> Remover Inscrito</a>
-                    </div>
-                </div>
-            </div>
-        }
-    }
-
+<div class="album py-5 bg-light">
+    <partial name="_AgendaList" model="Model.Input.ListaEventos"/>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="viewmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="viewmodalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h6 class="modal-title" id="viewmodalLabel">Detalhes</h6>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p id="viewmodalData"></p>
+    <!-- Modal -->
+    <div class="modal fade" id="viewmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="viewmodalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title" id="viewmodalLabel">Detalhes</h6>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="viewmodalData"></p>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-@section scripts
+    @section scripts
 {
-    <script type="text/javascript">
-    $(".viewbutton").on("click", function () {
-        var customerId = $(this).data('id');
-        var secao = $(this).data('secao');
-        var acao = $(this).data('acao');
-            $.ajax({
-                url: "/"+ secao +"/" + acao + "?id=" + customerId,
-                cache: false
-            }).done(function (data) {
-                $("#viewmodalData").html(data);
-            });
-        });</script>
-}
+        <script type="text/javascript">
+            $(".viewbutton").on("click", function () {
+                var customerId = $(this).data('id');
+                var secao = $(this).data('secao');
+                var acao = $(this).data('acao');
+                $.ajax({
+                    url: "/" + secao + "/" + acao + "?id=" + customerId,
+                    cache: false
+                }).done(function (data) {
+                    $("#viewmodalData").html(data);
+                });
+            });</script>
+    }

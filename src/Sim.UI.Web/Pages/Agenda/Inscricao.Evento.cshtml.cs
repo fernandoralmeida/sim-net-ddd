@@ -64,7 +64,7 @@ namespace Sim.UI.Web.Pages.Agenda
             Input.Evento = t.Result;
         }
 
-        public async Task OnGet(int? id)
+        public async Task OnGetAsync(int? id)
         {
             if (id != null)
             {

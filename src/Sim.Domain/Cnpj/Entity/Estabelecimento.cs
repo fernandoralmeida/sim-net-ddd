@@ -139,7 +139,7 @@ namespace Sim.Domain.Cnpj.Entity
                 return "Baixada";
 
             else
-                return "";
+                return valor;
         }
 
         private string StringDateTime(string valor)

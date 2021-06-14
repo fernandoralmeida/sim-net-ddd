@@ -1,26 +1,38 @@
 ﻿@using Sim.UI.Web.Pages.Atendimento
 
+<nav class="navbar navbar-expand-lg navbar-light shadow">
+    <div class="container-fluid">
+        <span class="text-primary me-2">Atendimentos</span>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarScroll">
+            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                <li class="nav-item">
+                    <a class="nav-link @AtendimentoNavPages.InicioNavClass(ViewContext)" asp-page="./Index">Listar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link @AtendimentoNavPages.AtendiementoNavClass(ViewContext)" asp-page="./Novo">Ativo</a>
+                </li>
 
-<ul class="nav nav-tabs justify-content-center">
-    <li class="nav-item">
-        <a class="nav-link @AtendimentoNavPages.InicioNavClass(ViewContext)" asp-page="./Index"><i class="fas fa-hourglass-start"></i> Meus Atendimentos</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link @AtendimentoNavPages.AtendiementoNavClass(ViewContext)" asp-page="./Novo"><i class="fas fa-clock"></i> Atendimento Ativo</a>
-    </li>
-
-    <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle @AtendimentoNavPages.ConsultaNavClass(ViewContext)" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><i class="fas fa-search"></i> Consultar</a>
-        <ul class="dropdown-menu">
-            <li><a class="dropdown-item" asp-page="./Consulta">Atendimentos por Data</a></li>
-            <li><a class="dropdown-item" asp-page="./Consulta.ByPF">Atendimentos por CPF</a></li>
-            <li><a class="dropdown-item" asp-page="./Consulta.ByPJ">Atendimentos por CNPJ</a></li>
-            <li class="dropdown-divider"></li>
-            <li><a class="dropdown-item" asp-page="./Consulta.Pendencias">Atendimentos Pendentes</a></li>
-            <li><a class="dropdown-item" asp-page="./Consulta.Cancelados">Atendimentos Cancelados</a></li>
-        </ul>
-    </li>
-    <li class="nav-item" hidden>
-        <a class="nav-link" href="#"><i class="fas fa-clipboard-list"></i> Relatórios</a>
-    </li>
-</ul>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle @AtendimentoNavPages.ConsultaNavClass(ViewContext)" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Consultar</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" asp-page="./Consulta">Atendimentos por Data</a></li>
+                        <li><a class="dropdown-item" asp-page="./Consulta.ByPF">Atendimentos por CPF</a></li>
+                        <li><a class="dropdown-item" asp-page="./Consulta.ByPJ">Atendimentos por CNPJ</a></li>
+                        <li class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" asp-page="./Consulta.Pendencias">Atendimentos Pendentes</a></li>
+                        <li><a class="dropdown-item" asp-page="./Consulta.Cancelados">Atendimentos Cancelados</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item" hidden>
+                    <a class="nav-link" href="#">Relatórios</a>
+                </li>
+            </ul>
+            <form class="d-flex">
+                <a asp-area="" asp-page="/Pessoa/Index" class="btn btn-sm btn-outline-primary" title="Novo Evento">Novo Atendimento</a>
+            </form>
+        </div>
+    </div>
+</nav>

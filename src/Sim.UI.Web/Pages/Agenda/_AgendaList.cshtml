@@ -1,0 +1,54 @@
+﻿@using Sim.Domain.Shared.Entity;
+@model IEnumerable<InputModelEvento>
+
+<div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <svg class="bd-placeholder-img card-img-top" width="100%" height="100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                            <title>Placeholder</title>
+                            <rect width="100%" height="100%" fill="#55595c" />
+                            <text x="4%" y="33%" fill="#eceeef" dy=".3em">Código @item.Codigo</text>
+                            <text x="4%" y="66%" fill="#eceeef" dy=".3em">@item.Tipo @item.Nome</text>
+                        </svg>
+                        <div class="card-body">
+                            <p class="card-text">
+                                Formato: @item.Formato
+                                <br />Data: @item.Data
+                                <br />Setor: @item.Owner
+                                <br />Vagas: @item.Vagas
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-warning"><i class="fas fa-pen-square"></i></a>
+                                <div class="btn-group">
+                                    @{  
+                                        if (item.NumeroInscritos >= item.Lotacao)
+                                        {
+                                            <button asp-page="./Inscricao.Evento" asp-route-id="@item.Codigo" disabled class="btn btn-sm btn-outline-secondary"><i class="fas fa-plus-circle"></i></button>
+                                        }
+                                        else
+                                        {
+                                            <a asp-page="./Inscricao.Evento" asp-route-id="@item.Codigo" class="btn btn-sm btn-outline-secondary"><i class="fas fa-plus-circle"></i></a>
+                                        }
+                                    }
+                                    <a asp-page="./Inscricao.Remove" asp-route-id="@item.Codigo" class="btn btn-sm btn-outline-secondary"><i class="fas fa-minus-circle"></i></a>
+                                </div>
+                                <small class="text-muted">
+                                    <a href="#" data-secao="Agenda" data-acao="Inscritos.List" data-id="@item.Codigo" class="card-link viewbutton" data-bs-toggle="modal" data-bs-target="#viewmodal">
+                                        @item.NumeroInscritos inscritos
+                                    </a>
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>

@@ -104,8 +104,6 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
 
                 await t;
 
-                StatusMessage = "Setor incluído com sucesso!";
-
                 return RedirectToPage();
             }
             catch(Exception ex)
@@ -134,8 +132,6 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
                 });
 
                 await t;
-
-                StatusMessage = "Setor removido com sucesso!";
 
                 return RedirectToPage();
             }

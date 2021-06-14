@@ -25,64 +25,7 @@
     </form>
 </div>
 <div>
-    <table class="table table-light table-striped">
-        <caption>Lista de empresas @Model.Input.ListaEmpresas.Count()</caption>
-        <thead>
-            <tr>
-                <th></th>
-                <th>
-                    CNPJ
-                </th>
-
-                <th>
-                    Nome Empresarial
-                </th>
-
-                <th>
-                    Porte
-                </th>
-
-                <th>
-                    Situação
-                </th>
-
-                <th>Ação</th>
-            </tr>
-        </thead>
-        <tbody>
-            @{
-                int cont = 0;
-            }
-
-            @foreach (var item in Model.Input.ListaEmpresas)
-            {
-            <tr>
-                <td>
-                    @{ cont++; }
-                    @cont
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CNPJ)
-                </td>
-
-                <td>
-                    @Html.DisplayFor(modelItem => item.Empresa.RazaoSocial)
-                </td>
-
-                <td>
-                    @Html.DisplayFor(modelItem => item.Empresa.PorteEmpresa)
-                </td>
-
-                <td>
-                    @Html.DisplayFor(modelItem => item.Estabelecimento.SituacaoCadastral)
-                </td>
-                <td>
-                    <a asp-page="./Detalhe" asp-route-id="@item.CNPJ" class="btn btn-sm btn-secondary" title="Ver informações"><i class="fas fa-eye"></i></a>
-                </td>
-            </tr>
-            }
-        </tbody>
-    </table>
+    <partial name="_EmpresaList" model="Model.Input.ListaEmpresas"/>
 </div>
 
 @section Scripts {

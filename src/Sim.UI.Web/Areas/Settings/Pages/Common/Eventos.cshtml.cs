@@ -88,8 +88,6 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
 
                 await t;
 
-                StatusMessage = "Tipo incluído com sucesso!";
-
                 return RedirectToPage();
             }
             catch (Exception ex)
@@ -118,8 +116,6 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
                 });
 
                 await t;
-
-                StatusMessage = "Tipo removido com sucesso!";
 
                 return RedirectToPage();
             }

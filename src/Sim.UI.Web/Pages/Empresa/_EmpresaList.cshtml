@@ -1,0 +1,73 @@
+﻿@using Sim.Domain.Cnpj.Entity;
+@model IEnumerable<BaseJucesp>
+
+<table class="table table-striped">
+    <caption>Lista de empresas @if (Model != null)@Model.Count()</caption>
+    <thead>
+        <tr>
+            <th></th>
+
+            <th>
+                I.E.
+            </th>
+            <th>
+                CNPJ
+            </th>
+
+            <th>
+                Nome Empresarial
+            </th>
+
+            <th>
+                Regime
+            </th>
+
+            <th>
+                Data
+            </th>
+
+            <th>Ação</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int cont = 0;
+        }
+
+        @if(Model != null)
+        { 
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @{ cont++; }
+                    @cont
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Inscricao_Estadual)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CNPJ)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome_Empresarial)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Regime_Apuracao)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Data_Situacao_Cadastral)
+                </td>
+
+                <td>
+                    <a asp-page="./Jucesp-detail" asp-route-id="@item.CNPJ" class="btn btn-sm btn-secondary" title="Alterar informações"><i class="fas fa-eye"></i></a>
+                </td>
+            </tr>
+        }
+        }
+    </tbody>
+</table>
