@@ -8,7 +8,7 @@
 
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
-<div class="mt-2 mb-2">
+<div class="mb-2">
     <form method="post">
         <div class="d-grid gap-2 d-md-flex justify-content-md-center">
             <div class="d-flex">
@@ -20,7 +20,7 @@
             </div>
             @if(!Model.Input.ListaPessoas.Any())
             {
-                <a asp-area="" asp-page="/Pessoa/Novo" asp-route-id="@Model.Input.RouteCPF" class="btn btn-primary" title="Adicionar Nova Pessoa"><i class="fas fa-user-plus"></i></a>
+                <a asp-area="" asp-page="/Pessoa/Novo" asp-route-id="@Model.Input.RouteCPF" class="btn btn-sm btn-primary" title="Adicionar Nova Pessoa"><i class="fas fa-user-plus"></i></a>
             }            
         </div>
     </form>

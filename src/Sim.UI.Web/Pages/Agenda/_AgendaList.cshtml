@@ -30,14 +30,14 @@
                                     @{  
                                         if (item.NumeroInscritos >= item.Lotacao)
                                         {
-                                            <button asp-page="./Inscricao.Evento" asp-route-id="@item.Codigo" disabled class="btn btn-sm btn-outline-secondary"><i class="fas fa-plus-circle"></i></button>
+                                            <button asp-page="./Inscricao.Evento" asp-route-id="@item.Codigo" disabled class="btn btn-sm btn-outline-primary"><i class="fas fa-plus-circle"></i></button>
                                         }
                                         else
                                         {
-                                            <a asp-page="./Inscricao.Evento" asp-route-id="@item.Codigo" class="btn btn-sm btn-outline-secondary"><i class="fas fa-plus-circle"></i></a>
+                                            <a asp-page="./Inscricao.Evento" asp-route-id="@item.Codigo" class="btn btn-sm btn-outline-primary"><i class="fas fa-plus-circle"></i></a>
                                         }
                                     }
-                                    <a asp-page="./Inscricao.Remove" asp-route-id="@item.Codigo" class="btn btn-sm btn-outline-secondary"><i class="fas fa-minus-circle"></i></a>
+                                    <a asp-page="./Inscricao.Remove" asp-route-id="@item.Codigo" class="btn btn-sm btn-outline-danger"><i class="fas fa-minus-circle"></i></a>
                                 </div>
                                 <small class="text-muted">
                                     <a href="#" data-secao="Agenda" data-acao="Inscritos.List" data-id="@item.Codigo" class="card-link viewbutton" data-bs-toggle="modal" data-bs-target="#viewmodal">
