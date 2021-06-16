@@ -11,8 +11,7 @@ using Sim.Domain.Cnpj.Interface;
 namespace Sim.UI.Web.Areas.Censo.Pages.Empresas
 {
 
-    [Authorize(Roles = "Administrador")]
-    [Authorize(Roles = "M_RFB")]
+    [Authorize(Roles = "Administrador,M_RFB")]
     public class Empresa_detalheModel : PageModel
     {
 

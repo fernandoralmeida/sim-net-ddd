@@ -18,8 +18,7 @@ namespace Sim.UI.Web.Areas.Censo.Pages.Empresas
 
 
 
-    [Authorize(Roles = "Administrador")]
-    [Authorize(Roles = "M_RFB")]
+    [Authorize(Roles = "Administrador,M_RFB")]
     public class Consulta_logradouroModel : PageModel
     {
         private readonly ICNPJBase<BaseReceitaFederal> _empresaApp;

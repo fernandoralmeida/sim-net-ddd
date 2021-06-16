@@ -16,8 +16,7 @@ namespace Sim.UI.Web.Areas.Censo.Pages.Empresas
     using Sim.Application.Interface;
 
 
-    [Authorize(Roles = "Administradir")]
-    [Authorize(Roles = "M_RFB")]
+    [Authorize(Roles = "Administrador,M_RFB")]
     public class Consulta_cnaeModel : PageModel
     {
         private readonly ICNPJBase<BaseReceitaFederal> _empresaApp;

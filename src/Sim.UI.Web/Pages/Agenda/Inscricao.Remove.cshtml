@@ -23,7 +23,7 @@
                         N
                     </th>
                     <th>
-                        Inscrição
+                        CPF
                     </th>
                     <th>
                         Cliente
@@ -53,7 +53,7 @@
                             @cont.ToString()
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Numero)
+                            @Html.DisplayFor(modelItem => item.Participante.CPF)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Participante.Nome)

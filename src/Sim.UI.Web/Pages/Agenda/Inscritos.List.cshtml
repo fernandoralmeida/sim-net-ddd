@@ -11,7 +11,7 @@
         <br /><b>@Model.Input.Tipo @Model.Input.Nome</b>
         <br />@Model.Input.Formato para até @Model.Input.Lotacao pessoas.
         <br />Data: @Model.Input.Data
-        <br />Data: @Model.Input.Descricao
+        <br />Descrição: @Model.Input.Descricao
     </div>
 </div>
 
@@ -24,7 +24,7 @@
                     N
                 </th>
                 <th>
-                    Inscrição
+                    CPF
                 </th>
                 <th>
                     Cliente
@@ -54,7 +54,7 @@
                     @cont.ToString()
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Numero)
+                    @Html.DisplayFor(modelItem => item.Participante.CPF)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Participante.Nome)

@@ -48,7 +48,7 @@ namespace Sim.UI.Web.Pages.Empresa
 
         private async Task LoadAsync()
         {
-            var t = Task.Run(() => _empresaApp.List());
+            var t = Task.Run(() => _empresaApp.ConsultaByCNPJ("00.000.000/0000-00"));
 
             await t;
 

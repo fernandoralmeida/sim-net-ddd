@@ -11,8 +11,7 @@ using Sim.Domain.Cnpj.Interface;
 namespace Sim.UI.Web.Pages.Empresa
 {
 
-    [Authorize(Roles = "Administrador")]
-    [Authorize(Roles = "M_Jucesp")]
+    [Authorize(Roles = "Administrador,M_Jucesp")]
     public class Jucesp_detailModel : PageModel
     {
         private readonly ICNPJBase<BaseJucesp> _empresaApp;

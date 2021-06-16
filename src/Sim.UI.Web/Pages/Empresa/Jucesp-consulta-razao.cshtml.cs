@@ -13,8 +13,7 @@ namespace Sim.UI.Web.Pages.Empresa
     using Sim.Domain.Cnpj.Interface;
     using System.ComponentModel.DataAnnotations;
 
-    [Authorize(Roles = "Administrador")]
-    [Authorize(Roles = "M_Jucesp")]
+    [Authorize(Roles = "Administrador,M_Jucesp")]
     public class Jucesp_consulta_razaoModel : PageModel
     {
         private readonly ICNPJBase<BaseJucesp> _empresaApp;
