@@ -1,13 +1,13 @@
 ﻿@using Sim.UI.Web.Pages.Atendimento
 
-<nav class="navbar navbar-expand-lg navbar-light shadow">
-    <div class="container-fluid">
+<nav id="navbar_top" class="navbar navbar-expand-sm navbar-light shadow bg-body">
+    <div class="container">
         <span class="text-primary me-2">Atendimentos</span>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarScroll">
-            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+            <ul class="navbar-nav me-auto my-2 my-lg-0">
                 <li class="nav-item">
                     <a class="nav-link @AtendimentoNavPages.InicioNavClass(ViewContext)" asp-page="./Index">Listar</a>
                 </li>
@@ -31,7 +31,7 @@
                 </li>
             </ul>
             <form class="d-flex">
-                <a asp-area="" asp-page="/Pessoa/Index" class="btn btn-sm btn-outline-primary" title="Novo Evento">Novo Atendimento</a>
+                <a asp-area="" asp-page="/Pessoa/Index" class="btn btn-sm btn-outline-success" title="Novo Evento">Novo Atendimento</a>
             </form>
         </div>
     </div>

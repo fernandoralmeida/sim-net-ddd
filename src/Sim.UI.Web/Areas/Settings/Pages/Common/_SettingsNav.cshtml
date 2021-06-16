@@ -1,13 +1,13 @@
 ﻿@using Sim.UI.Web.Areas.Settings.Pages.Common
 
-<nav class="navbar navbar-expand-lg navbar-light shadow">
-    <div class="container-fluid">
+<nav id="navbar_top" class="navbar navbar-expand-sm navbar-light shadow bg-body">
+    <div class="container">
         <span class="text-primary me-2">Opções</span>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarScroll">
-            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
                 <li class="nav-item">
                     <a class="nav-link @SettingsNavPages.SecretariaNavClass(ViewContext)" id="secretaria" asp-page="./Index">Secretaria</a>
                 </li>

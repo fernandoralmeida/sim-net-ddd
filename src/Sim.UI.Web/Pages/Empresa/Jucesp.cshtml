@@ -12,14 +12,13 @@
 <div class="mt-5 mb-5">
     <form method="post">
         <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-            <div class="col-md-auto">
-                <div class="input-group">
-                    <span class="input-group-text">CNPJ</span>
-                    <input asp-for="Input.CNPJ" class="form-control" aria-describedby="button-addon2" id="inputCNPJ">
-                    <button class="btn btn-primary" type="submit" role="button" id="button-addon2"><i class="fa fa-search"></i></button>
+
+                <div class="d-flex">
+
+                    <input asp-for="Input.CNPJ" class="form-control form-control-sm me-2" aria-describedby="button-addon2" id="inputCNPJ">
+                    <button class="btn btn-sm btn-outline-primary" type="submit" role="button" id="button-addon2"><i class="fa fa-search"></i></button>
                 </div>
-                <span asp-validation-for="Input.CNPJ" class="text-danger"></span>
-            </div>
+
         </div>
     </form>
 </div>

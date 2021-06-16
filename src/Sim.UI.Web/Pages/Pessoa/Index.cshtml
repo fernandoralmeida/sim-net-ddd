@@ -8,20 +8,15 @@
 
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
-<div class="shadow bg-body pt-2 pb-1 mb-2">
+<div class="mt-5 mb-5">
     <form method="post">
         <div class="d-grid gap-2 d-md-flex justify-content-md-center">
             <div class="d-flex">
 
                     <input asp-for="Input.CPF" class="form-control form-control-sm me-2" placeholder="CPF" aria-describedby="button-addon2" id="inputCPF">
-                    <button class="btn btn-sm btn-outline-primary" type="submit" role="button" id="button-addon2"><i class="fa fa-search"></i></button>
-               
-                <span asp-validation-for="Input.CPF" class="text-danger"></span>
-            </div>
-            @if(!Model.Input.ListaPessoas.Any())
-            {
-                <a asp-area="" asp-page="/Pessoa/Novo" asp-route-id="@Model.Input.RouteCPF" class="btn btn-sm btn-primary" title="Adicionar Nova Pessoa"><i class="fas fa-user-plus"></i></a>
-            }            
+                    <button class="btn btn-sm btn-outline-primary" type="submit" role="button" id="button-addon2"><i class="fa fa-search"></i></button>              
+                
+            </div>        
         </div>
     </form>
 </div>

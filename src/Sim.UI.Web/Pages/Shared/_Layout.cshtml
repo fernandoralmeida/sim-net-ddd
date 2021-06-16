@@ -12,7 +12,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-body">
+        <nav class="navbar navbar-expand-lg navbar-light bg-body border-bottom">
             <div class="container">                
                 <a style="font-size:24px; margin-right:10px;" asp-area="" asp-page="/Index"><i class="fab fa-windows"></i></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,14 +43,15 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-page="/Agenda/Index">Agenda</a>
                         </li>
-                        <li class="nav-item" hidden>
-                            <a class="nav-link" asp-area="" asp-page="/Planner/Index">e-Planner</a>
-                        </li>
+
                         @if (User.IsInRole("Administrador") || User.IsInRole("ModuloRFB"))
                         {
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="Censo" asp-page="/Empresas/Index">Censo</a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-page="/Planner/Index">e-Planner</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="Censo" asp-page="/Empresas/Index">Censo</a>
+                            </li>
                         }
                     </ul>
                     @if (User.IsInRole("Administrador"))
@@ -76,7 +77,7 @@
         
     </header>
     
-    <div class="container mt-3">
+    <div class="container">
         <main role="main">
             @RenderBody()
         </main>

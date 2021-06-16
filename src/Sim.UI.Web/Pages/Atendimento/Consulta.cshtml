@@ -10,11 +10,10 @@
 
 <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-5 mb-5">
         <form method="post" asp-page-handler="ListByData">
-            <div class="input-group input-group">
-                <span class="input-group-text">Data</span>
-                <input asp-for="Input.DataI" class="form-control" />
-                <input asp-for="Input.DataF" class="form-control" />
-                <button asp-page-handler="ListByData" class="btn btn-primary" type="submit" role="button"><i class="fas fa-search"></i></button>
+            <div class="d-flex">
+                <input asp-for="Input.DataI" class="form-control form-control-sm me-2" />
+                <input asp-for="Input.DataF" class="form-control form-control-sm me-2" />
+                <button asp-page-handler="ListByData" class="btn btn-sm btn-outline-primary" type="submit" role="button"><i class="fas fa-search"></i></button>
             </div>
         </form>
 

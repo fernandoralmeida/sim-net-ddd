@@ -11,15 +11,14 @@
 <div class="mt-5 mb-5">
     <form method="post">
         <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-            <a asp-area="" asp-page="/Empresa/Add" class="btn btn-primary" title="Adicionar Nova Empresa"><i class="fas fa-plus-circle"></i></a>
-            <div class="col-md-auto">
-                <input asp-for="Input.CNPJRes" hidden>
-                <div class="input-group">
-                    <span class="input-group-text">CNPJ</span>
-                    <input asp-for="Input.RazaoSocial" class="form-control" aria-describedby="button-addon2" id="inputCNPJ">
-                    <button class="btn btn-primary" type="submit" role="button" id="button-addon2"><i class="fa fa-search"></i></button>
-                </div>
-                <span asp-validation-for="Input.CNPJ" class="text-danger"></span>
+            <input asp-for="Input.CNPJRes" hidden>
+            
+            <div class="d-flex">
+                
+                
+                    <input asp-for="Input.RazaoSocial" class="form-control form-control-sm me-2" placeholder="Razão Social" aria-describedby="button-addon2">
+                    <button class="btn btn-sm btn-outline-primary" type="submit" role="button" id="button-addon2"><i class="fa fa-search"></i></button>
+                
             </div>
         </div>
     </form>
@@ -71,7 +70,7 @@
                     </td>
 
                     <td>                        
-                        <a asp-page="./Update" asp-route-id="@item.Id" class="btn btn-sm btn-secondary" title="Alterar informações"><i class="fas fa-pen"></i></a>                        
+                        <a asp-page="./Update" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary" title="Alterar informações"><i class="fas fa-pen"></i></a>                        
                     </td>
                 </tr>
             }
