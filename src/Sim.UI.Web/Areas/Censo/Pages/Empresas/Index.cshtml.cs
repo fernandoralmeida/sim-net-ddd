@@ -16,7 +16,8 @@ namespace Sim.UI.Web.Areas.Censo.Pages.Empresas
     using Sim.Application.Interface;
 
 
-    [Authorize]
+    [Authorize(Roles = "Administrador")]
+    [Authorize(Roles = "M_RFB")]
     public class IndexModel : PageModel
     {
         private readonly ICNPJBase<BaseReceitaFederal>  _empresaApp;

@@ -15,6 +15,9 @@ namespace Sim.UI.Web.Areas.Censo.Pages.Empresas
     using Sim.Domain.Cnpj.Entity;
     using Sim.Domain.Cnpj.Interface;
 
+
+    [Authorize(Roles = "Administrador")]
+    [Authorize(Roles = "M_RFB")]
     public class Consulta_socioModel : PageModel
     {
         private readonly ICNPJBase<BaseReceitaFederal> _empresaApp;

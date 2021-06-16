@@ -1,11 +1,12 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+﻿
+// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
 
 document.addEventListener("DOMContentLoaded", function () {
     window.addEventListener('scroll', function () {
-        if (window.scrollY > 80) {
+        if (window.scrollY > 55) {
             document.getElementById('navbar_top').classList.add('fixed-top');
             //document.getElementById('navbar_top').classList.add('shadow-sm');
             // add padding top to show content behind navbar

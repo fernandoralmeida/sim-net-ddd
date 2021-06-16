@@ -16,7 +16,8 @@ namespace Sim.UI.Web.Pages.Empresa
     using Sim.Application.Interface;
 
 
-    [Authorize]
+    [Authorize(Roles = "Administrador")]
+    [Authorize(Roles = "M_Jucesp")]
     public class Jucesp_consulta_logradouroModel : PageModel
     {
         private readonly ICNPJBase<BaseJucesp> _empresaApp;

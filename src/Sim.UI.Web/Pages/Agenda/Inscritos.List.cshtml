@@ -11,6 +11,7 @@
         <br /><b>@Model.Input.Tipo @Model.Input.Nome</b>
         <br />@Model.Input.Formato para até @Model.Input.Lotacao pessoas.
         <br />Data: @Model.Input.Data
+        <br />Data: @Model.Input.Descricao
     </div>
 </div>
 
@@ -34,7 +35,7 @@
                 <th>
                     Contato
                 </th>
-                <th>
+                <th hidden>
                     Ação
                 </th>
             </tr>
@@ -64,7 +65,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Participante.Tel_Movel)
                 </td>
-                <td>
+                <td hidden>
                     <a asp-page="./Inscricao.Remove" asp-route-id="@Model.Input.Codigo" class="btn btn-sm btn-danger"><i class="fas fa-minus-circle"></i></a>
                 </td>
             </tr>

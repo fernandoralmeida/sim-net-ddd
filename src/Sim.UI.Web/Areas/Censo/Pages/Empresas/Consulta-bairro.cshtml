@@ -12,15 +12,13 @@
 <div class="mt-5 mb-5">
     <form method="post">
         <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-            <div class="col-md-1">
-                <select asp-for="Input.Municipio" placeholder="Municipio" class="form-select" asp-items="@Model.ListaMunicipios"></select>
-            </div>
-            <div class="col-md-auto">
-                <div class="input-group">
-                    <span class="input-group-text">Logradouro</span>
-                    <input asp-for="Input.Bairro" class="form-control" aria-describedby="button-addon2">
-                    <button class="btn btn-primary" type="submit" role="button" id="button-addon2"><i class="fa fa-search"></i></button>
-                </div>
+            <div class="d-flex col-5">
+                <select asp-for="Input.Municipio" placeholder="Municipio" class="form-select form-select-sm me-2" asp-items="@Model.ListaMunicipios"></select>
+            
+    
+                    <input asp-for="Input.Bairro" placeholder="Bairro" class="form-control form-control-sm me-2" aria-describedby="button-addon2">
+                    <button class="btn btn-sm btn-outline-primary" type="submit" role="button" id="button-addon2"><i class="fa fa-search"></i></button>
+               
             </div>
         </div>
     </form>

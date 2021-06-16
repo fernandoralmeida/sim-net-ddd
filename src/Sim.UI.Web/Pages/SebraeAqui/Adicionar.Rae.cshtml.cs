@@ -13,7 +13,9 @@ namespace Sim.UI.Web.Pages.SebraeAqui
     using Sim.Cross.Identity;
     using Sim.Domain.SDE.Entity;
 
-    [Authorize]
+    [Authorize(Roles = "Administradir")]
+    [Authorize(Roles = "M_Sebrae")]
+
     public class AdicionarRaeModel : PageModel
     {
         private readonly IAppServiceAtendimento _appServiceAtendimento;

@@ -15,7 +15,8 @@ namespace Sim.UI.Web.Pages.SebraeAqui
     using Sim.Domain.Shared.Entity;
     using Sim.Application.Shared.Interface;
 
-    [Authorize]
+    [Authorize(Roles = "Administradir")]
+    [Authorize(Roles = "M_Sebrae")]
     public class RaeLancadosModel : PageModel
     {
         //private readonly UserManager<ApplicationUser> _userManager;
