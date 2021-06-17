@@ -14,7 +14,7 @@ namespace Sim.UI.Web.Areas.Admin.Pages.Manager
     using ViewModel;
     using Sim.Cross.Identity;
 
-
+    [Authorize(Roles = "Administrador")]
     public class UserRolesModel : PageModel
     {
         private readonly UserManager<ApplicationUser> _userManager;

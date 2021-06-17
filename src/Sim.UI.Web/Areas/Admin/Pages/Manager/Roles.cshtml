@@ -3,7 +3,7 @@
 @{
     Layout = "_Layout.cshtml";
 
-    ViewData["Title"] = "Roles";
+    ViewData["Title"] = "Apolice";
     ViewData["ActivePage"] = AdminNavPages.Roles;
 }
 
@@ -14,9 +14,9 @@
     <div class="col-md-5 mb-3">
         <form method="post">
             <div class="row g-3">
-                <div class="input-group mb-3">
-                    <input asp-for="Input.Name" class="form-control" placeholder="Nova Role" />
-                    <button class="btn btn-primary" type="submit">Adicionar</button>
+                <div class="d-flex mb-3">
+                    <input asp-for="Input.Name" class="form-control me-2" placeholder="Nova Role" />
+                    <button class="btn btn-outline-primary" type="submit">Adicionar</button>
                 </div>
             </div>
         </form>
@@ -55,7 +55,7 @@
 
                                 <td>
                                     <form method="post">
-                                        <button type="submit" asp-page-handler="Remove" asp-route-id="@item.Id" class="btn btn-sm btn-danger" title="Excluir Role"><i class="far fa-window-close"></i></button>
+                                        <button type="submit" asp-page-handler="Remove" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger" title="Excluir Role"><i class="fas fa-trash"></i></button>
                                     </form>
                                     
                                 </td>

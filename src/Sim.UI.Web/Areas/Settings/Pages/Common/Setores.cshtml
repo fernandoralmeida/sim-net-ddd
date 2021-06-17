@@ -30,7 +30,7 @@
                 <span asp-validation-for="Input.Secretaria" class="text-danger"></span>
             </div>
             <div class="col-md-auto align-self-end mt-3">
-                <button type="submit" class="btn btn-primary">Incluir Setor</button>
+                <button type="submit" class="btn btn-outline-primary">Incluir Setor</button>
             </div>
         </div>
 
@@ -60,7 +60,7 @@
                             </td>
 
                             <td>
-                                <button type="submit" asp-page-handler="Remove" asp-route-id="@item.Id" class="btn btn-sm btn-danger" title="Excluir item"><i class="far fa-window-close"></i></button>
+                                <button type="submit" asp-page-handler="Remove" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger" title="Excluir item"><i class="fas fa-trash"></i></button>
                             </td>
                         </tr>
                     }

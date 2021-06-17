@@ -77,10 +77,21 @@ namespace Sim.UI.Web.Pages.Agenda
         {
             var t = Task.Run(() => _appServicePessoa.ConsultaByCPF(GetCPF));
             await t;
-
+            
             foreach (var p in t.Result)
             {
                 Input.Participante = p;
+            }
+
+            if (Input.Participante != null)
+            {
+                var e = Task.Run(() => _appServiceEmpresa.ConsultaByRazaoSocial(new Functions.Mask().Remove(Input.Participante.CPF)));
+                await e;
+
+                foreach (var emp in e.Result)
+                {
+                    Input.Empresa = emp;
+                }
             }
         }
 

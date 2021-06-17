@@ -7,10 +7,13 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 
+
 namespace Sim.UI.Web.Areas.Admin.Pages.Manager
 {
     using ViewModel;
     using Sim.Cross.Identity;
+
+    [Authorize(Roles = "Administrador")]
     public class RolesModel : PageModel
     {
         private readonly RoleManager<IdentityRole> _roleManager;

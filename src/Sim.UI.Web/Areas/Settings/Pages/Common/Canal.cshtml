@@ -34,7 +34,7 @@
                 <span asp-validation-for="Input.Setor" class="text-danger"></span>
             </div>
             <div class="col-md-auto align-self-end mt-3">
-                <button type="submit" class="btn btn-primary">Incluir Canal</button>
+                <button type="submit" class="btn btn-outline-primary">Incluir Canal</button>
             </div>
         </div>        
 
@@ -64,7 +64,7 @@
                             </td>
 
                             <td>
-                                <button asp-page-handler="Remove" val asp-route-id="@item.Id" class="btn btn-sm btn-danger">Remover</button>
+                                <button asp-page-handler="Remove" val asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
                             </td>
                         </tr>
                     }

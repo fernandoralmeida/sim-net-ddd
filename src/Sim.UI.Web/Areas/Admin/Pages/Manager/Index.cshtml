@@ -3,7 +3,7 @@
 @{
     Layout = "_Layout.cshtml";
 
-    ViewData["Title"] = "Contas";
+    ViewData["Title"] = "Contas de Usuário";
     ViewData["ActivePage"] = AdminNavPages.Index;
 }
 
@@ -56,7 +56,7 @@
                     <td>
                     </td>
                     <td>
-                        <a asp-page="./UserRoles" asp-route-id="@item.Id" class="btn btn-sm btn-info" title="Editar"><i class="far fa-edit"></i></a>
+                        <a asp-page="./UserRoles" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary" title="Editar"><i class="fas fa-pen"></i></a>
                     </td>
                 </tr>
             }

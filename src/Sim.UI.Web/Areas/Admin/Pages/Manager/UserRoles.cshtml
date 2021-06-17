@@ -1,12 +1,12 @@
 ﻿@page
 @model Sim.UI.Web.Areas.Admin.Pages.Manager.UserRolesModel
 @{
-    ViewData["Title"] = "Roles";
+    ViewData["Title"] = "Perfil de Acesso";
 }
 
-<div class="row">
-    <div class="col-md-6">
-        <a asp-area="Admin" asp-page="./Index" class="link-primary">Voltar</a> | <b>Controle de Acessos</b>
+<div class="container">
+    <div class="col-md-6 mt-3">
+        <a asp-area="Admin" asp-page="./Index" class="link-primary">Voltar</a> | <b>Perfil do Usuário</b>
     </div>
 </div>
 <partial name="_StatusMessage" model="Model.StatusMessage" />
@@ -48,12 +48,11 @@
             </dd>
         </dl>
         <div class="col-md-5">
-            <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1">Nível de Acesso</span>
-                <select asp-for="Selecionado" asp-items="Model.RoleList" class="form-select" >
-                    <option selected></option>
+            <div class="d-flex mb-3">
+                <select asp-for="Selecionado" asp-items="Model.RoleList" class="form-select me-2" >
+                    <option selected>-- Associar Perfil --</option>
                 </select>
-                <button type="submit" asp-page-handler="AddRole" asp-route-id="@Model.Input.Id" class="btn btn-primary"><i class="fas fa-level-down-alt"></i></button>
+                <button type="submit" asp-page-handler="AddRole" asp-route-id="@Model.Input.Id" class="btn btn-outline-primary">Adicionar</button>
             </div>
         </div>
 
@@ -83,7 +82,7 @@
                                     </td>
 
                                     <td>
-                                        <button type="submit" asp-page-handler="RemoveRole" asp-route-id="@Model.Input.Id" asp-route-role="@item" class="btn btn-sm btn-danger" title="Excluir Role"><i class="fas fa-minus-square"></i></button>
+                                        <button type="submit" asp-page-handler="RemoveRole" asp-route-id="@Model.Input.Id" asp-route-role="@item" class="btn btn-sm btn-outline-danger" title="Excluir Role"><i class="fas fa-trash"></i></button>
                                     </td>
                                 </tr>
                             }
