@@ -53,7 +53,7 @@ namespace Sim.UI.Web.Pages.Empresa
 
         public void OnGet()
         {
-            Input = new() { Municipio = "Jau" };
+            Input = new() { Municipio = "Jau", ListaEmpresas = new List<BaseJucesp>().ToList() };
         }
 
         public async Task<IActionResult> OnPostAsync()

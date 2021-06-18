@@ -34,40 +34,56 @@
             int cont = 0;
         }
 
-        @if(Model != null)
-        { 
-
-        @foreach (var item in Model)
+        @if (Model != null)
         {
-            <tr>
-                <td>
-                    @{ cont++; }
-                    @cont
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Inscricao_Estadual)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CNPJ)
-                </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nome_Empresarial)
-                </td>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @{ cont++; }
+                        @cont
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Inscricao_Estadual)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CNPJ)
+                    </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.Regime_Apuracao)
-                </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome_Empresarial)
+                    </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.Data_Situacao_Cadastral)
-                </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Regime_Apuracao)
+                    </td>
 
-                <td>
-                    <a asp-page="./Jucesp-detail" asp-route-id="@item.CNPJ" class="btn btn-sm btn-outline-secondary" title="Alterar informações"><i class="fas fa-eye"></i></a>
-                </td>
-            </tr>
-        }
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Data_Situacao_Cadastral)
+                    </td>
+
+                    <td>
+                        <a href="#" class="btn btn-sm btn-outline-secondary viewbutton" data-secao="Empresa"  data-acao="Jucesp-detail" data-id="@item.CNPJ" data-bs-toggle="modal" data-bs-target="#viewmodal"><i class="fas fa-eye"></i></a>
+                    </td>
+                </tr>
+            }
         }
     </tbody>
 </table>
+
+<!-- Modal -->
+<div class="modal fade" id="viewmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="viewmodalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title" id="viewmodalLabel">Detalhes</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="viewmodalData"></p>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -30,6 +30,7 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
             [HiddenInput(DisplayValue = false)]
             public Guid Id { get; set; }
 
+            [Required]
             [DisplayName("Nome")]
             public string Nome { get; set; }
 
@@ -79,48 +80,45 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task OnPostAsync()
         {
             try
             {
-                if (!ModelState.IsValid)
-                { return Page(); }
-
-                var t = Task.Run(() =>
+                if (ModelState.IsValid)
                 {
 
-                    var sec = _appServiceSecretaria.GetById(ItemSelecionado);
-
-                    var input = new Setor()
+                    var t = Task.Run(() =>
                     {
-                        Nome = Input.Nome,
-                        Secretaria = sec,
-                        Ativo = true
-                    };
 
-                    _appServiceSetor.Add(input);
+                        var sec = _appServiceSecretaria.GetById(ItemSelecionado);
 
-                });
+                        var input = new Setor()
+                        {
+                            Nome = Input.Nome,
+                            Secretaria = sec,
+                            Ativo = true
+                        };
 
-                await t;
+                        _appServiceSetor.Add(input);
 
-                return RedirectToPage();
+                    });
+
+                    await t;
+                }
+
+                await OnLoad();
             }
             catch(Exception ex)
             {
                 StatusMessage = "Erro ao tentar incluír novo setor!" + "\n" + ex.Message;
-
-                return RedirectToPage();
             }
 
         }
 
-        public async Task<IActionResult> OnPostRemoveAsync(Guid id)
+        public async Task OnPostRemoveAsync(Guid id)
         {
             try
             {
-                if (!ModelState.IsValid)
-                { return Page(); }
 
                 var t = Task.Run(() =>
                 {
@@ -132,14 +130,11 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
                 });
 
                 await t;
-
-                return RedirectToPage();
+                await OnLoad();
             }
             catch (Exception ex)
             {
                 StatusMessage = "Erro ao tentar remover setor!" + "\n" + ex.Message;
-
-                return RedirectToPage();
             }
 
         }

@@ -29,6 +29,7 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
             [HiddenInput(DisplayValue = false)]
             public Guid Id { get; set; }
 
+            [Required]
             [DisplayName("Nome")]
             public string Nome { get; set; }
 
@@ -65,46 +66,45 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task OnPostAsync()
         {
             try
             {
-                if (!ModelState.IsValid)
-                { return Page(); }
-
-                var t = Task.Run(() =>
+                if (ModelState.IsValid)
                 {
 
-                    var input = new Tipo()
+                    var t = Task.Run(() =>
                     {
-                        Nome = Input.Nome,
-                        Owner = Input.Tipo,
-                        Ativo = true
-                    };
 
-                    _appServiceTipo.Add(input);
+                        var input = new Tipo()
+                        {
+                            Nome = Input.Nome,
+                            Owner = Input.Tipo,
+                            Ativo = true
+                        };
 
-                });
+                        _appServiceTipo.Add(input);
 
-                await t;
+                    });
 
-                return RedirectToPage();
+                    await t;
+
+                }
+                await OnLoad();
             }
             catch (Exception ex)
             {
                 StatusMessage = "Erro ao tentar incluír novo tipo!" + "\n" + ex.Message;
 
-                return RedirectToPage();
             }
 
         }
 
-        public async Task<IActionResult> OnPostRemoveAsync(Guid id)
+        public async Task OnPostRemoveAsync(Guid id)
         {
             try
             {
-                if (!ModelState.IsValid)
-                { return Page(); }
+
 
                 var t = Task.Run(() =>
                 {
@@ -116,16 +116,12 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
                 });
 
                 await t;
-
-                return RedirectToPage();
+                await OnLoad();
             }
             catch (Exception ex)
             {
                 StatusMessage = "Erro ao tentar remover tipo!" + "\n" + ex.Message;
-
-                return RedirectToPage();
             }
-
         }
     }
 }

@@ -72,7 +72,7 @@ namespace Sim.UI.Web.Areas.Censo.Pages.Empresas
         public async Task OnGetAsync()
         {
             await LoadMunicipios();
-            Input = new() { Municipio = "6607" };
+            Input = new() { Municipio = "6607", ListaEmpresas = new List<BaseReceitaFederal>().ToList() };
         }
 
         public async Task<IActionResult> OnPostAsync()

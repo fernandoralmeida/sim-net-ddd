@@ -21,3 +21,16 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 // DOMContentLoaded  end
+
+$(".viewbutton").on("click", function () {
+    var customerId = $(this).data('id');
+    var secao = $(this).data('secao');
+    var acao = $(this).data('acao');
+    $.ajax({
+        url: "/" + secao + "/" + acao + "?id=" + customerId,
+        cache: false
+    }).done(function (data) {
+        $("#viewmodalData").html(data);
+    });
+});
+

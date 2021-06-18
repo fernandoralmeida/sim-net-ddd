@@ -50,7 +50,7 @@ namespace Sim.UI.Web.Pages.Empresa
 
         public void OnGet()
         {
-            Input = new() { Municipio = "Jau" };
+            Input = new() { Municipio = "Jau", ListaEmpresas = new List<BaseJucesp>().ToList() };
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -63,7 +63,7 @@ namespace Sim.UI.Web.Pages.Empresa
 
                     await emp;
 
-                    StatusMessage = "Erro:" + Input.RazaoSocial + "\\n" + Input.Municipio;
+                    //StatusMessage = "Erro:" + Input.RazaoSocial + "\\n" + Input.Municipio;
 
                     Input = new InputModel
                     {

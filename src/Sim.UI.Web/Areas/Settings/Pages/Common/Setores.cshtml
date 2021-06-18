@@ -17,17 +17,14 @@
             <div class="col-md-12" hidden>
                 <label asp-for="Input.Id" class="form-label"></label>
                 <input asp-for="Input.Id" class="form-control" />
-                <span asp-validation-for="Input.Id" class="text-danger"></span>
             </div>
             <div class="col-md-4">
                 <label asp-for="Input.Nome" class="form-label"></label>
                 <input asp-for="Input.Nome" class="form-control" />
-                <span asp-validation-for="Input.Nome" class="text-danger"></span>
             </div>
             <div class="col-md-5">
                 <label asp-for="Secretarias" class="form-label"></label>
                 <select asp-for="ItemSelecionado" class="form-select" asp-items="Model.Secretarias"></select>
-                <span asp-validation-for="Input.Secretaria" class="text-danger"></span>
             </div>
             <div class="col-md-auto align-self-end mt-3">
                 <button type="submit" class="btn btn-outline-primary">Incluir Setor</button>

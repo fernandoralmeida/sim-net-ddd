@@ -50,11 +50,11 @@ namespace Sim.UI.Web.Pages.Empresa
 
         private async Task LoadAsync()
         {
-            var t = await _empresaApp.ListTop10();
-
+            var t = Task.Run(() => { });
+            await t;
             Input = new InputModel
             {
-                ListaEmpresas = t
+                ListaEmpresas = new List<BaseJucesp>().ToList()
             };
         }
 

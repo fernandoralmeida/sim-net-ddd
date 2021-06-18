@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Sim.UI.Web.Pages.Planner
 {
-    [Authorize]
+    [Authorize(Roles = "Administrador")]
     public class IndexModel : PageModel
     {
         public IndexModel() { }

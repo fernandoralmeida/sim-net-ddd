@@ -12,9 +12,9 @@
 <div class="mt-5 mb-5">
     <form method="post">
         <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-            <div class="d-flex col-5">
-                <input asp-for="Input.Municipio" placeholder="Municipio" class="form-control form-control-sm me-2" />
-                <select asp-for="Input.Atividade" asp-items="@Model.ListaCnaes" class="form-select form-select-sm me-2" aria-describedby="button-addon2">
+            <div class="d-flex">
+                <input asp-for="Input.Municipio" placeholder="Municipio" class="form-control form-control-sm me-2" style="max-width:150px;" />
+                <select asp-for="Input.Atividade" asp-items="@Model.ListaCnaes" class="form-select form-select-sm me-2" aria-describedby="button-addon2" style="max-width:250px;">
                     <option selected>-- Atividade --</option>
                 </select>
                 <button class="btn btn-sm btn-outline-primary" type="submit" role="button" id="button-addon2"><i class="fa fa-search"></i></button>

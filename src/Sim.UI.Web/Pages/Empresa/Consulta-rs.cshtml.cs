@@ -49,13 +49,13 @@ namespace Sim.UI.Web.Pages.Empresa
 
         private async Task LoadAsync()
         {
-            var t = Task.Run(() => _empresaApp.List());
+            var t = Task.Run(() => { });
 
             await t;
 
             Input = new InputModel
             {
-                ListaEmpresas = t.Result
+                ListaEmpresas = new List<Empresa>().ToList()
             };
         }
 

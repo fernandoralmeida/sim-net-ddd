@@ -32,6 +32,9 @@
                     <th>
                         Contato
                     </th>
+                    <th>
+
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -49,6 +52,9 @@
 
                             @Html.DisplayFor(modelItem => Model.Input.Pessoa.Tel_Movel)
                         </td>
+                        <td>
+                            <a href="#" class="btn btn-sm btn-outline-secondary viewbutton" data-secao="Pessoa" data-acao="Details" data-id="@Model.Input.Pessoa.Id" data-bs-toggle="modal" data-bs-target="#viewmodal"><i class="fas fa-eye"></i></a>
+                        </td>
                     </tr>
                 }
                 @if (Model.Input.Empresa != null)
@@ -64,6 +70,9 @@
                             @Html.DisplayFor(modelItem => Model.Input.Empresa.Email)
 
                             @Html.DisplayFor(modelItem => Model.Input.Empresa.Telefone)
+                        </td>
+                        <td>
+                            <a href="#" class="btn btn-sm btn-outline-secondary viewbutton" data-secao="Empresa" data-acao="Perfil" data-id="@Model.Input.Empresa.Id" data-bs-toggle="modal" data-bs-target="#viewmodal"><i class="fas fa-eye"></i></a>
                         </td>
                     </tr>
                 }
@@ -88,7 +97,7 @@
             <div class="col-md-4 mb-2">
                 <label class="form-label" for="floatingservico">Serviços Disponível</label>
                 <select asp-for="GetServico" class="form-control" size="10"></select>
-                
+
             </div>
             <div class="col-md-4 mb-2">
                 <label class="form-label">Serviços Realizado</label>
@@ -108,7 +117,7 @@
                 <label asp-for="Input.Descricao"></label>
             </div>
             <div class="col-md-9 mb-3">
-                <textarea asp-for="Input.Descricao" class="form-control" rows="2"></textarea>                
+                <textarea asp-for="Input.Descricao" class="form-control" rows="2"></textarea>
             </div>
             <div class="col-md-3">
                 <div class="d-grid gap-2">
@@ -118,6 +127,21 @@
         </div>
     </div>
 </form>
+
+<!-- Modal -->
+<div class="modal fade" id="viewmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="viewmodalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title" id="viewmodalLabel">Detalhes</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="viewmodalData"></p>
+            </div>
+        </div>
+    </div>
+</div>
 
 @section scripts{
     <script>
@@ -156,7 +180,7 @@
                     $(`#ServicosSelecionados option[value="${meuServico}"]`).remove();
                 }
             });
-            
+
             $("#addbtn").on("click", function () {
                 var selected_val = $.map($(`#ServicosSelecionados option`), function (a) {
                     return a.value;
@@ -165,6 +189,8 @@
             });
         });
     </script>
+
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script src="~/js/jquery.validation.js"></script>
 }
+

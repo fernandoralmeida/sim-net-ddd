@@ -69,7 +69,7 @@ namespace Sim.UI.Web.Pages.Empresa
         public async Task OnGetAsync()
         {
             await LoadCnaes();
-            Input = new() { Municipio = "Jau" };
+            Input = new() { Municipio = "Jau", ListaEmpresas = new List<BaseJucesp>().ToList() };
         }
 
         public async Task<IActionResult> OnPostAsync()

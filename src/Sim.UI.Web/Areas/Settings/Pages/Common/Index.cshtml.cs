@@ -27,6 +27,7 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
             [HiddenInput(DisplayValue = false)]
             public Guid Id { get; set; }
 
+            [Required]
             [DisplayName("Nome")]
             public string Nome { get; set; }
 
@@ -61,36 +62,37 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
             OnLoad().Wait();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task OnPostAsync()
         {
-            if(!ModelState.IsValid)
-            { return Page(); }
-
-            var t = Task.Run(() =>
+            if (ModelState.IsValid)
             {
 
-                var input = new Secretaria()
+                var t = Task.Run(() =>
                 {
-                    Nome = Input.Nome,
-                    Owner = Input.Owner,
-                    Ativo = true
-                };
 
-                _appServiceSecretaria.Add(input);
+                    var input = new Secretaria()
+                    {
+                        Nome = Input.Nome,
+                        Owner = Input.Owner,
+                        Ativo = true
+                    };
 
-            });
+                    _appServiceSecretaria.Add(input);
 
-            await t;
-                      
-            return RedirectToPage();
+                });
+
+                await t;
+
+            }
+
+            await OnLoad();
         }
 
-        public async Task<IActionResult> OnPostRemoveAsync(Guid id)
+        public async Task OnPostRemoveAsync(Guid id)
         {
             try
             {
-                if (!ModelState.IsValid)
-                { return Page(); }
+
 
                 var t = Task.Run(() =>
                 {
@@ -99,13 +101,11 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
                 });
 
                 await t;
-
-                return RedirectToPage();
+                await OnLoad();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 StatusMessage = "Erro ao tentar remover Secretaria!" + "\n" + ex.Message;
-                return Page();
             }
         }
     }

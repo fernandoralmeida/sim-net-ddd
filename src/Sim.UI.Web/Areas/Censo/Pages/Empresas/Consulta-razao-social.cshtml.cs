@@ -65,12 +65,10 @@ namespace Sim.UI.Web.Areas.Censo.Pages.Empresas
         {
             await LoadMunicipios();
 
-            var emp = await _empresaApp.ListByCnpjAsync("99999999999999");
-
             Input = new InputModel
             {
                 Municipio = "6607",
-                ListaEmpresas = emp
+                ListaEmpresas = new List<BaseReceitaFederal>().ToList()
             };
             return Page();
         }

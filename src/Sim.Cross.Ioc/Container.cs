@@ -38,6 +38,8 @@ namespace Sim.Cross.Ioc
     using Sim.Domain.Cnpj.Interface;
     using Sim.Domain.Cnpj.Entity;
 
+    using Sim.Domain.Cnpj.Service;
+
 
     public static class Container
     {
@@ -77,6 +79,8 @@ namespace Sim.Cross.Ioc
             services.AddScoped<ICNPJBase<BaseJucesp>, RepositoryJucesp>();
             services.AddScoped<IBase<CNAE>, RepositoryCNAEs>();
             services.AddScoped<IBase<Municipio>, RepositoryMunicipios>();
+
+            services.AddScoped<IServiceCnpj<BaseReceitaFederal>, ServiceRFB>();
 
             /**/
             services.AddScoped<IAppServiceBase<Domain.SDE.Entity.Empresa>, AppServiceBase<Domain.SDE.Entity.Empresa>>();

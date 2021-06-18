@@ -20,12 +20,15 @@ namespace Sim.UI.Web.Areas.Censo.Pages.Empresas
     {
         private readonly ICNPJBase<BaseReceitaFederal> _empresaApp;
         private readonly IBase<Municipio> _municipios;
+        private readonly IServiceCnpj<BaseReceitaFederal> _appServiceCNPJ;
 
         public Consulta_bairroModel(ICNPJBase<BaseReceitaFederal> appServiceEmpresa,
-            IBase<Municipio> municipios)
+            IBase<Municipio> municipios,
+            IServiceCnpj<BaseReceitaFederal> appServiceCNPJ)
         {
             _empresaApp = appServiceEmpresa;
             _municipios = municipios;
+            _appServiceCNPJ = appServiceCNPJ;
         }
 
         [TempData]
@@ -45,6 +48,8 @@ namespace Sim.UI.Web.Areas.Censo.Pages.Empresas
             [Required]
             [DisplayName("Logradouro")]
             public string Bairro { get; set; }
+
+            public string Situacao { get; set; }
 
             public IEnumerable<BaseReceitaFederal> ListaEmpresas { get; set; }
 
@@ -69,7 +74,7 @@ namespace Sim.UI.Web.Areas.Censo.Pages.Empresas
         public async Task OnGetAsync()
         {
             await LoadMunicipios();
-            Input = new() { Municipio = "6607" };
+            Input = new() { Municipio = "6607", ListaEmpresas = new List<BaseReceitaFederal>().ToList() };
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -80,12 +85,18 @@ namespace Sim.UI.Web.Areas.Censo.Pages.Empresas
                 {
                     await LoadMunicipios();
 
+
                     var emp = await _empresaApp.ListByBairroAsync(Input.Bairro, Input.Municipio);
+
+                    //StatusMessage = emp.Count().ToString();
+
+                    //var t = await _appServiceCNPJ.EmpresasAtivas(emp);
 
                     Input = new InputModel
                     {
                         ListaEmpresas = emp
                     };
+
                 }
 
             }

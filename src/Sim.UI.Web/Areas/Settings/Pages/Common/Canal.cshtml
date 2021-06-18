@@ -20,18 +20,15 @@
         <div class="row mb-5 justify-content-center">
             <div class="col-md-4">
                 <label asp-for="Input.Nome" class="form-label"></label>
-                <input asp-for="Input.Nome" class="form-control" />
-                <span asp-validation-for="Input.Nome" class="text-danger"></span>
+                <input asp-for="Input.Nome" class="form-control" placeholder="Canal de atendimento" />
             </div>
             <div class="col-md">
                 <label asp-for="Input.Secretaria" class="form-label"></label>
                 <select asp-for="SecretariaSelecionada" class="form-select" asp-items="Model.Secretarias"></select>
-                <span asp-validation-for="Input.Secretaria" class="text-danger"></span>
             </div>
             <div class="col-md-3">
                 <label asp-for="Input.Setor" class="form-label"></label>
                 <select asp-for="SetorSelecionado" class="form-select" asp-items="Model.Setores"></select>
-                <span asp-validation-for="Input.Setor" class="text-danger"></span>
             </div>
             <div class="col-md-auto align-self-end mt-3">
                 <button type="submit" class="btn btn-outline-primary">Incluir Canal</button>

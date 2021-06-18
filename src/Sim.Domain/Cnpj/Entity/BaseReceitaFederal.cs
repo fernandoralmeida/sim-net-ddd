@@ -47,5 +47,30 @@ namespace Sim.Domain.Cnpj.Entity
         public virtual Municipio Cidade { get; private set; }
         public virtual QualificacaoSocio QualificacaoSocio { get; private set; }
 
+        public bool EmpresaNula(BaseReceitaFederal obj)
+        {
+            return obj.Estabelecimento.SituacaoCadastral.Equals("01");
+        }
+
+        public bool EmpresaAtiva(BaseReceitaFederal obj)
+        {
+            return obj.Estabelecimento.SituacaoCadastral.Equals("02");
+        }
+
+        public bool EmpresaSuspensa(BaseReceitaFederal obj)
+        {
+            return obj.Estabelecimento.SituacaoCadastral.Equals("03"); 
+        }
+
+        public bool EmpresaInapta(BaseReceitaFederal obj)
+        {
+            return obj.Estabelecimento.SituacaoCadastral.Equals("04"); 
+        }
+        
+        public bool EmpresaBaixada(BaseReceitaFederal obj)
+        {
+            return obj.Estabelecimento.SituacaoCadastral.Equals("08"); 
+        }
+
     }
 }

@@ -8,12 +8,13 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarScroll">
             <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
-                <li class="nav-item">
+                <li class="nav-item" hidden>
                     <a class="nav-link @EmpresaNavPages.InicioNavClass(ViewContext)" asp-page="./Index">Listar</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle @EmpresaNavPages.ConsultaNomeNavClass(ViewContext) @EmpresaNavPages.ConsultaCNPJNavClass(ViewContext)" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Consultar</a>
                     <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" asp-page="./Index">Por CNPJ</a></li>
                         <li><a class="dropdown-item" asp-page="./Consulta-razao-social">Razao Social</a></li>
                         <li><a class="dropdown-item" asp-page="./Consulta-socio">Nome Sócio</a></li>
                         <li><a class="dropdown-item" asp-page="./Consulta-cnae">Por Atividade</a></li>
