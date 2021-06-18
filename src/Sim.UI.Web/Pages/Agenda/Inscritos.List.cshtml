@@ -35,8 +35,8 @@
                 <th>
                     Contato
                 </th>
-                <th hidden>
-                    Ação
+                <th >
+                    Data
                 </th>
             </tr>
         </thead>
@@ -65,8 +65,8 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Participante.Tel_Movel)
                 </td>
-                <td hidden>
-                    <a asp-page="./Inscricao.Remove" asp-route-id="@Model.Input.Codigo" class="btn btn-sm btn-danger"><i class="fas fa-minus-circle"></i></a>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Data_Inscricao)
                 </td>
             </tr>
             }

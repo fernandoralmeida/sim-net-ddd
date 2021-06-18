@@ -91,6 +91,7 @@ namespace Sim.UI.Web.Areas.Censo.Pages.Empresas
                     //StatusMessage = emp.Count().ToString();
 
                     //var t = await _appServiceCNPJ.EmpresasAtivas(emp);
+                    //StatusMessage = t.Count().ToString();
 
                     Input = new InputModel
                     {

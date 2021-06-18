@@ -58,11 +58,10 @@ body {
     background-color: #f8f8f8 !important;
 }
 
-/*
-.table > :not(:last-child) > :last-child > * {
-    border-bottom-width: 4px;
-    border-bottom-color: #dfe0e1;
-}*/
+/**/
+.table {
+    font-size:10.5pt;
+}
 
 .footer {
     position: absolute;

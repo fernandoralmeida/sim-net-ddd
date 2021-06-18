@@ -32,7 +32,7 @@ namespace Sim.Cross.Data.Repository.Shared
                 .Include(p => p.Participante)
                 .Include(e => e.Empresa)
                 .Include(e=>e.Evento)
-                .Where(s => s.Evento.Codigo == eve.Codigo);
+                .Where(s => s.Evento.Codigo == eve.Codigo).OrderBy(s=>s.Data_Inscricao);
 
             eve.Inscritos = insc.ToList();
 
