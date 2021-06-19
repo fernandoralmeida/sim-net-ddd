@@ -8,8 +8,8 @@ namespace Sim.Application.Shared.Interface
 {
     using Domain.Shared.Entity;
     using Application.Interface;
-    public interface IAppServicePlaner : IAppServiceBase<Planer>
+    public interface IAppServicePlaner : IAppServiceBase<Planner>
     {
-        IEnumerable<Planer> GetByData(DateTime? data);
+        IEnumerable<Planner> GetByData(DateTime? data);
     }
 }

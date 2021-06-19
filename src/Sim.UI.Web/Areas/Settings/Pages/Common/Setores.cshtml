@@ -27,7 +27,7 @@
                 <select asp-for="ItemSelecionado" class="form-select" asp-items="Model.Secretarias"></select>
             </div>
             <div class="col-md-auto align-self-end mt-3">
-                <button type="submit" class="btn btn-outline-primary">Incluir Setor</button>
+                <button type="submit" asp-page-handler="Add" class="btn btn-outline-primary">Incluir Setor</button>
             </div>
         </div>
 

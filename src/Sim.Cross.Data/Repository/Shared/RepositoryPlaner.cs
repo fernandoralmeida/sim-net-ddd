@@ -9,7 +9,7 @@ namespace Sim.Cross.Data.Repository.Shared
     using Sim.Domain.Shared.Entity;
     using Sim.Domain.Shared.Interface;
     using Context;
-    public class RepositoryPlaner : RepositoryBase<Planer>, IRepositoryPlaner
+    public class RepositoryPlaner : RepositoryBase<Planner>, IRepositoryPlaner
     {
         public RepositoryPlaner(ApplicationContext dbContext)
             :base(dbContext)
@@ -17,9 +17,9 @@ namespace Sim.Cross.Data.Repository.Shared
 
         }
 
-        public IEnumerable<Planer> GetByData(DateTime? data)
+        public IEnumerable<Planner> GetByData(DateTime? data)
         {
-            return _db.Planer.Where(u => u.Data == data);
+            return _db.Planner.Where(u => u.Data == data);
         }
     }
 }

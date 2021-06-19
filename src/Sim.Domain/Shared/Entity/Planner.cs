@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Sim.Domain.Shared.Entity
 {
-    public class Planer
+    public class Planner
     {
-        public Planer()
+        public Planner()
         {
 
         }

@@ -9,9 +9,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace Sim.Cross.Data.Config.Entity
 {
     using Sim.Domain.Shared.Entity;
-    public class PlanerMap : IEntityTypeConfiguration<Planer>
+    public class PlannerMap : IEntityTypeConfiguration<Planner>
     {
-        public void Configure(EntityTypeBuilder<Planer> builder)
+        public void Configure(EntityTypeBuilder<Planner> builder)
         {
             builder.HasKey(c => c.Id);
             builder.Property(c => c.Segunda)

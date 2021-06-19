@@ -62,7 +62,7 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
             OnLoad().Wait();
         }
 
-        public async Task OnPostAsync()
+        public async Task OnPostAddAsync()
         {
             if (ModelState.IsValid)
             {

@@ -78,14 +78,15 @@
     <tbody>
         <tr>
             <td>@Html.DisplayFor(modelitem => Model.Input.Estabelecimento.CEP)</td>
-            <td>@Html.DisplayFor(modelitem => Model.Input.Estabelecimento.TipoLogradouro)
+            <td>
+                @Html.DisplayFor(modelitem => Model.Input.Estabelecimento.TipoLogradouro)
             @Html.DisplayFor(modelitem => Model.Input.Estabelecimento.Logradouro)
             @Html.DisplayFor(modelitem => Model.Input.Estabelecimento.Numero)
-            </td>
-            <td>@Html.DisplayFor(modelitem => Model.Input.Estabelecimento.Bairro)</td>
-            <td>@Html.DisplayFor(modelitem => Model.Input.Cidade.Descricao)</td>
-        </tr>
-    </tbody>
+        </td>
+        <td>@Html.DisplayFor(modelitem => Model.Input.Estabelecimento.Bairro)</td>
+        <td>@Html.DisplayFor(modelitem => Model.Input.Cidade.Descricao)</td>
+    </tr>
+</tbody>
 </table>
 
 <table class="table table-light table-striped table-bordered">
@@ -117,6 +118,8 @@
     </tbody>
 </table>
 
+@if (Model.Input.SimplesNacional != null)
+{
 <table class="table table-light table-striped table-bordered">
     <caption>Simples Nacional</caption>
     <thead>
@@ -142,53 +145,48 @@
         </tr>
     </tbody>
 </table>
+}
 
-<table class="table table-light table-striped table-bordered">
-    <caption>Quadro Social</caption>
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Identificação</th>
-            <th scope="col">Nome</th>
-            <th scope="col">CPF/CNPJ</th>
-            <th scope="col">Qualificação</th>
-            <th scope="col">Faixa Etária</th>
-        </tr>
-    </thead>
-    <tbody>
+@if (Model.Input.Socios.Count() > 0)
+{
+    <table class="table table-light table-striped table-bordered">
+        <caption>Quadro Social</caption>
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Identificação</th>
+                <th scope="col">Nome</th>
+                <th scope="col">CPF/CNPJ</th>
+                <th scope="col">Qualificação</th>
+                <th scope="col">Faixa Etária</th>
+            </tr>
+        </thead>
+        <tbody>
 
-        @{
+            @{
+            
             int cont = 0;
 
-        }
-        @if (Model.Input.Socios != null)
-        {
-            foreach (var item in Model.Input.Socios)
+            }
+
+            @foreach (var item in Model.Input.Socios)
             {
 
-                <tr>
-                    <th scope="row">
-                        @{ cont++; }
-                        @cont
-                    </th>
-                    <td>@Html.DisplayFor(modelItem => item.IdentificadorSocio)</td>
-                    <td>@Html.DisplayFor(modelItem => item.NomeRazaoSocio)</td>
-                    <td>@Html.DisplayFor(modelItem => item.CnpjCpfSocio)</td>
-                    <td>@Html.DisplayFor(modelItem => item.QualificacaoSocio)</td>
-                    <td>@Html.DisplayFor(modelItem => item.FaixaEtaria)</td>
-                </tr>
-            }
-        }
-        else
-        {
             <tr>
                 <th scope="row">
                     @{ cont++; }
                     @cont
                 </th>
-                <td colspan="3">Empresa não possui quadro de sócios</td>
+                <td>@Html.DisplayFor(modelItem => item.IdentificadorSocio)</td>
+                <td>@Html.DisplayFor(modelItem => item.NomeRazaoSocio)</td>
+                <td>@Html.DisplayFor(modelItem => item.CnpjCpfSocio)</td>
+                <td>@Html.DisplayFor(modelItem => item.QualificacaoSocio)</td>
+                <td>@Html.DisplayFor(modelItem => item.FaixaEtaria)</td>
             </tr>
-        }
+            }
 
-    </tbody>
-</table>
+        </tbody>
+    </table>
+}
+
+

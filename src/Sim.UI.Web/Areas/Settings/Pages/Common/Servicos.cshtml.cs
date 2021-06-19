@@ -98,7 +98,7 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
             return Page();
         }
 
-        public async Task OnPostAsync()
+        public async Task OnPostAddAsync()
         {
             try
             {

@@ -9,13 +9,13 @@ namespace Sim.Domain.Shared.Service
     using Entity;
     using Domain.Service;
     using Interface;
-    public class ServicePlaner : ServiceBase<Planer>, IServicePlaner
+    public class ServicePlaner : ServiceBase<Planner>, IServicePlaner
     {
         private readonly IRepositoryPlaner _planer;
         public ServicePlaner(IRepositoryPlaner repositoryPlaner)
             :base(repositoryPlaner)
         { _planer = repositoryPlaner; }
-        public IEnumerable<Planer> GetByData(DateTime? data)
+        public IEnumerable<Planner> GetByData(DateTime? data)
         {
             return _planer.GetByData(data);
         }

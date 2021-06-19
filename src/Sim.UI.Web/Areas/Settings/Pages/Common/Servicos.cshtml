@@ -31,7 +31,7 @@
                 <select asp-for="SetorSelecionado" class="form-select" asp-items="Model.Setores"></select>
             </div>
             <div class="col-md-auto align-self-end mt-3">
-                <button type="submit" class="btn btn-outline-primary">Incluir Serviço</button>
+                <button type="submit" asp-page-handler="Add" class="btn btn-outline-primary">Incluir Serviço</button>
             </div>
         </div>
 

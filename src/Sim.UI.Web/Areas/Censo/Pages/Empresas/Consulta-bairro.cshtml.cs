@@ -83,22 +83,44 @@ namespace Sim.UI.Web.Areas.Censo.Pages.Empresas
             {
                 if (ModelState.IsValid)
                 {
-                    await LoadMunicipios();
-
-
                     var emp = await _empresaApp.ListByBairroAsync(Input.Bairro, Input.Municipio);
 
-                    //StatusMessage = emp.Count().ToString();
+                    IEnumerable<BaseReceitaFederal> t = new List<BaseReceitaFederal>();
 
-                    //var t = await _appServiceCNPJ.EmpresasAtivas(emp);
-                    //StatusMessage = t.Count().ToString();
+                    switch(Input.Situacao)
+                    {
+                        case "Ativa":
+                            t = await _appServiceCNPJ.EmpresasAtivas(emp);
+                            break;
 
+                        case "Nula":
+                            t = await _appServiceCNPJ.EmpresasNulas(emp);
+                            break;
+
+                        case "Suspensa":
+                            t = await _appServiceCNPJ.EmpresasSuspensas(emp);
+                            break;
+
+                        case "Inapta":
+                            t = await _appServiceCNPJ.EmpresasInaptas(emp);
+                            break;
+
+                        case "Baixada":
+                            t = await _appServiceCNPJ.EmpresasBaixadas(emp);
+                            break;
+
+                        default:
+                            break;   
+                    }                                       
+                    
                     Input = new InputModel
                     {
-                        ListaEmpresas = emp
+                        ListaEmpresas = t
                     };
 
                 }
+
+                await LoadMunicipios();
 
             }
             catch (Exception ex)

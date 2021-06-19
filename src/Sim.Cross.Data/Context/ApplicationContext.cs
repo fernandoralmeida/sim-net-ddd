@@ -32,7 +32,7 @@ namespace Sim.Cross.Data.Context
         public DbSet<Atendimento> Atendimento { get; set; }
         public DbSet<Canal> Canal { get; set; }
         public DbSet<Evento> Evento { get; set; }
-        public DbSet<Planer> Planer { get; set; }
+        public DbSet<Planner> Planner { get; set; }
         public DbSet<Secretaria> Secretaria { get; set; }
         public DbSet<Servico> Servico { get; set; }
         public DbSet<Setor> Setor { get; set; }
@@ -74,7 +74,7 @@ namespace Sim.Cross.Data.Context
             modelBuilder.Entity<Atendimento>().ToTable("Atendimento");            
             modelBuilder.Entity<Canal>().ToTable("Canal");
             modelBuilder.Entity<Evento>().ToTable("Evento");
-            modelBuilder.Entity<Planer>().ToTable("Planer");
+            modelBuilder.Entity<Planner>().ToTable("Planer");
             modelBuilder.Entity<Secretaria>().ToTable("Secretaria");
             modelBuilder.Entity<Setor>().ToTable("Setor");
             modelBuilder.Entity<Servico>().ToTable("Servico");
@@ -89,7 +89,7 @@ namespace Sim.Cross.Data.Context
             modelBuilder.ApplyConfiguration(new Config.Entity.DIAMap());
             modelBuilder.ApplyConfiguration(new Config.Entity.EmpresaMap());
             modelBuilder.ApplyConfiguration(new Config.Entity.PessoaMap());
-            modelBuilder.ApplyConfiguration(new Config.Entity.PlanerMap());
+            modelBuilder.ApplyConfiguration(new Config.Entity.PlannerMap());
             //modelBuilder.ApplyConfiguration(new Config.Entity.QSAMap());
             modelBuilder.ApplyConfiguration(new Config.Entity.SecretariaMap());
             modelBuilder.ApplyConfiguration(new Config.Entity.ServicoMap());

@@ -66,13 +66,14 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
             return Page();
         }
 
-        public async Task OnPostAsync()
+        public async Task OnPostAddAsync()
         {
             try
             {
+                
                 if (ModelState.IsValid)
                 {
-
+                    
                     var t = Task.Run(() =>
                     {
 
@@ -105,7 +106,7 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
             try
             {
 
-
+                
                 var t = Task.Run(() =>
                 {
 
@@ -117,6 +118,7 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
 
                 await t;
                 await OnLoad();
+
             }
             catch (Exception ex)
             {

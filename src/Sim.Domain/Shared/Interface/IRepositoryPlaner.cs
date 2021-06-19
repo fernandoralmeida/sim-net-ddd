@@ -8,8 +8,8 @@ namespace Sim.Domain.Shared.Interface
 {
     using Entity;
     using Domain.Interface;
-    public interface IRepositoryPlaner : IRepositoryBase<Planer>
+    public interface IRepositoryPlaner : IRepositoryBase<Planner>
     {
-        IEnumerable<Planer> GetByData(DateTime? data);
+        IEnumerable<Planner> GetByData(DateTime? data);
     }
 }

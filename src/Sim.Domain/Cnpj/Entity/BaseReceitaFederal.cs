@@ -49,27 +49,27 @@ namespace Sim.Domain.Cnpj.Entity
 
         public bool EmpresaNula(BaseReceitaFederal obj)
         {
-            return obj.Estabelecimento.SituacaoCadastral.Equals("01");
+            return obj.Estabelecimento.SituacaoCadastral == "Nula";
         }
 
         public bool EmpresaAtiva(BaseReceitaFederal obj)
         {
-            return obj.Estabelecimento.SituacaoCadastral.Equals("02");
+            return obj.Estabelecimento.SituacaoCadastral == "Ativa";
         }
 
         public bool EmpresaSuspensa(BaseReceitaFederal obj)
         {
-            return obj.Estabelecimento.SituacaoCadastral.Equals("03"); 
+            return obj.Estabelecimento.SituacaoCadastral == "Suspensa"; 
         }
 
         public bool EmpresaInapta(BaseReceitaFederal obj)
         {
-            return obj.Estabelecimento.SituacaoCadastral.Equals("04"); 
+            return obj.Estabelecimento.SituacaoCadastral == "Inapita"; 
         }
         
         public bool EmpresaBaixada(BaseReceitaFederal obj)
         {
-            return obj.Estabelecimento.SituacaoCadastral.Equals("08"); 
+            return obj.Estabelecimento.SituacaoCadastral == "Baixada"; 
         }
 
     }

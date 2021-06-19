@@ -13,19 +13,19 @@
     <form method="post">
         <div class="d-grid gap-2 d-md-flex justify-content-md-center">
             <div class="d-flex">
-                <select asp-for="Input.Municipio" placeholder="Municipio" class="form-select form-select-sm me-2" asp-items="@Model.ListaMunicipios"></select>
+                <select asp-for="Input.Municipio" placeholder="Municipio" class="form-select me-2" asp-items="@Model.ListaMunicipios"></select>
 
-                <input asp-for="Input.Bairro" placeholder="Bairro" class="form-control form-control-sm me-2" aria-describedby="button-addon2" />
+                <input asp-for="Input.Bairro" placeholder="Bairro" class="form-control me-2" aria-describedby="button-addon2" />
                 
-                <select asp-for="Input.Situacao" placeholder="Municipio" class="form-select form-select-sm me-2" hidden>
-                    <option selected value="02">Ativa</option>
-                    <option value="01">Nula</option>
-                    <option value="03">Suspensa</option>
-                    <option value="04">Inapta</option>
-                    <option value="08">Baixada</option>
+                <select asp-for="Input.Situacao" placeholder="Municipio" class="form-select me-2">
+                    <option selected>Ativa</option>
+                    <option>Nula</option>
+                    <option>Suspensa</option>
+                    <option>Inapta</option>
+                    <option>Baixada</option>
                 </select>
 
-                <button class="btn btn-sm btn-outline-primary" type="submit" role="button" id="button-addon2"><i class="fa fa-search"></i></button>
+                <button class="btn btn-outline-primary" type="submit" role="button" id="button-addon2"><i class="fa fa-search"></i></button>
 
             </div>
         </div>

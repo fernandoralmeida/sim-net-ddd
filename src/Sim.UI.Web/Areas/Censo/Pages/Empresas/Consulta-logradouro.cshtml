@@ -13,11 +13,11 @@
     <form method="post">
         <div class="d-grid gap-2 d-md-flex justify-content-md-center">
             <div class="d-flex">
-                <select asp-for="Input.Municipio" placeholder="Municipio" class="form-select form-select-sm me-2" asp-items="@Model.ListaMunicipios"></select>
+                <select asp-for="Input.Municipio" placeholder="Municipio" class="form-select me-2" asp-items="@Model.ListaMunicipios"></select>
             
 
-                <input asp-for="Input.Logradouro" placeholder="Logradouro" class="form-control form-control-sm me-2" aria-describedby="button-addon2" />
-                    <button class="btn btn-sm btn-outline-primary" type="submit" role="button" id="button-addon2"><i class="fa fa-search"></i></button>
+                <input asp-for="Input.Logradouro" placeholder="Logradouro" class="form-control me-2" aria-describedby="button-addon2" />
+                    <button class="btn btn-outline-primary" type="submit" role="button" id="button-addon2"><i class="fa fa-search"></i></button>
                
             </div>
         </div>
