@@ -44,7 +44,7 @@ namespace Sim.Domain.Cnpj.Entity
         private string Porte(string valor)
         {
             if (valor == "01")
-                return "Não informado";
+                return "ME";
 
             else if (valor == "02")
                 return "ME";
@@ -55,7 +55,7 @@ namespace Sim.Domain.Cnpj.Entity
             else if (valor == "05")
                 return "Demais";
             else
-                return "";
+                return valor;
         }
     }
 }

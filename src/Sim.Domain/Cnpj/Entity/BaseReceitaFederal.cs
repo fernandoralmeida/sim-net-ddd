@@ -72,5 +72,27 @@ namespace Sim.Domain.Cnpj.Entity
             return obj.Estabelecimento.SituacaoCadastral == "Baixada"; 
         }
 
+        public bool OptanteSimplesNacional(BaseReceitaFederal obj)
+        {
+            return obj.SimplesNacional != null && obj.SimplesNacional.OpcaoSimples == "Sim";
+        }
+        public bool OptanteMEI(BaseReceitaFederal obj)
+        {
+            return obj.SimplesNacional != null && obj.SimplesNacional.OpcaoMEI == "Sim";
+        }
+
+        public bool OptanteSimplesNacionalNaoMEI (BaseReceitaFederal obj)
+        {
+            return obj.SimplesNacional != null && obj.SimplesNacional.OpcaoSimples == "Sim" && obj.SimplesNacional.OpcaoMEI == "Não";
+        }
+        public bool ExclusaoSimplesNacional(BaseReceitaFederal obj)
+        {
+            return obj.SimplesNacional != null && obj.SimplesNacional.OpcaoSimples == "Não";
+        }
+        public bool ExclusaoSimplesNacionalMEI(BaseReceitaFederal obj)
+        {
+            return obj.SimplesNacional != null && obj.SimplesNacional.DataExclusaoMEI != "0000-00-00";
+        }
+
     }
 }

@@ -1,0 +1,144 @@
+﻿@page
+@model Sim.UI.Web.Areas.Censo.Pages.Simples.IndexModel
+@{
+    Layout = "_Layout.cshtml";
+    ViewData["Title"] = "Simples Nacional";
+    ViewData["ActivePage"] = EmpresaNavPages.Simples;
+}
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+<div class="mt-5 mb-5">
+    <form method="post">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+            <div class="d-flex">
+                <select asp-for="Input.Municipio" placeholder="Municipio" class="form-select me-2" asp-items="@Model.ListaMunicipios"></select>
+                <button class="btn btn-outline-primary" type="submit" role="button" id="button-addon2"><i class="fa fa-search"></i></button>
+            </div>
+        </div>
+    </form>
+</div>
+<div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    Optantes do Simples Nacional
+                </th>
+                <th>
+                    Ativa
+                </th>
+                <th>
+                    Inapta
+                </th>
+                <th>
+                    Nula
+                </th>
+                <th>
+                    Suspensa
+                </th>
+                <th>Baixada</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    ME, EPP e EIRELI
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => modelItem.Input.VGOptantesSimples.ListaOptSimplesNaoMEI.Ativa)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => modelItem.Input.VGOptantesSimples.ListaOptSimplesNaoMEI.Inapta)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => modelItem.Input.VGOptantesSimples.ListaOptSimplesNaoMEI.Nula)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => modelItem.Input.VGOptantesSimples.ListaOptSimplesNaoMEI.Suspensa)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => modelItem.Input.VGOptantesSimples.ListaOptSimplesNaoMEI.Baixada)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => modelItem.Input.VGOptantesSimples.OptSimplesNaoMEI)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    MEI
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => modelItem.Input.VGOptantesSimples.ListaOptSMEI.Ativa)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => modelItem.Input.VGOptantesSimples.ListaOptSMEI.Inapta)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => modelItem.Input.VGOptantesSimples.ListaOptSMEI.Nula)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => modelItem.Input.VGOptantesSimples.ListaOptSMEI.Suspensa)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => modelItem.Input.VGOptantesSimples.ListaOptSMEI.Baixada)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => modelItem.Input.VGOptantesSimples.OptMEI)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Total</b>
+                </td>
+                <td>
+                    <b>@Html.DisplayFor(modelItem => modelItem.Input.VGOptantesSimples.ListaOptSimples.Ativa)</b>
+                </td>
+                <td>
+                    <b>@Html.DisplayFor(modelItem => modelItem.Input.VGOptantesSimples.ListaOptSimples.Inapta)</b>
+                </td>
+                <td>
+                    <b>@Html.DisplayFor(modelItem => modelItem.Input.VGOptantesSimples.ListaOptSimples.Nula)</b>
+                </td>
+
+                <td>
+                    <b>@Html.DisplayFor(modelItem => modelItem.Input.VGOptantesSimples.ListaOptSimples.Suspensa)</b>
+                </td>
+                <td>
+                    <b>@Html.DisplayFor(modelItem => modelItem.Input.VGOptantesSimples.ListaOptSimples.Baixada)</b>
+                </td>
+                <td>
+                    <b>@Html.DisplayFor(modelItem => modelItem.Input.VGOptantesSimples.OptSimples)</b>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Exclusões do Simples Nacional (MEI, ME, EPP e EIRELI)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => modelItem.Input.VGOptantesSimples.ListaExclusaoSimples.Ativa)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => modelItem.Input.VGOptantesSimples.ListaExclusaoSimples.Inapta)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => modelItem.Input.VGOptantesSimples.ListaExclusaoSimples.Nula)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => modelItem.Input.VGOptantesSimples.ListaExclusaoSimples.Suspensa)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => modelItem.Input.VGOptantesSimples.ListaExclusaoSimples.Baixada)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => modelItem.Input.VGOptantesSimples.ExclusaoSimples)
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

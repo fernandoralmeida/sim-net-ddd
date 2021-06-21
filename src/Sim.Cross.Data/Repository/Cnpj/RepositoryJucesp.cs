@@ -107,7 +107,12 @@ namespace Sim.Cross.Data.Repository.Cnpj
 
         public Task<IEnumerable<BaseJucesp>> ListBySociosAsync(string atividade, string municipio)
         {
-            throw new NotImplementedException();
+            return null;
+        }
+
+        public Task<IEnumerable<BaseJucesp>> ListAllOptanteSimplesAsync(string municipio)
+        {
+            return null;
         }
     }
 }

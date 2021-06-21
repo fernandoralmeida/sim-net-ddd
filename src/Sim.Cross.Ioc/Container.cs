@@ -81,6 +81,7 @@ namespace Sim.Cross.Ioc
             services.AddScoped<IBase<Municipio>, RepositoryMunicipios>();
 
             services.AddScoped<IServiceCnpj<BaseReceitaFederal>, ServiceRFB>();
+            services.AddScoped<IServiceSimplesNacional<BaseReceitaFederal>, ServiceRFBSimplesNacional>();
 
             /**/
             services.AddScoped<IAppServiceBase<Domain.SDE.Entity.Empresa>, AppServiceBase<Domain.SDE.Entity.Empresa>>();

@@ -76,7 +76,7 @@ namespace Sim.Domain.Cnpj.Entity
 
         private string GetSimples(string valor)
         {
-            if (valor == "S")
+            if (valor.ToLower() == "S".ToLower())
                 return "Sim";
 
             else
@@ -85,7 +85,7 @@ namespace Sim.Domain.Cnpj.Entity
 
         private string GetMEI(string valor)
         {
-            if (valor == "S")
+            if (valor.ToLower() == "S".ToLower())
                 return "Sim";
 
             else

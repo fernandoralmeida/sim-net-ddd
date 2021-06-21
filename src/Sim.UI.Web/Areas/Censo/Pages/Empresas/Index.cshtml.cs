@@ -51,12 +51,14 @@ namespace Sim.UI.Web.Areas.Censo.Pages.Empresas
 
         private async Task LoadAsync()
         {
-            var t = await _empresaApp.ListTop10();
+            //var t = await _empresaApp.ListAllAsync();            
 
             Input = new InputModel
             {
-                ListaEmpresas = t
+                ListaEmpresas = new List<BaseReceitaFederal>()
             };
+
+            //StatusMessage = "Jaú tem " + t.Count().ToString() + "CNPJs";
         }
 
         public async Task<IActionResult> OnGetAsync()

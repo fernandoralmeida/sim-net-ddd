@@ -1,11 +1,12 @@
 ﻿@page
-@model Sim.UI.Web.Areas.Censo.Pages.Empresas.Consulta_cnaeModel
+@model Sim.UI.Web.Areas.Censo.Pages.Simples.Consulta_logradouroModel
 
 @{
     Layout = "_Layout.cshtml";
-    ViewData["Title"] = "Lista";
-    ViewData["ActivePage"] = EmpresaNavPages.ConsultaNome;
+    ViewData["Title"] = "Simples Nacional";
+    ViewData["ActivePage"] = EmpresaNavPages.Simples;
 }
+
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
 <div class="mt-5 mb-5">
@@ -13,8 +14,12 @@
         <div class="d-grid gap-2 d-md-flex justify-content-md-center">
             <div class="d-flex">
                 <select asp-for="Input.Municipio" placeholder="Municipio" class="form-select me-2" asp-items="@Model.ListaMunicipios"></select>
-                <select asp-for="Input.CNAE" class="form-select me-2" asp-items="@Model.ListaCnaes" style="max-width:250px;">
-                    <option selected>-- Atividade --</option>
+                <input asp-for="Input.Logradouro" placeholder="Logradouro" class="form-control me-2" aria-describedby="button-addon2" />
+                <select asp-for="Input.OptanteSimples" class="form-select me-2">
+                    <option value="opsimples" selected>Optante Simples</option>
+                    <option value="opsimplesnaomei">Optante Não MEI</option>
+                    <option value="opmei">Optante MEI</option>
+                    <option value="excsimples">Exclusão do Simples</option>
                 </select>
                 <select asp-for="Input.Situacao" class="form-select me-2">
                     <option selected>Ativa</option>
@@ -30,7 +35,5 @@
     </form>
 </div>
 <div>
-
-    <partial name="_EmpresaList" model="Model.Input.ListaEmpresas" />
-
+    <partial name="./Empresas/_EmpresaList" model="Model.Input.ListaEmpresas" />
 </div>

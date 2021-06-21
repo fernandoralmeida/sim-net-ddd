@@ -11,6 +11,7 @@ namespace Sim.Domain.Cnpj.Interface
         void Dispose();
         Task<IEnumerable<TEntity>> ListTop10();
         Task<IEnumerable<TEntity>> ListAllAsync();
+        Task<IEnumerable<TEntity>> ListAllOptanteSimplesAsync(string municipio);
         Task<TEntity> GetCnpjAsync(string cnpj);
         Task<IEnumerable<TEntity>> ListByCnpjAsync(string cnpj);
         Task<IEnumerable<TEntity>> ListByRazaoSocialAsync(string razaosocial, string municipio);

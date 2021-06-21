@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace Sim.UI.Web.Areas.Censo.Pages.Empresas
+namespace Sim.UI.Web.Areas.Censo.Pages.Simples
 {
     using Sim.Domain.Cnpj.Entity;
     using Sim.Domain.Cnpj.Interface;
@@ -24,14 +24,16 @@ namespace Sim.UI.Web.Areas.Censo.Pages.Empresas
         private readonly ICNPJBase<BaseReceitaFederal> _empresaApp;
         private readonly IBase<Municipio> _municipios;
         private readonly IServiceCnpj<BaseReceitaFederal> _appServiceCNPJ;
-
+        private readonly IServiceSimplesNacional<BaseReceitaFederal> _appsimples;
         public Consulta_logradouroModel(ICNPJBase<BaseReceitaFederal> appServiceEmpresa,
             IBase<Municipio> municipios,
-            IServiceCnpj<BaseReceitaFederal> appServiceCNPJ)
+            IServiceCnpj<BaseReceitaFederal> appServiceCNPJ,
+            IServiceSimplesNacional<BaseReceitaFederal> appsimples)
         {
             _empresaApp = appServiceEmpresa;
             _municipios = municipios;
             _appServiceCNPJ = appServiceCNPJ;
+            _appsimples = appsimples;
         }
 
         [TempData]
@@ -44,9 +46,9 @@ namespace Sim.UI.Web.Areas.Censo.Pages.Empresas
         public class InputModel
         {
 
-            
-            [DisplayName("CNPJ")]
-            public string CNPJ { get; set; }
+
+            [DisplayName("Optante Simples Nacional")]
+            public string OptanteSimples { get; set; }
 
             [Required]
             [DisplayName("Logradouro")]
@@ -54,9 +56,6 @@ namespace Sim.UI.Web.Areas.Censo.Pages.Empresas
 
             public string Situacao { get; set; }
             public IEnumerable<BaseReceitaFederal> ListaEmpresas { get; set; }
-
-            [TempData]
-            public string StatusMessage { get; set; }
 
             [Required]
             public string Municipio { get; set; }
@@ -91,26 +90,55 @@ namespace Sim.UI.Web.Areas.Censo.Pages.Empresas
 
                     IEnumerable<BaseReceitaFederal> t = new List<BaseReceitaFederal>();
 
+                    switch (Input.OptanteSimples)
+                    {
+                        case "opsimples":
+                            t = await _appsimples.OptanteSimplesNacional(emp);
+                            break;
+
+                        case "opsimplesnaomei":
+                            t = await _appsimples.OptanteSimplesNacionalNaoMEI(emp);
+                            break;
+
+                        case "opmei":
+                            t = await _appsimples.OptanteMEI(emp);
+                            break;
+
+                        case "excsimples":
+                            t = await _appsimples.ExclusaoSimplesNacional(emp);
+                            break;
+
+
+                        case "excsimplesmei":
+                            t = await _appsimples.ExclusaoSimplesNacionalMEI(emp);
+                            break;
+
+                        default:
+                            break;
+                    }
+
+                    IEnumerable<BaseReceitaFederal> v = new List<BaseReceitaFederal>();
+
                     switch (Input.Situacao)
                     {
                         case "Ativa":
-                            t = await _appServiceCNPJ.EmpresasAtivas(emp);
+                            v = await _appServiceCNPJ.EmpresasAtivas(t);
                             break;
 
                         case "Nula":
-                            t = await _appServiceCNPJ.EmpresasNulas(emp);
+                            v = await _appServiceCNPJ.EmpresasNulas(t);
                             break;
 
                         case "Suspensa":
-                            t = await _appServiceCNPJ.EmpresasSuspensas(emp);
+                            v = await _appServiceCNPJ.EmpresasSuspensas(t);
                             break;
 
                         case "Inapta":
-                            t = await _appServiceCNPJ.EmpresasInaptas(emp);
+                            v = await _appServiceCNPJ.EmpresasInaptas(t);
                             break;
 
                         case "Baixada":
-                            t = await _appServiceCNPJ.EmpresasBaixadas(emp);
+                            v = await _appServiceCNPJ.EmpresasBaixadas(t);
                             break;
 
                         default:
@@ -119,7 +147,7 @@ namespace Sim.UI.Web.Areas.Censo.Pages.Empresas
 
                     Input = new InputModel
                     {
-                        ListaEmpresas = t
+                        ListaEmpresas = v
                     };
                 }
 

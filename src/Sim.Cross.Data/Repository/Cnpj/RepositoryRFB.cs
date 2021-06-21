@@ -63,7 +63,7 @@ namespace Sim.Cross.Data.Repository.Cnpj
                           from atv in db.CNAEs
                           .Where(s => est.CnaeFiscalPrincipal == s.Codigo).Distinct()
                           from emp in db.Empresas
-                          .Where(s => est.CNPJBase == s.CNPJBase && est.SituacaoCadastral == "02").Distinct()
+                          .Where(s => est.CNPJBase == s.CNPJBase).Distinct()
                           select new { est, emp, atv };
 
                 foreach (var e in qry)
@@ -83,6 +83,7 @@ namespace Sim.Cross.Data.Repository.Cnpj
 
             return brf;
         }
+
         public async Task<BaseReceitaFederal> GetCnpjAsync(string cnpj)
         {
             var brf = new BaseReceitaFederal();
@@ -148,6 +149,7 @@ namespace Sim.Cross.Data.Repository.Cnpj
 
             return brf;
         }
+
         /// <summary>
         /// Async
         /// </summary>
@@ -216,7 +218,8 @@ namespace Sim.Cross.Data.Repository.Cnpj
 
                 var qry = (from est in db.Estabelecimentos
                            from emp in db.Empresas.Where(s => s.CNPJBase == est.CNPJBase)
-                           select new { est, emp })
+                           from sn in db.Simples.Where(s => s.CNPJBase == est.CNPJBase).DefaultIfEmpty()
+                           select new { est, emp, sn })
                           .Where(s => s.est.Logradouro.Contains(logradouro) && s.est.Municipio.Contains(muinicipio)).Distinct();
 
                 foreach (var e in qry)
@@ -225,7 +228,7 @@ namespace Sim.Cross.Data.Repository.Cnpj
 
 
                     brf.Add(new BaseReceitaFederal(
-                        0, _cnpj, e.emp, e.est, null, null, null, null, null, null, null, null));
+                        0, _cnpj, e.emp, e.est, null, e.sn, null, null, null, null, null, null));
                 }
 
             });
@@ -243,7 +246,8 @@ namespace Sim.Cross.Data.Repository.Cnpj
 
                 var qry = (from est in db.Estabelecimentos
                            from emp in db.Empresas.Where(s => s.CNPJBase == est.CNPJBase)
-                           select new { est, emp })
+                           from sn in db.Simples.Where(s=>s.CNPJBase == est.CNPJBase).DefaultIfEmpty()
+                           select new { est, emp, sn })
                           .Where(s => s.est.Bairro.Contains(bairro) && s.est.Municipio.Contains(muinicipio)).Distinct();
 
                 foreach (var e in qry)
@@ -252,7 +256,7 @@ namespace Sim.Cross.Data.Repository.Cnpj
 
 
                     brf.Add(new BaseReceitaFederal(
-                        0, _cnpj, e.emp, e.est, null, null, null, null, null, null, null, null));
+                        0, _cnpj, e.emp, e.est, null, e.sn, null, null, null, null, null, null));
                 }
 
             });
@@ -270,7 +274,8 @@ namespace Sim.Cross.Data.Repository.Cnpj
 
                 var qry = (from est in db.Estabelecimentos
                            from emp in db.Empresas.Where(s => s.CNPJBase == est.CNPJBase)
-                           select new { est, emp })
+                           from sn in db.Simples.Where(s => s.CNPJBase == est.CNPJBase).DefaultIfEmpty()
+                           select new { est, emp, sn })
                           .Where(s => s.est.CnaeFiscalPrincipal.Contains(atividade) && s.est.Municipio.Contains(muinicipio)).Distinct();
 
                 foreach (var e in qry)
@@ -279,7 +284,7 @@ namespace Sim.Cross.Data.Repository.Cnpj
 
 
                     brf.Add(new BaseReceitaFederal(
-                        0, _cnpj, e.emp, e.est, null, null, null, null, null, null, null, null));
+                        0, _cnpj, e.emp, e.est, null, e.sn, null, null, null, null, null, null));
                 }
 
             });
@@ -313,6 +318,41 @@ namespace Sim.Cross.Data.Repository.Cnpj
             });
 
             await t;
+
+            return brf;
+        }
+
+        public async Task<IEnumerable<BaseReceitaFederal>> ListAllOptanteSimplesAsync(string municipio)
+        {
+            var brf = new List<BaseReceitaFederal>();
+
+            var t = Task.Run(() =>
+            {
+
+                var qry = (from est in db.Estabelecimentos
+                          from atv in db.CNAEs
+                          .Where(s => est.CnaeFiscalPrincipal == s.Codigo)
+                          from emp in db.Empresas
+                          .Where(s => est.CNPJBase == s.CNPJBase)
+                          from sn in db.Simples
+                          .Where(s => est.CNPJBase == s.CNPJBase)
+                          select new { est, emp, atv, sn })
+                          .Where(s => s.est.Municipio.Contains(municipio)).Distinct();
+
+                foreach (var e in qry)
+                {
+                    var _cnpj = string.Format("{0}{1}{2}", e.est.CNPJBase, e.est.CNPJOrdem, e.est.CNPJDV);
+
+
+                    brf.Add(new BaseReceitaFederal(
+                        0, _cnpj, e.emp, e.est, null, e.sn, e.atv, null, null, null, null, null));
+
+                }
+
+            });
+
+            await t;
+
 
             return brf;
         }
