@@ -22,12 +22,14 @@
                 <input asp-for="Input.Nome_Social" class="form-control" id="inputSocial" />
             </div>
             <div class="col-md-2">
-                <label asp-for="Input.Genero" class="form-label" for="selectGenero"></label>
-                <select asp-for="Input.Genero" class="form-select" id="selectGenero">
-                    <option selected></option>
-                    <option>Feminino</option>
-                    <option>Masculino</option>
-                </select>
+                <div class="input-field col s12">
+                    <select asp-for="Input.Genero">
+                        <option selected></option>
+                        <option>Feminino</option>
+                        <option>Masculino</option>
+                    </select>
+                    <label asp-for="Input.Genero"></label>
+                </div>
             </div>
         </div>
 

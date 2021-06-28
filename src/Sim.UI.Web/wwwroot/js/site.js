@@ -3,7 +3,7 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
-
+/*
 document.addEventListener("DOMContentLoaded", function () {
     window.addEventListener('scroll', function () {
         if (window.scrollY > 55) {
@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
             document.body.style.paddingTop = '0';
         }
     });
-});
+});*/
 // DOMContentLoaded  end
 
 $(".viewbutton").on("click", function () {
@@ -34,3 +34,27 @@ $(".viewbutton").on("click", function () {
     });
 });
 
+$(document).ready(function () {
+
+    $(".dropdown-trigger").dropdown();
+
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    var elemsselect = document.querySelectorAll('select');
+    var elemscollapsible = document.querySelectorAll('.collapsible');
+    var instances = M.FormSelect.init(elemscollapsible, options);
+    var instances = M.Collapsible.init(elemsselect, options);
+});
+
+// Or with jQuery
+
+$(document).ready(function () {
+    $('select').formSelect();
+});
+
+// Or with jQuery
+
+$(document).ready(function () {
+    $('.collapsible').collapsible();
+});

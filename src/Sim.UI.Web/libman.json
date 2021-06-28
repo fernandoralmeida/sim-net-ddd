@@ -52,6 +52,11 @@
         "dist/js/bootstrap.min.js.map",
         "LICENSE"
       ]
+    },
+    {
+      "provider": "cdnjs",
+      "library": "materialize@1.0.0",
+      "destination": "wwwroot/lib/materialize/"
     }
   ]
 }

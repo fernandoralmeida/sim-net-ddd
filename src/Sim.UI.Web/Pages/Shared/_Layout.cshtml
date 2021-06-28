@@ -6,43 +6,160 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SIM - @ViewData["Title"]</title>
     <link rel="shortcut icon" href="~/favicon.ico" />
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link rel="stylesheet" href="~/lib/materialize/css/materialize.min.css" />
+    <!--
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">-->
     <link rel="stylesheet" href="~/css/site.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-body border-bottom">
-            <div class="container">                
-                <a style="font-size:24px; margin-right:10px;" asp-area="" asp-page="/Index"><i class="fab fa-windows"></i></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Início
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                                <li><a class="dropdown-item" href="#"><i class="fas fa-industry"></i> PAT</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="fas fa-hand-holding-usd"></i> Banco do Povo</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-page="/SebraeAqui/Index"><i class="fas fa-handshake"></i> Sebrae Aqui</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="fas fa-building"></i> Espaço do Empreendedor</a></li>
+        <div class="navbar navbar-fixed">
+            <nav class="navbar">
+                <div class="nav-wrapper">
+                    <ul id="nav-mobile" class="hide-on-med-and-down">
+                        <li><a asp-area="" asp-page="/Index"><i class="fab fa-windows"></i></a></li>
+                        <!-- Dropdown Trigger -->
+                        <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Início<i class="material-icons right">arrow_drop_down</i></a></li>
+                        <li><a asp-area="" asp-page="/Atendimento/Index">Atedimentos</a></li>
+                        <li><a asp-area="" asp-page="/Pessoa/Index">Clientes</a></li>
+                        <li><a asp-area="" asp-page="/Empresa/Index">Empresas</a></li>
+                        <li><a asp-area="" asp-page="/Agenda/Index">Agenda</a></li>
+                        <li><a asp-area="" asp-page="/Planner/Index">e-Planner</a></li>
+                        <li><a class="grey-text text-darken-4" asp-area="Censo" asp-page="/Empresas/Index">Censo</a></li>
+                    </ul>
+                    <!-- Dropdown Structure -->
+                    <ul id="dropdown1" class="dropdown-content">
+                        <li><a href="#"><i class="fas fa-industry"></i> PAT</a></li>
+                        <li><a href="#"><i class="fas fa-hand-holding-usd"></i> Banco do Povo</a></li>
+                        <li><a asp-area="" asp-page="/SebraeAqui/Index"><i class="fas fa-handshake"></i> Sebrae Aqui</a></li>
+                        <li><a href="#"><i class="fas fa-building"></i> Espaço do Empreendedor</a></li>
+                    </ul>
+
+                    <ul class="right">
+
+                        @if (User.IsInRole("Administrador"))
+                        {
+                            <li><a class="dropdown-trigger" href="#!" data-target="dropdown2">Gerenciar<i class="material-icons right">arrow_drop_down</i></a></li>
+                            <li class="dropdown-content">
+                                <ul id="dropdown2" class="dropdown-content">
+
+                                    <li><a asp-area="Settings" asp-page="/Common/Index">Sistema</a></li>
+                                    <li><a asp-area="Admin" asp-page="/Manager/Index">Contas</a></li>
+                                </ul>
+                            </li>
+                        }
+
+                        <partial name="_LoginPartial" />
+                    </ul>
+
+                </div>
+            </nav>
+        </div>
+        <ul id="sidenav-left" class="sidenav sidenav-fixed teal darken-2">
+            <li><a asp-area="" asp-page="/Index" class="waves-effect brand-logo">Admin <i class="fab fa-windows"></i></a></li>
+            <li class="no-padding">
+                <ul class="collapsible">
+                    <li class="bold waves-block waves-effect active">
+                        <a class="collapsible-header">Pages<i class="material-icons chevron">chevron_left</i></a>
+                        <div class="collapsible-body  transparent">
+                            <ul>
+                                <li><a href="#" class="waves-effect active">Dashboard<i class="material-icons">web</i></a></li>
+                                <li><a href="#" class="waves-effect">Fixed Chart<i class="material-icons">list</i></a></li>
+                                <li><a href="#" class="waves-effect">Grid<i class="material-icons">dashboard</i></a></li>
+                                <li><a href="#" class="waves-effect">Chat<i class="material-icons">chat</i></a></li>
                             </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-page="/Atendimento/Index">Atedimentos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-page="/Pessoa/Index">Clientes</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-page="/Empresa/Index">Empresas</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-page="/Agenda/Index">Agenda</a>
-                        </li>
+                        </div>
+                    </li>
+                    <li class="bold waves-effect">
+                        <a class="collapsible-header">Charts<i class="material-icons chevron">chevron_left</i></a>
+                        <div class="collapsible-body transparent">
+                            <ul>
+                                <li><a href="#" class="waves-effect">Line Charts<i class="material-icons">show_chart</i></a></li>
+                                <li><a href="#" class="waves-effect">Bar Charts<i class="material-icons">equalizer</i></a></li>
+                                <li><a href="#" class="waves-effect">Area Charts<i class="material-icons">multiline_chart</i></a></li>
+                                <li><a href="#" class="waves-effect">Doughnut Charts<i class="material-icons">pie_chart</i></a></li>
+                                <li><a href="#" class="waves-effect">Financial Charts<i class="material-icons">euro_symbol</i></a></li>
+                                <li><a href="#" class="waves-effect">Interactive Charts<i class="material-icons">touch_app</i></a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="bold waves-effect">
+                        <a class="collapsible-header">Tables<i class="material-icons chevron">chevron_left</i></a>
+                        <div class="collapsible-body transparent">
+                            <ul>
+                                <li><a href="#" class="waves-effect">Fullscreen with Chart<i class="material-icons">show_chart</i></a></li>
+                                <li><a href="#" class="waves-effect">Table with Custom Elements<i class="material-icons">settings</i></a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="bold waves-effect">
+                        <a class="collapsible-header">Calendar<i class="material-icons chevron">chevron_left</i></a>
+                        <div class="collapsible-body transparent">
+                            <ul>
+                                <li><a href="#" class="waves-effect">Calendar<i class="material-icons">cloud</i></a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="bold waves-effect">
+                        <a class="collapsible-header">Headers<i class="material-icons chevron">chevron_left</i></a>
+                        <div class="collapsible-body transparent">
+                            <ul>
+                                <li><a href="#" class="waves-effect">Tabbed<i class="material-icons">tab</i></a></li>
+                                <li><a href="#" class="waves-effect">Metrics<i class="material-icons">web</i></a></li>
+                                <li><a href="#" class="waves-effect">Search<i class="material-icons">search</i></a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="bold waves-effect">
+                        <a class="collapsible-header">Account<i class="material-icons chevron">chevron_left</i></a>
+                        <div class="collapsible-body transparent">
+                            <ul>
+                                <li><a href="#" class="waves-effect">Log In<i class="material-icons">person</i></a></li>
+                                <li><a href="#" class="waves-effect">Settings<i class="material-icons">settings</i></a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+
+        <!--
+            <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+                <div class="container">
+                    <a style="font-size:24px; margin-right:10px;" asp-area="" asp-page="/Index"><i class="fab fa-windows"></i></a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Início
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                                    <li><a class="dropdown-item" href="#"><i class="fas fa-industry"></i> PAT</a></li>
+                                    <li><a class="dropdown-item" href="#"><i class="fas fa-hand-holding-usd"></i> Banco do Povo</a></li>
+                                    <li><a class="dropdown-item" asp-area="" asp-page="/SebraeAqui/Index"><i class="fas fa-handshake"></i> Sebrae Aqui</a></li>
+                                    <li><a class="dropdown-item" href="#"><i class="fas fa-building"></i> Espaço do Empreendedor</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-page="/Atendimento/Index">Atedimentos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-page="/Pessoa/Index">Clientes</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-page="/Empresa/Index">Empresas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-page="/Agenda/Index">Agenda</a>
+                            </li>
 
 
                             <li class="nav-item">
@@ -52,46 +169,47 @@
                                 <a class="nav-link" asp-area="Censo" asp-page="/Empresas/Index">Censo</a>
                             </li>
 
-                    </ul>
-                    @if (User.IsInRole("Administrador"))
-                    {
-                        <div class="d-flex">
-                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Gerenciar
-                                    </a>
-                                    <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                                        <li><a class="dropdown-item" asp-area="Settings" asp-page="/Common/Index">Sistema</a></li>
-                                        <li><a class="dropdown-item" asp-area="Admin" asp-page="/Manager/Index">Contas</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                    }
-                    <partial name="_LoginPartial" />
-                </div>                
-            </div>
-        </nav>     
-        
+                        </ul>
+                        @if (User.IsInRole("Administrador"))
+                        {
+                            <div class="d-flex">
+                                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Gerenciar
+                                        </a>
+                                        <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                                            <li><a class="dropdown-item" asp-area="Settings" asp-page="/Common/Index">Sistema</a></li>
+                                            <li><a class="dropdown-item" asp-area="Admin" asp-page="/Manager/Index">Contas</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        }
+                        <partial name="_LoginPartial" />
+                    </div>
+                </div>
+            </nav>
+    -->
     </header>
-    
+
     <div class="container">
         <main role="main">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="footer bg-light text-muted">
+    <footer class=" ooter bg-light text-muted">
         <div class="container">
             &copy; @DateTime.Now.Year - Sim.Web - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
     </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!--
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>-->
     <script src="~/js/site.js" asp-append-version="true"></script>
-
+    <script type="text/javascript" src="~/lib/materialize/js/materialize.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 
 </body>
