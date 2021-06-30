@@ -21,184 +21,281 @@ html {
     font-size: 13px;
 }
 
-@media (min-width: 768px) {
-    html {
-        font-size: 15px;
+/* materialize */
+.has-fixed-sidenav .fixed-chart {
+    left: 300px
+}
+
+@media only screen and (max-width: 992px) {
+    .has-fixed-sidenav .fixed-chart {
+        left: 0
     }
 }
 
-button.accept-policy {
-    font-size: 1rem;
-    line-height: inherit;
-}
+@media only screen and (min-width: 993px) {
+    body.has-fixed-sidenav {
+        padding-left: 300px
+    }
 
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-    position: relative;
-    min-height: 100%;
-}
+@media only screen and (min-width: 993px){
+    body.has-fixed-sidenav {
+        padding-left: 300px
+    }
 
-body {
-    /* Margin bottom by footer height */
-    margin-bottom: 70px;
-    /* Margin top by fixed navbar height 
-    margin-top: 90px;*/
-    /* background: url(imgs/bgios.jpg) no-repeat fixed;
-    background-size: cover;*/
-    /*
-    background-color: #f5f5f5;*/
-}
+@media only screen and (min-width: 993px) {
+    .has-fixed-sidenav .navbar-fixed nav.navbar {
+        width: calc(100% - 300px);
+        left: 300px
+    }
 
-.bg-teal {
-    background-color: #20c997 !important;
-}
+    body:not(.has-fixed-sidenav) nav a.sidenav-trigger {
+        display: block
+    }
 
-.bg-silver {
-    background-color: #f8f8f8 !important;
-}
+    body:not(.has-fixed-sidenav) nav.navbar .brand-logo {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%)
+    }
+ }
 
-/**/
-.table {
-    font-size:10.5pt;
-}
+    ul.collapsible-accordion {
+        background-color: #FFF
+    }
 
-.footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    white-space: nowrap;
-    line-height: 50px; /* Vertically center the text there */
-}
+    ul.sidenav.sidenav-fixed ul.collapsible-accordion a.collapsible-header {
+        padding: 0 30px
+    }
 
-
-/* Login style */
-.form-signin {
-    width: 100%;
-    max-width: 330px;
-    padding: 15px;
-    margin: auto;
-}
-
-    .form-signin .checkbox {
+    ul.sidenav.sidenav-fixed ul.collapsible-accordion .collapsible-body li a {
         font-weight: 400;
+        padding: 0 37.5px 0 45px
     }
 
-    .form-signin .form-floating:focus-within {
-        z-index: 2;
+    ul.sidenav.sidenav-fixed:hover {
+        overflow-y: auto
     }
 
-    .form-signin input[type="text"] {
-        margin-bottom: -1px;
-        border-bottom-right-radius: 0;
-        border-bottom-left-radius: 0;
+    .search-wrapper {
+        color: #777;
+        margin-top: -1px;
+        border-top: 1px solid rgba(0,0,0,0.14);
+        -webkit-transition: margin .25s ease;
+        transition: margin .25s ease
     }
 
-    .form-signin input[type="password"] {
-        margin-bottom: 10px;
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
+    #nav-mobile li.search .search-wrapper.focused .search-results:not(:empty) {
+        border-bottom: 1px solid rgba(0,0,0,0.14)
+    }
+
+    #nav-mobile li.search .search-wrapper input#search {
+        color: #777;
+        display: block;
+        font-size: 16px;
+        font-weight: 300;
+        width: 100%;
+        height: 62px;
+        margin: 0;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        padding: 0 45px 0 30px;
+        border: 0
+    }
+
+        #nav-mobile li.search .search-wrapper input#search:focus {
+            outline: none;
+            -webkit-box-shadow: none;
+            box-shadow: none
+        }
+
+    #nav-mobile li.search .search-wrapper i.material-icons {
+        position: absolute;
+        top: 21px;
+        right: 10px;
+        cursor: pointer
+    }
+
+    /***/
+
+    @media (min-width: 768px) {
+        html {
+            font-size: 15px;
+        }
+    }
+
+    button.accept-policy {
+        font-size: 1rem;
+        line-height: inherit;
+    }
+
+    /* Sticky footer styles
+-------------------------------------------------- */
+    html {
+        position: relative;
+        min-height: 100%;
+    }
+
+    body {
+        /* Margin bottom by footer height 
+        margin-bottom: 70px;*/
+        /* Margin top by fixed navbar height 
+    margin-top: 90px;*/
+        /* background: url(imgs/bgios.jpg) no-repeat fixed;
+    background-size: cover;*/
+        /*
+    background-color: #f5f5f5;*/
+    }
+
+    .bg-teal {
+        background-color: #20c997 !important;
+    }
+
+    .bg-silver {
+        background-color: #f8f8f8 !important;
+    }
+
+    /**/
+    .table {
+        font-size: 10.5pt;
+    }
+
+    .footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        white-space: nowrap;
+        line-height: 50px; /* Vertically center the text there */
     }
 
 
-.strip-bg {
-    margin: 0px 0px 0px 0px;
-    height: 20px;
-}
+    /* Login style */
+    .form-signin {
+        width: 100%;
+        max-width: 330px;
+        padding: 15px;
+        margin: auto;
+    }
 
-/* faixa pontilhada */
-.strip-dot {
-    margin: 0px 0px 0px 0px;
-    height: 20px;
-    background-image: url(imgs/dot.jpg);
-}
+        .form-signin .checkbox {
+            font-weight: 400;
+        }
 
-.strip-dot-b4 {
-    margin: 0px 0px 0px 0px;
-    height: 6px;
-    background-image: url(imgs/dot.jpg);
-}
+        .form-signin .form-floating:focus-within {
+            z-index: 2;
+        }
 
-/* Logo SIM */
-.logo-sim-sm {
-    display:flex;
-    margin: 0px 0px 0px 0px;
-    background-image: url(imgs/sim-ico.ico);
-    background-size: 32px 32px;
-    height: 32px;
-    width: 32px;
-    image-rendering: optimizeQuality;
-}
+        .form-signin input[type="text"] {
+            margin-bottom: -1px;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+        }
 
-.logo-sim{
-    background-image: url(imgs/sim_logo_nb.png);
-    background-size: 40px 40px;
-    height: 40px;
-    width: 40px;
-}
-
-.logo-sim-lg {
-    margin: auto;
-    background-image: url(imgs/sim-ico.ico);
-    background-size: 64px 64px;
-    height: 64px;
-    width: 64px;
-    image-rendering: optimizeQuality;
-}
-
-.sedemp {
-    margin: 0px 0px 0px 0px;
-    background-image: url(imgs/n_logo_sedemp.jpeg);
-    image-rendering:optimizeQuality;
-}
-
-/**** Links ****/
-
-/**** Modulos ****/
-
-.l-btn /* estrutura principal */ {
-    display: inline-block;
-    margin: 5px;
-    height: 200px;
-    width: 200px;
-    color: #ffffff;
-    background-color: #20c997;
-    text-decoration: none;
-    border-radius: 0px;
-    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
+        .form-signin input[type="password"] {
+            margin-bottom: 10px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
 
 
+    .strip-bg {
+        margin: 0px 0px 0px 0px;
+        height: 20px;
+    }
 
-    .l-btn:hover /* ao mover o mouse */ {
-        background-color: #26dca6;
+    /* faixa pontilhada */
+    .strip-dot {
+        margin: 0px 0px 0px 0px;
+        height: 20px;
+        background-image: url(imgs/dot.jpg);
+    }
+
+    .strip-dot-b4 {
+        margin: 0px 0px 0px 0px;
+        height: 6px;
+        background-image: url(imgs/dot.jpg);
+    }
+
+    /* Logo SIM */
+    .logo-sim-sm {
+        display: flex;
+        margin: 0px 0px 0px 0px;
+        background-image: url(imgs/sim-ico.ico);
+        background-size: 32px 32px;
+        height: 32px;
+        width: 32px;
+        image-rendering: optimizeQuality;
+    }
+
+    .logo-sim {
+        background-image: url(imgs/sim_logo_nb.png);
+        background-size: 40px 40px;
+        height: 40px;
+        width: 40px;
+    }
+
+    .logo-sim-lg {
+        margin: auto;
+        background-image: url(imgs/sim-ico.ico);
+        background-size: 64px 64px;
+        height: 64px;
+        width: 64px;
+        image-rendering: optimizeQuality;
+    }
+
+    .sedemp {
+        margin: 0px 0px 0px 0px;
+        background-image: url(imgs/n_logo_sedemp.jpeg);
+        image-rendering: optimizeQuality;
+    }
+
+    /**** Links ****/
+
+    /**** Modulos ****/
+
+    .l-btn /* estrutura principal */ {
+        display: inline-block;
+        margin: 5px;
+        height: 200px;
+        width: 200px;
         color: #ffffff;
-        text-decoration: none;
-    }
-
-    .l-btn:active {
         background-color: #20c997;
+        text-decoration: none;
+        border-radius: 0px;
+        transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     }
 
-.div-modulos /* div das seções free-hand, digital paint, comp grafica e web-dev */ { 
-    text-align: center;/*
+
+
+        .l-btn:hover /* ao mover o mouse */ {
+            background-color: #26dca6;
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .l-btn:active {
+            background-color: #20c997;
+        }
+
+    .div-modulos /* div das seções free-hand, digital paint, comp grafica e web-dev */ {
+        text-align: center; /*
        
     background-image: url(imgs/dot.jpg);*/
-}
-
-.agenda {
-    display: inline-block;
-    margin: 10px;
-    width: 300px;
-    background-color: #ffffff;
-    text-decoration: none;
-    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
-
-    .agenda:hover /* ao mover o mouse */ {
-        background-color: #fafafa;
     }
 
-    .agenda:active {
-        background-color: #fafafa;
+    .agenda {
+        display: inline-block;
+        margin: 10px;
+        width: 300px;
+        background-color: #ffffff;
+        text-decoration: none;
+        transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     }
+
+        .agenda:hover /* ao mover o mouse */ {
+            background-color: #fafafa;
+        }
+
+        .agenda:active {
+            background-color: #fafafa;
+        }
+

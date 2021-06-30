@@ -7,29 +7,29 @@
 
 
 
-        @if (SignInManager.IsSignedIn(User))
-        {
-            var DisplayName = UserManager.Users.FirstOrDefault(m => m.UserName == User.Identity.Name).Name;
+@if (SignInManager.IsSignedIn(User))
+{
+    var DisplayName = UserManager.Users.FirstOrDefault(m => m.UserName == User.Identity.Name).Name;
 
-            <li>
-                <a class="dropdown-trigger" href="#" data-target="dropdown3">
-                    Olá @DisplayName
-                </a>
-                <ul id="dropdown3" class="dropdown-content">
-                    <li><a asp-area="Identity" asp-page="/Account/Manage/Index" title="Meu Perfil">Meu Espaço</a></li>
-                    @if (User.IsInRole("Administrador"))
-                    {
-                        <li><a asp-area="Identity" asp-page="/Account/Register">Registrar</a></li>
-                    }
-                    <li class="divider"></li>
-                    <li><a asp-area="Identity" asp-page="/Account/Logout" title="Logout">Sair</a></li>
-                </ul>
-            </li>
-        }
-        else
-        {
-            <li>
-                <a asp-area="Identity" asp-page="/Account/Login">Entrar</a>
-            </li>
-        }
+
+    <li class="bold waves-effect">
+        <a class="collapsible-header">Olá @DisplayName<i class="material-icons chevron">chevron_left</i></a>
+        <div class="collapsible-body">
+            <ul>
+                <li><a asp-area="Identity" asp-page="/Account/Manage/Index" class="waves-effect">Meu Espaço<i class="material-icons">person</i></a></li>
+                @if (User.IsInRole("Administrador"))
+                {
+                    <li><a asp-area="Identity" asp-page="/Account/Register" class="waves-effect">Registrar<i class="material-icons">person</i></a></li>
+                }
+                <li><a asp-area="Identity" asp-page="/Account/Logout" class="waves-effect">Sasir<i class="material-icons">logout</i></a></li>
+            </ul>
+        </div>
+    </li>
+}
+else
+{
+    <li>
+        <a asp-area="Identity" asp-page="/Account/Login">Entrar</a>
+    </li>
+}
 

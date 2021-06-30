@@ -1,23 +1,16 @@
 ﻿@using Sim.UI.Web.Pages.SebraeAqui
 
-<nav id="navbar_top" class="navbar navbar-expand-sm nav-wrapper">
-    <div class="container">
-        <span class="text-primary me-2">Sebrae</span>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarScroll">
-            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
-                <li class="nav-item">
-                    <a class="nav-link @SebraeAquiNavPages.InicioNavClass(ViewContext)" asp-page="./Index">Não Lançados</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link @SebraeAquiNavPages.AtendiementoNavClass(ViewContext)" asp-page="./Rae.Lancados">Lançados</a>
-                </li>
+<div class="navbar navbar-fixed" >
+    <nav class="navbar">
+        <div class="nav-wrapper">
+            <a href="#!" class="brand-logo grey-text text-darken-4">Sebrae Aqui</a>
+            <ul>
+                <li><a asp-page="/SebraeAqui/Index" class="@SebraeAquiNavPages.InicioNavClass(ViewContext)">Não Lançados</a></li>
+                <li><a asp-page="/SebraeAqui/Rae.Lancados" class="@SebraeAquiNavPages.AtendiementoNavClass(ViewContext)">Lançados</a></li>
             </ul>
-            <form class="d-flex">
-                <a asp-area="" asp-page="/Pessoa/Index" class="btn btn-sm btn-outline-primary" title="Novo Evento">Novo Atendimento</a>
-            </form>
+            <ul class="right light-blue lighten-4">
+                <li><a asp-area="" asp-page="/Pessoa/Index" class="waves-effect waves-light">Novo Atendimento</a></li>
+            </ul>
         </div>
-    </div>
-</nav>
+    </nav>
+</div>

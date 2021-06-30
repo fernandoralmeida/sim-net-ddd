@@ -57,6 +57,11 @@
       "provider": "cdnjs",
       "library": "materialize@1.0.0",
       "destination": "wwwroot/lib/materialize/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "masonry@4.2.2",
+      "destination": "wwwroot/lib/masonry/"
     }
   ]
 }
