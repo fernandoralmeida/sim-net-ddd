@@ -19,17 +19,18 @@
 <body class="has-fixed-sidenav">
     <header>
         <ul id="sidenav-left" class="sidenav sidenav-fixed teal lighten-4">
-            <li><a asp-area="" asp-page="/Index" class="logo-container">SEDEMP<i class="material-icons">widgets</i></a></li>
+            <!--<li><a asp-area="" asp-page="/Index" class="logo-container">SEDEMP<i class="material-icons">widgets</i></a></li>-->
             <li class="no-padding">
                 <ul class="collapsible collapsible-accordion transparent">
+                    <partial name="_LoginPartial" />
                     <li class="bold waves-effect">
                         <a class="collapsible-header">Inicio<i class="material-icons chevron">chevron_left</i></a>
                         <div class="collapsible-body">
                             <ul>
                                 <li><a href="#" class="waves-effect active">PAT<i class="fas fa-industry"></i></a></li>
-                                <li><a href="#" class="waves-effect"><i class="fas fa-hand-holding-usd"></i> Banco do Povo</a></li>
-                                <li><a class="waves-effect" asp-area="" asp-page="/SebraeAqui/Index"><i class="fas fa-handshake"></i> Sebrae Aqui</a></li>
-                                <li><a href="#" class="waves-effect"><i class="fas fa-building"></i> Espaço do Empreendedor</a></li>
+                                <li><a href="#" class="waves-effect"><i class="fas fa-hand-holding-usd"></i>Banco do Povo</a></li>
+                                <li><a class="waves-effect" asp-area="" asp-page="/SebraeAqui/Index"><i class="fas fa-handshake"></i>Sebrae Aqui</a></li>
+                                <li><a href="#" class="waves-effect"><i class="fas fa-building"></i>Sala do Empreendedor</a></li>
                             </ul>
                         </div>
                     </li>
@@ -99,15 +100,12 @@
                             <div class="collapsible-body">
                                 <ul>
                                     <li><a class="waves-effect" asp-area="Settings" asp-page="/Common/Index">Sistema<i class="material-icons">settings</i></a></li>
-                                    <li><a asp-area="Admin" asp-page="/Manager/Index" class="waves-effect">Contas<i class="material-icons">settings</i></a></li>
+                                    <li><a asp-area="Admin" asp-page="/Manager/Index" class="waves-effect">Contas<i class="material-icons">account_circle</i></a></li>
                                 </ul>
                             </div>
                         </li>
 
                     }
-
-                    <partial name="_LoginPartial" />
-
                 </ul>
             </li>
         </ul>
@@ -118,10 +116,10 @@
         </div>
     </main>
     <footer class="page-footer">
-        <div>
-            &copy; @DateTime.Now.Year - Sim.Web - <a asp-area="" asp-page="/Privacy">Privacy</a>
-        </div>
+        &copy; @DateTime.Now.Year - Sim.Web
+        <a asp-area="" asp-page="/Privacy" class="grey-text text-lighten-4 right">Privacy</a>
     </footer>
+
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <!--

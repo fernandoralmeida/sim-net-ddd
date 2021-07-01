@@ -21,6 +21,10 @@ html {
     font-size: 13px;
 }
 
+.mycontainer{
+    margin: auto;
+}
+
 /* materialize */
 .has-fixed-sidenav .fixed-chart {
     left: 300px
@@ -137,7 +141,7 @@ html {
 
     body {
         /* Margin bottom by footer height 
-        margin-bottom: 70px;*/
+        margin-bottom: 80px;*/
         /* Margin top by fixed navbar height 
     margin-top: 90px;*/
         /* background: url(imgs/bgios.jpg) no-repeat fixed;
