@@ -21,10 +21,6 @@ html {
     font-size: 13px;
 }
 
-.mycontainer{
-    margin: auto;
-}
-
 /* materialize */
 .has-fixed-sidenav .fixed-chart {
     left: 300px

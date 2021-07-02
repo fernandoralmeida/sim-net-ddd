@@ -11,15 +11,18 @@
     <!--Import materialize.css
     <link rel="stylesheet" href="~/lib/materialize/css/materialize.min.css" />-->
     <link rel="stylesheet" href="~/lib/materialize/css/dashboard.materialize.css" />
-    <!--
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">-->
+
+    <!--   <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">-->
     <link rel="stylesheet" href="~/css/site.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 </head>
 <body class="has-fixed-sidenav">
     <header>
+
         <ul id="sidenav-left" class="sidenav sidenav-fixed teal lighten-4">
-            <!--<li><a asp-area="" asp-page="/Index" class="logo-container">SEDEMP<i class="material-icons">widgets</i></a></li>-->
+            <li>
+                <a asp-area="" asp-page="/Index" class="logo-container">SEDEMP<i class="material-icons">widgets</i></a>
+            </li>
             <li class="no-padding">
                 <ul class="collapsible collapsible-accordion transparent">
                     <partial name="_LoginPartial" />
@@ -38,10 +41,9 @@
                         <a class="collapsible-header">Atendimentos<i class="material-icons chevron">chevron_left</i></a>
                         <div class="collapsible-body">
                             <ul>
-                                <li><a asp-page="/Atendimento/Index" class="waves-effect">Meus Atendimentos<i class="material-icons">show_chart</i></a></li>
-                                <li><a asp-page="/Atendimento/Novo" class="waves-effect">Atendimento Ativo<i class="material-icons">equalizer</i></a></li>
-                                <li><a asp-page="/Atendimento/Consulta" class="waves-effect">Consultar<i class="material-icons">multiline_chart</i></a></li>
-                                <li><a href="#" class="waves-effect">Relatórios<i class="material-icons">pie_chart</i></a></li>
+                                <li><a asp-page="/Atendimento/Index" class="waves-effect">Meus Atendimentos<i class="material-icons">access_time</i></a></li>
+                                <li><a asp-page="/Atendimento/Novo" class="waves-effect">Atendimento Ativo<i class="material-icons">access_alarm</i></a></li>
+                                <li><a asp-page="/Atendimento/Consulta" class="waves-effect">Consultar<i class="material-icons">search</i></a></li>
                             </ul>
                         </div>
                     </li>
@@ -49,16 +51,8 @@
                         <a class="collapsible-header">Clientes<i class="material-icons chevron">chevron_left</i></a>
                         <div class="collapsible-body">
                             <ul>
-                                <li><a href="#" class="waves-effect">Fullscreen with Chart<i class="material-icons">show_chart</i></a></li>
-                                <li><a href="#" class="waves-effect">Table with Custom Elements<i class="material-icons">settings</i></a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="bold waves-effect">
-                        <a class="collapsible-header">Empresas<i class="material-icons chevron">chevron_left</i></a>
-                        <div class="collapsible-body">
-                            <ul>
-                                <li><a href="#" class="waves-effect">Calendar<i class="material-icons">cloud</i></a></li>
+                                <li><a asp-page="/Pessoa/Index" class="waves-effect">Pessoas<i class="material-icons">group</i></a></li>
+                                <li><a asp-page="/Empresa/Index" class="waves-effect">Empresas<i class="material-icons">domain</i></a></li>
                             </ul>
                         </div>
                     </li>
@@ -66,19 +60,15 @@
                         <a class="collapsible-header">Agenda<i class="material-icons chevron">chevron_left</i></a>
                         <div class="collapsible-body">
                             <ul>
-                                <li><a href="#" class="waves-effect">Tabbed<i class="material-icons">tab</i></a></li>
-                                <li><a href="#" class="waves-effect">Metrics<i class="material-icons">web</i></a></li>
-                                <li><a href="#" class="waves-effect">Search<i class="material-icons">search</i></a></li>
+                                <li><a asp-page="/Agenda/Index" class="waves-effect">Eventos<i class="material-icons">event</i></a></li>
                             </ul>
                         </div>
                     </li>
                     <li class="bold waves-effect">
-                        <a class="collapsible-header">Planner<i class="material-icons chevron">chevron_left</i></a>
+                        <a class="collapsible-header">e-Planner<i class="material-icons chevron">chevron_left</i></a>
                         <div class="collapsible-body">
                             <ul>
-                                <li><a href="#" class="waves-effect">Tabbed<i class="material-icons">tab</i></a></li>
-                                <li><a href="#" class="waves-effect">Metrics<i class="material-icons">web</i></a></li>
-                                <li><a href="#" class="waves-effect">Search<i class="material-icons">search</i></a></li>
+                                <li><a asp-page="/Planner/Index" class="waves-effect">Meu Planner<i class="material-icons">description</i></a></li>
                             </ul>
                         </div>
                     </li>
@@ -86,9 +76,10 @@
                         <a class="collapsible-header">Power BI<i class="material-icons chevron">chevron_left</i></a>
                         <div class="collapsible-body">
                             <ul>
-                                <li><a href="#" class="waves-effect">Tabbed<i class="material-icons">tab</i></a></li>
-                                <li><a href="#" class="waves-effect">Metrics<i class="material-icons">web</i></a></li>
-                                <li><a href="#" class="waves-effect">Search<i class="material-icons">search</i></a></li>
+                                <li><a href="#" class="waves-effect">Atendimentos<i class="material-icons">access_time</i></a></li>
+                                <li><a href="#" class="waves-effect">Empresas<i class="material-icons">domain</i></a></li>
+                                <li><a href="#" class="waves-effect">Pessoas<i class="material-icons">people</i></a></li>
+
                             </ul>
                         </div>
                     </li>
@@ -108,6 +99,12 @@
                     }
                 </ul>
             </li>
+            <li>
+                <div class="center">
+                    &copy; @DateTime.Now.Year - Sim.Web
+                    <a asp-area="" asp-page="/Privacy">Privacy</a>
+                </div>
+            </li>
         </ul>
     </header>
     <main>
@@ -115,11 +112,6 @@
             @RenderBody()
         </div>
     </main>
-    <footer class="page-footer">
-        &copy; @DateTime.Now.Year - Sim.Web
-        <a asp-area="" asp-page="/Privacy" class="grey-text text-lighten-4 right">Privacy</a>
-    </footer>
-
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <!--

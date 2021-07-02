@@ -8,13 +8,13 @@
         Layout = "/Pages/Shared/_Layout.cshtml";
     }
 }
-<div class="mb-5">
-            <partial name="_AdminNav" />
-</div>
-<div>
+
+<partial name="_AdminNav" />
+<div class="card" style="margin:20px 20px 20px 20px;">
     <pre>Altere as configurações das contas</pre>
     @RenderBody()
 </div>
+
 
 @section Scripts {
     @RenderSection("Scripts", required: false)
