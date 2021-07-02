@@ -1,32 +1,26 @@
 ﻿@using Sim.UI.Web.Areas.Settings.Pages.Common
 
-<nav id="navbar_top" class="navbar navbar-expand-sm navbar-light shadow bg-body">
-    <div class="container">
-        <span class="text-primary me-2">Opções</span>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarScroll">
-            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
-                <li class="nav-item">
-                    <a class="nav-link @SettingsNavPages.SecretariaNavClass(ViewContext)" id="secretaria" asp-page="./Index">Secretaria</a>
+<div class="navbar navbar-fixed">
+    <nav class="navbar">
+        <div class="nav-wrapper">
+            <span class="brand-logo grey-text text-darken-4">Opções</span>
+            <ul class="right hide-on-med-and-down">
+                <li>
+                    <a class="@SettingsNavPages.SecretariaNavClass(ViewContext)" id="secretaria" asp-page="./Index">Secretaria</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link @SettingsNavPages.SetoresNavClass(ViewContext)" id="setor" asp-page="./Setores">Setores</a>
+                <li>
+                    <a class="@SettingsNavPages.SetoresNavClass(ViewContext)" id="setor" asp-page="./Setores">Setores</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link @SettingsNavPages.ServicosNavClass(ViewContext)" id="servico" asp-page="./Servicos">Serviços</a>
+                <li>
+                    <a class="@SettingsNavPages.ServicosNavClass(ViewContext)" id="servico" asp-page="./Servicos">Serviços</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link @SettingsNavPages.EventosNavClass(ViewContext)" id="evento" asp-page="./Eventos">Eventos</a>
+                <li>
+                    <a class="@SettingsNavPages.EventosNavClass(ViewContext)" id="evento" asp-page="./Eventos">Eventos</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link @SettingsNavPages.CanalNavClass(ViewContext)" id="canal" asp-page="./Canal">Canais</a>
+                <li>
+                    <a class="@SettingsNavPages.CanalNavClass(ViewContext)" id="canal" asp-page="./Canal">Canais</a>
                 </li>
             </ul>
-            <form class="d-flex">
-                <a asp-area="" asp-page="./Novo" class="btn btn-sm btn-outline-primary" title="Novo Evento">Novo Evento</a>
-            </form>
         </div>
-    </div>
-</nav>
+    </nav>
+</div>

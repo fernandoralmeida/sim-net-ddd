@@ -4,12 +4,10 @@
     <nav class="navbar">
         <div class="nav-wrapper">            
             <a class="brand-logo grey-text text-darken-4">Sebrae Aqui</a>
-            <ul class="center">
+            <ul class="right">
                 <li><a asp-page="/SebraeAqui/Index" class="@SebraeAquiNavPages.InicioNavClass(ViewContext)">Não Lançados</a></li>
                 <li><a asp-page="/SebraeAqui/Rae.Lancados" class="@SebraeAquiNavPages.AtendiementoNavClass(ViewContext)">Lançados</a></li>
-            </ul>
-            <ul class="right light-blue lighten-4">
-                <li><a asp-area="" asp-page="/Pessoa/Index" class="waves-effect waves-light">Novo Atendimento</a></li>
+                <li class="light-blue lighten-4"><a asp-area="" asp-page="/Pessoa/Index" class="waves-effect waves-light">Novo Atendimento</a></li>
             </ul>
         </div>
     </nav>

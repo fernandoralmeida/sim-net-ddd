@@ -1,29 +1,28 @@
 ﻿@using Sim.UI.Web.Areas.Admin.Pages.Manager
 
-<nav id="navbar_top" class="navbar navbar-expand-sm navbar-light shadow bg-body">
-    <div class="container">
-        <span class="text-primary me-2">Contas</span>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarScroll">
-            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
-                <li class="nav-item">
-                    <a class="nav-link @AdminNavPages.IndexNavClass(ViewContext)" id="lusers" asp-page="./Index">Listar</a>
+<div class="navbar-fixed">
+    <nav class="navbar">
+        <div class="nav-wrapper">
+            <span class="brand-logo grey-text text-darken-4">Contas</span>
+            <ul class="right hide-on-med-and-down">
+                <li>
+                    <a class="@AdminNavPages.IndexNavClass(ViewContext)" id="lusers" asp-page="./Index">Listar</a>
                 </li>
-                <li class="nav-item dropdown" hidden>
-                    <a class="nav-link @AdminNavPages.RegisterNavClass(ViewContext)" id="regs" asp-page="./Register"><i class="fas fa-user-plus"></i></a>
+                <li hidden>
+                    <a class="@AdminNavPages.RegisterNavClass(ViewContext)" id="regs" asp-page="./Register"><i class="fas fa-user-plus"></i></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link @AdminNavPages.RolesNavClass(ViewContext)" id="roles" asp-page="./Roles">Apolices</a>
+                <li>
+                    <a class="@AdminNavPages.RolesNavClass(ViewContext)" id="roles" asp-page="./Roles">Apolices</a>
                 </li>
-                <li class="nav-item" hidden>
-                    <a class="nav-link @AdminNavPages.ClaimsNavClass(ViewContext)" id="claims" asp-page="./Claims">Papeis</a>
+                <li hidden>
+                    <a class="@AdminNavPages.ClaimsNavClass(ViewContext)" id="claims" asp-page="./Claims">Papeis</a>
+                </li>
+                <li class="light-blue lighten-4 waves-effect waves-light">
+                    <form>
+                        <a asp-page="./Register">Adicionar Novo Usuário</a>
+                    </form>
                 </li>
             </ul>
-            <form class="d-flex">
-                <a class="btn btn-sm btn-outline-primary" id="regs" asp-page="./Register">Adicionar Novo Usuário</a>
-            </form>
         </div>
-    </div>
-</nav>
+    </nav>
+</div>

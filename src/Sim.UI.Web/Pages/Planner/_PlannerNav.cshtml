@@ -1,26 +1,26 @@
 ﻿@using Sim.UI.Web.Pages.Planner
 
-<nav id="navbar_top" class="navbar navbar-expand-sm nav-wrapper">
-    <div class="container">
-        <span class="text-primary me-2">Planner</span>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarScroll">
-            <ul class="navbar-nav me-auto my-2 my-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link @PlannerNavPages.InicioNavClass(ViewContext)" asp-page="./Index">Inicio</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link @PlannerNavPages.ListarNavClass(ViewContext)" asp-page="./Listar">Listar</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link @PlannerNavPages.AjudaNavClass(ViewContext)" asp-page="./Ajuda">Ajuda</a>
-                </li>
-            </ul>
-            <form class="d-flex">
-                <a asp-area="" asp-page="./Novo" class="btn btn-sm btn-outline-primary" title="Novo Evento">Nova Semana</a>
-            </form>
+<div class="navbar navbar-fixed">
+    <nav class="navbar">
+        <div class="nav-wrapper">
+            <span class="brand-logo grey-text text-darken-4">e-Planner</span>
+
+                <ul class="right">
+                    <li>
+                        <a class="nav-link @PlannerNavPages.InicioNavClass(ViewContext)" asp-page="./Index">Inicio</a>
+                    </li>
+                    <li>
+                        <a class="nav-link @PlannerNavPages.ListarNavClass(ViewContext)" asp-page="./Listar">Listar</a>
+                    </li>
+                    <li>
+                        <a class="nav-link @PlannerNavPages.AjudaNavClass(ViewContext)" asp-page="./Ajuda">Ajuda</a>
+                    </li>
+                    <li class="light-blue lighten-4 waves-effect waves-light">
+                        <form>
+                            <a asp-area="" asp-page="./Novo">Nova Semana</a>
+                        </form>
+                    </li>
+                </ul>
         </div>
-    </div>
-</nav>
+    </nav>
+</div>

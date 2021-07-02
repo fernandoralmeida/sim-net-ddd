@@ -1,34 +1,32 @@
 ﻿@using Sim.UI.Web.Pages.Empresa
 
-<nav id="navbar_top" class="navbar navbar-expand-sm nav-wrapper">
-    <div class="container">
-        <span class="text-primary me-2">Empresas</span>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarScroll">
-            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
-                <li class="nav-item" hidden>
-                    <a class="nav-link @EmpresaNavPages.InicioNavClass(ViewContext)" asp-page="./Index">Listar</a>
+<div class="navbar navbar-fixed">
+    <nav class="navbar">
+        <div class="nav-wrapper">
+            <span class="brand-logo grey-text text-darken-4">Empresas</span>
+
+
+            <ul class="right hide-on-med-and-down">
+                <li hidden>
+                    <a class="@EmpresaNavPages.InicioNavClass(ViewContext)" asp-page="./Index">Listar</a>
                 </li>
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle @EmpresaNavPages.ConsultaNomeNavClass(ViewContext)" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Consultar</a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" asp-page="./Index">por CNPJ</a></li>
-                        <li><a class="dropdown-item" asp-page="./Consulta-rs">por Razao Social</a></li>
+                <li>
+                    <a class="dropdown-trigger @EmpresaNavPages.ConsultaNomeNavClass(ViewContext)" data-target="dropdownemp" href="#">Consultar</a>
+                    <ul id="dropdownemp" class="dropdown-content">
+                        <li><a asp-page="./Index">por CNPJ</a></li>
+                        <li><a asp-page="./Consulta-rs">por Razao Social</a></li>
                     </ul>
                 </li>
 
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle @EmpresaNavPages.JucespNavClass(ViewContext)" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Base Jucesp</a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" asp-page="./Jucesp">Consultar CNPJ</a></li>
-                        <li><a class="dropdown-item" asp-page="./Jucesp-consulta-razao">Consultar por Razão Social</a></li>
-                        <li><a class="dropdown-item" asp-page="./Jucesp-consulta-logradouro">Consultar por Endereço</a></li>
-                        <li><a class="dropdown-item" asp-page="./Jucesp-consulta-bairro">Consultar por Bairro</a></li>
-                        <li><a class="dropdown-item" asp-page="./Jucesp-consulta-atividade">Consultar por Atividade</a></li>
+                <li>
+                    <a class="dropdown-trigger @EmpresaNavPages.JucespNavClass(ViewContext)" data-target="dropdownjucep" href="#">Base Jucesp</a>
+                    <ul id="dropdownjucep" class="dropdown-content">
+                        <li><a asp-page="./Jucesp">Consultar CNPJ</a></li>
+                        <li><a asp-page="./Jucesp-consulta-razao">Consultar por Razão Social</a></li>
+                        <li><a asp-page="./Jucesp-consulta-logradouro">Consultar por Endereço</a></li>
+                        <li><a asp-page="./Jucesp-consulta-bairro">Consultar por Bairro</a></li>
+                        <li><a asp-page="./Jucesp-consulta-atividade">Consultar por Atividade</a></li>
                     </ul>
                 </li>
 
@@ -37,15 +35,19 @@
                 </li>
                 @if (User.IsInRole("Administrador"))
                 {
-                    <li class="nav-item">
-                        <a class="nav-link @EmpresaNavPages.MigraDataNavClass(ViewContext)" asp-page="./Migra.data">Migra Data</a>
+                    <li>
+                        <a class="@EmpresaNavPages.MigraDataNavClass(ViewContext)" asp-page="./Migra.data">Migra Data</a>
                     </li>
 
                 }
+                <li class="light-blue lighten-4 waves-effect waves-light">
+                    <form>
+                        <a asp-area="" asp-page="./Add">Adicionar Empresa</a>
+                    </form>
+                </li>
             </ul>
-            <form class="d-flex">
-                <a asp-area="" asp-page="./Add" class="btn btn-sm btn-outline-primary" title="Novo Evento">Adicionar Empresa</a>
-            </form>
+
+
         </div>
-    </div>
-</nav>
+    </nav>
+</div>

@@ -1,29 +1,25 @@
 ﻿@using Sim.UI.Web.Pages.Pessoa
 
-<nav id="navbar_top" class="navbar navbar-expand-sm nav-wrapper">
-    <div class="container">
-        <span class="text-primary me-2">Pessoas</span>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarScroll">
-            <ul class="navbar-nav me-auto my-2 my-lg-0">
-                <li class="nav-item">
+<div class="navbar navbar-fixed">
+    <nav class="navbar">
+        <div class="nav-wrapper">
+            <span class="brand-logo grey-text text-darken-4">Pessoas</span>
+            <ul class="right">
+                <li>
                     <a class="nav-link @PessoaNavPages.InicioNavClass(ViewContext)" asp-page="./Index">Listar</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle @PessoaNavPages.ConsultaNomeNavClass(ViewContext) @PessoaNavPages.ConsultaCPFNavClass(ViewContext)" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Consultar</a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" asp-page="./Consulta.Nome">Nome</a></li>
+                <li>
+                    <a class="dropdown-trigger @PessoaNavPages.ConsultaNomeNavClass(ViewContext) @PessoaNavPages.ConsultaCPFNavClass(ViewContext)" data-target="dropdownpe">Consultar</a>
+                    <ul id="dropdownpe" class="dropdown-content">
+                        <li><a asp-page="./Consulta.Nome">Nome</a></li>
                     </ul>
                 </li>
-                <li class="nav-item" hidden>
-                    <a class="nav-link" href="#">Relatórios</a>
+                <li class="light-blue lighten-4">
+                    <form>
+                        <a asp-area="" asp-page="./Novo">Adicionar Pessoa</a>
+                    </form>
                 </li>
             </ul>
-            <form class="d-flex">
-                <a asp-area="" asp-page="./Novo" class="btn btn-sm btn-outline-primary" title="Novo Evento">Adicionar Pessoa</a>
-            </form>
         </div>
-    </div>
-</nav>
+    </nav>
+</div>

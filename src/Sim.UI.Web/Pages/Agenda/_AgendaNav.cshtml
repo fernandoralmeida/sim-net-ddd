@@ -1,31 +1,33 @@
 ﻿@using Sim.UI.Web.Pages.Agenda
 
-<nav id="navbar_top" class="navbar navbar-expand-sm nav-wrapper">
-    <div class="container">
-        <span class="text-primary me-2">Agenda</span>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarScroll">
-            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
-                <li class="nav-item">
-                    <a class="nav-link @AgendaNavPages.InicioNavClass(ViewContext)" asp-page="./Index">Eventos</a>
+<div class="navbar navbar-fixed">
+    <nav class="navbar">
+        <div class="nav-wrapper">
+            <span class="brand-logo grey-text text-darken-4">Agenda</span>
+
+            <ul class="right hide-on-med-and-down">
+                <li>
+                    <a class="@AgendaNavPages.InicioNavClass(ViewContext)" asp-page="./Index">Eventos</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle @AgendaNavPages.EventoListClass(ViewContext)" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Consultar</a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" asp-page="./Evento-list-passados">Eventos Anteriores</a></li>
-                        <li><a class="dropdown-item" asp-page="./Evento.List">Participantes</a></li>
+                <li>
+                    <a class="dropdown-trigger @AgendaNavPages.EventoListClass(ViewContext)" data-target="dropdownag" href="#">Consultar</a>
+                    <ul id="dropdownag" class="dropdown-content">
+                        <li><a asp-page="./Evento-list-passados">Eventos Anteriores</a></li>
+                        <li><a asp-page="./Evento.List">Participantes</a></li>
                     </ul>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link @AgendaNavPages.EventoEditClass(ViewContext)" href="#">Relatórios</a>
+                <li>
+                    <a class="@AgendaNavPages.EventoEditClass(ViewContext)" href="#">Relatórios</a>
+                </li>
+                <li class="light-blue lighten-4 waves-effect waves-light">
+                    <form>
+                        <a asp-area="" asp-page="./Novo">Novo Evento</a>
+                    </form>
                 </li>
             </ul>
-            <form class="d-flex">
-                <a asp-area="" asp-page="./Novo" class="btn btn-sm btn-outline-primary" title="Novo Evento">Novo Evento</a>
-            </form>
+
         </div>
-    </div>
-</nav>
+    </nav>
+</div>
+
 

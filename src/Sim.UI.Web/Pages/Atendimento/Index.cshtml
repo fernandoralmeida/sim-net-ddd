@@ -6,22 +6,23 @@
     ViewData["ActivePage"] = AtendimentoNavPages.Inicio;
 }
 
-
 <partial name="_StatusMessage" model="Model.StatusMessage" />
-
-<div class="row mt-5 mb-5">    
-    <form method="post">
-        <div class="d-grid gap-2 d-md-flex justify-content-md-center">            
-            <div class="d-flex">
-                    <input asp-for="Input.DataAtendimento" class="form-control me-2" aria-describedby="button-addon2">
-                    <button class="btn btn-outline-primary" type="submit" role="button" id="button-addon2"><i class="fas fa-sync"></i></button>
+<div class="row">    
+    <form class="col s12 center" method="post">
+        <div class="row">
+            <div class="input col s4">
+                <input asp-for="Input.DataAtendimento">
+            </div>
+            <div class="col s1">
+                <button class="btn waves-effect waves-light" type="submit" role="button"><i class="material-icons">search</i></button>
             </div>
         </div>
+
     </form>
 </div>
 
 <div>
-    <table class="table table-borderless table-striped">
+    <table>
         <caption>Lista de atendimentos!</caption>
         <thead>
             <tr>

@@ -1,35 +1,33 @@
 ﻿@using Sim.UI.Web.Pages.Atendimento
 
-<nav class="nav-wrapper blue-grey">
-    <ul class="hide-on-med-and-down">
-
-        <li>
-            <a class="@AtendimentoNavPages.InicioNavClass(ViewContext)" asp-page="./Index">Meus Atendimentos</a>
-        </li>
-        <li>
-            <a class="@AtendimentoNavPages.AtendiementoNavClass(ViewContext)" asp-page="./Novo">Ativo</a>
-        </li>
-        <li>
-            <a class="dropdown-trigger @AtendimentoNavPages.ConsultaNavClass(ViewContext)" data-target="dropdownat" href="#">Consultar<i class="material-icons right">arrow_drop_down</i></a>
-            <ul id="dropdownat" class="dropdown-content">
-                <li><a asp-page="./Consulta">Atendimentos por Data</a></li>
-                <li><a asp-page="./Consulta.ByPF">Atendimentos por CPF</a></li>
-                <li><a asp-page="./Consulta.ByPJ">Atendimentos por CNPJ</a></li>
-                <li class="divider"></li>
-                <li><a asp-page="./Consulta.Pendencias">Atendimentos Pendentes</a></li>
-                <li><a asp-page="./Consulta.Cancelados">Atendimentos Cancelados</a></li>
+<div class="navbar navbar-fixed">
+    <nav class="navbar">
+        <div class="nav-wrapper">
+            <a class="brand-logo grey-text text-darken-4">Atendimentos</a>
+            <ul class="right hide-on-med-and-down">
+                <li>
+                    <a class="@AtendimentoNavPages.InicioNavClass(ViewContext)" asp-page="./Index">Meus Atendimentos</a>
+                </li>
+                <li>
+                    <a class="@AtendimentoNavPages.AtendiementoNavClass(ViewContext)" asp-page="./Novo">Ativo</a>
+                </li>
+                <li>
+                    <a class="dropdown-trigger @AtendimentoNavPages.ConsultaNavClass(ViewContext)" data-target="dropdownat" href="#">Consultar<i class="material-icons right">arrow_drop_down</i></a>
+                    <ul id="dropdownat" class="dropdown-content">
+                        <li><a asp-page="./Consulta">Atendimentos por Data</a></li>
+                        <li><a asp-page="./Consulta.ByPF">Atendimentos por CPF</a></li>
+                        <li><a asp-page="./Consulta.ByPJ">Atendimentos por CNPJ</a></li>
+                        <li><a asp-page="./Consulta.Pendencias">Atendimentos Pendentes</a></li>
+                        <li><a asp-page="./Consulta.Cancelados">Atendimentos Cancelados</a></li>
+                    </ul>
+                </li>
+                <li class="light-blue lighten-4 waves-effect waves-light">
+                    <form>
+                        <a asp-area="" asp-page="/Pessoa/Index">Novo Atendimento</a>
+                    </form>
+                </li>
             </ul>
-        </li>
-        <li hidden>
-            <a href="#">Relatórios</a>
-        </li>
-    </ul>
-    <ul class="right">
-        <li class="divider"></li>
-        <li>
-            <form>
-                <a asp-area="" asp-page="/Pessoa/Index" class="waves-effect waves-light">Novo Atendimento</a>
-            </form>
-        </li>
-    </ul>
-</nav>
+        </div>
+    </nav>
+</div>
+    
