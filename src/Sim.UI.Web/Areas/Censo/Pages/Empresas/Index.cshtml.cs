@@ -49,22 +49,9 @@ namespace Sim.UI.Web.Areas.Censo.Pages.Empresas
             public string CNPJRes { get; set; }
         }
 
-        private async Task LoadAsync()
+        public void OnGet()
         {
-            //var t = await _empresaApp.ListAllAsync();            
-
-            Input = new InputModel
-            {
-                ListaEmpresas = new List<BaseReceitaFederal>()
-            };
-
-            //StatusMessage = "Jaú tem " + t.Count().ToString() + "CNPJs";
-        }
-
-        public async Task<IActionResult> OnGetAsync()
-        {
-            await LoadAsync();
-            return Page();
+            Input = new InputModel();           
         }
 
         public async Task<IActionResult> OnPostAsync()

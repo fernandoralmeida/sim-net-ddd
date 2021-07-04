@@ -5,33 +5,39 @@
     ViewData["ActivePage"] = PessoaNavPages.Inicio;
 }
 
-<partial name="_StatusMessage" model="Model.StatusMessage" />
+<!--<partial name="_StatusMessage" model="Model.StatusMessage" />-->
 
-<pre>Identificação</pre>
-
-<div>
+<div class="card">
     <form method="post" asp-route="url" novalidate>
-
-        <div class="mb-3 row">
-            <div class="col-md-5">
-                <label asp-for="Input.Nome" class="form-label" for="inputNome"></label>
-                <input asp-for="Input.Nome" class="form-control" id="inputNome" required />
-            </div>
-            <div class="col-md-5">
-                <label asp-for="Input.Nome_Social" class="form-label" for="inputSocial"></label>
-                <input asp-for="Input.Nome_Social" class="form-control" id="inputSocial" />
-            </div>
-            <div class="col-md-2">
-                <div class="input-field col s12">
-                    <select asp-for="Input.Genero">
-                        <option selected></option>
-                        <option>Feminino</option>
-                        <option>Masculino</option>
-                    </select>
-                    <label asp-for="Input.Genero"></label>
+        <div class="section">
+            <div class="row">
+                <div class="col s12">
+                    <div class="col s12 m4 l4">
+                        <div class="input-field">
+                            <input asp-for="Input.Nome" id="inputNome" required />
+                            <label asp-for="Input.Nome" for="inputNome"></label>
+                        </div>
+                    </div>
+                    <div class="col s12 m4 l4">
+                        <div class="input-field">
+                            <input asp-for="Input.Nome_Social" id="inputSocial" />
+                            <label asp-for="Input.Nome_Social" for="inputSocial"></label>
+                        </div>
+                    </div>
+                    <div class="col s12 m4 l4">
+                        <div class="input-field">
+                            <select asp-for="Input.Genero" id="inputGenero">
+                                <option></option>
+                                <option>Feminino</option>
+                                <option>Masculino</option>
+                            </select>
+                            <label asp-for="Input.Genero" for="inputGenero"></label>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+        <div class="divider"></div>
 
         <div class="mb-3 row">
             <div class="col-md-3">
@@ -180,10 +186,10 @@
     <script src="~/js/jquery.mask.min.js"></script>
     <script src="~/js/jquery.validation.js"></script>
     <script>
-        $('#inputCPF').mask('000.000.000-00', { placeholder: "___.___.___-__" });
-        $('#txtphone').mask('(00) 0000-0000', { placeholder: "(__) ____-____" });
-        $('#txtmobile').mask('(00) 00000-0000', { placeholder: "(__) _____-____" });
-        $('#cep').mask('00000-000', { placeholder: "_____-___" });
+        $('#inputCPF').mask('000.000.000-00');
+        $('#txtphone').mask('(00) 0000-0000');
+        $('#txtmobile').mask('(00) 00000-0000');
+        $('#cep').mask('00000-000');
     </script>
 
 }

@@ -5,14 +5,16 @@
     ViewData["ActivePage"] = AtendimentoNavPages.Atendimento;
 }
 
-<partial name="_StatusMessage" model="Model.StatusMessage" />
+<!--
+<partial name="_StatusMessage" model="Model.StatusMessage" />-->
 
-<form method="post">
-    <div class="col-md-12 mb-4">
+<form class="card" method="post">
+
+    <div class="section">
 
         @if (Model.Input.Pessoa == null)
         {
-            <div class="row g-2 mb-4">
+            <div class="row">
                 <div class="form-group col-md-4">
                     <div class="input-group ">
                         <span class="input-group-text">CPF</span>
@@ -24,118 +26,101 @@
         }
         else
         {
-            <div class="row g-2 mb-4">
+
+            <div class="row">
                 <div class="col-md-2" hidden>
-                    <label class="form-label" asp-for="Input.Pessoa.Id"></label>
-                    <input class="form-control" asp-for="Input.Pessoa.Id" />
+                    <input asp-for="Input.Pessoa.Id" />
+                    <label asp-for="Input.Pessoa.Id" for="Input_Pessoa_Id"></label>
                 </div>
-                <div class="col-md-2">
-                    <label class="form-label" asp-for="Input.Pessoa.CPF"></label>
-                    <input class="form-control" asp-for="Input.Pessoa.CPF" />
+                <div class="input-field col s12 m6 l3">
+                    <input asp-for="Input.Pessoa.CPF" />
+                    <label asp-for="Input.Pessoa.CPF"></label>
                 </div>
-                <div class="col-md-5">
-                    <label class="form-label" asp-for="Input.Pessoa.Nome"></label>
-                    <input class="form-control" asp-for="Input.Pessoa.Nome" />
+                <div class="input-field col s12 m6 l3">
+                    <input asp-for="Input.Pessoa.Nome" />
+                    <label asp-for="Input.Pessoa.Nome"></label>
                 </div>
-                <div class="col-md-3">
-                    <label class="form-label" asp-for="Input.Pessoa.Email"></label>
-                    <input class="form-control" asp-for="Input.Pessoa.Email" />
+                <div class="input-field col s12 m6 l3">
+                    <input asp-for="Input.Pessoa.Email" />
+                    <label asp-for="Input.Pessoa.Email"></label>
                 </div>
-                <div class="col-md-2">
-                    <label class="form-label" asp-for="Input.Pessoa.Tel_Movel"></label>
-                    <input class="form-control" asp-for="Input.Pessoa.Tel_Movel" />
+                <div class="input-field col s12 m6 l3">
+                    <input asp-for="Input.Pessoa.Tel_Movel" />
+                    <label asp-for="Input.Pessoa.Tel_Movel"></label>
                 </div>
                 <div class="col-md align-self-end" hidden>
-                    <button class="btn btn-danger" type="submit" asp-page-handler="RemoverPessoa"><i class="fas fa-minus-square"></i> Remover</button>
+                    <button class="btn btn-danger" type="submit" asp-page-handler="RemoverPessoa">Remover</button>
                 </div>
             </div>
         }
-
-
-
-
-
-    <div class="accordion" id="accordionExample">
+    </div>
+    <div class="divider"></div>
+    <div class="section">
 
         @if (Model.Input.Empresa == null)
         {
-
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="headingTwo">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        Adicionar Empresa?
-                    </button>
-                </h2>
-                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                        <div class="row g-2 mb-4">
-                            <div class="form-group col-md-4">
-                                <div class="input-group ">
-                                    <span class="input-group-text">CNPJ</span>
-                                    <input class="form-control" asp-for="GetCNPJ" id="inputCNPJ" aria-describedby="button-addon2">
-                                    <button asp-page-handler="IncluirEmpresa" class="btn btn-primary" type="submit"><i class="fa fa-plus-square" aria-hidden="true"></i> Incluir</button>
-                                </div>
-                            </div>
-                        </div>
+            <div class="row">
+                <div class="col">
+                    <div class="input-field">
+                        <input asp-for="GetCNPJ" id="inputCNPJ">
+                        <label for="inputCNPJ">CNPJ</label>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="input-field">
+                        <button asp-page-handler="IncluirEmpresa" class="btn waves-effect" type="submit">Incluir</button>
                     </div>
                 </div>
             </div>
         }
         else
         {
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="headingOne">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        Empresa Adicionada.
-                    </button>
-                </h2>
-                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                        <div class="row g-2 mb-3">
-                            <div class="col-md-2" hidden>
-                                <label class="form-label" asp-for="Input.Empresa.Id"></label>
-                                <input class="form-control" asp-for="Input.Empresa.Id" />
-                            </div>
-                            <div class="col-md-2">
-                                <label class="form-label" asp-for="Input.Empresa.CNPJ"></label>
-                                <input class="form-control" asp-for="Input.Empresa.CNPJ" />
-                            </div>
-                            <div class="col-md-4">
-                                <label class="form-label" asp-for="Input.Empresa.Nome_Empresarial"></label>
-                                <input class="form-control" asp-for="Input.Empresa.Nome_Empresarial" />
-                            </div>
-                            <div class="col-md-3">
-                                <label class="form-label" asp-for="Input.Empresa.Email"></label>
-                                <input class="form-control" asp-for="Input.Empresa.Email" />
-                            </div>
-                            <div class="col-md-2">
-                                <label class="form-label" asp-for="Input.Empresa.Telefone"></label>
-                                <input class="form-control" asp-for="Input.Empresa.Telefone" />
-                            </div>
-                            <div class="col-md align-self-end">
-                                <button class="btn btn-danger" type="submit" asp-page-handler="RemoverEmpresa"><i class="fas fa-minus-square"></i> Remover</button>
-                            </div>
-                        </div>
-                    </div>
+            <div class="row">
+                <div class="input-field col s12 m6 l3" hidden>
+                    <label asp-for="Input.Empresa.Id"></label>
+                    <input asp-for="Input.Empresa.Id" />
+                </div>
+                <div class="input-field col s12 m6 l3">
+                    <label asp-for="Input.Empresa.CNPJ"></label>
+                    <input asp-for="Input.Empresa.CNPJ" />
+                </div>
+                <div class="input-field col s12 m6 l3">
+                    <label asp-for="Input.Empresa.Nome_Empresarial"></label>
+                    <input asp-for="Input.Empresa.Nome_Empresarial" />
+                </div>
+                <div class="input-field col s12 m6 l3">
+                    <label asp-for="Input.Empresa.Email"></label>
+                    <input asp-for="Input.Empresa.Email" />
+                </div>
+                <div class="input-field col s12 m6 l3">
+                    <label asp-for="Input.Empresa.Telefone"></label>
+                    <input asp-for="Input.Empresa.Telefone" />
+                </div>
+                <div class="input-field col s12 m6 l3">
+                    <button class="btn red lighten-1" type="submit" asp-page-handler="RemoverEmpresa">Remover</button>
                 </div>
             </div>
         }
     </div>
+    <div class="divider"></div>
+    <div class="section">
+        <div class="row">
+            <div class="col s12">
+                <button asp-page-handler="Save" type="submit" class="btn waves-effect">Iniciar Atendimento</button>
+                <a asp-page="/Atendimento/Index" class="btn waves-effect red lighten-1">Cancelar</a>
+            </div>
+        </div>
     </div>
 
-    <div class="d-grid gap-2 d-md-block mb-3">
-        <button asp-page-handler="Save" type="submit" class="btn btn-success">Iniciar Atendimento</button>
-        <a asp-page="/Atendimento/Index" class="btn btn-secondary">Cancelar</a>
-    </div>
 </form>
 
 @section Scripts {
     <script src="~/js/jquery.cep.js"></script>
     <script src="~/js/jquery.mask.min.js"></script>
     <script>
-        $('#inputCPF').mask('000.000.000-00', { placeholder: "___.___.___-__" });
+        $('#inputCPF').mask('000.000.000-00');
         $('#txtphone').mask('(00) 0000-0000', { placeholder: "(__) ____-____" });
         $('#txtmobile').mask('(00) 00000-0000', { placeholder: "(__) _____-____" });
-        $('#inputCNPJ').mask('00.000.000/0000-00', { placeholder: "__.___.___/____-__" });
+        $('#inputCNPJ').mask('00.000.000/0000-00');
     </script>
 }

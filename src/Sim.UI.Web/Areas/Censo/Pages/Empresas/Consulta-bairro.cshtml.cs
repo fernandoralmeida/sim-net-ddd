@@ -19,11 +19,11 @@ namespace Sim.UI.Web.Areas.Censo.Pages.Empresas
     public class Consulta_bairroModel : PageModel
     {
         private readonly ICNPJBase<BaseReceitaFederal> _empresaApp;
-        private readonly IBase<Municipio> _municipios;
+        private readonly IServiceMunicipios<Municipio> _municipios;
         private readonly IServiceCnpj<BaseReceitaFederal> _appServiceCNPJ;
 
         public Consulta_bairroModel(ICNPJBase<BaseReceitaFederal> appServiceEmpresa,
-            IBase<Municipio> municipios,
+            IServiceMunicipios<Municipio> municipios,
             IServiceCnpj<BaseReceitaFederal> appServiceCNPJ)
         {
             _empresaApp = appServiceEmpresa;
@@ -63,7 +63,7 @@ namespace Sim.UI.Web.Areas.Censo.Pages.Empresas
         private async Task LoadMunicipios()
         {
 
-            var t = await _municipios.ListAll();
+            var t = await _municipios.MicroRegiaoJahu();
 
             if (t != null)
             {

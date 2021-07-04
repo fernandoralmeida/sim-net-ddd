@@ -40,7 +40,6 @@ namespace Sim.Cross.Ioc
 
     using Sim.Domain.Cnpj.Service;
 
-
     public static class Container
     {
         public static void RegisterApplicationService(IServiceCollection services)
@@ -83,6 +82,7 @@ namespace Sim.Cross.Ioc
             services.AddScoped<IServiceCnpj<BaseReceitaFederal>, ServiceRFB>();
             services.AddScoped<IServiceSimplesNacional<BaseReceitaFederal>, ServiceRFBSimplesNacional>();
 
+            services.AddScoped<IServiceMunicipios<Municipio>, ServiceMunicipios>();
             /**/
             services.AddScoped<IAppServiceBase<Domain.SDE.Entity.Empresa>, AppServiceBase<Domain.SDE.Entity.Empresa>>();
             services.AddScoped<IAppServiceEmpresa, AppServiceEmpresa>();

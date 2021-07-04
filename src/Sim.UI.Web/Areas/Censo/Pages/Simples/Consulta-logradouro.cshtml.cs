@@ -22,11 +22,11 @@ namespace Sim.UI.Web.Areas.Censo.Pages.Simples
     public class Consulta_logradouroModel : PageModel
     {
         private readonly ICNPJBase<BaseReceitaFederal> _empresaApp;
-        private readonly IBase<Municipio> _municipios;
+        private readonly IServiceMunicipios<Municipio> _municipios;
         private readonly IServiceCnpj<BaseReceitaFederal> _appServiceCNPJ;
         private readonly IServiceSimplesNacional<BaseReceitaFederal> _appsimples;
         public Consulta_logradouroModel(ICNPJBase<BaseReceitaFederal> appServiceEmpresa,
-            IBase<Municipio> municipios,
+            IServiceMunicipios<Municipio> municipios,
             IServiceCnpj<BaseReceitaFederal> appServiceCNPJ,
             IServiceSimplesNacional<BaseReceitaFederal> appsimples)
         {
@@ -64,7 +64,7 @@ namespace Sim.UI.Web.Areas.Censo.Pages.Simples
         private async Task LoadMunicipios()
         {
 
-            var t = await _municipios.ListAll();
+            var t = await _municipios.MicroRegiaoJahu();
 
             if (t != null)
             {

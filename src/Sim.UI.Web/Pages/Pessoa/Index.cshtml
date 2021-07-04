@@ -6,24 +6,30 @@
     ViewData["ActivePage"] = PessoaNavPages.Inicio;
 }
 
-<partial name="_StatusMessage" model="Model.StatusMessage" />
+<!--<partial name="_StatusMessage" model="Model.StatusMessage" />-->
 
-<div class="mt-5 mb-5">
+<div class="section">
     <form method="post">
-        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-            <div class="d-flex">
-
-                    <input asp-for="Input.CPF" class="form-control me-2" placeholder="CPF" aria-describedby="button-addon2" id="inputCPF" autofocus>
-                    <button class="btn btn-outline-primary" type="submit" role="button" id="button-addon2"><i class="fa fa-search"></i></button>              
-                
-            </div>        
+        <div class="row">
+            <div class="col s12">
+                <div class="col s6">
+                    <div class="input-field right">
+                        <input asp-for="Input.CPF" id="inputCPF" autofocus>
+                        <label asp-for="Input.CPF" for="inputCPF"></label>
+                    </div>
+                </div>
+                <div class="col s6">
+                    <div class="input-field">
+                        <button class="btn waves-effect" type="submit"><i class="material-icons">search</i></button>
+                    </div>
+                </div>
+            </div>
         </div>
     </form>
 </div>
 
-<div>
-    <table class="table table-striped">
-        <caption>Lista Pessoas (ultimos 10 cadastros)</caption>
+<div class="card">
+    <table>
         <thead>
             <tr>
                 <th></th>
@@ -47,25 +53,25 @@
             {
                 foreach (var item in Model.Input.ListaPessoas)
                 {
-            <tr>
-                <td>
-                    <a asp-area="" asp-page="/Atendimento/Iniciar" asp-route-id="@item.Id" class="btn btn-sm btn-outline-info" title="Iniciar atendimento"><i class="far fa-clock"></i></a>
+                    <tr>
+                        <td>
+                            <a asp-area="" asp-page="/Atendimento/Iniciar" asp-route-id="@item.Id" class="btn btn-small" title="Iniciar atendimento"><i class="far fa-clock"></i></a>
 
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CPF)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nome)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Tel_Movel)
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary" title="Alterar informações"><i class="fas fa-pen"></i></a>
-                </td>
-            </tr>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CPF)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nome)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Tel_Movel)
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            <a asp-page="./Edit" asp-route-id="@item.Id" class="btn orange lighten-1 btn-small" title="Alterar informações"><i class="fas fa-pen"></i></a>
+                        </td>
+                    </tr>
                 }
             }
 
@@ -77,6 +83,6 @@
     <script src="~/js/jquery.cep.js"></script>
     <script src="~/js/jquery.mask.min.js"></script>
     <script>
-        $('#inputCPF').mask('000.000.000-00', { placeholder: "___.___.___-__" });
+        $('#inputCPF').mask('000.000.000-00');
     </script>
 }

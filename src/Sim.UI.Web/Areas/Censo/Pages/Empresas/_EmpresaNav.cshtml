@@ -34,15 +34,10 @@
                 </li>
                 @if (User.IsInRole("Administrador"))
                 {
-                    <li>
+                    <li hidden>
                         <a class="@EmpresaNavPages.MigraDataNavClass(ViewContext)" asp-page="/Empresas/Migra.data">Migra Data</a>
                     </li>
                 }
-                <li class="light-blue lighten-4 waves-effect waves-light">
-                    <form>
-                        <a asp-area="" asp-page="/Empresa/Add">Adicionar Empresa</a>
-                    </form>
-                </li>
             </ul>
         </div>
     </nav>

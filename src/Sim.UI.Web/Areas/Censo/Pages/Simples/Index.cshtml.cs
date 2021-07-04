@@ -17,11 +17,11 @@ namespace Sim.UI.Web.Areas.Censo.Pages.Simples
         private readonly ICNPJBase<BaseReceitaFederal> _empresaApp;
         private readonly IServiceCnpj<BaseReceitaFederal> _appServiceCNPJ;
         private readonly IServiceSimplesNacional<BaseReceitaFederal> _appsimples;
-        private readonly IBase<Municipio> _municipios;
+        private readonly IServiceMunicipios<Municipio> _municipios;
 
         public IndexModel(ICNPJBase<BaseReceitaFederal> appServiceEmpresa,
             IServiceCnpj<BaseReceitaFederal> appServiceCNPJ,
-            IBase<Municipio> municipios,
+            IServiceMunicipios<Municipio> municipios,
             IServiceSimplesNacional<BaseReceitaFederal> appsimples)
         {
             _empresaApp = appServiceEmpresa;
@@ -72,7 +72,7 @@ namespace Sim.UI.Web.Areas.Censo.Pages.Simples
         private async Task LoadMunicipios()
         {
 
-            var t = await _municipios.ListAll();
+            var t = await _municipios.MicroRegiaoJahu();
 
             if (t != null)
             {

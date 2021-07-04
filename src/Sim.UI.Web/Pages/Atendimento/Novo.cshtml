@@ -6,10 +6,10 @@
     ViewData["ActivePage"] = AtendimentoNavPages.Atendimento;
 }
 
-<partial name="_StatusMessage" model="Model.StatusMessage" />
+<!--<partial name="_StatusMessage" model="Model.StatusMessage" />-->
 
-<form method="post">
-    <div class="col-md-12 mb-3" hidden>
+<form class="card card-content" method="post">
+    <div class="col s12" hidden>
         <div class="input-group">
             <span class="input-group-text">Atendimento</span>
             <input type="text" asp-for="Input.Protocolo" class="form-control" readonly>
@@ -18,8 +18,8 @@
             <input type="text" asp-for="Input.Id" class="form-control" readonly>
         </div>
     </div>
-    <div class="col-md-12">
-        <table class="table table-striped">
+    <div class="section">
+        <table>
             <!--<caption>Informações do Cliente</caption>-->
             <thead>
                 <tr>
@@ -53,7 +53,7 @@
                             @Html.DisplayFor(modelItem => Model.Input.Pessoa.Tel_Movel)
                         </td>
                         <td>
-                            <a href="#" class="btn btn-sm btn-outline-secondary viewbutton" data-secao="Pessoa" data-acao="Details" data-id="@Model.Input.Pessoa.Id" data-bs-toggle="modal" data-bs-target="#viewmodal"><i class="fas fa-eye"></i></a>
+                            <a href="#" class="btn orange lighten-1 viewbutton" data-secao="Pessoa" data-acao="Details" data-id="@Model.Input.Pessoa.Id" data-bs-toggle="modal" data-bs-target="#viewmodal"><i class="fas fa-eye"></i></a>
                         </td>
                     </tr>
                 }
@@ -72,56 +72,57 @@
                             @Html.DisplayFor(modelItem => Model.Input.Empresa.Telefone)
                         </td>
                         <td>
-                            <a href="#" class="btn btn-sm btn-outline-secondary viewbutton" data-secao="Empresa" data-acao="Perfil" data-id="@Model.Input.Empresa.Id" data-bs-toggle="modal" data-bs-target="#viewmodal"><i class="fas fa-eye"></i></a>
+                            <a href="#" class="btn purple lighten-1 viewbutton" data-secao="Empresa" data-acao="Perfil" data-id="@Model.Input.Empresa.Id" data-bs-toggle="modal" data-bs-target="#viewmodal"><i class="fas fa-eye"></i></a>
                         </td>
                     </tr>
                 }
 
             </tbody>
         </table>
+    </div>
+    <div class="section">
         <div class="row">
-            <div class="col-md-4">
-                <div class="col-mb-12 mb-2">
-                    <label class="form-label" asp-for="Input.Setor" for="floatingsetor"></label>
-                    <select asp-for="Input.Setor" class="form-select" asp-items="Model.Setores">
+            <div class="col s12">
+                <div class="input-field col s12 m6 l6">
+                    <select asp-for="Input.Setor" asp-items="Model.Setores">
                         <option selected>-- Selecione um Setor --</option>
                     </select>
-                    <span asp-validation-for="Input.Setor" class="text-danger"></span>
+                    <label asp-for="Input.Setor"></label>
                 </div>
-                <div class="col-mb-12 mb-2">
-                    <label class="form-label" asp-for="Input.Canal"></label>
-                    <select asp-for="Input.Canal" class="form-select"></select>
-                    <span asp-validation-for="Input.Canal" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="col-md-4 mb-2">
-                <label class="form-label" for="floatingservico">Serviços Disponível</label>
-                <select asp-for="GetServico" class="form-control" size="10"></select>
-
-            </div>
-            <div class="col-md-4 mb-2">
-                <label class="form-label">Serviços Realizado</label>
-                <select asp-for="ServicosSelecionados" class="form-control" size="10"></select>
-                <div class="row" hidden>
-                    <div class="col-md-1 mt-1">
-                        <input asp-for="Input.Servicos" class="form-control form-control-sm" />
-                    </div>
-                    <div class="col-md">
-                        <span asp-validation-for="Input.Servicos" class="text-danger"></span>
-                    </div>
+                <div class="input-field col s12 m6 l6">
+                    <select asp-for="Input.Canal"></select>
+                    <label asp-for="Input.Canal"></label>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12">
-                <label asp-for="Input.Descricao"></label>
+            <div class="col s12">
+                <div class="input-field col s12">
+                    <select asp-for="Input.Servicos" multiple size="2"></select>
+                    <label asp-for="Input.Servicos"></label>
+                </div>
             </div>
-            <div class="col-md-9 mb-3">
-                <textarea asp-for="Input.Descricao" class="form-control" rows="2"></textarea>
+
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <div class="input-field col s12">
+                    <input asp-for="Input.Descricao" id="input_descricao" />
+                    <label asp-for="Input.Descricao" for="input_descricao"></label>
+                </div>
             </div>
-            <div class="col-md-3">
-                <div class="d-grid gap-2">
-                    <button id="addbtn" type="submit" role="button" class="btn btn-primary">Finalizar<br /> Atendimento</button>
+        </div>
+    </div>
+    <div class=" divider"></div>
+    <div class="section">
+        <div class="row">
+            <div class="col s12">
+                <div class="col s12 m6 l6">
+                    <button id="onbtn" type="submit" role="button" class="btn btn-large waves-effect waves-light">Finalizar Atendimento</button>
+                </div>
+                <div class="input-field col s12 m6 l6" hidden>
+                    <input asp-for="ServicosSelecionados" />
+                    <label for="ServicosSelecionados">Serviços</label>
                 </div>
             </div>
         </div>
@@ -146,7 +147,7 @@
 @section scripts{
     <script>
         $(function () {
-            $("#Input_Setor").on("change", function () {
+            $("#Input_Setor").change(function () {
                 var getSetor = $(this).val();
                 //get canais de atendimento
                 $("#Input_Canal").empty();
@@ -157,35 +158,22 @@
                     });
                 });
                 //get servicos por setor
-                $("#GetServico").empty();
+                $("#Input_Servicos").empty();
                 $.getJSON(`?handler=Servicos&getSetor=${getSetor}`, (data) => {
                     $.each(data, function (i, item) {
-                        $("#GetServico").append(`<option value="${item.nome}">${item.nome}</option>`)
+                        $("#Input_Servicos").append(`<option value="${item.nome}">${item.nome}</option>`)
                     });
                 });
             });
-            //adiciona serviços
-            $("#GetServico").on("click", function () {
-                var getServico = $(this).val();
-                if (getServico !== null) {
-                    $("#ServicosSelecionados").append(`<option value="${getServico}">${getServico}</option>`);
-                    $(`#GetServico option[value="${getServico}"]`).remove();
-                }
-            });
-            //revome serviços
-            $("#ServicosSelecionados").on("click", function () {
-                var meuServico = $(this).val();
-                if (meuServico !== null) {
-                    $("#GetServico").append(`<option value="${meuServico}">${meuServico}</option>`);
-                    $(`#ServicosSelecionados option[value="${meuServico}"]`).remove();
-                }
-            });
-
-            $("#addbtn").on("click", function () {
-                var selected_val = $.map($(`#ServicosSelecionados option`), function (a) {
-                    return a.value;
-                }).join(';');
-                document.getElementById("Input_Servicos").value = selected_val;
+            
+            $("#onbtn").click(function () {
+                var selectedValues = [];
+                $("#Input_Servicos :selected").each(function () {
+                    selectedValues.push($(this).val());
+                });
+                document.getElementById("ServicosSelecionados").value = selectedValues;
+                //alert(selectedValues);
+                return true;
             });
         });
     </script>

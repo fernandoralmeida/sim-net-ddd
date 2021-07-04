@@ -26,7 +26,8 @@ namespace Sim.Cross.Data.Repository.Cnpj
 
         public async Task<IEnumerable<Municipio>> ListAll()
         {
-            return await db.Municipios.ToListAsync();
+            return await db.Municipios.OrderBy(s => s.Descricao).ToListAsync();
         }
+
     }
 }

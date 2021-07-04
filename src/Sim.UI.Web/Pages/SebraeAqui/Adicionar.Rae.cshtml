@@ -5,21 +5,27 @@
     ViewData["Title"] = "Lançar RAE";
 }
 
-<partial name="_StatusMessage" model="Model.StatusMessage" />
+<!--<partial name="_StatusMessage" model="Model.StatusMessage" />-->
 
-<form method="post">
-    <div class="col-md-12 mb-3">
-        <div class="input-group">
-            <span class="input-group-text">Atendimento</span>
-            <input type="text" asp-for="Input.Protocolo" class="form-control" readonly>
-            <input type="text" asp-for="Input.Data" class="form-control" readonly>
-            <input type="text" asp-for="Input.Status" class="form-control" readonly>
-            <input type="text" asp-for="Input.Id" class="form-control" readonly>
+<form class="card" method="post">
+    <div class="section" hidden>
+        <div class="row col s12">
+            <div class="input-field col s4 m6 l3">
+                <input type="text" asp-for="Input.Protocolo" readonly>
+            </div>
+            <div class="input-field col s4 m6 l3">
+                <input type="text" asp-for="Input.Data" readonly>
+            </div>
+            <div class="input-field col s4 m6 l3">
+                <input type="text" asp-for="Input.Status" readonly>
+            </div>
+            <div class="input-field col s4 m6 l3">
+                <input type="text" asp-for="Input.Id" readonly>
+            </div>
         </div>
     </div>
-    <div class="col-md-12">
-        <table class="table table-striped">
-            <!--<caption>Informações do Cliente</caption>-->
+    <div class="section">
+        <table>
             <thead>
                 <tr>
                     <th>
@@ -69,33 +75,43 @@
 
             </tbody>
         </table>
+    </div>
+    <div class="section">
         <div class="row">
-            <div class="col-md-6 mb-2">
-                <label class="form-label" asp-for="Input.Setor" for="floatingsetor"></label>
-                <input asp-for="Input.Setor" class="form-control" readonly />
-            </div>
-            <div class="col-md-6 mb-2">
-                <label class="form-label" asp-for="Input.Canal"></label>
-                <input asp-for="Input.Canal" class="form-control" readonly />
-            </div>
-            <div class="col-md-6 mb-2">
-                <label class="form-label" asp-for="Input.Servicos"></label>
-                <textarea asp-for="Input.Servicos" class="form-control" rows="3" readonly></textarea>
-            </div>
-            <div class="col-md-6 mb-3">
-                <label class="form-label" asp-for="Input.Descricao"></label>
-                <textarea asp-for="Input.Descricao" class="form-control" rows="3" readonly></textarea>
-            </div>
-        </div>
-        <div class="row mt-3">
-            <div class="col-md-8">
-                <div class="input-group">
-                    <input asp-for="Input.Sebrae.RAE" class="form-control" placeholder="Numero Atendimento RAE">
+            <div class="row col s12">
+                <div class="input-field col s12 m6 l6">
+                    <input asp-for="Input.Setor" readonly />
+                    <label asp-for="Input.Setor" for="floatingsetor"></label>
+                </div>
+                <div class="input-field col s12 m6 l6">
+                    <input asp-for="Input.Canal" readonly />
+                    <label asp-for="Input.Canal"></label>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="d-grid gap-2">
-                    <button type="submit" role="button" class="btn btn-primary">Lançar Atendimento do RAE</button>
+            <div class="row col s12">
+                <div class="input-field col s12">
+                    <input asp-for="Input.Servicos" readonly />
+                    <label asp-for="Input.Servicos"></label>
+                </div>
+                <div class="input-field col s12">
+                    <input asp-for="Input.Descricao" rows="3" readonly />
+                    <label asp-for="Input.Descricao"></label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="divider"></div>
+    <div class="section">
+        <div class="row">
+            <div class="col s12 m5 l5">
+                <div class="input-field">
+                    <input asp-for="Input.Sebrae.RAE" id="input_rae">
+                    <label for="input_rae">Numero Atendimento RAE</label>
+                </div>
+            </div>
+            <div class="col s12 m7 l7">
+                <div class="input-field right">
+                    <button type="submit" role="button" class="btn btn-large waves-effect">Lançar Atendimento do RAE</button>
                 </div>
             </div>
         </div>

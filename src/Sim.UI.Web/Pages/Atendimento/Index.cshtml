@@ -6,24 +6,28 @@
     ViewData["ActivePage"] = AtendimentoNavPages.Inicio;
 }
 
-<partial name="_StatusMessage" model="Model.StatusMessage" />
-<div class="row">    
-    <form class="col s12 center" method="post">
-        <div class="row">
-            <div class="input col s4">
-                <input asp-for="Input.DataAtendimento">
+<!--<partial name="_StatusMessage" model="Model.StatusMessage" />-->
+
+<form class="section" method="post">
+    <div class="row">
+        <div class="col s12">
+            <div class="col s6">
+                <div class="input-field right">
+                    <input asp-for="Input.DataAtendimento" id="inputdate" />
+                    <label for="inputdate">Atendimentos do dia</label>
+                </div>
             </div>
-            <div class="col s1">
-                <button class="btn waves-effect waves-light" type="submit" role="button"><i class="material-icons">search</i></button>
+            <div class="col s6">
+                <div class="input-field">
+                    <button class="btn waves-effect" type="submit"><i class="material-icons">search</i></button>
+                </div>
             </div>
         </div>
+    </div>
+</form>
 
-    </form>
-</div>
-
-<div>
+<div class="card">
     <table>
-        <caption>Lista de atendimentos!</caption>
         <thead>
             <tr>
                 <th>
@@ -63,7 +67,7 @@
                         @cont.ToString()
                     </td>
                     <td>
-                        <a href="#" class="link-secondary viewbutton" data-secao="Atendimento" data-acao="Detail" data-id="@item.Id" data-bs-toggle="modal" data-bs-target="#viewmodal">@Html.DisplayFor(modelItem => item.Protocolo)</a>                        
+                        <a href="#viewmodal" class="modal-trigger viewbutton" data-secao="Atendimento" data-acao="Detail" data-id="@item.Id">@Html.DisplayFor(modelItem => item.Protocolo)</a>
                     </td>
                     <td>
                         @{
@@ -77,10 +81,10 @@
                         @Html.DisplayFor(modelItem => datafinal)
                     </td>
                     <td>
-                        <a href="#" class="link-secondary viewbutton" data-secao="Pessoa"  data-acao="Details" data-id="@item.Pessoa.Id" data-bs-toggle="modal" data-bs-target="#viewmodal">@Html.DisplayFor(modelItem => item.Pessoa.Nome)</a>
+                        <a class="viewbutton modal-trigger" data-secao="Pessoa" data-acao="Details" data-id="@item.Pessoa.Id" href="#viewmodal">@Html.DisplayFor(modelItem => item.Pessoa.Nome)</a>
                         @if (item.Empresa != null)
                         {
-                            <a href="#" class="link-secondary viewbutton" data-secao="Empresa"  data-acao="Perfil" data-id="@item.Empresa.Id" data-bs-toggle="modal" data-bs-target="#viewmodal">[@item.Empresa.CNPJ]</a>
+                            <a class="viewbutton modal-trigger" data-secao="Empresa" data-acao="Perfil" data-id="@item.Empresa.Id" href="#viewmodal">[@item.Empresa.CNPJ]</a>
                         }
                     </td>
                     <td>
@@ -98,18 +102,14 @@
     </table>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="viewmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="viewmodalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h6 class="modal-title" id="viewmodalLabel">Detalhes</h6>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p id="viewmodalData"></p>
-            </div>
-        </div>
+<!-- Modal Structure -->
+<div id="viewmodal" class="modal modal-fixed-footer">
+    <div class="modal-content">
+        <!---->
+        <p id="viewmodalData"></p>
+
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
     </div>
 </div>
-

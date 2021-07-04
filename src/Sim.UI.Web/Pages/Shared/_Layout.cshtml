@@ -3,32 +3,31 @@
 <html lang="pt-br">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SIM - @ViewData["Title"]</title>
     <link rel="shortcut icon" href="~/favicon.ico" />
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import materialize.css
-    <link rel="stylesheet" href="~/lib/materialize/css/materialize.min.css" />-->
-    <link rel="stylesheet" href="~/lib/materialize/css/dashboard.materialize.css" />
-
-    <!--   <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">-->
+    <!--Import materialize.css-->
+    <link rel="stylesheet" href="~/lib/materialize/css/materialize.min.css" />
     <link rel="stylesheet" href="~/css/site.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIM - @ViewData["Title"]</title>
 </head>
 <body class="has-fixed-sidenav">
     <header>
 
-        <ul id="sidenav-left" class="sidenav sidenav-fixed teal lighten-4">
+        <ul id="sidenav-left" class="sidenav sidenav-fixed ">
             <li>
+                <p></p>
                 <a asp-area="" asp-page="/Index" class="logo-container">SEDEMP<i class="material-icons">widgets</i></a>
+                <p></p>
             </li>
             <li class="no-padding">
                 <ul class="collapsible collapsible-accordion transparent">
-                    <partial name="_LoginPartial" />
-                    <li class="bold waves-effect">
-                        <a class="collapsible-header">Inicio<i class="material-icons chevron">chevron_left</i></a>
-                        <div class="collapsible-body">
+                    <li class="divider"></li>
+                    <li class="bold waves-block waves-effect">
+                        <a class="collapsible-header">Inicio</a>
+                        <div class="collapsible-body transparent">
                             <ul>
                                 <li><a href="#" class="waves-effect active">PAT<i class="fas fa-industry"></i></a></li>
                                 <li><a href="#" class="waves-effect"><i class="fas fa-hand-holding-usd"></i>Banco do Povo</a></li>
@@ -37,9 +36,9 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="bold waves-effect">
-                        <a class="collapsible-header">Atendimentos<i class="material-icons chevron">chevron_left</i></a>
-                        <div class="collapsible-body">
+                    <li class="bold waves-block waves-effect">
+                        <a class="collapsible-header">Atendimentos</a>
+                        <div class="collapsible-body transparent">
                             <ul>
                                 <li><a asp-page="/Atendimento/Index" class="waves-effect">Meus Atendimentos<i class="material-icons">access_time</i></a></li>
                                 <li><a asp-page="/Atendimento/Novo" class="waves-effect">Atendimento Ativo<i class="material-icons">access_alarm</i></a></li>
@@ -47,37 +46,30 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="bold waves-effect">
-                        <a class="collapsible-header">Clientes<i class="material-icons chevron">chevron_left</i></a>
-                        <div class="collapsible-body">
+                    <li class="bold waves-block waves-effect">
+                        <a class="collapsible-header">Clientes</a>
+                        <div class="collapsible-body transparent">
                             <ul>
                                 <li><a asp-page="/Pessoa/Index" class="waves-effect">Pessoas<i class="material-icons">group</i></a></li>
                                 <li><a asp-page="/Empresa/Index" class="waves-effect">Empresas<i class="material-icons">domain</i></a></li>
                             </ul>
                         </div>
                     </li>
-                    <li class="bold waves-effect">
-                        <a class="collapsible-header">Agenda<i class="material-icons chevron">chevron_left</i></a>
-                        <div class="collapsible-body">
+                    <li class="bold waves-block waves-effect">
+                        <a class="collapsible-header">Agenda</a>
+                        <div class="collapsible-body transparent">
                             <ul>
                                 <li><a asp-page="/Agenda/Index" class="waves-effect">Eventos<i class="material-icons">event</i></a></li>
+                                <li><a asp-page="/Planner/Index" class="waves-effect">e-Planner<i class="material-icons">description</i></a></li>
                             </ul>
                         </div>
                     </li>
-                    <li class="bold waves-effect">
-                        <a class="collapsible-header">e-Planner<i class="material-icons chevron">chevron_left</i></a>
-                        <div class="collapsible-body">
-                            <ul>
-                                <li><a asp-page="/Planner/Index" class="waves-effect">Meu Planner<i class="material-icons">description</i></a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="bold waves-effect">
-                        <a class="collapsible-header">Power BI<i class="material-icons chevron">chevron_left</i></a>
-                        <div class="collapsible-body">
+                    <li class="bold waves-block waves-effect">
+                        <a class="collapsible-header">Power BI</a>
+                        <div class="collapsible-body transparent">
                             <ul>
                                 <li><a href="#" class="waves-effect">Atendimentos<i class="material-icons">access_time</i></a></li>
-                                <li><a href="#" class="waves-effect">Empresas<i class="material-icons">domain</i></a></li>
+                                <li><a asp-area="Censo" asp-page="/Empresas/Index" class="waves-effect">Empresas<i class="material-icons">domain</i></a></li>
                                 <li><a href="#" class="waves-effect">Pessoas<i class="material-icons">people</i></a></li>
 
                             </ul>
@@ -86,9 +78,9 @@
 
                     @if (User.IsInRole("Administrador"))
                     {
-                        <li class="bold waves-effect">
-                            <a class="collapsible-header">Configurações<i class="material-icons chevron">chevron_left</i></a>
-                            <div class="collapsible-body">
+                        <li class="bold waves-block waves-effect">
+                            <a class="collapsible-header">Configurações</a>
+                            <div class="collapsible-body transparent">
                                 <ul>
                                     <li><a class="waves-effect" asp-area="Settings" asp-page="/Common/Index">Sistema<i class="material-icons">settings</i></a></li>
                                     <li><a asp-area="Admin" asp-page="/Manager/Index" class="waves-effect">Contas<i class="material-icons">account_circle</i></a></li>
@@ -97,6 +89,8 @@
                         </li>
 
                     }
+                    <partial name="_LoginPartial" />
+                    <li><div class="divider"></div></li>
                 </ul>
             </li>
             <li>
@@ -114,13 +108,10 @@
     </main>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <!--
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="text/javascript" src="~/lib/materialize/js/materialize.min.js"></script>-->
-    <script type="text/javascript" src="~/lib/materialize/js/dashboard.materialize.js"></script>
-    <!---->
+    <!--<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>-->
+    <script type="text/javascript" src="~/lib/materialize/js/materialize.min.js"></script>
     <script type="text/javascript" src="~/lib/masonry/masonry.pkgd.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/js/site.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

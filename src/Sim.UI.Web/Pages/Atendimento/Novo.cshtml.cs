@@ -57,6 +57,7 @@ namespace Sim.UI.Web.Pages.Atendimento
 
         public string GetServico { get; set; }
 
+        [BindProperty(SupportsGet = true)]
         public string ServicosSelecionados { get; set; }
 
         private async Task OnLoad()
@@ -117,20 +118,20 @@ namespace Sim.UI.Web.Pages.Atendimento
 
         public async Task<IActionResult> OnPostAsync()
         {
-            
+
             try
             {
-                
-                if(Input.Servicos == null || Input.Servicos == string.Empty)
+
+                if (Input.Servicos == null || Input.Servicos == string.Empty)
                 {
                     StatusMessage = "Erro: " + "Selecione um serviço ou mais!";
                     await OnLoad();
                     return RedirectToPage();
                 }
 
-                    //var user = await _userManager.GetUserAsync(User);
+                //var user = await _userManager.GetUserAsync(User);
 
-                    var t = Task.Run(() =>
+                var t = Task.Run(() =>
                     {
                         //var atendimemnto_ativio = _appServiceAtendimento.AtendimentoAtivo(user.Id).FirstOrDefault();
 
@@ -138,7 +139,7 @@ namespace Sim.UI.Web.Pages.Atendimento
                         atold.DataF = DateTime.Now;
                         atold.Setor = Input.Setor; //GetSetor;
                         atold.Canal = Input.Canal;  //GetCanal;
-                        atold.Servicos = Input.Servicos; //MeusServicos;
+                        atold.Servicos = ServicosSelecionados; //MeusServicos;
                         atold.Descricao = Input.Descricao;
                         atold.Status = "Finalizado";
                         atold.Ultima_Alteracao = DateTime.Now;
@@ -146,12 +147,12 @@ namespace Sim.UI.Web.Pages.Atendimento
 
                     });
 
-                    await t;
+                await t;
 
-                    return RedirectToPage("./Index");                
+                return RedirectToPage("./Index");
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 StatusMessage = "Erro: " + ex.Message;
                 return Page();
