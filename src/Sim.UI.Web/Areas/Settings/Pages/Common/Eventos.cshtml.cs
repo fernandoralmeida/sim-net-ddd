@@ -30,7 +30,7 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
             public Guid Id { get; set; }
 
             [Required]
-            [DisplayName("Nome")]
+            [DisplayName("Tipo")]
             public string Nome { get; set; }
 
             [DisplayName("Tipo")]

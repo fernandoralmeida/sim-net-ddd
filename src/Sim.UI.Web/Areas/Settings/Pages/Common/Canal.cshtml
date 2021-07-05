@@ -7,66 +7,77 @@
 
     ViewData["ActivePage"] = SettingsNavPages.Canal;
 }
-<partial name="_StatusMessage" model="Model.StatusMessage" />
+<!--<partial name="_StatusMessage" model="Model.StatusMessage" />-->
 
 <div>
     <form method="post">
-        <div class="col-md-1 g-2" hidden>
+        <div class="col s12" hidden>
             <label asp-for="Input.Id" class="form-label"></label>
             <input asp-for="Input.Id" class="form-control" />
-            <span asp-validation-for="Input.Id" class="text-danger"></span>
         </div>
 
-        <div class="row mb-5 justify-content-center">
-            <div class="col-md-4">
-                <label asp-for="Input.Nome" class="form-label"></label>
-                <input asp-for="Input.Nome" class="form-control" placeholder="Canal de atendimento" />
+        <div class="row">
+            <div class="col s12">
+                <div class="col s12 m3 l3">
+                    <div class="input-field">
+                        <input asp-for="Input.Nome" />
+                        <label asp-for="Input.Nome" ></label>
+                    </div>
+                </div>
+                <div class="col s12 m3 l3">
+                    <div class="input-field">
+                        <select asp-for="SecretariaSelecionada" asp-items="Model.Secretarias"></select>
+                        <label asp-for="Input.Secretaria" ></label>
+                    </div>
+                </div>
+                <div class="col s12 m3 l3">
+                    <div class="input-field">
+                        <select asp-for="SetorSelecionado" asp-items="Model.Setores"></select>
+                        <label asp-for="Input.Setor" ></label>
+                    </div>
+                </div>
+                <div class="col s12 m3 l3">
+                    <div class="input-field">
+                        <button type="submit" asp-page-handler="Add" class="btn waves-effect">Incluir Canal</button>
+                    </div>                    
+                </div>
             </div>
-            <div class="col-md">
-                <label asp-for="Input.Secretaria" class="form-label"></label>
-                <select asp-for="SecretariaSelecionada" class="form-select" asp-items="Model.Secretarias"></select>
-            </div>
-            <div class="col-md-3">
-                <label asp-for="Input.Setor" class="form-label"></label>
-                <select asp-for="SetorSelecionado" class="form-select" asp-items="Model.Setores"></select>
-            </div>
-            <div class="col-md-auto align-self-end mt-3">
-                <button type="submit" asp-page-handler="Add" class="btn btn-outline-primary">Incluir Canal</button>
-            </div>
-        </div>        
+        </div>
 
-        <table class="table table-striped">
-            <caption>Lista de Canais de Atendimento</caption>
-            <thead>
-                <tr>
-                    <th>
-                        Canal
-                    </th>
-                    <th>Setor</th>
-                    <th>Ação</th>
-                </tr>
-            </thead>
-            <tbody>
-                @if (Model.Input.Listar != null)
-                {
-                    foreach (var item in Model.Input.Listar)
+
+        <div class="card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>
+                            Canal
+                        </th>
+                        <th>Setor</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Input.Listar != null)
                     {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Nome)
-                            </td>
+                        foreach (var item in Model.Input.Listar)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Nome)
+                                </td>
 
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Setor.Nome)
-                            </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Setor.Nome)
+                                </td>
 
-                            <td>
-                                <button asp-page-handler="Remove" val asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
-                            </td>
-                        </tr>
+                                <td>
+                                    <button asp-page-handler="Remove" val asp-route-id="@item.Id" class="btn btn-small waves-effect"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        }
                     }
-                }
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
     </form>
 </div>

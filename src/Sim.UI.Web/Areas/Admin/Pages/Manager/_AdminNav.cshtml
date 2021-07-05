@@ -1,9 +1,9 @@
 ﻿@using Sim.UI.Web.Areas.Admin.Pages.Manager
 
-<div class="navbar-fixed">
+<div class="navbar navbar-fixed">
     <nav class="navbar">
-        <div class="nav-wrapper">
-            <span class="brand-logo grey-text text-darken-4">Contas</span>
+        <div class="nav-wrapper teal lighten-1">
+            <span class="brand-logo" style="margin-left:10px;">Contas</span>
             <ul class="right hide-on-med-and-down">
                 <li>
                     <a class="@AdminNavPages.IndexNavClass(ViewContext)" id="lusers" asp-page="./Index">Listar</a>
@@ -17,9 +17,9 @@
                 <li hidden>
                     <a class="@AdminNavPages.ClaimsNavClass(ViewContext)" id="claims" asp-page="./Claims">Papeis</a>
                 </li>
-                <li class="light-blue lighten-4 waves-effect waves-light">
+                <li class="blue lighten-1 waves-effect waves-light">
                     <form>
-                        <a asp-page="./Register">Adicionar Novo Usuário</a>
+                        <a asp-area="Identity" asp-page="/Account/Register">Novo Usuário</a>
                     </form>
                 </li>
             </ul>

@@ -11,20 +11,28 @@
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
 <div>
-    <div class="col-md-5 mb-3">
+    
         <form method="post">
-            <div class="row g-3">
-                <div class="d-flex mb-3">
-                    <input asp-for="Input.Name" class="form-control me-2" placeholder="Nova Role" />
-                    <button class="btn btn-outline-primary" type="submit">Adicionar</button>
+            <div class="row">
+                <div class="col s12">
+                    <div class="col s4 m4 l4">
+                        <div class="input-field">
+                            <input asp-for="Input.Name" class="validate" />
+                            <label asp-for="Input.Name"></label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-field">
+                            <button class="btn waves-effect" type="submit">Adicionar</button>
+                        </div>                        
+                    </div>
                 </div>
             </div>
         </form>
-    </div>
-    <p></p>
-    <div class="col-md">
-        <div class="row g-3">
-            <table class="table table-striped">
+    
+    <div class="card">
+        
+            <table>
                 <thead>
                     <tr>
                         <th>
@@ -55,7 +63,7 @@
 
                                 <td>
                                     <form method="post">
-                                        <button type="submit" asp-page-handler="Remove" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger" title="Excluir Role"><i class="fas fa-trash"></i></button>
+                                        <button type="submit" asp-page-handler="Remove" asp-route-id="@item.Id" class="btn btn-small waves-effect" title="Excluir Role"><i class="fas fa-trash"></i></button>
                                     </form>
                                     
                                 </td>
@@ -64,7 +72,7 @@
                     }
                 </tbody>
             </table>
-        </div>
+        
     </div>
 
 </div>

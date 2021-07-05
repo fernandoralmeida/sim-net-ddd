@@ -11,16 +11,22 @@
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
 
-<div >
-    <div class="col-md-5">
-        <form asp-action="Claims" method="post">
-            <div class="row g-3">
-                <div class="d-flex mb-3">
-                    <input asp-for="Input.ClaimType" class="form-control me-2" disabled />
-                    <button class="btn btn-outline-primary" type="submit" disabled>Adicionar</button>
+<div>
+    <form method="post">
+        <div class="row">
+            <div class="col s12">
+                <div class="col s4 m4 l4">
+                    <div class="input-field">
+                        <input asp-for="Input.ClaimType" />
+                        <label asp-for="Input.ClaimType"></label>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="input-field">
+                        <button class="btn waves-effect" type="submit">Adicionar</button>
+                    </div>
                 </div>
             </div>
-        </form>
-    </div>
-    <hr />
+        </div>
+    </form>
 </div>

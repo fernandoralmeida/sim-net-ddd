@@ -1,96 +1,104 @@
 ﻿@page
 @model Sim.UI.Web.Areas.Admin.Pages.Manager.UserRolesModel
 @{
+    Layout = "_Layout.cshtml";
     ViewData["Title"] = "Perfil de Acesso";
 }
 
-<div class="container">
-    <div class="col-md-6 mt-3">
-        <a asp-area="Admin" asp-page="./Index" class="link-primary">Voltar</a> | <b>Perfil do Usuário</b>
-    </div>
-</div>
 <partial name="_StatusMessage" model="Model.StatusMessage" />
-<hr />
-<div>
-      
+
+<div class="card">
+     <p></p>
     <form method="post">
+
         <dl class="row">
-            <dt class="col-sm-2">
+            <dt class="col m2">
                 @Html.DisplayNameFor(model => model.Input.Id)
             </dt>
-            <dd class="col-sm-10">
+            <dd class="col m10">
                 @Html.DisplayFor(model => model.Input.Id)
             </dd>
-            <dt class="col-sm-2">
+            <dt class="col m2">
                 Identificador
             </dt>
-            <dd class="col-sm-10">
+            <dd class="col m10">
                 @Html.DisplayFor(model => model.Input.UserName)
             </dd>
-            <dt class="col-sm-2">
+            <dt class="col m2">
                 Nome
             </dt>
-            <dd class="col-sm-10">
+            <dd class="col m10">
                 @Html.DisplayFor(model => model.Input.Name)
                 @Html.DisplayFor(model => model.Input.LastName)
             </dd>
-            <dt class="col-sm-2">
+            <dt class="col m2">
                 Genero
             </dt>
-            <dd class="col-sm-10">
+            <dd class="col m10">
                 @Html.DisplayFor(model => model.Input.Gender)
             </dd>
-            <dt class="col-sm-2">
+            <dt class="col m2">
                 @Html.DisplayNameFor(model => model.Input.Email)
             </dt>
-            <dd class="col-sm-10">
+            <dd class="col m10">
                 @Html.DisplayFor(model => model.Input.Email)
             </dd>
         </dl>
-        <div class="col-md-5">
-            <div class="d-flex mb-3">
-                <select asp-for="Selecionado" asp-items="Model.RoleList" class="form-select me-2" >
-                    <option selected>-- Associar Perfil --</option>
-                </select>
-                <button type="submit" asp-page-handler="AddRole" asp-route-id="@Model.Input.Id" class="btn btn-outline-primary">Adicionar</button>
+
+        <div class="divider"></div>
+        <p></p>
+        <div class="row">
+            <div class="col s12">
+                <div class="col s12 m4 l4">
+                    <div class="input-field">
+                        <select asp-for="Selecionado" asp-items="Model.RoleList">
+                            <option selected>-- Associar Perfil --</option>
+                        </select>
+                        <label>Perfil</label>
+                    </div>
+                </div>
+                <div class="col s12 m4 l4">
+                    <div class="input-field">
+                        <button type="submit" asp-page-handler="AddRole" asp-route-id="@Model.Input.Id" class="btn btn-small waves-effect">Adicionar</button>
+                    </div>
+                </div>
             </div>
         </div>
+        <div class="divider"></div>
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        Perfil Habilitado
+                    </th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Input.ListRoles != null)
+                {
 
-        <div>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>
-                            Perfil Habilitado
-                        </th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @if (Model.Input.ListRoles != null)
+                    foreach (var item in Model.Input.ListRoles)
                     {
-                                                
-                            foreach (var item in Model.Input.ListRoles)
-                            {
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item)
-                                    </td>
-                                    
-                                    <td>
-                                    </td>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item)
+                            </td>
 
-                                    <td>
-                                        <button type="submit" asp-page-handler="RemoveRole" asp-route-id="@Model.Input.Id" asp-route-role="@item" class="btn btn-sm btn-outline-danger" title="Excluir Role"><i class="fas fa-trash"></i></button>
-                                    </td>
-                                </tr>
-                            }
-                        
+                            <td>
+                            </td>
+
+                            <td>
+                                <button type="submit" asp-page-handler="RemoveRole" asp-route-id="@Model.Input.Id" asp-route-role="@item" class="btn btn-small waves-effect" title="Excluir Role"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
                     }
-                </tbody>
-            </table>
-        </div>
+
+                }
+            </tbody>
+        </table>
+
     </form>
 </div>
 

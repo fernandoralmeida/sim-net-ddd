@@ -10,60 +10,69 @@
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
 <div>
-    <form class="col-md-12" method="post">
-        <div class="col-md-12" hidden>
+    <form method="post">
+        <div class="col s12" hidden>
             <label asp-for="Input.Id" class="form-label"></label>
             <input asp-for="Input.Id" class="form-control" />
         </div>
-        <div class="row mb-4">
-            <div class="col-md-3">
-                <label asp-for="Input.Nome" class="form-label"></label>
-                <input asp-for="Input.Nome" class="form-control" />
-            </div>
-            <div class="col-md-3">
-                <label asp-for="Input.Tipo" class="form-label"></label>
-                <select asp-for="Input.Tipo" class="form-select">
-                    <option selected>Evento</option>
-                </select>
-            </div>
-            <div class="col-md-auto align-self-end mt-3">
-                <button type="submit" asp-page-handler="Add" class="btn btn-outline-primary">Incluir Evento</button>
+        <div class="row">
+            <div class="col s12">
+                <div class="col s12 m4 l4">
+                    <div class="input-field">
+                        <input asp-for="Input.Nome" />
+                        <label asp-for="Input.Nome"></label>
+                    </div>
+                </div>
+                <div class="col s12 m4 l4">
+                    <div class="input-field">
+                        <select asp-for="Input.Tipo">
+                            <option selected>Evento</option>
+                        </select>
+                        <label asp-for="Input.Tipo"></label>
+                    </div>
+                </div>
+                <div class="col s12 m3 l3">
+                    <div class="input-field">
+                        <button type="submit" asp-page-handler="Add" class="btn waves-effect">Incluir Tipo</button>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <table class="table table-striped">
-            <caption>Lista de Tipos de Eventos</caption>
-            <thead>
-                <tr>
-                    <th>
-                        Nome
-                    </th>
-                    <th>Tipo</th>
-                    <th>Ação</th>
-                </tr>
-            </thead>
-            <tbody>
-                @if (Model.Input.Listar != null)
-                {
-                    foreach (var item in Model.Input.Listar)
+        <div class="card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>
+                            Nome
+                        </th>
+                        <th>Tipo</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Input.Listar != null)
                     {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Nome)
-                            </td>
+                        foreach (var item in Model.Input.Listar)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Nome)
+                                </td>
 
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Owner)
-                            </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Owner)
+                                </td>
 
-                            <td>
-                                <button type="submit" asp-page-handler="Remove" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger" title="Excluir item"><i class="fas fa-trash"></i></button>
+                                <td>
+                                    <button type="submit" asp-page-handler="Remove" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger" title="Excluir item"><i class="fas fa-trash"></i></button>
 
-                            </td>
-                        </tr>
+                                </td>
+                            </tr>
+                        }
                     }
-                }
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
+
     </form>
 </div>

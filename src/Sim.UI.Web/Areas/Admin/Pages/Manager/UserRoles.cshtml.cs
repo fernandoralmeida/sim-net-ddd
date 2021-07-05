@@ -71,11 +71,20 @@ namespace Sim.UI.Web.Areas.Admin.Pages.Manager
 
         public async Task<IActionResult> OnPostAddRoleAsync(string id)
         {
-            var user = await _userManager.FindByIdAsync(id);
+            try {
+                var user = await _userManager.FindByIdAsync(id);
 
-            await _userManager.AddToRoleAsync(user, Selecionado);
+                await _userManager.AddToRoleAsync(user, Selecionado);
 
-            return RedirectToPage("./UserRoles", new { id });
+                return RedirectToPage("./UserRoles", new { id });
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = ex.Message;
+                await LoadAsync(id);
+                return Page();
+            }
+
         }
 
         public async Task<IActionResult> OnPostRemoveRoleAsync(string id, string role)

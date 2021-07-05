@@ -9,9 +9,8 @@
 
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
-<div>
-    <table class="table table-striped">
-        <caption>Lista de Usuários</caption>
+<div class="card">
+    <table>
         <thead>
             <tr>
                 <th>
@@ -56,7 +55,7 @@
                     <td>
                     </td>
                     <td>
-                        <a asp-page="./UserRoles" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary" title="Editar"><i class="fas fa-pen"></i></a>
+                        <a asp-page="./UserRoles" asp-route-id="@item.Id" class="btn btn-small waves-effect" title="Editar"><i class="fas fa-pen"></i></a>
                     </td>
                 </tr>
             }
