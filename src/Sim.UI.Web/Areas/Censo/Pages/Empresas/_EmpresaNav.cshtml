@@ -2,8 +2,8 @@
 
 <div class="navbar navbar-fixed">
     <nav class="navbar">
-        <div class="nav-wrapper">
-            <span class="brand-logo grey-text text-darken-4">Empresas</span>
+        <div class="nav-wrapper blue lighten-1">
+            <span class="brand-logo" style="margin-left:10px;">Empresas</span>
 
             <ul class="right hide-on-small-and-down">
                 <li hidden>
@@ -12,32 +12,23 @@
                 <li>
                     <a class="dropdown-trigger @EmpresaNavPages.InicioNavClass(ViewContext) @EmpresaNavPages.ConsultaNomeNavClass(ViewContext) @EmpresaNavPages.ConsultaCNPJNavClass(ViewContext)" data-target="dropdownrfb" href="#">Consultar</a>
                     <ul id="dropdownrfb" class="dropdown-content">
-                        <li><a class="dropdown-item" asp-page="/Empresas/Index">Por CNPJ</a></li>
-                        <li><a class="dropdown-item" asp-page="/Empresas/Consulta-razao-social">Razao Social</a></li>
-                        <li><a class="dropdown-item" asp-page="/Empresas/Consulta-socio">Nome Sócio</a></li>
-                        <li><a class="dropdown-item" asp-page="/Empresas/Consulta-cnae">Por Atividade</a></li>
-                        <li><a class="dropdown-item" asp-page="/Empresas/Consulta-logradouro">Por Logradouro</a></li>
-                        <li><a class="dropdown-item" asp-page="/Empresas/Consulta-bairro">Por Bairro</a></li>
+                        <li><a asp-page="/Empresas/Index">N. CNPJ</a></li>
+                        <li><a asp-page="/Empresas/Consulta-razao-social">Razao Social</a></li>
+                        <li><a asp-page="/Empresas/Consulta-socio">Nome Sócio</a></li>
+                        <li><a asp-page="/Empresas/Consulta-cnae">Atividade</a></li>
+                        <li><a asp-page="/Empresas/Consulta-logradouro">Logradouro</a></li>
+                        <li><a asp-page="/Empresas/Consulta-bairro">Bairro</a></li>
                     </ul>
                 </li>
                 <li>
                     <a class="dropdown-trigger @EmpresaNavPages.SimplesNavClass(ViewContext)" data-target="dropdownspn" href="#">Simples Nacional</a>
                     <ul id="dropdownspn" class="dropdown-content">
-                        <li><a class="dropdown-item" asp-page="/Simples/Index">Geral</a></li>
-                        <li><a class="dropdown-item" asp-page="/Simples/Consulta-cnae">Por Atividade</a></li>
-                        <li><a class="dropdown-item" asp-page="/Simples/Consulta-logradouro">Por Logradouro</a></li>
-                        <li><a class="dropdown-item" asp-page="/Simples/Consulta-bairro">Por Bairro</a></li>
+                        <li><a asp-page="/Simples/Index">Optantes</a></li>
+                        <li><a asp-page="/Simples/Consulta-cnae">Atividade</a></li>
+                        <li><a asp-page="/Simples/Consulta-logradouro">Logradouro</a></li>
+                        <li><a asp-page="/Simples/Consulta-bairro">Bairro</a></li>
                     </ul>
                 </li>
-                <li hidden>
-                    <a href="#">Relatórios</a>
-                </li>
-                @if (User.IsInRole("Administrador"))
-                {
-                    <li hidden>
-                        <a class="@EmpresaNavPages.MigraDataNavClass(ViewContext)" asp-page="/Empresas/Migra.data">Migra Data</a>
-                    </li>
-                }
             </ul>
         </div>
     </nav>

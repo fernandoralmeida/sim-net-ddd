@@ -7,32 +7,40 @@
     ViewData["ActivePage"] = EmpresaNavPages.Jucesp;
 }
 
-<partial name="_StatusMessage" model="Model.StatusMessage" />
+<!--<partial name="_StatusMessage" model="Model.StatusMessage" />-->
 
-<div class="mt-5 mb-5">
+<div class="section">
     <form method="post">
-        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-
-            <div class="d-flex">
-
-                <input asp-for="Input.CNPJ" class="form-control me-2" aria-describedby="button-addon2" id="inputCNPJ">
-                <button class="btn btn-outline-primary" type="submit" role="button" id="button-addon2"><i class="fa fa-search"></i></button>
+        <input asp-for="Input.CNPJRes" hidden>
+        <div class="row">
+            <div class="col s12">
+                <div class="col s6">
+                    <div class="input-field right">
+                        <input asp-for="Input.CNPJ" id="inputCNPJ" />
+                        <label asp-for="Input.CNPJ" for="inputCNPJ"></label>
+                    </div>
+                </div>
+                <div class="col s6">
+                    <div class="input-field">
+                        <button class="btn waves-effect" type="submit" role="button" id="button-addon2"><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
             </div>
-
         </div>
     </form>
 </div>
-<div>
+
+<div class="card">
     <partial name="_EmpresaList" model="Model.Input.ListaEmpresas" />
 </div>
 
 
 
-@section Scripts {       
+@section Scripts {
 
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script src="~/js/jquery.mask.min.js"></script>
     <script>
-        $('#inputCNPJ').mask('00.000.000/0000-00', { placeholder: "__.___.___/____-__" });
+        $('#inputCNPJ').mask('00.000.000/0000-00');
     </script>
 }

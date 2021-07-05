@@ -77,9 +77,9 @@ namespace Sim.Cross.Data.Repository.Cnpj
             return t.Result;
         }
 
-        public async Task<IEnumerable<BaseJucesp>> ListByRazaoSocialAsync(string razaosocial, string muinicipio)
+        public async Task<IEnumerable<BaseJucesp>> ListByRazaoSocialAsync(string razaosocial)
         {
-            var t = Task.Run(() => db.BaseJucesp.Where(s => s.Nome_Empresarial.Contains(razaosocial) && s.Municipio.Contains(muinicipio)).ToList());
+            var t = Task.Run(() => db.BaseJucesp.Where(s => s.Nome_Empresarial.Contains(razaosocial)).ToList());
             await t;
             return t.Result;
         }
@@ -105,12 +105,12 @@ namespace Sim.Cross.Data.Repository.Cnpj
             return t.Result;
         }
 
-        public Task<IEnumerable<BaseJucesp>> ListBySociosAsync(string atividade, string municipio)
+        public Task<IEnumerable<BaseJucesp>> ListAllOptanteSimplesAsync(string municipio)
         {
             return null;
         }
 
-        public Task<IEnumerable<BaseJucesp>> ListAllOptanteSimplesAsync(string municipio)
+        public Task<IEnumerable<BaseJucesp>> ListBySociosAsync(string nomesocio)
         {
             return null;
         }

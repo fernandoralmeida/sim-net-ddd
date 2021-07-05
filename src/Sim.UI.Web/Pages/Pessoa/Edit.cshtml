@@ -5,176 +5,230 @@
     ViewData["ActivePage"] = PessoaNavPages.Inicio;
 }
 
-<partial name="_StatusMessage" model="Model.StatusMessage" />
-
-Ultima atualização: @Html.DisplayFor(model => model.Input.Ultima_Alteracao)
-<hr />
-
-<pre>Identificação</pre>
+<!--<partial name="_StatusMessage" model="Model.StatusMessage" />-->
 
 <div>
-    <form method="post" novalidate>
-
-        <div class="mb-3 row">
-
-            <div class="col-md-5">
-                <input asp-for="Input.Id" hidden />
-                <label asp-for="Input.Nome" class="form-label" for="inputNome"></label>
-                <input asp-for="Input.Nome" class="form-control" id="inputNome" required />
-            </div>
-            <div class="col-md-5">
-                <label asp-for="Input.Nome_Social" class="form-label" for="inputSocial"></label>
-                <input asp-for="Input.Nome_Social" class="form-control" id="inputSocial" />
-            </div>
-            <div class="col-md-2">
-                <label asp-for="Input.Genero" class="form-label" for="selectGenero"></label>
-                <select asp-for="Input.Genero" class="form-select" id="selectGenero">
-                    <option selected></option>
-                    <option>Feminino</option>
-                    <option>Masculino</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="mb-3 row">
-            <div class="col-md-3">
-                <label asp-for="Input.Data_Nascimento" class="form-label" for="inputNascimento"></label>
-                <input asp-for="Input.Data_Nascimento" class="form-control" id="inputNascimento" required />
-            </div>
-            <div class="col-md-3">
-                <label asp-for="Input.CPF" class="form-label" for="inputCPF"></label>
-                <input asp-for="Input.CPF" class="form-control" id="inputCPF" required />
-            </div>
-            <div class="col-md-3">
-                <label asp-for="Input.RG" class="form-label" for="inputRG"></label>
-                <input asp-for="Input.RG" class="form-control" id="inputRG" />
-            </div>
-            <div class="col-md-2">
-                <label asp-for="Input.RG_Emissor" class="form-label" for="inputEmissor"></label>
-                <input asp-for="Input.RG_Emissor" class="form-control text-uppercase" id="inputEmissor" />
-            </div>
-            <div class="col-md-1">
-                <label asp-for="Input.RG_Emissor_UF" class="form-label" for="inputEmissorUF"></label>
-                <input asp-for="Input.RG_Emissor_UF" class="form-control text-uppercase" id="inputEmissorUF" />
-            </div>
-        </div>
-        <hr />
-        <h6>
-            <label asp-for="Input.Deficiencia" class="form-label"></label>
-            <input asp-for="Input.Deficiencia" class="form-control" hidden />
-        </h6>
-
-        <div class="mb-3 row">
-
-            <div class="col-md-2">
-                <div class="form-switch">
-                    <input asp-for="Input.Fisica" type="checkbox" class="form-check-input" id="customSwitch1">
-                    <label asp-for="Input.Fisica" class="custom-control-label" for="customSwitch1"></label>
+    <form method="post" asp-route="url" novalidate>
+        <div class="card section">
+            <div class="row">
+                <div class="col s12">
+                    <div class="col s12 m5 l5">
+                        <input asp-for="Input.Id" hidden/>
+                        <div class="input-field">
+                            <input asp-for="Input.Nome" id="inputNome" required />
+                            <label asp-for="Input.Nome" for="inputNome"></label>
+                        </div>
+                    </div>
+                    <div class="col s12 m4 l4">
+                        <div class="input-field">
+                            <input asp-for="Input.Nome_Social" id="inputSocial" />
+                            <label asp-for="Input.Nome_Social" for="inputSocial"></label>
+                        </div>
+                    </div>
+                    <div class="col s12 m3 l3">
+                        <div class="input-field">
+                            <select asp-for="Input.Genero" id="inputGenero">
+                                <option selected>-- Genero --</option>
+                                <option>Feminino</option>
+                                <option>Masculino</option>
+                            </select>
+                            <label asp-for="Input.Genero" for="inputGenero"></label>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-2">
-                <div class="form-switch">
-                    <input asp-for="Input.Visual" type="checkbox" class="form-check-input" id="customSwitch2">
-                    <label asp-for="Input.Visual" class="custom-control-label" for="customSwitch2"></label>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-switch">
-                    <input asp-for="Input.Auditiva" type="checkbox" class="form-check-input" id="customSwitch3">
-                    <label asp-for="Input.Auditiva" class="custom-control-label" for="customSwitch3"></label>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-switch">
-                    <input asp-for="Input.Intelectual" type="checkbox" class="form-check-input" id="customSwitch4">
-                    <label asp-for="Input.Intelectual" class="custom-control-label" for="customSwitch4"></label>
-                </div>
-            </div>
+            <div class="row">
+                <div class="col s12">
+                    <div class="col s12 m4 l3">
+                        <div class="input-field">
+                            <input asp-for="Input.Data_Nascimento" id="inputNascimento" required />
+                            <label asp-for="Input.Data_Nascimento" for="inputNascimento"></label>
+                        </div>
+                    </div>
+                    <div class="col s12 m3 l3">
+                        <div class="input-field">
 
-        </div>
-
-        <hr />
-        <pre>Endereço</pre>
-
-        <div class="mb-3 row">
-            <div class="col-md-2">
-                <label asp-for="Input.CEP" class="form-label" for="cep"></label>
-                <input asp-for="Input.CEP" class="form-control" id="cep" />
-            </div>
-            <div class="col-md-8">
-                <label asp-for="Input.Logradouro" class="form-label" for="rua"></label>
-                <input asp-for="Input.Logradouro" class="form-control" id="rua" />
-            </div>
-            <div class="col-md-2">
-                <label asp-for="Input.Numero" class="form-label"></label>
-                <input asp-for="Input.Numero" class="form-control" />
-            </div>
-        </div>
-        <div class="mb-3 row">
-            <div class="col-md-3">
-                <label asp-for="Input.Complemento" class="form-label"></label>
-                <input asp-for="Input.Complemento" class="form-control" />
-            </div>
-            <div class="col-md-5">
-                <label asp-for="Input.Bairro" class="form-label" for="bairro"></label>
-                <input asp-for="Input.Bairro" class="form-control" id="bairro" />
-            </div>
-            <div class="col-md-3">
-                <label asp-for="Input.Cidade" class="form-label" for="cidade"></label>
-                <input asp-for="Input.Cidade" class="form-control" id="cidade" />
-            </div>
-            <div class="col-md-1">
-                <label asp-for="Input.UF" class="form-label" for="uf"></label>
-                <input asp-for="Input.UF" class="form-control" id="uf" />
+                            <input asp-for="Input.CPF" id="inputCPF" required />
+                            <label asp-for="Input.CPF" for="inputCPF"></label>
+                        </div>
+                    </div>
+                    <div class="col s12 m2 l3">
+                        <div class="input-field">
+                            <input asp-for="Input.RG" id="inputRG" />
+                            <label asp-for="Input.RG" for="inputRG"></label>
+                        </div>
+                    </div>
+                    <div class="col s12 m2 l2">
+                        <div class="input-field">
+                            <input asp-for="Input.RG_Emissor" id="inputEmissor" />
+                            <label asp-for="Input.RG_Emissor" for="inputEmissor"></label>
+                        </div>
+                    </div>
+                    <div class="col s12 m1 l1">
+                        <div class="input-field">
+                            <input asp-for="Input.RG_Emissor_UF" id="inputEmissorUF" />
+                            <label asp-for="Input.RG_Emissor_UF" for="inputEmissorUF"></label>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <hr />
-        <pre>Contato</pre>
+        <ul class="collapsible">
+            <li>
+                <div class="collapsible-header">@Html.DisplayNameFor(model => model.Input.Deficiencia)<input asp-for="Input.Deficiencia" class="form-control" hidden /></div>
+                <div class="collapsible-body">
+                    <div class="row">
+                        <div class="col s12">
+                            <div class="col s12 m3 l3">
+                                <label>
+                                    <input type="checkbox" asp-for="Input.Fisica" />
+                                    <span>@Html.DisplayNameFor(model => model.Input.Fisica)</span>
+                                </label>
+                            </div>
+                            <div class="col s12 m3 l3">
+                                <label>
+                                    <input type="checkbox" asp-for="Input.Visual" />
+                                    <span>@Html.DisplayNameFor(model => model.Input.Visual)</span>
+                                </label>
+                            </div>
+                            <div class="col s12 m3 l3">
+                                <label>
+                                    <input type="checkbox" asp-for="Input.Auditiva" />
+                                    <span>@Html.DisplayNameFor(model => model.Input.Auditiva)</span>
+                                </label>
+                            </div>
+                            <div class="col s12 m3 l3">
+                                <label>
+                                    <input type="checkbox" asp-for="Input.Intelectual" />
+                                    <span>@Html.DisplayNameFor(model => model.Input.Intelectual)</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
 
-        <div class="mb-3 row">
-
-            <div class="col-md-3">
-                <label asp-for="Input.Tel_Movel" class="form-label"></label>
-                <input asp-for="Input.Tel_Movel" class="form-control" id="txtmobile" />
+        <div class="card section">
+            <div class="row">
+                <div class="col s12">
+                    <div class="col s12 m3 l3">
+                        <div class="input-field">
+                            <input asp-for="Input.CEP" id="cep" />
+                            <label asp-for="Input.CEP" for="cep"></label>
+                        </div>
+                    </div>
+                    <div class="col s12 m6 l6">
+                        <div class="input-field">
+                            <input asp-for="Input.Logradouro" id="rua" />
+                            <label asp-for="Input.Logradouro" for="rua"></label>
+                        </div>
+                    </div>
+                    <div class="col s12 m3 l3">
+                        <div class="input-field">
+                            <input asp-for="Input.Numero" />
+                            <label asp-for="Input.Numero"></label>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-3">
-                <label asp-for="Input.Tel_Fixo" class="form-label"></label>
-                <input asp-for="Input.Tel_Fixo" class="form-control" id="txtphone" />
-            </div>
-            <div class="col-md-6">
-                <label asp-for="Input.Email" class="form-label"></label>
-                <input asp-for="Input.Email" class="form-control" />
+            <div class="row">
+                <div class="col s12">
+                    <div class="col s12 m6 l3">
+                        <div class="input-field">
+                            <input asp-for="Input.Complemento" />
+                            <label asp-for="Input.Complemento"></label>
+                        </div>
+                    </div>
+                    <div class="col s12 m6 l3">
+                        <div class="input-field">
+                            <input asp-for="Input.Bairro" id="bairro" />
+                            <label asp-for="Input.Bairro" for="bairro"></label>
+                        </div>
+                    </div>
+                    <div class="col s12 m6 l3">
+                        <div class="input-field">
+                            <input asp-for="Input.Cidade" id="cidade" />
+                            <label asp-for="Input.Cidade" for="cidade"></label>
+                        </div>
+                    </div>
+                    <div class="col s12 m6 l3">
+                        <div class="input-field">
+                            <input asp-for="Input.UF" id="uf" />
+                            <label asp-for="Input.UF" for="uf"></label>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <hr />
-        <pre>Informações</pre>
-        <div class="row">
-
-            <div class="col-md-3">
-                <label asp-for="Input.Data_Cadastro" class="form-label"></label>
-                <input asp-for="Input.Data_Cadastro" class="form-control" disabled />
-            </div>
-            <div class="col-md-3">
-                <label asp-for="Input.Ultima_Alteracao" class="form-label"></label>
-                <input asp-for="Input.Ultima_Alteracao" class="form-control" disabled />
-            </div>
-            <div class="col-md-3">
-                <label asp-for="Input.Ativo" class="form-label"></label>
-                <div class="custom-control custom-switch">
-                    <input asp-for="Input.Ativo" type="checkbox" class="form-check-input" id="customSwitch5">
-                    <label class="custom-control-label" for="customSwitch5">Ativo?</label>
+        <div class="card section">
+            <div class="row">
+                <div class="col s12">
+                    <div class="col s12 m3 l3">
+                        <div class="input-field">
+                            <input asp-for="Input.Tel_Movel" class="form-control" id="txtmobile" />
+                            <label asp-for="Input.Tel_Movel" class="form-label"></label>
+                        </div>
+                    </div>
+                    <div class="col s12 m3 l3">
+                        <div class="input-field">
+                            <input asp-for="Input.Tel_Fixo" class="form-control" id="txtphone" />
+                            <label asp-for="Input.Tel_Fixo" class="form-label"></label>
+                        </div>
+                    </div>
+                    <div class="col s12 m6 l6">
+                        <div class="input-field">
+                            <input asp-for="Input.Email" class="form-control" />
+                            <label asp-for="Input.Email" class="form-label"></label>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <p />
-            <div class="d-grid gap-2 d-md-block">
-                <a asp-page="/Pessoa/Index" role="button" type="button" class="btn btn-secondary">Voltar</a> | 
-                <button type="submit" role="button" class="btn btn-primary">Gravar</button>
+        </div>
+
+        <div class="card section" hidden>
+            <div class="row">
+                <div class="col s12">
+                    <div class="col s12 m3 l3">
+                        <div class="input-field">
+                            <label asp-for="Input.Data_Cadastro" ></label>
+                            <input asp-for="Input.Data_Cadastro" disabled />
+                        </div>
+                    </div>
+                    <div class="col s12 m3 l3">
+                        <div class="input-field">
+                            <label asp-for="Input.Ultima_Alteracao" ></label>
+                            <input asp-for="Input.Ultima_Alteracao" disabled />
+                        </div>
+                    </div>
+                    <div class="col s12 m3 l3">
+                        <label>
+                            <input type="checkbox" asp-for="Input.Ativo" />
+                            <span>@Html.DisplayNameFor(model => model.Input.Ativo)</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card section">
+            <div class="card-header"></div>
+            <div class="card-content">
+                <div class="row">
+                    <div class="col s12">
+                        <div class="col s6 m6 l6">
+                            <a asp-page="/Pessoa/Index" role="button" type="button" class="btn btn-large blue-grey lighten-1 waves-effect right">Voltar</a>
+                        </div>
+                        <div class="col s6 m6 l6">
+                            <button type="submit" role="button" class="btn btn-large waves-effect">Gravar Cadastro</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </form>
-
 </div>
 
 @section Scripts {

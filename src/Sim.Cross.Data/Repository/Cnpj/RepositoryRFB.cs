@@ -182,7 +182,7 @@ namespace Sim.Cross.Data.Repository.Cnpj
             return brf;
         }
 
-        public async Task<IEnumerable<BaseReceitaFederal>> ListByRazaoSocialAsync(string razaosocial, string municipio)
+        public async Task<IEnumerable<BaseReceitaFederal>> ListByRazaoSocialAsync(string razaosocial)
         {
             var brf = new List<BaseReceitaFederal>();
 
@@ -192,7 +192,7 @@ namespace Sim.Cross.Data.Repository.Cnpj
                 var qry = (from est in db.Estabelecimentos
                            from emp in db.Empresas.Where(s => s.CNPJBase == est.CNPJBase)
                            select new { est, emp })
-                          .Where(s => s.emp.RazaoSocial.Contains(razaosocial) && s.est.Municipio.Contains(municipio)).Distinct();
+                          .Where(s => s.emp.RazaoSocial.Contains(razaosocial)).Distinct();
 
                 foreach (var e in qry)
                 {
@@ -293,7 +293,7 @@ namespace Sim.Cross.Data.Repository.Cnpj
             return brf;
         }
 
-        public async Task<IEnumerable<BaseReceitaFederal>> ListBySociosAsync(string nomesocio, string municipio)
+        public async Task<IEnumerable<BaseReceitaFederal>> ListBySociosAsync(string nomesocio)
         {
             var brf = new List<BaseReceitaFederal>();
 
@@ -304,7 +304,7 @@ namespace Sim.Cross.Data.Repository.Cnpj
                            from est in db.Estabelecimentos.Where(s => s.CNPJBase == sco.CNPJBase)
                            from emp in db.Empresas.Where(s => s.CNPJBase == sco.CNPJBase)
                            select new { est, emp, sco })
-                          .Where(s => s.sco.NomeRazaoSocio.Contains(nomesocio) || s.sco.NomeRepresentante.Contains(nomesocio) && s.est.Municipio.Contains(municipio)).Distinct();
+                          .Where(s => s.sco.NomeRazaoSocio.Contains(nomesocio) || s.sco.NomeRepresentante.Contains(nomesocio)).Distinct();
 
                 foreach (var e in qry)
                 {
@@ -356,5 +356,6 @@ namespace Sim.Cross.Data.Repository.Cnpj
 
             return brf;
         }
+
     }
 }

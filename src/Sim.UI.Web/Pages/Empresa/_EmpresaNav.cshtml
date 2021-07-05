@@ -2,8 +2,8 @@
 
 <div class="navbar navbar-fixed">
     <nav class="navbar">
-        <div class="nav-wrapper">
-            <span class="brand-logo grey-text text-darken-4">Empresas</span>
+        <div class="nav-wrapper blue-grey lighten-1">
+            <span class="brand-logo" style="margin-left:10px;">Empresas</span>
 
 
             <ul class="right hide-on-med-and-down">
@@ -20,7 +20,7 @@
                 </li>
 
                 <li>
-                    <a class="dropdown-trigger @EmpresaNavPages.JucespNavClass(ViewContext)" data-target="dropdownjucep" href="#">Base Jucesp</a>
+                    <a class="dropdown-trigger @EmpresaNavPages.JucespNavClass(ViewContext)" data-target="dropdownjucep" href="#">Consulta Jucesp</a>
                     <ul id="dropdownjucep" class="dropdown-content">
                         <li><a asp-page="./Jucesp">Consultar CNPJ</a></li>
                         <li><a asp-page="./Jucesp-consulta-razao">Consultar por Razão Social</a></li>
@@ -30,9 +30,10 @@
                     </ul>
                 </li>
 
-                <li class="nav-item" hidden>
-                    <a class="nav-link" href="#">Relatórios</a>
+                <li>
+                    <a class="@EmpresaNavPages.InicioNavClass(ViewContext)" asp-area="Censo" asp-page="/Empresas/Index">Consulta RFB</a>
                 </li>
+
                 @if (User.IsInRole("Administrador"))
                 {
                     <li>
@@ -40,7 +41,7 @@
                     </li>
 
                 }
-                <li class="light-blue lighten-4 waves-effect waves-light">
+                <li class="blue lighten-1 waves-effect waves-light">
                     <form>
                         <a asp-area="" asp-page="./Add">Adicionar Empresa</a>
                     </form>

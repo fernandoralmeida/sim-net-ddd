@@ -32,7 +32,7 @@ namespace Sim.UI.Web.Pages.Pessoa
         {
          
             [Required]
-            [DisplayName("Nome ou CPF")]            
+            [DisplayName("Informe o CPF")]            
             public string CPF { get; set; }
 
             public string RouteCPF { get; set; }

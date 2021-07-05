@@ -1,8 +1,7 @@
 ﻿@using Sim.Domain.Cnpj.Entity;
 @model IEnumerable<BaseReceitaFederal>
 
-<table class="table table-striped">
-    <caption>Lista de empresas @if (Model != null) Model.Count();</caption>
+<table>
     <thead>
         <tr>
             <th>#</th>
@@ -57,7 +56,7 @@
                     </td>
                     <td>
 
-                        <a href="#" class="btn btn-sm btn-outline-secondary viewbutton" data-secao="Censo/Empresas" data-acao="Detalhe" data-id="@item.CNPJ" data-bs-toggle="modal" data-bs-target="#viewmodal"><i class="fas fa-eye"></i></a>
+                        <a href="#" class="btn btn-small waves-effect viewbutton" data-secao="Censo/Empresas" data-acao="Detalhe" data-id="@item.CNPJ" data-bs-toggle="modal" data-bs-target="#viewmodal"><i class="fas fa-eye"></i></a>
                     </td>
                 </tr>
             }

@@ -14,7 +14,7 @@
             <div class="col s12">
                 <div class="col s6">
                     <div class="input-field right">
-                        <input asp-for="Input.CPF" id="inputCPF" autofocus>
+                        <input asp-for="Input.CPF" id="inputCPF">
                         <label asp-for="Input.CPF" for="inputCPF"></label>
                     </div>
                 </div>
@@ -55,7 +55,7 @@
                 {
                     <tr>
                         <td>
-                            <a asp-area="" asp-page="/Atendimento/Iniciar" asp-route-id="@item.Id" class="btn btn-small" title="Iniciar atendimento"><i class="far fa-clock"></i></a>
+                            <a asp-area="" asp-page="/Atendimento/Iniciar" asp-route-id="@item.Id" class="btn btn-small waves-effect" title="Iniciar atendimento"><i class="far fa-clock"></i></a>
 
                         </td>
                         <td>
@@ -69,7 +69,14 @@
                             @Html.DisplayFor(modelItem => item.Email)
                         </td>
                         <td>
-                            <a asp-page="./Edit" asp-route-id="@item.Id" class="btn orange lighten-1 btn-small" title="Alterar informações"><i class="fas fa-pen"></i></a>
+                            <a asp-page="./Edit" asp-route-id="@item.Id" class="btn blue lighten-1 btn-small" title="Modificar"><i class="fas fa-pen"></i></a>
+                            @if (User.IsInRole("Administrador"))
+                            {
+
+
+                                <a asp-page="./Delete" asp-route-id="@item.Id" class="btn red lighten-1 btn-small" title="Excluir"><i class="material-icons">delete</i></a>
+
+                            }
                         </td>
                     </tr>
                 }

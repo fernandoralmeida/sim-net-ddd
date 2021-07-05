@@ -59,15 +59,14 @@ namespace Sim.UI.Web.Pages.Empresa
             {
                 if (ModelState.IsValid)
                 {
-                    var emp = Task.Run(() => _empresaApp.ListByRazaoSocialAsync(Input.RazaoSocial, Input.Municipio));
+                    var emp = await _empresaApp.ListByRazaoSocialAsync(Input.RazaoSocial);
 
-                    await emp;
-
+                   
                     //StatusMessage = "Erro:" + Input.RazaoSocial + "\\n" + Input.Municipio;
 
                     Input = new InputModel
                     {
-                        ListaEmpresas = emp.Result,
+                        ListaEmpresas = emp,
                     };
                 }
 

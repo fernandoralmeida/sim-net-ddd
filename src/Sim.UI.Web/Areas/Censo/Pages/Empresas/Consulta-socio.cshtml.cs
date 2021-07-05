@@ -20,9 +20,9 @@ namespace Sim.UI.Web.Areas.Censo.Pages.Empresas
     public class Consulta_socioModel : PageModel
     {
         private readonly ICNPJBase<BaseReceitaFederal> _empresaApp;
-        private readonly IBase<Municipio> _municipios;
+        private readonly IServiceMunicipios<Municipio> _municipios;
         public Consulta_socioModel(ICNPJBase<BaseReceitaFederal> appServiceEmpresa,
-            IBase<Municipio> municipios)
+            IServiceMunicipios<Municipio> municipios)
         {
             _empresaApp = appServiceEmpresa;
             _municipios = municipios;
@@ -41,7 +41,7 @@ namespace Sim.UI.Web.Areas.Censo.Pages.Empresas
             [DisplayName("CNPJ")]
             public string CNPJ { get; set; }
 
-            [DisplayName("Razao Social")]
+            [DisplayName("Sócio")]
             public string Socios { get; set; }
 
             public IEnumerable<BaseReceitaFederal> ListaEmpresas { get; set; }
@@ -54,7 +54,7 @@ namespace Sim.UI.Web.Areas.Censo.Pages.Empresas
 
         private async Task LoadMunicipios()
         {
-            var t = await _municipios.ListAll();
+            var t = await _municipios.MicroRegiaoJahu();
 
             if (t != null)
             {
@@ -82,7 +82,7 @@ namespace Sim.UI.Web.Areas.Censo.Pages.Empresas
                 {
                     await LoadMunicipios();
 
-                    var emp = await _empresaApp.ListBySociosAsync(Input.Socios, Input.Municipio);
+                    var emp = await _empresaApp.ListBySociosAsync(Input.Socios);
 
                     Input = new InputModel
                     {

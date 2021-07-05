@@ -26,7 +26,7 @@ namespace Sim.Cross.Data.Repository.Cnpj
 
         public async Task<IEnumerable<CNAE>> ListAll()
         {
-            return await db.CNAEs.OrderBy(s => s.Codigo).ToListAsync();
+            return await db.CNAEs.OrderBy(s => s.Descricao).ToListAsync();
         }
     }
 }

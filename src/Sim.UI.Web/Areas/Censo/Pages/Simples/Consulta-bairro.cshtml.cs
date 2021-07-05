@@ -47,7 +47,7 @@ namespace Sim.UI.Web.Areas.Censo.Pages.Simples
             public string OptanteSimples { get; set; }
 
             [Required]
-            [DisplayName("Logradouro")]
+            [DisplayName("Bairro")]
             public string Bairro { get; set; }
 
             public string Situacao { get; set; }

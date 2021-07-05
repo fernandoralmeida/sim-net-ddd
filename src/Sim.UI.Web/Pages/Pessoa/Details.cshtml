@@ -8,110 +8,110 @@
 
 <div>
     <dl class="row">
-        <dt class="col-sm-3">
+        <dt class="col s3">
             @Html.DisplayNameFor(model => model.Input.Id)
         </dt>
-        <dd class="col-sm-9">
+        <dd class="col s9">
             @Html.DisplayFor(model => model.Input.Id)
         </dd>
-        <dt class="col-sm-3">
+        <dt class="col s3">
             @Html.DisplayNameFor(model => model.Input.Nome)
         </dt>
-        <dd class="col-sm-9">
+        <dd class="col s9">
             @Html.DisplayFor(model => model.Input.Nome)
         </dd>
-        <dt class="col-sm-3">
+        <dt class="col s3">
             @Html.DisplayNameFor(model => model.Input.Nome_Social)
         </dt>
-        <dd class="col-sm-9">
+        <dd class="col s9">
             @Html.DisplayFor(model => model.Input.Nome_Social)
         </dd>
-        <dt class="col-sm-3">
+        <dt class="col s3">
             @Html.DisplayNameFor(model => model.Input.Data_Nascimento)
         </dt>
-        <dd class="col-sm-9">
+        <dd class="col s9">
             @Html.DisplayFor(model => model.Input.Data_Nascimento)
         </dd>
-        <dt class="col-sm-3">
+        <dt class="col s3">
             @Html.DisplayNameFor(model => model.Input.CPF)
         </dt>
-        <dd class="col-sm-9">
+        <dd class="col s9">
             @Html.DisplayFor(model => model.Input.CPF)
         </dd>
-        <dt class="col-sm-3">
+        <dt class="col s3">
             @Html.DisplayNameFor(model => model.Input.RG)
         </dt>
-        <dd class="col-sm-9">
+        <dd class="col s9">
             @Html.DisplayFor(model => model.Input.RG) @Html.DisplayFor(model => model.Input.RG_Emissor) @Html.DisplayFor(model => model.Input.RG_Emissor_UF)
         </dd>
-        <dt class="col-sm-3">
+        <dt class="col s3">
             @Html.DisplayNameFor(model => model.Input.Genero)
         </dt>
-        <dd class="col-sm-9">
+        <dd class="col s9">
             @Html.DisplayFor(model => model.Input.Genero)
         </dd>
-        <dt class="col-sm-3">
+        <dt class="col s3">
             @Html.DisplayNameFor(model => model.Input.Deficiencia)
         </dt>
-        <dd class="col-sm-9">
+        <dd class="col s9">
             @Html.DisplayFor(model => model.Input.Deficiencia)
         </dd>
-        <dt class="col-sm-3">
+        <dt class="col s3">
             @Html.DisplayNameFor(model => model.Input.CEP)
         </dt>
-        <dd class="col-sm-9">
+        <dd class="col s9">
             @Html.DisplayFor(model => model.Input.CEP)
         </dd>
-        <dt class="col-sm-3">
+        <dt class="col s3">
             @Html.DisplayNameFor(model => model.Input.Logradouro)
         </dt>
-        <dd class="col-sm-9">
+        <dd class="col s9">
             @Html.DisplayFor(model => model.Input.Logradouro), @Html.DisplayFor(model => model.Input.Numero) @Html.DisplayFor(model => model.Input.Complemento)
         </dd>
-        <dt class="col-sm-3">
+        <dt class="col s3">
             @Html.DisplayNameFor(model => model.Input.Bairro)
         </dt>
-        <dd class="col-sm-9">
+        <dd class="col s9">
             @Html.DisplayFor(model => model.Input.Bairro)
         </dd>
-        <dt class="col-sm-3">
+        <dt class="col s3">
             @Html.DisplayNameFor(model => model.Input.Cidade)
         </dt>
-        <dd class="col-sm-9">
+        <dd class="col s9">
             @Html.DisplayFor(model => model.Input.Cidade) @Html.DisplayFor(model => model.Input.UF)
         </dd>
-        <dt class="col-sm-3">
+        <dt class="col s3">
             @Html.DisplayNameFor(model => model.Input.Tel_Movel)
         </dt>
-        <dd class="col-sm-9">
+        <dd class="cols9">
             @Html.DisplayFor(model => model.Input.Tel_Movel) @Html.DisplayFor(model => model.Input.Tel_Fixo)
         </dd>
-        <dt class="col-sm-3">
+        <dt class="col s3">
             @Html.DisplayNameFor(model => model.Input.Email)
         </dt>
-        <dd class="col-sm-9">
+        <dd class="col s9">
             @Html.DisplayFor(model => model.Input.Email)
         </dd>
-        <dt class="col-sm-3">
+        <dt class="col s3">
             @Html.DisplayNameFor(model => model.Input.Data_Cadastro)
         </dt>
-        <dd class="col-sm-9">
+        <dd class="col s9">
             @Html.DisplayFor(model => model.Input.Data_Cadastro)
         </dd>
-        <dt class="col-sm-3">
+        <dt class="col s3">
             @Html.DisplayNameFor(model => model.Input.Ultima_Alteracao)
         </dt>
-        <dd class="col-sm-9">
+        <dd class="col s9">
             @Html.DisplayFor(model => model.Input.Ultima_Alteracao)
         </dd>
-        <dt class="col-sm-3">
+        <dt class="col s3">
             @Html.DisplayNameFor(model => model.Input.Ativo)
         </dt>
-        <dd class="col-sm-9">
-            <div class="custom-control custom-switch">
-                <input asp-for="Input.Ativo" type="checkbox" class="custom-control-input" id="customSwitch1">
-                <label class="custom-control-label" for="customSwitch1">Ativo</label>
-            </div>
+        <dd class="col s9">
+            <label>
+                <input type="checkbox" asp-for="Input.Ativo" />
+                <span>Ativo</span>
+            </label>
         </dd>
     </dl>
 </div>

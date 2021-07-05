@@ -81,7 +81,7 @@ namespace Sim.UI.Web.Areas.Censo.Pages.Empresas
                 {
                     await LoadMunicipios();
 
-                    var emp = await _empresaApp.ListByRazaoSocialAsync(Input.RazaoSocial, Input.Municipio);
+                    var emp = await _empresaApp.ListByRazaoSocialAsync(Input.RazaoSocial);
 
                     Input = new InputModel
                     {

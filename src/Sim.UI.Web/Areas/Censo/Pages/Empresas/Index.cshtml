@@ -8,21 +8,28 @@
     ViewData["ActivePage"] = EmpresaNavPages.Inicio;
 }
 
-<partial name="_StatusMessage" model="Model.StatusMessage" />
+<!--<partial name="_StatusMessage" model="Model.StatusMessage" />-->
 
-<div class="mt-5 mb-5">
-    <form method="post">
-        <div class="d-grid gap-2 d-md-flex justify-content-md-center">            
-            <div class="d-flex">
-                    <input asp-for="Input.CNPJ" class="form-control me-2" aria-describedby="button-addon2" id="inputCNPJ" />
-                    <button class="btn btn-outline-primary" type="submit" role="button" id="button-addon2"><i class="fa fa-search"></i></button>
-                
+<form class="section" method="post">
+    <div class="row">
+        <div class="col s12">
+            <div class="col s12 m4 l4">
+                <div class="input-field">
+                    <input asp-for="Input.CNPJ" />
+                    <label asp-for="Input.CNPJ"></label>
+                </div>
+            </div>
+            <div class="col s12 m2 l2">
+                <div class="input-field">
+                    <button class="btn waves-effect" type="submit" role="button"><i class="fa fa-search"></i></button>
+                </div>
             </div>
         </div>
-    </form>
-</div>
-<div>
-    <partial name="_EmpresaList" model="Model.Input.ListaEmpresas"/>
+    </div>
+</form>
+
+<div class="card">
+    <partial name="_EmpresaList" model="Model.Input.ListaEmpresas" />
 </div>
 
 @section Scripts {

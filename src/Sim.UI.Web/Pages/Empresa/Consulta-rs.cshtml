@@ -6,26 +6,31 @@
     ViewData["ActivePage"] = EmpresaNavPages.Consulta;
 }
 
-<partial name="_StatusMessage" model="Model.StatusMessage" />
+<!--<partial name="_StatusMessage" model="Model.StatusMessage" />-->
 
-<div class="mt-5 mb-5">
+<div class="section">
     <form method="post">
-        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-            <input asp-for="Input.CNPJRes" hidden>
-            
-            <div class="d-flex">
-                
-                
-                    <input asp-for="Input.RazaoSocial" class="form-control me-2" placeholder="Razão Social" aria-describedby="button-addon2">
-                    <button class="btn btn-outline-primary" type="submit" role="button" id="button-addon2"><i class="fa fa-search"></i></button>
-                
+        <input asp-for="Input.CNPJRes" hidden>
+        <div class="row">
+            <div class="col s12">
+                <div class="col s6">
+                    <div class="input-field right">
+                        <input asp-for="Input.RazaoSocial" id="inputrz" />
+                        <label asp-for="Input.RazaoSocial" for="inputrz"></label>
+                    </div>
+                </div>
+                <div class="col s6">
+                    <div class="input-field">
+                        <button class="btn waves-effect" type="submit" role="button" id="button-addon2"><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
             </div>
         </div>
     </form>
 </div>
-<div>
-    <table class="table table-striped">
-        <caption>Lista de empresas @Model.Input.ListaEmpresas.Count()</caption>
+
+<div class="card">
+    <table>
         <thead>
             <tr>
                 <th></th>
@@ -69,8 +74,8 @@
                         @Html.DisplayFor(modelItem => item.Email)
                     </td>
 
-                    <td>                        
-                        <a asp-page="./Update" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary" title="Alterar informações"><i class="fas fa-pen"></i></a>                        
+                    <td>
+                        <a asp-page="./Update" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary" title="Alterar informações"><i class="fas fa-pen"></i></a>
                     </td>
                 </tr>
             }

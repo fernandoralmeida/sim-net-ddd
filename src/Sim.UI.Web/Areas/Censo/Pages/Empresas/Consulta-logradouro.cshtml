@@ -7,27 +7,44 @@
     ViewData["ActivePage"] = EmpresaNavPages.ConsultaNome;
 }
 
-<partial name="_StatusMessage" model="Model.StatusMessage" />
+<!--<partial name="_StatusMessage" model="Model.StatusMessage" />-->
 
-<div class="mt-5 mb-5">
-    <form method="post">
-        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-            <div class="d-flex">
-                <select asp-for="Input.Municipio" placeholder="Municipio" class="form-select me-2" asp-items="@Model.ListaMunicipios"></select>
-                <input asp-for="Input.Logradouro" placeholder="Logradouro" class="form-control me-2" aria-describedby="button-addon2" />
-                <select asp-for="Input.Situacao" class="form-select me-2">
-                    <option selected>Ativa</option>
-                    <option>Nula</option>
-                    <option>Suspensa</option>
-                    <option>Inapta</option>
-                    <option>Baixada</option>
-                </select>
-                <button class="btn btn-outline-primary" type="submit" role="button" id="button-addon2"><i class="fa fa-search"></i></button>
-
+<form class="section" method="post">
+    <div class="row">
+        <div class="col s12">
+            <div class="col s12 m3 l3">
+                <div class="input-field">
+                    <select asp-for="Input.Municipio" asp-items="@Model.ListaMunicipios"></select>
+                    <label asp-for="Input.Municipio"></label>
+                </div>
+            </div>
+            <div class="col s12 m4 l4">
+                <div class="input-field">
+                    <input asp-for="Input.Logradouro" />
+                    <label asp-for="Input.Logradouro"></label>
+                </div>
+            </div>
+            <div class="col s12 m3 l3">
+                <div class="input-field">
+                    <select asp-for="Input.Situacao">
+                        <option selected>Ativa</option>
+                        <option>Nula</option>
+                        <option>Suspensa</option>
+                        <option>Inapta</option>
+                        <option>Baixada</option>
+                    </select>
+                    <label asp-for="Input.Situacao"></label>
+                </div>
+            </div>
+            <div class="col s12 m2 l2">
+                <div class="input-field">
+                    <button class="btn waves-effect" type="submit" role="button"><i class="fa fa-search"></i></button>
+                </div>
             </div>
         </div>
-    </form>
-</div>
-<div>
+    </div>
+</form>
+
+<div class="card">
     <partial name="_EmpresaList" model="Model.Input.ListaEmpresas" />
 </div>
