@@ -10,88 +10,93 @@
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
 
-<div class="d-grid gap-2 d-md-flex justify-content-md-center mt-5 mb-5">
-        <form method="post" asp-page-handler="ListByPessoa">
-            <div class="d-flex">
+<div class="card">
+
+    <form method="post" asp-page-handler="ListByPessoa">
+        <div class="row">
+            <div class="col input-field">
                 <input asp-for="Input.CPF" id="inputCPF" class="form-control me-2" />
-                <button asp-page-handler="ListByPessoa" class="btn btn-outline-primary" type="submit" role="button"><i class="fas fa-search"></i></button>
+                <label>CPF</label>
             </div>
-        </form>
-</div>
+            <div class="input-field">
+                <button asp-page-handler="ListByPessoa" class="btn waves-effect" type="submit" role="button"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </form>
 
-<div>
-    <table class="table table-striped">
-        <caption>Lista de atendimentos!</caption>
-        <thead>
-            <tr>
-                <th>
-                    N
-                </th>
-                <th>
-                    Protocolo
-                </th>
-                <th>
-                    Data
-                </th>
-                <th>
-                    Cliente
-                </th>
-                <th>
-                    Servicos
-                </th>
-                <th>
-                    Setor
-                </th>
-                <th>
-                    Canal
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @{
-                int cont = 0;
-            }
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        N
+                    </th>
+                    <th>
+                        Protocolo
+                    </th>
+                    <th>
+                        Data
+                    </th>
+                    <th>
+                        Cliente
+                    </th>
+                    <th>
+                        Servicos
+                    </th>
+                    <th>
+                        Setor
+                    </th>
+                    <th>
+                        Canal
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int cont = 0;
+                }
 
-            @if (Model.Input.ListaAtendimento != null)
-            {
-
-                @foreach (var item in Model.Input.ListaAtendimento)
+                @if (Model.Input.ListaAtendimento != null)
                 {
-                    <tr>
-                        <td>
-                            @{cont++;}
-                            @cont.ToString()
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Protocolo)
-                        </td>
-                        <td>
-                            @{
-                                var d1 = Convert.ToDateTime(item.Data);
-                                var datainicial = d1.ToShortDateString();
-                            }
 
-                            @Html.DisplayFor(modelItem => datainicial)
-                        </td>
-                        <td>
-                            <a href="#" class="link-secondary viewbutton" data-secao="Pessoa" data-acao="Details" data-id="@item.Pessoa.Id" data-bs-toggle="modal" data-bs-target="#viewmodal">@Html.DisplayFor(modelItem => item.Pessoa.Nome)</a>
-                            @if (item.Empresa != null)
-                            {
-                                <a href="#" class="link-secondary viewbutton" data-secao="Empresa" data-acao="Perfil" data-id="@item.Empresa.Id" data-bs-toggle="modal" data-bs-target="#viewmodal">[@item.Empresa.CNPJ]</a>
-                            }
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Servicos)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Setor)
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Canal)
-                        </td>
-                    </tr>
-                }}
-        </tbody>
-    </table>
+                    @foreach (var item in Model.Input.ListaAtendimento)
+                    {
+                        <tr>
+                            <td>
+                                @{cont++;}
+                                @cont.ToString()
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Protocolo)
+                            </td>
+                            <td>
+                                @{
+                                    var d1 = Convert.ToDateTime(item.Data);
+                                    var datainicial = d1.ToShortDateString();
+                                }
+
+                                @Html.DisplayFor(modelItem => datainicial)
+                            </td>
+                            <td>
+                                <a href="#" class="link-secondary viewbutton" data-secao="Pessoa" data-acao="Details" data-id="@item.Pessoa.Id" data-bs-toggle="modal" data-bs-target="#viewmodal">@Html.DisplayFor(modelItem => item.Pessoa.Nome)</a>
+                                @if (item.Empresa != null)
+                                {
+                                    <a href="#" class="link-secondary viewbutton" data-secao="Empresa" data-acao="Perfil" data-id="@item.Empresa.Id" data-bs-toggle="modal" data-bs-target="#viewmodal">[@item.Empresa.CNPJ]</a>
+                                }
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Servicos)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Setor)
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Canal)
+                            </td>
+                        </tr>
+                    }}
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <!-- Modal -->

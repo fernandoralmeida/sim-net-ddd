@@ -7,21 +7,32 @@
 }
 
 <partial name="_StatusMessage" model="Model.StatusMessage" />
-
-<div class="d-grid gap-2 d-md-flex justify-content-md-center mt-5 mb-5">
-        <form method="post" asp-page-handler="ListByData">
-            <div class="d-flex">
-                <input asp-for="Input.DataI" class="form-control me-2" />
-                <input asp-for="Input.DataF" class="form-control me-2" />
-                <button asp-page-handler="ListByData" class="btn btn-outline-primary" type="submit" role="button"><i class="fas fa-search"></i></button>
+<form method="post" asp-page-handler="ListByData">
+    <div class="row">
+        <div class="col s12">
+            <div class="col s12 m3 l3">
+                <div class="input-field">
+                    <input asp-for="Input.DataI" />
+                    <label>Data Inicial</label>
+                </div>
             </div>
-        </form>
+            <div class="col s12 m3 l3">
+                <div class="input-field">
+                    <input asp-for="Input.DataF" />
+                    <label>Data Final</label>
+                </div>
+            </div>
+            <div class="col s12 m3 l3">
+                <div class="input-field">
+                    <button asp-page-handler="ListByData" class="btn waves-effect" type="submit" role="button"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
 
-</div>
-
-<div>
-    <table class="table table-striped">
-        <caption>Lista de atendimentos!</caption>
+<div class="card">
+    <table>
         <thead>
             <tr>
                 <th>

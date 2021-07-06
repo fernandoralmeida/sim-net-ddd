@@ -10,7 +10,7 @@
     var DisplayName = UserManager.Users.FirstOrDefault(m => m.UserName == User.Identity.Name).Name;
     var DisplayLastName = UserManager.Users.FirstOrDefault(m => m.UserName == User.Identity.Name).LastName;
 
-    <li class="bold waves-block waves-effect">
+    <li class="waves-block waves-effect">
         <a class="collapsible-header">Olá @DisplayName @DisplayLastName</a>
         <div class="collapsible-body transparent">
             <ul>

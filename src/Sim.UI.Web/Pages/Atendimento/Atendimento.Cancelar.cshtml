@@ -7,19 +7,19 @@
 
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
-<form method="post">
-    <div class="col-md-12 mb-3">
-        <div class="input-group">
-            <span class="input-group-text">Atendimento</span>
-            <input type="text" asp-for="Input.Protocolo" class="form-control" readonly>
-            <input type="text" asp-for="Input.Data" class="form-control" readonly>
-            <input type="text" asp-for="Input.Status" class="form-control" readonly>
-            <input type="text" asp-for="Input.Id" class="form-control" readonly>
-            <input type="text" asp-for="Input.Sebrae.RAE" class="form-control">
+<form class="card" method="post">
+    <div class="row" hidden>
+        <div class="col s12">
+            <span class="col">Atendimento</span>
+            <input type="text" asp-for="Input.Protocolo" class="col" readonly>
+            <input type="text" asp-for="Input.Data" class="col" readonly>
+            <input type="text" asp-for="Input.Status" class="col" readonly>
+            <input type="text" asp-for="Input.Id" class="col" readonly>
+            <input type="text" asp-for="Input.Sebrae.RAE" class="col" readonly>
         </div>
     </div>
-    <div class="col-md-12">
-        <table class="table table-striped">
+    <div class="col s12">
+        <table>
             <!--<caption>Informações do Cliente</caption>-->
             <thead>
                 <tr>
@@ -71,16 +71,15 @@
             </tbody>
         </table>
         <div class="row">
-            <div class="col-md-12">
-                <label asp-for="MotivoCancelamento"></label>
+            <div class="col s6 m6 l6">
+                <div class="input-field">
+                    <input asp-for="MotivoCancelamento" multiple />
+                    <label asp-for="MotivoCancelamento"></label>
+                </div>
             </div>
-            <div class="col-md-9 mb-3">
-                <textarea asp-for="MotivoCancelamento" class="form-control" rows="2"></textarea>
-                <span asp-validation-for="MotivoCancelamento" class="text-danger"></span>
-            </div>
-            <div class="col-md-3">
-                <div class="d-grid gap-2">
-                    <button id="addbtn" type="submit" role="button" class="btn btn-danger">Cancelar<br /> Atendimento</button>
+            <div class="col">
+                <div class="input-field">
+                    <button type="submit" role="button" class="btn waves-effect">Cancelar Atendimento</button>
                 </div>
             </div>
         </div>
