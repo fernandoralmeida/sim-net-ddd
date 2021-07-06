@@ -8,18 +8,26 @@
 
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
-<div class="row">
-    <form method="post">
-        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-
-                <div class="d-flex">
-                    <input asp-for="Input.Evento" class="form-control me-2" placeholder="Cosultar Evento por Nome" aria-describedby="button-addon2">
-                    <button class="btn btn-outline-primary" type="submit" role="button" id="button-addon2"><i class="fas fa-search"></i></button>
+<form method="post">
+    <div class="row">
+        <div class="col s12">
+            <div class="col s10 m6 l6">
+                <div class="input-field">
+                    <input asp-for="Input.Evento">
+                    <label>Nome do Evento</label>
                 </div>
+            </div>
+            <div class="col">
+                <div class="input-field">
+                    <button class="btn waves-effect" type="submit" role="button"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
         </div>
-    </form>
-</div>
+    </div>
+</form>
+
 <pre>Lista de Eventos Anteriores a @DateTime.Now.Date</pre>
+
 <div class="albun py-5 bg-silver">
 
     <partial name="_AgendaList" model="Model.Input.ListaEventos" />

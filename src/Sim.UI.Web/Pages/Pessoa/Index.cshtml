@@ -69,12 +69,12 @@
                             @Html.DisplayFor(modelItem => item.Email)
                         </td>
                         <td>
-                            <a asp-page="./Edit" asp-route-id="@item.Id" class="btn blue lighten-1 btn-small" title="Modificar"><i class="fas fa-pen"></i></a>
+                            <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-small waves-effect" title="Modificar"><i class="fas fa-pen"></i></a>
                             @if (User.IsInRole("Administrador"))
                             {
 
 
-                                <a asp-page="./Delete" asp-route-id="@item.Id" class="btn red lighten-1 btn-small" title="Excluir"><i class="material-icons">delete</i></a>
+                                <a asp-page="./Delete" asp-route-id="@item.Id" class="btn red lighten-1 btn-small waves-effect" title="Excluir"><i class="material-icons">delete</i></a>
 
                             }
                         </td>

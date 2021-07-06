@@ -7,21 +7,26 @@
 
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
-<div class="row mt-5 mb-5">
-    <form method="post">
-        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-
-                <div class="d-flex">
-                    <input asp-for="Input.GetCPF" placeholder="CPF" class="form-control me-2" id="inputCPF" aria-describedby="button-addon2">
-                    <button class="btn btn-outline-primary" type="submit" role="button" id="button-addon2"><i class="fas fa-search"></i></button>
+<form method="post">
+    <div class="row">
+        <div class="col s12">
+            <div class="col s10 m6 l6">
+                <div class="input-field">
+                    <input asp-for="Input.GetCPF" />
+                    <label>CPF</label>
                 </div>
+            </div>
+            <div class="col">
+                <div class="input-field">
+                    <button class="btn waves-effect" type="submit" role="button"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
         </div>
-    </form>
-</div>
+    </div>
+</form>
 
-<div>
-    <table class="table table-striped">
-        <caption>Lista de Incrições por Pessoa!</caption>
+<div class="card">
+    <table>
         <thead>
             <tr>
                 <th>
@@ -57,40 +62,40 @@
 
                 @foreach (var item in Model.Input.ListaInscricoes)
                 {
-            <tr>
-                <td>
-                    @{cont++;}
-                    @cont.ToString()
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Numero)
-                </td>
+                    <tr>
+                        <td>
+                            @{cont++;}
+                            @cont.ToString()
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Numero)
+                        </td>
 
-                <td>
-                    <a href="#" class="link-secondary viewbutton" data-secao="Pessoa" data-acao="Details" data-id="@item.Participante.Id" data-bs-toggle="modal" data-bs-target="#viewmodal">@Html.DisplayFor(modelItem => item.Participante.Nome)</a>
-                    @if (item.Empresa != null)
-                    {
-                        <a href="#" class="link-secondary viewbutton" data-secao="Empresa" data-acao="Perfil" data-id="@item.Empresa.Id" data-bs-toggle="modal" data-bs-target="#viewmodal">[@item.Empresa.CNPJ]</a>
-                    }
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Evento.Tipo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Evento.Nome)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Evento.Formato)
-                </td>
-                <td>
-                    @{
-                        var d1 = Convert.ToDateTime(item.Evento.Data);
-                        var datainicial = d1.ToShortDateString();
-                    }
+                        <td>
+                            <a href="#" class="link-secondary viewbutton" data-secao="Pessoa" data-acao="Details" data-id="@item.Participante.Id" data-bs-toggle="modal" data-bs-target="#viewmodal">@Html.DisplayFor(modelItem => item.Participante.Nome)</a>
+                            @if (item.Empresa != null)
+                            {
+                                <a href="#" class="link-secondary viewbutton" data-secao="Empresa" data-acao="Perfil" data-id="@item.Empresa.Id" data-bs-toggle="modal" data-bs-target="#viewmodal">[@item.Empresa.CNPJ]</a>
+                            }
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Evento.Tipo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Evento.Nome)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Evento.Formato)
+                        </td>
+                        <td>
+                            @{
+                                var d1 = Convert.ToDateTime(item.Evento.Data);
+                                var datainicial = d1.ToShortDateString();
+                            }
 
-                    @Html.DisplayFor(modelItem => item.Evento.Data)
-                </td>
-            </tr>
+                            @Html.DisplayFor(modelItem => item.Evento.Data)
+                        </td>
+                    </tr>
                 }}
         </tbody>
     </table>
