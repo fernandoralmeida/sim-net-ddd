@@ -10,21 +10,21 @@
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
 
-<div class="card">
+
 
     <form method="post" asp-page-handler="ListByPessoa">
         <div class="row">
-            <div class="col input-field">
-                <input asp-for="Input.CPF" id="inputCPF" class="form-control me-2" />
+            <div class="col s10 m4 l4 input-field">
+                <input asp-for="Input.CPF" id="inputCPF" />
                 <label>CPF</label>
             </div>
-            <div class="input-field">
+            <div class="col input-field">
                 <button asp-page-handler="ListByPessoa" class="btn waves-effect" type="submit" role="button"><i class="fas fa-search"></i></button>
             </div>
         </div>
     </form>
 
-    <div>
+    <div class="card">
         <table>
             <thead>
                 <tr>
@@ -97,7 +97,7 @@
             </tbody>
         </table>
     </div>
-</div>
+
 
 <!-- Modal -->
 <div class="modal fade" id="viewmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="viewmodalLabel" aria-hidden="true">

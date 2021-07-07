@@ -7,7 +7,7 @@
 <div class="row">
     <div class="col s12">
         Código: @Model.Input.Codigo
-        <br /><span class="text-primary">@Model.Input.Tipo @Model.Input.Nome - @Model.Input.Formato</span>
+        <br /><span class="red-text">@Model.Input.Tipo @Model.Input.Nome - @Model.Input.Formato</span>
         <br />Data: @Model.Input.Data
     </div>
 </div>
@@ -15,7 +15,6 @@
 <div class="card">
     <form method="post">
         <table>
-            <caption>Lista de Inscritos!</caption>
             <thead>
                 <tr>
                     <th>
@@ -71,10 +70,7 @@
             </tbody>
         </table>
     </form>
-</div>
-
-<div class="row">
-    <div class="col-md-4 mt-4">
-        <a asp-page="./Index" class="btn btn-secondary">Voltar</a>
+    <div class="card-action">
+        <a asp-page="./Index" class="btn waves-effect waves-light">Voltar</a>
     </div>
 </div>

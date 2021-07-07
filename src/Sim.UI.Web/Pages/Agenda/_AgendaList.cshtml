@@ -2,57 +2,33 @@
 @model IEnumerable<InputModelEvento>
 
 
-    <div class="row col">
+<div class="row col">
 
-        @if (Model != null)
+    @if (Model != null)
+    {
+        foreach (var item in Model)
         {
-            foreach (var item in Model)
-            {
-
-                <div class="col s12 m4 l4">
-                    <div class="card">                        
-                        <svg class="card-image" width="100%" height="100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                            <title>Placeholder</title>
-                            <rect width="100%" height="100%" fill="#55595c" />
-                            <text x="4%" y="25%" fill="#eceeef" dy=".3em" style="font-size:10px;">Código @item.Codigo</text>
-                            <text x="4%" y="50%" fill="#eceeef" dy=".3em">@item.Tipo</text>
-                            <text x="4%" y="75%" fill="#eceeef" dy=".3em">@item.Nome</text>
-                        </svg>
-                        <div class="card-content">
-                            <p class="grey-text">
-                                Formato: @item.Formato
-                                <br />Data: @item.Data
-                                <br />Setor: @item.Owner
-                                <br />Vagas: @item.Vagas -
-                                <a href="#" data-secao="Agenda" data-acao="Inscritos.List" data-id="@item.Codigo" class="viewbutton" data-bs-toggle="modal" data-bs-target="#viewmodal">
-                                    @item.NumeroInscritos inscritos
-                                </a>
-                            </p>
-                        </div>
-                        <div class="card-footer">
-                            <div class="row" style="padding-bottom:10px;">
-                                <div class="col s4 m4 l4 center">
-                                    <a asp-page="./Edit" asp-route-id="@item.Id" class="orange-text lighten-1"><i class="fas fa-pen"></i></a>
-                                </div>
-                                <div class="col s4 m4 l4 center">
-                                    @{
-                                        if (item.NumeroInscritos >= item.Lotacao)
-                                        {
-                                            <button asp-page="./Inscricao.Evento" asp-route-id="@item.Codigo" disabled class="blue-text lighten-1"><i class="fas fa-plus-circle"></i></button>
-                                        }
-                                        else
-                                        {
-                                            <a asp-page="./Inscricao.Evento" asp-route-id="@item.Codigo" class="blue-text lighten-1"><i class="fas fa-plus-circle"></i></a>
-                                        }
-                                    }
-                                </div>
-                                <div class="col s4 m4 l4 right">
-                                    <a asp-page="./Inscricao.Remove" asp-route-id="@item.Codigo" class="red-text lighten-1"><i class="fas fa-minus-circle"></i></a>
-                                </div>
-                            </div>
-                        </div>
+            <div class="col s12 m6 l4">
+                <div class="card">
+                    <div class="card-image blue-grey darken-1">
+                        <div style="height:100px;"></div>                       
+                        <span class="card-title truncate"><a asp-page="./Edit" asp-route-id="@item.Id" class="orange-text">@item.Nome</a></span>
+                        <a class="btn-floating halfway-fab waves-effect waves-light red" asp-page="./Inscricao.Evento" asp-route-id="@item.Codigo" title="Inscrever"><i class="material-icons">add</i></a>
+                    </div>
+                    <div class="card-content truncate">
+                        Formato: @item.Formato
+                        <br />Data: @item.Data
+                        <br />Setor: @item.Owner
+                        <br />Vagas: @item.Vagas
+                    </div>
+                    <div class="card-action">
+                        <a asp-page="./Inscricao.Remove" asp-route-id="@item.Codigo">Gerenciar<span class="new badge" data-badge-caption="inscritos">@item.NumeroInscritos</span></a>                        
                     </div>
                 </div>
-            }
+            </div>
         }
-    </div>
+    }
+</div>
+
+
+

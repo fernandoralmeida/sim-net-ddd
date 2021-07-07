@@ -9,66 +9,56 @@
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
 <div class="row">
-    <form method="post">
-        <div class="row">
-            <div class="col-md-2 mb-3" hidden>
+    <form method="post" class="card">
+        <div class="row card-content">
+            <div class="col s12" hidden>
                 <label class="form-label" asp-for="Input.Codigo"></label>
-                <input asp-for="Input.Codigo" class="form-control" />
+                <input asp-for="Input.Codigo" />
             </div>
-            <div class="col-md-3 mb-3">
-                <label class="form-label" asp-for="Input.Tipo"></label>
-                <select asp-for="Input.Tipo" asp-items="Model.TipoEventos" class="form-select">
+            <div class="col s12 m6 l6 input-field">
+                <select asp-for="Input.Tipo" asp-items="Model.TipoEventos">
                     <option selected value=''>--Tipo do Evento--</option>
                 </select>
-                <span asp-validation-for="Input.Tipo" class="text-danger" />
+                <label asp-for="Input.Tipo"></label>
             </div>
-            <div class="col-md-4 mb-3">
-                <label class="form-label" asp-for="Input.Nome"></label>
-                <input asp-for="Input.Nome" class="form-control" />
-                <span asp-validation-for="Input.Nome" class="text-danger" />
+            <div class="col s12 m6 l6 input-field">
+                <input asp-for="Input.Nome" required/>
+                <label asp-for="Input.Nome"></label>
             </div>
-            <div class="col-md-3 mb-3">
-                <label class="form-label" asp-for="Input.Formato"></label>
-                <select asp-for="Input.Formato" class="form-select">
-                    <option selected value=''>--Tipo do Evento--</option>
+            <div class="col s12 m3 l3 input-field">
+                <select asp-for="Input.Formato">
+                    <option selected value=''>--Formato--</option>
                     <option value='Online'>Online</option>
                     <option value='Presencial'>Presencial</option>
                 </select>
-                <span asp-validation-for="Input.Formato" class="text-danger" />
+                <label asp-for="Input.Formato"></label>
             </div>
-            <div class="col-md-3 mb-3">
-                <label class="form-label" asp-for="Input.Data"></label>
-                <input asp-for="Input.Data" class="form-control" />
-                <span asp-validation-for="Input.Data" class="text-danger" />
+            <div class="col s12 m3 l3 input-field">
+                <input asp-for="Input.Data" required />
+                <label asp-for="Input.Data"></label>
             </div>
-            <div class="col-md-4 mb-3">
-                <label class="form-label" asp-for="Input.Owner"></label>
-                <select asp-for="Input.Owner" asp-items="Model.Setores" asp- class="form-select">
-                    <option selected value=''>------Setor------</option>
+            <div class="col s12 m4 l4 input-field">
+                <select asp-for="Input.Owner" asp-items="Model.Setores">
+                    <option selected value=''>--Setor--</option>
                 </select>
-                <span asp-validation-for="Input.Owner" class="text-danger" />
+                <label asp-for="Input.Owner"></label>
             </div>
-            <div class="col-md-2 mb-3">
-                <label class="form-label" asp-for="Input.Lotacao"></label>
-                <input asp-for="Input.Lotacao" class="form-control" />
+            <div class="col s12 m2 l2 input-field">
+                <input asp-for="Input.Lotacao" />
+                <label asp-for="Input.Lotacao"></label>
             </div>
-            <div class="col-md-10 mb-3">
-                <label class="form-label" asp-for="Input.Descricao"></label>
-                <textarea asp-for="Input.Descricao" rows="2" asp- class="form-control"></textarea>
+            <div class="col s12">
+                <label asp-for="Input.Descricao"></label>
+                <textarea asp-for="Input.Descricao" class="browser-default" rows="3"></textarea>
             </div>
-
-
         </div>
-        <div class="row">
-            <div class="col-md-4 mt-4">
-                <button type="submit" class="btn btn-primary">Gravar Novo Evento</button> |
-                <a asp-page="./Index" class="btn btn-secondary">Voltar</a>
-            </div>
+        <div class="card-action">
+                <button type="submit" class="btn waves-effect waves-light">Gravar Novo Evento</button> 
+                <a asp-page="./Index" class="btn grey lighten-1 waves-effect waves-light">Voltar</a>            
         </div>
     </form>
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <script src="~/js/jquery.validation.js"></script>
 }
