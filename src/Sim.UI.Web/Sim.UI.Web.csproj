@@ -10,12 +10,16 @@
   <ItemGroup>
     <Compile Remove="Pages\BancodoPovo\**" />
     <Compile Remove="Pages\SaladoEmpreendedor\**" />
+    <Compile Remove="wwwroot\lib\bootstrap\**" />
     <Content Remove="Pages\BancodoPovo\**" />
     <Content Remove="Pages\SaladoEmpreendedor\**" />
+    <Content Remove="wwwroot\lib\bootstrap\**" />
     <EmbeddedResource Remove="Pages\BancodoPovo\**" />
     <EmbeddedResource Remove="Pages\SaladoEmpreendedor\**" />
+    <EmbeddedResource Remove="wwwroot\lib\bootstrap\**" />
     <None Remove="Pages\BancodoPovo\**" />
     <None Remove="Pages\SaladoEmpreendedor\**" />
+    <None Remove="wwwroot\lib\bootstrap\**" />
   </ItemGroup>
 
   <ItemGroup>
