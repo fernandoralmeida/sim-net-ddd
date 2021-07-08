@@ -67,7 +67,7 @@
                         @cont.ToString()
                     </td>
                     <td>
-                        <a href="#viewmodal" class="viewbutton modal-trigger" data-secao="Atendimento" data-acao="Detail" data-id="@item.Id">@Html.DisplayFor(modelItem => item.Protocolo)</a>
+                        <a class="viewbutton modal-trigger" data-secao="Atendimento" data-acao="Detail" data-id="@item.Id" href="#viewmodal">@Html.DisplayFor(modelItem => item.Protocolo)</a>
                     </td>
                     <td>
                         @{

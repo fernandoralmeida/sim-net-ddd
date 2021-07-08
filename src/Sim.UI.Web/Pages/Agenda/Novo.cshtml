@@ -22,8 +22,12 @@
                 <label asp-for="Input.Tipo"></label>
             </div>
             <div class="col s12 m6 l6 input-field">
-                <input asp-for="Input.Nome" required/>
+                <input asp-for="Input.Nome" required />
                 <label asp-for="Input.Nome"></label>
+            </div>
+            <div class="col s12 m3 l3 input-field">
+                <input asp-for="Input.Data" required />
+                <label asp-for="Input.Data"></label>
             </div>
             <div class="col s12 m3 l3 input-field">
                 <select asp-for="Input.Formato">
@@ -32,10 +36,6 @@
                     <option value='Presencial'>Presencial</option>
                 </select>
                 <label asp-for="Input.Formato"></label>
-            </div>
-            <div class="col s12 m3 l3 input-field">
-                <input asp-for="Input.Data" required />
-                <label asp-for="Input.Data"></label>
             </div>
             <div class="col s12 m4 l4 input-field">
                 <select asp-for="Input.Owner" asp-items="Model.Setores">
