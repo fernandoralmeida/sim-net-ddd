@@ -52,6 +52,7 @@ namespace Sim.UI.Web.Pages.Atendimento
             //Input.ListaAtendimento = lista.Result.ToList();
             Input.DataI = new DateTime(DateTime.Now.Year, 1, 1);
             Input.DataF = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+            Input.ListaAtendimento = new List<Atendimento>();
         }
 
         public async Task OnPostListByDataAsync()

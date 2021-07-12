@@ -29,6 +29,7 @@ namespace Sim.UI.Web.Pages.Atendimento
             Input.DataAtendimento = DateTime.Now.Date;
         }
 
+
         [TempData]
         public string StatusMessage { get; set; }
 
@@ -69,6 +70,17 @@ namespace Sim.UI.Web.Pages.Atendimento
             }
 
             return Page();
+        }
+
+        public JsonResult OnGetPreview(string id)
+        {
+            var atendimemnto_ativo = Task.Run(() => _appServiceAtendimento.GetAtendimento(new Guid(id)));
+
+            atendimemnto_ativo.Wait();
+
+            StatusMessage = atendimemnto_ativo.Result.Pessoa.Nome;
+
+            return new JsonResult(atendimemnto_ativo.Result);
         }
     }
 }

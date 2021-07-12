@@ -58,11 +58,7 @@
                             @Html.DisplayFor(modelItem => datainicial)
                         </td>
                         <td>
-                            <a href="#" class="link-secondary viewbutton" data-secao="Pessoa" data-acao="Details" data-id="@item.Pessoa.Id" data-bs-toggle="modal" data-bs-target="#viewmodal">@Html.DisplayFor(modelItem => item.Pessoa.Nome)</a>
-                            @if (item.Empresa != null)
-                            {
-                                <a href="#" class="link-secondary viewbutton" data-secao="Empresa" data-acao="Perfil" data-id="@item.Empresa.Id" data-bs-toggle="modal" data-bs-target="#viewmodal">[@item.Empresa.CNPJ]</a>
-                            }
+                            @Html.DisplayFor(modelItem => item.Pessoa.Nome)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Descricao)
