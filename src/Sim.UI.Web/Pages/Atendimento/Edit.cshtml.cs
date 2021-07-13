@@ -55,6 +55,8 @@ namespace Sim.UI.Web.Pages.Atendimento
         public string GetSetor { get; set; }
 
         public SelectList Setores { get; set; }
+        public SelectList Canais { get; set; }
+        public SelectList Servicos { get; set; }
 
         public string GetServico { get; set; }
 
@@ -104,15 +106,35 @@ namespace Sim.UI.Web.Pages.Atendimento
                 Empresa = atendimemnto_ativio.Empresa                
             };
 
-            var set = Task.Run(() => _appServiceSetor.List());
-            await set;
+            var canal = Task.Run(() => _appServiceCanal.GetByOwner(Input.Setor));
+            await canal;
 
-            if (set.Result != null)
+            if (canal.Result != null)
             {
-                Setores = new SelectList(set.Result, nameof(Setor.Nome), nameof(Setor.Nome), null);
+                Canais = new SelectList(canal.Result, nameof(Canal.Nome), nameof(Canal.Nome), null);
             }
 
-            ServicosSelecionados = Input.Servicos;
+            var serv = Task.Run(() => _appServiceServico.GetByOwner(Input.Setor));
+            await serv;
+
+            if (serv.Result != null)
+            {
+                Servicos = new SelectList(serv.Result, nameof(Servico.Nome), nameof(Servico.Nome), null);
+            }
+                        
+            Input.Canal = atendimemnto_ativio.Canal;            
+
+            string linha = atendimemnto_ativio.Servicos;
+            string[] palavra = linha.Split(',');
+            string nserv = string.Empty;
+
+            foreach (var letra in palavra)
+            {
+                nserv += letra + ", ";
+            }
+
+            Input.Servicos = nserv;
+            ServicosSelecionados = nserv;
 
             return Page();
         }
@@ -147,7 +169,7 @@ namespace Sim.UI.Web.Pages.Atendimento
                     //var atendimemnto_ativio = _appServiceAtendimento.AtendimentoAtivo(user.Id).FirstOrDefault();
 
                     var atold = _appServiceAtendimento.GetById(Input.Id);
-                    atold.DataF = DateTime.Now;
+                    atold.DataF = Input.DataF;
                     atold.Setor = Input.Setor; //GetSetor;
                     atold.Canal = Input.Canal;  //GetCanal;
                     atold.Servicos = ServicosSelecionados; //MeusServicos;
