@@ -6,10 +6,7 @@
         <thead>
             <tr>
                 <th>
-
-                </th>
-                <th>
-                    N
+                    #
                 </th>
                 <th>
                     Protocolo
@@ -29,6 +26,9 @@
                 <th>
                     Canal
                 </th>
+                <th>
+                    Ação
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -39,41 +39,42 @@
 
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        <a class="btn btn-small waves-effect modal-trigger" data-id="@item.Id" href="#viewmodal"><i class="material-icons">visibility</i></a>
-                    </td>
-                    <td>
-                        @{cont++;}
-                        @cont.ToString()
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Protocolo)
-                    </td>
-                    <td>
-                        @{
-                            var d1 = Convert.ToDateTime(item.Data);
-                            var d2 = Convert.ToDateTime(item.DataF);
-                            var datainicial = d1.ToShortTimeString();
-                            var datafinal = d2.ToShortTimeString();
-                        }
+            <tr>
 
-                        @Html.DisplayFor(modelItem => datainicial)
-                        @Html.DisplayFor(modelItem => datafinal)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Pessoa.Nome)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Servicos)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Setor)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Canal)
-                    </td>
-                </tr>
+                <td>
+                    @{cont++;}
+                    @cont.ToString()
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Protocolo)
+                </td>
+                <td>
+                    @{
+                        var d1 = Convert.ToDateTime(item.Data);
+                        var d2 = Convert.ToDateTime(item.DataF);
+                        var datainicial = d1.ToShortTimeString();
+                        var datafinal = d2.ToShortTimeString();
+                    }
+
+                    @Html.DisplayFor(modelItem => datainicial)
+                    @Html.DisplayFor(modelItem => datafinal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Pessoa.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Servicos)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Setor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Canal)
+                </td>
+                <td>
+                    <a class="btn btn-small waves-effect" asp-page="/Atendimento/Edit" asp-route-id="@item.Id"><i class="material-icons">edit</i></a>
+                </td>
+            </tr>
             }
         </tbody>
     </table>
