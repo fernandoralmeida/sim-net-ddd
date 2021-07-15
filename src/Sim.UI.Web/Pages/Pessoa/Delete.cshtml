@@ -8,107 +8,107 @@
 <pre>Apagar Registro</pre>
 
 <div class="card">
-    <dl class="row">
-        <dt class="col s3">
+    <dl class="row card-content">
+        <dt hidden>
             @Html.DisplayNameFor(model => model.Input.Id)
         </dt>
-        <dd class="col s9">
+        <dd hidden>
             @Html.DisplayFor(model => model.Input.Id)
         </dd>
-        <dt class="col s3">
+        <dt class="col s2 m2 l2">
             @Html.DisplayNameFor(model => model.Input.Nome)
         </dt>
-        <dd class="col s9">
+        <dd class="col s10 m10 l10">
             @Html.DisplayFor(model => model.Input.Nome)
         </dd>
-        <dt class="col s3">
+        <dt class="col s2 m2 l2">
             @Html.DisplayNameFor(model => model.Input.Nome_Social)
         </dt>
-        <dd class="col s9">
+        <dd class="col s10 m10 l10">
             @Html.DisplayFor(model => model.Input.Nome_Social)
         </dd>
-        <dt class="col s3">
+        <dt class="col s2 m2 l2">
             @Html.DisplayNameFor(model => model.Input.Data_Nascimento)
         </dt>
-        <dd class="col s9">
+        <dd class="col s10 m10 l10">
             @Html.DisplayFor(model => model.Input.Data_Nascimento)
         </dd>
-        <dt class="col s3">
+        <dt class="col s2 m2 l2">
             @Html.DisplayNameFor(model => model.Input.CPF)
         </dt>
-        <dd class="col s9">
+        <dd class="col s10 m10 l10">
             @Html.DisplayFor(model => model.Input.CPF)
         </dd>
-        <dt class="col s3">
+        <dt class="col s2 m2 l2">
             @Html.DisplayNameFor(model => model.Input.RG)
         </dt>
-        <dd class="col s9">
+        <dd class="col s10 m10 l10">
             @Html.DisplayFor(model => model.Input.RG) @Html.DisplayFor(model => model.Input.RG_Emissor) @Html.DisplayFor(model => model.Input.RG_Emissor_UF)
         </dd>
-        <dt class="col s3">
+        <dt class="col s2 m2 l2">
             @Html.DisplayNameFor(model => model.Input.Genero)
         </dt>
-        <dd class="col s9">
+        <dd class="col s10 m10 l10">
             @Html.DisplayFor(model => model.Input.Genero)
         </dd>
-        <dt class="col s3">
+        <dt class="col s2 m2 l2">
             @Html.DisplayNameFor(model => model.Input.Deficiencia)
         </dt>
-        <dd class="col s9">
+        <dd class="col s10 m10 l10">
             @Html.DisplayFor(model => model.Input.Deficiencia)
         </dd>
-        <dt class="col s3">
+        <dt class="col s2 m2 l2">
             @Html.DisplayNameFor(model => model.Input.CEP)
         </dt>
-        <dd class="col s9">
+        <dd class="col s10 m10 l10">
             @Html.DisplayFor(model => model.Input.CEP)
         </dd>
-        <dt class="col s3">
+        <dt class="col s2 m2 l2">
             @Html.DisplayNameFor(model => model.Input.Logradouro)
         </dt>
-        <dd class="col s9">
+        <dd class="col s10 m10 l10">
             @Html.DisplayFor(model => model.Input.Logradouro), @Html.DisplayFor(model => model.Input.Numero) @Html.DisplayFor(model => model.Input.Complemento)
         </dd>
-        <dt class="col s3">
+        <dt class="col s2 m2 l2">
             @Html.DisplayNameFor(model => model.Input.Bairro)
         </dt>
-        <dd class="col s9">
+        <dd class="col s10 m10 l10">
             @Html.DisplayFor(model => model.Input.Bairro)
         </dd>
-        <dt class="col s3">
+        <dt class="col s2 m2 l2">
             @Html.DisplayNameFor(model => model.Input.Cidade)
         </dt>
-        <dd class="col s9">
+        <dd class="col s10 m10 l10">
             @Html.DisplayFor(model => model.Input.Cidade) @Html.DisplayFor(model => model.Input.UF)
         </dd>
-        <dt class="col s3">
+        <dt class="col s2 m2 l2">
             @Html.DisplayNameFor(model => model.Input.Tel_Movel)
         </dt>
-        <dd class="cols9">
+        <dd class="col s10 m10 l10">
             @Html.DisplayFor(model => model.Input.Tel_Movel) @Html.DisplayFor(model => model.Input.Tel_Fixo)
         </dd>
-        <dt class="col s3">
+        <dt class="col s2 m2 l2">
             @Html.DisplayNameFor(model => model.Input.Email)
         </dt>
-        <dd class="col s9">
+        <dd class="col s10 m10 l10">
             @Html.DisplayFor(model => model.Input.Email)
         </dd>
-        <dt class="col s3">
+        <dt class="col s2 m2 l2">
             @Html.DisplayNameFor(model => model.Input.Data_Cadastro)
         </dt>
-        <dd class="col s9">
+        <dd class="col s10 m10 l10">
             @Html.DisplayFor(model => model.Input.Data_Cadastro)
         </dd>
-        <dt class="col s3">
+        <dt class="col s2 m2 l2">
             @Html.DisplayNameFor(model => model.Input.Ultima_Alteracao)
         </dt>
-        <dd class="col s9">
+        <dd class="col s10 m10 l10">
             @Html.DisplayFor(model => model.Input.Ultima_Alteracao)
         </dd>
-        <dt class="col s3">
+        <dt class="col s2 m2 l2">
             @Html.DisplayNameFor(model => model.Input.Ativo)
         </dt>
-        <dd class="col s9">
+        <dd class="col s10 m10 l10">
             <label>
                 <input type="checkbox" asp-for="Input.Ativo" />
                 <span>Ativo</span>
@@ -117,19 +117,12 @@
     </dl>
 </div>
 <div class="card">
-    <form method="post">
+    <form method="post" class="card-action">
         <input type="hidden" asp-for="Input.Id" />
-        <div class="section">
-            <div class="row">
-                <div class="col s12">
-                    <div class="col s6 m6 l6">
+        
                         <a asp-page="/Pessoa/Index" role="button" type="button" class="btn btn-large blue-grey lighten-1 waves-effect right">Voltar</a>
-                    </div>
-                    <div class="col s6 m6 l6">
+                    
                         <button type="submit" role="button" class="btn btn-large red lighten-1 waves-effect">Excluir Cadastro</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+
     </form>
 </div>

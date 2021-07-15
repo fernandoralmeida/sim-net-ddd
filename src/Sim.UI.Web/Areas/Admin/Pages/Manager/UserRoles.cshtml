@@ -8,45 +8,45 @@
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
 <div class="card">
-     <p></p>
+     
     <form method="post">
 
-        <dl class="row">
-            <dt class="col m2">
-                @Html.DisplayNameFor(model => model.Input.Id)
-            </dt>
-            <dd class="col m10">
-                @Html.DisplayFor(model => model.Input.Id)
-            </dd>
-            <dt class="col m2">
-                Identificador
-            </dt>
-            <dd class="col m10">
-                @Html.DisplayFor(model => model.Input.UserName)
-            </dd>
-            <dt class="col m2">
-                Nome
-            </dt>
-            <dd class="col m10">
-                @Html.DisplayFor(model => model.Input.Name)
-                @Html.DisplayFor(model => model.Input.LastName)
-            </dd>
-            <dt class="col m2">
-                Genero
-            </dt>
-            <dd class="col m10">
-                @Html.DisplayFor(model => model.Input.Gender)
-            </dd>
-            <dt class="col m2">
-                @Html.DisplayNameFor(model => model.Input.Email)
-            </dt>
-            <dd class="col m10">
-                @Html.DisplayFor(model => model.Input.Email)
-            </dd>
-        </dl>
-
+        <div class="card-content">
+            <dl class="row">
+                <dt class="col m2">
+                    @Html.DisplayNameFor(model => model.Input.Id)
+                </dt>
+                <dd class="col m10">
+                    @Html.DisplayFor(model => model.Input.Id)
+                </dd>
+                <dt class="col m2">
+                    Identificador
+                </dt>
+                <dd class="col m10">
+                    @Html.DisplayFor(model => model.Input.UserName)
+                </dd>
+                <dt class="col m2">
+                    Nome
+                </dt>
+                <dd class="col m10">
+                    @Html.DisplayFor(model => model.Input.Name)
+                    @Html.DisplayFor(model => model.Input.LastName)
+                </dd>
+                <dt class="col m2">
+                    Genero
+                </dt>
+                <dd class="col m10">
+                    @Html.DisplayFor(model => model.Input.Gender)
+                </dd>
+                <dt class="col m2">
+                    @Html.DisplayNameFor(model => model.Input.Email)
+                </dt>
+                <dd class="col m10">
+                    @Html.DisplayFor(model => model.Input.Email)
+                </dd>
+            </dl>
+        </div>
         <div class="divider"></div>
-        <p></p>
         <div class="row">
             <div class="col s12">
                 <div class="col s12 m4 l4">
@@ -59,7 +59,7 @@
                 </div>
                 <div class="col s12 m4 l4">
                     <div class="input-field">
-                        <button type="submit" asp-page-handler="AddRole" asp-route-id="@Model.Input.Id" class="btn btn-small waves-effect">Adicionar</button>
+                        <button type="submit" asp-page-handler="AddRole" asp-route-id="@Model.Input.Id" class="btn waves-effect">Adicionar</button>
                     </div>
                 </div>
             </div>
@@ -90,7 +90,7 @@
                             </td>
 
                             <td>
-                                <button type="submit" asp-page-handler="RemoveRole" asp-route-id="@Model.Input.Id" asp-route-role="@item" class="btn btn-small waves-effect" title="Excluir Role"><i class="fas fa-trash"></i></button>
+                                <button type="submit" asp-page-handler="RemoveRole" asp-route-id="@Model.Input.Id" asp-route-role="@item" class="btn btn-small waves-effect" title="Excluir Role"><i class="material-icons">delete_outline</i></button>
                             </td>
                         </tr>
                     }

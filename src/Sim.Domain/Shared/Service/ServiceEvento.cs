@@ -20,7 +20,7 @@ namespace Sim.Domain.Shared.Service
 
         public async Task<IEnumerable<Evento>> EventosAtivos(IEnumerable<Evento> eventos)
         {
-            var t = Task.Run(() => eventos.Where(s => s.EventosAtivos(s)));
+            var t = Task.Run(() => eventos.Where(s => s.EventosAtivos(s)).OrderBy(o => o.Data));
 
             await t;
 
@@ -29,7 +29,7 @@ namespace Sim.Domain.Shared.Service
 
         public async Task<IEnumerable<Evento>> EventosPassados(IEnumerable<Evento> eventos)
         {
-            var t = Task.Run(() => eventos.Where(s => s.EventosPassados(s)));
+            var t = Task.Run(() => eventos.Where(s => s.EventosPassados(s)).OrderByDescending(o => o.Data));
 
             await t;
 

@@ -19,11 +19,17 @@ namespace Sim.Cross.Data.Repository.Shared
 
         public IEnumerable<Servico> GetByOwner(string setor)
         {
-            if(setor.Contains("Sebrae") || setor.Contains("Empreendedor"))
-                return _db.Servico.Where(u => u.Setor.Nome.Contains(setor) || u.Setor.Nome.Contains("Geral"));
+            if (setor != null)
+            {
+                if (setor.Contains("Sebrae") || setor.Contains("Empreendedor"))
+                    return _db.Servico.Where(u => u.Setor.Nome.Contains(setor) || u.Setor.Nome.Contains("Geral"));
+                else
+                    return _db.Servico.Where(u => u.Setor.Nome.Contains(setor));
+            }
             else
-                return _db.Servico.Where(u => u.Setor.Nome.Contains(setor));
-
+            {
+                return new List<Servico>();
+            }
         }
     }
 

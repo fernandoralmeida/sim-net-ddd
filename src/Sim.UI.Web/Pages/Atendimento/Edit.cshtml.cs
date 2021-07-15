@@ -123,9 +123,11 @@ namespace Sim.UI.Web.Pages.Atendimento
             }
                         
             Input.Canal = atendimemnto_ativio.Canal;            
-
+            
             string linha = atendimemnto_ativio.Servicos;
+            
             string[] palavra = linha.Split(',');
+            
             string nserv = string.Empty;
 
             foreach (var letra in palavra)
@@ -169,7 +171,6 @@ namespace Sim.UI.Web.Pages.Atendimento
                     //var atendimemnto_ativio = _appServiceAtendimento.AtendimentoAtivo(user.Id).FirstOrDefault();
 
                     var atold = _appServiceAtendimento.GetById(Input.Id);
-                    atold.DataF = Input.DataF;
                     atold.Setor = Input.Setor; //GetSetor;
                     atold.Canal = Input.Canal;  //GetCanal;
                     atold.Servicos = ServicosSelecionados; //MeusServicos;

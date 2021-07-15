@@ -6,13 +6,14 @@
             <span class="brand-logo" style="margin-left:10px;">Pessoas</span>
             <ul class="right">
                 <li>
-                    <a class="nav-link @PessoaNavPages.InicioNavClass(ViewContext)" asp-page="./Index">Listar</a>
-                </li>
-                <li>
                     <a class="dropdown-trigger @PessoaNavPages.ConsultaNomeNavClass(ViewContext) @PessoaNavPages.ConsultaCPFNavClass(ViewContext)" data-target="dropdownpe">Consultar</a>
                     <ul id="dropdownpe" class="dropdown-content">
+                        <li>
+                            <a asp-page="./Index">CPF</a>
+                        </li>
                         <li><a asp-page="./Consulta.Nome">Nome</a></li>
                     </ul>
+
                 </li>
                 <li class="blue lighten-1 waves-effect waves-light">
                     <form>

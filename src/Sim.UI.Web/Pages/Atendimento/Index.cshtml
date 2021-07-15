@@ -27,5 +27,123 @@
     </div>
 </form>
 
-<partial name="_AtendimentoList" model="Model.Input.ListaAtendimento" />
+<div class="card">
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    #
+                </th>
+                <th>
+                    Protocolo
+                </th>
+                <th>
+                    Horário
+                </th>
+                <th>
+                    Cliente
+                </th>
+                <th>
+                    Servicos
+                </th>
+                <th>
+                    Setor
+                </th>
+                <th>
+                    Canal
+                </th>
+                <th>
+                    Ação
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int cont = 0;
+            }
 
+
+            @foreach (var item in Model.Input.ListaAtendimento)
+            {
+                <tr>
+
+                    <td>
+                        @{cont++;}
+                        @cont.ToString()
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Protocolo)
+                    </td>
+                    <td>
+                        @{
+                            var d1 = Convert.ToDateTime(item.Data);
+                            var d2 = Convert.ToDateTime(item.DataF);
+                            var datainicial = d1.ToShortTimeString();
+                            var datafinal = d2.ToShortTimeString();
+                        }
+
+                        @Html.DisplayFor(modelItem => datainicial)
+                        @Html.DisplayFor(modelItem => datafinal)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Pessoa.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Servicos)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Setor)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Canal)
+                    </td>
+                    <td>
+                        <a class="btn btn-small waves-effect" asp-page="/Atendimento/Edit" asp-route-id="@item.Id"><i class="material-icons">edit</i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal Structure -->
+<div id="viewmodal" class="modal modal-fixed-footer">
+    <div class="modal-content">
+
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Fechar</a>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        $(function () {
+            $(".modal-trigger").click(function () {
+                var customerId = $(this).data('id');
+                var url = "/Atendimento?id=" + customerId + "&handler=Preview";
+                /*
+                $.getJSON(url, (data) => {
+                    $.each(data, (item) => {
+                        var htmlbody = "";
+
+                        for (var i = 0; i < item.length; i++) {
+                            htmlbody += item[i];
+                        }
+
+                        $(".modal-content").html(htmlbody)
+                    });
+                });
+
+                */
+                $.ajax({
+                    url,
+                    cache: false
+                }).done(function (data) {
+                    $(".modal-content").append(data);
+                });
+
+            });
+        });
+    </script>
+}
