@@ -4,48 +4,21 @@
 
 // Write your JavaScript code.
 
-$(function () {
+$(document).ready(function () {
+
     $(".viewbutton").on("click", function () {
         var customerId = $(this).data('id');
         var secao = $(this).data('secao');
         var acao = $(this).data('acao');
-        $.ajax({
-            url: "/" + secao + "/" + acao + "?id=" + customerId,
-            cache: true
-        }).done(function (data) {
-            $("#viewmodalData").html(data);
+        var url = "/" + secao + "/" + acao + "?id=" + customerId;        
+        $("#viewmodalData").empty();
+        $.get(url, function (data) {
+            var tempdata = data;
+            $("#viewmodalData").html(tempdata);
         });
+        
     });
-});
 
-$(document).ready(function () {
-    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
-    // the "data-source" attribute of .modal-trigger must specify the url that will be ajaxed
-    //$('.modal-trigger').click(function () {
-
-        //var customerId = $(this).data('id');
-        //var secao = $(this).data('secao');
-        //var acao = $(this).data('acao');
-
-        //var url = '/' + secao + '/' + acao + '?id=' + customerId;
-        // use other ajax submission type for post, put ...
-        //$.get(url, function (data) {
-            // use this method you need to handle the response from the view 
-            // with rails Server-Generated JavaScript Responses this is portion will be in a .js.erb file  
-            //$(".modal-content").html(data);
-        //});
-
-        //$.ajax({
-            //url: "/" + secao + "/" + acao + "?id=" + customerId,
-            //cache: true
-        //}).done(function (data) {
-           // $(".modal-content").html(data);
-        //});
-    //});
-    // opens the modal
-});
-
-$(document).ready(function () {
     $('.modal').modal();
 
     $('.dropdown-trigger').dropdown();

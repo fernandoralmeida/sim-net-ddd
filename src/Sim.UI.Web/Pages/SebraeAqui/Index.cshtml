@@ -75,10 +75,10 @@
                         @Html.DisplayFor(modelItem => datainicial)
                     </td>
                     <td>
-                        <a href="#" class="link-secondary viewbutton" data-secao="Pessoa" data-acao="Details" data-id="@item.Pessoa.Id" data-bs-toggle="modal" data-bs-target="#viewmodal">@Html.DisplayFor(modelItem => item.Pessoa.Nome)</a>
+                        <a href="#viewmodal" class="modal-trigger viewbutton" data-secao="Pessoa" data-acao="Details" data-id="@item.Pessoa.Id">@Html.DisplayFor(modelItem => item.Pessoa.Nome)</a>
                         @if (item.Empresa != null)
                         {
-                            <a href="#" class="link-secondary viewbutton" data-secao="Empresa" data-acao="Perfil" data-id="@item.Empresa.Id" data-bs-toggle="modal" data-bs-target="#viewmodal">[@item.Empresa.CNPJ]</a>
+                            <a href="#viewmodal" class="modal-trigger viewbutton" data-secao="Empresa" data-acao="Perfil" data-id="@item.Empresa.Id">[@item.Empresa.CNPJ]</a>
                         }
                     </td>
                     <td>
@@ -97,32 +97,12 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="viewmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="viewmodalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h6 class="modal-title" id="viewmodalLabel">Detalhes</h6>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p id="viewmodalData"></p>
-            </div>
-        </div>
+<div id="viewmodal" class="modal modal-fixed-footer">
+    <div class="modal-content">
+        <p id="viewmodalData"></p>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Fechar</a>
     </div>
 </div>
 
-@section scripts
-{
-    <script type="text/javascript">
-        $(".viewbutton").on("click", function () {
-            var customerId = $(this).data('id');
-            var secao = $(this).data('secao');
-            var acao = $(this).data('acao');
-            $.ajax({
-                url: "/" + secao + "/" + acao + "?id=" + customerId,
-                cache: false
-            }).done(function (data) {
-                $("#viewmodalData").html(data);
-            });
-        });</script>
-}
