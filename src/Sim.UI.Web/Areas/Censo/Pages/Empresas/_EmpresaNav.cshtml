@@ -2,7 +2,7 @@
 
 <div class="navbar navbar-fixed">
     <nav class="navbar">
-        <div class="nav-wrapper blue lighten-1">
+        <div class="nav-wrapper blue-grey lighten-1">
             <span class="brand-logo" style="margin-left:10px;">Empresas</span>
 
             <ul class="right hide-on-small-and-down">
@@ -10,7 +10,7 @@
                     <a class="@EmpresaNavPages.InicioNavClass(ViewContext)" asp-page="/Empresas/Index">Listar</a>
                 </li>
                 <li>
-                    <a class="dropdown-trigger @EmpresaNavPages.InicioNavClass(ViewContext) @EmpresaNavPages.ConsultaNomeNavClass(ViewContext) @EmpresaNavPages.ConsultaCNPJNavClass(ViewContext)" data-target="dropdownrfb" href="#">Consultar</a>
+                    <a class="dropdown-trigger @EmpresaNavPages.InicioNavClass(ViewContext) @EmpresaNavPages.ConsultaNomeNavClass(ViewContext) @EmpresaNavPages.ConsultaCNPJNavClass(ViewContext)" data-target="dropdownrfb" href="#">Consultar<i class="material-icons right">arrow_drop_down</i></a>
                     <ul id="dropdownrfb" class="dropdown-content">
                         <li><a asp-page="/Empresas/Index">N. CNPJ</a></li>
                         <li><a asp-page="/Empresas/Consulta-razao-social">Razao Social</a></li>
@@ -21,7 +21,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a class="dropdown-trigger @EmpresaNavPages.SimplesNavClass(ViewContext)" data-target="dropdownspn" href="#">Simples Nacional</a>
+                    <a class="dropdown-trigger @EmpresaNavPages.SimplesNavClass(ViewContext)" data-target="dropdownspn" href="#">Simples Nacional<i class="material-icons right">arrow_drop_down</i></a>
                     <ul id="dropdownspn" class="dropdown-content">
                         <li><a asp-page="/Simples/Index">Optantes</a></li>
                         <li><a asp-page="/Simples/Consulta-cnae">Atividade</a></li>

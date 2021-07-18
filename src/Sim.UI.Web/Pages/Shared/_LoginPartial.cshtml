@@ -10,8 +10,8 @@
     var DisplayName = UserManager.Users.FirstOrDefault(m => m.UserName == User.Identity.Name).Name;
     var DisplayLastName = UserManager.Users.FirstOrDefault(m => m.UserName == User.Identity.Name).LastName;
 
-    <li class="waves-block waves-effect">
-        <a class="collapsible-header">Olá @DisplayName @DisplayLastName</a>
+    <li class="waves-block waves-effect" style="border-bottom:solid 1px #e0e0e0;">
+        <div class="collapsible-header">Olá @DisplayName @DisplayLastName</div>
         <div class="collapsible-body transparent">
             <ul>
                 <li><a asp-area="Identity" asp-page="/Account/Manage/Index" class="waves-effect">Meu Espaço<i class="material-icons">person</i></a></li>

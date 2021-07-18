@@ -10,7 +10,7 @@
                     <a class="@AgendaNavPages.InicioNavClass(ViewContext)" asp-page="./Index">Eventos</a>
                 </li>
                 <li>
-                    <a class="dropdown-trigger @AgendaNavPages.EventoListClass(ViewContext)" data-target="dropdownag" href="#">Consultar</a>
+                    <a class="dropdown-trigger @AgendaNavPages.EventoListClass(ViewContext)" data-target="dropdownag" href="#">Consultar<i class="material-icons right">arrow_drop_down</i></a>
                     <ul id="dropdownag" class="dropdown-content">
                         <li><a asp-page="./Evento-list-passados">Eventos Anteriores</a></li>
                         <li><a asp-page="./Evento.List">Participantes</a></li>

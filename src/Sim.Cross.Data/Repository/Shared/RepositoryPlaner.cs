@@ -21,5 +21,12 @@ namespace Sim.Cross.Data.Repository.Shared
         {
             return _db.Planner.Where(u => u.Data == data);
         }
+
+        public async Task<IEnumerable<Planner>> GetMyPlanner(DateTime? datai, DateTime? dataf, string username)
+        {
+            var t = Task.Run(() => _db.Planner.Where(s => s.Data >= datai && s.Ultima_Alteracao <= dataf && s.Owner_AppUser_Id == username).OrderBy(o => o.Data));
+            await t;
+            return t.Result;
+        }
     }
 }

@@ -34,7 +34,7 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
             [HiddenInput(DisplayValue = false)]
             public Guid Id { get; set; }
 
-            [Required]
+            //[Required]
             [DisplayName("Serviço")]
             public string Nome { get; set; }
 
@@ -89,7 +89,7 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
             if (set.Result != null)
             {
                 Setores = new SelectList(set.Result, nameof(Setor.Id), nameof(Setor.Nome), null);
-            }
+            }            
         }
 
         public async Task<IActionResult> OnGetAsync()
@@ -98,13 +98,25 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
             return Page();
         }
 
+        public async Task OnPostServicosBySetor()
+        {
+            await OnLoad();
+            var setorname = _appServiceSetor.GetById(SetorSelecionado);
+            Input.Listar = _appServiceServico.GetByOwner(setorname.Nome).ToList();
+            //await OnLoad();
+        }
+
         public async Task OnPostAddAsync()
         {
             try
             {
                 if (ModelState.IsValid)
                 {
+                    if(Input.Nome!=null)
+                    {
+
                     
+
                     var t = Task.Run(() =>
                     {
 
@@ -123,7 +135,7 @@ namespace Sim.UI.Web.Areas.Settings.Pages.Common
 
                     });
 
-                    await t;
+                    await t;}
                 }
 
                 await OnLoad();

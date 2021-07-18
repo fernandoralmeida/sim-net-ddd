@@ -21,7 +21,12 @@ $(document).ready(function () {
 
     $('.modal').modal();
 
-    $('.dropdown-trigger').dropdown();
+    $('.dropdown-trigger').dropdown(
+        {
+            hover:true,
+            restringirWidth:false,
+            coverTrigger:false
+        });
 
     $('select').formSelect();
 

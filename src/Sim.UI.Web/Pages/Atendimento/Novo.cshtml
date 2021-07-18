@@ -100,8 +100,8 @@
                     </select>
                     <label asp-for="Input.Setor"></label>
                 </div>
-                <div class="input-field col s12 m1 l1">
-                    <a href="#" class="btn waves-effect viewbutton" data-secao="Atendimento" data-acao="Detail" data-id="@Model.Input.Id" title="Carregar Serviços"><i class="material-icons">refresh</i></a>
+                <div class="input-field col s12 m1 l1 center">
+                    <a href="#" class="btn waves-effect viewbutton" data-secao="Atendimento" data-acao="Detail" data-id="@Model.Input.Id" title="Carregar Serviços"><i class="material-icons">refresh</i></a>                    
                 </div>
                 <div class="input-field col s12 m6 l6">
                     <select asp-for="Input.Canal"></select>
@@ -155,55 +155,34 @@
 
 @section scripts{
     <script>
-        $(function () {
-            $("#Input_Setor").change(function () {
-                var getSetor = $(this).val();
-                //get canais de atendimento
-                $("#Input_Canal").empty();
-                $("#Input_Canal").append("<option value=''>-- Selecione um Canal --</option>");
-                $.getJSON(`?handler=Canais&getSetor=${getSetor}`, (data) => {
-                    $.each(data, function (i, item) {
-                        $("#Input_Canal").append(`<option value="${item.nome}">${item.nome}</option>`);
-                    });
-                });
-                //get servicos por setor
-                $("#Input_Servicos").empty();
-                $.getJSON(`?handler=Servicos&getSetor=${getSetor}`, (data) => {
-                    $.each(data, function (i, item) {
-                        $("#Input_Servicos").append(`<option value="${item.nome}">${item.nome}</option>`)
-                    });
+        $("#Input_Setor").change(function () {
+            var getSetor = $(this).val();
+            //get canais de atendimento
+            $("#Input_Canal").empty();
+            $("#Input_Canal").append("<option value=''>-- Selecione um Canal --</option>");
+            $.getJSON(`/Atendimento/Novo?handler=Canais&getSetor=${getSetor}`, (data) => {
+                $.each(data, function (i, item) {
+                    $("#Input_Canal").append(`<option value="${item.nome}">${item.nome}</option>`);
                 });
             });
-
-            $(".dataload").click(function () {
-                var getSetor = $("#Input_Setor").val();
-                //get canais de atendimento
-                $("#Input_Canal").empty();
-                $("#Input_Canal").append("<option value=''>-- Selecione um Canal --</option>");
-                $.getJSON(`?handler=Canais&getSetor=${getSetor}`, (data) => {
-                    $.each(data, function (i, item) {
-                        $("#Input_Canal").append(`<option value="${item.nome}">${item.nome}</option>`);
-                    });
+            //get servicos por setor
+            $("#Input_Servicos").empty();
+            $.getJSON(`/Atendimento/Novo?handler=Servicos&getSetor=${getSetor}`, (data) => {
+                $.each(data, function (i, item) {
+                    $("#Input_Servicos").append(`<option value="${item.nome}">${item.nome}</option>`)
                 });
-                //get servicos por setor
-                $("#Input_Servicos").empty();
-                $.getJSON(`?handler=Servicos&getSetor=${getSetor}`, (data) => {
-                    $.each(data, function (i, item) {
-                        $("#Input_Servicos").append(`<option value="${item.nome}">${item.nome}</option>`)
-                    });
-                });
-            });
-            
-            $("#onbtn").click(function () {
-                var selectedValues = [];
-                $("#Input_Servicos :selected").each(function () {
-                    selectedValues.push($(this).val());
-                });
-                document.getElementById("ServicosSelecionados").value = selectedValues;
-                //alert(selectedValues);
-                return true;
             });
         });
+
+        $("#onbtn").click(function () {
+            var selectedValues = [];
+            $("#Input_Servicos :selected").each(function () {
+                selectedValues.push($(this).val());
+            });
+            document.getElementById("ServicosSelecionados").value = selectedValues;
+            //alert(selectedValues);
+            return true;
+        });      
     </script>
 
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

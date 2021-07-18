@@ -11,5 +11,7 @@ namespace Sim.Domain.Shared.Interface
     public interface IRepositoryPlaner : IRepositoryBase<Planner>
     {
         IEnumerable<Planner> GetByData(DateTime? data);
+
+        Task<IEnumerable<Planner>> GetMyPlanner(DateTime? datai, DateTime? dataf, string username);
     }
 }

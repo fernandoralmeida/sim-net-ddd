@@ -36,39 +36,39 @@
 
             @foreach (var item in Model)
             {
-            <tr>
+                <tr>
 
-                <td>
-                    @{cont++;}
-                    @cont.ToString()
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Protocolo)
-                </td>
-                <td>
-                    @{
-                        var d1 = Convert.ToDateTime(item.Data);
-                        var d2 = Convert.ToDateTime(item.DataF);
-                        var datainicial = d1.ToShortTimeString();
-                        var datafinal = d2.ToShortTimeString();
-                    }
+                    <td>
+                        @{cont++;}
+                        @cont.ToString()
+                    </td>
+                    <td>
+                        <a class="modal-trigger" href="#viewmodal" data-id="@item.Id">@Html.DisplayFor(modelItem => item.Protocolo)</a>
+                    </td>
+                    <td>
+                        @{
+                            var d1 = Convert.ToDateTime(item.Data);
+                            var d2 = Convert.ToDateTime(item.DataF);
+                            var datainicial = d1.ToShortTimeString();
+                            var datafinal = d2.ToShortTimeString();
+                        }
 
-                    @Html.DisplayFor(modelItem => datainicial)
-                    @Html.DisplayFor(modelItem => datafinal)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Pessoa.Nome)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Servicos)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Setor)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Canal)
-                </td>
-            </tr>
+                        @Html.DisplayFor(modelItem => datainicial)
+                        @Html.DisplayFor(modelItem => datafinal)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Pessoa.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Servicos)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Setor)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Canal)
+                    </td>
+                </tr>
             }
         </tbody>
     </table>
@@ -80,38 +80,7 @@
 
     </div>
     <div class="modal-footer">
-        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Fechar</a>
+        <a href="#!" class="modal-close btn waves-effect">Fechar</a>
     </div>
 </div>
 
-@section scripts{
-    <script>
-        $(function () {
-            $(".modal-trigger").click(function () {
-                var customerId = $(this).data('id');
-                var url = "/Atendimento?id=" + customerId + "&handler=Preview";
-                /*
-                $.getJSON(url, (data) => {
-                    $.each(data, (item) => {
-                        var htmlbody = "";
-
-                        for (var i = 0; i < item.length; i++) {
-                            htmlbody += item[i];
-                        }
-
-                        $(".modal-content").html(htmlbody)
-                    });
-                });
-
-                */
-                $.ajax({
-                    url,
-                    cache: false
-                }).done(function (data) {
-                    $(".modal-content").append(data);
-                });
-
-            });
-        });
-    </script>
-}

@@ -8,76 +8,123 @@
 
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
-@{ 
-    var week = new Functions.Dates(DateTime.Today.Month, DateTime.Today.Year);
-
-    var weekstart = week.WeekDateStart;
-
-    var weekend = week.WeekDateEnd;
-    //var mondays = new DateTime(DateTime.Now.Year, DateTime.Now.Month,DateTime.Now.Day).Where(i => i.DayOfWeek == DayOfWeek.Monday);
 
 
+@{
+    var d1 = Model.InicioSemana.Value.ToShortDateString();
+    var d2 = Model.FimSemana.Value.ToShortDateString();
 }
 
-<pre>Semana de @weekstart à @weekend </pre>
-
-<form method="post" style="font-size:12px;">
-    <div class="row mt-1 mb-2">
-        <div class="col-md-2 mt-1">
-            <div class="form-floating">
-                <textarea asp-for="Input.Segunda" class="form-control bg-light" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 300px;"></textarea>
-                <label asp-for="Input.Segunda" for="floatingTextarea2"></label>
-            </div>
-        </div>
-        <div class="col-md-2 mt-1">
-            <div class="form-floating">
-                <textarea asp-for="Input.Terca" class="form-control bg-light" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 300px"></textarea>
-                <label asp-for="Input.Terca" for="floatingTextarea2"></label>
-            </div>
-        </div>
-        <div class="col-md-2 mt-1">
-            <div class="form-floating">
-                <textarea asp-for="Input.Quarta" class="form-control bg-light" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 300px"></textarea>
-                <label asp-for="Input.Quarta" for="floatingTextarea2"></label>
-            </div>
-        </div>
-        <div class="col-md-2 mt-1">
-            <div class="form-floating">
-                <textarea asp-for="Input.Quinta" class="form-control bg-light" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 300px"></textarea>
-                <label asp-for="Input.Quinta" for="floatingTextarea2"></label>
-            </div>
-        </div>
-        <div class="col-md-2 mt-1">
-            <div class="form-floating">
-                <textarea asp-for="Input.Sexta" class="form-control bg-light" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 300px"></textarea>
-                <label asp-for="Input.Sexta" for="floatingTextarea2"></label>
-            </div>
-        </div>
-        <div class="col-md-2 mt-1">
-            <div class="form-floating">
-                <textarea asp-for="Input.Sabado" class="form-control bg-light" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 300px"></textarea>
-                <label asp-for="Input.Sabado" for="floatingTextarea2"></label>
-            </div>
+<div class="row">
+    <div class="col s12">
+        <div class="card">
+            <pre><span class="new badge center" data-badge-caption="@d1 à @d2">Semana de</span></pre>
         </div>
     </div>
-    <div class="row mb-5 mt-3">
-        <div class="col-md-4 mt-1">
-            <div class="form-floating">
-                <textarea asp-for="Input.ProximaSemana" class="form-control bg-silver" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 150px"></textarea>
-                <label asp-for="Input.ProximaSemana" for="floatingTextarea2"></label>
+</div>
+
+<form method="post">
+    <div class="row">
+        <div class="col s12 m4 l2">
+            <div class="card">
+                <div class="card-content">
+                    <div class="input-field">
+                        <textarea asp-for="Input.Segunda" poster class="materialize-textarea" placeholder="meus afazeres" style="height: 300px;"></textarea>
+                        <label class="badge" asp-for="Input.Segunda"></label>
+                    </div>
+                </div>
             </div>
+
         </div>
-        <div class="col-md-4 mt-1">
-            <div class="form-floating">
-                <textarea asp-for="Input.Prioridades" class="form-control bg-silver" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 150px"></textarea>
-                <label asp-for="Input.Prioridades" for="floatingTextarea2"></label>
+        <div class="col s12 m4 l2">
+            <div class="card">
+                <div class="card-content">
+                    <div class="input-field">
+                        <textarea asp-for="Input.Terca" class="materialize-textarea" placeholder="meus afazeres" style="height: 300px"></textarea>
+                        <label asp-for="Input.Terca"></label>
+                    </div>
+                </div>
             </div>
+
         </div>
-        <div class="col-md-4 mt-1">
-            <div class="form-floating">
-                <textarea asp-for="Input.Anotacao" class="form-control bg-silver" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 150px"></textarea>
-                <label asp-for="Input.Anotacao" for="floatingTextarea2"></label>
+        <div class="col s12 m4 l2">
+            <div class="card">
+                <div class="card-content">
+                    <div class="input-field">
+                        <textarea asp-for="Input.Quarta" class="materialize-textarea" placeholder="meus afazeres" style="height: 300px"></textarea>
+                        <label asp-for="Input.Quarta"></label>
+                    </div>
+                </div>
             </div>
+
+        </div>
+        <div class="col s12 m4 l2">
+            <div class="card">
+                <div class="card-content">
+                    <div class="input-field">
+                        <textarea asp-for="Input.Quinta" class="materialize-textarea" placeholder="meus afazeres" style="height: 300px"></textarea>
+                        <label asp-for="Input.Quinta"></label>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col s12 m4 l2">
+            <div class="card">
+                <div class="card-content">
+                    <div class="input-field">
+                        <textarea asp-for="Input.Sexta" class="materialize-textarea" placeholder="meus afazeres" style="height: 300px"></textarea>
+                        <label asp-for="Input.Sexta"></label>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col s12 m4 l2">
+            <div class="card">
+                <div class="card-content">
+                    <div class="input-field">
+                        <textarea asp-for="Input.Sabado" class="materialize-textarea" placeholder="meus afazeres" style="height: 300px"></textarea>
+                        <label asp-for="Input.Sabado"></label>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12 m4 l4">
+            <div class="card blue lighten-5">
+                <div class="card-content">
+                    <div class="input-field">
+                        <textarea asp-for="Input.ProximaSemana" class="materialize-textarea" placeholder="meus afazeres" style="height: 150px"></textarea>
+                        <label asp-for="Input.ProximaSemana"></label>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col s12 m4 l4">
+            <div class="card pink lighten-5">
+                <div class="card-content">
+                    <div class="input-field">
+                        <textarea asp-for="Input.Prioridades" class="materialize-textarea" placeholder="meus afazeres" style="height: 150px"></textarea>
+                        <label asp-for="Input.Prioridades"></label>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col s12 m4 l4">
+            <div class="card yellow lighten-5">
+                <div class="card-content">
+                    <div class="input-field">
+                        <textarea asp-for="Input.Anotacao" class="materialize-textarea" placeholder="meus afazeres" style="height: 150px"></textarea>
+                        <label asp-for="Input.Anotacao"></label>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </form>

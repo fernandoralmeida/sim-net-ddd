@@ -67,7 +67,7 @@
                     </td>
                     <td>
 
-                        <a href="#" class="btn btn-small waves-effect viewbutton" data-secao="Censo/Empresas" data-acao="Detalhe" data-id="@item.CNPJ" data-bs-toggle="modal" data-bs-target="#viewmodal"><i class="material-icons">visibility</i></a>
+                        <a class="btn btn-small waves-effect modal-trigger viewbutton" data-secao="Censo/Empresas" data-acao="Detalhe" data-id="@item.CNPJ" href="#viewmodal"><i class="material-icons">visibility</i></a>
                     </td>
                 </tr>
             }
@@ -75,17 +75,12 @@
     </tbody>
 </table>
 
-<!-- Modal -->
-<div class="modal fade" id="viewmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="viewmodalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h6 class="modal-title" id="viewmodalLabel">Detalhes</h6>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p id="viewmodalData"></p>
-            </div>
-        </div>
+<!-- Modal Structure -->
+<div id="viewmodal" class="modal modal-fixed-footer">
+    <div class="modal-content">
+
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close btn waves-effect">Fechar</a>
     </div>
 </div>
