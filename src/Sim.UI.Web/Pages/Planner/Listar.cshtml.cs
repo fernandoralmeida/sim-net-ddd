@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Sim.UI.Web.Pages.Planner
 {
-    [Authorize(Roles = "Administrador")]
+    [Authorize]
     public class ListarModel : PageModel
     {
         [TempData]

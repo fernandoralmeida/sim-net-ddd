@@ -22,8 +22,8 @@ namespace Sim.Domain.Shared.Entity
         public string ProximaSemana { get; set; }
         public string Prioridades { get; set; }
         public string Anotacao { get; set; }
-        public DateTime? Data { get; set; }
-        public DateTime? Ultima_Alteracao { get; set; }
+        public DateTime? DataInicial { get; set; }
+        public DateTime? DataFinal { get; set; }
         public string Owner_AppUser_Id { get; set; }
         public bool Ativo { get; set; }
     }

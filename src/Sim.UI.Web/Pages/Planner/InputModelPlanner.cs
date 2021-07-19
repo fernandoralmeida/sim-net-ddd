@@ -43,10 +43,10 @@ namespace Sim.UI.Web.Pages.Planner
         public string Anotacao { get; set; }
 
         [DataType(DataType.Date)]
-        public DateTime? Data { get; set; }
+        public DateTime? DataInicial { get; set; }
 
         [DataType(DataType.Date)]
-        public DateTime? Ultima_Alteracao { get; set; }
+        public DateTime? DataFinal { get; set; }
 
         [DisplayName("Operador")]
         public string Owner_AppUser_Id { get; set; }

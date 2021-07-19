@@ -5,13 +5,29 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.ComponentModel.DataAnnotations;
+using AutoMapper;
 
 namespace Sim.UI.Web.Pages.Planner
 {
-    [Authorize(Roles = "Administrador")]
+    
+    using Sim.Application.Shared.Interface;
+    using Sim.Domain.Shared.Entity;
+
+
+    [Authorize]
     public class IndexModel : PageModel
     {
-        public IndexModel() { }
+
+        private readonly IAppServicePlaner _planner;
+        private readonly IMapper _mapper;
+
+        public IndexModel(IAppServicePlaner planner,
+            IMapper mapper) {
+
+            _planner = planner;
+            _mapper = mapper;
+        }
 
         [TempData]
         public string StatusMessage { get; set; }
@@ -20,21 +36,53 @@ namespace Sim.UI.Web.Pages.Planner
         public InputModelPlanner Input { get; set; }
 
         [BindProperty(SupportsGet = true)]
+        [DataType(DataType.Date)]
         public DateTime? InicioSemana { get; set; }
 
         [BindProperty(SupportsGet = true)]
+        [DataType(DataType.Date)]
         public DateTime? FimSemana { get; set; }
 
-        public void OnGet()
+        public async Task OnGetAsync()
         {
             PlannerTimer(DateTime.Now);
+            
+            var plnn = await _planner.GetMyPlanner(Input.DataInicial, Input.DataFinal, User.Identity.Name);
+
+            if(!plnn.Any())
+            {
+                Input.Owner_AppUser_Id = User.Identity.Name;
+                Input.Ativo = true;
+                var t = Task.Run(() => _planner.Add(_mapper.Map<Planner>(Input)));
+                await t;
+            }
+
+            foreach(Planner p in plnn)
+            {
+                Input = _mapper.Map<InputModelPlanner>(p);
+            }   
+        }
+
+        public async Task OnPostAsync()
+        {
+            PlannerTimer(DateTime.Now.Date);
+            
+            var t = Task.Run(() => _planner.Update(_mapper.Map<Planner>(Input)));
+            await t;
+            
+            var plnn = await _planner.GetMyPlanner(Input.DataInicial, Input.DataFinal, User.Identity.Name);
+
+            foreach (Planner p in plnn)
+            {
+                Input = _mapper.Map<InputModelPlanner>(p);
+            }
         }
 
         private void PlannerTimer(DateTime dia)
         {
             var dia_da_semana = dia.DayOfWeek;
-            InicioSemana = dia;
-            FimSemana = dia;
+            InicioSemana = dia.Date;
+            FimSemana = dia.Date;
 
             switch (dia_da_semana)
             {
@@ -77,6 +125,8 @@ namespace Sim.UI.Web.Pages.Planner
                     break;
             }
 
+            Input.DataInicial = InicioSemana.Value.Date;
+            Input.DataFinal = FimSemana.Value.Date;
         }
     }
 }

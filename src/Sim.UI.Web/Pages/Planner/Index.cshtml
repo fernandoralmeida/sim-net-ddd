@@ -8,8 +8,6 @@
 
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
-
-
 @{
     var d1 = Model.InicioSemana.Value.ToShortDateString();
     var d2 = Model.FimSemana.Value.ToShortDateString();
@@ -29,7 +27,11 @@
             <div class="card">
                 <div class="card-content">
                     <div class="input-field">
-                        <textarea asp-for="Input.Segunda" poster class="materialize-textarea" placeholder="meus afazeres" style="height: 300px;"></textarea>
+                        <input asp-for="Input.Id" hidden/>
+                        <input asp-for="Input.Owner_AppUser_Id" hidden/>
+                        <input asp-for="Input.DataInicial" hidden/>
+                        <input asp-for="Input.DataFinal" hidden/>
+                        <textarea asp-for="Input.Segunda" class="materialize-textarea" style="height: 300px;"></textarea>
                         <label class="badge" asp-for="Input.Segunda"></label>
                     </div>
                 </div>
@@ -40,7 +42,7 @@
             <div class="card">
                 <div class="card-content">
                     <div class="input-field">
-                        <textarea asp-for="Input.Terca" class="materialize-textarea" placeholder="meus afazeres" style="height: 300px"></textarea>
+                        <textarea asp-for="Input.Terca" class="materialize-textarea" style="height: 300px"></textarea>
                         <label asp-for="Input.Terca"></label>
                     </div>
                 </div>
@@ -51,7 +53,7 @@
             <div class="card">
                 <div class="card-content">
                     <div class="input-field">
-                        <textarea asp-for="Input.Quarta" class="materialize-textarea" placeholder="meus afazeres" style="height: 300px"></textarea>
+                        <textarea asp-for="Input.Quarta" class="materialize-textarea" style="height: 300px"></textarea>
                         <label asp-for="Input.Quarta"></label>
                     </div>
                 </div>
@@ -62,7 +64,7 @@
             <div class="card">
                 <div class="card-content">
                     <div class="input-field">
-                        <textarea asp-for="Input.Quinta" class="materialize-textarea" placeholder="meus afazeres" style="height: 300px"></textarea>
+                        <textarea asp-for="Input.Quinta" class="materialize-textarea" style="height: 300px"></textarea>
                         <label asp-for="Input.Quinta"></label>
                     </div>
                 </div>
@@ -73,7 +75,7 @@
             <div class="card">
                 <div class="card-content">
                     <div class="input-field">
-                        <textarea asp-for="Input.Sexta" class="materialize-textarea" placeholder="meus afazeres" style="height: 300px"></textarea>
+                        <textarea asp-for="Input.Sexta" class="materialize-textarea" style="height: 300px"></textarea>
                         <label asp-for="Input.Sexta"></label>
                     </div>
                 </div>
@@ -84,7 +86,7 @@
             <div class="card">
                 <div class="card-content">
                     <div class="input-field">
-                        <textarea asp-for="Input.Sabado" class="materialize-textarea" placeholder="meus afazeres" style="height: 300px"></textarea>
+                        <textarea asp-for="Input.Sabado" class="materialize-textarea" style="height: 300px"></textarea>
                         <label asp-for="Input.Sabado"></label>
                     </div>
                 </div>
@@ -97,7 +99,7 @@
             <div class="card blue lighten-5">
                 <div class="card-content">
                     <div class="input-field">
-                        <textarea asp-for="Input.ProximaSemana" class="materialize-textarea" placeholder="meus afazeres" style="height: 150px"></textarea>
+                        <textarea asp-for="Input.ProximaSemana" class="materialize-textarea" style="height: 150px"></textarea>
                         <label asp-for="Input.ProximaSemana"></label>
                     </div>
                 </div>
@@ -108,7 +110,7 @@
             <div class="card pink lighten-5">
                 <div class="card-content">
                     <div class="input-field">
-                        <textarea asp-for="Input.Prioridades" class="materialize-textarea" placeholder="meus afazeres" style="height: 150px"></textarea>
+                        <textarea asp-for="Input.Prioridades" class="materialize-textarea" style="height: 150px"></textarea>
                         <label asp-for="Input.Prioridades"></label>
                     </div>
                 </div>
@@ -119,13 +121,17 @@
             <div class="card yellow lighten-5">
                 <div class="card-content">
                     <div class="input-field">
-                        <textarea asp-for="Input.Anotacao" class="materialize-textarea" placeholder="meus afazeres" style="height: 150px"></textarea>
+                        <textarea asp-for="Input.Anotacao" class="materialize-textarea" style="height: 150px"></textarea>
                         <label asp-for="Input.Anotacao"></label>
                     </div>
                 </div>
             </div>
-
         </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <button type="submit" class="btn btn-large waves-effect waves-light">Gravar</button>
+        </div>        
     </div>
 </form>
 

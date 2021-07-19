@@ -12,6 +12,7 @@ namespace Sim.UI.Web.AutoMapper
     using Web.Pages.Empresa;
     using Sim.Service.CNPJ.Entity;
     using Web.Pages.Agenda;
+    using Web.Pages.Planner;
 
     public class AutoMapperProfile : Profile
     {
@@ -40,6 +41,9 @@ namespace Sim.UI.Web.AutoMapper
 
             CreateMap<InputModelInscricao, Inscricao>();
             CreateMap<Inscricao, InputModelInscricao>().ReverseMap();
+
+            CreateMap<InputModelPlanner, Planner>();
+            CreateMap<Planner, InputModelPlanner>().ReverseMap();
         }
     }
 }

@@ -19,5 +19,10 @@ namespace Sim.Domain.Shared.Service
         {
             return _planer.GetByData(data);
         }
+
+        public Task<IEnumerable<Planner>> GetMyPlanner(DateTime? datai, DateTime? dataf, string username)
+        {
+            return _planer.GetMyPlanner(datai, dataf, username);
+        }
     }
 }

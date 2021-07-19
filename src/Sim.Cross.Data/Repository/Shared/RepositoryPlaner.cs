@@ -19,12 +19,12 @@ namespace Sim.Cross.Data.Repository.Shared
 
         public IEnumerable<Planner> GetByData(DateTime? data)
         {
-            return _db.Planner.Where(u => u.Data == data);
+            return _db.Planner.Where(u => u.DataInicial == data);
         }
 
         public async Task<IEnumerable<Planner>> GetMyPlanner(DateTime? datai, DateTime? dataf, string username)
         {
-            var t = Task.Run(() => _db.Planner.Where(s => s.Data >= datai && s.Ultima_Alteracao <= dataf && s.Owner_AppUser_Id == username).OrderBy(o => o.Data));
+            var t = Task.Run(() => _db.Planner.Where(s => s.DataInicial.Value.Date == datai && s.DataFinal.Value.Date == dataf && s.Owner_AppUser_Id == username).OrderBy(o => o.DataInicial));
             await t;
             return t.Result;
         }

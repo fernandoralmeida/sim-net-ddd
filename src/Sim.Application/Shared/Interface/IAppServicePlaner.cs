@@ -11,5 +11,7 @@ namespace Sim.Application.Shared.Interface
     public interface IAppServicePlaner : IAppServiceBase<Planner>
     {
         IEnumerable<Planner> GetByData(DateTime? data);
+
+        Task<IEnumerable<Planner>> GetMyPlanner(DateTime? datai, DateTime? dataf, string username);
     }
 }
