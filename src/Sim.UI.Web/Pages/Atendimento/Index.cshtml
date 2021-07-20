@@ -11,18 +11,12 @@
 
 <form method="post">
     <div class="row">
-        <div class="col s12">
-            <div class="col s12 m5 l5">
-                <div class="input-field">
+        <div class="col s12 m5 l5">
+                <div class="input-field valign-wrapper">
                     <input asp-for="Input.DataAtendimento" id="inputdate" />
                     <label for="inputdate">Atendimentos do dia</label>
-                </div>
-            </div>
-            <div class="col">
-                <div class="input-field">
                     <button class="btn waves-effect" type="submit"><i class="material-icons">search</i></button>
                 </div>
-            </div>
         </div>
     </div>
 </form>
@@ -127,6 +121,7 @@
                         $(".modal-content").append(`<div>Setor: ${item.setor}</div>`);
                         $(".modal-content").append(`<div>Canal: ${item.canal}</div>`);
                         $(".modal-content").append(`<div>Serviços: ${item.servicos}</div>`);
+                        $(".modal-content").append(`<div>Descricao: ${item.descricao}</div>`);
                         $(".modal-content").append(`<div class="divider"></div>`);
                         $(".modal-content").append(`<div>Nome: ${item.pessoa.nome}</div>`);
                         $(".modal-content").append(`<div>CPF: ${item.pessoa.cpf}</div>`);
@@ -136,7 +131,15 @@
                         $(".modal-content").append(`<div>${item.pessoa.bairro}, ${item.pessoa.cidade} - ${item.pessoa.uf}</div>`);
                         $(".modal-content").append(`<div>Telefone: ${item.pessoa.tel_Movel}, E-mail: ${item.pessoa.email}</div>`);
                         $(".modal-content").append(`<div class="divider"></div>`);
-                        $(".modal-content").append(`<div>${item.empresa.cnpj}</div>`);
+                        $(".modal-content").append(`<div>${item.empresa.cnpj} ${item.empresa.situacao_Cadastral}</div>`);
+                        $(".modal-content").append(`<div>${item.empresa.nome_Empresarial}</div>`);
+                        $(".modal-content").append(`<div>${item.empresa.nome_Fantasia}</div>`);
+                        $(".modal-content").append(`<div>${item.empresa.data_Abertura}</div>`);
+                        $(".modal-content").append(`<div>${item.empresa.cnaE_Principal} ${item.empresa.atividade_Principal}</div>`);
+                        $(".modal-content").append(`<div>${item.empresa.atividade_Secundarias}</div>`);
+                        $(".modal-content").append(`<div>${item.empresa.cep} ${item.empresa.logradouro} ${item.empresa.numero}</div>`);
+                        $(".modal-content").append(`<div>${item.empresa.bairro} ${item.empresa.municipio} ${item.empresa.uf}</div>`);
+                        $(".modal-content").append(`<div>${item.empresa.telefone} ${item.empresa.email}</div>`);
                     });
                 });
 

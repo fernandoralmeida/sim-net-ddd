@@ -26,6 +26,59 @@ html {
     left: 300px
 }
 
+.waves-effect.waves-blue .waves-ripple {
+    /* The alpha value allows the text and background color
+   of the button to still show through. */
+    background-color: rgba(33, 150, 243, 0.7);
+}
+
+.waves-effect.waves-blue-grey .waves-ripple {
+    /* The alpha value allows the text and background color
+   of the button to still show through. */
+    background-color: rgba(96, 125, 139, 0.7);
+}
+
+nav.navbar .brand-logo {
+    position: relative;
+    float: left;
+    font-size: 18px;
+    /*color: rgba(0,0,0,0.87)*/
+}
+
+    nav.navbar .brand-logo i {
+        line-height: inherit;
+        transition: color .2s
+    }
+
+/*  Sidenav  */
+.sidenav .logo-container {
+    padding: 0 16px;
+    height: 64px;
+    line-height: 64px;
+    font-size: 24px;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+    box-sizing: content-box
+}
+
+    .sidenav .logo-container i.material-icons {
+        line-height: inherit
+    }
+
+.sidenav .collapsible > .active .collapsible-header .chevron {
+    transform: rotate(-90deg)
+}
+
+.sidenav .collapsible .collapsible-header .chevron {
+    float: right;
+    height: 24px;
+    width: 24px;
+    line-height: 24px;
+    margin: 20px 0 0 0;
+    transition: transform .2s
+}
+
+/* End Sidenav  */
+
 @media only screen and (max-width: 992px) {
     .has-fixed-sidenav .fixed-chart {
         left: 0

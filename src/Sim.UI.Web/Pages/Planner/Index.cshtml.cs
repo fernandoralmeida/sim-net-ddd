@@ -43,8 +43,13 @@ namespace Sim.UI.Web.Pages.Planner
         [DataType(DataType.Date)]
         public DateTime? FimSemana { get; set; }
 
+        [BindProperty(SupportsGet = true)]
+        [DataType(DataType.Date)]
+        public DateTime? MeuDia { get; set; }
+
         public async Task OnGetAsync()
         {
+            MeuDia = DateTime.Now.Date;
             PlannerTimer(DateTime.Now);
             
             var plnn = await _planner.GetMyPlanner(Input.DataInicial, Input.DataFinal, User.Identity.Name);
@@ -76,6 +81,29 @@ namespace Sim.UI.Web.Pages.Planner
             {
                 Input = _mapper.Map<InputModelPlanner>(p);
             }
+        }
+
+        public async Task<IActionResult> OnPostToDateAsync() {
+
+            PlannerTimer((DateTime)MeuDia);
+
+            var plnn = await _planner.GetMyPlanner(Input.DataInicial, Input.DataFinal, User.Identity.Name);
+
+            if (!plnn.Any())
+            {
+                Input = new();
+                Input.Owner_AppUser_Id = User.Identity.Name;
+                Input.Ativo = true;
+                var t = Task.Run(() => _planner.Add(_mapper.Map<Planner>(Input)));
+                await t;
+            }
+
+            foreach (Planner p in plnn)
+            {
+                Input = _mapper.Map<InputModelPlanner>(p);
+            }
+
+            return Page();
         }
 
         private void PlannerTimer(DateTime dia)

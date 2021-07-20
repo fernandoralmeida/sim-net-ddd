@@ -68,5 +68,17 @@ namespace Sim.UI.Web.Pages.SebraeAqui
 
             return Page();
         }
+        public JsonResult OnGetPreview(string id)
+        {
+            var list = new List<Atendimento>();
+
+            var atendimemnto_ativo = Task.Run(() => _appServiceAtendimento.GetAtendimento(new Guid(id)));
+
+            atendimemnto_ativo.Wait();
+
+            list.Add(atendimemnto_ativo.Result);
+
+            return new JsonResult(list);
+        }
     }
 }

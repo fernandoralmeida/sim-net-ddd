@@ -16,23 +16,23 @@
     <header>
 
         <ul id="sidenav-left" class="sidenav sidenav-fixed">
-            <li style="border-bottom:solid 1px #e0e0e0;padding-top:8px; padding-bottom:8px;">
-                <a class="logo-container teal-text"><i class="material-icons teal-text">widgets</i>SEDEMP</a>
+            <li >
+                <a class="logo-container teal-text">SEDEMP<i class="material-icons teal-text left">widgets</i></a>
             </li>            
             <li class="no-padding">
                 <ul class="collapsible collapsible-accordion transparent">                    
-                    <li class="waves-block waves-effect" style="border-bottom:solid 1px #e0e0e0;">
+                    <li class="waves-block waves-effect waves-teal" style="border-bottom:solid 1px #e0e0e0;">
                         <div class="collapsible-header">Inicio</div>
                         <div class="collapsible-body transparent">
                             <ul>
-                                <li><a href="#" class="waves-effect active">PAT</a></li>
+                                <li><a href="#" class="waves-effect">PAT</a></li>
                                 <li><a href="#" class="waves-effect">Banco do Povo</a></li>
                                 <li><a class="waves-effect" asp-area="" asp-page="/SebraeAqui/Index">Sebrae Aqui</a></li>
                                 <li><a href="#" class="waves-effect">Sala do Empreendedor</a></li>
                             </ul>
                         </div>                        
                     </li>                   
-                    <li class="waves-block waves-effect" style="border-bottom:solid 1px #e0e0e0;">
+                    <li class="waves-block waves-effect waves-green" style="border-bottom:solid 1px #e0e0e0;">
                         <div class="collapsible-header">Atendimentos</div>
                         <div class="collapsible-body transparent">
                             <ul>
@@ -42,7 +42,7 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="waves-block waves-effect" style="border-bottom:solid 1px #e0e0e0;">
+                    <li class="waves-block waves-effect waves-purple" style="border-bottom:solid 1px #e0e0e0;">
                         <div class="collapsible-header">Clientes</div>
                         <div class="collapsible-body transparent">
                             <ul>
@@ -51,7 +51,7 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="waves-block waves-effect" style="border-bottom:solid 1px #e0e0e0;">
+                    <li class="waves-block waves-effect waves-orange" style="border-bottom:solid 1px #e0e0e0;">
                         <div class="collapsible-header">Agenda</div>
                         <div class="collapsible-body transparent">
                             <ul>
@@ -60,7 +60,7 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="waves-block waves-effect" style="border-bottom:solid 1px #e0e0e0;">
+                    <li class="waves-block waves-effect waves-blue" style="border-bottom:solid 1px #e0e0e0;">
                         <div class="collapsible-header">Power BI</div>
                         <div class="collapsible-body transparent">
                             <ul>
@@ -74,7 +74,7 @@
 
                     @if (User.IsInRole("Administrador"))
                     {
-                        <li class="waves-block waves-effect" style="border-bottom:solid 1px #e0e0e0;">
+                        <li class="waves-block waves-effect waves-red" style="border-bottom:solid 1px #e0e0e0;">
                             <div class="collapsible-header">Configurações</div>
                             <div class="collapsible-body transparent">
                                 <ul>

@@ -66,7 +66,7 @@ namespace Sim.UI.Web.Pages.Atendimento
             await LoadAsync(Input.DataAtendimento);
             if (Input.ListaAtendimento.Count == 0)
             {
-                StatusMessage = string.Format("Erro: Não há atendimentos para do {0}", Input.DataAtendimento.Value.Date);
+                StatusMessage = string.Format("Erro: Não há atendimentos para {0}", Input.DataAtendimento.Value.Date);
             }
 
             return Page();

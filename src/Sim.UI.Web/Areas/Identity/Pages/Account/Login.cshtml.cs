@@ -91,7 +91,9 @@ namespace Sim.UI.Web.Areas.Identity.Pages.Account
                     User.AddIdentity(new System.Security.Claims.ClaimsIdentity() { Label = first_name.Name });
 
                     _logger.LogInformation("Usuário conectado.");
-                    return LocalRedirect(returnUrl);
+
+                    //return LocalRedirect(returnUrl);
+                    return RedirectToPage("/Planner/Index");
                 }
                 if (result.RequiresTwoFactor)
                 {

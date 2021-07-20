@@ -9,37 +9,24 @@
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 <form method="post" asp-page-handler="ListByData">
     <div class="row">
-        <div class="col s12">
-            <div class="col s12 m3 l3">
+            <div class="col s12 m5 l5 valign-wrapper">
                 <div class="input-field">
                     <input asp-for="Input.DataI" />
                     <label>Data Inicial</label>
                 </div>
-            </div>
-            <div class="col s12 m3 l3">
-                <div class="input-field">
+                <div class="input-field valign-wrapper">
                     <input asp-for="Input.DataF" />
                     <label>Data Final</label>
-                </div>
-            </div>
-            <div class="col s12 m3 l3">
-                <div class="input-field">
                     <button asp-page-handler="ListByData" class="btn waves-effect" type="submit" role="button"><i class="material-icons">search</i></button>
                 </div>
             </div>
-        </div>
     </div>
 </form>
 
 <partial name="_AtendimentoList" model="Model.Input.ListaAtendimento" />
 
 @section scripts{
-    <script src="~/js/jquery.mask.min.js"></script>
     <script>
-
-        $('#inputCPF').mask('000.000.000-00', { placeholder: "___.___.___-__" });
-        $('#inputCNPJ').mask('00.000.000/0000-00', { placeholder: "__.___.___/____-__" });
-
         $(function () {
             $(".modal-trigger").click(function () {
                 var customerId = $(this).data('id');
@@ -51,6 +38,7 @@
                         $(".modal-content").append(`<div>Setor: ${item.setor}</div>`);
                         $(".modal-content").append(`<div>Canal: ${item.canal}</div>`);
                         $(".modal-content").append(`<div>Serviços: ${item.servicos}</div>`);
+                        $(".modal-content").append(`<div>Descricao: ${item.descricao}</div>`);
                         $(".modal-content").append(`<div class="divider"></div>`);
                         $(".modal-content").append(`<div>Nome: ${item.pessoa.nome}</div>`);
                         $(".modal-content").append(`<div>CPF: ${item.pessoa.cpf}</div>`);
@@ -60,7 +48,15 @@
                         $(".modal-content").append(`<div>${item.pessoa.bairro}, ${item.pessoa.cidade} - ${item.pessoa.uf}</div>`);
                         $(".modal-content").append(`<div>Telefone: ${item.pessoa.tel_Movel}, E-mail: ${item.pessoa.email}</div>`);
                         $(".modal-content").append(`<div class="divider"></div>`);
-                        $(".modal-content").append(`<div>${item.empresa.cnpj}</div>`);
+                        $(".modal-content").append(`<div>${item.empresa.cnpj} ${item.empresa.situacao_Cadastral}</div>`);
+                        $(".modal-content").append(`<div>${item.empresa.nome_Empresarial}</div>`);
+                        $(".modal-content").append(`<div>${item.empresa.nome_Fantasia}</div>`);
+                        $(".modal-content").append(`<div>${item.empresa.data_Abertura}</div>`);
+                        $(".modal-content").append(`<div>${item.empresa.cnaE_Principal} ${item.empresa.atividade_Principal}</div>`);
+                        $(".modal-content").append(`<div>${item.empresa.atividade_Secundarias}</div>`);
+                        $(".modal-content").append(`<div>${item.empresa.cep} ${item.empresa.logradouro} ${item.empresa.numero}</div>`);
+                        $(".modal-content").append(`<div>${item.empresa.bairro} ${item.empresa.municipio} ${item.empresa.uf}</div>`);
+                        $(".modal-content").append(`<div>${item.empresa.telefone} ${item.empresa.email}</div>`);
                     });
                 });
 

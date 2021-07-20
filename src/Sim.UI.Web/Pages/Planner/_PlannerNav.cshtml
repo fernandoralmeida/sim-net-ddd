@@ -2,18 +2,15 @@
 
 <div class="navbar navbar-fixed">
     <nav class="navbar">
-        <div class="nav-wrapper">
+        <div class="nav-wrapper deep-orange lighten-2">
             <span class="brand-logo" style="margin-left:10px;">e-Planner</span>
 
                 <ul class="right hide-on-small-only">
                     <li>
-                        <a class="nav-link @PlannerNavPages.InicioNavClass(ViewContext)" asp-page="./Index">Inicio</a>
+                        <a class="@PlannerNavPages.InicioNavClass(ViewContext)" asp-page="./Index">Meu Planner</a>
                     </li>
                     <li>
-                        <a class="nav-link @PlannerNavPages.ListarNavClass(ViewContext)" asp-page="./Listar">Listar</a>
-                    </li>
-                    <li>
-                        <a class="nav-link @PlannerNavPages.AjudaNavClass(ViewContext)" asp-page="./Ajuda">Ajuda</a>
+                        <a class="@PlannerNavPages.AjudaNavClass(ViewContext)" asp-page="./Ajuda">Ajuda</a>
                     </li>
                 </ul>
         </div>

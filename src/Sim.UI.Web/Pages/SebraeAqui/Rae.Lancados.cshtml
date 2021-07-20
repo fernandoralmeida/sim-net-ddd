@@ -46,10 +46,10 @@
                     Canal
                 </th>
                 <th>
-                    Rae
+                    Lançado
                 </th>
                 <th>
-                    Lançado
+                    Rae
                 </th>
             </tr>
         </thead>
@@ -61,79 +61,96 @@
 
             @foreach (var item in Model.Input.ListaAtendimento)
             {
-            <tr>
-                <td>
-                    @{cont++;}
-                    @cont.ToString()
-                </td>
-                <td>
-                    <a class="link-secondary" asp-page="./Adicionar.Rae" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.Protocolo)</a>
-                </td>
-                <td>
-                    @{
-                        var d1 = Convert.ToDateTime(item.Data);
-                        var datainicial = d1.ToShortDateString();
-                    }
+                <tr>
+                    <td>
+                        @{cont++;}
+                        @cont.ToString()
+                    </td>
+                    <td>
+                        <a class="modal-trigger" href="#viewmodal" data-id="@item.Id">@Html.DisplayFor(modelItem => item.Protocolo)</a>
+                    </td>
+                    <td>
+                        @{
+                            var d1 = Convert.ToDateTime(item.Data);
+                            var datainicial = d1.ToShortDateString();
+                        }
 
-                    @Html.DisplayFor(modelItem => datainicial)
-                </td>
-                <td>
-                    <a href="#" class="link-secondary viewbutton" data-secao="Pessoa" data-acao="Details" data-id="@item.Pessoa.Id" data-bs-toggle="modal" data-bs-target="#viewmodal">@Html.DisplayFor(modelItem => item.Pessoa.Nome)</a>
-                    @if (item.Empresa != null)
-                    {
-                        <a href="#" class="link-secondary viewbutton" data-secao="Empresa" data-acao="Perfil" data-id="@item.Empresa.Id" data-bs-toggle="modal" data-bs-target="#viewmodal">[@item.Empresa.CNPJ]</a>
-                    }
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Servicos)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Canal)
-                </td>
-                <td class="blue-text">
-                    @Html.DisplayFor(modelItem => item.Sebrae.RAE)
-                </td>
-                <td>
-                    @{
-                        var dua = Convert.ToDateTime(item.Ultima_Alteracao);
-                        var ultima_alteracao = dua.ToShortDateString();
-                    }
+                        @Html.DisplayFor(modelItem => datainicial)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Pessoa.Nome)
+                        @if (item.Empresa != null)
+                        {
+                            @Html.DisplayFor(modelItem => item.Empresa.CNPJ)
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Servicos)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Canal)
+                    </td>
+                    <td>
+                        @{
+                            var dua = Convert.ToDateTime(item.Ultima_Alteracao);
+                            var ultima_alteracao = dua.ToShortDateString();
+                        }
 
-                    @Html.DisplayFor(modelItem => ultima_alteracao)
-                </td>
-            </tr>
+                        @Html.DisplayFor(modelItem => ultima_alteracao)
+                    </td>
+                    <td class="blue-text">
+                        <a asp-page="./Adicionar.Rae" asp-route-id="@item.Id">RAE - @Html.DisplayFor(modelItem => item.Sebrae.RAE)</a>
+                    </td>
+                </tr>
             }
         </tbody>
     </table>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="viewmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="viewmodalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h6 class="modal-title" id="viewmodalLabel">Detalhes</h6>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p id="viewmodalData"></p>
-            </div>
-        </div>
+<!-- Modal Structure -->
+<div id="viewmodal" class="modal modal-fixed-footer">
+    <div class="modal-content"></div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close btn waves-effect">Fechar</a>
     </div>
 </div>
 
-@section scripts
-{
-    <script type="text/javascript">
-        $(".viewbutton").on("click", function () {
-            var customerId = $(this).data('id');
-            var secao = $(this).data('secao');
-            var acao = $(this).data('acao');
-            $.ajax({
-                url: "/" + secao + "/" + acao + "?id=" + customerId,
-                cache: false
-            }).done(function (data) {
-                $("#viewmodalData").html(data);
+@section scripts{
+    <script>
+        $(function () {
+            $(".modal-trigger").click(function () {
+                var customerId = $(this).data('id');
+                $(".modal-content").empty();
+                $.getJSON(`/Atendimento?id=${customerId}&handler=Preview`, (data) => {
+                    $.each(data, function (i, item) {
+                        $(".modal-content").append(`<div>Protocolo: ${item.protocolo}</div>`);
+                        $(".modal-content").append(`<div>Data: ${item.data}</div>`);
+                        $(".modal-content").append(`<div>Setor: ${item.setor}</div>`);
+                        $(".modal-content").append(`<div>Canal: ${item.canal}</div>`);
+                        $(".modal-content").append(`<div>Serviços: ${item.servicos}</div>`);
+                        $(".modal-content").append(`<div>Descricao: ${item.descricao}</div>`);
+                        $(".modal-content").append(`<div class="divider"></div>`);
+                        $(".modal-content").append(`<div>Nome: ${item.pessoa.nome}</div>`);
+                        $(".modal-content").append(`<div>CPF: ${item.pessoa.cpf}</div>`);
+                        $(".modal-content").append(`<div>Data Nascimento: ${item.pessoa.data_Nascimento}</div>`);
+                        $(".modal-content").append(`<div>CEP: ${item.pessoa.cep}</div>`);
+                        $(".modal-content").append(`<div>${item.pessoa.logradouro} ${item.pessoa.numero}</div>`);
+                        $(".modal-content").append(`<div>${item.pessoa.bairro}, ${item.pessoa.cidade} - ${item.pessoa.uf}</div>`);
+                        $(".modal-content").append(`<div>Telefone: ${item.pessoa.tel_Movel}, E-mail: ${item.pessoa.email}</div>`);
+                        $(".modal-content").append(`<div class="divider"></div>`);
+                        $(".modal-content").append(`<div>${item.empresa.cnpj} ${item.empresa.situacao_Cadastral}</div>`);
+                        $(".modal-content").append(`<div>${item.empresa.nome_Empresarial}</div>`);
+                        $(".modal-content").append(`<div>${item.empresa.nome_Fantasia}</div>`);
+                        $(".modal-content").append(`<div>${item.empresa.data_Abertura}</div>`);
+                        $(".modal-content").append(`<div>${item.empresa.cnaE_Principal} ${item.empresa.atividade_Principal}</div>`);
+                        $(".modal-content").append(`<div>${item.empresa.atividade_Secundarias}</div>`);
+                        $(".modal-content").append(`<div>${item.empresa.cep} ${item.empresa.logradouro} ${item.empresa.numero}</div>`);
+                        $(".modal-content").append(`<div>${item.empresa.bairro} ${item.empresa.municipio} ${item.empresa.uf}</div>`);
+                        $(".modal-content").append(`<div>${item.empresa.telefone} ${item.empresa.email}</div>`);
+                    });
+                });
+
             });
-        });</script>
+        });
+    </script>
 }
