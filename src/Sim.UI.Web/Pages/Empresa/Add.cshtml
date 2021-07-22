@@ -10,23 +10,19 @@
 <div>
     <form class="row" asp-page-handler="RWS" method="post">
 
-        <div class="card section">
+        <div class="card">
             <div class="row">
                 <div class="col s12">
                     <div class="col s12" hidden>
                         <label asp-for="Input.Id"></label>
                         <input asp-for="Input.Id" />
                     </div>
-                    <div class="col s12 m4 l4">
+                    <div class="col left-align valign-wrapper">
                         <div class="input-field">
                             <input asp-for="Input.CNPJ" id="inputCNPJ">
-                            <label asp-for="Input.CNPJ" for="inputCNPJ"></label>
+                            <label asp-for="Input.CNPJ" for="inputCNPJ"></label>                            
                         </div>
-                    </div>
-                    <div class="col s12 m3 l3">
-                        <div class="input-field">
-                            <button asp-page-handler="RWS" class="btn waves-effect" type="submit">Sincronizar</button>
-                        </div>
+                        <button asp-page-handler="RWS" class="btn waves-effect right" type="submit">Sincronizar</button>
                     </div>
                     <div class="col s12 m3 l3">
                         <div class="input-field">
@@ -84,7 +80,7 @@
             </div>
         </div>
 
-        <div class="card section">
+        <div class="card">
             <div class="row">
                 <div class="col s12">
                     <div class="col s12 m3 l3">
@@ -137,7 +133,7 @@
             </div>
         </div>
 
-        <div class="card section">
+        <div class="card">
             <div class="row">
                 <div class="col s12">
                     <div class="col s12 m6 l6">
@@ -156,16 +152,12 @@
             </div>
         </div>
 
-        <div class="card section">
-            <div class="row">
-                <div class="col s12">
-                    <div class="col s6 m6 l6">
+        <div class="card" hidden>
+            <div class="card-action">
                         <a asp-page="./Index" role="button" type="button" class="btn btn-large blue-grey lighten-1 waves-effect right">Voltar</a>
-                    </div>
-                    <div class="col s6 m6 l6" hidden>
+                    
                         <button type="submit" role="button" class="btn btn-large waves-effect">Gravar Cadastro</button>
-                    </div>
-                </div>
+                    
             </div>
         </div>
     </form>

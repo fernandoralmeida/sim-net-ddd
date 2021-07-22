@@ -8,26 +8,20 @@
 
 <!--<partial name="_StatusMessage" model="Model.StatusMessage" />-->
 
-<div class="section">
+
     <form method="post">
         <input asp-for="Input.CNPJRes" hidden>
         <div class="row">
-            <div class="col s12">
-                <div class="col s6">
-                    <div class="input-field right">
+            <div class="col s12 m6 l6">
+                    <div class="input-field valign-wrapper">
                         <input asp-for="Input.RazaoSocial" id="inputrz" />
                         <label asp-for="Input.RazaoSocial" for="inputrz"></label>
-                    </div>
-                </div>
-                <div class="col s6">
-                    <div class="input-field">
                         <button class="btn waves-effect" type="submit" role="button" id="button-addon2"><i class="material-icons">search</i></button>
                     </div>
-                </div>
+                
             </div>
         </div>
     </form>
-</div>
 
 <div class="card">
     <table>

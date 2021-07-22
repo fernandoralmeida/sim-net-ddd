@@ -36,5 +36,10 @@ namespace Sim.Domain.SDE.Entity
 
         public virtual ICollection<Atendimento> Atendimentos { get; set; }
         public virtual ICollection<Inscricao> Inscricoes { get; set; }
+
+        public bool UltimasFormalizacoes(Empresa obj)
+        {
+            return obj.Data_Abertura >= DateTime.Now.AddDays(-60);
+        }
     }
 }

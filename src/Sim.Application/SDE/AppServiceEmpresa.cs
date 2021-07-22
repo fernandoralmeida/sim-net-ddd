@@ -38,5 +38,10 @@ namespace Sim.Application.SDE
         {
             return _empresa.ListEmpresasQsa(id);
         }
+
+        public async Task<IEnumerable<Empresa>> UltimasFormalizacoes()
+        {
+            return await _empresa.UltimasFormalizacoes();
+        }
     }
 }

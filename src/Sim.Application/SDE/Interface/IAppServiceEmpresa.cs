@@ -15,5 +15,6 @@ namespace Sim.Application.SDE.Interface
         IEnumerable<Empresa> ConsultaByRazaoSocial(string _name);
 
         IEnumerable<Empresa> ListEmpresasQsa(Guid id);
+        Task<IEnumerable<Empresa>> UltimasFormalizacoes();
     }
 }

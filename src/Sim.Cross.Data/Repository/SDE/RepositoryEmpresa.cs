@@ -41,5 +41,10 @@ namespace Sim.Cross.Data.Repository.SDE
 
             return _db.Empresa.Where(p => p.Id == id);
         }
+
+        public async Task<IEnumerable<Empresa>> UltimasFormalizacoes()
+        {
+            return await Task.Run(() => _db.Empresa.Where(p => p.Data_Abertura >= DateTime.Now.AddDays(-60)).OrderByDescending(o => o.Data_Abertura));
+        }
     }
 }

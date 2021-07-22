@@ -9,25 +9,17 @@
 
 <!--<partial name="_StatusMessage" model="Model.StatusMessage" />-->
 
-<div class="section">
     <form method="post">
-        <div class="row">
-            <div class="col s12">
-                <div class="col s6">
-                    <div class="input-field right">
-                        <input asp-for="Input.RazaoSocial" id="inputrz" />
-                        <label asp-for="Input.RazaoSocial" for="inputrz"></label>
-                    </div>
+        <div class="row">            
+            <div class="col s12 m4 l4 valign-wrapper">
+                <div class="col s12 input-field">
+                    <input asp-for="Input.RazaoSocial" id="inputrz" />
+                    <label asp-for="Input.RazaoSocial" for="inputrz"></label>
                 </div>
-                <div class="col s6">
-                    <div class="input-field">
-                        <button class="btn waves-effect" type="submit" role="button" ><i class="material-icons">search</i></button>
-                    </div>
-                </div>
+                <button class="btn waves-effect" type="submit" role="button"><i class="material-icons">search</i></button>
             </div>
         </div>
     </form>
-</div>
 
 <div class="card">
     <partial name="_EmpresaList" model="Model.Input.ListaEmpresas" />

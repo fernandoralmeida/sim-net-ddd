@@ -9,33 +9,25 @@
 
 <!--<partial name="_StatusMessage" model="Model.StatusMessage" />-->
 
-<div class="section">
     <form method="post">
         <div class="row">
-            <div class="col s12">
-                <div class="col s5 m4 l4">
-                    <div class="input-field right">
+                <div class="col s12 m4 l4">
+                    <div class="input-field">
                         <input asp-for="Input.Municipio" id="inputmn" />
                         <label asp-for="Input.Municipio" for="inputmn"></label>
                     </div>
                 </div>
-                <div class="col s5 m4 l4">
-                    <div class="input-field">
+                <div class="col s12 m5 l5 valign-wrapper">
+                    <div class="col s12 input-field">
                         <select asp-for="Input.Atividade" asp-items="@Model.ListaCnaes" id="inputatv">
                             <option selected>-- Atividade --</option>
                         </select>
-                        <label asp-for="Input.Atividade" for="inputatv"></label>
+                        <label asp-for="Input.Atividade" for="inputatv"></label>                        
                     </div>
+                    <button class="col btn waves-effect" type="submit" role="button" id="button-addon2"><i class="material-icons">search</i></button>                    
                 </div>
-                <div class="col s2 m4 l4">
-                    <div class="input-field">
-                        <button class="btn waves-effect" type="submit" role="button" id="button-addon2"><i class="material-icons">search</i></button>
-                    </div>
-                </div>
-            </div>
         </div>
     </form>
-</div>
 
 <div class="card">
     <partial name="_EmpresaList" model="Model.Input.ListaEmpresas" />

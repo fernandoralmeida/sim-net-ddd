@@ -54,7 +54,7 @@ namespace Sim.UI.Web.Pages.Empresa
 
             Input = new InputModel
             {
-                ListaEmpresas = new List<Empresa>().ToList()
+                ListaEmpresas = await _empresaApp.UltimasFormalizacoes()
             };
         }
 
