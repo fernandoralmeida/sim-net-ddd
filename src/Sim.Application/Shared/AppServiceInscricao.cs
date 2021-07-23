@@ -33,6 +33,11 @@ namespace Sim.Application.Shared
             return _inscricao.GetByTipo(evento);
         }
 
+        public async Task<IEnumerable<Inscricao>> GetInscrito(Guid id)
+        {
+            return await _inscricao.GetInscrito(id);
+        }
+
         public bool JaInscrito(string cpf, int evento)
         {
             return _inscricao.JaInscrito(cpf, evento);

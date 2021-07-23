@@ -12,6 +12,7 @@ namespace Sim.Application.Shared.Interface
     {
         IEnumerable<Inscricao> GetByEvento(string evento);
         IEnumerable<Inscricao> GetByParticipante(string nome);
+        Task<IEnumerable<Inscricao>> GetInscrito(Guid id);
         IEnumerable<Inscricao> GetByTipo(string evento);
         bool JaInscrito(string cpf, int evento);
         int LastCodigo();

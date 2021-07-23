@@ -27,6 +27,9 @@ namespace Sim.UI.Web.Pages.Agenda
         [DataType(DataType.DateTime)]
         public DateTime? Data_Inscricao { get; set; }
 
+        [DisplayName("Presente")]
+        public bool Presente { get; set; }
+
         public virtual Pessoa Participante { get; set; }
         public virtual Empresa Empresa { get; set; }
         public virtual Evento Evento { get; set; }

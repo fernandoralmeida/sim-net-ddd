@@ -39,6 +39,17 @@ namespace Sim.Cross.Data.Repository.Shared
             return _db.Inscricao.Select(r => r);
         }
 
+        public async Task<IEnumerable<Inscricao>> GetInscrito(Guid id)
+        {
+            var query = await Task.Run(() => _db.Inscricao
+                .Include(p => p.Participante)
+                .Include(e => e.Empresa)
+                .Include(e => e.Evento)
+                .Where(s => s.Id == id));
+
+            return query; //_db.Inscricao.Select(r => r);
+        }
+
         public bool JaInscrito(string cpf, int evento)
         {
             var query = _db.Inscricao

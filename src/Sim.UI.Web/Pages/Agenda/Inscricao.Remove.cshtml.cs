@@ -50,5 +50,12 @@ namespace Sim.UI.Web.Pages.Agenda
 
             return RedirectToPage("./Inscricao.Remove", new { id = ide });
         }
+
+        public async Task<JsonResult> OnGetDetalheInscrito(string id)
+        {
+            var detalhe = await _appServiceInscricao.GetInscrito(new Guid(id));
+
+            return new JsonResult(detalhe);
+        }
     }
 }

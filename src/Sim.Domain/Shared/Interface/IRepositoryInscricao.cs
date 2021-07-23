@@ -14,6 +14,8 @@ namespace Sim.Domain.Shared.Interface
 
         IEnumerable<Inscricao> GetByParticipante(string nome);
 
+        Task<IEnumerable<Inscricao>> GetInscrito(Guid id);
+
         IEnumerable<Inscricao> GetByTipo(string evento);
 
         bool JaInscrito(string cpf, int evento);

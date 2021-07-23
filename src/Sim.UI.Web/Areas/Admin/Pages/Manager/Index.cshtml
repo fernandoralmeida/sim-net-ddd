@@ -9,10 +9,14 @@
 
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
-<div class="card">
+
+<form class="card">
     <table>
         <thead>
             <tr>
+                <th>
+                    #
+                </th>
                 <th>
                     User Name
                 </th>
@@ -28,14 +32,23 @@
                 <th>
                     Bloqueado
                 </th>
-                <th></th>
-                <th></th>
+                <th>Ação</th>
             </tr>
         </thead>
         <tbody>
+
+            @{
+                int cont = 0;
+            }
+
             @foreach (var item in Model.Input.Users)
             {
+
                 <tr>
+                    <td>
+                        @{cont++;}
+                        @cont.ToString()
+                    </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.UserName)
                     </td>
@@ -47,12 +60,16 @@
                         @Html.DisplayFor(modelItem => item.Email)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.EmailConfirmed)
+                        <label>
+                            <input type="checkbox" asp-for="@item.EmailConfirmed" />
+                            <span></span>
+                        </label>
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.LockoutEnabled)
-                    </td>
-                    <td>
+                        <label>
+                            <input type="checkbox" asp-for="@item.LockoutEnabled" />
+                            <span></span>
+                        </label>
                     </td>
                     <td>
                         <a asp-page="./UserRoles" asp-route-id="@item.Id" class="btn btn-small waves-effect" title="Editar"><i class="material-icons">edit</i></a>
@@ -61,5 +78,4 @@
             }
         </tbody>
     </table>
-
-</div>
+</form>
