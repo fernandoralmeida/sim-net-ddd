@@ -5,8 +5,8 @@
     ViewData["ActivePage"] = AtendimentoNavPages.Atendimento;
 }
 
-<!--
-<partial name="_StatusMessage" model="Model.StatusMessage" />-->
+<!---->
+<partial name="_StatusMessage" model="Model.StatusMessage" />
 
 <form class="card" method="post">
 
@@ -18,7 +18,7 @@
             <div class="row">
                 <div class="col">
                     <div class="input-field">
-                        <input asp-for="GetCPF" id="inputCPF">                        
+                        <input asp-for="GetCPF" id="inputCPF">
                         <label for="inputCPF">CPF</label>
                     </div>
                 </div>
@@ -109,8 +109,8 @@
     </div>
     <div class="card-action">
 
-                <button asp-page-handler="Save" type="submit" class="btn waves-effect">Iniciar Atendimento</button>
-                <a asp-page="/Atendimento/Index" class="btn waves-effect red lighten-1">Cancelar</a>
+        <button asp-page-handler="Save" type="submit" class="btn waves-effect">Iniciar Atendimento</button>
+        <a asp-page="/Atendimento/Index" class="btn waves-effect red lighten-1">Cancelar</a>
 
     </div>
 

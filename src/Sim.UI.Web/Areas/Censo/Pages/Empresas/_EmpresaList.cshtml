@@ -66,8 +66,8 @@
                         @Html.DisplayFor(modelItem => item.Estabelecimento.SituacaoCadastral)
                     </td>
                     <td>
-
-                        <a class="btn btn-small waves-effect modal-trigger viewbutton" data-secao="Censo/Empresas" data-acao="Detalhe" data-id="@item.CNPJ" href="#viewmodal"><i class="material-icons">visibility</i></a>
+                        <a class="btn btn-small waves-effect" asp-page-handler="DetalheEmpresa" asp-route-id="@item.CNPJ" target="_blank" ><i class="material-icons">visibility</i></a>
+                        <a class="btn btn-small waves-effect modal-trigger modalrfb" data-secao="Censo/Empresas" data-acao="Detalhe" data-id="@item.CNPJ" href="#viewmodal"><i class="material-icons">visibility</i></a>
                     </td>
                 </tr>
             }

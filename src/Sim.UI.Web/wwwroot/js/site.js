@@ -15,8 +15,7 @@ $(document).ready(function () {
         $.get(url, function (data) {
             var tempdata = data;
             $("#viewmodalData").html(tempdata);
-        });
-        
+        });        
     });
 
     $('.modal').modal();

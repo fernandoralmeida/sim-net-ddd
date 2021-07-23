@@ -98,5 +98,12 @@ namespace Sim.UI.Web.Areas.Censo.Pages.Empresas
 
             return Page();
         }
+
+        public async Task<JsonResult> OnGetDetalheEmpresa(string id)
+        {
+            var t = await _empresaApp.GetCnpjAsync(id);
+
+            return new JsonResult(t);
+        }
     }
 }

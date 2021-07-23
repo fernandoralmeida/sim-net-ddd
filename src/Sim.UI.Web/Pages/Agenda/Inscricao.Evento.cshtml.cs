@@ -142,8 +142,9 @@ namespace Sim.UI.Web.Pages.Agenda
         {
             var ja_inscricao = false;
 
-            if (Input.Evento == null)
+            if (Input.Evento == null || Input.Participante == null)
             {
+                StatusMessage = "Erro: Verifique se os campos foram preenchidos corretamente!";
                 return Page();
             }
 
