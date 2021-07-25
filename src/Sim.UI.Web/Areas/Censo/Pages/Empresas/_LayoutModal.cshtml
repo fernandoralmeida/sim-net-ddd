@@ -9,9 +9,10 @@
     }
 }
 
-<div>
+<div class="container">
     @RenderBody()
 </div>
+<div>@DateTime.Now @User.Identity.Name</div>
 
 @section Scripts {
     @RenderSection("Scripts", required: false)

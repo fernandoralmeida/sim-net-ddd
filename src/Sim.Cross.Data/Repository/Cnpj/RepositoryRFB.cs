@@ -300,9 +300,10 @@ namespace Sim.Cross.Data.Repository.Cnpj
             var t = Task.Run(() =>
             {
 
-                var qry = (from sco in db.Socios
-                           from est in db.Estabelecimentos.Where(s => s.CNPJBase == sco.CNPJBase)
-                           from emp in db.Empresas.Where(s => s.CNPJBase == sco.CNPJBase)
+                var qry = (
+                           from est in db.Estabelecimentos
+                           from emp in db.Empresas.Where(s => s.CNPJBase == est.CNPJBase)
+                           from sco in db.Socios.Where(s => s.CNPJBase == est.CNPJBase)
                            select new { est, emp, sco })
                           .Where(s => s.sco.NomeRazaoSocio.Contains(nomesocio) || s.sco.NomeRepresentante.Contains(nomesocio)).Distinct();
 

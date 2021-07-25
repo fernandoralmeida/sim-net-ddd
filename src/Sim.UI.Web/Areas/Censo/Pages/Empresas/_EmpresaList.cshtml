@@ -1,7 +1,7 @@
 ﻿@using Sim.Domain.Cnpj.Entity;
 @model IEnumerable<BaseReceitaFederal>
 
-<table>
+<table class="responsive-table">
     <thead>
         <tr>
             <th>#</th>
@@ -67,7 +67,7 @@
                     </td>
                     <td>
                         <a class="btn btn-small waves-effect" asp-page-handler="DetalheEmpresa" asp-route-id="@item.CNPJ" target="_blank" ><i class="material-icons">visibility</i></a>
-                        <a class="btn btn-small waves-effect modal-trigger modalrfb" data-secao="Censo/Empresas" data-acao="Detalhe" data-id="@item.CNPJ" href="#viewmodal"><i class="material-icons">visibility</i></a>
+                        <a class="btn btn-small waves-effect" asp-area="Censo" asp-page="/Empresas/Detalhe" asp-route-id="@item.CNPJ" target="_blank"><i class="material-icons">visibility</i></a>
                     </td>
                 </tr>
             }

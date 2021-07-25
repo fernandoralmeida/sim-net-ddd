@@ -6,6 +6,57 @@
     ViewData["ActivePage"] = EmpresaNavPages.ConsultaNome;
 }
 <!--<partial name="_StatusMessage" model="Model.StatusMessage" />-->
+
+<div class="row card">
+    <div class="col s12">
+        <div class="col">
+            <div class="input-field">
+                <input asp-for="Input.CNPJ" readonly />
+                <label>CNPJ</label>
+            </div>
+        </div>
+        <div class="col">
+            <div class="input-field">
+                <input asp-for="Input.Estabelecimento.DataInicioAtividade" />
+                <label>Data Abertura</label>
+            </div>
+        </div>
+        <div class="col">
+            <div class="input-field">
+                <input asp-for="Input.Empresa.PorteEmpresa" />
+                <label>Porte</label>
+            </div>
+        </div>
+    </div>
+    <div class="col s12">
+        <div class="col s12">
+            <div class="input-field">
+                <input asp-for="Input.Empresa.RazaoSocial" />
+                <label>Razão Social</label>
+            </div>
+        </div>
+        <div class="col s12">
+            <div class="input-field">
+                <input asp-for="Input.Estabelecimento.NomeFantasia" />
+                <label>Nome Fantasia</label>
+            </div>
+        </div>
+        <div class="col">
+            <div class="input-field">
+                <input asp-for="Input.Estabelecimento.CnaeFiscalPrincipal" />
+                <label>CNAE</label>
+            </div>
+        </div>
+        <div class="col s11">
+            <div class="input-field">
+                <input asp-for="Input.AtividadePrincipal.Descricao" />
+                <label>Descrição</label>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <table>
     <thead>
         <tr>
@@ -149,7 +200,7 @@
 
     @if (Model.Input.Socios.Count() > 0)
     {
-        <table>
+        <table class="striped">
             <caption>Quadro Social</caption>
             <thead>
                 <tr>
