@@ -9,80 +9,82 @@
 <!--<partial name="_StatusMessage" model="Model.StatusMessage" />-->
 
 
-    <form method="post">
-        <div class="row">
-            <div class="col s12 m3 l3">
-                    <div class="input-field valign-wrapper">
-                        <input asp-for="Input.CPF" id="inputCPF">
-                        <label asp-for="Input.CPF" for="inputCPF"></label>
-                        <button class="btn waves-effect" type="submit"><i class="material-icons">search</i></button>
-                    </div>
-            </div>
+    <div class="card">
+        <div class="card-title">
+            <nav class="z-depth-0" style="border-bottom:solid 1px #efefef">
+                <div class="nav-wrapper white">
+                    <form method="post">
+                        <div class="input-field">
+                            <input asp-for="Input.CPF" type="search" id="inputCPF" required>
+                            <label class="label-icon" asp-for="Input.CPF"><i class="black-text material-icons">search</i></label>
+                            <i class="material-icons">close</i>
+                        </div>
+                    </form>
+                </div>
+            </nav>
         </div>
-    </form>
 
-<div class="card">
-    <table class="responsive-table">
-        <thead>
-            <tr>
-                <th></th>
-                <th>
-                    CPF
-                </th>
-                <th>
-                    Nome
-                </th>
-                <th>
-                    Contato
-                </th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
+        <table class="responsive-table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>
+                        CPF
+                    </th>
+                    <th>
+                        Nome
+                    </th>
+                    <th>
+                        Contato
+                    </th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
 
-            @if (Model.Input.ListaPessoas == null)
-            { }
-            else
-            {
-                foreach (var item in Model.Input.ListaPessoas)
+                @if (Model.Input.ListaPessoas == null)
+                { }
+                else
                 {
-                    <tr>
-                        <td>
-                            <a asp-area="" asp-page="/Atendimento/Iniciar" asp-route-id="@item.Id" class="btn btn-small waves-effect" title="Iniciar atendimento"><i class="material-icons">access_time</i></a>
+                    foreach (var item in Model.Input.ListaPessoas)
+                    {
+                        <tr>
+                            <td>
+                                <a asp-area="" asp-page="/Atendimento/Iniciar" asp-route-id="@item.Id" class="btn btn-small waves-effect" title="Iniciar atendimento"><i class="material-icons">access_time</i></a>
 
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CPF)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Nome)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Tel_Movel)
-                            @Html.DisplayFor(modelItem => item.Email)
-                        </td>
-                        <td>
-                            <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-small blue lighten-1 waves-effect" title="Modificar"><i class="material-icons">edit</i></a>
-                            @if (User.IsInRole("Administrador"))
-                            {
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CPF)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nome)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Tel_Movel)
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                            <td>
+                                <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-small blue lighten-1 waves-effect" title="Modificar"><i class="material-icons">edit</i></a>
+                                @if (User.IsInRole("Administrador"))
+                                {
 
 
-                                <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-small red lighten-1 waves-effect" title="Excluir"><i class="material-icons">delete_outline</i></a>
+                                    <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-small red lighten-1 waves-effect" title="Excluir"><i class="material-icons">delete_outline</i></a>
 
-                            }
-                        </td>
-                    </tr>
+                                }
+                            </td>
+                        </tr>
+                    }
                 }
-            }
 
-        </tbody>
-    </table>
-</div>
+            </tbody>
+        </table>
+    </div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script src="~/js/jquery.cep.js"></script>
     <script src="~/js/jquery.mask.min.js"></script>
     <script>
-        $('#inputCPF').mask('000.000.000-00');
+        $('#inputCPF').mask('000.000.000-00', { placeholder: "___.___.___-__" });
     </script>
 }

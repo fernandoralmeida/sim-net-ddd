@@ -8,54 +8,51 @@
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
 
-    <form method="post">
-        <div class="row">      
-            <div class="col s12 m4 l4">
-                
-                    <div class="input-field valign-wrapper">
-                        <input asp-for="Input.Evento">
-                        <label>Nome do Evento</label>
 
-
-                        <button class="btn waves-effect" type="submit" role="button"><i class="material-icons">search</i></button>
-                    </div>
-               
-            </div>    
+    <nav style="margin-bottom:20px;">
+        <div class="nav-wrapper white">
+            <form method="post">
+                <div class="input-field">
+                    <input asp-for="Input.Evento" type="search" placeholder="Nome" required>
+                    <label class="label-icon" asp-for="Input.Evento"><i class="black-text material-icons">search</i></label>
+                    <i class="material-icons">close</i>
+                </div>
+            </form>
         </div>
-    </form>
+    </nav>
 
 
-<div>
-    <partial name="_AgendaList" model="Model.Input.ListaEventos"/>
-</div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="viewmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="viewmodalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h6 class="modal-title" id="viewmodalLabel">Detalhes</h6>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p id="viewmodalData"></p>
-                </div>
+    <partial name="_AgendaList" model="Model.Input.ListaEventos" />
+
+
+<!-- Modal -->
+<div class="modal fade" id="viewmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="viewmodalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title" id="viewmodalLabel">Detalhes</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="viewmodalData"></p>
             </div>
         </div>
     </div>
+</div>
 
-    @section scripts
+@section scripts
 {
-        <script type="text/javascript">
-            $(".viewbutton").on("click", function () {
-                var customerId = $(this).data('id');
-                var secao = $(this).data('secao');
-                var acao = $(this).data('acao');
-                $.ajax({
-                    url: "/" + secao + "/" + acao + "?id=" + customerId,
-                    cache: false
-                }).done(function (data) {
-                    $("#viewmodalData").html(data);
-                });
-            });</script>
-    }
+    <script type="text/javascript">
+        $(".viewbutton").on("click", function () {
+            var customerId = $(this).data('id');
+            var secao = $(this).data('secao');
+            var acao = $(this).data('acao');
+            $.ajax({
+                url: "/" + secao + "/" + acao + "?id=" + customerId,
+                cache: false
+            }).done(function (data) {
+                $("#viewmodalData").html(data);
+            });
+        });</script>
+}

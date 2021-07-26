@@ -9,18 +9,19 @@
 
 <!--<partial name="_StatusMessage" model="Model.StatusMessage" />-->
 
-    <form method="post">
-        <div class="row">            
-            <div class="col s12 m4 l4 valign-wrapper">
-                <div class="col s12 input-field">
-                    <input asp-for="Input.RazaoSocial" id="inputrz" />
-                    <label asp-for="Input.RazaoSocial" for="inputrz"></label>
+    <div class="card">
+        <div class="card-title">
+            <nav class="z-depth-0" style="border-bottom:solid 1px #efefef">
+                <div class="nav-wrapper white">
+                    <form method="post">
+                        <div class="input-field">
+                            <input asp-for="Input.RazaoSocial" type="search" placeholder="Razão Social" required>
+                            <label class="label-icon" asp-for="Input.RazaoSocial"><i class="black-text material-icons">search</i></label>
+                            <i class="material-icons">close</i>
+                        </div>
+                    </form>
                 </div>
-                <button class="btn waves-effect" type="submit" role="button"><i class="material-icons">search</i></button>
-            </div>
+            </nav>
         </div>
-    </form>
-
-<div class="card">
-    <partial name="_EmpresaList" model="Model.Input.ListaEmpresas" />
-</div>
+        <partial name="_EmpresaList" model="Model.Input.ListaEmpresas" />
+    </div>

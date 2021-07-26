@@ -7,19 +7,20 @@
 
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
-<form method="post">
-    <div class="row">
-        <div class="col s12 m4 l4">
-                <div class="input-field valign-wrapper">
-                    <input asp-for="Input.GetCPF" id="inputCPF" />
-                    <label>CPF</label>
-                    <button class="btn waves-effect" type="submit" role="button"><i class="material-icons">search</i></button>
-                </div>
-        </div>
-    </div>
-</form>
-
 <div class="card">
+    <div class="card-title">
+        <nav class="z-depth-0" style="border-bottom:solid 1px #efefef">
+            <div class="nav-wrapper white">
+                <form method="post">
+                    <div class="input-field">
+                        <input asp-for="Input.GetCPF" type="search" id="inputCPF" required>
+                        <label class="label-icon" asp-for="Input.GetCPF"><i class="black-text material-icons">search</i></label>
+                        <i class="material-icons">close</i>
+                    </div>
+                </form>
+            </div>
+        </nav>
+    </div>
     <table class="responsive-table">
         <thead>
             <tr>
@@ -115,7 +116,7 @@
     <script src="~/js/jquery.cep.js"></script>
     <script src="~/js/jquery.mask.min.js"></script>
     <script>
-        $('#inputCPF').mask('000.000.000-00');
+        $('#inputCPF').mask('000.000.000-00', { placeholder: "___.___.___-__" });
         $('#txtphone').mask('(00) 0000-0000', { placeholder: "(__) ____-____" });
         $('#txtmobile').mask('(00) 00000-0000', { placeholder: "(__) _____-____" });
         $('#inputCNPJ').mask('00.000.000/0000-00', { placeholder: "__.___.___/____-__" });

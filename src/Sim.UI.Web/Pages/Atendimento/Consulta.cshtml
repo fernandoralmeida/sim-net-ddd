@@ -7,23 +7,24 @@
 }
 
 <partial name="_StatusMessage" model="Model.StatusMessage" />
-<form method="post" asp-page-handler="ListByData">
-    <div class="row">
-            <div class="col s12 m5 l5 valign-wrapper">
-                <div class="input-field">
-                    <input asp-for="Input.DataI" />
-                    <label>Data Inicial</label>
-                </div>
-                <div class="input-field valign-wrapper">
-                    <input asp-for="Input.DataF" />
-                    <label>Data Final</label>
-                    <button asp-page-handler="ListByData" class="btn waves-effect" type="submit" role="button"><i class="material-icons">search</i></button>
-                </div>
-            </div>
-    </div>
-</form>
 
-<partial name="_AtendimentoList" model="Model.Input.ListaAtendimento" />
+<div class="card">
+    <form method="post" class="row" style="border-bottom:solid 1px #efefef; margin-bottom:0px;">
+        <div class="col s12 m6 l6 valign-wrapper left" style="height:64px;">
+            <div class="col">
+                <input asp-for="Input.DataI" />
+            </div>
+            <div class="col">
+                <input asp-for="Input.DataF" />
+            </div>
+            <div class="col">
+                <button asp-page-handler="ListByData" class="btn waves-effect" type="submit" role="button"><i class="material-icons">search</i></button>
+            </div>
+        </div>
+    </form>
+    <partial name="_AtendimentoList" model="Model.Input.ListaAtendimento" />
+</div>
+
 
 @section scripts{
     <script>

@@ -40,17 +40,11 @@ namespace Sim.UI.Web.Pages.Empresa
             public string RazaoSocial { get; set; }
 
             public IEnumerable<BaseJucesp> ListaEmpresas { get; set; }
-
-            [TempData]
-            public string StatusMessage { get; set; }
-
-            [Required]
-            public string Municipio { get; set; }
         }
 
         public void OnGet()
         {
-            Input = new() { Municipio = "Jau", ListaEmpresas = new List<BaseJucesp>().ToList() };
+            Input = new() { ListaEmpresas = new List<BaseJucesp>().ToList() };
         }
 
         public async Task<IActionResult> OnPostAsync()

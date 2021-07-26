@@ -41,10 +41,6 @@ namespace Sim.UI.Web.Pages.Empresa
 
             public IEnumerable<Empresa> ListaEmpresas { get; set; }
 
-            [TempData]
-            public string StatusMessage { get; set; }
-
-            public string CNPJRes { get; set; }
         }
 
         private async Task LoadAsync()
@@ -77,9 +73,7 @@ namespace Sim.UI.Web.Pages.Empresa
 
                     Input = new InputModel
                     {
-                        ListaEmpresas = emp.Result,
-                        CNPJRes = new Functions.Mask().Remove(Input.CNPJ)
-
+                        ListaEmpresas = emp.Result
                     };
                 }
 

@@ -120,8 +120,7 @@ namespace Sim.UI.Web.Pages.Pessoa
                 CPF = id,
                 Data_Cadastro = DateTime.Now,
                 Ultima_Alteracao = DateTime.Now,
-                Ativo = true
-                
+                Ativo = true                
             };
         }
 

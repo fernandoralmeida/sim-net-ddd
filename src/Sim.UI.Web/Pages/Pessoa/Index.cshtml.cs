@@ -74,7 +74,7 @@ namespace Sim.UI.Web.Pages.Pessoa
                         ListaPessoas = pessoa
                     };
                 }
-
+                StatusMessage = "";
             }
             catch(Exception ex)
             {

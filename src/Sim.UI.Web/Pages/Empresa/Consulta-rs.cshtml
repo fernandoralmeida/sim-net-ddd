@@ -8,74 +8,72 @@
 
 <!--<partial name="_StatusMessage" model="Model.StatusMessage" />-->
 
-
-    <form method="post">
-        <input asp-for="Input.CNPJRes" hidden>
-        <div class="row">
-            <div class="col s12 m6 l6">
-                    <div class="input-field valign-wrapper">
-                        <input asp-for="Input.RazaoSocial" id="inputrz" />
-                        <label asp-for="Input.RazaoSocial" for="inputrz"></label>
-                        <button class="btn waves-effect" type="submit" role="button" id="button-addon2"><i class="material-icons">search</i></button>
-                    </div>
-                
-            </div>
+    <div class="card">
+        <div class="card-title">
+            <nav class="z-depth-0" style="border-bottom:solid 1px #efefef;">
+                <div class="nav-wrapper white">
+                    <form method="post">
+                        <div class="input-field">
+                            <input asp-for="Input.RazaoSocial" type="search" placeholder="Razão Social" required>
+                            <label class="label-icon" asp-for="Input.RazaoSocial"><i class="black-text material-icons">search</i></label>
+                            <i class="material-icons">close</i>
+                        </div>
+                    </form>
+                </div>
+            </nav>
         </div>
-    </form>
-
-<div class="card">
-    <table class="responsive-table">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>
-                    CNPJ
-                </th>
-
-                <th>
-                    Nome Empresarial
-                </th>
-
-                <th>
-                    Contato
-                </th>
-
-                <th>Ação</th>
-            </tr>
-        </thead>
-        <tbody>
-            @{
-                int cont = 0;
-            }
-
-            @foreach (var item in Model.Input.ListaEmpresas)
-            {
+        <table class="responsive-table">
+            <thead>
                 <tr>
-                    <td>
-                        @{ cont++; }
-                        @cont
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CNPJ)
-                    </td>
+                    <th>#</th>
+                    <th>
+                        CNPJ
+                    </th>
 
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Nome_Empresarial)
-                    </td>
+                    <th>
+                        Nome Empresarial
+                    </th>
 
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Telefone)
-                        @Html.DisplayFor(modelItem => item.Email)
-                    </td>
+                    <th>
+                        Contato
+                    </th>
 
-                    <td>
-                        <a asp-page="./Update" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary" title="Alterar informações"><i class="material-icons">edit</i></a>
-                    </td>
+                    <th>Ação</th>
                 </tr>
-            }
-        </tbody>
-    </table>
-</div>
+            </thead>
+            <tbody>
+                @{
+                    int cont = 0;
+                }
+
+                @foreach (var item in Model.Input.ListaEmpresas)
+                {
+                    <tr>
+                        <td>
+                            @{ cont++; }
+                            @cont
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CNPJ)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nome_Empresarial)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Telefone)
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+
+                        <td>
+                            <a asp-page="./Update" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary" title="Alterar informações"><i class="material-icons">edit</i></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

@@ -41,8 +41,6 @@ namespace Sim.UI.Web.Areas.Censo.Pages.Simples
         public InputModel Input { get; set; }
         public class InputModel
         {
-
-
             [DisplayName("Optante Simples Nacional")]
             public string OptanteSimples { get; set; }
 
@@ -139,10 +137,7 @@ namespace Sim.UI.Web.Areas.Censo.Pages.Simples
                             break;
                     }
 
-                    Input = new InputModel
-                    {
-                        ListaEmpresas = v
-                    };
+                    Input.ListaEmpresas = v;
 
                 }
 

@@ -47,8 +47,9 @@ namespace Sim.UI.Web.Pages.Agenda
 
         public async Task OnPostAsync()
         {
-            var t = await _appServiceEvento.EventosPassados();
-            Input.ListaEventos = _mapper.Map<IEnumerable<InputModelEvento>>(t);
+            var t = Task.Run(() => _appServiceEvento.GetByNome(Input.Evento));
+            await t;
+            Input.ListaEventos = _mapper.Map<IEnumerable<InputModelEvento>>(t.Result);
         }
     }
 }

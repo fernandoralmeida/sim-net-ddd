@@ -7,51 +7,15 @@
     ViewData["ActivePage"] = EmpresaNavPages.ConsultaNome;
 }
 
-<!--<partial name="_StatusMessage" model="Model.StatusMessage" />
-
-<form class="section" method="post">
-    <div class="row">
-        <div class="col s12">
-            <div class="col s12 m3 l3">
-                <div class="input-field">
-                    <select asp-for="Input.Municipio" asp-items=""></select>
-                    <label asp-for="Input.Municipio"></label>
-                </div>
-            </div>
-            <div class="col s12 m4 l4">
-                <div class="input-field">
-                    <input asp-for="Input.Bairro" />
-                    <label asp-for="Input.Bairro"></label>
-                </div>
-            </div>
-            <div class="col s12 m3 l3">
-                <div class="input-field">
-                    <select asp-for="Input.Situacao">
-                        <option selected>Ativa</option>
-                        <option>Nula</option>
-                        <option>Suspensa</option>
-                        <option>Inapta</option>
-                        <option>Baixada</option>
-                    </select>
-                    <label asp-for="Input.Situacao"></label>
-                </div>
-            </div>
-            <div class="col s12 m2 l2">
-                <div class="input-field">
-                    <button class="btn waves-effect" type="submit" role="button"><i class="material-icons">search</i></button>
-                </div>
-            </div>
-        </div>
-    </div>
-</form>-->
+<!--<partial name="_StatusMessage" model="Model.StatusMessage" />-->
 
 <div class="card">
-    <form method="post" class="row" style="border-bottom:solid 1px #efefef;">
+    <form method="post" class="row" style="border-bottom:solid 1px #efefef; margin-bottom:0px;">
         <div class="col m6 l6 s12">
             <nav class="z-depth-0">
                 <div class="nav-wrapper white">
                     <div class="input-field">
-                        <input asp-for="Input.Bairro" type="search" required>
+                        <input asp-for="Input.Bairro" type="search" placeholder="Digite o Bairro" required>
                         <label class="label-icon" asp-for="Input.Bairro"><i class="black-text material-icons">search</i></label>
                         <i class="material-icons">close</i>
                     </div>

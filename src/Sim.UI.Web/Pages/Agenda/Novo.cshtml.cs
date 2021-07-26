@@ -58,7 +58,7 @@ namespace Sim.UI.Web.Pages.Agenda
             if (s.Result != null)
             {
                 Setores = new SelectList(s.Result, nameof(Setor.Nome), nameof(Setor.Nome), null);
-            }
+            }            
         }
 
         public async Task<IActionResult> OnPostAsync()

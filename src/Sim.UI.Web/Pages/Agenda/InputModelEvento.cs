@@ -32,7 +32,7 @@ namespace Sim.UI.Web.Pages.Agenda
         public string Formato { get; set; }
 
         [Required]
-        [DisplayName("Data do Evento")]
+        [DisplayName("Data")]
         [DataType(DataType.DateTime)]
         public DateTime? Data { get; set; }
 

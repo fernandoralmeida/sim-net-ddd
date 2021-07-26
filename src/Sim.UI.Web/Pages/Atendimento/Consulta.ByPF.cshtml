@@ -9,25 +9,28 @@
 
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
-
-
-
-<form method="post" asp-page-handler="ListByPessoa">
-    <div class="row">
-        <div class="col s10 m4 l4 input-field valign-wrapper">
-            <input asp-for="Input.CPF" id="inputCPF" />
-            <label>CPF</label>
-            <button asp-page-handler="ListByPessoa" class="btn waves-effect" type="submit" role="button"><i class="material-icons">search</i></button>
-        </div>
+<div class="card">
+    <div class="card-title">
+        <nav class="z-depth-0" style="border-bottom:solid 1px #efefef">
+            <div class="nav-wrapper white">
+                <form method="post" asp-page-handler="ListByPessoa">
+                    <div class="input-field">
+                        <input asp-for="Input.CPF" type="search" id="inputCPF" required>
+                        <label class="label-icon" asp-for="Input.CPF"><i class="black-text material-icons">search</i></label>
+                        <i class="material-icons">close</i>
+                    </div>
+                </form>
+            </div>
+        </nav>
     </div>
-</form>
+    <partial name="_AtendimentoList" model="Model.Input.ListaAtendimento" />
+</div>
 
-<partial name="_AtendimentoList" model="Model.Input.ListaAtendimento" />
 
 @section scripts{
     <script src="~/js/jquery.mask.min.js"></script>
     <script>
-        $('#inputCPF').mask('000.000.000-00');
+        $('#inputCPF').mask('000.000.000-00', { placeholder: "___.___.___-__" });
     </script>
     <script>
         $(function () {
