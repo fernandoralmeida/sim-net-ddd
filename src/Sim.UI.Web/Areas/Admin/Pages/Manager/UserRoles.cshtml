@@ -43,18 +43,23 @@
                 </dt>
                 <dd class="col m10">
                     @Html.DisplayFor(model => model.Input.Email)
+                    @{
+                        if (!Model.Input.EmailConfirmed)
+                        {
+                            <button type="submit" asp-page-handler="ConfirmEmail" asp-route-id="@Model.Input.Id" class="btn btn-small waves-effect">Confirmar Email</button>                            
+                        }
+
+                    }
                 </dd>
             </dl>
         </div>
-        <div class="divider"></div>
         <div class="row">
             <div class="col s12">
                 <div class="col s12 m4 l4">
                     <div class="input-field">
-                        <select asp-for="Selecionado" asp-items="Model.RoleList">
+                        <select asp-for="Selecionado" asp-items="Model.RoleList" class="browser-default">
                             <option selected>-- Associar Perfil --</option>
                         </select>
-                        <label>Perfil</label>
                     </div>
                 </div>
                 <div class="col s12 m4 l4">
@@ -72,7 +77,6 @@
                         Perfil Habilitado
                     </th>
                     <th></th>
-                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -84,9 +88,6 @@
                         <tr>
                             <td>
                                 @Html.DisplayFor(modelItem => item)
-                            </td>
-
-                            <td>
                             </td>
 
                             <td>

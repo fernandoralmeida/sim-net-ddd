@@ -47,5 +47,6 @@ namespace Sim.Application.Shared
         {
             return _inscricao.LastCodigo();
         }
+
     }
 }

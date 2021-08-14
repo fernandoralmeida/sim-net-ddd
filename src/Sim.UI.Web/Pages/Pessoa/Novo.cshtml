@@ -5,7 +5,8 @@
     ViewData["ActivePage"] = PessoaNavPages.Inicio;
 }
 
-<!--<partial name="_StatusMessage" model="Model.StatusMessage" />-->
+<!---->
+<partial name="_StatusMessage" model="Model.StatusMessage" />
 
 <div>
     <form method="post" asp-route="url" novalidate>
@@ -192,13 +193,13 @@
                 <div class="col s12">
                     <div class="col s12 m3 l3">
                         <div class="input-field">
-                            <label asp-for="Input.Data_Cadastro" ></label>
+                            <label asp-for="Input.Data_Cadastro"></label>
                             <input asp-for="Input.Data_Cadastro" disabled />
                         </div>
                     </div>
                     <div class="col s12 m3 l3">
                         <div class="input-field">
-                            <label asp-for="Input.Ultima_Alteracao" ></label>
+                            <label asp-for="Input.Ultima_Alteracao"></label>
                             <input asp-for="Input.Ultima_Alteracao" disabled />
                         </div>
                     </div>
@@ -211,7 +212,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="card">
             <div class="card-action">
                 <button type="submit" role="button" class="btn btn-large waves-effect">Gravar Cadastro</button>

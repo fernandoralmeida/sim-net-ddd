@@ -157,7 +157,7 @@ namespace Sim.UI.Web.Pages.Pessoa
             }
             catch (Exception ex)
             {
-                StatusMessage = "Erro: " + ex.Message;
+                StatusMessage = "Erro: " + "Verifique se o Cliente já está cadastrado ou contate o suporte!";
                 return Page();
             }
 

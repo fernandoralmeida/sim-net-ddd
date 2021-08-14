@@ -56,10 +56,14 @@
                         @cont.ToString()
                     </td>
                     <td>
-                        <label>
-                            <input type="checkbox" asp-for="@item.Presente" />
-                            <span></span>
-                        </label>
+                        @if (item.Presente)
+                        {
+                            <button asp-page-handler="Presente" asp-route-id="@item.Id" asp-route-ide="@Model.Input.Codigo" type="submit" class="btn-flat"><i class="material-icons large">done</i></button>
+                        }
+                        else
+                        {
+                            <button asp-page-handler="Presente" asp-route-id="@item.Id" asp-route-ide="@Model.Input.Codigo" type="submit" class="btn-flat"><i class="material-icons large">check_box_outline_blank</i></button>
+                        }
                     </td>
                     <td>
                         <a class="modal-trigger" href="#viewmodal" data-id="@item.Id">@Html.DisplayFor(modelItem => item.Participante.CPF)</a>
@@ -75,7 +79,7 @@
                     </td>
 
                     <td>
-                        <button asp-page-handler="Remove" asp-route-id="@item.Id" asp-route-ide="@Model.Input.Codigo" type="submit" class="btn btn-sm btn-danger">Remover</button>
+                        <button asp-page-handler="Remove" asp-route-id="@item.Id" asp-route-ide="@Model.Input.Codigo" type="submit" class="btn btn-small">Remover</button>
                     </td>
                 </tr>
                 }

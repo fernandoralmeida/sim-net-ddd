@@ -76,5 +76,6 @@ namespace Sim.Cross.Data.Repository.Shared
             else
                 return (int)cod;
         }
+
     }
 }

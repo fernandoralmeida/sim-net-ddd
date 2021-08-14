@@ -59,6 +59,7 @@ namespace Sim.UI.Web.Areas.Admin.Pages.Manager
                 LastName = u.Result.LastName,
                 Gender = u.Result.Gender,
                 Email = u.Result.Email,
+                EmailConfirmed = u.Result.EmailConfirmed,
                 ListRoles = r.Result
             };
         }
@@ -67,6 +68,25 @@ namespace Sim.UI.Web.Areas.Admin.Pages.Manager
         {
             await LoadAsync(id);
             return Page();
+        }
+
+        public async Task<IActionResult> OnPostConfirmEmailAsync(string id)
+        {
+            try
+            {
+                var user = await _userManager.FindByIdAsync(id);
+                var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                await _userManager.ConfirmEmailAsync(user, code);
+                
+                return RedirectToPage("./UserRoles", new { id });
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = ex.Message;
+                await LoadAsync(id);
+                return Page();
+            }
+
         }
 
         public async Task<IActionResult> OnPostAddRoleAsync(string id)

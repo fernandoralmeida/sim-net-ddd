@@ -43,7 +43,7 @@ namespace Sim.Cross.Data.Repository.Shared
                 .Include(p => p.Pessoa)
                 .Include(e => e.Empresa)
                 .Include(s => s.Sebrae)
-                .Where(u => u.Empresa.CNPJ == cnpj).OrderBy(d => d.Data);
+                .Where(u => u.Empresa.CNPJ == cnpj).OrderBy(d => d.Data).OrderByDescending(o => o.Data);
         }
 
         public IEnumerable<Atendimento> GetByPessoa(string cpf)
@@ -52,7 +52,7 @@ namespace Sim.Cross.Data.Repository.Shared
                 .Include(p => p.Pessoa)
                 .Include(e => e.Empresa)
                 .Include(s => s.Sebrae)
-                .Where(u => u.Pessoa.CPF == cpf).OrderBy(d => d.Data);
+                .Where(u => u.Pessoa.CPF == cpf).OrderBy(d => d.Data).OrderByDescending(o => o.Data);
         }
 
         public IEnumerable<Atendimento> GetByServicos(string servicos)
@@ -85,7 +85,7 @@ namespace Sim.Cross.Data.Repository.Shared
                 .Include(u => u.Pessoa)
                 .Include(e => e.Empresa)
                 .Include(s => s.Sebrae)
-                .Where(a => a.Owner_AppUser_Id == userid &&  a.Data.Value.Date == date.Value.Date &&  a.Status == "Finalizado");
+                .Where(a => a.Owner_AppUser_Id == userid && a.Data.Value.Date == date.Value.Date && a.Status == "Finalizado").OrderBy(o => o.Data);
 
             return lista;
         }
@@ -96,7 +96,7 @@ namespace Sim.Cross.Data.Repository.Shared
                 .Include(u => u.Pessoa)
                 .Include(e => e.Empresa)
                 .Include(s => s.Sebrae)
-                .Where(a => a.Ativo == true).OrderBy(a => a.Data);
+                .Where(a => a.Ativo == true).OrderBy(a => a.Data).OrderBy(o => o.Data);
 
             return lista;
         }
@@ -107,7 +107,7 @@ namespace Sim.Cross.Data.Repository.Shared
                 .Include(p => p.Pessoa)
                 .Include(e => e.Empresa)
                 .Include(s => s.Sebrae)
-                .Where(s => s.Owner_AppUser_Id == userid && s.Status == "Cancelado");
+                .Where(s => s.Owner_AppUser_Id == userid && s.Status == "Cancelado").OrderBy(o => o.DataF);
 
             return ativo;
         }
@@ -129,7 +129,7 @@ namespace Sim.Cross.Data.Repository.Shared
                 .Include(u => u.Pessoa)
                 .Include(e => e.Empresa)
                 .Include(s => s.Sebrae)
-                .Where(a => a.Owner_AppUser_Id == userid);
+                .Where(a => a.Owner_AppUser_Id == userid).OrderBy(o => o.Data);
 
             return lista;
         }

@@ -60,7 +60,7 @@ namespace Sim.UI.Web.Areas.Identity
 
                     //define Lockout
                     options.Lockout.AllowedForNewUsers = false;
-                    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(720);
                     options.Lockout.MaxFailedAccessAttempts = 5;
 
                 });

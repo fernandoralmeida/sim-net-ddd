@@ -51,6 +51,25 @@ namespace Sim.UI.Web.Pages.Agenda
             return RedirectToPage("./Inscricao.Remove", new { id = ide });
         }
 
+        public async Task<IActionResult> OnPostPresenteAsync(Guid id, int ide)
+        {
+            var inscrito = Task.Run(() => _appServiceInscricao.GetById(id));
+            await inscrito;
+
+            var ispresente = inscrito.Result;
+
+            if (ispresente.Presente)
+                ispresente.Presente = false;
+            else
+                ispresente.Presente = true;
+
+            var update = Task.Run(() => _appServiceInscricao.Update(ispresente));
+            await update;
+
+
+            return RedirectToPage("./Inscricao.Remove", new { id = ide });
+        }
+
         public async Task<JsonResult> OnGetDetalheInscrito(string id)
         {
             var detalhe = await _appServiceInscricao.GetInscrito(new Guid(id));

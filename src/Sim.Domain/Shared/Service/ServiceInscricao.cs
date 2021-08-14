@@ -47,5 +47,6 @@ namespace Sim.Domain.Shared.Service
         {
             return _inscricao.LastCodigo();
         }
+
     }
 }

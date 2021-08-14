@@ -19,7 +19,6 @@ namespace Sim.Domain.Shared.Interface
         IEnumerable<Inscricao> GetByTipo(string evento);
 
         bool JaInscrito(string cpf, int evento);
-
         int LastCodigo();
     }
 }
