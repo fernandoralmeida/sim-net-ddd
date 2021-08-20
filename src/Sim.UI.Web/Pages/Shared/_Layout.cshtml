@@ -36,8 +36,8 @@
                         <div class="collapsible-header">Atendimentos</div>
                         <div class="collapsible-body transparent">
                             <ul>
-                                <li><a asp-page="/Atendimento/Index" class="waves-effect">Meus Atendimentos<i class="material-icons">access_time</i></a></li>
-                                <li><a asp-page="/Atendimento/Novo" class="waves-effect">Atendimento Ativo<i class="material-icons">access_alarm</i></a></li>
+                                <li><a asp-page="/Atendimento/Index" class="waves-effect">@User.Identity.Name<i class="material-icons">access_time</i></a></li>
+                                <li><a asp-page="/Atendimento/Novo" class="waves-effect"><i class="material-icons">access_alarm</i>Ativo</a></li>
                                 <li><a asp-page="/Atendimento/Consulta" class="waves-effect">Consultar<i class="material-icons">search</i></a></li>
                             </ul>
                         </div>

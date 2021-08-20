@@ -22,8 +22,12 @@ html {
 }
 
 /* materialize */
+.sidenav {
+    width: 250px
+}
+
 .has-fixed-sidenav .fixed-chart {
-    left: 300px
+    left: 250px
 }
 
 .waves-effect.waves-blue .waves-ripple {
@@ -87,18 +91,18 @@ nav.navbar .brand-logo {
 
 @media only screen and (min-width: 993px) {
     body.has-fixed-sidenav {
-        padding-left: 300px
+        padding-left: 250px
     }
 
     @media only screen and (min-width: 993px) {
         body.has-fixed-sidenav {
-            padding-left: 300px
+            padding-left: 250px
         }
 
         @media only screen and (min-width: 993px) {
             .has-fixed-sidenav .navbar-fixed nav.navbar {
-                width: calc(100% - 300px);
-                left: 300px
+                width: calc(100% - 250px);
+                left: 250px
             }
 
             body:not(.has-fixed-sidenav) nav a.sidenav-trigger {
