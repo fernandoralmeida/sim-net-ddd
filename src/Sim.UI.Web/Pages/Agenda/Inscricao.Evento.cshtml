@@ -2,7 +2,8 @@
 @model Sim.UI.Web.Pages.Agenda.Inscricao_EventoModel
 @{
     ViewData["Title"] = "Inscrição";
-    ViewData["ActivePage"] = AgendaNavPages.NovaInscricao;
+    ViewData["ActivePage"] = Web.Pages.Shared.LayoutNavPages.Agenda;
+    ViewData["ActivePageLi"] = Web.Pages.Shared.LayoutNavPages.AgendaEventos;
 }
 
 <partial name="_StatusMessage" model="Model.StatusMessage" />

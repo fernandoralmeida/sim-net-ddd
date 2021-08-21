@@ -3,7 +3,8 @@
 @model Sim.UI.Web.Pages.Atendimento.NovoModel
 @{
     ViewData["Title"] = "Atendimento";
-    ViewData["ActivePage"] = AtendimentoNavPages.Atendimento;
+    ViewData["ActivePage"] = Web.Pages.Shared.LayoutNavPages.Atendimento;
+    ViewData["ActivePageLi"] = Web.Pages.Shared.LayoutNavPages.AtendimentoAtivo;
 }
 
 <!--<partial name="_StatusMessage" model="Model.StatusMessage" />-->

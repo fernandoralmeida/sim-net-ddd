@@ -10,7 +10,7 @@
     var DisplayName = UserManager.Users.FirstOrDefault(m => m.UserName == User.Identity.Name).Name;
     var DisplayLastName = UserManager.Users.FirstOrDefault(m => m.UserName == User.Identity.Name).LastName;
 
-    <li class="waves-block waves-effect waves-blue-grey" style="border-bottom:solid 1px #e0e0e0;">
+    <li class="waves-block waves-effect @LayoutNavPages.LoginNavClass(ViewContext)" style="border-bottom:solid 1px #e0e0e0;">
         <div class="collapsible-header">Olá @DisplayName @DisplayLastName</div>
         <div class="collapsible-body transparent">
             <ul>

@@ -3,7 +3,8 @@
 @{
 
     ViewData["Title"] = "Novo Evento";
-    ViewData["ActivePage"] = AgendaNavPages.NovoEvento;
+    ViewData["ActivePage"] = Web.Pages.Shared.LayoutNavPages.Agenda;
+    ViewData["ActivePageLi"] = Web.Pages.Shared.LayoutNavPages.AgendaEventos;
 }
 
 <partial name="_StatusMessage" model="Model.StatusMessage" />

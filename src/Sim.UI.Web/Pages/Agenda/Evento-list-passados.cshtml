@@ -3,7 +3,8 @@
 
 @{
     ViewData["Title"] = "Indice de Eventos passados";
-    ViewData["ActivePage"] = AgendaNavPages.EventoList;
+    ViewData["ActivePage"] = Web.Pages.Shared.LayoutNavPages.Agenda;
+    ViewData["ActivePageLi"] = Web.Pages.Shared.LayoutNavPages.AgendaEventos;
 }
 
 <partial name="_StatusMessage" model="Model.StatusMessage" />

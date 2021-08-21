@@ -2,7 +2,8 @@
 @model Sim.UI.Web.Pages.Agenda.Evento_ListModel
 @{
     ViewData["Title"] = "Lista Eventos";
-    ViewData["ActivePage"] = AgendaNavPages.EventoList;
+    ViewData["ActivePage"] = Web.Pages.Shared.LayoutNavPages.Agenda;
+    ViewData["ActivePageLi"] = Web.Pages.Shared.LayoutNavPages.AgendaEventos;
 }
 
 <partial name="_StatusMessage" model="Model.StatusMessage" />

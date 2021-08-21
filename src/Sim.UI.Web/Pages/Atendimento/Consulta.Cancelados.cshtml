@@ -3,7 +3,8 @@
 @{
     Layout = "_Layout.cshtml";
     ViewData["Title"] = "Consultas por Periodos";
-    ViewData["ActivePage"] = AtendimentoNavPages.Consulta;
+    ViewData["ActivePage"] = Web.Pages.Shared.LayoutNavPages.Atendimento;
+    ViewData["ActivePageLi"] = Web.Pages.Shared.LayoutNavPages.AtendimentoConsulta;
 }
 
 <partial name="_StatusMessage" model="Model.StatusMessage" />
