@@ -113,6 +113,16 @@ namespace Sim.Cross.Ioc
 
             services.AddScoped<IRepositoryBase<Atendimento>, RepositoryBase<Atendimento>>();
             services.AddScoped<IRepositoryAtendimento, RepositoryAtendimento>();
+
+            // Status Atendimento
+            services.AddScoped<IAppServiceBase<StatusAtendimento>, AppServiceBase<StatusAtendimento>>();
+            services.AddScoped<IAppServiceStatusAtendimento, AppServiceStatusAtendimento>();
+
+            services.AddScoped<IServiceBase<StatusAtendimento>, ServiceBase<StatusAtendimento>>();
+            services.AddScoped<IServiceStatusAtendimento, ServiceStatusAtendimento>();
+
+            services.AddScoped<IRepositoryBase<StatusAtendimento>, RepositoryBase<StatusAtendimento>>();
+            services.AddScoped<IRepositoryStatusAtendimento, RepositoryStatusAtendimento>();
         }
 
         private static void RegisterSecretaria(IServiceCollection services)

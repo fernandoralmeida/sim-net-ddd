@@ -36,7 +36,7 @@
                         int cont = 0;
                     }
 
-                    @foreach (var item in Model.Input.ListaUsuariosPAT)
+                    @foreach (var item in Model.ListaPAT)
                     {
 
                         <tr>
@@ -45,21 +45,20 @@
                                 @cont.ToString()
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Name)
-                                @Html.DisplayFor(modelItem => item.LastName)
+                                @Html.DisplayFor(modelItem => item.Atendente)
                             </td>
                             <td>
-                                @if (cont == 1)
+                                @if (item.Status == "Em Atendimento")
                                 {
-                                    <span class="new badge blue" data-badge-caption="Em atendimento"></span>
+                                    <span class="new badge blue" data-badge-caption="@item.Status.ToUpper()"></span>
                                 }
-                                else if (cont == 3)
+                                else if (item.Status == "Disponível")
                                 {
-                                    <span class="new badge red" data-badge-caption="Indisponível"></span>
+                                    <span class="new badge green" data-badge-caption="@item.Status.ToUpper()"></span>
                                 }
                                 else
                                 {
-                                    <span class="new badge green" data-badge-caption="Disponível"></span>
+                                    <span class="new badge red" data-badge-caption="@item.Status.ToUpper()"></span>
                                 }
                             </td>
                         </tr>
@@ -92,30 +91,29 @@
                         int cont1 = 0;
                     }
 
-                    @foreach (var item in Model.Input.ListaUsuariosBPP)
+                    @foreach (var item in Model.ListaBPP)
                     {
 
                         <tr>
                             <td>
-                                @{cont1++;}
-                                @cont1.ToString()
+                                @{cont++;}
+                                @cont.ToString()
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Name)
-                                @Html.DisplayFor(modelItem => item.LastName)
+                                @Html.DisplayFor(modelItem => item.Atendente)
                             </td>
                             <td>
-                                @if (cont == 1)
+                                @if (item.Status == "Em Atendimento")
                                 {
-                                    <span class="new badge blue" data-badge-caption="Em atendimento"></span>
+                                    <span class="new badge blue" data-badge-caption="@item.Status.ToUpper()"></span>
                                 }
-                                else if (cont == 3)
+                                else if (item.Status == "Disponível")
                                 {
-                                    <span class="new badge red" data-badge-caption="Indisponível"></span>
+                                    <span class="new badge green" data-badge-caption="@item.Status.ToUpper()"></span>
                                 }
                                 else
                                 {
-                                    <span class="new badge green" data-badge-caption="Disponível"></span>
+                                    <span class="new badge red" data-badge-caption="Indisponível"></span>
                                 }
                             </td>
                         </tr>
@@ -148,30 +146,29 @@
                         int cont2 = 0;
                     }
 
-                    @foreach (var item in Model.Input.ListaUsuariosSA)
+                    @foreach (var item in Model.ListaSA)
                     {
 
                         <tr>
                             <td>
-                                @{cont2++;}
-                                @cont2.ToString()
+                                @{cont++;}
+                                @cont.ToString()
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Name)
-                                @Html.DisplayFor(modelItem => item.LastName)
+                                @Html.DisplayFor(modelItem => item.Atendente)
                             </td>
                             <td>
-                                @if (cont == 1)
+                                @if (item.Status == "Em Atendimento")
                                 {
-                                    <span class="new badge blue" data-badge-caption="Em atendimento"></span>
+                                    <span class="new badge blue" data-badge-caption="@item.Status.ToUpper()"></span>
                                 }
-                                else if (cont == 3)
+                                else if (item.Status == "Disponível")
                                 {
-                                    <span class="new badge red" data-badge-caption="Indisponível"></span>
+                                    <span class="new badge green" data-badge-caption="@item.Status.ToUpper()"></span>
                                 }
                                 else
                                 {
-                                    <span class="new badge green" data-badge-caption="Disponível"></span>
+                                    <span class="new badge red" data-badge-caption="Indisponível"></span>
                                 }
                             </td>
                         </tr>
@@ -184,7 +181,7 @@
     <div class="col s12 m12 l6">
         <div class="card">
             <div class="orange lighten-2 white-text card-header">
-                <h6>PAT</h6>
+                <h6>Sala do Empreendedor</h6>
             </div>
             <table class="responsive-table">
                 <thead>
@@ -204,30 +201,29 @@
                         int cont3 = 0;
                     }
 
-                    @foreach (var item in Model.Input.ListaUsuariosSE)
+                    @foreach (var item in Model.ListaSE)
                     {
 
                         <tr>
                             <td>
-                                @{cont3++;}
-                                @cont3.ToString()
+                                @{cont++;}
+                                @cont.ToString()
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Name)
-                                @Html.DisplayFor(modelItem => item.LastName)
+                                @Html.DisplayFor(modelItem => item.Atendente)
                             </td>
                             <td>
-                                @if (cont == 1)
+                                @if (item.Status == "Em Atendimento")
                                 {
-                                    <span class="new badge blue" data-badge-caption="Em atendimento"></span>
+                                    <span class="new badge blue" data-badge-caption="@item.Status.ToUpper()"></span>
                                 }
-                                else if (cont == 3)
+                                else if (item.Status == "Disponível")
                                 {
-                                    <span class="new badge red" data-badge-caption="Indisponível"></span>
+                                    <span class="new badge green" data-badge-caption="@item.Status.ToUpper()"></span>
                                 }
                                 else
                                 {
-                                    <span class="new badge green" data-badge-caption="Disponível"></span>
+                                    <span class="new badge red" data-badge-caption="Indisponível"></span>
                                 }
                             </td>
                         </tr>
@@ -237,7 +233,6 @@
         </div>
     </div>
 </div>
-
 
 @section scripts
 {

@@ -12,45 +12,159 @@ namespace Sim.UI.Web.Pages.Triagem
 {
     
     using Sim.Cross.Identity;
+    using Sim.Application.Shared.Interface;
 
     [Authorize]
     public class IndexModel : PageModel
     {
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IAppServiceAtendimento _appAtendimento;
+        private readonly IAppServiceStatusAtendimento _appServiceStatusAtendimento;
 
         [BindProperty(SupportsGet = true)]
         public InputModelIndex Input { get; set; }
 
+        [BindProperty(SupportsGet = true)]
+        public IEnumerable<InputModelIndex> ListaPAT { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public IEnumerable<InputModelIndex> ListaBPP { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public IEnumerable<InputModelIndex> ListaSA { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public IEnumerable<InputModelIndex> ListaSE { get; set; }
+
         public class InputModelIndex
         {
-            public IEnumerable<ApplicationUser> ListaUsuariosPAT { get; set; }
-            public IEnumerable<ApplicationUser> ListaUsuariosBPP { get; set; }
-            public IEnumerable<ApplicationUser> ListaUsuariosSA { get; set; }
-            public IEnumerable<ApplicationUser> ListaUsuariosSE { get; set; }
+            public string Atendente { get; set; }
+            public string Status { get; set; }
         }
 
         [TempData]
         public string StatusMessage { get; set; }
 
-        public IndexModel(UserManager<ApplicationUser> userManager)
+        public IndexModel(UserManager<ApplicationUser> userManager,
+            IAppServiceAtendimento appAtendimento,
+            IAppServiceStatusAtendimento appServiceStatusAtendimento)
         {
             _userManager = userManager;
+            _appAtendimento = appAtendimento;
+            _appServiceStatusAtendimento = appServiceStatusAtendimento;
         }
 
-        private async Task LoadAsync()
+        private async Task LoadPATAsync()
         {
-            Input = new()
-            {                
-                ListaUsuariosPAT = await _userManager.GetUsersInRoleAsync("M_Pat"),
-                ListaUsuariosBPP = await _userManager.GetUsersInRoleAsync("M_BancoPovo"),
-                ListaUsuariosSA = await _userManager.GetUsersInRoleAsync("M_Sebrae"),
-                ListaUsuariosSE = await _userManager.GetUsersInRoleAsync("M_SalaEmpreendedor")
-            };
+            var list = new List<InputModelIndex>();
+            var pat = await _userManager.GetUsersInRoleAsync("M_Pat");
+
+            foreach(ApplicationUser s in pat)
+            {
+                var t = await _appServiceStatusAtendimento.ListByUser(s.UserName);
+                
+                if(t.FirstOrDefault().Online)
+                {
+                    var at = _appAtendimento.AtendimentoAtivo(s.UserName);
+
+                    if (at.Any())
+                        list.Add(new InputModelIndex() { Atendente = s.Name + " " + s.LastName, Status = "Em Atendimento" });
+
+                    else
+                        list.Add(new InputModelIndex() { Atendente = s.Name + " " + s.LastName, Status = "Disponível" });
+                }
+                else
+                    list.Add(new InputModelIndex() { Atendente = s.Name + " " + s.LastName, Status = "Indisponível" });
+            }
+
+            ListaPAT = list;
         }
 
+        private async Task LoadBPPAsync()
+        {
+            var list = new List<InputModelIndex>();
+            var pat = await _userManager.GetUsersInRoleAsync("M_BancoPovo");
+
+            foreach (ApplicationUser s in pat)
+            {
+                var t = await _appServiceStatusAtendimento.ListByUser(s.UserName);
+
+                if (t.FirstOrDefault().Online)
+                {
+                    var at = _appAtendimento.AtendimentoAtivo(s.UserName);
+
+                    if (at.Any())
+                        list.Add(new InputModelIndex() { Atendente = s.Name + " " + s.LastName, Status = "Em Atendimento" });
+
+                    else
+                        list.Add(new InputModelIndex() { Atendente = s.Name + " " + s.LastName, Status = "Disponível" });
+                }
+                else
+                    list.Add(new InputModelIndex() { Atendente = s.Name + " " + s.LastName, Status = "Indisponível" });
+            }
+
+            ListaBPP = list;
+        }
+
+        private async Task LoadSAAsync()
+        {
+            var list = new List<InputModelIndex>();
+            var pat = await _userManager.GetUsersInRoleAsync("M_Sebrae");
+
+            foreach (ApplicationUser s in pat)
+            {
+                var t = await _appServiceStatusAtendimento.ListByUser(s.UserName);
+
+                if (t.FirstOrDefault().Online)
+                {
+                    var at = _appAtendimento.AtendimentoAtivo(s.UserName);
+
+                    if (at.Any())
+                        list.Add(new InputModelIndex() { Atendente = s.Name + " " + s.LastName, Status = "Em Atendimento" });
+
+                    else
+                        list.Add(new InputModelIndex() { Atendente = s.Name + " " + s.LastName, Status = "Disponível" });
+                }
+                else
+                    list.Add(new InputModelIndex() { Atendente = s.Name + " " + s.LastName, Status = "Indisponível" });
+            }
+
+            ListaSA = list;
+        }
+
+
+        private async Task LoadSEAsync()
+        {
+            var list = new List<InputModelIndex>();
+            var pat = await _userManager.GetUsersInRoleAsync("M_SalaEmpreendedor");
+
+            foreach (ApplicationUser s in pat)
+            {
+                var t = await _appServiceStatusAtendimento.ListByUser(s.UserName);
+
+                if (t.FirstOrDefault().Online)
+                {
+                    var at = _appAtendimento.AtendimentoAtivo(s.UserName);
+
+                    if (at.Any())
+                        list.Add(new InputModelIndex() { Atendente = s.Name + " " + s.LastName, Status = "Em Atendimento" });
+
+                    else
+                        list.Add(new InputModelIndex() { Atendente = s.Name + " " + s.LastName, Status = "Disponível" });
+                }
+                else
+                    list.Add(new InputModelIndex() { Atendente = s.Name + " " + s.LastName, Status = "Indisponível" });
+            }
+
+            ListaSE = list;
+
+        }
         public async Task<IActionResult> OnGetAsync()
         {
-            await LoadAsync();
+            await LoadPATAsync();
+            await LoadBPPAsync();
+            await LoadSAAsync();
+            await LoadSEAsync();
             return Page();
         }
     }

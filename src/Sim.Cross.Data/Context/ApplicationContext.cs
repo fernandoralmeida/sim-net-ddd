@@ -39,6 +39,7 @@ namespace Sim.Cross.Data.Context
         public DbSet<Inscricao> Inscricao { get; set; }
         public DbSet<Tipo> Tipos { get; set; }
         public DbSet<Contador> Contador { get; set; }
+        public DbSet<StatusAtendimento> StatusAtendimento { get; set; }
        
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -82,6 +83,8 @@ namespace Sim.Cross.Data.Context
             modelBuilder.Entity<Tipo>().ToTable("Tipos");
             modelBuilder.Entity<Contador>().ToTable("Protocolos");
             modelBuilder.Entity<RaeSebrae>().ToTable("RaeSebrae");
+            modelBuilder.Entity<StatusAtendimento>().ToTable("StatusAtendimento");
+
 
             modelBuilder.ApplyConfiguration(new Config.Entity.AmbulanteMap());
             modelBuilder.ApplyConfiguration(new Config.Entity.AtendimentoMap());
@@ -97,6 +100,7 @@ namespace Sim.Cross.Data.Context
             modelBuilder.ApplyConfiguration(new Config.Entity.InscricaoMap());
             modelBuilder.ApplyConfiguration(new Config.Entity.TipoMap());
             modelBuilder.ApplyConfiguration(new Config.Entity.ContadorMap());
+            modelBuilder.ApplyConfiguration(new Config.Entity.StatusAtendimentoMap());
 
             base.OnModelCreating(modelBuilder);
         }

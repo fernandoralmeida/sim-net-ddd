@@ -1,0 +1,53 @@
+﻿@page
+@model Sim.UI.Web.Pages.Atendimento.StatusModel
+@{
+    ViewData["Title"] = "Meu Status";
+    ViewData["ActivePageLi"] = Web.Pages.Shared.LayoutNavPages.AtendimentoStatus;
+}
+
+<!---->
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+
+<div class="card">
+    <form method="post">
+        <table class="responsive-table">
+            <thead>
+                <tr>
+                    <th>
+                        #
+                    </th>
+                    <th>
+                        Identificador do Atendente
+                    </th>
+                    <th>
+                        Disponível para Atender?
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Input.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Input.UnserName)
+                    </td>
+                    <td>
+                        @if (Model.Input.Online)
+                        {
+                            <button asp-route-id="@Model.Input.Id" type="submit" class="btn-flat"><i class="material-icons large">done</i></button>
+                        }
+                        else
+                        {
+                            <button asp-route-id="@Model.Input.Id" type="submit" class="btn-flat"><i class="material-icons large">check_box_outline_blank</i></button>
+                        }
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </form>
+
+</div>
