@@ -357,3 +357,9 @@ nav.navbar .brand-logo {
                 background-color: #fafafa;
             }
 
+/* Card */
+.card-header{
+    padding:10px 10px 10px 10px;
+    vertical-align:middle;
+    font-weight:bold;
+}

@@ -7,16 +7,15 @@
     {
         Layout = "/Pages/Shared/_Layout.cshtml";
     }
-
-    ViewData["ActivePage"] = Sim.UI.Web.Pages.Shared.LayoutNavPages.Configuracoes;
-    ViewData["ActivePageLi"] = Sim.UI.Web.Pages.Shared.LayoutNavPages.ConfigContas;
+    ViewData["ActivePage"] = Web.Pages.Shared.LayoutNavPages.Inicio;
+    ViewData["ActivePageLi"] = Web.Pages.Shared.LayoutNavPages.InicioTriagem;
 }
+<!---->
+<partial name="_TriagemNav" />
 
-<partial name="_AdminNav" />
 <div style="margin:20px 20px 20px 20px;">
     @RenderBody()
 </div>
-
 
 @section Scripts {
     @RenderSection("Scripts", required: false)

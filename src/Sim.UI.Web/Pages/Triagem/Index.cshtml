@@ -1,0 +1,249 @@
+﻿@page
+@model Sim.UI.Web.Pages.Triagem.IndexModel
+
+@using Microsoft.AspNetCore.Identity
+@using Sim.Cross.Identity
+
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+
+<div id="autoloadcontainer" class="row">
+    <div class="col s12 m12 l6">
+        <div class="card">
+            <div class="red lighten-2 white-text card-header">
+                <h6>PAT</h6>
+            </div>
+            <table class="responsive-table">
+                <thead>
+                    <tr>
+                        <th>
+                            #
+                        </th>
+                        <th>
+                            Nome
+                        </th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @{
+                        int cont = 0;
+                    }
+
+                    @foreach (var item in Model.Input.ListaUsuariosPAT)
+                    {
+
+                        <tr>
+                            <td>
+                                @{cont++;}
+                                @cont.ToString()
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                                @Html.DisplayFor(modelItem => item.LastName)
+                            </td>
+                            <td>
+                                @if (cont == 1)
+                                {
+                                    <span class="new badge blue" data-badge-caption="Em atendimento"></span>
+                                }
+                                else if (cont == 3)
+                                {
+                                    <span class="new badge red" data-badge-caption="Indisponível"></span>
+                                }
+                                else
+                                {
+                                    <span class="new badge green" data-badge-caption="Disponível"></span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="col s12 m12 l6">
+        <div class="card">
+            <div class="green lighten-2 white-text card-header">
+                <h6>Banco do Povo</h6>
+            </div>
+            <table class="responsive-table">
+                <thead>
+                    <tr>
+                        <th>
+                            #
+                        </th>
+                        <th>
+                            Nome
+                        </th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @{
+                        int cont1 = 0;
+                    }
+
+                    @foreach (var item in Model.Input.ListaUsuariosBPP)
+                    {
+
+                        <tr>
+                            <td>
+                                @{cont1++;}
+                                @cont1.ToString()
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                                @Html.DisplayFor(modelItem => item.LastName)
+                            </td>
+                            <td>
+                                @if (cont == 1)
+                                {
+                                    <span class="new badge blue" data-badge-caption="Em atendimento"></span>
+                                }
+                                else if (cont == 3)
+                                {
+                                    <span class="new badge red" data-badge-caption="Indisponível"></span>
+                                }
+                                else
+                                {
+                                    <span class="new badge green" data-badge-caption="Disponível"></span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="col s12 m12 l6">
+        <div class="card">
+            <div class="blue lighten-2 white-text card-header">
+                <h6>Sebrae Aqui</h6>
+            </div>
+            <table class="responsive-table">
+                <thead>
+                    <tr>
+                        <th>
+                            #
+                        </th>
+                        <th>
+                            Nome
+                        </th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @{
+                        int cont2 = 0;
+                    }
+
+                    @foreach (var item in Model.Input.ListaUsuariosSA)
+                    {
+
+                        <tr>
+                            <td>
+                                @{cont2++;}
+                                @cont2.ToString()
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                                @Html.DisplayFor(modelItem => item.LastName)
+                            </td>
+                            <td>
+                                @if (cont == 1)
+                                {
+                                    <span class="new badge blue" data-badge-caption="Em atendimento"></span>
+                                }
+                                else if (cont == 3)
+                                {
+                                    <span class="new badge red" data-badge-caption="Indisponível"></span>
+                                }
+                                else
+                                {
+                                    <span class="new badge green" data-badge-caption="Disponível"></span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="col s12 m12 l6">
+        <div class="card">
+            <div class="orange lighten-2 white-text card-header">
+                <h6>PAT</h6>
+            </div>
+            <table class="responsive-table">
+                <thead>
+                    <tr>
+                        <th>
+                            #
+                        </th>
+                        <th>
+                            Nome
+                        </th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @{
+                        int cont3 = 0;
+                    }
+
+                    @foreach (var item in Model.Input.ListaUsuariosSE)
+                    {
+
+                        <tr>
+                            <td>
+                                @{cont3++;}
+                                @cont3.ToString()
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                                @Html.DisplayFor(modelItem => item.LastName)
+                            </td>
+                            <td>
+                                @if (cont == 1)
+                                {
+                                    <span class="new badge blue" data-badge-caption="Em atendimento"></span>
+                                }
+                                else if (cont == 3)
+                                {
+                                    <span class="new badge red" data-badge-caption="Indisponível"></span>
+                                }
+                                else
+                                {
+                                    <span class="new badge green" data-badge-caption="Disponível"></span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            setInterval(function () { $('#autoloadcontainer').load('/Home/GetPicture'); }, 2000)
+        });
+    </script>
+}

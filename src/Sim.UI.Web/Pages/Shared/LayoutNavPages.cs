@@ -10,6 +10,7 @@ namespace Sim.UI.Web.Pages.Shared
         public static string InicioBPP => "InicioBPP";
         public static string InicioSA => "InicioSA";
         public static string InicioSE => "InicioSE";
+        public static string InicioTriagem => "InicioTriagem";
         public static string Atendimento => "Atendimento";
         public static string AtendimentoDiario => "AtendimentoDiario";
         public static string AtendimentoAtivo => "AtendimentoAtivo";
@@ -35,6 +36,7 @@ namespace Sim.UI.Web.Pages.Shared
         public static string InicioBPPNavClass(ViewContext viewContext) => PageNavClassLi(viewContext, InicioBPP);
         public static string InicioSANavClass(ViewContext viewContext) => PageNavClassLi(viewContext, InicioSA);
         public static string InicioSENavClass(ViewContext viewContext) => PageNavClassLi(viewContext, InicioSE);
+        public static string InicioTriagemNavClass(ViewContext viewContext) => PageNavClassLi(viewContext, InicioTriagem);
         public static string AtendimentoNavClass(ViewContext viewContext) => PageNavClass(viewContext, Atendimento);
         public static string AtendimentoDiarioNavClass(ViewContext viewContext) => PageNavClassLi(viewContext, AtendimentoDiario);
         public static string AtendimentoAtivoNavClass(ViewContext viewContext) => PageNavClassLi(viewContext, AtendimentoAtivo);

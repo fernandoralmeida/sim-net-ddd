@@ -2,30 +2,23 @@
 @model Sim.UI.Web.Pages.Agenda.IndexModel
 @{
     ViewData["Title"] = "Eventos";
-    ViewData["ActivePage"] = Web.Pages.Shared.LayoutNavPages.Agenda;
-    ViewData["ActivePageLi"] = Web.Pages.Shared.LayoutNavPages.AgendaEventos;
 }
 
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
+<nav style="margin-bottom:20px;">
+    <div class="nav-wrapper white">
+        <form method="post">
+            <div class="input-field">
+                <input asp-for="Input.Evento" type="search" placeholder="Consultar Evento" required>
+                <label class="label-icon" asp-for="Input.Evento"><i class="black-text material-icons">search</i></label>
+                <i class="material-icons">close</i>
+            </div>
+        </form>
+    </div>
+</nav>
 
-
-    <nav style="margin-bottom:20px;">
-        <div class="nav-wrapper white">
-            <form method="post">
-                <div class="input-field">
-                    <input asp-for="Input.Evento" type="search" placeholder="Consultar Evento" required>
-                    <label class="label-icon" asp-for="Input.Evento"><i class="black-text material-icons">search</i></label>
-                    <i class="material-icons">close</i>
-                </div>
-            </form>
-        </div>
-    </nav>
-
-
-
-    <partial name="_AgendaList" model="Model.Input.ListaEventos" />
-
+<partial name="_AgendaList" model="Model.Input.ListaEventos" />
 
 <!-- Modal -->
 <div class="modal fade" id="viewmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="viewmodalLabel" aria-hidden="true">
