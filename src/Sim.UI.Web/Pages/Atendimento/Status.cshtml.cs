@@ -35,18 +35,16 @@ namespace Sim.UI.Web.Pages.Atendimento
 
         private async Task LoadAsync()
         {
-            var t = Task.Run(() => _appServiceStatusAtendimento.ListByUser(User.Identity.Name));
-            await t;
-
-            if(!t.Result.Any())
+            var t = await  _appServiceStatusAtendimento.ListByUser(User.Identity.Name);
+            
+            if(!t.Any())
             {
                 _appServiceStatusAtendimento.Add(new StatusAtendimento() {Id = new Guid(), UnserName = User.Identity.Name, Online = true });
             }
 
-            var t2 = Task.Run(() => _appServiceStatusAtendimento.ListByUser(User.Identity.Name));
-            await t2;
+            var t2 = await _appServiceStatusAtendimento.ListByUser(User.Identity.Name);             
             
-            foreach (StatusAtendimento sta in t2.Result)
+            foreach (StatusAtendimento sta in t2)
             {               
                 Input.Id = sta.Id;
                 Input.UnserName = sta.UnserName;

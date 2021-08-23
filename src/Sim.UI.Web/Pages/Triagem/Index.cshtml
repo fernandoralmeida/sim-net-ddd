@@ -12,7 +12,7 @@
 
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
-<div id="autoloadcontainer" class="row">
+<div class="row">
     <div class="col s12 m12 l6">
         <div class="card">
             <div class="red lighten-2 white-text card-header">
@@ -22,9 +22,6 @@
                 <thead>
                     <tr>
                         <th>
-                            #
-                        </th>
-                        <th>
                             Nome
                         </th>
                         <th>Status</th>
@@ -32,18 +29,10 @@
                 </thead>
                 <tbody>
 
-                    @{
-                        int cont = 0;
-                    }
-
                     @foreach (var item in Model.ListaPAT)
                     {
 
                         <tr>
-                            <td>
-                                @{cont++;}
-                                @cont.ToString()
-                            </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Atendente)
                             </td>
@@ -77,9 +66,6 @@
                 <thead>
                     <tr>
                         <th>
-                            #
-                        </th>
-                        <th>
                             Nome
                         </th>
                         <th>Status</th>
@@ -87,18 +73,10 @@
                 </thead>
                 <tbody>
 
-                    @{
-                        int cont1 = 0;
-                    }
-
                     @foreach (var item in Model.ListaBPP)
                     {
 
                         <tr>
-                            <td>
-                                @{cont++;}
-                                @cont.ToString()
-                            </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Atendente)
                             </td>
@@ -113,7 +91,7 @@
                                 }
                                 else
                                 {
-                                    <span class="new badge red" data-badge-caption="Indisponível"></span>
+                                    <span class="new badge red" data-badge-caption="@item.Status.ToUpper()"></span>
                                 }
                             </td>
                         </tr>
@@ -122,7 +100,9 @@
             </table>
         </div>
     </div>
+</div>
 
+<div class="row">
     <div class="col s12 m12 l6">
         <div class="card">
             <div class="blue lighten-2 white-text card-header">
@@ -132,9 +112,6 @@
                 <thead>
                     <tr>
                         <th>
-                            #
-                        </th>
-                        <th>
                             Nome
                         </th>
                         <th>Status</th>
@@ -142,18 +119,10 @@
                 </thead>
                 <tbody>
 
-                    @{
-                        int cont2 = 0;
-                    }
-
                     @foreach (var item in Model.ListaSA)
                     {
 
                         <tr>
-                            <td>
-                                @{cont++;}
-                                @cont.ToString()
-                            </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Atendente)
                             </td>
@@ -168,7 +137,7 @@
                                 }
                                 else
                                 {
-                                    <span class="new badge red" data-badge-caption="Indisponível"></span>
+                                    <span class="new badge red" data-badge-caption="@item.Status.ToUpper()"></span>
                                 }
                             </td>
                         </tr>
@@ -187,9 +156,6 @@
                 <thead>
                     <tr>
                         <th>
-                            #
-                        </th>
-                        <th>
                             Nome
                         </th>
                         <th>Status</th>
@@ -197,18 +163,10 @@
                 </thead>
                 <tbody>
 
-                    @{
-                        int cont3 = 0;
-                    }
-
                     @foreach (var item in Model.ListaSE)
                     {
-
                         <tr>
-                            <td>
-                                @{cont++;}
-                                @cont.ToString()
-                            </td>
+
                             <td>
                                 @Html.DisplayFor(modelItem => item.Atendente)
                             </td>
@@ -223,7 +181,7 @@
                                 }
                                 else
                                 {
-                                    <span class="new badge red" data-badge-caption="Indisponível"></span>
+                                    <span class="new badge red" data-badge-caption="@item.Status.ToUpper()"></span>
                                 }
                             </td>
                         </tr>
@@ -236,9 +194,9 @@
 
 @section scripts
 {
-    <script type="text/javascript">
-        $(function () {
-            setInterval(function () { $('#autoloadcontainer').load('/Home/GetPicture'); }, 2000)
-        });
+    <script language="javascript">
+        setInterval(function () {
+            window.location.reload(1);
+        }, 30000);
     </script>
 }

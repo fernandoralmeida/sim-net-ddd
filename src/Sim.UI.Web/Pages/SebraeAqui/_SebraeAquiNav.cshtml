@@ -2,11 +2,11 @@
 
 <div class="navbar navbar-fixed" >
     <nav class="navbar">
-        <div class="nav-wrapper white">            
-            <a class="brand-logo black-text" style="margin-left:10px;">Sebrae Aqui</a>
+        <div class="nav-wrapper blue-grey lighten-2">            
+            <a class="brand-logo" style="margin-left:10px;">Sebrae Aqui</a>
             <ul class="right">
-                <li><a asp-page="/SebraeAqui/Index" class="black-text @SebraeAquiNavPages.InicioNavClass(ViewContext)">Não Lançados</a></li>
-                <li><a asp-page="/SebraeAqui/Rae.Lancados" class="black-text @SebraeAquiNavPages.AtendiementoNavClass(ViewContext)">Lançados</a></li>
+                <li><a asp-page="/SebraeAqui/Index" class="@SebraeAquiNavPages.InicioNavClass(ViewContext)">Não Lançados</a></li>
+                <li><a asp-page="/SebraeAqui/Rae.Lancados" class="@SebraeAquiNavPages.AtendiementoNavClass(ViewContext)">Lançados</a></li>
                 <li class="blue lighten-1 waves-effect waves-light"><a asp-area="" asp-page="/Pessoa/Index">Novo Atendimento</a></li>
             </ul>
         </div>

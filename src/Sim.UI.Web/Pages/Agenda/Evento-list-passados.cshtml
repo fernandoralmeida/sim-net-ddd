@@ -9,12 +9,13 @@
 
 <nav style="margin-bottom:20px;">
     <div class="nav-wrapper white">
-        <form method="post">
-            <div class="input-field">
+        <form method="post" class="row">
+            <div class="input-field col s6 l6 m6">
                 <input asp-for="Input.Evento" type="search" placeholder="Consultar Evento" required>
                 <label class="label-icon" asp-for="Input.Evento"><i class="black-text material-icons">search</i></label>
                 <i class="material-icons">close</i>
             </div>
+            <button class="btn waves-effect waves-light" type="submit" name="action">Pesquisar</button>
         </form>
     </div>
 </nav>

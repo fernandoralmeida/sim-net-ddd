@@ -59,22 +59,36 @@ namespace Sim.UI.Web.Pages.Triagem
             var list = new List<InputModelIndex>();
             var pat = await _userManager.GetUsersInRoleAsync("M_Pat");
 
-            foreach(ApplicationUser s in pat)
+            foreach (ApplicationUser s in pat)
             {
-                var t = await _appServiceStatusAtendimento.ListByUser(s.UserName);
-                
-                if(t.FirstOrDefault().Online)
-                {
-                    var at = _appAtendimento.AtendimentoAtivo(s.UserName);
 
-                    if (at.Any())
+                var t = await _appServiceStatusAtendimento.ListByUser(s.UserName);
+
+                if (t.Any())
+
+                    if (t.FirstOrDefault().Online)
+                    {
+                        var ativo = _appAtendimento.AtendimentoAtivo(s.UserName);
+
+                        if (ativo.Any())
+                            list.Add(new InputModelIndex() { Atendente = s.Name + " " + s.LastName, Status = "Em Atendimento" });
+
+                        else
+                            list.Add(new InputModelIndex() { Atendente = s.Name + " " + s.LastName, Status = "Disponível" });
+                    }
+                    else
+                        list.Add(new InputModelIndex() { Atendente = s.Name + " " + s.LastName, Status = "Indisponível" });
+                else
+                {
+                    var ativo = _appAtendimento.AtendimentoAtivo(s.UserName);
+
+                    if (ativo.Any())
                         list.Add(new InputModelIndex() { Atendente = s.Name + " " + s.LastName, Status = "Em Atendimento" });
 
                     else
                         list.Add(new InputModelIndex() { Atendente = s.Name + " " + s.LastName, Status = "Disponível" });
                 }
-                else
-                    list.Add(new InputModelIndex() { Atendente = s.Name + " " + s.LastName, Status = "Indisponível" });
+
             }
 
             ListaPAT = list;
@@ -89,18 +103,30 @@ namespace Sim.UI.Web.Pages.Triagem
             {
                 var t = await _appServiceStatusAtendimento.ListByUser(s.UserName);
 
-                if (t.FirstOrDefault().Online)
-                {
-                    var at = _appAtendimento.AtendimentoAtivo(s.UserName);
+                if (t.Any())
 
-                    if (at.Any())
+                    if (t.FirstOrDefault().Online)
+                    {
+                        var ativo = _appAtendimento.AtendimentoAtivo(s.UserName);
+
+                        if (ativo.Any())
+                            list.Add(new InputModelIndex() { Atendente = s.Name + " " + s.LastName, Status = "Em Atendimento" });
+
+                        else
+                            list.Add(new InputModelIndex() { Atendente = s.Name + " " + s.LastName, Status = "Disponível" });
+                    }
+                    else
+                        list.Add(new InputModelIndex() { Atendente = s.Name + " " + s.LastName, Status = "Indisponível" });
+                else
+                {
+                    var ativo = _appAtendimento.AtendimentoAtivo(s.UserName);
+
+                    if (ativo.Any())
                         list.Add(new InputModelIndex() { Atendente = s.Name + " " + s.LastName, Status = "Em Atendimento" });
 
                     else
                         list.Add(new InputModelIndex() { Atendente = s.Name + " " + s.LastName, Status = "Disponível" });
                 }
-                else
-                    list.Add(new InputModelIndex() { Atendente = s.Name + " " + s.LastName, Status = "Indisponível" });
             }
 
             ListaBPP = list;
@@ -115,18 +141,30 @@ namespace Sim.UI.Web.Pages.Triagem
             {
                 var t = await _appServiceStatusAtendimento.ListByUser(s.UserName);
 
-                if (t.FirstOrDefault().Online)
-                {
-                    var at = _appAtendimento.AtendimentoAtivo(s.UserName);
+                if (t.Any())
 
-                    if (at.Any())
+                    if (t.FirstOrDefault().Online)
+                    {
+                        var ativo = _appAtendimento.AtendimentoAtivo(s.UserName);
+
+                        if (ativo.Any())
+                            list.Add(new InputModelIndex() { Atendente = s.Name + " " + s.LastName, Status = "Em Atendimento" });
+
+                        else
+                            list.Add(new InputModelIndex() { Atendente = s.Name + " " + s.LastName, Status = "Disponível" });
+                    }
+                    else
+                        list.Add(new InputModelIndex() { Atendente = s.Name + " " + s.LastName, Status = "Indisponível" });
+                else
+                {
+                    var ativo = _appAtendimento.AtendimentoAtivo(s.UserName);
+
+                    if (ativo.Any())
                         list.Add(new InputModelIndex() { Atendente = s.Name + " " + s.LastName, Status = "Em Atendimento" });
 
                     else
                         list.Add(new InputModelIndex() { Atendente = s.Name + " " + s.LastName, Status = "Disponível" });
                 }
-                else
-                    list.Add(new InputModelIndex() { Atendente = s.Name + " " + s.LastName, Status = "Indisponível" });
             }
 
             ListaSA = list;
@@ -142,18 +180,30 @@ namespace Sim.UI.Web.Pages.Triagem
             {
                 var t = await _appServiceStatusAtendimento.ListByUser(s.UserName);
 
-                if (t.FirstOrDefault().Online)
-                {
-                    var at = _appAtendimento.AtendimentoAtivo(s.UserName);
+                if (t.Any())
 
-                    if (at.Any())
+                    if (t.FirstOrDefault().Online)
+                    {
+                        var ativo = _appAtendimento.AtendimentoAtivo(s.UserName);
+
+                        if (ativo.Any())
+                            list.Add(new InputModelIndex() { Atendente = s.Name + " " + s.LastName, Status = "Em Atendimento" });
+
+                        else
+                            list.Add(new InputModelIndex() { Atendente = s.Name + " " + s.LastName, Status = "Disponível" });
+                    }
+                    else
+                        list.Add(new InputModelIndex() { Atendente = s.Name + " " + s.LastName, Status = "Indisponível" });
+                else
+                {
+                    var ativo = _appAtendimento.AtendimentoAtivo(s.UserName);
+
+                    if (ativo.Any())
                         list.Add(new InputModelIndex() { Atendente = s.Name + " " + s.LastName, Status = "Em Atendimento" });
 
                     else
                         list.Add(new InputModelIndex() { Atendente = s.Name + " " + s.LastName, Status = "Disponível" });
                 }
-                else
-                    list.Add(new InputModelIndex() { Atendente = s.Name + " " + s.LastName, Status = "Indisponível" });
             }
 
             ListaSE = list;
