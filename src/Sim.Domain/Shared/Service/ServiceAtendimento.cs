@@ -92,5 +92,10 @@ namespace Sim.Domain.Shared.Service
         {
             return atendimentos.Where(a => a.RaeNaoLancados(a));
         }
+
+        public async Task<IEnumerable<Atendimento>> GetByUserName(string username)
+        {
+            return await _atendimento.GetByUserName(username);
+        }
     }
 }

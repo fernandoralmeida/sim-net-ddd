@@ -14,7 +14,7 @@ namespace Sim.UI.Web.Pages.Triagem
     using Sim.Cross.Identity;
     using Sim.Application.Shared.Interface;
 
-    [Authorize]
+    //[Authorize]
     public class IndexModel : PageModel
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -169,7 +169,6 @@ namespace Sim.UI.Web.Pages.Triagem
 
             ListaSA = list;
         }
-
 
         private async Task LoadSEAsync()
         {

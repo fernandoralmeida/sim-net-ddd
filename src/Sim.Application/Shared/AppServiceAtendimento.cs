@@ -92,5 +92,10 @@ namespace Sim.Application.Shared
         {
             return _atendimento.ListarRaeNaoLancados(MeusAtendimentosRae(userid));
         }
+
+        public async Task<IEnumerable<Atendimento>> GetByUserName(string username)
+        {
+            return await _atendimento.GetByUserName(username);
+        }
     }
 }

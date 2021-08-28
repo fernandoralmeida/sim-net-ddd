@@ -133,5 +133,12 @@ namespace Sim.Cross.Data.Repository.Shared
 
             return lista;
         }
+
+        public async Task<IEnumerable<Atendimento>> GetByUserName(string username)
+        {
+            var t = Task.Run(() => _db.Atendimento.Where(u => u.Owner_AppUser_Id == username));
+            await t;
+            return t.Result;
+        }
     }
 }
