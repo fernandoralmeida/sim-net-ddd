@@ -39,5 +39,10 @@ namespace Sim.Domain.Shared.Entity
         {
             return obj.Sebrae == null && obj.Status != "Cancelado";
         }
+
+        public bool BySetor(Atendimento obj, string setor_name)
+        {
+            return obj.Setor == setor_name;
+        }
     }
 }

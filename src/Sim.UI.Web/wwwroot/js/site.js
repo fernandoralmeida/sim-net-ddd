@@ -29,7 +29,7 @@ $(document).ready(function () {
 
     $('select').formSelect();
 
-    $('.collapsible').collapsible();
+    $('.collapsible').collapsible({ accordion:true });
 
     $('.sidenav').sidenav();
 

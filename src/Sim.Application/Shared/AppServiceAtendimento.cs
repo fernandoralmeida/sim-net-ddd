@@ -97,5 +97,10 @@ namespace Sim.Application.Shared
         {
             return await _atendimento.GetByUserName(username);
         }
+
+        public async Task< IEnumerable<KeyValuePair<string, int>>> BySetor(string setor)
+        {
+            return await _atendimento.BySetor(setor);
+        }
     }
 }

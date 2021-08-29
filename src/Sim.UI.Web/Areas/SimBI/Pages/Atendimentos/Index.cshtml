@@ -10,159 +10,62 @@
 
 <div class="row">
 
-
-
-
-    <div class="col s12 m12 l12">
-        <ul class="collection with-header">
-            @foreach (var item in Model.Input.Atendimentos)
-            {
-                <li class="collection-header"><span class="new badge blue" data-badge-caption="@item.Value"></span>@Html.DisplayFor(modelItem => item.Key)</li>
-            }
-            @foreach (var item in Model.Input.Servicos)
-            {
-                <li class="collection-header"><span class="new badge large green" data-badge-caption="@item.Value"></span>@Html.DisplayFor(modelItem => item.Key)</li>
-            }
-            <li class="collection-item">
-                <ul class="collapsible z-depth-0">
-                    <li>
-                        <div class="collapsible-header"><i class="material-icons">access_time</i>Atendimento por Atendente</div>
-                        <div class="collapsible-body">
-                            <div class="center">
-                                <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Detalhar Meus Atendimentos</a>
-                            </div>
-                            <ul class="collection with-header">
-                                @foreach (var item in Model.Input.Operador)
+    <ul class="collapsible popout">
+        @foreach (var setor in Model.Input)
+        {
+            <li>
+                <div class="collapsible-header">@setor.FirstOrDefault().Key<span class="new badge blue" data-badge-caption="@setor.FirstOrDefault().Value">Atendimentos</span></div>
+                <div class="collapsible-body white">
+                    <div class="row">
+                        <div class="col s12 m4 l4">
+                            <ul class="collection z-depth-1">
+                                <li class="collection-item"><i class="material-icons right">handyman</i>Serviços Executados</li>
+                                @foreach (var op in setor)
                                 {
-                                    <li class="collection-item"><span class="new badge green" data-badge-caption="@item.Value"></span>@Html.DisplayFor(modelItem => item.Key)</li>
+                                    @if (op.Key.Contains("Servico-"))
+                                    {
+                                        <li class="collection-item"><span class="new badge green lighten-1" data-badge-caption="@op.Value"></span>@op.Key.Replace("Servico-", "")</li>
+                                    }
                                 }
                             </ul>
                         </div>
-                    </li>
-                </ul>
+                        <div class="col s12 m4 l4">
+                            <ul class="collection z-depth-1">
+                                <li class="collection-item"><i class="material-icons right">desktop_windows</i>Canais de Atendimento</li>
+                                @foreach (var op in setor)
+                                {
+                                    @if (op.Key.Contains("Canal-"))
+                                    {
+                                        <li class="collection-item"><span class="new badge orange lighten-1" data-badge-caption="@op.Value"></span>@op.Key.Replace("Canal-", "")</li>
+                                    }
+                                }
+                            </ul>
+                        </div>
+                        <div class="col s12 m4 l4">
+                            <ul class="collection z-depth-1">
+                                <li class="collection-item"><i class="material-icons right">account_box</i>Atendimento por Atendente</li>
+                                @foreach (var op in setor)
+                                {
+                                    @if (op.Key.Contains("User-"))
+                                    {
+                                        <li class="collection-item"><span class="new badge blue lighten-1" data-badge-caption="@op.Value"></span>@op.Key.Replace("User-", "")</li>
+                                    }
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </li>
-        </ul>
-    </div>
-
-    <div class="col s12 m12 l6">
-        <ul class="collection with-header z-depth-1">
-            @foreach (var item in Model.ListaPAT.Atendimentos)
-            {
-                <li class="collection-header"><span class="new badge blue" data-badge-caption="@item.Value">@Html.DisplayFor(modelItem => item.Key)</span>PAT</li>
-            }
-            @foreach (var item in Model.ListaPAT.Servicos)
-            {
-                <li class="collection-item"><span class="new badge green" data-badge-caption="@item.Value"></span>@Html.DisplayFor(modelItem => item.Key)</li>
-            }
-        </ul>
-    </div>
-
-    <div class="col s12 m12 l6">
-        <ul class="collection with-header z-depth-1">
-
-            @foreach (var item in Model.ListaBPP.Atendimentos)
-            {
-                <li class="collection-header"><span class="new badge blue" data-badge-caption="@item.Value">@Html.DisplayFor(modelItem => item.Key)</span>Banco do Povo</li>
-            }
-            @foreach (var item in Model.ListaBPP.Servicos)
-            {
-                <li class="collection-item"><span class="new badge green" data-badge-caption="@item.Value"></span>@Html.DisplayFor(modelItem => item.Key)</li>
-            }
-        </ul>
-    </div>
-</div>
-
-<div class="row">
-
-    <div class="col s12 m12 l6">
-        <ul class="collection with-header z-depth-1">
-            @foreach (var item in Model.ListaSE.Atendimentos)
-            {
-                <li class="collection-header"><span class="new badge blue" data-badge-caption="@item.Value">@Html.DisplayFor(modelItem => item.Key)</span>Sala do Empreendedor</li>
-            }
-            @foreach (var item in Model.ListaSE.Servicos)
-            {
-                <li class="collection-item"><span class="new badge green" data-badge-caption="@item.Value"></span>@Html.DisplayFor(modelItem => item.Key)</li>
-            }
-        </ul>
-    </div>
-
-    <div class="col s12 m12 l6">
-        <ul class="collection with-header z-depth-1">
-            @foreach (var item in Model.ListaSA.Atendimentos)
-            {
-                <li class="collection-header"><span class="new badge blue" data-badge-caption="@item.Value">@Html.DisplayFor(modelItem => item.Key)</span>Sebrae Aqui</li>
-            }
-            @foreach (var item in Model.ListaSA.Servicos)
-            {
-                <li class="collection-item"><span class="new badge green" data-badge-caption="@item.Value"></span>@Html.DisplayFor(modelItem => item.Key)</li>
-            }
-        </ul>
-    </div>
-
-    <div class="col s12 m12 l6">
-        <ul class="collection with-header z-depth-1">
-            @foreach (var item in Model.ListaSA.Atendimentos)
-            {
-                <li class="collection-header"><span class="new badge blue" data-badge-caption="@item.Value">@Html.DisplayFor(modelItem => item.Key)</span>Sebrae Aqui</li>
-            }
-            @foreach (var item in Model.ListaSA.Servicos)
-            {
-                <li class="collection-item"><span class="new badge green" data-badge-caption="@item.Value"></span>@Html.DisplayFor(modelItem => item.Key)</li>
-            }
-        </ul>
-    </div>
-
-</div>
-
-<div class="row">
-    <ul class="collapsible expandable">
-        <li>
-            <div class="collapsible-header"><i class="material-icons">filter_drama</i>Atendimentos</div>
-            <div class="collapsible-body">
-                <ul class="collection with-header">
-                    @foreach (var item in Model.Input.Atendimentos)
-                    {
-                        <li class="collection-header"><span class="new badge blue" data-badge-caption="@item.Value"></span>@Html.DisplayFor(modelItem => item.Key)</li>
-                    }
-                    @foreach (var item in Model.Input.Servicos)
-                    {
-                        <li class="collection-header"><span class="new badge large green" data-badge-caption="@item.Value"></span>@Html.DisplayFor(modelItem => item.Key)</li>
-                    }
-                    <li class="collection-item">
-                        <ul class="collapsible z-depth-0">
-                            <li>
-                                <div class="collapsible-header"><i class="material-icons">access_time</i>Atendimento por Atendente</div>
-                                <div class="collapsible-body">
-                                    <div class="center">
-                                        <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Detalhar Meus Atendimentos</a>
-                                    </div>
-                                    <ul class="collection with-header">
-                                        @foreach (var item in Model.Input.Operador)
-                                        {
-                                            <li class="collection-item"><span class="new badge green" data-badge-caption="@item.Value"></span>@Html.DisplayFor(modelItem => item.Key)</li>
-                                        }
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </li>
-        <li>
-            <div class="collapsible-header"><i class="material-icons">place</i>Second</div>
-            <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-        </li>
-        <li>
-            <div class="collapsible-header"><i class="material-icons">whatshot</i>Third</div>
-            <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-        </li>
+        }
     </ul>
 </div>
 
+<div class="center">
+    <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Detalhar Meus Atendimentos</a>
+</div>
+
 <!-- Modal Structure -->
-<div id="modal1" class="modal">
+<div id="modal1" class="modal modal-fixed-footer">
     <div class="modal-content">
         <ul class="collection with-header">
             @foreach (var item in Model.ListaOperador.Atendimentos)

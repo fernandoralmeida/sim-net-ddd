@@ -57,12 +57,12 @@ namespace Sim.Cross.Data.Repository.Shared
 
         public IEnumerable<Atendimento> GetByServicos(string servicos)
         {
-            return _db.Atendimento.Where(u => u.Servicos == servicos);
+            return _db.Atendimento.Where(u => u.Servicos == servicos && u.Status == "Finalizado");
         }
 
         public IEnumerable<Atendimento> GetBySetor(string setor)
         {
-            return _db.Atendimento.Where(u => u.Setor == setor);
+            return _db.Atendimento.Where(u => u.Setor == setor && u.Status == "Finalizado");
         }
 
         public IEnumerable<Atendimento> ListByPeriodo(DateTime? dataI, DateTime? dataF)
@@ -74,7 +74,7 @@ namespace Sim.Cross.Data.Repository.Shared
                 .Include(e => e.Empresa)
                 .Include(s => s.Sebrae)
                 .Where(a => a.Data.Value.Date >= dataI
-                && a.Data.Value.Date <= dataF).OrderBy(o => o.Data);
+                && a.Data.Value.Date <= dataF && a.Status == "Finalizado").OrderBy(o => o.Data);
 
             return list;
         }
@@ -96,7 +96,7 @@ namespace Sim.Cross.Data.Repository.Shared
                 .Include(u => u.Pessoa)
                 .Include(e => e.Empresa)
                 .Include(s => s.Sebrae)
-                .Where(a => a.Ativo == true).OrderBy(a => a.Data).OrderBy(o => o.Data);
+                .Where(a => a.Ativo == true && a.Status == "Finalizado").OrderBy(a => a.Data).OrderBy(o => o.Data);
 
             return lista;
         }
@@ -129,14 +129,14 @@ namespace Sim.Cross.Data.Repository.Shared
                 .Include(u => u.Pessoa)
                 .Include(e => e.Empresa)
                 .Include(s => s.Sebrae)
-                .Where(a => a.Owner_AppUser_Id == userid).OrderBy(o => o.Data);
+                .Where(a => a.Owner_AppUser_Id == userid && a.Status=="Finalizado").OrderBy(o => o.Data);
 
             return lista;
         }
 
         public async Task<IEnumerable<Atendimento>> GetByUserName(string username)
         {
-            var t = Task.Run(() => _db.Atendimento.Where(u => u.Owner_AppUser_Id == username));
+            var t = Task.Run(() => _db.Atendimento.Where(u => u.Owner_AppUser_Id == username && u.Status=="Finalizado"));
             await t;
             return t.Result;
         }
