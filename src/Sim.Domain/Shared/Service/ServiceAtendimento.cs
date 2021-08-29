@@ -129,7 +129,7 @@ namespace Sim.Domain.Shared.Service
                 }
             }
 
-            var setores = new List<KeyValuePair<string, int>>();
+            var r_setores = new List<KeyValuePair<string, int>>();
 
             var t = Task.Run(() => {
 
@@ -147,7 +147,7 @@ namespace Sim.Domain.Shared.Service
 
                                 if (at.Servicos != null)
                                 {
-                                    string[] words = at.Servicos.ToString().Split(new Char[] { ';', ',' });
+                                    string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
 
                                     foreach (string sv in words)
                                     {
@@ -173,11 +173,9 @@ namespace Sim.Domain.Shared.Service
 
                     foreach (var x in c_setor)
                     {
-                        setores.Add(new KeyValuePair<string, int>(x.Value, x.Count));
+                        r_setores.Add(new KeyValuePair<string, int>(x.Value, x.Count));
                     }
-
-                    setores.Add(new KeyValuePair<string, int>("Serviços", _servico.Count()));
-
+                                        
                     var c_servicos = from x in _servico
                                         group x by x into g
                                         let count = g.Count()
@@ -186,8 +184,10 @@ namespace Sim.Domain.Shared.Service
 
                     foreach (var x in c_servicos)
                     {
-                        setores.Add(new KeyValuePair<string, int>(x.Value, x.Count));
+                        r_setores.Add(new KeyValuePair<string, int>(x.Value, x.Count));
                     }
+
+                    r_setores.Add(new KeyValuePair<string, int>("Servico-Total de Serviços", _servico.Count()));
 
                     var c_canais = from x in _canal
                                      group x by x into g
@@ -197,7 +197,7 @@ namespace Sim.Domain.Shared.Service
 
                     foreach (var x in c_canais)
                     {
-                        setores.Add(new KeyValuePair<string, int>(x.Value, x.Count));
+                        r_setores.Add(new KeyValuePair<string, int>(x.Value, x.Count));
                     }
 
                     var c_operador = from x in _operador
@@ -208,7 +208,7 @@ namespace Sim.Domain.Shared.Service
 
                     foreach (var x in c_operador)
                     {
-                        setores.Add(new KeyValuePair<string, int>(x.Value, x.Count));
+                        r_setores.Add(new KeyValuePair<string, int>(x.Value, x.Count));
                     }
 
                     
@@ -218,7 +218,172 @@ namespace Sim.Domain.Shared.Service
             });
             await t;
 
-            return setores;
+            return r_setores;
+        }
+
+        public async Task<IEnumerable<KeyValuePair<string, int>>> ByAll()
+        {
+            var list = _atendimento.ListAll();
+            
+            var r_all = new List<KeyValuePair<string, int>>();
+
+            var t = Task.Run(() => {
+
+                try
+                {
+                    var _servico = new List<string>();
+                    var _canal = new List<string>();
+                    var _operador = new List<string>();
+                    var _setor = new List<string>();
+
+                    foreach (Atendimento at in list)
+                    {
+                        if (at.Setor == "Espaço do Empreendedor")
+                            at.Setor = "Sala do Empreendedor";
+
+                        if (at.Servicos != null)
+                        {
+                            string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
+
+                            foreach (string sv in words)
+                            {
+                                if (sv != null && sv != string.Empty)
+                                    _servico.Add("Servico-" + sv);
+                            }
+                        }
+
+                        if (at.Canal != null)
+                            _canal.Add("Canal-" + at.Canal);
+
+                        _setor.Add("Geral");
+
+                        _operador.Add("User-" + at.Owner_AppUser_Id);
+
+                    }
+
+                    var c_setor = from x in _setor
+                                  group x by x into g
+                                  let count = g.Count()
+                                  orderby count descending
+                                  select new { Value = g.Key, Count = count };
+
+                    foreach (var x in c_setor)
+                    {
+                        r_all.Add(new KeyValuePair<string, int>(x.Value, x.Count));
+                    }
+
+                    var c_servicos = from x in _servico
+                                     group x by x into g
+                                     let count = g.Count()
+                                     orderby count descending
+                                     select new { Value = g.Key, Count = count };
+
+                    foreach (var x in c_servicos)
+                    {
+                        r_all.Add(new KeyValuePair<string, int>(x.Value, x.Count));
+                    }
+
+                    r_all.Add(new KeyValuePair<string, int>("Servico-Total de Serviços", _servico.Count()));
+
+                    var c_canais = from x in _canal
+                                   group x by x into g
+                                   let count = g.Count()
+                                   orderby count descending
+                                   select new { Value = g.Key, Count = count };
+
+                    foreach (var x in c_canais)
+                    {
+                        r_all.Add(new KeyValuePair<string, int>(x.Value, x.Count));
+                    }
+
+                    var c_operador = from x in _operador
+                                     group x by x into g
+                                     let count = g.Count()
+                                     orderby count descending
+                                     select new { Value = g.Key, Count = count };
+
+                    foreach (var x in c_operador)
+                    {
+                        r_all.Add(new KeyValuePair<string, int>(x.Value, x.Count));
+                    }
+
+
+                }
+                catch { }
+
+            });
+            await t;
+
+            return r_all;
+        }
+
+        public async Task<IEnumerable<KeyValuePair<string, int>>> ByUserName(string username)
+        {
+            var t = Task.Run(() => _atendimento.GetByUserName(username));
+            await t;
+            var r_user = new List<KeyValuePair<string, int>>();
+            try
+            {
+                List<string> _ano = new List<string>();
+                List<string> _atendimento = new List<string>();
+                List<string> _servico = new List<string>();
+
+                foreach (Atendimento at in t.Result)
+                {
+                    _atendimento.Add("Atendimentos");
+
+                    _ano.Add(at.Data.Value.Year.ToString());
+
+                    if (at.Servicos != null)
+                    {
+                        string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
+
+                        foreach (string sv in words)
+                        {
+                            if (sv != null && sv != string.Empty)
+                                _servico.Add(sv);
+                        }
+                    }
+
+                }
+
+                var c_atendimento = from x in _atendimento
+                                    group x by x into g
+                                    let count = g.Count()
+                                    orderby count descending
+                                    select new { Value = g.Key, Count = count };
+
+                foreach (var x in c_atendimento)
+                {
+                    r_user.Add(new KeyValuePair<string, int>(x.Value, x.Count));
+                }
+
+                var c_ano = from x in _ano
+                            group x by x into g
+                            let count = g.Count()
+                            orderby count descending
+                            select new { Value = g.Key, Count = count };
+
+                foreach (var x in c_ano)
+                {
+                    r_user.Add(new KeyValuePair<string, int>(x.Value, x.Count));
+                }
+
+                var c_tipo = from x in _servico
+                             group x by x into g
+                             let count = g.Count()
+                             orderby count descending
+                             select new { Value = g.Key, Count = count };
+
+                foreach (var x in c_tipo)
+                {
+                    r_user.Add(new KeyValuePair<string, int>(x.Value, x.Count));
+                }
+
+            }
+            catch { }
+
+            return r_user;
         }
     }
 }

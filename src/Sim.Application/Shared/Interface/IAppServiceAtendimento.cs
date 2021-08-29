@@ -27,5 +27,7 @@ namespace Sim.Application.Shared.Interface
         IEnumerable<Atendimento> ListarRaeLancados(string userid);
         IEnumerable<Atendimento> ListarRaeNaoLancados(string userid);
         Task<IEnumerable<KeyValuePair<string, int>>> BySetor(string setor);
+        Task<IEnumerable<KeyValuePair<string, int>>> ByAll();
+        Task<IEnumerable<KeyValuePair<string, int>>> ByUserName(string username);
     }
 }

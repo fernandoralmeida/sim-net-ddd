@@ -27,6 +27,7 @@ namespace Sim.Domain.Shared.Interface
         IEnumerable<Atendimento> ListarRaeLancados(IEnumerable<Atendimento> atendimentos);
         IEnumerable<Atendimento> ListarRaeNaoLancados(IEnumerable<Atendimento> atendimentos);
         Task<IEnumerable<KeyValuePair<string, int>>> BySetor(string setor);
-
+        Task<IEnumerable<KeyValuePair<string, int>>> ByAll();
+        Task<IEnumerable<KeyValuePair<string, int>>> ByUserName(string username);
     }
 }
