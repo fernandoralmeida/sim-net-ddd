@@ -36,5 +36,9 @@ $(document).ready(function () {
     $('.tabs').tabs();
 
     $('.datepicker').datepicker();    
+
+    $('.tooltipped').tooltip();
+       
+    M.updateTextFields();
 });
 

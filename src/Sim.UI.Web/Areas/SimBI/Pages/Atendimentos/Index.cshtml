@@ -9,12 +9,33 @@
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
 <div class="row">
-
+    <div class="row center">
+        <button type="submit" class="btn-flat waves-effect waves-light">Jan</button>
+        <button type="submit" class="btn-flat waves-effect waves-light">Fev</button>
+        <button type="submit" class="btn-flat waves-effect waves-light">Mar</button>
+        <button type="submit" class="btn-flat waves-effect waves-light">Abr</button>
+        <button type="submit" class="btn-flat waves-effect waves-light">Mai</button>
+        <button type="submit" class="btn-flat waves-effect waves-light">Jun</button>
+        <button type="submit" class="btn-flat waves-effect waves-light">Jul</button>
+        <button type="submit" class="btn-flat waves-effect waves-light">Ago</button>
+        <button type="submit" class="btn-flat waves-effect waves-light">Set</button>
+        <button type="submit" class="btn-flat waves-effect waves-light">Out</button>
+        <button type="submit" class="btn-flat waves-effect waves-light">Nov</button>
+        <button type="submit" class="btn-flat waves-effect waves-light">Dez</button>
+    </div>
     <ul class="collapsible popout">
+        @{
+            var ativo = "active";
+        }
+
         @foreach (var setor in Model.Input)
         {
-            <li>
-                <div class="collapsible-header">@setor.FirstOrDefault().Key<span class="new badge blue" data-badge-caption="@setor.FirstOrDefault().Value">Atendimentos</span></div>
+
+            <li class="@ativo">
+
+                @{ ativo = string.Empty; }
+
+                <div class="collapsible-header waves-effect waves-green">@setor.FirstOrDefault().Key<span class="new badge blue" data-badge-caption="@setor.FirstOrDefault().Value">Atendimentos</span></div>
                 <div class="collapsible-body white">
                     <div class="row">
                         <div class="col s12 m4 l4">
@@ -43,12 +64,12 @@
                         </div>
                         <div class="col s12 m4 l4">
                             <ul class="collection z-depth-1">
-                                <li class="collection-item"><i class="material-icons left">account_box</i>Atendimento por Atendente</li>
+                                <li class="collection-item"><i class="material-icons left">account_box</i>Antendentes</li>
                                 @foreach (var op in setor)
                                 {
                                     @if (op.Key.Contains("User-"))
                                     {
-                                        <li class="collection-item"><span class="new badge blue lighten-1" data-badge-caption="@op.Value"></span><a class="modal-trigger" href="#viewmodal" data-id="@op.Key.Replace("User-", "")">@op.Key.Replace("User-", "")</a><a asp-area="SimBI" asp-page-handler="Preview" asp-route-id="@op.Key.Replace("User-", "")">@op.Key.Replace("User-", "")</a></li>
+                                        <li class="collection-item"><span class="new badge blue lighten-1" data-badge-caption="@op.Value"></span><a class="modal-trigger blue-grey-text" href="#viewmodal" data-id="@op.Key.Replace("User-", "")" title="Detalhar Atendimentos">@op.Key.Replace("User-", "")</a></li>
                                     }
                                 }
                             </ul>
@@ -63,8 +84,7 @@
 <!-- Modal Structure -->
 <div id="viewmodal" class="modal modal-fixed-footer">
     <div class="modal-content">
-        <ul class="collection showcollection">
-        </ul>
+        <ul class="collection showcollection"></ul>
     </div>
     <div class="modal-footer">
         <a href="#!" class="modal-close btn waves-effect">Fechar</a>
@@ -79,7 +99,7 @@
                 $(".showcollection").empty();
                 $.getJSON(`/SimBI/Atendimentos?id=${customerId}&handler=Preview`, (data) => {
                     $.each(data, function (i, item) {
-                        $(".showcollection").append(`<li class="collection-item"><span class="new badge orange lighten-1" data-badge-caption="${item.value}"></span>${item.key}</li>`);
+                        $(".showcollection").append(`<li class="collection-item"><span class="new badge green lighten-1" data-badge-caption="${item.value}"></span>${item.key}</li>`);
                     });
                 });
 

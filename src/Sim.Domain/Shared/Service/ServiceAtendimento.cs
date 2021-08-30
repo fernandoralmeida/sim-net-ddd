@@ -324,15 +324,15 @@ namespace Sim.Domain.Shared.Service
             var r_user = new List<KeyValuePair<string, int>>();
             try
             {
-                List<string> _ano = new List<string>();
-                List<string> _atendimento = new List<string>();
-                List<string> _servico = new List<string>();
+                //List<string> _ano = new List<string>();
+                var _atendimento = new List<string>();
+                var _servico = new List<string>();
 
                 foreach (Atendimento at in t.Result)
                 {
-                    _atendimento.Add("Atendimentos");
+                    _atendimento.Add(at.Owner_AppUser_Id);
 
-                    _ano.Add(at.Data.Value.Year.ToString());
+                    //_ano.Add(at.Data.Value.Year.ToString());
 
                     if (at.Servicos != null)
                     {
@@ -347,38 +347,20 @@ namespace Sim.Domain.Shared.Service
 
                 }
 
-                var c_atendimento = from x in _atendimento
-                                    group x by x into g
-                                    let count = g.Count()
-                                    orderby count descending
-                                    select new { Value = g.Key, Count = count };
+                r_user.Add(new KeyValuePair<string, int>(username, _atendimento.Count()));
 
-                foreach (var x in c_atendimento)
-                {
-                    r_user.Add(new KeyValuePair<string, int>(x.Value, x.Count));
-                }
-
-                var c_ano = from x in _ano
-                            group x by x into g
-                            let count = g.Count()
-                            orderby count descending
-                            select new { Value = g.Key, Count = count };
-
-                foreach (var x in c_ano)
-                {
-                    r_user.Add(new KeyValuePair<string, int>(x.Value, x.Count));
-                }
-
-                var c_tipo = from x in _servico
+                var c_servico = from x in _servico
                              group x by x into g
                              let count = g.Count()
                              orderby count descending
                              select new { Value = g.Key, Count = count };
 
-                foreach (var x in c_tipo)
+                foreach (var x in c_servico)
                 {
                     r_user.Add(new KeyValuePair<string, int>(x.Value, x.Count));
                 }
+
+                r_user.Add(new KeyValuePair<string, int>("Total de Serviços", _servico.Count()));
 
             }
             catch { }

@@ -10,24 +10,30 @@
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
 <div class="card">
-    <form method="post" class="row" style="border-bottom:solid 1px #efefef; margin-bottom:0px;">
-        <div class="col s12 m6 l6 valign-wrapper left" style="height:64px;">
-            <div class="col">
-                <input asp-for="Input.DataI" />
-            </div>
-            <div class="col">
-                <input asp-for="Input.DataF" />
-            </div>
-            <div class="col">
+    <nav class="z-depth-0" style="border-bottom:solid 1px #efefef">
+        <div class="nav-wrapper white">
+            <form method="post" class="row" asp-page-handler="ListByPessoa">
+                <div class="input-field col s4 m4 l4">
+                    <input asp-for="Input.DataI" type="search" id="inputDataI" required>
+                    <label class="label-icon"><i class="black-text material-icons">search</i></label>
+                </div>
+                <div class="input-field col s4 m4 l4">
+                    <input asp-for="Input.DataF" type="search" id="inputDataF" required>
+                </div>
                 <button asp-page-handler="ListByData" class="btn waves-effect" type="submit" role="button">Pesquisar</button>
-            </div>
+            </form>
         </div>
-    </form>
+    </nav>
     <partial name="_AtendimentoList" model="Model.Input.ListaAtendimento" />
 </div>
 
 
 @section scripts{
+    <script src="~/js/jquery.mask.min.js"></script>
+    <script>
+        $('#inputDataI').mask('00/00/0000', { placeholder: "data inicial" });
+        $('#inputDataF').mask('00/00/0000', { placeholder: "data final" });
+    </script>
     <script>
         $(function () {
             $(".modal-trigger").click(function () {

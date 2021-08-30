@@ -8,23 +8,23 @@
 
 <!--<partial name="_StatusMessage" model="Model.StatusMessage" />-->
 
-    <div class="card">
-        <form method="post" class="row" style="border-bottom:solid 1px #efefef; margin-bottom:0px;">
-            <div class="col s12 m6 l6 valign-wrapper left" style="height:64px;">
-                <div class="col s12">
-                    <select asp-for="Input.Atividade" class="browser-default" asp-items="@Model.ListaCnaes">
-                        <option selected>-- Atividade --</option>
-                    </select>
-                </div>
+<div class="card">
+    <form method="post" class="row" style="border-bottom:solid 1px #efefef; margin-bottom:0px;">
+        <div class="col s12 m6 l6 valign-wrapper left" style="height:64px;">
+            <div class="col s12">
+                <select asp-for="Input.Atividade" class="browser-default" asp-items="@Model.ListaCnaes">
+                    <option selected>-- Atividade --</option>
+                </select>
             </div>
-            <div class="col valign-wrapper" style="height:64px;">
-                <div class="col">
-                    <input asp-for="Input.Municipio" />
-                </div>
-                <div class="col">
-                    <button class="btn waves-effect waves-green" type="submit" role="button">Pesquisar</button>
-                </div>
+        </div>
+        <div class="col valign-wrapper" style="height:64px;">
+            <div class="col">
+                <input asp-for="Input.Municipio" />
             </div>
-        </form>
-        <partial name="_EmpresaList" model="Model.Input.ListaEmpresas" />
-    </div>
+            <div class="col">
+                <button class="btn waves-effect waves-green" type="submit" role="button">Pesquisar</button>
+            </div>
+        </div>
+    </form>
+    <partial name="_EmpresaList" model="Model.Input.ListaEmpresas" />
+</div>
