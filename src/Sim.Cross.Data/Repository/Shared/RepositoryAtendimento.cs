@@ -67,14 +67,12 @@ namespace Sim.Cross.Data.Repository.Shared
 
         public IEnumerable<Atendimento> ListByPeriodo(DateTime? dataI, DateTime? dataF)
         {
-
-
             var list = _db.Atendimento
                 .Include(p => p.Pessoa)
                 .Include(e => e.Empresa)
                 .Include(s => s.Sebrae)
                 .Where(a => a.Data.Value.Date >= dataI
-                && a.Data.Value.Date <= dataF && a.Status == "Finalizado").OrderBy(o => o.Data);
+                && a.Data.Value.Date <= dataF && a.Status == "Finalizado" && a.Ativo == true).OrderBy(o => o.Data);
 
             return list;
         }
@@ -85,7 +83,7 @@ namespace Sim.Cross.Data.Repository.Shared
                 .Include(u => u.Pessoa)
                 .Include(e => e.Empresa)
                 .Include(s => s.Sebrae)
-                .Where(a => a.Owner_AppUser_Id == userid && a.Data.Value.Date == date.Value.Date && a.Status == "Finalizado").OrderBy(o => o.Data);
+                .Where(a => a.Owner_AppUser_Id == userid && a.Data.Value.Date == date.Value.Date && a.Status == "Finalizado" && a.Ativo == true).OrderBy(o => o.Data);
 
             return lista;
         }
@@ -107,7 +105,7 @@ namespace Sim.Cross.Data.Repository.Shared
                 .Include(p => p.Pessoa)
                 .Include(e => e.Empresa)
                 .Include(s => s.Sebrae)
-                .Where(s => s.Owner_AppUser_Id == userid && s.Status == "Cancelado").OrderBy(o => o.DataF);
+                .Where(s => s.Owner_AppUser_Id == userid && s.Status == "Cancelado" && s.Ativo == true).OrderBy(o => o.DataF);
 
             return ativo;
         }
@@ -129,14 +127,14 @@ namespace Sim.Cross.Data.Repository.Shared
                 .Include(u => u.Pessoa)
                 .Include(e => e.Empresa)
                 .Include(s => s.Sebrae)
-                .Where(a => a.Owner_AppUser_Id == userid && a.Status=="Finalizado").OrderBy(o => o.Data);
+                .Where(a => a.Owner_AppUser_Id == userid && a.Status=="Finalizado" && a.Ativo == true).OrderBy(o => o.Data);
 
             return lista;
         }
 
         public async Task<IEnumerable<Atendimento>> GetByUserName(string username)
         {
-            var t = Task.Run(() => _db.Atendimento.Where(u => u.Owner_AppUser_Id == username && u.Status=="Finalizado"));
+            var t = Task.Run(() => _db.Atendimento.Where(u => u.Owner_AppUser_Id == username && u.Status == "Finalizado" && u.Ativo == true));
             await t;
             return t.Result;
         }

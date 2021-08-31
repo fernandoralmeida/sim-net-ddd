@@ -21,10 +21,7 @@ namespace Sim.Cross.Data.Repository.Shared
         {
             if (setor != null)
             {
-                if (setor.Contains("Sebrae") || setor.Contains("Empreendedor"))
-                    return _db.Servico.Where(u => u.Setor.Nome.Contains(setor) || u.Setor.Nome.Contains("Geral"));
-                else
-                    return _db.Servico.Where(u => u.Setor.Nome.Contains(setor));
+                return _db.Servico.Where(u => u.Setor.Nome.Contains(setor) || u.Setor.Nome.Contains("Geral"));                
             }
             else
             {

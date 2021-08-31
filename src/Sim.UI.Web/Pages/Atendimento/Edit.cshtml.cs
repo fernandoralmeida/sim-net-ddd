@@ -7,6 +7,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace Sim.UI.Web.Pages.Atendimento
 {
@@ -68,9 +69,16 @@ namespace Sim.UI.Web.Pages.Atendimento
             var set = Task.Run(() => _appServiceSetor.List());
             await set;
 
-            if (set.Result != null)
+            var lst = new List<Setor>();
+            foreach (var s in set.Result)
             {
-                Setores = new SelectList(set.Result, nameof(Setor.Nome), nameof(Setor.Nome), null);
+                if (s.Nome != "Geral")
+                    lst.Add(new Setor() { Nome = s.Nome, Secretaria = s.Secretaria, Id = s.Id, Ativo = s.Ativo, Canais = s.Canais, Servicos = s.Servicos });
+            }
+
+            if (lst != null)
+            {
+                Setores = new SelectList(lst, nameof(Setor.Nome), nameof(Setor.Nome), null);
             }
         }
 

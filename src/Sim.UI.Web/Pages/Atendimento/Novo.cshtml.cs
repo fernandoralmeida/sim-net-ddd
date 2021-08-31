@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Sim.UI.Web.Pages.Atendimento
 {
@@ -14,7 +16,6 @@ namespace Sim.UI.Web.Pages.Atendimento
     using Sim.Cross.Identity;
     using Sim.Domain.SDE.Entity;
     using Sim.Domain.Shared.Entity;
-    using System.ComponentModel.DataAnnotations;
 
     [Authorize]
     public class NovoModel : PageModel
@@ -63,11 +64,18 @@ namespace Sim.UI.Web.Pages.Atendimento
         private async Task OnLoad()
         {
             var set = Task.Run(() => _appServiceSetor.List());
-            await set;        
+            await set;
 
-            if (set.Result != null)
+            var lst = new List<Setor>();
+            foreach(var s in set.Result)
             {
-                Setores = new SelectList(set.Result, nameof(Setor.Nome), nameof(Setor.Nome), null);
+                if (s.Nome != "Geral")
+                    lst.Add(new Setor() { Nome = s.Nome, Secretaria = s.Secretaria, Id = s.Id, Ativo=s.Ativo, Canais = s.Canais, Servicos = s.Servicos });
+            }
+
+            if (lst != null)
+            {
+                Setores = new SelectList(lst, nameof(Setor.Nome), nameof(Setor.Nome), null);
             }
         }
 

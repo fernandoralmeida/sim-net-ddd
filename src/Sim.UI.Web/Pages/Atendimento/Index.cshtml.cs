@@ -56,17 +56,36 @@ namespace Sim.UI.Web.Pages.Atendimento
 
         public async Task<IActionResult> OnGetAsync()
         {
-            await LoadAsync(Input.DataAtendimento);
+            try
+            {
+                await LoadAsync(Input.DataAtendimento);
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = "Erro: " + ex.Message;
+            }
+
             return Page();
         }
 
 
         public async Task<IActionResult> OnPostAsync()
         {
-            await LoadAsync(Input.DataAtendimento);
-            if (Input.ListaAtendimento.Count == 0)
+            try
             {
-                StatusMessage = string.Format("Erro: Não há atendimentos para {0}", Input.DataAtendimento.Value.Date);
+                await LoadAsync(Input.DataAtendimento);
+
+
+
+                if (Input.ListaAtendimento.Count == 0)
+                {
+                    StatusMessage = string.Format("Erro: Não há atendimentos para {0}", Input.DataAtendimento.Value.Date);
+                }
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = "Erro: " + ex.Message;
+                Input.ListaAtendimento = new List<Atendimento>();
             }
 
             return Page();

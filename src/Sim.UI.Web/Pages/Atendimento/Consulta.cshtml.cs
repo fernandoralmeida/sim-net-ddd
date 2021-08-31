@@ -57,9 +57,20 @@ namespace Sim.UI.Web.Pages.Atendimento
 
         public async Task OnPostListByDataAsync()
         {
-            var lista = Task.Run(() => _appServiceAtendimento.ListByPeriodo(Input.DataI.Value.Date, Input.DataF.Value.Date));
-            await lista;
-            Input.ListaAtendimento = lista.Result.ToList();
+            try
+            {
+                var dataI = Input.DataI.Value.Date;
+                var dataF = Input.DataF.Value.Date;
+
+                var lista = Task.Run(() => _appServiceAtendimento.ListByPeriodo(dataI, dataF));
+                await lista;
+                Input.ListaAtendimento = lista.Result.ToList();
+            }
+            catch(Exception ex)
+            {
+                StatusMessage = "Erro: " + ex.Message;
+                Input.ListaAtendimento = new List<Atendimento>();
+            }
         }
 
         public async Task OnPostListByPessoaAsync()
