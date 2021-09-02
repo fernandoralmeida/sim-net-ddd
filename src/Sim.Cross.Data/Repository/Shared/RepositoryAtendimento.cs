@@ -57,12 +57,12 @@ namespace Sim.Cross.Data.Repository.Shared
 
         public IEnumerable<Atendimento> GetByServicos(string servicos)
         {
-            return _db.Atendimento.Where(u => u.Servicos == servicos && u.Status == "Finalizado");
+            return _db.Atendimento.Where(u => u.Servicos.Contains(servicos) && u.Status == "Finalizado" && u.Ativo == true);
         }
 
         public IEnumerable<Atendimento> GetBySetor(string setor)
         {
-            return _db.Atendimento.Where(u => u.Setor == setor && u.Status == "Finalizado");
+            return _db.Atendimento.Where(u => u.Setor == setor && u.Status == "Finalizado" && u.Ativo == true);
         }
 
         public IEnumerable<Atendimento> ListByPeriodo(DateTime? dataI, DateTime? dataF)

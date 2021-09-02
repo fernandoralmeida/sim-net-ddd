@@ -60,5 +60,19 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Atendimentos
             user_atendimentos.Wait();
             return new JsonResult(user_atendimentos.Result);
         }
+
+        public JsonResult OnGetServicoPreview(string id)
+        {
+            var user_atendimentos = Task.Run(() => _appAtendimento.ByServicos(id));
+            user_atendimentos.Wait();
+            return new JsonResult(user_atendimentos.Result);
+        }
+
+        public JsonResult OnGetCanalPreview(string id, string id2)
+        {
+            var user_atendimentos = Task.Run(() => _appAtendimento.ByCanal(id, id2));
+            user_atendimentos.Wait();
+            return new JsonResult(user_atendimentos.Result);
+        }
     }
 }

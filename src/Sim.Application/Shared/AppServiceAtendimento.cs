@@ -112,5 +112,15 @@ namespace Sim.Application.Shared
         {
             return await _atendimento.ByUserName(username);
         }
+
+        public async Task<IEnumerable<KeyValuePair<string, int>>> ByServicos(string servico)
+        {
+            return await _atendimento.ByServicos(servico);
+        }
+
+        public async Task<IEnumerable<KeyValuePair<string, int>>> ByCanal(string canal, string setor)
+        {
+            return await _atendimento.ByCanal(canal, setor);
+        }
     }
 }

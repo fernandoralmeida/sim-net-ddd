@@ -29,5 +29,7 @@ namespace Sim.Domain.Shared.Interface
         Task<IEnumerable<KeyValuePair<string, int>>> BySetor(string setor);
         Task<IEnumerable<KeyValuePair<string, int>>> ByAll();
         Task<IEnumerable<KeyValuePair<string, int>>> ByUserName(string username);
+        Task<IEnumerable<KeyValuePair<string, int>>> ByServicos(string servico);
+        Task<IEnumerable<KeyValuePair<string, int>>> ByCanal(string canal, string setor);
     }
 }

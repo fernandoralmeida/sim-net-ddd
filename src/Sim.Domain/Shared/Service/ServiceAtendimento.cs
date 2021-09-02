@@ -367,5 +367,89 @@ namespace Sim.Domain.Shared.Service
 
             return r_user;
         }
+
+        public async Task<IEnumerable<KeyValuePair<string, int>>> ByServicos(string servico)
+        {
+            var t = Task.Run(() => _atendimento.GetByServicos(servico));
+            await t;
+            var r_servico = new List<KeyValuePair<string, int>>();
+            try
+            {
+                //List<string> _ano = new List<string>();
+                //var _canal = new List<string>();
+                var _user = new List<string>();
+
+                foreach (Atendimento at in t.Result)
+                {
+                    _user.Add(at.Owner_AppUser_Id);
+
+                    //_ano.Add(at.Data.Value.Year.ToString());
+                }
+
+                r_servico.Add(new KeyValuePair<string, int>(servico, t.Result.Count()));
+
+                var c_user = from x in _user
+                             group x by x into g
+                                let count = g.Count()
+                                orderby count descending
+                                select new { Value = g.Key, Count = count };
+
+                foreach (var x in c_user)
+                {
+                    r_servico.Add(new KeyValuePair<string, int>(x.Value, x.Count));
+                }
+
+            }
+            catch { }
+
+            return r_servico;
+        }
+
+        public async Task<IEnumerable<KeyValuePair<string, int>>> ByCanal(string canal, string setor)
+        {
+            
+            var t = Task.Run(() => _atendimento.GetByCanal(canal));
+            await t;
+            var r_servico = new List<KeyValuePair<string, int>>();
+            try
+            {
+
+                var _servico = new List<string>();
+
+                foreach (Atendimento at in t.Result)
+                {
+                    if (at.Setor == "Espaço do Empreendedor")
+                        at.Setor = "Sala do Empreendedor";
+
+                    if (at.Setor == setor || setor == "Geral")
+                        if (at.Servicos != null)
+                        {
+                            string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
+
+                            foreach (string sv in words)
+                            {
+                                if (sv != null && sv != string.Empty)
+                                    _servico.Add(sv);
+                            }
+                        }
+                }
+                                
+                var c_servico = from x in _servico
+                                group x by x into g
+                              let count = g.Count()
+                              orderby count descending
+                              select new { Value = g.Key, Count = count };
+
+                foreach (var x in c_servico)
+                {
+                    r_servico.Add(new KeyValuePair<string, int>(x.Value, x.Count));
+                }
+
+                r_servico.Add(new KeyValuePair<string, int>("Total de Serviços " + canal, _servico.Count()));
+            }
+            catch { }
+
+            return r_servico;
+        }
     }
 }
