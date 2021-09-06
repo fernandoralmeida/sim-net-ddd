@@ -26,10 +26,10 @@ namespace Sim.Application.Shared.Interface
         Task<IEnumerable<Atendimento>> GetByUserName(string username);
         IEnumerable<Atendimento> ListarRaeLancados(string userid);
         IEnumerable<Atendimento> ListarRaeNaoLancados(string userid);
-        Task<IEnumerable<KeyValuePair<string, int>>> BySetor(string setor);
-        Task<IEnumerable<KeyValuePair<string, int>>> ByAll();
-        Task<IEnumerable<KeyValuePair<string, int>>> ByUserName(string username);
-        Task<IEnumerable<KeyValuePair<string, int>>> ByServicos(string servico);
-        Task<IEnumerable<KeyValuePair<string, int>>> ByCanal(string canal, string setor);
+        Task<IEnumerable<KeyValuePair<string, int>>> BySetor(string setor, DateTime periodo);
+        Task<IEnumerable<KeyValuePair<string, int>>> ByAll(DateTime periodo);
+        Task<IEnumerable<KeyValuePair<string, int>>> ByUserName(string username, DateTime periodo);
+        Task<IEnumerable<KeyValuePair<string, int>>> ByServicos(string servico, DateTime periodo);
+        Task<IEnumerable<KeyValuePair<string, int>>> ByCanal(string canal, string setor, DateTime periodo);
     }
 }

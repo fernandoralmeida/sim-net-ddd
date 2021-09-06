@@ -4,28 +4,29 @@
 @{
     Layout = "_Layout.cshtml";
     ViewData["Title"] = "Index";
+    ViewData["ActiveButton"] = Model.ButtonPressed;
 }
 
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
 <div class="row">
-    <div class="row center">
-        <button type="submit" class="btn-flat waves-effect waves-light">Jan</button>
-        <button type="submit" class="btn-flat waves-effect waves-light">Fev</button>
-        <button type="submit" class="btn-flat waves-effect waves-light">Mar</button>
-        <button type="submit" class="btn-flat waves-effect waves-light">Abr</button>
-        <button type="submit" class="btn-flat waves-effect waves-light">Mai</button>
-        <button type="submit" class="btn-flat waves-effect waves-light">Jun</button>
-        <button type="submit" class="btn-flat waves-effect waves-light">Jul</button>
-        <button type="submit" class="btn-flat waves-effect waves-light">Ago</button>
-        <button type="submit" class="btn-flat waves-effect waves-light">Set</button>
-        <button type="submit" class="btn-flat waves-effect waves-light">Out</button>
-        <button type="submit" class="btn-flat waves-effect waves-light">Nov</button>
-        <button type="submit" class="btn-flat waves-effect waves-light">Dez</button>
-    </div>
+    <form method="post" class="row center">
+        <button class="@NavPages.JanNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="jan">Jan</button>
+        <button class="@NavPages.FevNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="fev">Fev</button>
+        <button class="@NavPages.MarNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="mar">Mar</button>
+        <button class="@NavPages.AbrNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="abr">Abr</button>
+        <button class="@NavPages.MaiNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="mai">Mai</button>
+        <button class="@NavPages.JunNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="jun">Jun</button>
+        <button class="@NavPages.JulNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="jul">Jul</button>
+        <button class="@NavPages.AgoNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="ago">Ago</button>
+        <button class="@NavPages.SetNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="set">Set</button>
+        <button class="@NavPages.OutNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="out">Out</button>
+        <button class="@NavPages.NovNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="nov">Nov</button>
+        <button class="@NavPages.DezNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="dez">Dez</button>
+    </form>
     <ul class="collapsible popout">
         @{
-            var ativo = "active";
+            var ativo = string.Empty;
         }
 
         @foreach (var setor in Model.Input)

@@ -98,7 +98,7 @@ namespace Sim.Domain.Shared.Service
             return await _atendimento.GetByUserName(username);
         }
 
-        public async Task<IEnumerable<KeyValuePair<string, int>>> BySetor(string setor)
+        public async Task<IEnumerable<KeyValuePair<string, int>>> BySetor(string setor, DateTime periodo)
         {
             var list = new List<Atendimento>();
 
@@ -142,27 +142,31 @@ namespace Sim.Domain.Shared.Service
 
                     foreach (Atendimento at in list)
                     {
-                        if (at.Setor == "Espaço do Empreendedor")
-                            at.Setor = "Sala do Empreendedor";
+                        if (at.Data.Value.Month == periodo.Month && at.Data.Value.Year == periodo.Year)
+                        {
 
-                                if (at.Servicos != null)
+                            if (at.Setor == "Espaço do Empreendedor")
+                                at.Setor = "Sala do Empreendedor";
+
+                            if (at.Servicos != null)
+                            {
+                                string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
+
+                                foreach (string sv in words)
                                 {
-                                    string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
-
-                                    foreach (string sv in words)
-                                    {
-                                        if (sv != null && sv != string.Empty)
-                                            _servico.Add("Servico-" + sv);
-                                    }
+                                    if (sv != null && sv != string.Empty)
+                                        _servico.Add("Servico-" + sv);
                                 }
+                            }
 
-                                if (at.Canal != null)
-                                    _canal.Add("Canal-" + at.Canal);
+                            if (at.Canal != null)
+                                _canal.Add("Canal-" + at.Canal);
 
-                                _setor.Add(at.Setor);
+                            _setor.Add(at.Setor);
 
-                                _operador.Add("User-" + at.Owner_AppUser_Id);  
-                        
+                            _operador.Add("User-" + at.Owner_AppUser_Id);
+                        }
+
                     }
 
                     var c_setor = from x in _setor
@@ -221,7 +225,7 @@ namespace Sim.Domain.Shared.Service
             return r_setores;
         }
 
-        public async Task<IEnumerable<KeyValuePair<string, int>>> ByAll()
+        public async Task<IEnumerable<KeyValuePair<string, int>>> ByAll(DateTime periodo)
         {
             var list = _atendimento.ListAll();
             
@@ -238,27 +242,29 @@ namespace Sim.Domain.Shared.Service
 
                     foreach (Atendimento at in list)
                     {
-                        if (at.Setor == "Espaço do Empreendedor")
-                            at.Setor = "Sala do Empreendedor";
-
-                        if (at.Servicos != null)
+                        if (at.Data.Value.Month == periodo.Month && at.Data.Value.Year == periodo.Year)
                         {
-                            string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
+                            if (at.Setor == "Espaço do Empreendedor")
+                                at.Setor = "Sala do Empreendedor";
 
-                            foreach (string sv in words)
+                            if (at.Servicos != null)
                             {
-                                if (sv != null && sv != string.Empty)
-                                    _servico.Add("Servico-" + sv);
+                                string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
+
+                                foreach (string sv in words)
+                                {
+                                    if (sv != null && sv != string.Empty)
+                                        _servico.Add("Servico-" + sv);
+                                }
                             }
+
+                            if (at.Canal != null)
+                                _canal.Add("Canal-" + at.Canal);
+
+                            _setor.Add("Geral");
+
+                            _operador.Add("User-" + at.Owner_AppUser_Id);
                         }
-
-                        if (at.Canal != null)
-                            _canal.Add("Canal-" + at.Canal);
-
-                        _setor.Add("Geral");
-
-                        _operador.Add("User-" + at.Owner_AppUser_Id);
-
                     }
 
                     var c_setor = from x in _setor
@@ -317,7 +323,7 @@ namespace Sim.Domain.Shared.Service
             return r_all;
         }
 
-        public async Task<IEnumerable<KeyValuePair<string, int>>> ByUserName(string username)
+        public async Task<IEnumerable<KeyValuePair<string, int>>> ByUserName(string username, DateTime periodo)
         {
             var t = Task.Run(() => _atendimento.GetByUserName(username));
             await t;
@@ -330,21 +336,23 @@ namespace Sim.Domain.Shared.Service
 
                 foreach (Atendimento at in t.Result)
                 {
-                    _atendimento.Add(at.Owner_AppUser_Id);
-
-                    //_ano.Add(at.Data.Value.Year.ToString());
-
-                    if (at.Servicos != null)
+                    if(at.Data.Value.Month == periodo.Month && at.Data.Value.Year == periodo.Year)
                     {
-                        string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
+                        _atendimento.Add(at.Owner_AppUser_Id);
 
-                        foreach (string sv in words)
+                        //_ano.Add(at.Data.Value.Year.ToString());
+
+                        if (at.Servicos != null)
                         {
-                            if (sv != null && sv != string.Empty)
-                                _servico.Add(sv);
+                            string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
+
+                            foreach (string sv in words)
+                            {
+                                if (sv != null && sv != string.Empty)
+                                    _servico.Add(sv);
+                            }
                         }
                     }
-
                 }
 
                 r_user.Add(new KeyValuePair<string, int>(username, _atendimento.Count()));
@@ -368,7 +376,7 @@ namespace Sim.Domain.Shared.Service
             return r_user;
         }
 
-        public async Task<IEnumerable<KeyValuePair<string, int>>> ByServicos(string servico)
+        public async Task<IEnumerable<KeyValuePair<string, int>>> ByServicos(string servico, DateTime periodo)
         {
             var t = Task.Run(() => _atendimento.GetByServicos(servico));
             await t;
@@ -381,7 +389,8 @@ namespace Sim.Domain.Shared.Service
 
                 foreach (Atendimento at in t.Result)
                 {
-                    _user.Add(at.Owner_AppUser_Id);
+                    if (at.Data.Value.Month == periodo.Month && at.Data.Value.Year == periodo.Year)
+                        _user.Add(at.Owner_AppUser_Id);
 
                     //_ano.Add(at.Data.Value.Year.ToString());
                 }
@@ -405,7 +414,7 @@ namespace Sim.Domain.Shared.Service
             return r_servico;
         }
 
-        public async Task<IEnumerable<KeyValuePair<string, int>>> ByCanal(string canal, string setor)
+        public async Task<IEnumerable<KeyValuePair<string, int>>> ByCanal(string canal, string setor, DateTime periodo)
         {
             
             var t = Task.Run(() => _atendimento.GetByCanal(canal));
@@ -418,20 +427,23 @@ namespace Sim.Domain.Shared.Service
 
                 foreach (Atendimento at in t.Result)
                 {
-                    if (at.Setor == "Espaço do Empreendedor")
-                        at.Setor = "Sala do Empreendedor";
+                    if (at.Data.Value.Month == periodo.Month && at.Data.Value.Year == periodo.Year)
+                    {
+                        if (at.Setor == "Espaço do Empreendedor")
+                            at.Setor = "Sala do Empreendedor";
 
-                    if (at.Setor == setor || setor == "Geral")
-                        if (at.Servicos != null)
-                        {
-                            string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
-
-                            foreach (string sv in words)
+                        if (at.Setor == setor || setor == "Geral")
+                            if (at.Servicos != null)
                             {
-                                if (sv != null && sv != string.Empty)
-                                    _servico.Add(sv);
+                                string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
+
+                                foreach (string sv in words)
+                                {
+                                    if (sv != null && sv != string.Empty)
+                                        _servico.Add(sv);
+                                }
                             }
-                        }
+                    }
                 }
                                 
                 var c_servico = from x in _servico

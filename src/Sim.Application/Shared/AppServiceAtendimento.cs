@@ -13,7 +13,7 @@ namespace Sim.Application.Shared
     {
         private readonly IServiceAtendimento _atendimento;
         public AppServiceAtendimento(IServiceAtendimento atendimento)
-            :base(atendimento)
+            : base(atendimento)
         {
             _atendimento = atendimento;
         }
@@ -98,29 +98,29 @@ namespace Sim.Application.Shared
             return await _atendimento.GetByUserName(username);
         }
 
-        public async Task< IEnumerable<KeyValuePair<string, int>>> BySetor(string setor)
+        public async Task<IEnumerable<KeyValuePair<string, int>>> BySetor(string setor, DateTime periodo)
         {
-            return await _atendimento.BySetor(setor);
+            return await _atendimento.BySetor(setor, periodo);
         }
 
-        public async Task<IEnumerable<KeyValuePair<string, int>>> ByAll()
+        public async Task<IEnumerable<KeyValuePair<string, int>>> ByAll(DateTime periodo)
         {
-            return await _atendimento.ByAll();
+            return await _atendimento.ByAll(periodo);
         }
 
-        public async Task<IEnumerable<KeyValuePair<string, int>>> ByUserName(string username)
+        public async Task<IEnumerable<KeyValuePair<string, int>>> ByUserName(string username, DateTime periodo)
         {
-            return await _atendimento.ByUserName(username);
+            return await _atendimento.ByUserName(username, periodo);
         }
 
-        public async Task<IEnumerable<KeyValuePair<string, int>>> ByServicos(string servico)
+        public async Task<IEnumerable<KeyValuePair<string, int>>> ByServicos(string servico, DateTime periodo)
         {
-            return await _atendimento.ByServicos(servico);
+            return await _atendimento.ByServicos(servico, periodo);
         }
 
-        public async Task<IEnumerable<KeyValuePair<string, int>>> ByCanal(string canal, string setor)
+        public async Task<IEnumerable<KeyValuePair<string, int>>> ByCanal(string canal, string setor, DateTime periodo)
         {
-            return await _atendimento.ByCanal(canal, setor);
+            return await _atendimento.ByCanal(canal, setor, periodo);
         }
     }
 }
