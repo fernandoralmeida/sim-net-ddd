@@ -122,5 +122,35 @@ namespace Sim.Application.Shared
         {
             return await _atendimento.ByCanal(canal, setor, periodo);
         }
+
+        public async Task<IEnumerable<KeyValuePair<string, int>>> BySetorMonth(string setor, DateTime periodo)
+        {
+            return await _atendimento.BySetorMonth(setor, periodo);
+        }
+
+        public async Task<IEnumerable<KeyValuePair<string, int>>> ByAllMonth(DateTime periodo)
+        {
+            return await _atendimento.ByAllMonth(periodo);
+        }
+
+        public async Task<IEnumerable<KeyValuePair<string, int>>> ByUserNameMonth(string username, string setor, DateTime periodo)
+        {
+            return await _atendimento.ByUserNameMonth(username, setor, periodo);
+        }
+
+        public async Task<IEnumerable<KeyValuePair<string, int>>> ByServicosMonth(string servico, DateTime periodo)
+        {
+            return await _atendimento.ByServicosMonth(servico, periodo);
+        }
+
+        public async Task<IEnumerable<KeyValuePair<string, int>>> ByCanalMonth(string canal, string setor, DateTime periodo)
+        {
+            return await _atendimento.ByCanalMonth(canal, setor, periodo);
+        }
+
+        public async Task<IEnumerable<Atendimento>> ListByMonth(DateTime? month)
+        {
+            return await _atendimento.ListByMonth(month);
+        }
     }
 }

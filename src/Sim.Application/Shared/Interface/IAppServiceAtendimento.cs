@@ -21,15 +21,21 @@ namespace Sim.Application.Shared.Interface
         IEnumerable<Atendimento> AtendimentoAtivo(string userid);
         IEnumerable<Atendimento> AtendimentosCancelados(string userid);
         IEnumerable<Atendimento> ListByPeriodo(DateTime? dataI, DateTime? dataF);
+        Task<IEnumerable<Atendimento>> ListByMonth(DateTime? month);
         IEnumerable<Atendimento> ListAll();
         Atendimento GetAtendimento(Guid id);
         Task<IEnumerable<Atendimento>> GetByUserName(string username);
         IEnumerable<Atendimento> ListarRaeLancados(string userid);
         IEnumerable<Atendimento> ListarRaeNaoLancados(string userid);
         Task<IEnumerable<KeyValuePair<string, int>>> BySetor(string setor, DateTime periodo);
+        Task<IEnumerable<KeyValuePair<string, int>>> BySetorMonth(string setor, DateTime periodo);
         Task<IEnumerable<KeyValuePair<string, int>>> ByAll(DateTime periodo);
+        Task<IEnumerable<KeyValuePair<string, int>>> ByAllMonth(DateTime periodo);
         Task<IEnumerable<KeyValuePair<string, int>>> ByUserName(string username, DateTime periodo);
+        Task<IEnumerable<KeyValuePair<string, int>>> ByUserNameMonth(string username, string setor, DateTime periodo);
         Task<IEnumerable<KeyValuePair<string, int>>> ByServicos(string servico, DateTime periodo);
+        Task<IEnumerable<KeyValuePair<string, int>>> ByServicosMonth(string servico, DateTime periodo);
         Task<IEnumerable<KeyValuePair<string, int>>> ByCanal(string canal, string setor, DateTime periodo);
+        Task<IEnumerable<KeyValuePair<string, int>>> ByCanalMonth(string canal, string setor, DateTime periodo);
     }
 }

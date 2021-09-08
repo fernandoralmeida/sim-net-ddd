@@ -17,6 +17,7 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Atendimentos
         public static string Out => "Out";
         public static string Nov => "Nov";
         public static string Dez => "Dez";
+        public static string Year => "Year";
         public static string JanNavClass(ViewContext viewContext) => PageNavClass(viewContext, Jan);
         public static string FevNavClass(ViewContext viewContext) => PageNavClass(viewContext, Fev);
         public static string MarNavClass(ViewContext viewContext) => PageNavClass(viewContext, Mar);
@@ -29,6 +30,7 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Atendimentos
         public static string OutNavClass(ViewContext viewContext) => PageNavClass(viewContext, Out);
         public static string NovNavClass(ViewContext viewContext) => PageNavClass(viewContext, Nov);
         public static string DezNavClass(ViewContext viewContext) => PageNavClass(viewContext, Dez);
+        public static string YearNavClass(ViewContext viewContext) => PageNavClass(viewContext, Year);
         private static string PageNavClass(ViewContext viewContext, string page)
         {
             var activePage = viewContext.ViewData["ActiveButton"] as string

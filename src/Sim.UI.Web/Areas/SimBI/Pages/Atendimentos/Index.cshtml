@@ -11,6 +11,7 @@
 
 <div class="row">
     <form method="post" class="row center">
+
         <button class="@NavPages.JanNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="jan">Jan</button>
         <button class="@NavPages.FevNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="fev">Fev</button>
         <button class="@NavPages.MarNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="mar">Mar</button>
@@ -23,10 +24,11 @@
         <button class="@NavPages.OutNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="out">Out</button>
         <button class="@NavPages.NovNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="nov">Nov</button>
         <button class="@NavPages.DezNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="dez">Dez</button>
+        <button class="@NavPages.YearNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Year">Anual</button>
     </form>
     <ul class="collapsible popout">
         @{
-            var ativo = string.Empty;
+            var ativo = "active";
         }
 
         @foreach (var setor in Model.Input)
@@ -46,7 +48,7 @@
                                 {
                                     @if (op.Key.Contains("Servico-"))
                                     {
-                                        <li class="collection-item"><span class="new badge green lighten-1" data-badge-caption="@op.Value"></span><a class="modal-trigger blue-grey-text" href="#viewmodal" data-hdlr="ServicoPreview" data-id="@op.Key.Replace("Servico-", "")" title="Detalhar serviço">@op.Key.Replace("Servico-", "")</a></li>
+                                        <li class="collection-item"><span class="new badge green lighten-1" data-badge-caption="@op.Value"></span><a class="modal-trigger blue-grey-text" href="#viewmodal" data-hdlr="ServicoPreview" data-id="@op.Key.Replace("Servico-", "")" data-mth="@Model.ButtonPressed" title="Detalhar serviço">@op.Key.Replace("Servico-", "")</a></li>
                                     }
                                 }
                             </ul>
@@ -58,7 +60,7 @@
                                 {
                                     @if (op.Key.Contains("Canal-"))
                                     {
-                                        <li class="collection-item"><span class="new badge orange lighten-1" data-badge-caption="@op.Value"></span><a class="modal-trigger blue-grey-text" href="#viewmodalcanal" data-hdlr="CanalPreview" data-id="@op.Key.Replace("Canal-", "")" data-id2="@setor.FirstOrDefault().Key" title="Detalhar canal de atendimento">@op.Key.Replace("Canal-", "")</a></li>
+                                        <li class="collection-item"><span class="new badge blue lighten-1" data-badge-caption="@op.Value"></span><a class="modal-trigger blue-grey-text" href="#viewmodalcanal" data-hdlr="CanalPreview" data-id="@op.Key.Replace("Canal-", "")" data-id2="@setor.FirstOrDefault().Key" data-mth="@Model.ButtonPressed"  title="Detalhar canal de atendimento">@op.Key.Replace("Canal-", "")</a></li>
                                     }
                                 }
                             </ul>
@@ -70,7 +72,7 @@
                                 {
                                     @if (op.Key.Contains("User-"))
                                     {
-                                        <li class="collection-item"><span class="new badge blue lighten-1" data-badge-caption="@op.Value"></span><a class="modal-trigger blue-grey-text" href="#viewmodal" data-hdlr="Preview" data-id="@op.Key.Replace("User-", "")" title="Detalhar atendimentos">@op.Key.Replace("User-", "")</a></li>
+                                        <li class="collection-item"><span class="new badge blue lighten-1" data-badge-caption="@op.Value"></span><a class="modal-trigger blue-grey-text" href="#viewmodaluser" data-hdlr="Preview" data-id="@op.Key.Replace("User-", "")" data-id2="@setor.FirstOrDefault().Key" data-mth="@Model.ButtonPressed" title="Detalhar atendimentos">@op.Key.Replace("User-", "")</a></li>
                                     }
                                 }
                             </ul>
@@ -102,27 +104,57 @@
     </div>
 </div>
 
+<!-- Modal Structure User-->
+<div id="viewmodaluser" class="modal modal-fixed-footer">
+    <div class="modal-content">
+        <ul class="collection showcollectionUser"></ul>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close btn waves-effect">Fechar</a>
+    </div>
+</div>
+
 @section scripts{
     <script>
         $(function () {
             $(".modal-trigger").click(function () {
                 var param1 = $(this).data('id');
-                var param2 = $(this).data('hdlr');
+                var param2 = $(this).data('mth');
+                var param3 = $(this).data('hdlr');
                 $(".showcollection").empty();
-                $.getJSON(`/SimBI/Atendimentos?id=${param1}&handler=${param2}`, (data) => {
+                $.getJSON(`/SimBI/Atendimentos?id=${param1}&mth=${param2}&handler=${param3}`, (data) => {
+                    var cor = "darken-1";
                     $.each(data, function (i, item) {
-                        $(".showcollection").append(`<li class="collection-item"><span class="new badge green lighten-1" data-badge-caption="${item.value}"></span>${item.key}</li>`);
+                        $(".showcollection").append(`<li class="collection-item"><span class="new badge green ${cor}" data-badge-caption="${item.value}"></span>${item.key}</li>`);
+                        cor = "lighten-1";
                     });
                 });
             });
             $(".modal-trigger").click(function () {
                 var param1 = $(this).data('id');
                 var param2 = $(this).data('id2');
-                var param3 = $(this).data('hdlr');
+                var param3 = $(this).data('mth');
+                var param4 = $(this).data('hdlr');
                 $(".showcollectionCanal").empty();
-                $.getJSON(`/SimBI/Atendimentos?id=${param1}&id2=${param2}&handler=${param3}`, (data) => {
+                $.getJSON(`/SimBI/Atendimentos?id=${param1}&id2=${param2}&mth=${param3}&handler=${param4}`, (data) => {
+                    var cor = "blue";
+                    $.each(data, function (i, item) {                        
+                        $(".showcollectionCanal").append(`<li class="collection-item"><span class="new badge ${cor} lighten-1" data-badge-caption="${item.value}"></span>${item.key}</li>`);
+                        cor = "green";
+                    });
+                });
+            });
+            $(".modal-trigger").click(function () {
+                var param1 = $(this).data('id');
+                var param2 = $(this).data('id2');
+                var param3 = $(this).data('mth');
+                var param4 = $(this).data('hdlr');
+                $(".showcollectionUser").empty();
+                $.getJSON(`/SimBI/Atendimentos?id=${param1}&id2=${param2}&mth=${param3}&handler=${param4}`, (data) => {
+                    var cor = "blue";
                     $.each(data, function (i, item) {
-                        $(".showcollectionCanal").append(`<li class="collection-item"><span class="new badge green lighten-1" data-badge-caption="${item.value}"></span>${item.key}</li>`);
+                        $(".showcollectionUser").append(`<li class="collection-item"><span class="new badge ${cor} lighten-1" data-badge-caption="${item.value}"></span>${item.key}</li>`);
+                        cor = "green";
                     });
                 });
             });

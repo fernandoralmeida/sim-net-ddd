@@ -138,5 +138,19 @@ namespace Sim.Cross.Data.Repository.Shared
             await t;
             return t.Result;
         }
+
+        public async Task<IEnumerable<Atendimento>> ListByMonth(DateTime? month)
+        {
+            var list = Task.Run(() => _db.Atendimento
+                .Include(p => p.Pessoa)
+                .Include(e => e.Empresa)
+                .Include(s => s.Sebrae)
+                .Where(a => a.Data.Value.Month == month.Value.Month
+                && a.Status == "Finalizado"
+                && a.Ativo == true).OrderBy(o => o.Data));
+            await list;
+
+            return list.Result;
+        }
     }
 }

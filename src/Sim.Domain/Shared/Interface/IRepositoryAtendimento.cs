@@ -21,6 +21,7 @@ namespace Sim.Domain.Shared.Interface
         IEnumerable<Atendimento> AtendimentoAtivo(string userid);
         IEnumerable<Atendimento> AtendimentosCancelados(string userid);
         IEnumerable<Atendimento> ListByPeriodo(DateTime? dataI, DateTime? dataF);
+        Task<IEnumerable<Atendimento>> ListByMonth(DateTime? month);
         IEnumerable<Atendimento> ListAll();
         Atendimento GetAtendimento(Guid id);
         Task<IEnumerable<Atendimento>> GetByUserName(string username);

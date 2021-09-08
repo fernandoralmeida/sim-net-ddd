@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Globalization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Authorization;
@@ -38,10 +39,9 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Atendimentos
             _appSetores = appsetores;
         }
 
-        private async Task LoadAsync(DateTime date)
+        private async Task LoadAsyncMonth(DateTime date)
         {
-
-            var l_all_atendimentos = await _appAtendimento.ByAll(date);
+            var l_all_atendimentos = await _appAtendimento.ByAllMonth(date);
 
             Input.Add(l_all_atendimentos);
 
@@ -49,126 +49,181 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Atendimentos
 
             foreach (Setor s in setores)
             {
-                var setor = await _appAtendimento.BySetor(s.Nome, date);
+                var setor = await _appAtendimento.BySetorMonth(s.Nome, date);
                 if (setor.Count() > 1)
                     Input.Add(setor);
             }
+        }
+        private async Task LoadAsync(DateTime date, string month)
+        {
+            ButtonPressed = month;
+
+            GetPeriod(month);
+
+            if(ButtonPressed == "Year")
+            {
+                var l_all_atendimentos = await _appAtendimento.ByAll(date);
+
+                Input.Add(l_all_atendimentos);
+
+                var setores = _appSetores.List();
+
+                foreach (Setor s in setores)
+                {
+                    var setor = await _appAtendimento.BySetor(s.Nome, date);
+                    if (setor.Count() > 1)
+                        Input.Add(setor);
+                }
+            }
+            else
+                await LoadAsyncMonth(Periodo);
         }
 
         public async Task<IActionResult> OnGetAsync()
         {
             Periodo = DateTime.Now;
-            await LoadAsync(Periodo);
+            await LoadAsync(Periodo, Functions.DateTimeExtensions.ToShortMonthName(DateTime.Now));
             return Page();
         }
 
-        public JsonResult OnGetPreview(string id)
+        public JsonResult OnGetPreview(string id, string id2, string mth)
         {
-            var user_atendimentos = Task.Run(() => _appAtendimento.ByUserName(id, Periodo));
-            user_atendimentos.Wait();
-            return new JsonResult(user_atendimentos.Result);
-        }
+            JsonResult rjson;
 
-        public JsonResult OnGetServicoPreview(string id)
-        {
-            var user_atendimentos = Task.Run(() => _appAtendimento.ByServicos(id, Periodo));
-            user_atendimentos.Wait();
-            return new JsonResult(user_atendimentos.Result);
-        }
+            ButtonPressed = mth;
+            GetPeriod(mth);
 
-        public JsonResult OnGetCanalPreview(string id, string id2)
-        {
-            var user_atendimentos = Task.Run(() => _appAtendimento.ByCanal(id, id2, Periodo));
-            user_atendimentos.Wait();
-            return new JsonResult(user_atendimentos.Result);
-        }
-
-        private async Task LoadAsyncMonth(DateTime date)
-        {
-            var l_all_atendimentos = await _appAtendimento.ByAll(date);
-
-            Input.Add(l_all_atendimentos);
-
-            var setores = _appSetores.List();
-
-            foreach (Setor s in setores)
-            {
-                var setor = await _appAtendimento.BySetor(s.Nome, date);
-                if (setor.Count() > 1)
-                    Input.Add(setor);
+            if (ButtonPressed == "Year")
+            {                
+                var user_atendimentos = Task.Run(() => _appAtendimento.ByUserName(id, Periodo));
+                user_atendimentos.Wait();
+                rjson = new JsonResult(user_atendimentos.Result);
             }
+            else
+            {
+                var user_atendimentos = Task.Run(() => _appAtendimento.ByUserNameMonth(id, id2, Periodo));
+                user_atendimentos.Wait();
+                rjson = new JsonResult(user_atendimentos.Result);
+            }
+
+            return rjson;
+        }
+
+        public JsonResult OnGetServicoPreview(string id, string mth)
+        {
+            JsonResult rjson;
+
+            ButtonPressed = mth;
+            GetPeriod(mth);
+
+            if (ButtonPressed == "Year")
+            {
+                var user_atendimentos = Task.Run(() => _appAtendimento.ByServicos(id, Periodo));
+                user_atendimentos.Wait();
+                rjson = new JsonResult(user_atendimentos.Result);
+            }
+            else
+            {
+                var user_atendimentos = Task.Run(() => _appAtendimento.ByServicosMonth(id, Periodo));
+                user_atendimentos.Wait();
+                rjson = new JsonResult(user_atendimentos.Result);
+            }
+
+            return rjson;
+        }
+
+        public JsonResult OnGetCanalPreview(string id, string id2, string mth)
+        {
+            JsonResult rjson;
+
+            ButtonPressed = mth;
+            GetPeriod(mth);
+
+            if (ButtonPressed == "Year")
+            {
+                var user_atendimentos = Task.Run(() => _appAtendimento.ByCanal(id, id2, Periodo));
+                user_atendimentos.Wait();
+                rjson = new JsonResult(user_atendimentos.Result);
+            }
+            else
+            {
+                var user_atendimentos = Task.Run(() => _appAtendimento.ByCanalMonth(id, id2, Periodo));
+                user_atendimentos.Wait();
+                rjson = new JsonResult(user_atendimentos.Result);
+            }
+
+            return rjson;
         }
 
         public async Task<IActionResult> OnPostMonth(string id)
         {
-            switch(id)
+            await LoadAsync(Periodo, id);
+            return Page();
+        }
+
+        public async Task<IActionResult> OnPostYear(string id)
+        {
+            Periodo = DateTime.Now;
+            await LoadAsync(Periodo, id);
+            return Page();
+        }
+
+        private void GetPeriod(string param)
+        {
+            switch (param)
             {
                 case "jan":
                     Periodo = new DateTime(DateTime.Now.Year, 01, 01);
-                    await LoadAsyncMonth(Periodo);
                     break;
 
                 case "fev":
                     Periodo = new DateTime(DateTime.Now.Year, 02, 01);
-                    await LoadAsyncMonth(Periodo);
                     break;
 
                 case "mar":
                     Periodo = new DateTime(DateTime.Now.Year, 03, 01);
-                    await LoadAsyncMonth(Periodo);
                     break;
 
                 case "abr":
                     Periodo = new DateTime(DateTime.Now.Year, 04, 01);
-                    await LoadAsyncMonth(Periodo);
                     break;
 
                 case "mai":
                     Periodo = new DateTime(DateTime.Now.Year, 05, 01);
-                    await LoadAsyncMonth(Periodo);
                     break;
 
                 case "jun":
                     Periodo = new DateTime(DateTime.Now.Year, 06, 01);
-                    await LoadAsyncMonth(Periodo);
                     break;
 
                 case "jul":
                     Periodo = new DateTime(DateTime.Now.Year, 07, 01);
-                    await LoadAsyncMonth(Periodo);
                     break;
 
                 case "ago":
                     Periodo = new DateTime(DateTime.Now.Year, 08, 01);
-                    await LoadAsyncMonth(Periodo);
                     break;
 
                 case "set":
                     Periodo = new DateTime(DateTime.Now.Year, 09, 01);
-                    await LoadAsyncMonth(Periodo);
                     break;
 
                 case "out":
                     Periodo = new DateTime(DateTime.Now.Year, 10, 01);
-                    await LoadAsyncMonth(Periodo);
                     break;
 
                 case "nov":
                     Periodo = new DateTime(DateTime.Now.Year, 11, 01);
-                    await LoadAsyncMonth(Periodo);
                     break;
 
                 case "dez":
                     Periodo = new DateTime(DateTime.Now.Year, 12, 01);
-                    await LoadAsyncMonth(Periodo);
                     break;
 
                 default:
+                    ButtonPressed = "Year";
                     break;
             }
-
-            ButtonPressed = id;
-            return Page();
         }
     }
 }
