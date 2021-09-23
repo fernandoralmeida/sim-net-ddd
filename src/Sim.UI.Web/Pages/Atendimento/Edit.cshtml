@@ -8,7 +8,7 @@
 <!--<partial name="_StatusMessage" model="Model.StatusMessage" />-->
 
 <form class="card card-content" method="post">
-    <div class="col s12" hidden>
+    <div class="col s12">
         <div class="input-group">
             <span class="input-group-text">Atendimento</span>
             <input type="text" asp-for="Input.Protocolo" class="form-control" readonly>
@@ -130,6 +130,15 @@
     <div class="card-action">
 
         <button id="onbtn" type="submit" role="button" class="btn btn-large waves-effect waves-light">Alterar Atendimento</button>
+
+        @{
+            if (User.IsInRole("Administrador"))
+            {
+                <button type="submit" role="button" class="btn btn-large waves-effect waves-light red lighten-2 right" asp-page-handler="Excluir" asp-route-id="@Model.Input.Id">Excluir Atendimento</button>
+            }
+
+        }
+
 
         <div class="input-field col s12 m6 l6" hidden>
             <input asp-for="ServicosSelecionados" />

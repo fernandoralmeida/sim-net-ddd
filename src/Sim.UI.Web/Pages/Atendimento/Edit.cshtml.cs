@@ -133,15 +133,17 @@ namespace Sim.UI.Web.Pages.Atendimento
             Input.Canal = atendimemnto_ativio.Canal;            
             
             string linha = atendimemnto_ativio.Servicos;
-            
-            string[] palavra = linha.Split(',');
-            
             string nserv = string.Empty;
 
-            foreach (var letra in palavra)
+            if (linha!=null)
             {
-                nserv += letra + ", ";
-            }
+                string[] palavra = linha.Split(',');               
+
+                foreach (var letra in palavra)
+                {
+                    nserv += letra + ", ";
+                }
+            }         
 
             Input.Servicos = nserv;
             ServicosSelecionados = nserv;
@@ -186,6 +188,34 @@ namespace Sim.UI.Web.Pages.Atendimento
                     atold.Status = "Finalizado";
                     atold.Ultima_Alteracao = DateTime.Now;
                     _appServiceAtendimento.Update(atold);
+
+                });
+
+                await t;
+
+                return RedirectToPage("./Index");
+
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = "Erro: " + ex.Message;
+                return Page();
+            }
+
+        }
+
+        public async Task<IActionResult> OnPostExcluirAsync(Guid id)
+        {
+
+            try
+            {
+
+                var t = Task.Run(() =>
+                {
+                    //var atendimemnto_ativio = _appServiceAtendimento.AtendimentoAtivo(user.Id).FirstOrDefault();
+
+                    var atold = _appServiceAtendimento.GetById(id);
+                    _appServiceAtendimento.Remove(atold);
 
                 });
 
