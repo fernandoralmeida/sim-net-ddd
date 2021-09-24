@@ -132,21 +132,8 @@ namespace Sim.UI.Web.Pages.Atendimento
                         
             Input.Canal = atendimemnto_ativio.Canal;            
             
-            string linha = atendimemnto_ativio.Servicos;
-            string nserv = string.Empty;
-
-            if (linha!=null)
-            {
-                string[] palavra = linha.Split(',');               
-
-                foreach (var letra in palavra)
-                {
-                    nserv += letra + ", ";
-                }
-            }         
-
-            Input.Servicos = nserv;
-            ServicosSelecionados = nserv;
+            Input.Servicos = atendimemnto_ativio.Servicos;
+            ServicosSelecionados = atendimemnto_ativio.Servicos; 
 
             return Page();
         }
@@ -161,18 +148,11 @@ namespace Sim.UI.Web.Pages.Atendimento
             return new JsonResult(_appServiceServico.GetByOwner(GetSetor));
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAlterarAsync(Guid id)
         {
 
             try
             {
-
-                if (Input.Servicos == null || Input.Servicos == string.Empty)
-                {
-                    StatusMessage = "Erro: " + "Selecione um serviço ou mais!";
-                    await OnLoad();
-                    return RedirectToPage();
-                }
 
                 //var user = await _userManager.GetUserAsync(User);
 
@@ -180,10 +160,15 @@ namespace Sim.UI.Web.Pages.Atendimento
                 {
                     //var atendimemnto_ativio = _appServiceAtendimento.AtendimentoAtivo(user.Id).FirstOrDefault();
 
-                    var atold = _appServiceAtendimento.GetById(Input.Id);
+                    var atold = _appServiceAtendimento.GetById(id);
                     atold.Setor = Input.Setor; //GetSetor;
                     atold.Canal = Input.Canal;  //GetCanal;
-                    atold.Servicos = ServicosSelecionados; //MeusServicos;
+
+                    if(Input.Servicos!=null || Input.Servicos!=string.Empty)
+                        atold.Servicos = ServicosSelecionados; //MeusServicos;
+                    else
+                        atold.Servicos = Input.Servicos; //MeusServicos;
+
                     atold.Descricao = Input.Descricao;
                     atold.Status = "Finalizado";
                     atold.Ultima_Alteracao = DateTime.Now;
