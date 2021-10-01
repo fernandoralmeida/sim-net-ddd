@@ -32,12 +32,12 @@ namespace Sim.Domain.Shared.Entity
 
         public bool RaeLancados(Atendimento obj)
         {
-            return obj.Sebrae != null && obj.Status != "Cancelado";
+            return obj.Sebrae != null && obj.Status != "Cancelado" && obj.Setor == "Sebrae Aqui";
         }
 
         public bool RaeNaoLancados(Atendimento obj)
         {
-            return obj.Sebrae == null && obj.Status != "Cancelado";
+            return obj.Sebrae == null && obj.Status != "Cancelado" && obj.Setor == "Sebrae Aqui";
         }
 
         public bool BySetor(Atendimento obj, string setor_name)

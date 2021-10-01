@@ -152,5 +152,16 @@ namespace Sim.Cross.Data.Repository.Shared
 
             return list.Result;
         }
+
+        public async Task<IEnumerable<Atendimento>> GetByUserNamePeriodo(string username, DateTime? date)
+        {
+            var t = Task.Run(() => _db.Atendimento
+                .Include(p => p.Pessoa)
+                .Include(e => e.Empresa)
+                .Include(s => s.Sebrae)
+                .Where(u => u.Owner_AppUser_Id == username && u.Status == "Finalizado" && u.Ativo == true && u.Data.Value.Date == date.Value.Date));
+            await t;
+            return t.Result;
+        }
     }
 }

@@ -33,6 +33,11 @@ namespace Sim.Application.Shared
             return _evento.GetByCodigo(codigo);
         }
 
+        public Evento GetByCodigo_Participantes(int codigo)
+        {
+            return _evento.GetByCodigo_Participantes(codigo);
+        }
+
         public IEnumerable<Evento> GetByNome(string nome)
         {
             return _evento.GetByNome(nome);

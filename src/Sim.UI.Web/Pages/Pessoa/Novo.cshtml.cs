@@ -113,8 +113,9 @@ namespace Sim.UI.Web.Pages.Pessoa
             public bool Ativo { get; set; }
         }
 
-        public void OnGet(string id)
+        public IActionResult OnGet(string id)
         {
+            
             Input = new InputModel
             {
                 CPF = id,
@@ -122,6 +123,14 @@ namespace Sim.UI.Web.Pages.Pessoa
                 Ultima_Alteracao = DateTime.Now,
                 Ativo = true                
             };
+
+            if(!Functions.Validate.IsCpf(id))
+            {
+                StatusMessage = "Erro: CPF inválido!";
+                return RedirectToPage("./Index");
+            }
+            else                
+                return Page();
         }
 
         public IActionResult OnPost()
@@ -152,12 +161,10 @@ namespace Sim.UI.Web.Pages.Pessoa
 
                 return RedirectToPage("./Index");
 
-
-
             }
             catch (Exception ex)
             {
-                StatusMessage = "Erro: " + "Verifique se o Cliente já está cadastrado ou contate o suporte!";
+                StatusMessage = "Erro: " + "Verifique se o Cliente já está cadastrado ou contate o suporte! - " + ex.Message;
                 return Page();
             }
 

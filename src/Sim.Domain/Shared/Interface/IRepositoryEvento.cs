@@ -14,6 +14,7 @@ namespace Sim.Domain.Shared.Interface
         IEnumerable<Evento> GetByOwner(string setor);
         IEnumerable<Evento> GetByNome(string nome);
         Evento GetByCodigo(int codigo);
+        Evento GetByCodigo_Participantes(int codigo);
         int LastCodigo();
     }
 }

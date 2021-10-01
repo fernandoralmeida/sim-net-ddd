@@ -152,5 +152,10 @@ namespace Sim.Application.Shared
         {
             return await _atendimento.ListByMonth(month);
         }
+
+        public async Task<IEnumerable<Atendimento>> GetByUserNamePeriodo(string username, DateTime? date)
+        {
+            return await _atendimento.GetByUserNamePeriodo(username, date);
+        }
     }
 }

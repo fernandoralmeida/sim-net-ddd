@@ -25,6 +25,7 @@ namespace Sim.Application.Shared.Interface
         IEnumerable<Atendimento> ListAll();
         Atendimento GetAtendimento(Guid id);
         Task<IEnumerable<Atendimento>> GetByUserName(string username);
+        Task<IEnumerable<Atendimento>> GetByUserNamePeriodo(string username, DateTime? date);
         IEnumerable<Atendimento> ListarRaeLancados(string userid);
         IEnumerable<Atendimento> ListarRaeNaoLancados(string userid);
         Task<IEnumerable<KeyValuePair<string, int>>> BySetor(string setor, DateTime periodo);

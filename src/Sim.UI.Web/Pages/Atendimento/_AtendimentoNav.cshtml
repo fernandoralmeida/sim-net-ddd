@@ -9,6 +9,15 @@
     <li>
         <a class="@AtendimentoNavPages.InicioNavClass(ViewContext)" asp-page="./Index">Meus Atendimentos</a>
     </li>-->
+
+                @{
+                    if (User.IsInRole("Administrador"))
+                    {
+                        <li>
+                            <a class="@AtendimentoNavPages.InicioNavClass(ViewContext)" asp-page="./Consulta.User">Consultar Atendentes</a>
+                        </li>
+                    }
+                }
                 <li>
                     <a class="dropdown-trigger @AtendimentoNavPages.ConsultaNavClass(ViewContext)" data-target="dropdownat" href="#">Consultar<i class="material-icons right">arrow_drop_down</i></a>
                     <ul id="dropdownat" class="dropdown-content">

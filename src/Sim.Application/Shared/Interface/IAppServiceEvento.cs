@@ -18,5 +18,6 @@ namespace Sim.Application.Shared.Interface
         Task<IEnumerable<Evento>> EventosAtivos();
         Task<IEnumerable<Evento>> EventosPassados();
 
+        Evento GetByCodigo_Participantes(int codigo);
     }
 }

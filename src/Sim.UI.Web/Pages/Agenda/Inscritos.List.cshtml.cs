@@ -31,7 +31,7 @@ namespace Sim.UI.Web.Pages.Agenda
         public async Task OnGetAsync(int id)
         {
 
-            var t = Task.Run(() => _appServiceEvento.GetByCodigo((int)id));
+            var t = Task.Run(() => _appServiceEvento.GetByCodigo_Participantes((int)id));
             await t;
 
             Input = _mapper.Map<InputModelEvento>(t.Result);

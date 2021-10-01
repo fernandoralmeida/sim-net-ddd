@@ -1,105 +1,38 @@
 ﻿@page
-@model Sim.UI.Web.Pages.SebraeAqui.IndexModel
+@model Sim.UI.Web.Pages.Atendimento.ConsultaUserModel
 @{
-    ViewData["Title"] = "Index";
-}
+    Layout = "_Layout.cshtml";
+    ViewData["Title"] = "Consultas por Atendente";
 
+    ViewData["ActivePageLi"] = Web.Pages.Shared.LayoutNavPages.AtendimentoConsulta;
+}
 
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
-<div class="row mt-5 mb-5" hidden>
-    <form method="post">
-        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-            <a asp-area="" asp-page="./Iniciar" class="btn btn-primary" title="Novo Atendimento"><i class="fas fa-plus-square"></i></a>
-            <div class="col-md-auto">
-                <div class="input-group">
-                    <span class="input-group-text">Data</span>
-                    <input asp-for="Input.DataAtendimento" class="form-control" aria-describedby="button-addon2">
-                    <button class="btn btn-primary" type="submit" role="button" id="button-addon2"><i class="fas fa-sync"></i></button>
-                </div>
-            </div>
-        </div>
-    </form>
-</div>
-
 <div class="card">
-    <table class="responsive-table">
-        <thead>
-            <tr>
-                <th>
-                    N
-                </th>
-                <th>
-                    Protocolo
-                </th>
-                <th>
-                    Data
-                </th>
-                <th>
-                    Cliente
-                </th>
-                <th>
-                    Servicos
-                </th>
-                <th>
-                    Canal
-                </th>
-                <th>
-                    Rae
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @{
-                int cont = 0;
-            }
-
-
-            @foreach (var item in Model.Input.ListaAtendimento)
-            {
-            <tr>
-                <td>
-                    @{cont++;}
-                    @cont.ToString()
-                </td>
-                <td>
-                    <a class="modal-trigger" href="#viewmodal" data-id="@item.Id">@Html.DisplayFor(modelItem => item.Protocolo)</a>
-                </td>
-                <td>
-                    @{
-                            var d1 = Convert.ToDateTime(item.Data);
-                            var datainicial = d1.ToShortDateString();
-                    }
-
-                    @Html.DisplayFor(modelItem => datainicial)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Pessoa.Nome)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Servicos)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Canal)
-                </td>
-                <td>
-                    <a asp-page="./Adicionar.Rae" asp-route-id="@item.Id">RAE @Html.DisplayFor(modelItem => item.Sebrae.RAE)</a>
-                </td>
-            </tr>
-            }
-        </tbody>
-    </table>
-</div>
-
-<!-- Modal Structure -->
-<div id="viewmodal" class="modal modal-fixed-footer">
-    <div class="modal-content"></div>
-    <div class="modal-footer">
-        <a href="#!" class="modal-close btn waves-effect">Fechar</a>
-    </div>
+    <form method="post">
+        <nav class="z-depth-0" style="border-bottom:solid 1px #efefef">
+            <div class="nav-wrapper white row">
+                <div class="input-field col">
+                    <select asp-for="Input.UserName" class="browser-default" style="margin-top:10px;" asp-items="@Model.ListaAtendentes" required></select>
+                </div>
+                <div class="input-field col s4">
+                    <input asp-for="Input.DataF" type="search" id="inputDataF" required>
+                    <label class="label-icon"><i class="black-text material-icons">date_range</i></label>
+                </div>
+                <button class="btn waves-effect">Pesquisar</button>
+            </div>
+        </nav>
+    </form>
+    <partial name="_AtendimentoList" model="Model.Input.ListaAtendimento" />
 </div>
 
 @section scripts{
+    <script src="~/js/jquery.mask.min.js"></script>
+    <script>
+        $('#inputDataI').mask('00/00/0000', { placeholder: "data inicial" });
+        $('#inputDataF').mask('00/00/0000', { placeholder: "data final" });
+    </script>
     <script>
         $(function () {
             $(".modal-trigger").click(function () {
@@ -138,4 +71,3 @@
         });
     </script>
 }
-

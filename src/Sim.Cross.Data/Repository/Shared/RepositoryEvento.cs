@@ -39,6 +39,27 @@ namespace Sim.Cross.Data.Repository.Shared
             return eve;
         }
 
+        public Evento GetByCodigo_Participantes(int codigo)
+        {
+            var eve = _db.Evento
+                .Include(i => i.Inscritos)
+                .Where(c => c.Codigo == codigo)
+                .FirstOrDefault();
+
+            if (eve == null)
+                return null;
+
+            var insc = _db.Inscricao
+                .Include(p => p.Participante)
+                .Include(e => e.Empresa)
+                .Include(e => e.Evento)
+                .Where(s => s.Evento.Codigo == eve.Codigo).OrderBy(s => s.Participante.Nome);
+
+            eve.Inscritos = insc.ToList();
+
+            return eve;
+        }
+
         public IEnumerable<Evento> GetByNome(string nome)
         {
             return _db.Evento.Where(u => u.Nome.Contains(nome)).OrderBy(d => d.Data).ThenByDescending(d => d.Data);

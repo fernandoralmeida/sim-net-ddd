@@ -21,7 +21,7 @@ namespace Sim.Cross.Data.Repository.Shared
         {
             if (setor != null)
             {
-                return _db.Servico.Where(u => u.Setor.Nome.Contains(setor) || u.Setor.Nome.Contains("Geral"));                
+                return _db.Servico.Where(u => u.Setor.Nome.Contains(setor) || u.Setor.Nome.Contains("Geral")).OrderBy(o => o.Nome);                
             }
             else
             {

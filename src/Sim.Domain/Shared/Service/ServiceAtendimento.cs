@@ -85,7 +85,7 @@ namespace Sim.Domain.Shared.Service
 
         public IEnumerable<Atendimento> ListarRaeLancados(IEnumerable<Atendimento> atendimentos)
         {
-            return atendimentos.Where(a => a.RaeLancados(a));
+            return atendimentos.Where(a => a.RaeLancados(a)).OrderByDescending(o => o.Data);
         }
 
         public IEnumerable<Atendimento> ListarRaeNaoLancados(IEnumerable<Atendimento> atendimentos)
@@ -893,6 +893,11 @@ namespace Sim.Domain.Shared.Service
         public async Task<IEnumerable<Atendimento>> ListByMonth(DateTime? month)
         {
             return await _atendimento.ListByMonth(month);
+        }
+
+        public async Task<IEnumerable<Atendimento>> GetByUserNamePeriodo(string username, DateTime? date)
+        {
+            return await _atendimento.GetByUserNamePeriodo(username, date);
         }
     }
 }

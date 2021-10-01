@@ -26,6 +26,8 @@ namespace Sim.UI.Web.Pages.Pessoa
         [TempData]
         public string StatusMessage { get; set; }
 
+        public bool CpfValido = false;
+
         [BindProperty]
         public InputModel Input { get; set; }
         public class InputModel
@@ -65,16 +67,27 @@ namespace Sim.UI.Web.Pages.Pessoa
             {
                 if (ModelState.IsValid)
                 {
-                    var pessoa = _pessoaApp.ConsultaByCPF(Input.CPF);
+                    if (Functions.Validate.IsCpf(Input.CPF))
+                    {
+                        StatusMessage = "";
+                        CpfValido = true;
+                    }
+                    else
+                    {
+                        StatusMessage = "Erro: CPF inválido!";
+                        CpfValido = false;
+                    }                       
 
+
+                    var pessoa = _pessoaApp.ConsultaByCPF(Input.CPF);
 
                     Input = new InputModel
                     {
                         RouteCPF = new Functions.Mask().Remove(Input.CPF),
                         ListaPessoas = pessoa
                     };
-                }
-                StatusMessage = "";
+
+                }                
             }
             catch(Exception ex)
             {
