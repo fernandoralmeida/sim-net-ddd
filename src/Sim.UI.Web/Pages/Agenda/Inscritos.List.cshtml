@@ -1,4 +1,5 @@
 ﻿@page
+@using System.Text;
 @model Sim.UI.Web.Pages.Agenda.Inscritos_ListModel
 @{
     Layout = "/Pages/Shared/__LayoutModal.cshtml";
@@ -20,7 +21,7 @@
         <thead>
             <tr>
                 <th>
-                    N
+                    #
                 </th>
                 <th>
                     CPF
@@ -34,9 +35,6 @@
                 <th>
                     Contato
                 </th>
-                <th >
-                    Data
-                </th>
             </tr>
         </thead>
         <tbody>
@@ -47,28 +45,61 @@
 
             @foreach (var item in Model.Input.Inscritos)
             {
-            <tr>
-                <td>
-                    @{cont++;}
-                    @cont.ToString()
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Participante.CPF)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Participante.Nome)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Empresa.CNPJ)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Participante.Tel_Movel)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Data_Inscricao)
-                </td>
-            </tr>
+                <tr>
+                    <td>
+                        @{cont++;}
+                        @cont.ToString()
+                    </td>
+                    <td>
+                        @{
+                            var _cpf = item.Participante.CPF;
+                            var _cpfmsk = _cpf.Remove(4, 7);
+                            _cpfmsk = _cpfmsk.Insert(4, "XXX.XXX");
+
+                            string[] nomes = item.Participante.Nome.Split(new char[] { ' ' });
+
+                            StringBuilder _nome = new StringBuilder();
+
+                            var i = 0;
+
+                            foreach (string s in nomes)
+                            {
+
+                                if (i % 2 == 0)
+                                {
+                                    _nome.Append(nomes[i].ToUpper());
+                                    i++;
+                                }
+                                else
+                                {
+                                    _nome.Append(" XXXX ");
+                                    i++;
+                                }
+                            }
+
+                            var _nomemsk = _nome.ToString();
+                        }
+
+                        @Html.DisplayFor(modelItem => _cpfmsk)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => _nomemsk)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Empresa.CNPJ)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Participante.Tel_Movel)
+                    </td>
+                </tr>
             }
         </tbody>
     </table>
 </div>
+<!---->
+<div class="row">
+    <p class="center">
+        <button class="btn waves-effect waves-light" onclick="window.print()">Imprimir</button>
+    </p>
+</div>
+
