@@ -54,7 +54,8 @@ namespace Sim.Domain.Cnpj.Entity
                 obj.Codigo == "6259" ||
                 obj.Codigo == "6697" ||
                 obj.Codigo == "6835" ||
-                obj.Codigo == "6383"; 
+                obj.Codigo == "6383" ||
+                obj.Codigo == "6219";
         }
     }
 }

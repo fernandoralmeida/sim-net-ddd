@@ -94,7 +94,7 @@
                         @Html.DisplayFor(modelItem => ultima_alteracao)
                     </td>
                     <td class="blue-text">
-                        <a asp-page="./Adicionar.Rae" asp-route-id="@item.Id">RAE - @Html.DisplayFor(modelItem => item.Sebrae.RAE)</a>
+                        <a asp-page="./Adicionar.Rae" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.Sebrae.RAE)</a>
                     </td>
                 </tr>
             }

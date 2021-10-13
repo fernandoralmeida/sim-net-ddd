@@ -53,8 +53,10 @@
                     <td>
                         @{
                             var _cpf = item.Participante.CPF;
-                            var _cpfmsk = _cpf.Remove(4, 7);
-                            _cpfmsk = _cpfmsk.Insert(4, "XXX.XXX");
+                            var _cpfmsk = _cpf.Remove(0, 3);
+                            _cpfmsk = _cpfmsk.Insert(0, "***");
+                            _cpfmsk = _cpfmsk.Remove(12, 2);
+                            _cpfmsk = _cpfmsk.Insert(12, "**");
 
                             string[] nomes = item.Participante.Nome.Split(new char[] { ' ' });
 
@@ -72,7 +74,7 @@
                                 }
                                 else
                                 {
-                                    _nome.Append(" XXXX ");
+                                    _nome.Append(" **** ");
                                     i++;
                                 }
                             }
