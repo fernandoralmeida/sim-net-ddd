@@ -9,9 +9,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace Sim.Cross.Data.Config.Entity
 {
     using Domain.SDE.Entity;
-    public class EmpresaMap : IEntityTypeConfiguration<Empresa>
+    public class EmpresaMap : IEntityTypeConfiguration<Empresas>
     {
-        public void Configure(EntityTypeBuilder<Empresa> builder)
+        public void Configure(EntityTypeBuilder<Empresas> builder)
         {
             builder.HasKey(c => c.Id);
 

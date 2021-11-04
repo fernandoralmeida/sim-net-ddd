@@ -38,7 +38,7 @@ namespace Sim.UI.Web.Pages.Empresa
             [DisplayName("Razao Social")]
             public string RazaoSocial { get; set; }
 
-            public IEnumerable<Empresa> ListaEmpresas { get; set; }
+            public IEnumerable<Empresas> ListaEmpresas { get; set; }
 
             [TempData]
             public string StatusMessage { get; set; }
@@ -54,7 +54,7 @@ namespace Sim.UI.Web.Pages.Empresa
 
             Input = new InputModel
             {
-                ListaEmpresas = await _empresaApp.UltimasFormalizacoes()
+                ListaEmpresas = await _empresaApp.ListTop20()
             };
         }
 

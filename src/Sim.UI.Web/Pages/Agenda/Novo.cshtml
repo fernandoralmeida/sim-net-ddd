@@ -26,10 +26,10 @@
                     <input asp-for="Input.Nome" required />
                     <label asp-for="Input.Nome"></label>
                 </div>
-                <div class="col s12 m3 l3 input-field">
+                <div class="col s12 m3 l4 input-field">
                     <input asp-for="Input.Data" id="dataid" required />
                 </div>
-                <div class="col s12 m3 l3 input-field">
+                <div class="col s12 m3 l4 input-field">
                     <select asp-for="Input.Formato">
                         <option selected>--Formato--</option>
                         <option value="Online">Online</option>
@@ -37,15 +37,21 @@
                     </select>
                     <label asp-for="Input.Formato"></label>
                 </div>
-                <div class="col s12 m4 l4 input-field">
+                <div class="col s12 m2 l4 input-field">
+                    <input asp-for="Input.Lotacao" />
+                    <label asp-for="Input.Lotacao"></label>
+                </div>
+                <div class="col s12 m6 l6 input-field">
                     <select asp-for="Input.Owner" asp-items="Model.Setores">
                         <option selected>--Setor--</option>
                     </select>
                     <label asp-for="Input.Owner"></label>
                 </div>
-                <div class="col s12 m2 l2 input-field">
-                    <input asp-for="Input.Lotacao" />
-                    <label asp-for="Input.Lotacao"></label>
+                <div class="col s12 m6 l6 input-field">
+                    <select asp-for="Input.Parceiro" asp-items="Model.Parceiros">
+                        <option selected>--Parceiro--</option>
+                    </select>
+                    <label asp-for="Input.Parceiro"></label>
                 </div>
                 <div class="col s12 input-field">
                     <textarea asp-for="Input.Descricao" class="materialize-textarea" rows="2"></textarea>

@@ -39,7 +39,7 @@ namespace Sim.UI.Web.Pages.Empresa
             [DisplayName("Razao Social")]
             public string RazaoSocial { get; set; }
 
-            public IEnumerable<Empresa> ListaEmpresas { get; set; }
+            public IEnumerable<Empresas> ListaEmpresas { get; set; }
 
         }
 
@@ -51,7 +51,7 @@ namespace Sim.UI.Web.Pages.Empresa
 
             Input = new InputModel
             {
-                ListaEmpresas = new List<Empresa>().ToList()
+                ListaEmpresas = new List<Empresas>().ToList()
             };
         }
 

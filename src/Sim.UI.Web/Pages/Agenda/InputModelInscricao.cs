@@ -31,7 +31,7 @@ namespace Sim.UI.Web.Pages.Agenda
         public bool Presente { get; set; }
 
         public virtual Pessoa Participante { get; set; }
-        public virtual Empresa Empresa { get; set; }
+        public virtual Empresas Empresa { get; set; }
         public virtual Evento Evento { get; set; }
     }
 }

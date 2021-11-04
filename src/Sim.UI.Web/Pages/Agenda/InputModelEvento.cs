@@ -43,6 +43,10 @@ namespace Sim.UI.Web.Pages.Agenda
         [DisplayName("Setor Responsável")]
         public string Owner { get; set; }
 
+        [Required]
+        [DisplayName("Parceiro")]
+        public string Parceiro { get; set; }
+
         [DisplayName("Lotação")]
         public int Lotacao { get; set; }
 

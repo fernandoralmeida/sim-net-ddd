@@ -23,7 +23,7 @@ namespace Sim.Cross.Data.Context
         //SDE
         public DbSet<Ambulante> Ambulante { get; set; }
         public DbSet<DIA> DIA { get; set; }
-        public DbSet<Empresa> Empresa { get; set; }
+        public DbSet<Empresas> Empresa { get; set; }
         public DbSet<Pessoa> Pessoa { get; set; }
         //public DbSet<QSA> QSA { get; set; }
         public DbSet<RaeSebrae> Sebrae { get; set; }
@@ -32,6 +32,7 @@ namespace Sim.Cross.Data.Context
         public DbSet<Atendimento> Atendimento { get; set; }
         public DbSet<Canal> Canal { get; set; }
         public DbSet<Evento> Evento { get; set; }
+        public DbSet<Parceiro> Parceiro { get; set; }
         public DbSet<Planner> Planner { get; set; }
         public DbSet<Secretaria> Secretaria { get; set; }
         public DbSet<Servico> Servico { get; set; }
@@ -70,9 +71,9 @@ namespace Sim.Cross.Data.Context
             modelBuilder.Entity<Ambulante>().ToTable("Ambulante");
             modelBuilder.Entity<DIA>().ToTable("DIA");
             modelBuilder.Entity<Pessoa>().ToTable("Pessoa");
-            modelBuilder.Entity<Empresa>().ToTable("Empresa");
-            //modelBuilder.Entity<QSA>().ToTable("QSA");
-            modelBuilder.Entity<Atendimento>().ToTable("Atendimento");            
+            modelBuilder.Entity<Empresas>().ToTable("Empresa");
+            modelBuilder.Entity<Atendimento>().ToTable("Atendimento");
+            modelBuilder.Entity<Parceiro>().ToTable("Parceiros");
             modelBuilder.Entity<Canal>().ToTable("Canal");
             modelBuilder.Entity<Evento>().ToTable("Evento");
             modelBuilder.Entity<Planner>().ToTable("Planer");
@@ -93,7 +94,7 @@ namespace Sim.Cross.Data.Context
             modelBuilder.ApplyConfiguration(new Config.Entity.EmpresaMap());
             modelBuilder.ApplyConfiguration(new Config.Entity.PessoaMap());
             modelBuilder.ApplyConfiguration(new Config.Entity.PlannerMap());
-            //modelBuilder.ApplyConfiguration(new Config.Entity.QSAMap());
+            modelBuilder.ApplyConfiguration(new Config.Entity.ParceiroMap());
             modelBuilder.ApplyConfiguration(new Config.Entity.SecretariaMap());
             modelBuilder.ApplyConfiguration(new Config.Entity.ServicoMap());
             modelBuilder.ApplyConfiguration(new Config.Entity.SetorMap());

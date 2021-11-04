@@ -9,9 +9,9 @@ namespace Sim.Domain.SDE.Entity
     using Domain.Shared.Entity;
     using System.ComponentModel.DataAnnotations;
 
-    public class Empresa
+    public class Empresas
     {
-        public Empresa()
+        public Empresas()
         {
 
         }
@@ -37,7 +37,7 @@ namespace Sim.Domain.SDE.Entity
         public virtual ICollection<Atendimento> Atendimentos { get; set; }
         public virtual ICollection<Inscricao> Inscricoes { get; set; }
 
-        public bool UltimasFormalizacoes(Empresa obj)
+        public bool UltimasFormalizacoes(Empresas obj)
         {
             return obj.Data_Abertura >= DateTime.Now.AddDays(-60);
         }

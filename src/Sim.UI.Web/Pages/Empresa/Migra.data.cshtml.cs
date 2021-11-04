@@ -112,7 +112,7 @@ namespace Sim.UI.Web.Pages.Empresa
 
                     var t = Task.Run(() =>
                     {
-                        var empresa = _mapper.Map<Domain.SDE.Entity.Empresa>(Input);
+                        var empresa = _mapper.Map<Domain.SDE.Entity.Empresas>(Input);
                         _appServiceEmpresa.Add(empresa);
                     });
                     await t;

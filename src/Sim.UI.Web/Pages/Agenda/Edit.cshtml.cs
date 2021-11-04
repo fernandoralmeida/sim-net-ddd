@@ -17,16 +17,19 @@ namespace Sim.UI.Web.Pages.Agenda
         private readonly IAppServiceTipo _appServiceTipo;
         private readonly IAppServiceEvento _appServiceEvento;
         private readonly IAppServiceSetor _appServiceSetor;
+        private readonly IAppServiceParceiro _appServiceParceiro;
         private readonly IMapper _mapper;
 
         public EditModel(IAppServiceEvento appServiceEvento,
             IAppServiceTipo appServiceTipo,
             IAppServiceSetor appServiceSetor,
+            IAppServiceParceiro appServiceParceiro,
             IMapper mapper)
         {
             _appServiceEvento = appServiceEvento;
             _appServiceTipo = appServiceTipo;
             _appServiceSetor = appServiceSetor;
+            _appServiceParceiro = appServiceParceiro;
             _mapper = mapper;
         }
 
@@ -39,6 +42,8 @@ namespace Sim.UI.Web.Pages.Agenda
         public SelectList TipoEventos { get; set; }
         public SelectList Setores { get; set; }
 
+        public SelectList Parceiros { get; set; }
+
         public async Task OnGet(Guid id)
         {
             var t = Task.Run(() => _appServiceTipo.List());
@@ -46,6 +51,8 @@ namespace Sim.UI.Web.Pages.Agenda
 
             var s = Task.Run(() => _appServiceSetor.List());
             await s;
+
+            var p = Task.Run(() => _appServiceParceiro.List());
 
             if (t.Result != null)
             {
@@ -55,6 +62,11 @@ namespace Sim.UI.Web.Pages.Agenda
             if (s.Result != null)
             {
                 Setores = new SelectList(s.Result, nameof(Setor.Nome), nameof(Setor.Nome), null);
+            }
+
+            if (p.Result != null)
+            {
+                Parceiros = new SelectList(p.Result, nameof(Parceiro.Nome), nameof(Parceiro.Nome), null);
             }
 
             var evento = Task.Run(() => _appServiceEvento.GetById(id));

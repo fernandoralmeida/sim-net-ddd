@@ -30,8 +30,8 @@ namespace Sim.UI.Web.AutoMapper
             CreateMap<Qsa, QSA>();
             CreateMap<QSA, Qsa>().ReverseMap();
 
-            CreateMap<VMEmpresa, Empresa>();
-            CreateMap<Empresa, VMEmpresa>().ReverseMap();
+            CreateMap<VMEmpresa, Empresas>();
+            CreateMap<Empresas, VMEmpresa>().ReverseMap();
 
             CreateMap<Pages.Atendimento.InputModel, Atendimento>();
             CreateMap<Atendimento, Pages.Atendimento.InputModel>().ReverseMap();

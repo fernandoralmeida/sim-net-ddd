@@ -60,7 +60,7 @@ namespace Sim.UI.Web.Pages.Empresa
 
             var t = Task.Run(() =>
             {
-                var empresa = _mapper.Map<Empresa>(Input);
+                var empresa = _mapper.Map<Empresas>(Input);
                 _appServiceEmpresa.Add(empresa);
                 StatusMessage = "Empresa adicionada com sucesso!";
             });
@@ -109,7 +109,7 @@ namespace Sim.UI.Web.Pages.Empresa
             var t = Task.Run(() =>
             {                
 
-                var empresa = _mapper.Map<Empresa>(Input);
+                var empresa = _mapper.Map<Empresas>(Input);
 
                 _appServiceEmpresa.Add(empresa);
 

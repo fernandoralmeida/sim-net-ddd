@@ -27,7 +27,7 @@ namespace Sim.Domain.Shared.Entity
         public string Owner_AppUser_Id { get; set; }
 
         public virtual Pessoa Pessoa { get; set; }
-        public virtual Empresa Empresa { get; set; }
+        public virtual Empresas Empresa { get; set; }
         public virtual RaeSebrae Sebrae { get; set; }
 
         public bool RaeLancados(Atendimento obj)

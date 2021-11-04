@@ -18,6 +18,7 @@ namespace Sim.Domain.Shared.Entity
         public DateTime? Data { get; set; }
         public string Descricao { get; set; }
         public string Owner { get; set; }
+        public string Parceiro { get; set; }
         public int Lotacao { get; set; }
         public bool Ativo { get; set; }
 

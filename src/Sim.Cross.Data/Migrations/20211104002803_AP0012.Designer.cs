@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Sim.Cross.Data.Context;
 
 namespace Sim.Cross.Data.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20211104002803_AP0012")]
+    partial class AP0012
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -485,12 +487,10 @@ namespace Sim.Cross.Data.Migrations
                     b.Property<string>("Nome")
                         .HasColumnType("varchar(max)");
 
-                    b.Property<Guid?>("SecretariaId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("Owner")
+                        .HasColumnType("varchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("SecretariaId");
 
                     b.ToTable("Parceiros");
                 });
@@ -730,15 +730,6 @@ namespace Sim.Cross.Data.Migrations
                     b.Navigation("Evento");
 
                     b.Navigation("Participante");
-                });
-
-            modelBuilder.Entity("Sim.Domain.Shared.Entity.Parceiro", b =>
-                {
-                    b.HasOne("Sim.Domain.Shared.Entity.Secretaria", "Secretaria")
-                        .WithMany()
-                        .HasForeignKey("SecretariaId");
-
-                    b.Navigation("Secretaria");
                 });
 
             modelBuilder.Entity("Sim.Domain.Shared.Entity.Servico", b =>

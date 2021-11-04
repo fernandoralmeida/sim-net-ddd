@@ -56,6 +56,7 @@ namespace Sim.Cross.Ioc
             RegisterTiposEventos(services);
             RegisterTiposInscricaoEventos(services);
             RegisterPlanner(services);
+            RegisterParceiro(services);
         }
 
         private static void RegisterPessoa(IServiceCollection services)
@@ -85,17 +86,17 @@ namespace Sim.Cross.Ioc
 
             services.AddScoped<IServiceMunicipios<Municipio>, ServiceMunicipios>();
             /**/
-            services.AddScoped<IAppServiceBase<Domain.SDE.Entity.Empresa>, AppServiceBase<Domain.SDE.Entity.Empresa>>();
+            services.AddScoped<IAppServiceBase<Domain.SDE.Entity.Empresas>, AppServiceBase<Domain.SDE.Entity.Empresas>>();
             services.AddScoped<IAppServiceEmpresa, AppServiceEmpresa>();
             services.AddScoped<IAppServiceBase<QSA>, AppServiceBase<QSA>>();
             services.AddScoped<IAppServiceQSA, AppServiceQSA>();
 
-            services.AddScoped<IServiceBase<Domain.SDE.Entity.Empresa>, ServiceBase<Domain.SDE.Entity.Empresa>>();
+            services.AddScoped<IServiceBase<Domain.SDE.Entity.Empresas>, ServiceBase<Domain.SDE.Entity.Empresas>>();
             services.AddScoped<IServiceEmpresa, ServiceEmpresa>();
             services.AddScoped<IServiceBase<QSA>, ServiceBase<QSA>>();
             services.AddScoped<IServiceQSA, ServiceQSA>();
 
-            services.AddScoped<IRepositoryBase<Domain.SDE.Entity.Empresa>, RepositoryBase<Domain.SDE.Entity.Empresa>>();
+            services.AddScoped<IRepositoryBase<Domain.SDE.Entity.Empresas>, RepositoryBase<Domain.SDE.Entity.Empresas>>();
             services.AddScoped<IRepositoryEmpresa, RepositoryEmpresa>();
             services.AddScoped<IRepositoryBase<QSA>, RepositoryBase<QSA>>();
             services.AddScoped<IRepositoryQSA, RepositoryQsa>();
@@ -236,6 +237,18 @@ namespace Sim.Cross.Ioc
 
             services.AddScoped<IRepositoryBase<Planner>, RepositoryBase<Planner>>();
             services.AddScoped<IRepositoryPlaner, RepositoryPlaner>();
+        }
+
+        private static void RegisterParceiro(IServiceCollection services)
+        {
+            services.AddScoped<IAppServiceBase<Parceiro>, AppServiceBase<Parceiro>>();
+            services.AddScoped<IAppServiceParceiro, AppServiceParceiro>();
+
+            services.AddScoped<IServiceBase<Parceiro>, ServiceBase<Parceiro>>();
+            services.AddScoped<IServiceParceiro, ServiceParceiros>();
+
+            services.AddScoped<IRepositoryBase<Parceiro>, RepositoryBase<Parceiro>>();
+            services.AddScoped<IRepositoryParceiro, RepositoryParceiro>();
         }
     }
 }

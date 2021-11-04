@@ -65,7 +65,7 @@ namespace Sim.UI.Web.Pages.Empresa
         {
             try
             {
-                var t = Task.Run(() => _appServiceEmpresa.ListEmpresasQsa(id).FirstOrDefault());
+                var t = Task.Run(() => _appServiceEmpresa.GetById(id));
 
                 await t;
 
@@ -88,7 +88,7 @@ namespace Sim.UI.Web.Pages.Empresa
 
                 await LoadAsync(cnpj, Input.Id);
 
-                var empresa = _mapper.Map<Empresa>(Input);
+                var empresa = _mapper.Map<Empresas>(Input);
 
                 _appServiceEmpresa.Update(empresa);
                 
@@ -109,7 +109,7 @@ namespace Sim.UI.Web.Pages.Empresa
                 var t = Task.Run(() =>
                 {
 
-                    var empresa = _mapper.Map<Empresa>(Input);
+                    var empresa = _mapper.Map<Empresas>(Input);
                 
                     _appServiceEmpresa.Update(empresa);
 

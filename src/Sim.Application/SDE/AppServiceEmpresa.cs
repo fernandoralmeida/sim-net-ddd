@@ -9,7 +9,9 @@ namespace Sim.Application.SDE
     using Interface;
     using Domain.SDE.Entity;
     using Domain.SDE.Interface;
-    public class AppServiceEmpresa : AppServiceBase<Empresa>, IAppServiceEmpresa
+    using Sim.Domain.Cnpj.Entity;
+
+    public class AppServiceEmpresa : AppServiceBase<Empresas>, IAppServiceEmpresa
     {
         private readonly IServiceEmpresa _empresa;
 
@@ -19,29 +21,69 @@ namespace Sim.Application.SDE
             _empresa = empresa;
         }
 
-        public IEnumerable<Empresa> ConsultaByCNAE(string cnae)
-        {
-            return _empresa.ConsultaByCNAE(cnae);
-        }
-
-        public IEnumerable<Empresa> ConsultaByCNPJ(string cnpj)
+        public IEnumerable<Empresas> ConsultaByCNPJ(string cnpj)
         {
             return _empresa.ConsultaByCNPJ(cnpj);
         }
 
-        public IEnumerable<Empresa> ConsultaByRazaoSocial(string name)
+        public IEnumerable<Empresas> ConsultaByRazaoSocial(string name)
         {
             return _empresa.ConsultaByRazaoSocial(name);
         }
 
-        public IEnumerable<Empresa> ListEmpresasQsa(Guid id)
+        public async Task<BaseReceitaFederal> GetCnpjAsync(string cnpj)
         {
-            return _empresa.ListEmpresasQsa(id);
+            return await _empresa.GetCnpjAsync(cnpj);
         }
 
-        public async Task<IEnumerable<Empresa>> UltimasFormalizacoes()
+        public async Task<IEnumerable<BaseReceitaFederal>> ListAsync()
         {
-            return await _empresa.UltimasFormalizacoes();
+            return await _empresa.ListAsync();
+        }
+
+        public async Task<IEnumerable<BaseReceitaFederal>> ListByBairroAsync(string bairro, string atividade, string municipio, string situacao)
+        {
+            return await _empresa.ListByBairroAsync(bairro, atividade, municipio, situacao);
+        }
+
+        public async Task<IEnumerable<BaseReceitaFederal>> ListByCNAEAsync(string atividade, string municipio)
+        {
+            return await _empresa.ListByCNAEAsync(atividade, municipio);
+        }
+
+        public async Task<IEnumerable<BaseReceitaFederal>> ListByCNPJBaseAsync(string cnpj)
+        {
+            return await _empresa.ListByCNPJBaseAsync(cnpj);
+        }
+
+        public async Task<IEnumerable<BaseReceitaFederal>> ListByLogradouroAsync(string logradouro, string atividade, string municipio, string situacao)
+        {
+            return await _empresa.ListByLogradouroAsync(logradouro, atividade, municipio, situacao);
+        }
+
+        public async Task<IEnumerable<BaseReceitaFederal>> ListByMunicipioAsync(string municipio)
+        {
+            return await _empresa.ListByMunicipioAsync(municipio);
+        }
+
+        public async Task<IEnumerable<BaseReceitaFederal>> ListByOptanteSimplesAsync(string municipio)
+        {
+            return await _empresa.ListByOptanteSimplesAsync(municipio);
+        }
+
+        public async Task<IEnumerable<BaseReceitaFederal>> ListBySociosAsync(string nomesocio)
+        {
+            return await _empresa.ListBySociosAsync(nomesocio);
+        }
+
+        public async Task<IEnumerable<BaseReceitaFederal>> ListTop10()
+        {
+            return await _empresa.ListTop10();
+        }
+
+        public async Task<IEnumerable<Empresas>> ListTop20()
+        {
+            return await _empresa.ListTop20();
         }
     }
 }
