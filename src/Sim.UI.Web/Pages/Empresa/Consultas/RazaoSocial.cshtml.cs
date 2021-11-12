@@ -6,19 +6,20 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Authorization;
+using System.ComponentModel.DataAnnotations;
 
-namespace Sim.UI.Web.Pages.Empresa
+namespace Sim.UI.Web.Pages.Empresa.Consultas
 {
     using Sim.Domain.SDE.Entity;
     using Sim.Application.SDE.Interface;
-    using System.ComponentModel.DataAnnotations;
+    
 
     [Authorize]
-    public class Consulta_rsModel : PageModel
+    public class RazaoSocialModel : PageModel
     {
-        private readonly IAppServiceEmpresa  _empresaApp;
+        private readonly IAppServiceEmpresa _empresaApp;
 
-        public Consulta_rsModel(IAppServiceEmpresa appServiceEmpresa)
+        public RazaoSocialModel(IAppServiceEmpresa appServiceEmpresa)
         {
             _empresaApp = appServiceEmpresa;
         }
@@ -31,7 +32,7 @@ namespace Sim.UI.Web.Pages.Empresa
         public class InputModel
         {
 
-            
+
             [DisplayName("CNPJ")]
             public string CNPJ { get; set; }
 

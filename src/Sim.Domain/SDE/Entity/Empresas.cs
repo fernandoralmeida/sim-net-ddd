@@ -12,9 +12,7 @@ namespace Sim.Domain.SDE.Entity
     public class Empresas
     {
         public Empresas()
-        {
-
-        }
+        {  }
         public Guid Id { get; set; }
         public string CNPJ { get; set; }
         public DateTime? Data_Abertura { get; set; }

@@ -11,14 +11,14 @@
                 <li>
                     <a class="dropdown-trigger @EmpresaNavPages.ConsultaNomeNavClass(ViewContext)" data-target="dropdownemp" href="#">Consultar<i class="material-icons right">arrow_drop_down</i></a>
                     <ul id="dropdownemp" class="dropdown-content">
-                        <li><a asp-page="./Index">por CNPJ</a></li>
-                        <li><a asp-page="./Consulta-rs">por Razao Social</a></li>
+                        <li><a asp-page="/Empresa/Index">por CNPJ</a></li>
+                        <li><a asp-page="/Empresa/Consultas/RazaoSocial">por Razao Social</a></li>
                     </ul>
                 </li>
 
                 <li class="blue lighten-1 waves-effect waves-light">
                     <form>
-                        <a asp-area="" asp-page="./Add">Adicionar Empresa</a>
+                        <a asp-area="" asp-page="/Empresa/Add">Adicionar Empresa</a>
                     </form>
                 </li>
             </ul>

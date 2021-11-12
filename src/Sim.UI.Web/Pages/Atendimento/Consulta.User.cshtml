@@ -12,15 +12,15 @@
 <div class="card">
     <form method="post">
         <nav class="z-depth-0" style="border-bottom:solid 1px #efefef">
-            <div class="nav-wrapper white row">
-                <div class="input-field col">
-                    <select asp-for="Input.UserName" class="browser-default" style="margin-top:10px;" asp-items="@Model.ListaAtendentes" required></select>
+            <div class="nav-wrapper white row">                
+                <div class="input-field col valign-wrapper">
+                    <select asp-for="Input.UserName" class="browser-default" asp-items="@Model.ListaAtendentes" required></select>
                 </div>
                 <div class="input-field col s4">
                     <input asp-for="Input.DataF" type="search" id="inputDataF" required>
                     <label class="label-icon"><i class="black-text material-icons">date_range</i></label>
                 </div>
-                <button class="btn waves-effect">Pesquisar</button>
+                <button class="input-field btn waves-effect waves-light right z-depth-0">Pesquisar</button>
             </div>
         </nav>
     </form>

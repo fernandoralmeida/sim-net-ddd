@@ -9,11 +9,11 @@
         foreach (var item in Model)
         {
             <div class="col s12 m6 l4 xl3">
-                <div class="card">
-                    <div class="card-image blue-grey darken-1">
+                <div class="card hoverable">
+                    <div class="card-image blue-grey lighten-2">
                         <div style="height:100px;"><span style="font-size:12px; color:#fff; margin-left:10px;">@item.Tipo</span></div>   
                         
-                        <span class="card-title truncate orange-text">@item.Nome</span>
+                        <span class="card-title truncate white-text">@item.Nome</span>
                         <a class="btn-floating halfway-fab waves-effect waves-light red" asp-page="./Inscricao.Evento" asp-route-id="@item.Codigo" title="Inscrever"><i class="material-icons">add</i></a>
                     </div>
                     <div class="card-content truncate">
@@ -23,7 +23,7 @@
                         <br />Vagas: @item.Vagas
                     </div>
                     <div class="card-action">
-                        <a asp-page="./Edit" asp-route-id="@item.Id">Gerenciar</a><a asp-page="./Inscricao.Remove" asp-route-id="@item.Codigo"><span class="new badge" data-badge-caption="inscritos">@item.NumeroInscritos</span></a>
+                        <a class="blue-text" asp-page="./Edit" asp-route-id="@item.Id">Gerenciar</a><a asp-page="./Inscricao.Remove" asp-route-id="@item.Codigo"><span class="new badge" data-badge-caption="inscritos">@item.NumeroInscritos</span></a>
                     </div>
                 </div>
             </div>

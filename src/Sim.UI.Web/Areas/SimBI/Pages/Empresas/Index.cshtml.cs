@@ -30,10 +30,11 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Empresas
 
         private async Task LoadAsync()
         {
-            var l_all_atendimentos = _appEmpresa.List();
+            var l_all_atendimentos = Task.Run(()=>  new List<KeyValuePair<string, int>>());
 
-            Input.Add(null);
+            await l_all_atendimentos;
 
+            Input.Add(l_all_atendimentos.Result);
         }
 
         public async Task<IActionResult> OnGetAsync()
