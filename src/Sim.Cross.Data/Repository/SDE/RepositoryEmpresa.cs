@@ -250,8 +250,9 @@ namespace Sim.Cross.Data.Repository.SDE
 
                 var qry = (from est in db.Estabelecimentos
                            from emp in db.Empresas.Where(s => s.CNPJBase == est.CNPJBase)
+                           from atv in db.CNAEs.Where(s => est.CnaeFiscalPrincipal == s.Codigo)
                            from sn in db.Simples.Where(s => s.CNPJBase == est.CNPJBase).DefaultIfEmpty()
-                           select new { est, emp, sn })
+                           select new { est, emp, sn, atv })
                           .Where(s => s.est.Municipio.Contains(municipio)).Distinct();
 
                 foreach (var e in qry)
@@ -260,7 +261,7 @@ namespace Sim.Cross.Data.Repository.SDE
 
 
                     brf.Add(new BaseReceitaFederal(
-                        0, _cnpj, e.emp, e.est, null, e.sn, null, null, null, null, null, null));
+                        0, _cnpj, e.emp, e.est, null, e.sn, e.atv, null, null, null, null, null));
                 }
 
             });
@@ -331,6 +332,11 @@ namespace Sim.Cross.Data.Repository.SDE
             await t;
 
             return brf;
+        }
+
+        public async Task<IEnumerable<Municipio>> ListMinicipios()
+        {
+            return await db.Municipios.OrderBy(s => s.Descricao).ToListAsync();
         }
 
         public async Task<IEnumerable<BaseReceitaFederal>> ListTop10()

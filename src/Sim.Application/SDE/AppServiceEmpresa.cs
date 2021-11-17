@@ -31,6 +31,11 @@ namespace Sim.Application.SDE
             return _empresa.ConsultaByRazaoSocial(name);
         }
 
+        public Task<IEnumerable<KeyValuePair<string, int>>> EmpresasByMunicipioAsync(string municipio, string situacao)
+        {
+            return _empresa.EmpresasByMunicipioAsync(municipio, situacao);
+        }
+
         public async Task<BaseReceitaFederal> GetCnpjAsync(string cnpj)
         {
             return await _empresa.GetCnpjAsync(cnpj);
@@ -76,6 +81,11 @@ namespace Sim.Application.SDE
             return await _empresa.ListBySociosAsync(nomesocio);
         }
 
+        public async Task<IEnumerable<Municipio>> ListMinicipios()
+        {
+            return await _empresa.ListMinicipios();
+        }
+
         public async Task<IEnumerable<BaseReceitaFederal>> ListTop10()
         {
             return await _empresa.ListTop10();
@@ -84,6 +94,11 @@ namespace Sim.Application.SDE
         public async Task<IEnumerable<Empresas>> ListTop20()
         {
             return await _empresa.ListTop20();
+        }
+
+        public async Task<IEnumerable<Municipio>> MicroRegiaoJahu()
+        {
+            return await _empresa.MicroRegiaoJahu();
         }
     }
 }

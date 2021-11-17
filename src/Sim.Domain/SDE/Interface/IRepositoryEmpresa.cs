@@ -27,5 +27,7 @@ namespace Sim.Domain.SDE.Interface
         Task<IEnumerable<BaseReceitaFederal>> ListByCNPJBaseAsync(string cnpj);
         Task<IEnumerable<BaseReceitaFederal>> ListBySociosAsync(string nomesocio);
 
+        Task<IEnumerable<Municipio>> ListMinicipios();
+
     }
 }

@@ -26,5 +26,9 @@ namespace Sim.Application.SDE.Interface
         Task<IEnumerable<BaseReceitaFederal>> ListByCNAEAsync(string atividade, string municipio);
         Task<IEnumerable<BaseReceitaFederal>> ListByCNPJBaseAsync(string cnpj);
         Task<IEnumerable<BaseReceitaFederal>> ListBySociosAsync(string nomesocio);
+        Task<IEnumerable<Municipio>> ListMinicipios();
+        Task<IEnumerable<Municipio>> MicroRegiaoJahu();
+        /** Relatorio Estatisticos **/
+        Task<IEnumerable<KeyValuePair<string, int>>> EmpresasByMunicipioAsync(string municipio, string situacao);
     }
 }
