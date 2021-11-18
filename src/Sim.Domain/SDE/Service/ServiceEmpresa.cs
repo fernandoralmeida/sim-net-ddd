@@ -97,7 +97,7 @@ namespace Sim.Domain.SDE.Service
 
                 }
                 
-                bi_empresas.Empresas = new KeyValuePair<string, int>("Dados Gerais", _emp.Count);
+                bi_empresas.Empresas = new KeyValuePair<string, int>("Estatísticas de Empresas", _emp.Count);
 
                 var c_atv = from x in _atv
                              group x by x into g
