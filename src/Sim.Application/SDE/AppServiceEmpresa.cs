@@ -10,6 +10,7 @@ namespace Sim.Application.SDE
     using Domain.SDE.Entity;
     using Domain.SDE.Interface;
     using Sim.Domain.Cnpj.Entity;
+    using Domain.BI;
 
     public class AppServiceEmpresa : AppServiceBase<Empresas>, IAppServiceEmpresa
     {
@@ -31,9 +32,9 @@ namespace Sim.Application.SDE
             return _empresa.ConsultaByRazaoSocial(name);
         }
 
-        public Task<IEnumerable<KeyValuePair<string, int>>> EmpresasByMunicipioAsync(string municipio, string situacao)
+        public Task<IEnumerable<BiEmpresas>> BiEmpresasAsync(string municipio, string situacao)
         {
-            return _empresa.EmpresasByMunicipioAsync(municipio, situacao);
+            return _empresa.BiEmpresasAsync(municipio, situacao);
         }
 
         public async Task<BaseReceitaFederal> GetCnpjAsync(string cnpj)

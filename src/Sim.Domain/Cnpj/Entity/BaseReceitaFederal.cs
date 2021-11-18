@@ -64,7 +64,7 @@ namespace Sim.Domain.Cnpj.Entity
 
         public bool EmpresaInapta(BaseReceitaFederal obj)
         {
-            return obj.Estabelecimento.SituacaoCadastral == "Inapita"; 
+            return obj.Estabelecimento.SituacaoCadastral == "Inapta"; 
         }
         
         public bool EmpresaBaixada(BaseReceitaFederal obj)

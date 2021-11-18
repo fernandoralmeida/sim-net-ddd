@@ -9,35 +9,6 @@
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
 <div class="row">
-    <div class="row valign-wrapper">
-        <div class="col">
-            <select asp-for="Input.Municipio" class="browser-default" asp-items="@Model.ListaMunicipios"></select>
-        </div>
-        <div class="col">
-            <select asp-for="Input.Situacao" class="browser-default">
-                <option selected>Ativa</option>
-                <option>Inapta</option>
-                <option>Nula</option>
-                <option>Baixada</option>
-            </select>
-        </div>
-        <div class="col">
-            
-                <button type="submit" class="col btn-flat waves-effect waves-light">Jan</button>
-                <button type="submit" class="col btn-flat waves-effect waves-light">Fev</button>
-                <button type="submit" class="col btn-flat waves-effect waves-light">Mar</button>
-                <button type="submit" class="col btn-flat waves-effect waves-light">Abr</button>
-                <button type="submit" class="col btn-flat waves-effect waves-light">Mai</button>
-                <button type="submit" class="col btn-flat waves-effect waves-light">Jun</button>
-                <button type="submit" class="col btn-flat waves-effect waves-light">Jul</button>
-                <button type="submit" class="col btn-flat waves-effect waves-light">Ago</button>
-                <button type="submit" class="col btn-flat waves-effect waves-light">Set</button>
-                <button type="submit" class="col btn-flat waves-effect waves-light">Out</button>
-                <button type="submit" class="col btn-flat waves-effect waves-light">Nov</button>
-                <button type="submit" class="col btn-flat waves-effect waves-light">Dez</button>
-            
-        </div>
-    </div>
 
     <ul class="collapsible popout">
         @{
@@ -50,25 +21,51 @@
             <li class="@ativo">
 
                 @{ ativo = string.Empty; }
+                
 
-                <div class="collapsible-header waves-effect waves-green">@emp.FirstOrDefault().Key<span class="new badge blue" data-badge-caption="@emp.FirstOrDefault().Value">Estabelecimentos</span></div>
+                <div class="collapsible-header waves-effect waves-green">@emp.Empresas.Key<span class="new badge blue" data-badge-caption="@emp.Empresas.Value">Estabelecimentos</span></div>
                 <div class="collapsible-body white">
                     <div class="row">
                         <div class="col l6 m6 s12">
+                            <ul class="collection z-depth-1">
+                                <li class="collection-item"><i class="material-icons left">local_activity</i>Empresas por Setores</li>
 
+                                @foreach (var op in emp.ListaSetores)
+                                {
+
+                                        <li class="collection-item"><span class="new badge " data-badge-caption="@op.Value"></span>@op.Key</li>
+
+                                }
+
+                            </ul>
+                            <p></p>
+                            <ul class="collection z-depth-1">
+                                <li class="collection-item"><i class="material-icons left">analytics</i>Situação das empresas</li>
+
+                                @foreach (var op in emp.ListaSituacao)
+                                {
+
+
+                                        <li class="collection-item"><span class="new badge blue lighten-2" data-badge-caption="@op.Value"></span>@op.Key</li>
+
+                                }
+
+                            </ul>
+                            <p></p>
                         </div>
-                            <ul class="col l6 m6 s12 collection z-depth-1">
-                                <li class="collection-item"><i class="material-icons left">handyman</i>Principais atividades</li>
+                        <div class="col l6 m6 s12 ">
+                            <ul class="collection z-depth-1">
+                                <li class="collection-item"><i class="material-icons left">handyman</i>Principais atividades (10+)</li>
 
                                 @{int v = 0;}
 
-                                @foreach (var op in emp)
-                                {                                    
-                                    if (v > 0 && v < 16)
+                                @foreach (var op in emp.ListaAtividades)
+                                {
+                                    if (v < 10)
                                     {
                                         <li class="collection-item"><span class="new badge green lighten-1" data-badge-caption="@op.Value"></span>@op.Key</li>
                                     }
-                                    else if (v > 16)
+                                    else
                                     {
                                         break;
                                     }
@@ -76,10 +73,18 @@
                                 }
 
                             </ul>
+                        </div>                            
                     </div>
                 </div>
             </li>
         }
+
+    <li>
+        <div class="collapsible-header waves-effect waves-green">Empresas por CNAE</div>
+        <div class="collapsible-body white">
+
+        </div>
+    </li>
     </ul>
 </div>
 

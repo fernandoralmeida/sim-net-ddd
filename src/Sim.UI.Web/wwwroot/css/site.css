@@ -21,6 +21,11 @@ html {
     /*font-size: 14px;*/
 }
 
+.pdn-h-4{
+    padding-left:4px;
+    padding-right:4px;
+}
+
 /* materialize */
 .sidenav {
     width: 250px

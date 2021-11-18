@@ -133,7 +133,7 @@ namespace Sim.Domain.Cnpj.Entity
                 return "Suspensa";
 
             else if (valor == "04")
-                return "Inapita";
+                return "Inapta";
 
             else if (valor == "08")
                 return "Baixada";

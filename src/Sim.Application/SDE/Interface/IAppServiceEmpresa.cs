@@ -9,6 +9,7 @@ namespace Sim.Application.SDE.Interface
     using Domain.SDE.Entity;
     using Domain.Cnpj.Entity;
     using Application.Interface;
+    using Domain.BI;
     public interface IAppServiceEmpresa : IAppServiceBase<Empresas>
     {
         IEnumerable<Empresas> ConsultaByCNPJ(string _cnpj);
@@ -29,6 +30,6 @@ namespace Sim.Application.SDE.Interface
         Task<IEnumerable<Municipio>> ListMinicipios();
         Task<IEnumerable<Municipio>> MicroRegiaoJahu();
         /** Relatorio Estatisticos **/
-        Task<IEnumerable<KeyValuePair<string, int>>> EmpresasByMunicipioAsync(string municipio, string situacao);
+        Task<IEnumerable<BiEmpresas>> BiEmpresasAsync(string municipio, string situacao);
     }
 }

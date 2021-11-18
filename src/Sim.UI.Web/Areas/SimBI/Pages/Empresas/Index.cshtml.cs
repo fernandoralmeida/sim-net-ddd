@@ -7,13 +7,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel;
 
 namespace Sim.UI.Web.Areas.SimBI.Pages.Empresas
 {
 
     using Sim.Application.SDE.Interface;
     using Sim.Domain.Cnpj.Entity;
-    using System.ComponentModel;
+    using Sim.Domain.BI;
 
     [Authorize]
     public class IndexModel : PageModel
@@ -23,7 +24,7 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Empresas
         public SelectList ListaMunicipios { get; set; }
 
         [BindProperty(SupportsGet = true)]
-        public List<IEnumerable<KeyValuePair<string, int>>> ListEmpresas { get; set; }
+        public IEnumerable<BiEmpresas> ListEmpresas { get; set; }
 
         [BindProperty]
         public InputModel Input { get; set; }
@@ -33,6 +34,8 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Empresas
             [DisplayName("Situação")]
             public string Situacao { get; set; }
             public string Municipio { get; set; }
+            public string Mes { get; set; }
+            public int Ano { get; set; }
         }
 
         [TempData]
@@ -56,8 +59,7 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Empresas
 
         private async Task LoadAsync()
         {
-            var l_all_empresas = await _appEmpresa.EmpresasByMunicipioAsync(Input.Municipio, Input.Situacao);
-            ListEmpresas.Add(l_all_empresas);
+            ListEmpresas = await _appEmpresa.BiEmpresasAsync(Input.Municipio, Input.Situacao);
         }
 
         public async Task<IActionResult> OnGetAsync()
@@ -65,8 +67,10 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Empresas
             Input = new();
             Input.Municipio = "6607";
             Input.Situacao = "Ativa";
+            Input.Ano = DateTime.Today.Year;
+            Input.Mes = DateTime.Today.Month.ToString();
             await LoadMunicipios();
-            await LoadAsync();
+            await LoadAsync();            
             return Page();
         }
 
