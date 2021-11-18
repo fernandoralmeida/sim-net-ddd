@@ -14,34 +14,34 @@ namespace Sim.Domain.BI
         public IEnumerable<KeyValuePair<string, int>> ListaSetores { get; set; }
         public IEnumerable<IEnumerable<KeyValuePair<string, int>>> ListaAtividadesSetores { get; set; }        
 
-        public IEnumerable<ConclaSecao> ListCNAE { get; set; }
+        public IEnumerable<CnaeSecao> ListCNAE { get; set; }
     }
 
-    public class ConclaSecao
+    public class CnaeSecao
     {
         public KeyValuePair<string, int> Secao { get; set; }
-        public IEnumerable<ConclaDivisao> ListDivisao { get; set; }
+        public IEnumerable<CnaeDivisao> ListDivisao { get; set; }
     }
 
-    public class ConclaDivisao
+    public class CnaeDivisao
     {
         public KeyValuePair<string, int> Divisao { get; set; }
-        public IEnumerable<ConclaGrupo> ListGrupo { get; set; }
+        public IEnumerable<CnaeGrupo> ListGrupo { get; set; }
     }
 
-    public class ConclaGrupo
+    public class CnaeGrupo
     {
         public KeyValuePair<string, int> Grupo { get; set; }
-        public IEnumerable<ConclaClasse> ListClasse { get; set; }
+        public IEnumerable<CnaeClasse> ListClasse { get; set; }
     }
 
-    public class ConclaClasse
+    public class CnaeClasse
     {
         public KeyValuePair<string, int> Classe { get; set; }
-        public IEnumerable<ConclaSubclasse> ListSubclasse { get; set; }
+        public IEnumerable<CnaeSubclasse> ListSubclasse { get; set; }
     }
 
-    public class ConclaSubclasse
+    public class CnaeSubclasse
     {
         public KeyValuePair<string, int> Subclasse { get; set; }
     }

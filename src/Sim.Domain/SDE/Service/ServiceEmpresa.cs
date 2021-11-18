@@ -56,29 +56,25 @@ namespace Sim.Domain.SDE.Service
                     if (at.Estabelecimento.SituacaoCadastral == situacao)
                     {
 
-                        _atv.Add(at.AtividadePrincipal.Descricao);
+                        _atv.Add(string.Format("{0} - {1}", at.AtividadePrincipal.Codigo, at.AtividadePrincipal.Descricao));
                         _emp.Add("Empresas");
 
                         cnae = Convert.ToInt32(at.AtividadePrincipal.Codigo.Remove(2,5));
 
+                        var subclasse = new CnaeSubclasse();
+
                         if (cnae >= 1 && cnae <= 3)
-                        {
                             _srv.Add("Agropecuária");
-
-                            if (cnae == 1)
-                                bi_empresas.ListCNAE = new IEnumerable<KeyValuePair<string, int>>("",1);
-
-
-
-
-                        }
                             
                         else if (cnae >= 45 && cnae <= 47)
                             _srv.Add("Comércio");
+
                         else if (cnae >= 05 & cnae <= 09 || cnae >= 10 && cnae <= 33)
                             _srv.Add("Indústria");
+
                         else if (cnae >= 41 & cnae <= 43)
                             _srv.Add("Construção");
+
                         else if (cnae == 35 || (cnae >= 36 && cnae <= 39)
                             || (cnae >= 49 && cnae <= 53)
                             || (cnae >= 55 && cnae <= 56)
@@ -95,38 +91,12 @@ namespace Sim.Domain.SDE.Service
                             || (cnae == 97)
                             || (cnae == 99))
                             _srv.Add("Serviços");
-
-
-                        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                     }
 
                     _situcao.Add(at.Estabelecimento.SituacaoCadastral);
 
                 }
                 
-
                 bi_empresas.Empresas = new KeyValuePair<string, int>("Dados Gerais", _emp.Count);
 
                 var c_atv = from x in _atv
@@ -143,7 +113,6 @@ namespace Sim.Domain.SDE.Service
                 }
                 
                 bi_empresas.ListaAtividades = n_atv;                
-
 
                 var c_stc = from x in _situcao
                             group x by x into g
@@ -171,6 +140,69 @@ namespace Sim.Domain.SDE.Service
                     n_srv.Add(new KeyValuePair<string, int>(x.Value, x.Count));
                 }
                 bi_empresas.ListaSetores = n_srv;
+
+                //Estrutura do CNAE com Seção, Divisao, Grupo, Classe e Subclasse
+                /*
+                var secao_A = new CnaeSecao();
+                
+
+                foreach (var a in bi_empresas.ListaAtividades)
+                {
+
+                    int s = Convert.ToInt32(a.Key.Remove(2, (a.Key.Length - 2)));
+
+                    if (s >= 1 && s <= 3 )
+                    {
+                        var d = s;
+                        if (d == 1)
+                        {
+                            var n_divisao = new CnaeDivisao();
+                            var n_grupo = new CnaeGrupo();
+                            var n_listgrupo = new List<CnaeGrupo>();
+                            var n_classe = new CnaeClasse();
+                            var n_listclasse = new List<CnaeClasse>();
+                            var n_listsubclasse = new List<CnaeSubclasse>();
+                            var g = a.Key.Remove(3, a.Key.Length - 3);
+                            switch (g)
+                            {
+                                case "011":
+                                    
+                                    if(!n_grupo.Grupo.Key.Any())
+                                        n_grupo.Grupo = new KeyValuePair<string, int>("01.1 Produção de lavouras temporárias", a.Value);
+
+                                    var c = a.Key.Remove(5, a.Key.Length - 5);
+                                    switch(c)
+                                    {
+                                        case "01113":
+                                            
+                                            if (!n_classe.Classe.Key.Any())
+                                                n_classe.Classe = new KeyValuePair<string, int>("01.11-3 Cultivo de cereais", a.Value);
+
+                                            var n_subclasse = new CnaeSubclasse();
+                                            n_subclasse.Subclasse = new KeyValuePair<string, int>(a.Key, a.Value);
+                                            n_listsubclasse.Add(n_subclasse);
+                                            break;
+                                    }
+                                    
+                                    break;
+                                case "012":
+                                    break;
+                                case "013":
+                                    break;
+                                case "014":
+                                    break;
+                                case "015":
+                                    break;
+                                case "016":
+                                    break;
+                                case "017":
+                                    break;
+                            }
+                        }
+                    }
+                }
+                */
+
 
                 r_empresas.Add(bi_empresas);
 

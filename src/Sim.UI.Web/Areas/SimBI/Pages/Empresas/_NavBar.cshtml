@@ -9,7 +9,7 @@
                 <li class="pdn-h-4">
                     <select asp-for="Input.Municipio" class="browser-default" asp-items="@Model.ListaMunicipios"></select>
                 </li>
-                <li class="pdn-h-4">
+                <li class="pdn-h-4" hidden>
                     <select asp-for="Input.Situacao" class="browser-default">
                         <option selected>Ativa</option>
                         <option>Inapta</option>
@@ -17,7 +17,7 @@
                         <option>Baixada</option>
                     </select>
                 </li>
-                <li class="pdn-h-4">
+                <li class="pdn-h-4" hidden>
                     <select asp-for="Input.Mes" class="browser-default">
                         <option value="00" selected>Todos</option>
                         <option value="01">Janeiro</option>
@@ -34,7 +34,7 @@
                         <option value="12">Dezembro</option>
                     </select>
                 </li>
-                <li class="pdn-h-4">
+                <li class="pdn-h-4" hidden>
                     <input class="col l1 m1 s1" type="number" asp-for="Input.Ano"/>
                 </li>
                 <li class="pdn-h-4">
