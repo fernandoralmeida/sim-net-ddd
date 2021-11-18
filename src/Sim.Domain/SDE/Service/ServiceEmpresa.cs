@@ -62,7 +62,17 @@ namespace Sim.Domain.SDE.Service
                         cnae = Convert.ToInt32(at.AtividadePrincipal.Codigo.Remove(2,5));
 
                         if (cnae >= 1 && cnae <= 3)
+                        {
                             _srv.Add("Agropecuária");
+
+                            if (cnae == 1)
+                                bi_empresas.ListCNAE = new IEnumerable<KeyValuePair<string, int>>("",1);
+
+
+
+
+                        }
+                            
                         else if (cnae >= 45 && cnae <= 47)
                             _srv.Add("Comércio");
                         else if (cnae >= 05 & cnae <= 09 || cnae >= 10 && cnae <= 33)
@@ -85,6 +95,31 @@ namespace Sim.Domain.SDE.Service
                             || (cnae == 97)
                             || (cnae == 99))
                             _srv.Add("Serviços");
+
+
+                        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                     }
 
                     _situcao.Add(at.Estabelecimento.SituacaoCadastral);
