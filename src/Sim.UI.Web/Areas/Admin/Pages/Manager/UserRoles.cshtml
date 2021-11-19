@@ -51,6 +51,12 @@
 
                     }
                 </dd>
+                <dt class="col m2">
+                    @Html.DisplayNameFor(model => model.Input.PasswordHash)
+                </dt>
+                <dd class="col m10">
+                    <a asp-area="Identity" asp-page="/Account/ResetPassword" asp-route-code="@Model.ResetCode" class="waves-effect waves-light btn">Resetar Senha</a>
+                </dd>
             </dl>
         </div>
         <div class="row">

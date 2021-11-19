@@ -33,8 +33,12 @@ namespace Sim.UI.Web.Areas.Identity.Pages.Account
         {
             [Required]
             [EmailAddress]
-            public string Email { get; set; }
+            public string Email { get; set; }       
+            
+            public string Token { get; set; }
         }
+
+
 
         public async Task<IActionResult> OnPostAsync()
         {
@@ -61,8 +65,9 @@ namespace Sim.UI.Web.Areas.Identity.Pages.Account
                     Input.Email,
                     "Redefinir senha",
                     $"Redefina sua senha <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicando aqui</a>.");
-
-                return RedirectToPage("./ForgotPasswordConfirmation");
+                                
+                //return RedirectToPage("./ForgotPasswordConfirmation");
+                Input.Token = "Redefina sua senha <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicando aqui</a>.";
             }
 
             return Page();

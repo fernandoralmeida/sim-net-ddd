@@ -83,7 +83,7 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Empresas
 
         public JsonResult OnGetViewChart()
         {
-
+            
             return new JsonResult(null);
         }
 

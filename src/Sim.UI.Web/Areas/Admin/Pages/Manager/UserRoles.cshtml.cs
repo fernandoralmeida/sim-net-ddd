@@ -13,6 +13,8 @@ namespace Sim.UI.Web.Areas.Admin.Pages.Manager
 {
     using ViewModel;
     using Sim.Cross.Identity;
+    using Microsoft.AspNetCore.WebUtilities;
+    using System.Text;
 
     [Authorize(Roles = "Administrador")]
     public class UserRolesModel : PageModel
@@ -32,6 +34,9 @@ namespace Sim.UI.Web.Areas.Admin.Pages.Manager
 
         [BindProperty]
         public VMUserRoles Input { get; set; }
+
+        [BindProperty]
+        public string ResetCode { get; set; }
 
         [Required]
         [BindProperty]   
@@ -67,6 +72,10 @@ namespace Sim.UI.Web.Areas.Admin.Pages.Manager
         public async Task<IActionResult> OnGetAsync(string id)
         {
             await LoadAsync(id);
+            var user = await _userManager.FindByEmailAsync(Input.Email);
+            var code = await _userManager.GeneratePasswordResetTokenAsync(user);
+            code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+            ResetCode = code;
             return Page();
         }
 
