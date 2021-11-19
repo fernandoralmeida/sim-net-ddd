@@ -9,109 +9,159 @@
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
 <div class="row">
+    @foreach (var emp in Model.ListEmpresas)
+    {
 
-    <ul class="collapsible popout">
-        @{
-            var ativo = "active";
-        }
+    <div class="col l6 m6 s12">
+        <ul class="collection z-depth-1">
+            <li class="collection-item"><i class="material-icons left">factory</i>Empresas<span class="new badge blue" data-badge-caption="@emp.EmpresasAtivas.Value">Ativas</span></li>
+            @if (Model.Input.Mes != "99")
+            {
+                <li class="collection-item"><span class="new badge" data-badge-caption="@emp.Formalizacoes.Value"></span>@emp.Formalizacoes.Key</li>
+                <li class="collection-item"><span class="new badge" data-badge-caption="@emp.Baixas.Value"></span>@emp.Baixas.Key</li>
 
-        @foreach (var emp in Model.ListEmpresas)
-        {
+            }
+        </ul>
+        <p></p>
+        <ul class="collapsible white">
 
-            <li class="@ativo">
+            @foreach (var op in emp.ListaSetores)
+            {
+                <li>
+                    <div class="collapsible-header">@op.Key<span class="new badge " data-badge-caption="@op.Value"></span></div>
+                    <div class="collapsible-body">
 
-                @{ ativo = string.Empty; }
-                
+                        <ul class="collection">
+                            @if (op.Key == "Serviços")
+                            {
+                                int c = 0;
 
-                <div class="collapsible-header waves-effect waves-green">@emp.Empresas.Key<span class="new badge blue" data-badge-caption="@emp.Empresas.Value">Estabelecimentos</span></div>
-                <div class="collapsible-body white">
-                    <div class="row">
-                        <div class="col l6 m6 s12">
-                            <ul class="collection z-depth-1">
-                                <li class="collection-item"><i class="material-icons left">local_activity</i>Empresas por Setores</li>
-
-                                @foreach (var op in emp.ListaSetores)
+                                @foreach (var at in emp.Servicos)
                                 {
-
-                                        <li class="collection-item"><span class="new badge " data-badge-caption="@op.Value"></span>@op.Key</li>
-
-                                }
-
-                            </ul>
-                            <p></p>
-                            <ul class="collection z-depth-1">
-                                <li class="collection-item"><i class="material-icons left">analytics</i>Situação das empresas</li>
-
-                                @foreach (var op in emp.ListaSituacao)
-                                {
-
-
-                                        <li class="collection-item"><span class="new badge blue lighten-2" data-badge-caption="@op.Value"></span>@op.Key</li>
-
-                                }
-
-                            </ul>
-                            <p></p>
-                        </div>
-                        <div class="col l6 m6 s12 ">
-                            <ul class="collection z-depth-1">
-                                <li class="collection-item"><i class="material-icons left">handyman</i>Principais atividades (10+)</li>
-
-                                @{int v = 0;}
-
-                                @foreach (var op in emp.ListaAtividades)
-                                {
-                                    if (v < 10)
+                                    if (c < 5)
                                     {
-                                        <li class="collection-item"><span class="new badge green lighten-1" data-badge-caption="@op.Value"></span>@op.Key</li>
+                                        <li class="collection-item"><span class="new badge " data-badge-caption="@at.Value"></span>@at.Key</li>
                                     }
                                     else
-                                    {
                                         break;
-                                    }
-                                    v++;
+                                    c++;
                                 }
+                            }
+                            @if (op.Key == "Comércio")
+                            {
+                                int c = 0;
 
-                            </ul>
-                        </div>                            
-                    </div>
-                </div>
-            </li>
-        }
-
-    <li>
-        <div class="collapsible-header waves-effect waves-green">Empresas por CNAE</div>
-        <div class="collapsible-body white">
-            <div class="row">
-                <ul class="treeview" hidden>
-                    <li>
-                        <span class="caret">Beverages</span>
-                        <ul class="nested">
-                            <li>Water</li>
-                            <li>Coffee</li>
-                            <li>
-                                <span class="caret">Tea</span>
-                                <ul class="nested">
-                                    <li>Black Tea</li>
-                                    <li>White Tea</li>
-                                    <li>
-                                        <span class="caret">Green Tea</span>
-                                        <ul class="nested">
-                                            <li>Sencha</li>
-                                            <li>Gyokuro</li>
-                                            <li>Matcha</li>
-                                            <li>Pi Lo Chun</li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
+                                @foreach (var at in emp.Comercio)
+                                {
+                                    if (c < 5)
+                                    {
+                                        <li class="collection-item"><span class="new badge " data-badge-caption="@at.Value"></span>@at.Key</li>
+                                    }
+                                    else
+                                        break;
+                                    c++;
+                                }
+                            }
+                            @if (op.Key == "Indústria")
+                            {
+                                int c = 0;
+                                @foreach (var at in emp.Indistria)
+                                {
+                                    if (c < 5)
+                                    {
+                                        <li class="collection-item"><span class="new badge " data-badge-caption="@at.Value"></span>@at.Key</li>
+                                    }
+                                    else
+                                        break;
+                                    c++;
+                                }
+                            }
+                            @if (op.Key == "Construção")
+                            {
+                                int c = 0;
+                                @foreach (var at in emp.Construcao)
+                                {
+                                    if (c < 5)
+                                    {
+                                        <li class="collection-item"><span class="new badge" data-badge-caption="@at.Value"></span>@at.Key</li>
+                                    }
+                                    else
+                                        break;
+                                    c++;
+                                }
+                            }
+                            @if (op.Key == "Agropecuária")
+                            {
+                                int c = 0;
+                                @foreach (var at in emp.Agro)
+                                {
+                                    if (c < 5)
+                                    {
+                                        <li class="collection-item"><span class="new badge " data-badge-caption="@at.Value"></span>@at.Key</li>
+                                    }
+                                    else
+                                        break;
+                                    c++;
+                                }
+                            }
                         </ul>
-                    </li>
-                </ul>
-            </div>
+                    </div>
+                </li>
+            }
+
+        </ul>
+        <p></p>
+        <ul class="collection z-depth-1">
+            <li class="collection-item"><i class="material-icons left">analytics</i>Situação<span class="new badge blue" data-badge-caption="@emp.TotalEmpresas.Value">Empresas</span></li>
+
+            @foreach (var op in emp.ListaSituacao)
+            {
+                <li class="collection-item"><span class="new badge" data-badge-caption="@op.Value"></span>@op.Key</li>
+            }
+
+        </ul>
+        <p></p>
+        <ul class="collection z-depth-1">
+            <li class="collection-item"><i class="material-icons left">factory</i>Porte</li>
+            @foreach (var p in emp.Porte)
+            {
+                <li class="collection-item"><span class="new badge" data-badge-caption="@p.Value"></span>@p.Key</li>
+            }
+        </ul>
+        <p></p>
+        <ul class="collection z-depth-1">
+            <li class="collection-item"><i class="material-icons left">factory</i>Optantes Simples Nacional<span class="new badge blue" data-badge-caption="@emp.SimplesNacional.Value">Ativas</span></li>
+            <li class="collection-item"><span class="new badge" data-badge-caption="@emp.OptanteMEI.Value"></span>@emp.OptanteMEI.Key</li>                      
+        </ul>
+        <p></p>
+    </div>
+        <div class="col l6 m6 s12 ">
+            <ul class="collection z-depth-1">
+                <li class="collection-item"><i class="material-icons left">handyman</i>Principais Atividades (15+)</li>
+
+                @{int v = 0;}
+
+                @foreach (var op in emp.ListaAtividades)
+                {
+                    if (v < 15)
+                    {
+                        <li class="collection-item"><span class="new badge" data-badge-caption="@op.Value"></span>@op.Key</li>
+                    }
+                    else
+                    {
+                        break;
+                    }
+                    v++;
+                }
+
+            </ul>
         </div>
-    </li>
-    </ul>
+        <div class="col s12 m12 l12">
+            <p class="grey-text">Fonte: Receita Federal do Brasil em 14-10-2021</p>
+                <div id="piechart" class="col  white z-depth-1" hidden></div>
+                <div id="chart2" class="col  white z-depth-1" hidden></div>
+        </div>
+    }
 </div>
 
 <!-- Modal Structure -->
@@ -136,6 +186,13 @@
                     });
                 });
 
+            });
+        });
+
+        $(function () {
+            $("#submit").click(function () {
+                document.forms[0].submit();
+                return false;
             });
         });
     </script>

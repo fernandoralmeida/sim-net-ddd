@@ -58,8 +58,9 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Empresas
         }
 
         private async Task LoadAsync()
-        {
-            ListEmpresas = await _appEmpresa.BiEmpresasAsync(Input.Municipio, Input.Situacao);
+        {            
+            await LoadMunicipios();
+            ListEmpresas = _appEmpresa.BiEmpresasAsync(Input.Municipio, Input.Situacao,Input.Ano.ToString(), Input.Mes).Result;
         }
 
         public async Task<IActionResult> OnGetAsync()
@@ -70,8 +71,20 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Empresas
             Input.Ano = DateTime.Today.Year;
             Input.Mes = DateTime.Today.Month.ToString();
             await LoadMunicipios();
-            await LoadAsync();            
+            //await LoadAsync();            
             return Page();
+        }
+
+        public async Task<IActionResult> OnPostAsync()
+        {
+            await LoadAsync();
+            return Page();
+        }
+
+        public JsonResult OnGetViewChart()
+        {
+
+            return new JsonResult(null);
         }
 
         public JsonResult OnGetPreview(string id)

@@ -8,41 +8,27 @@ namespace Sim.Domain.BI
 {
     public class BiEmpresas
     {
-        public KeyValuePair<string, int> Empresas { get; set; }
+        public KeyValuePair<string, int> TotalEmpresas { get; set; }
+        public KeyValuePair<string, int> EmpresasAtivas { get; set; }
         public IEnumerable<KeyValuePair<string, int>> ListaSituacao { get; set; }
         public IEnumerable<KeyValuePair<string, int>> ListaAtividades { get; set; }
         public IEnumerable<KeyValuePair<string, int>> ListaSetores { get; set; }
-        public IEnumerable<IEnumerable<KeyValuePair<string, int>>> ListaAtividadesSetores { get; set; }        
+        public IEnumerable<IEnumerable<KeyValuePair<string, int>>> ListaAtividadesSetores { get; set; }
 
-        public IEnumerable<CnaeSecao> ListCNAE { get; set; }
-    }
+        public IEnumerable<KeyValuePair<string, int>> Servicos { get; set; }
+        public IEnumerable<KeyValuePair<string, int>> Comercio { get; set; }
+        public IEnumerable<KeyValuePair<string, int>> Indistria { get; set; }
+        public IEnumerable<KeyValuePair<string, int>> Agro { get; set; }
+        public IEnumerable<KeyValuePair<string, int>> Construcao { get; set; }
 
-    public class CnaeSecao
-    {
-        public KeyValuePair<string, int> Secao { get; set; }
-        public IEnumerable<CnaeDivisao> ListDivisao { get; set; }
-    }
+        public KeyValuePair<string, int> Formalizacoes { get; set; }
+        public KeyValuePair<string, int> Baixas { get; set; }
 
-    public class CnaeDivisao
-    {
-        public KeyValuePair<string, int> Divisao { get; set; }
-        public IEnumerable<CnaeGrupo> ListGrupo { get; set; }
-    }
+        public KeyValuePair<string, int> SimplesNacional { get; set; }
+        public KeyValuePair<string, int> OptanteMEI { get; set; }
+        public IEnumerable< KeyValuePair<string, int>> Porte { get; set; }
 
-    public class CnaeGrupo
-    {
-        public KeyValuePair<string, int> Grupo { get; set; }
-        public IEnumerable<CnaeClasse> ListClasse { get; set; }
-    }
-
-    public class CnaeClasse
-    {
-        public KeyValuePair<string, int> Classe { get; set; }
-        public IEnumerable<CnaeSubclasse> ListSubclasse { get; set; }
-    }
-
-    public class CnaeSubclasse
-    {
-        public KeyValuePair<string, int> Subclasse { get; set; }
     }
 }
+
+

@@ -32,9 +32,9 @@ namespace Sim.Application.SDE
             return _empresa.ConsultaByRazaoSocial(name);
         }
 
-        public Task<IEnumerable<BiEmpresas>> BiEmpresasAsync(string municipio, string situacao)
+        public Task<IEnumerable<BiEmpresas>> BiEmpresasAsync(string municipio, string situacao, string ano, string mes)
         {
-            return _empresa.BiEmpresasAsync(municipio, situacao);
+            return _empresa.BiEmpresasAsync(municipio, situacao, ano, mes);
         }
 
         public async Task<BaseReceitaFederal> GetCnpjAsync(string cnpj)

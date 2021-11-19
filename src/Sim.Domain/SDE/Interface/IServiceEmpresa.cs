@@ -32,7 +32,7 @@ namespace Sim.Domain.SDE.Interface
         Task<IEnumerable<Municipio>> MicroRegiaoJahu();
 
         /** Relatorios Estatísticos **/
-        Task<IEnumerable<BiEmpresas>> BiEmpresasAsync(string municipio, string situacao);
+        Task<IEnumerable<BiEmpresas>> BiEmpresasAsync(string municipio, string situacao, string ano, string mes);
 
     }
 }

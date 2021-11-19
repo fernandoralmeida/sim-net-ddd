@@ -3,8 +3,8 @@
 
 <div class="navbar navbar-fixed">
     <nav class="navbar">
-        <div class="nav-wrapper white">
-            <span class="brand-logo grey-text" style="margin-left:10px;">BI Empresas</span>
+        <form class="nav-wrapper white" method="post">
+            <span class="brand-logo grey-text" style="margin-left:10px; margin-right:10px;">BI Empresas</span>
             <ul class="right hide-on-small-and-down valign-wrapper">
                 <li class="pdn-h-4">
                     <select asp-for="Input.Municipio" class="browser-default" asp-items="@Model.ListaMunicipios"></select>
@@ -13,13 +13,15 @@
                     <select asp-for="Input.Situacao" class="browser-default">
                         <option selected>Ativa</option>
                         <option>Inapta</option>
+                        <option>Suspensa</option>
                         <option>Nula</option>
                         <option>Baixada</option>
                     </select>
                 </li>
-                <li class="pdn-h-4" hidden>
+                <li class="pdn-h-4">
                     <select asp-for="Input.Mes" class="browser-default">
-                        <option value="00" selected>Todos</option>
+                        <option value="99" selected>Geral</option>
+                        <option value="00">Anual</option>
                         <option value="01">Janeiro</option>
                         <option value="02">Feveiro</option>
                         <option value="03">Março</option>
@@ -34,14 +36,14 @@
                         <option value="12">Dezembro</option>
                     </select>
                 </li>
-                <li class="pdn-h-4" hidden>
+                <li class="pdn-h-4">
                     <input class="col l1 m1 s1" type="number" asp-for="Input.Ano"/>
                 </li>
-                <li class="pdn-h-4">
-                    <a class="waves-effect waves-light btn"><i class="material-icons">autorenew</i></a>
+                <li class="waves-effect waves-light blue lighten-1">
+                    <a id="submit"><i class="material-icons">autorenew</i></a>
                 <li>
             </ul>
-        </div>
+        </form>
     </nav>
 </div>
 
