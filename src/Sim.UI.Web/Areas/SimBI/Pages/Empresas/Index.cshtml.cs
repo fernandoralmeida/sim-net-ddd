@@ -69,7 +69,7 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Empresas
             Input.Municipio = "6607";
             Input.Situacao = "Ativa";
             Input.Ano = DateTime.Today.Year;
-            Input.Mes = DateTime.Today.Month.ToString();
+            Input.Mes = "00";
             await LoadMunicipios();
             //await LoadAsync();            
             return Page();
@@ -81,15 +81,16 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Empresas
             return Page();
         }
 
-        public JsonResult OnGetViewChart()
+        public JsonResult OnGetPreview(string mpo, string stc, string ano, string mes)
         {
-            
-            return new JsonResult(null);
+            var user_atendimentos = _appEmpresa.BiEmpresasAsync(mpo, stc, ano, mes);
+            user_atendimentos.Wait();
+            return new JsonResult(user_atendimentos.Result);
         }
 
-        public JsonResult OnGetPreview(string id)
+        public JsonResult OnPostPreview()
         {
-            var user_atendimentos = Task.Run(() => _appEmpresa.List());
+            var user_atendimentos = _appEmpresa.BiEmpresasAsync(Input.Municipio, Input.Situacao, Input.Ano.ToString(), Input.Mes);
             user_atendimentos.Wait();
             return new JsonResult(user_atendimentos.Result);
         }

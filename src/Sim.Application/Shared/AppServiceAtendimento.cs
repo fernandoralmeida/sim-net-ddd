@@ -157,5 +157,10 @@ namespace Sim.Application.Shared
         {
             return await _atendimento.GetByUserNamePeriodo(username, date);
         }
+
+        public async Task<IEnumerable<Atendimento>> ListAtendimentosAtivos()
+        {
+            return await _atendimento.ListAtendimentosAtivos();
+        }
     }
 }

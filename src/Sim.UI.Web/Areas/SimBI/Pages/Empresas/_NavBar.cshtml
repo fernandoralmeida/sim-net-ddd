@@ -5,11 +5,14 @@
     <nav class="navbar">
         <form class="nav-wrapper white" method="post">
             <span class="brand-logo grey-text" style="margin-left:10px; margin-right:10px;">BI Empresas</span>
-            <ul class="right hide-on-small-and-down valign-wrapper">
+            <ul class="right hide-on-med-and-down valign-wrapper">
+                <li hidden>
+                    <a class="grey-text" href="#">Empresas</a>
+                </li>
                 <li class="pdn-h-4">
                     <select asp-for="Input.Municipio" class="browser-default" asp-items="@Model.ListaMunicipios"></select>
                 </li>
-                <li class="pdn-h-4" hidden>
+                <li class="pdn-h-4">
                     <select asp-for="Input.Situacao" class="browser-default">
                         <option selected>Ativa</option>
                         <option>Inapta</option>
@@ -37,11 +40,17 @@
                     </select>
                 </li>
                 <li class="pdn-h-4">
-                    <input class="col l1 m1 s1" type="number" asp-for="Input.Ano"/>
+                    <input class="col" type="number" asp-for="Input.Ano" />
                 </li>
                 <li class="waves-effect waves-light blue lighten-1">
                     <a id="submit"><i class="material-icons">autorenew</i></a>
-                <li>
+                </li>
+                <li class="waves-effect waves-light blue lighten-1">
+                    <a hidden class="modal-trigger" href="#viewmodal" data-mpo="@Model.Input.Municipio" data-stc="@Model.Input.Situacao" data-ano="@Model.Input.Ano" data-mes="@Model.Input.Mes"><i class="material-icons">autorenew</i></a>
+                </li>
+                <li class="pdn-h-4" hidden>
+                    <button class="waves-effect waves-light btn orange" asp-area="SimBI" asp-page-handler="Preview" formtarget="_blank">JSON</button>
+                </li>
             </ul>
         </form>
     </nav>

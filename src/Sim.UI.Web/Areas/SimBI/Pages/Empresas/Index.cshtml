@@ -14,23 +14,110 @@
 
     <div class="col l6 m6 s12">
         <ul class="collection z-depth-1">
-            <li class="collection-item"><i class="material-icons left">factory</i>Empresas<span class="new badge blue" data-badge-caption="@emp.EmpresasAtivas.Value">Ativas</span></li>
+            <li class="collection-item"><i class="material-icons left">factory</i>Empresas<span class="new badge blue" data-badge-caption="@emp.EmpresasAtivas.Value">@Model.Input.Situacao</span></li>
             @if (Model.Input.Mes != "99")
             {
+
                 <li class="collection-item"><span class="new badge" data-badge-caption="@emp.Formalizacoes.Value"></span>@emp.Formalizacoes.Key</li>
                 <li class="collection-item"><span class="new badge" data-badge-caption="@emp.Baixas.Value"></span>@emp.Baixas.Key</li>
+            }
+        </ul>
 
+        @if (Model.Input.Mes == "00")
+        {
+            <p></p>
+            <ul class="collection z-depth-1">
+                <li class="collection-item"><i class="material-icons left">analytics</i>Variação Mensal<span class="new badge blue" data-badge-caption="@emp.EmpresasAtivas.Value">@Model.Input.Situacao</span></li>
+
+                @foreach (var op in emp.ListaMensal)
+                {
+                    float v1 = op.Value;
+                    float v2 = emp.EmpresasAtivas.Value;
+                    float r = (v1 / v2) * 100;
+                    <li class="collection-item"><span class="new badge" data-badge-caption="@op.Value (@r.ToString("N2")%)"></span>@op.Key</li>
+                }
+
+            </ul>
+        }
+
+        @if (Model.Input.Mes == "99")
+        {
+            <p></p>
+            <ul class="collection z-depth-1">
+                <li class="collection-item"><i class="material-icons left">analytics</i>Situação<span class="new badge blue" data-badge-caption="@emp.TotalEmpresas.Value">Empresas</span></li>
+
+                @foreach (var op in emp.ListaSituacao)
+                {
+                    float v1 = op.Value;
+                    float v2 = emp.EmpresasAtivas.Value;
+                    float r = (v1 / v2) * 100;
+                    <li class="collection-item"><span class="new badge" data-badge-caption="@op.Value (@r.ToString("N2")%)"></span>@op.Key</li>
+                }
+
+            </ul>
+        }
+
+        <p></p>
+        <ul class="collection z-depth-1">
+            <li class="collection-item"><i class="material-icons left">factory</i>Porte</li>
+            @foreach (var p in emp.Porte)
+            {
+                float v1 = p.Value;
+                float v2 = emp.EmpresasAtivas.Value;
+                float r = (v1 / v2) * 100;
+                <li class="collection-item"><span class="new badge" data-badge-caption="@p.Value (@r.ToString("N2")%)"></span>@p.Key</li>
             }
         </ul>
         <p></p>
+        <ul class="collection z-depth-1">
+            <li class="collection-item"><i class="material-icons left">factory</i>Optantes Simples Nacional<span class="new badge blue" data-badge-caption="@emp.SimplesNacional.Value">@Model.Input.Situacao</span></li>
+            @{ 
+                float s1 = emp.OptanteMEI.Value;
+                float s2 = emp.SimplesNacional.Value;
+                float rs = (s1 / s2) * 100;
+            }
+
+            <li class="collection-item"><span class="new badge" data-badge-caption="@emp.OptanteMEI.Value (@rs.ToString("N2")%)"></span>@emp.OptanteMEI.Key</li>
+        </ul>
+        <p></p>
+    </div>
+    <div class="col l6 m6 s12 ">
         <ul class="collapsible white">
+            <li class="active">
+                <div class="collapsible-header">
+                    <i class="material-icons left">handyman</i>Atividades Primárias (10+ Ocorrências)
+                </div>
+                <div class="collapsible-body">
+                    <ul class="collection">
+                        
+                        @{int v = 0;}
+
+                        @foreach (var op in emp.ListaAtividades)
+                        {
+                            if (v < 10)
+                            {
+                                <li class="collection-item"><span class="new badge" data-badge-caption="@op.Value"></span>@op.Key</li>
+                            }
+                            else
+                            {
+                                break;
+                            }
+                            v++;
+                        }
+
+                    </ul>
+                </div>
+            </li>
 
             @foreach (var op in emp.ListaSetores)
             {
+                float v1 = op.Value;
+                float v2 = emp.EmpresasAtivas.Value;
+                float r = (v1 / v2) * 100;
                 <li>
-                    <div class="collapsible-header">@op.Key<span class="new badge " data-badge-caption="@op.Value"></span></div>
+                    <div class="collapsible-header">@op.Key<span class="new badge " data-badge-caption="@op.Value (@r.ToString("N2")%)"></span></div>
                     <div class="collapsible-body">
-
+                        <p>5+ ocorrências no setor</p>
                         <ul class="collection">
                             @if (op.Key == "Serviços")
                             {
@@ -40,7 +127,7 @@
                                 {
                                     if (c < 5)
                                     {
-                                        <li class="collection-item"><span class="new badge " data-badge-caption="@at.Value"></span>@at.Key</li>
+                                        <li class="collection-item"><span class="new badge lighten-1" data-badge-caption="@at.Value"></span>@at.Key</li>
                                     }
                                     else
                                         break;
@@ -55,7 +142,7 @@
                                 {
                                     if (c < 5)
                                     {
-                                        <li class="collection-item"><span class="new badge " data-badge-caption="@at.Value"></span>@at.Key</li>
+                                        <li class="collection-item"><span class="new badge lighten-1" data-badge-caption="@at.Value"></span>@at.Key</li>
                                     }
                                     else
                                         break;
@@ -69,7 +156,7 @@
                                 {
                                     if (c < 5)
                                     {
-                                        <li class="collection-item"><span class="new badge " data-badge-caption="@at.Value"></span>@at.Key</li>
+                                        <li class="collection-item"><span class="new badge lighten-1" data-badge-caption="@at.Value"></span>@at.Key</li>
                                     }
                                     else
                                         break;
@@ -83,7 +170,7 @@
                                 {
                                     if (c < 5)
                                     {
-                                        <li class="collection-item"><span class="new badge" data-badge-caption="@at.Value"></span>@at.Key</li>
+                                        <li class="collection-item"><span class="new badge lighten-1" data-badge-caption="@at.Value"></span>@at.Key</li>
                                     }
                                     else
                                         break;
@@ -97,7 +184,7 @@
                                 {
                                     if (c < 5)
                                     {
-                                        <li class="collection-item"><span class="new badge " data-badge-caption="@at.Value"></span>@at.Key</li>
+                                        <li class="collection-item"><span class="new badge lighten-1" data-badge-caption="@at.Value"></span>@at.Key</li>
                                     }
                                     else
                                         break;
@@ -110,56 +197,11 @@
             }
 
         </ul>
-        <p></p>
-        <ul class="collection z-depth-1">
-            <li class="collection-item"><i class="material-icons left">analytics</i>Situação<span class="new badge blue" data-badge-caption="@emp.TotalEmpresas.Value">Empresas</span></li>
-
-            @foreach (var op in emp.ListaSituacao)
-            {
-                <li class="collection-item"><span class="new badge" data-badge-caption="@op.Value"></span>@op.Key</li>
-            }
-
-        </ul>
-        <p></p>
-        <ul class="collection z-depth-1">
-            <li class="collection-item"><i class="material-icons left">factory</i>Porte</li>
-            @foreach (var p in emp.Porte)
-            {
-                <li class="collection-item"><span class="new badge" data-badge-caption="@p.Value"></span>@p.Key</li>
-            }
-        </ul>
-        <p></p>
-        <ul class="collection z-depth-1">
-            <li class="collection-item"><i class="material-icons left">factory</i>Optantes Simples Nacional<span class="new badge blue" data-badge-caption="@emp.SimplesNacional.Value">Ativas</span></li>
-            <li class="collection-item"><span class="new badge" data-badge-caption="@emp.OptanteMEI.Value"></span>@emp.OptanteMEI.Key</li>                      
-        </ul>
-        <p></p>
     </div>
-        <div class="col l6 m6 s12 ">
-            <ul class="collection z-depth-1">
-                <li class="collection-item"><i class="material-icons left">handyman</i>Principais Atividades (15+)</li>
-
-                @{int v = 0;}
-
-                @foreach (var op in emp.ListaAtividades)
-                {
-                    if (v < 15)
-                    {
-                        <li class="collection-item"><span class="new badge" data-badge-caption="@op.Value"></span>@op.Key</li>
-                    }
-                    else
-                    {
-                        break;
-                    }
-                    v++;
-                }
-
-            </ul>
-        </div>
         <div class="col s12 m12 l12">
             <p class="grey-text">Fonte: Receita Federal do Brasil em 14-10-2021</p>
-                <div id="piechart" class="col  white z-depth-1"></div>
-                <div id="chart2" class="col  white z-depth-1"></div>
+                <div id="piechart" class="col  white z-depth-1" hidden></div>
+                <div id="chart2" class="col  white z-depth-1" hidden></div>
         </div>
     }
 </div>
@@ -178,14 +220,18 @@
     <script>
         $(function () {
             $(".modal-trigger").click(function () {
-                var customerId = $(this).data('id');
-                $(".showcollection").empty();
-                $.getJSON(`/SimBI/Atendimentos?id=${customerId}&handler=Preview`, (data) => {
+                var param1 = $(this).data('mpo');
+                var param2 = $(this).data('stc');
+                var param3 = $(this).data('ano');
+                var param4 = $(this).data('mes');
+                $(".showcollection").empty();                
+                $.getJSON(`/SimBI/Empresas?mpo=${param1}&stc=${param2}&ano=${param3}&mes=${param4}&handler=Preview`, function (data) {
                     $.each(data, function (i, item) {
-                        $(".showcollection").append(`<li class="collection-item"><span class="new badge green lighten-1" data-badge-caption="${item.value}"></span>${item.key}</li>`);
+                        
+                        $(".showcollection").append(`<li class="collection-item"><span class="new badge green" data-badge-caption="${item.listaAtividades.value}"></span>${item.listaAtividades.key}</li>`);
+                                              
                     });
-                });
-
+                });                
             });
         });
 

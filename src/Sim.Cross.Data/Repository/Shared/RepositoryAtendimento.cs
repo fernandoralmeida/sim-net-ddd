@@ -163,5 +163,16 @@ namespace Sim.Cross.Data.Repository.Shared
             await t;
             return t.Result;
         }
+
+        public async Task<IEnumerable<Atendimento>> ListAtendimentosAtivos()
+        {
+            var ativo = Task.Run(()=> _db.Atendimento
+                .Include(p => p.Pessoa)
+                .Include(e => e.Empresa)
+                .Include(s => s.Sebrae)
+                .Where(s => s.Status == "Ativo"));
+            await ativo;
+            return ativo.Result;
+        }
     }
 }
