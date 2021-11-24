@@ -28,13 +28,7 @@
                     Cliente
                 </th>
                 <th>
-                    Servicos
-                </th>
-                <th>
-                    Setor
-                </th>
-                <th>
-                    Canal
+                    Atendente
                 </th>
                 <th>
                     Ação
@@ -71,12 +65,7 @@
                             @Html.DisplayFor(modelItem => item.Pessoa.Nome)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Servicos)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Setor)
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Canal)
+                            @Html.DisplayFor(modelItem => item.Owner_AppUser_Id)
                         </td>
                         <td>
                             <a asp-page="./Atendimento.Cancelar" asp-route-id="@item.Id" class="btn btn-small red lighten-1 waves-effect" title="Cancelar Atendimento"><i class="material-icons">cancel</i></a>
