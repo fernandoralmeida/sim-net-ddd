@@ -101,5 +101,20 @@ namespace Sim.Application.SDE
         {
             return await _empresa.MicroRegiaoJahu();
         }
+
+        public async Task<IEnumerable<BaseReceitaFederal>> ListForBIAsync(string municipio, string situacao, string ano, string mes)
+        {
+            return await _empresa.ListForBIAsync(municipio, situacao, ano, mes);
+        }
+
+        public async Task<IEnumerable<BiCnae>> ListBICnae(string municipio)
+        {
+            return await _empresa.ListBICnae(municipio);
+        }
+
+        public async Task<IEnumerable<BaseReceitaFederal>> ListForBICnaeAsync(string municipio)
+        {
+            return await _empresa.ListForBICnaeAsync(municipio);
+        }
     }
 }

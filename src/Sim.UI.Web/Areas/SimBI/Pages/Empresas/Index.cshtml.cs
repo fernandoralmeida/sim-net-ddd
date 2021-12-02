@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace Sim.UI.Web.Areas.SimBI.Pages.Empresas
 {
@@ -26,6 +27,12 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Empresas
         [BindProperty(SupportsGet = true)]
         public IEnumerable<BiEmpresas> ListEmpresas { get; set; }
 
+        [BindProperty(SupportsGet = true)]
+        public IEnumerable<BiCnae> ListCnaes { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public IEnumerable<BaseReceitaFederal> ListCnaeTB { get; set; }
+
         [BindProperty]
         public InputModel Input { get; set; }
 
@@ -36,6 +43,7 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Empresas
             public string Municipio { get; set; }
             public string Mes { get; set; }
             public int Ano { get; set; }
+            public string Modo { get; set; }
         }
 
         [TempData]
@@ -58,9 +66,18 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Empresas
         }
 
         private async Task LoadAsync()
-        {            
+        {
             await LoadMunicipios();
-            ListEmpresas = _appEmpresa.BiEmpresasAsync(Input.Municipio, Input.Situacao,Input.Ano.ToString(), Input.Mes).Result;
+
+            if (Input.Modo == "Atividades")
+            {
+                ListCnaes = _appEmpresa.ListBICnae(Input.Municipio).Result;
+            }
+
+            else
+                ListEmpresas = _appEmpresa.BiEmpresasAsync(Input.Municipio, Input.Situacao, Input.Ano.ToString(), Input.Mes).Result;
+
+
         }
 
         public async Task<IActionResult> OnGetAsync()
@@ -70,7 +87,7 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Empresas
             Input.Situacao = "Ativa";
             Input.Ano = DateTime.Today.Year;
             Input.Mes = "00";
-            await LoadMunicipios();
+            await LoadMunicipios();            
             //await LoadAsync();            
             return Page();
         }
@@ -81,6 +98,7 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Empresas
             return Page();
         }
 
+        /**/
         public JsonResult OnGetPreview(string mpo, string stc, string ano, string mes)
         {
             var user_atendimentos = _appEmpresa.BiEmpresasAsync(mpo, stc, ano, mes);
@@ -94,5 +112,6 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Empresas
             user_atendimentos.Wait();
             return new JsonResult(user_atendimentos.Result);
         }
+        
     }
 }

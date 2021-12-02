@@ -1,0 +1,58 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@using Sim.Domain.BI;
+@model IEnumerable<BiCnae>
+
+<div class="row">
+    <ul class="collapsible white">
+        @foreach (var emp in Model)
+        {
+            <li>
+                @foreach (var s in emp.ListaSecao)
+                {
+                    <div class="collapsible-header">@s.Secao.Key</div>
+                    <div class="collapsible-body">
+                        <ul class="collapsible">
+                            @foreach (var d in s.ListaDivisao)
+                            {
+                                <li>
+                                    <div class="collapsible-header">@d.Divisao.Key</div>
+                                    <div class="collapsible-body">
+                                        <ul class="collapsible">
+                                            @foreach (var g in d.ListaGrupo)
+                                            {
+                                                <li>
+                                                    <div class="collapsible-header">@g.Grupo.Key</div>
+                                                    <div class="collapsible-body">
+                                                        <ul class="collapsible">
+                                                            @foreach (var c in g.ListaClasse)
+                                                            {
+                                                                <li>
+                                                                    <div class="collapsible-header">@c.Classe.Key</div>
+                                                                    <div class="collapsible-body">
+                                                                        <ul class="collection">
+                                                                            @foreach (var sc in c.ListaSubClasse)
+                                                                            {
+                                                                                <li class="collection-item"><span class="new badge" data-badge-caption="">@sc.Value</span>@sc.Key</li>
+                                                                            }
+                                                                        </ul>
+                                                                    </div>
+                                                                </li>
+                                                            }
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                            }
+                                        </ul>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+
+                }
+            </li>
+        }
+    </ul>
+</div>

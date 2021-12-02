@@ -26,6 +26,8 @@ namespace Sim.Domain.SDE.Interface
         Task<IEnumerable<BaseReceitaFederal>> ListByCNAEAsync(string atividade, string municipio);
         Task<IEnumerable<BaseReceitaFederal>> ListByCNPJBaseAsync(string cnpj);
         Task<IEnumerable<BaseReceitaFederal>> ListBySociosAsync(string nomesocio);
+        Task<IEnumerable<BaseReceitaFederal>> ListForBIAsync(string municipio, string situacao, string ano, string mes);
+        Task<IEnumerable<BaseReceitaFederal>> ListForBICnaeAsync(string municipio);
 
         Task<IEnumerable<Municipio>> ListMinicipios();
 

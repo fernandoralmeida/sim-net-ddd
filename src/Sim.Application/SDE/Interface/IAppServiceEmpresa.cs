@@ -29,7 +29,11 @@ namespace Sim.Application.SDE.Interface
         Task<IEnumerable<BaseReceitaFederal>> ListBySociosAsync(string nomesocio);
         Task<IEnumerable<Municipio>> ListMinicipios();
         Task<IEnumerable<Municipio>> MicroRegiaoJahu();
+        
         /** Relatorio Estatisticos **/
+        Task<IEnumerable<BaseReceitaFederal>> ListForBIAsync(string municipio, string situacao, string ano, string mes);
         Task<IEnumerable<BiEmpresas>> BiEmpresasAsync(string municipio, string situacao, string ano, string mes);
+        Task<IEnumerable<BaseReceitaFederal>> ListForBICnaeAsync(string municipio);
+        Task<IEnumerable<BiCnae>> ListBICnae(string municipio);
     }
 }

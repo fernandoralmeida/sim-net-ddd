@@ -379,5 +379,70 @@ namespace Sim.Cross.Data.Repository.SDE
 
             return t.Result;
         }
+
+        public async Task<IEnumerable<BaseReceitaFederal>> ListForBIAsync(string municipio, string situacao, string ano, string mes) 
+        {
+            var brf = new List<BaseReceitaFederal>();
+
+            var stc = situacao.Split(",");
+            var listasituacao = new List<string>();
+
+            foreach(string l in stc)
+            {
+                listasituacao.Add(l);
+            }
+
+            var t = Task.Run(() =>
+            {
+
+                var qry = (from est in db.Estabelecimentos
+                           from emp in db.Empresas.Where(s => s.CNPJBase == est.CNPJBase)
+                           from atv in db.CNAEs.Where(s => est.CnaeFiscalPrincipal == s.Codigo)
+                           from sn in db.Simples.Where(s => s.CNPJBase == est.CNPJBase).DefaultIfEmpty()
+                           select new { est, emp, sn, atv })
+                          .Where(s => s.est.Municipio.Contains(municipio) && s.est.SituacaoCadastral.CompareTo(listasituacao.Where(x => x.Any())) > 0).Distinct();
+
+                foreach (var e in qry)
+                {
+                    var _cnpj = string.Format("{0}{1}{2}", e.est.CNPJBase, e.est.CNPJOrdem, e.est.CNPJDV);
+
+
+                    brf.Add(new BaseReceitaFederal(
+                        0, _cnpj, e.emp, e.est, null, e.sn, e.atv, null, null, null, null, null));
+                }
+
+            });
+            await t;
+
+            return brf;
+        }
+
+        public async Task<IEnumerable<BaseReceitaFederal>> ListForBICnaeAsync(string municipio)
+        {
+            var brf = new List<BaseReceitaFederal>();
+
+            var t = Task.Run(() =>
+            {
+
+                var qry = (from est in db.Estabelecimentos
+                           from emp in db.Empresas.Where(s => s.CNPJBase == est.CNPJBase)
+                           from atv in db.CNAEs.Where(s => est.CnaeFiscalPrincipal == s.Codigo)
+                           from sn in db.Simples.Where(s => s.CNPJBase == est.CNPJBase).DefaultIfEmpty()
+                           select new { est, emp, sn, atv })
+                          .Where(s => s.est.Municipio.Contains(municipio)).OrderBy(o => o.atv.Codigo).Distinct();
+
+                foreach (var e in qry)
+                {
+                    var _cnpj = string.Format("{0}{1}{2}", e.est.CNPJBase, e.est.CNPJOrdem, e.est.CNPJDV);
+
+                    brf.Add(new BaseReceitaFederal(
+                        0, _cnpj, e.emp, e.est, null, e.sn, e.atv, null, null, null, null, null));
+                }
+
+            });
+            await t;
+
+            return brf;
+        }
     }
 }
