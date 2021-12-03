@@ -604,31 +604,19 @@ namespace Sim.Domain.SDE.Service
             var l_full_cnae = new List<BiCnae>();
 
             var secao = new KeyValuePair<string, int>();
-            var l_secao = new List<KeyValuePair<string, int>>();
 
-            var divisao = new KeyValuePair<string, int>();
-            var l_divisao = new List<KeyValuePair<string, int>>();
-
-            var grupo = new KeyValuePair<string, int>();
-            var l_grupo = new List<KeyValuePair<string, int>>();
-
-            var classe = new KeyValuePair<string, int>();
-            var l_classe = new List<KeyValuePair<string, int>>();
-            var l_subclasse = new List<KeyValuePair<string, int>>();
+            var l_secao = new BiCnae() { ListaSecao = new() };
 
             var emp = await _repositoryEmpresa.ListForBICnaeAsync(municipio);            
 
             var t = Task.Run(() => {
 
-                var cnae1 = new List<string>();
-                var cnae2 = new List<string>();
-                var cnae3 = new List<string>();
-                var cnae4 = new List<string>();
                 var subclasse = new List<string>();
 
                 foreach (BaseReceitaFederal e in emp)
                 {
-                    subclasse.Add(string.Format("{0} - {1}", e.AtividadePrincipal.Codigo, e.AtividadePrincipal.Descricao));
+                    if(e.Estabelecimento.SituacaoCadastral == "Ativa")
+                        subclasse.Add(string.Format("{0} - {1}", e.AtividadePrincipal.Codigo, e.AtividadePrincipal.Descricao));
                 }
 
                 var s_subclasse = from x in subclasse
@@ -637,54 +625,291 @@ namespace Sim.Domain.SDE.Service
                                 orderby g.Key ascending
                                 select new { Value = g.Key, Count = count };
 
-                var _cnae = new List<KeyValuePair<string, int>>();
-                foreach (var x in s_subclasse)
+                var sec_count = 0;
+                var sub_sec_count = 0;
+
+                //agro
+                var agro = new CnaeSecao() { ListaClasse = new(), Secao = new() };
+                for (int i = 1;i <= 3; i++)
                 {                    
-                    _cnae.Add(new KeyValuePair<string, int>(x.Value, x.Count));
-                }
-
-                foreach(var s in _cnae)
-                {
-                    string[] cd = s.Key.Split(" - ");
-
-                    int sec = Convert.ToInt32(cd[0].Remove(2, 5));
-                    int gpo = Convert.ToInt32(cd[0].Remove(3, 4));
-                    int cls = Convert.ToInt32(cd[0].Remove(5, 2));
-
-                    int sec_count = 0;
-                    if (sec >= 01 && sec <= 03)
+                    var n_cnae = new CnaeClasse() { ListaSubClasse = new(), Classe = new() };
+                    sec_count = 0;
+                    sub_sec_count = 0;
+                    foreach (var s in s_subclasse)
                     {
-                        sec_count++;
-                        secao = new KeyValuePair<string, int>("01...03 AGRICULTURA, PECUÁRIA, PRODUÇÃO FLORESTAL, PESCA E AQÜICULTURA", sec_count);
-                        var sub_sec_count = 0;
-                        if(sec == 01)
+                        string[] cd = s.Value.Split(" - ");
+
+                        int sec = Convert.ToInt32(cd[0].Remove(2, 5));
+                        
+                        if (sec >= 01 && sec <= 03)
                         {
-                            sub_sec_count++;
-                            divisao = new KeyValuePair<string, int>("01 AGRICULTURA, PECUÁRIA E SERVIÇOS RELACIONADOS", sub_sec_count);
-                            if(gpo >= 011 && gpo <= 017)
+                            sec_count += s.Count;
+                            secao = new KeyValuePair<string, int>("01...03 AGRICULTURA, PECUÁRIA, PRODUÇÃO FLORESTAL, PESCA E AQÜICULTURA", sec_count);
+                            
+                            if (i == 01 && sec == 01)
                             {
-                                switch(cls)
-                                {
-                                    case 01113:
-                                        grupo = new KeyValuePair<string, int>("",0);
+                                sub_sec_count += s.Count;
+                                n_cnae.Classe = new KeyValuePair<string, int>("01 AGRICULTURA, PECUÁRIA E SERVIÇOS RELACIONADOS", sub_sec_count);
+                                n_cnae.ListaSubClasse.Add(new KeyValuePair<string, int>(s.Value, s.Count));
+                            }
+                            if (i == 02 && sec == 02)
+                            {
+                                sub_sec_count += s.Count;
+                                n_cnae.Classe = new KeyValuePair<string, int>("02 PRODUÇÃO FLORESTAL", sub_sec_count);
+                                n_cnae.ListaSubClasse.Add(new KeyValuePair<string, int>(s.Value, s.Count));
+                            }
+                            if (i == 03 && sec == 03)
+                            {
+                                sub_sec_count += s.Count;
+                                n_cnae.Classe = new KeyValuePair<string, int>("03 PESCA E AQÜICULTURA", sub_sec_count);
+                                n_cnae.ListaSubClasse.Add(new KeyValuePair<string, int>(s.Value, s.Count));
+                            }
+                        }                        
+                    }
+                    if(n_cnae.ListaSubClasse.Any())
+                    {
+                        agro.ListaClasse.Add(n_cnae);
+                        agro.Secao = secao;
+                    }                    
+                }
+                if(agro.ListaClasse.Any())
+                    l_secao.ListaSecao.Add(agro);
 
-                                        break;
+                //Ind Ext
+                var indextrativa = new CnaeSecao() { ListaClasse = new(), Secao = new() };
+                for (int i = 5; i <= 9; i++)
+                {
+                    var n_cnae = new CnaeClasse() { ListaSubClasse = new(), Classe = new() };
+                    sec_count = 0;
+                    sub_sec_count = 0;
+                    foreach (var s in s_subclasse)
+                    {
+                        string[] cd = s.Value.Split(" - ");
 
-                                    case 01114:
+                        int sec = Convert.ToInt32(cd[0].Remove(2, 5));
 
-                                        break;
-                                }
+                        if (sec >= 05 && sec <= 09)
+                        {
+                            sec_count += s.Count;
+                            secao = new KeyValuePair<string, int>("05...09 INDÚSTRIAS EXTRATIVAS", sec_count);
+
+                            if (i == 05 && sec == 05)
+                            {
+                                sub_sec_count += s.Count;
+                                n_cnae.Classe = new KeyValuePair<string, int>("05 EXTRAÇÃO DE CARVÃO MINERAL", sub_sec_count);
+                                n_cnae.ListaSubClasse.Add(new KeyValuePair<string, int>(s.Value, s.Count));
+                            }
+                            else if (i == 06 && sec == 06)
+                            {
+                                sub_sec_count += s.Count;
+                                n_cnae.Classe = new KeyValuePair<string, int>("06 EXTRAÇÃO DE PETRÓLEO E GÁS NATURAL", sub_sec_count);
+                                n_cnae.ListaSubClasse.Add(new KeyValuePair<string, int>(s.Value, s.Count));
+                            }
+                            else if (i == 07 && sec == 07)
+                            {
+                                sub_sec_count += s.Count;
+                                n_cnae.Classe = new KeyValuePair<string, int>("07 EXTRAÇÃO DE MINERAIS METÁLICOS", sub_sec_count);
+                                n_cnae.ListaSubClasse.Add(new KeyValuePair<string, int>(s.Value, s.Count));
+                            }
+                            else if (i == 08 && sec == 08)
+                            {
+                                sub_sec_count += s.Count;
+                                n_cnae.Classe = new KeyValuePair<string, int>("08 EXTRAÇÃO DE MINERAIS NÃO-METÁLICOS", sub_sec_count);
+                                n_cnae.ListaSubClasse.Add(new KeyValuePair<string, int>(s.Value, s.Count));
+                            }
+                            else if (i == 09 && sec == 09)
+                            {
+                                sub_sec_count += s.Count;
+                                n_cnae.Classe = new KeyValuePair<string, int>("09 ATIVIDADES DE APOIO À EXTRAÇÃO DE MINERAIS", sub_sec_count);
+                                n_cnae.ListaSubClasse.Add(new KeyValuePair<string, int>(s.Value, s.Count));
                             }
                         }
                     }
+                    if(n_cnae.ListaSubClasse.Any())
+                    {
+                        indextrativa.ListaClasse.Add(n_cnae);
+                        indextrativa.Secao = secao;
+                    }                  
                 }
+                if(indextrativa.ListaClasse.Any())
+                    l_secao.ListaSecao.Add(indextrativa);
 
-                var t_classe = new CnaeClasse() { ListaSubClasse = _cnae, Classe = new KeyValuePair<string, int>("Classes", 10) };
-                var t_grupo = new CnaeGrupo() { ListaClasse = new List<CnaeClasse>() { t_classe }, Grupo = new KeyValuePair<string, int>("Grupo", 10) };
-                var t_divisao = new CnaeDivisao() { ListaGrupo =new List<CnaeGrupo>() { t_grupo }, Divisao = new KeyValuePair<string, int>("Divisão", 10) };
-                var t_secao = new CnaeSecao() { ListaDivisao = new List<CnaeDivisao>() { t_divisao }, Secao = new KeyValuePair<string, int>("Seção", 10) };
+                //Ind Transf
+                var indetransf = new CnaeSecao() { ListaClasse = new(), Secao = new() };
+                for (int i = 10; i <= 33; i++)
+                {
+                    var n_cnae = new CnaeClasse() { ListaSubClasse = new(), Classe = new() };
+                    sec_count = 0;
+                    sub_sec_count = 0;
+                    foreach (var s in s_subclasse)
+                    {
+                        string[] cd = s.Value.Split(" - ");
 
-                l_full_cnae.Add(new BiCnae() { ListaSecao = new List<CnaeSecao>() { t_secao } });
+                        int sec = Convert.ToInt32(cd[0].Remove(2, 5));
+
+                        if (sec >= 10 && sec <= 33)
+                        {
+                            sec_count += s.Count;
+                            secao = new KeyValuePair<string, int>("10...33 INDÚSTRIAS DE TRANSFORMAÇÃO", sec_count);
+
+                            if (i == 10 && sec == 10)
+                            {
+                                sub_sec_count += s.Count;
+                                n_cnae.Classe = new KeyValuePair<string, int>("10 FABRICAÇÃO DE PRODUTOS ALIMENTÍCIOS", sub_sec_count);
+                                n_cnae.ListaSubClasse.Add(new KeyValuePair<string, int>(s.Value, s.Count));
+                            }
+                            else if (i == 11 && sec == 11)
+                            {
+                                sub_sec_count += s.Count;
+                                n_cnae.Classe = new KeyValuePair<string, int>("11 FABRICAÇÃO DE BEBIDAS", sub_sec_count);
+                                n_cnae.ListaSubClasse.Add(new KeyValuePair<string, int>(s.Value, s.Count));
+                            }
+                            else if (i == 12 && sec == 12)
+                            {
+                                sub_sec_count += s.Count;
+                                n_cnae.Classe = new KeyValuePair<string, int>("12 FABRICAÇÃO DE PRODUTOS DO FUMO", sub_sec_count);
+                                n_cnae.ListaSubClasse.Add(new KeyValuePair<string, int>(s.Value, s.Count));
+                            }
+                            else if (i == 13 && sec == 13)
+                            {
+                                sub_sec_count += s.Count;
+                                n_cnae.Classe = new KeyValuePair<string, int>("13 FABRICAÇÃO DE PRODUTOS TÊXTEIS", sub_sec_count);
+                                n_cnae.ListaSubClasse.Add(new KeyValuePair<string, int>(s.Value, s.Count));
+                            }
+                            else if (i == 14 && sec == 14)
+                            {
+                                sub_sec_count += s.Count;
+                                n_cnae.Classe = new KeyValuePair<string, int>("14 CONFECÇÃO DE ARTIGOS DO VESTUÁRIO E ACESSÓRIOS", sub_sec_count);
+                                n_cnae.ListaSubClasse.Add(new KeyValuePair<string, int>(s.Value, s.Count));
+                            }
+                            else if (i == 15 && sec == 15)
+                            {
+                                sub_sec_count += s.Count;
+                                n_cnae.Classe = new KeyValuePair<string, int>("15 PREPARAÇÃO DE COUROS E FABRICAÇÃO DE ARTEFATOS DE COURO, ARTIGOS PARA VIAGEM E CALÇADOS", sub_sec_count);
+                                n_cnae.ListaSubClasse.Add(new KeyValuePair<string, int>(s.Value, s.Count));
+                            }
+                            else if (i == 16 && sec == 16)
+                            {
+                                sub_sec_count += s.Count;
+                                n_cnae.Classe = new KeyValuePair<string, int>("16 FABRICAÇÃO DE PRODUTOS DE MADEIRA", sub_sec_count);
+                                n_cnae.ListaSubClasse.Add(new KeyValuePair<string, int>(s.Value, s.Count));
+                            }
+                            else if (i == 17 && sec == 17)
+                            {
+                                sub_sec_count += s.Count;
+                                n_cnae.Classe = new KeyValuePair<string, int>("17 FABRICAÇÃO DE CELULOSE, PAPEL E PRODUTOS DE PAPEL", sub_sec_count);
+                                n_cnae.ListaSubClasse.Add(new KeyValuePair<string, int>(s.Value, s.Count));
+                            }
+                            else if (i == 18 && sec == 18)
+                            {
+                                sub_sec_count += s.Count;
+                                n_cnae.Classe = new KeyValuePair<string, int>("18 IMPRESSÃO E REPRODUÇÃO DE GRAVAÇÕES", sub_sec_count);
+                                n_cnae.ListaSubClasse.Add(new KeyValuePair<string, int>(s.Value, s.Count));
+                            }
+                            else if (i == 19 && sec == 19)
+                            {
+                                sub_sec_count += s.Count;
+                                n_cnae.Classe = new KeyValuePair<string, int>("19 FABRICAÇÃO DE COQUE, DE PRODUTOS DERIVADOS DO PETRÓLEO E DE BIOCOMBUSTÍVEIS", sub_sec_count);
+                                n_cnae.ListaSubClasse.Add(new KeyValuePair<string, int>(s.Value, s.Count));
+                            }
+                            else if (i == 20 && sec == 20)
+                            {
+                                sub_sec_count += s.Count;
+                                n_cnae.Classe = new KeyValuePair<string, int>("20 FABRICAÇÃO DE PRODUTOS QUÍMICOS", sub_sec_count);
+                                n_cnae.ListaSubClasse.Add(new KeyValuePair<string, int>(s.Value, s.Count));
+                            }
+                            else if (i == 21 && sec == 21)
+                            {
+                                sub_sec_count += s.Count;
+                                n_cnae.Classe = new KeyValuePair<string, int>("21 FABRICAÇÃO DE PRODUTOS FARMOQUÍMICOS E FARMACÊUTICOS", sub_sec_count);
+                                n_cnae.ListaSubClasse.Add(new KeyValuePair<string, int>(s.Value, s.Count));
+                            }
+                            else if (i == 22 && sec == 22)
+                            {
+                                sub_sec_count += s.Count;
+                                n_cnae.Classe = new KeyValuePair<string, int>("22 FABRICAÇÃO DE PRODUTOS DE BORRACHA E DE MATERIAL PLÁSTICO", sub_sec_count);
+                                n_cnae.ListaSubClasse.Add(new KeyValuePair<string, int>(s.Value, s.Count));
+                            }
+                            else if (i == 23 && sec == 23)
+                            {
+                                sub_sec_count += s.Count;
+                                n_cnae.Classe = new KeyValuePair<string, int>("23 FABRICAÇÃO DE PRODUTOS DE MINERAIS NÃO-METÁLICOS", sub_sec_count);
+                                n_cnae.ListaSubClasse.Add(new KeyValuePair<string, int>(s.Value, s.Count));
+                            }
+                            else if (i == 24 && sec == 24)
+                            {
+                                sub_sec_count += s.Count;
+                                n_cnae.Classe = new KeyValuePair<string, int>("24 METALURGIA", sub_sec_count);
+                                n_cnae.ListaSubClasse.Add(new KeyValuePair<string, int>(s.Value, s.Count));
+                            }
+                            else if (i == 25 && sec == 25)
+                            {
+                                sub_sec_count += s.Count;
+                                n_cnae.Classe = new KeyValuePair<string, int>("25 FABRICAÇÃO DE PRODUTOS DE METAL, EXCETO MÁQUINAS E EQUIPAMENTOS", sub_sec_count);
+                                n_cnae.ListaSubClasse.Add(new KeyValuePair<string, int>(s.Value, s.Count));
+                            }
+                            else if (i == 26 && sec == 26)
+                            {
+                                sub_sec_count += s.Count;
+                                n_cnae.Classe = new KeyValuePair<string, int>("26 FABRICAÇÃO DE EQUIPAMENTOS DE INFORMÁTICA, PRODUTOS ELETRÔNICOS E ÓPTICOS", sub_sec_count);
+                                n_cnae.ListaSubClasse.Add(new KeyValuePair<string, int>(s.Value, s.Count));
+                            }
+                            else if (i == 27 && sec == 27)
+                            {
+                                sub_sec_count += s.Count;
+                                n_cnae.Classe = new KeyValuePair<string, int>("27 FABRICAÇÃO DE MÁQUINAS, APARELHOS E MATERIAIS ELÉTRICOS", sub_sec_count);
+                                n_cnae.ListaSubClasse.Add(new KeyValuePair<string, int>(s.Value, s.Count));
+                            }
+                            else if (i == 28 && sec == 28)
+                            {
+                                sub_sec_count += s.Count;
+                                n_cnae.Classe = new KeyValuePair<string, int>("28 FABRICAÇÃO DE MÁQUINAS E EQUIPAMENTOS", sub_sec_count);
+                                n_cnae.ListaSubClasse.Add(new KeyValuePair<string, int>(s.Value, s.Count));
+                            }
+                            else if (i == 29 && sec == 29)
+                            {
+                                sub_sec_count += s.Count;
+                                n_cnae.Classe = new KeyValuePair<string, int>("29 FABRICAÇÃO DE VEÍCULOS AUTOMOTORES, REBOQUES E CARROCERIAS", sub_sec_count);
+                                n_cnae.ListaSubClasse.Add(new KeyValuePair<string, int>(s.Value, s.Count));
+                            }
+                            else if (i == 30 && sec == 30)
+                            {
+                                sub_sec_count += s.Count;
+                                n_cnae.Classe = new KeyValuePair<string, int>("30 FABRICAÇÃO DE OUTROS EQUIPAMENTOS DE TRANSPORTE, EXCETO VEÍCULOS AUTOMOTORES", sub_sec_count);
+                                n_cnae.ListaSubClasse.Add(new KeyValuePair<string, int>(s.Value, s.Count));
+                            }
+                            else if (i == 31 && sec == 31)
+                            {
+                                sub_sec_count += s.Count;
+                                n_cnae.Classe = new KeyValuePair<string, int>("31 FABRICAÇÃO DE MÓVEIS", sub_sec_count);
+                                n_cnae.ListaSubClasse.Add(new KeyValuePair<string, int>(s.Value, s.Count));
+                            }
+                            else if (i == 32 && sec == 32)
+                            {
+                                sub_sec_count += s.Count;
+                                n_cnae.Classe = new KeyValuePair<string, int>("32 FABRICAÇÃO DE PRODUTOS DIVERSOS", sub_sec_count);
+                                n_cnae.ListaSubClasse.Add(new KeyValuePair<string, int>(s.Value, s.Count));
+                            }
+                            else if (i == 33 && sec == 33)
+                            {
+                                sub_sec_count += s.Count;
+                                n_cnae.Classe = new KeyValuePair<string, int>("33 MANUTENÇÃO, REPARAÇÃO E INSTALAÇÃO DE MÁQUINAS E EQUIPAMENTOS", sub_sec_count);
+                                n_cnae.ListaSubClasse.Add(new KeyValuePair<string, int>(s.Value, s.Count));
+                            }
+                        }
+                    }
+                    if (n_cnae.ListaSubClasse.Any())
+                    {
+                        indetransf.ListaClasse.Add(n_cnae);
+                        indetransf.Secao = secao;
+                    }
+                }
+                if (indetransf.ListaClasse.Any())
+                    l_secao.ListaSecao.Add(indetransf);
+
+
+
+                l_full_cnae.Add(l_secao);
             });
             
             await t;

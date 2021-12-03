@@ -8,41 +8,22 @@
     <ul class="collapsible white">
         @foreach (var emp in Model)
         {
-            <li>
-                @foreach (var s in emp.ListaSecao)
-                {
-                    <div class="collapsible-header">@s.Secao.Key</div>
+
+            @foreach (var s in emp.ListaSecao)
+            {
+                <li>
+                    <div class="collapsible-header">@s.Secao.Key<span class="new badge" data-badge-caption="">@s.Secao.Value</span></div>
                     <div class="collapsible-body">
                         <ul class="collapsible">
-                            @foreach (var d in s.ListaDivisao)
+                            @foreach (var d in s.ListaClasse)
                             {
                                 <li>
-                                    <div class="collapsible-header">@d.Divisao.Key</div>
+                                    <div class="collapsible-header">@d.Classe.Key<span class="new badge" data-badge-caption="">@d.Classe.Value</span></div>
                                     <div class="collapsible-body">
-                                        <ul class="collapsible">
-                                            @foreach (var g in d.ListaGrupo)
+                                        <ul class="collection z-depth-1">
+                                            @foreach (var sc in d.ListaSubClasse)
                                             {
-                                                <li>
-                                                    <div class="collapsible-header">@g.Grupo.Key</div>
-                                                    <div class="collapsible-body">
-                                                        <ul class="collapsible">
-                                                            @foreach (var c in g.ListaClasse)
-                                                            {
-                                                                <li>
-                                                                    <div class="collapsible-header">@c.Classe.Key</div>
-                                                                    <div class="collapsible-body">
-                                                                        <ul class="collection">
-                                                                            @foreach (var sc in c.ListaSubClasse)
-                                                                            {
-                                                                                <li class="collection-item"><span class="new badge" data-badge-caption="">@sc.Value</span>@sc.Key</li>
-                                                                            }
-                                                                        </ul>
-                                                                    </div>
-                                                                </li>
-                                                            }
-                                                        </ul>
-                                                    </div>
-                                                </li>
+                                                <li class="collection-item"><span class="new badge" data-badge-caption="">@sc.Value</span>@sc.Key</li>
                                             }
                                         </ul>
                                     </div>
@@ -50,9 +31,8 @@
                             }
                         </ul>
                     </div>
-
-                }
-            </li>
+                </li>
+            }
         }
     </ul>
 </div>

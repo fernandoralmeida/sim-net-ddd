@@ -8,15 +8,15 @@ namespace Sim.Domain.BI
 {
     public class BiCnae
     {
-        public IEnumerable<CnaeSecao> ListaSecao { get; set; }
+        public List<CnaeSecao> ListaSecao { get; set; }
     }
 
     public class CnaeSecao
     {
         public KeyValuePair<string, int> Secao { get; set; }
-        public IEnumerable<CnaeDivisao> ListaDivisao { get; set; }
+        public List<CnaeClasse> ListaClasse { get; set; }
     }
-
+    /*
     public class CnaeDivisao
     {
         public KeyValuePair<string, int> Divisao { get; set; }
@@ -28,10 +28,10 @@ namespace Sim.Domain.BI
         public KeyValuePair<string, int> Grupo { get; set; }
         public IEnumerable<CnaeClasse> ListaClasse { get; set; }
     }
-
+    */
     public class CnaeClasse
     {
         public KeyValuePair<string, int> Classe { get; set; }
-        public IEnumerable<KeyValuePair<string, int>> ListaSubClasse { get; set; }
+        public List<KeyValuePair<string, int>> ListaSubClasse { get; set; }
     }
 }
