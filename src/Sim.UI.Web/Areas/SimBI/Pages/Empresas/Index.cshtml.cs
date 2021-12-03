@@ -38,7 +38,7 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Empresas
 
         public class InputModel
         {
-            [DisplayName("Situação")]
+            [DisplayName("Situaï¿½ï¿½o")]
             public string Situacao { get; set; }
             public string Municipio { get; set; }
             public string Mes { get; set; }
@@ -99,19 +99,20 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Empresas
         }
 
         /**/
-        public JsonResult OnGetPreview(string mpo, string stc, string ano, string mes)
+        public JsonResult OnGetPreview(string c, string m)
         {
-            var user_atendimentos = _appEmpresa.BiEmpresasAsync(mpo, stc, ano, mes);
+            var user_atendimentos = _appEmpresa.ListByCNAEAsync(c, m);
             user_atendimentos.Wait();
             return new JsonResult(user_atendimentos.Result);
         }
-
+        
+        /*
         public JsonResult OnPostPreview()
         {
             var user_atendimentos = _appEmpresa.BiEmpresasAsync(Input.Municipio, Input.Situacao, Input.Ano.ToString(), Input.Mes);
             user_atendimentos.Wait();
             return new JsonResult(user_atendimentos.Result);
         }
-        
+        */
     }
 }

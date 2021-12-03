@@ -229,14 +229,12 @@ else
     <script>
         $(function () {
             $(".modal-trigger").click(function () {
-                var param1 = $(this).data('mpo');
-                var param2 = $(this).data('stc');
-                var param3 = $(this).data('ano');
-                var param4 = $(this).data('mes');
+                var param1 = $(this).data('id');
+                var param2 = $('#municip').val(); // document.getElementById('#municip');
                 $(".showcollection").empty();
-                $.getJSON(`/SimBI/Empresas?mpo=${param1}&stc=${param2}&ano=${param3}&mes=${param4}&handler=Preview`, function (data) {
+                $.getJSON(`/SimBI/Empresas?c=${param1}&m=${param2}&handler=Preview`, function (data) {
                     $.each(data, function (i, item) {
-                        $(".showcollection").append(`<li class="collection-item"><span class="new badge green" data-badge-caption="${item.listaAtividades.value}"></span>${item.listaAtividades.key}</li>`);
+                        $(".showcollection").append(`<li class="collection-item"><span class="new badge green" data-badge-caption="${item.id.value}"></span>${item.cnpj.key}</li>`);
 
                     });
                 });
