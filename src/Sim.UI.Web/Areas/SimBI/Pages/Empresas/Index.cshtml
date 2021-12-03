@@ -236,7 +236,6 @@ else
                 $(".showcollection").empty();
                 $.getJSON(`/SimBI/Empresas?mpo=${param1}&stc=${param2}&ano=${param3}&mes=${param4}&handler=Preview`, function (data) {
                     $.each(data, function (i, item) {
-
                         $(".showcollection").append(`<li class="collection-item"><span class="new badge green" data-badge-caption="${item.listaAtividades.value}"></span>${item.listaAtividades.key}</li>`);
 
                     });
