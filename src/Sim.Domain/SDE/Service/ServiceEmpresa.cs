@@ -135,10 +135,17 @@ namespace Sim.Domain.SDE.Service
 
                     var _formalizacao = new List<string>();
                     var _baixada = new List<string>();
+                    var _mortalidade = new List<string>();
 
                     var bi_empresas = new BiEmpresas();
 
                     int cnae = 0;
+
+                    var mortalidade = DateTime.Today.AddDays(-731).ToShortDateString(); //add 2 anos
+                    var splitdata = mortalidade.Split(new char[] { '/' });
+                    var mortalidade2 = string.Format("{0}{1}{2}", splitdata[2], splitdata[1], splitdata[0]);
+                    var datainicial = Convert.ToInt32(mortalidade2);
+                    var dataabertura = 0;
 
                     foreach (BaseReceitaFederal at in t)
                     {
@@ -147,6 +154,16 @@ namespace Sim.Domain.SDE.Service
                         {
                             string[] data = at.Estabelecimento.DataInicioAtividade.ToString().Split(new char[] { '-' });
 
+                            dataabertura = Convert.ToInt32(at.Estabelecimento.DataInicioAtividade.Replace("-", ""));
+ 
+                            if (dataabertura >= datainicial)
+                            {
+                                if (at.Estabelecimento.SituacaoCadastral == "Baixada")
+                                    _mortalidade.Add("B");
+                                
+                                _mortalidade.Add("F");
+                            }
+                            
                             if (mes == "99")
                             {
 
@@ -486,7 +503,6 @@ namespace Sim.Domain.SDE.Service
                     }
                     bi_empresas.ListaSetores = n_srv;
 
-
                     // Atividades Serviços
                     var c_servico = from x in _servico
                                     group x by x into g
@@ -585,10 +601,34 @@ namespace Sim.Domain.SDE.Service
                     }
                     bi_empresas.ListaMensal = l_var_mes;
 
+                    // Taxa de mortalidade empresarial
+                    /**/
+                    var taxa_mort = from x in _mortalidade
+                                    group x by x into g
+                                    let count = g.Count()
+                                    orderby count descending
+                                    select new { Value = g.Key, Count = count };
+
+                    var l_tx_mort = new List<KeyValuePair<string, string>>();
+                    float emp_f = 0;
+                    float emp_b = 0;
+                    foreach(var x in taxa_mort)
+                    {
+                        emp_f += x.Count;
+                        if (x.Value == "B")
+                            emp_b = x.Count;
+                    }
+
+                    var r_tx_mort = (emp_b * 100) / emp_f;
+
+                    l_tx_mort.Add(new KeyValuePair<string, string>("Mortalidade de empresas com até 2 anos de atividade", string.Format("{0:N2}%", r_tx_mort)));
+
+                    bi_empresas.ListaMortalidadeEmpresas = l_tx_mort;
+                    
                     r_empresas.Add(bi_empresas);
 
                 }
-                catch { }
+                catch(Exception ex) { throw new Exception(ex.Message); }
 
             });
 
@@ -644,7 +684,7 @@ namespace Sim.Domain.SDE.Service
                         if (sec >= 01 && sec <= 03)
                         {
                             sec_count += s.Count;
-                            secao = new KeyValuePair<string, int>("01...03 AGRICULTURA, PECUÁRIA, PRODUÇÃO FLORESTAL, PESCA E AQÜICULTURA", sec_count);
+                            secao = new KeyValuePair<string, int>("AGRICULTURA, PECUÁRIA, PRODUÇÃO FLORESTAL, PESCA E AQÜICULTURA", sec_count);
                             
                             if (i == 01 && sec == 01)
                             {
@@ -691,7 +731,7 @@ namespace Sim.Domain.SDE.Service
                         if (sec >= 05 && sec <= 09)
                         {
                             sec_count += s.Count;
-                            secao = new KeyValuePair<string, int>("05...09 INDÚSTRIAS EXTRATIVAS", sec_count);
+                            secao = new KeyValuePair<string, int>("INDÚSTRIAS EXTRATIVAS", sec_count);
 
                             if (i == 05 && sec == 05)
                             {
@@ -750,7 +790,7 @@ namespace Sim.Domain.SDE.Service
                         if (sec >= 10 && sec <= 33)
                         {
                             sec_count += s.Count;
-                            secao = new KeyValuePair<string, int>("10...33 INDÚSTRIAS DE TRANSFORMAÇÃO", sec_count);
+                            secao = new KeyValuePair<string, int>("INDÚSTRIAS DE TRANSFORMAÇÃO", sec_count);
 
                             if (i == 10 && sec == 10)
                             {
@@ -924,7 +964,7 @@ namespace Sim.Domain.SDE.Service
                         if (sec >= 35 && sec <= 35)
                         {
                             sec_count += s.Count;
-                            secao = new KeyValuePair<string, int>("35 ELETRICIDADE E GÁS", sec_count);
+                            secao = new KeyValuePair<string, int>("ELETRICIDADE E GÁS", sec_count);
 
                             if (i == 35 && sec == 35)
                             {
@@ -959,7 +999,7 @@ namespace Sim.Domain.SDE.Service
                         if (sec >= 36 && sec <= 39)
                         {
                             sec_count += s.Count;
-                            secao = new KeyValuePair<string, int>("36...39 ÁGUA, ESGOTO, ATIVIDADES DE GESTÃO DE RESÍDUOS E DESCONTAMINAÇÃO", sec_count);
+                            secao = new KeyValuePair<string, int>("ÁGUA, ESGOTO, ATIVIDADES DE GESTÃO DE RESÍDUOS E DESCONTAMINAÇÃO", sec_count);
 
                             if (i == 36 && sec == 36)
                             {
@@ -1012,7 +1052,7 @@ namespace Sim.Domain.SDE.Service
                         if (sec >= 41 && sec <= 43)
                         {
                             sec_count += s.Count;
-                            secao = new KeyValuePair<string, int>("41...43 CONSTRUÇÃO", sec_count);
+                            secao = new KeyValuePair<string, int>("CONSTRUÇÃO", sec_count);
 
                             if (i == 41 && sec == 41)
                             {
@@ -1059,7 +1099,7 @@ namespace Sim.Domain.SDE.Service
                         if (sec >= 45 && sec <= 47)
                         {
                             sec_count += s.Count;
-                            secao = new KeyValuePair<string, int>("45...47 COMÉRCIO; REPARAÇÃO DE VEÍCULOS AUTOMOTORES E MOTOCICLETAS", sec_count);
+                            secao = new KeyValuePair<string, int>("COMÉRCIO; REPARAÇÃO DE VEÍCULOS AUTOMOTORES E MOTOCICLETAS", sec_count);
 
                             if (i == 45 && sec == 45)
                             {
@@ -1466,12 +1506,12 @@ namespace Sim.Domain.SDE.Service
                     }
                     if (n_cnae.ListaSubClasse.Any())
                     {
-                        cientifica.ListaClasse.Add(n_cnae);
-                        cientifica.Secao = secao;
+                        administrativo.ListaClasse.Add(n_cnae);
+                        administrativo.Secao = secao;
                     }
                 }
-                if(cientifica.ListaClasse.Any())
-                   l_secao.ListaSecao.Add(cientifica);
+                if(administrativo.ListaClasse.Any())
+                   l_secao.ListaSecao.Add(administrativo);
 
                 //Adm Publico etc...
                 var admpublic=new CnaeSecao(){ListaClasse = new(), Secao = new()};
@@ -1773,6 +1813,31 @@ namespace Sim.Domain.SDE.Service
         public async Task<IEnumerable<BaseReceitaFederal>> ListForBICnaeAsync(string municipio)
         {
             return await _repositoryEmpresa.ListForBICnaeAsync(municipio);
+        }
+
+        public async Task<IEnumerable<KeyValuePair<string, string>>> ListforCnaeJsonAsync(string cnae, string municipio, string situacao)
+        {
+            var emp = await _repositoryEmpresa.ListByCNAEAsync(cnae, municipio);
+            
+            var lista = new List<KeyValuePair<string, string>>();
+
+            foreach (var s in emp)
+            {
+                if (s.Estabelecimento.SituacaoCadastral == situacao)
+                    lista.Add(new KeyValuePair<string, string>(string.Format("CNPJ:{0}/{1}-{2} {3} TEL:{4}{5}",
+                        s.Estabelecimento.CNPJBase,
+                        s.Estabelecimento.CNPJOrdem,
+                        s.Estabelecimento.CNPJDV,
+                        s.Empresa.RazaoSocial,
+                        s.Estabelecimento.DDD1,
+                        s.Estabelecimento.Telefone1),
+                        string.Format("{0}{1}{2}",
+                        s.Estabelecimento.CNPJBase,
+                        s.Estabelecimento.CNPJOrdem,
+                        s.Estabelecimento.CNPJDV)));
+            }
+
+            return lista;
         }
     }
 }

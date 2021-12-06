@@ -27,6 +27,12 @@
     <script type="text/javascript" src="~/js/site.js"></script>
     <script type="text/javascript" src="~/lib/materialize/js/materialize.min.js"></script>
     <script type="text/javascript" src="~/lib/masonry/masonry.pkgd.min.js"></script>
+    
+    <script>
+        $(window).on('load', function () { 
+            $(".progress").fadeOut("slow");  
+        });  
+    </script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

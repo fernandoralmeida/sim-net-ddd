@@ -76,43 +76,30 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Empresas
 
             else
                 ListEmpresas = _appEmpresa.BiEmpresasAsync(Input.Municipio, Input.Situacao, Input.Ano.ToString(), Input.Mes).Result;
-
-
         }
 
-        public async Task<IActionResult> OnGetAsync()
+        public async Task OnGetAsync()
         {
             Input = new();
             Input.Municipio = "6607";
             Input.Situacao = "Ativa";
             Input.Ano = DateTime.Today.Year;
             Input.Mes = "00";
-            await LoadMunicipios();            
-            //await LoadAsync();            
-            return Page();
+            //await LoadMunicipios();            
+            await LoadAsync();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task OnPostAsync()
         {
             await LoadAsync();
-            return Page();
         }
 
-        /**/
-        public JsonResult OnGetPreview(string c, string m)
+        public JsonResult OnGetPreview(string c, string m, string a)
         {
-            var user_atendimentos = _appEmpresa.ListByCNAEAsync(c, m);
-            user_atendimentos.Wait();
-            return new JsonResult(user_atendimentos.Result);
-        }
-        
-        /*
-        public JsonResult OnPostPreview()
-        {
-            var user_atendimentos = _appEmpresa.BiEmpresasAsync(Input.Municipio, Input.Situacao, Input.Ano.ToString(), Input.Mes);
-            user_atendimentos.Wait();
-            return new JsonResult(user_atendimentos.Result);
-        }
-        */
+            var listEmp = _appEmpresa.ListforCnaeJsonAsync(c, m, a);
+
+            return new JsonResult(listEmp.Result);
+        }       
+
     }
 }

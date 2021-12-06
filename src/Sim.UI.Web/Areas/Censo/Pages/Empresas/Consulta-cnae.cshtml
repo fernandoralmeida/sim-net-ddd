@@ -10,30 +10,28 @@
 
 <div class="card">
     <form method="post" class="row" style="border-bottom:solid 1px #efefef; margin-bottom:0px;">
-        <div class="col s12 m6 l6 valign-wrapper left"  style="height:64px;">
-            <div class="col s12">
-                <select asp-for="Input.CNAE" class="browser-default" asp-items="@Model.ListaCnaes">
-                    <option selected>-- Atividade --</option>
-                </select>
+        <nav class="z-depth-0">
+            <div class="nav-wrapper white">
+                <div class="input-field col s3 m6 l6 valign-wrapper">
+                    <select asp-for="Input.CNAE" class="browser-default" asp-items="@Model.ListaCnaes">
+                        <option selected>-- Atividade --</option>
+                    </select>
+                </div>
+                <div class="input-field col s3 m2 l2 valign-wrapper">
+                    <select asp-for="Input.Municipio" class="browser-default" asp-items="@Model.ListaMunicipios"></select>
+                </div>
+                <div class="input-field col s3 m2 l2 valign-wrapper">
+                    <select asp-for="Input.Situacao" class="browser-default">
+                        <option selected>Ativa</option>
+                        <option>Nula</option>
+                        <option>Suspensa</option>
+                        <option>Inapta</option>
+                        <option>Baixada</option>
+                    </select>
+                </div>
+                <button class="input-field btn waves-effect z-depth-0 waves-light right" type="submit" name="action">Pesquisar</button>
             </div>
-        </div>
-        <div class="col valign-wrapper" style="height:64px;">
-            <div class="col">
-                <select asp-for="Input.Municipio" class="browser-default" asp-items="@Model.ListaMunicipios"></select>
-            </div>
-            <div class="col">
-                <select asp-for="Input.Situacao" class="browser-default">
-                    <option selected>Ativa</option>
-                    <option>Nula</option>
-                    <option>Suspensa</option>
-                    <option>Inapta</option>
-                    <option>Baixada</option>
-                </select>
-            </div>
-            <div class="col">
-                <button class="btn waves-effect waves-green" type="submit" role="button">Pesquisar</button>
-            </div>
-        </div>
+        </nav>
     </form>
     <partial name="_EmpresaList" model="Model.Input.ListaEmpresas" />
 

@@ -15,205 +15,346 @@
 }
 else
 {
-    <div class="row">
-        @foreach (var emp in Model.ListEmpresas)
-        {
+<div class="row">
+    @foreach (var emp in Model.ListEmpresas)
+    {
+    <blockquote class="grey-text darken-2">
+        Informações extraidas da base de dados da RFB em 18-11-2021
+        <br />E não contabilizam os CNPJs com CNAE principal "9492800 - Serviços políticos"
+    </blockquote>
 
-            <div class="col l6 m6 s12">
-                <ul class="collection z-depth-1">
-                    <li class="collection-item"><i class="material-icons left">factory</i>Empresas<span class="new badge blue" data-badge-caption="@emp.EmpresasAtivas.Value">@Model.Input.Situacao</span></li>
-                    @if (Model.Input.Mes != "99")
-                    {
+        <div class="row">
+            <div class="col s12 m4 l4">
+                <div class="card hoverable">
+                    <table class="centered">
+                        <thead>
+                            <tr>
+                                <th class="card-header grey-text darken-3">Mortalidade de Empresas abertas nos ultimos 24 meses</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var tx in emp.ListaMortalidadeEmpresas)
+                            {
+                                <tr>
+                                    <td>
+                                        <h5 class="blue-text darken-1">@tx.Value</h5>
+                                    </td>
+                                </tr>
 
-                        <li class="collection-item"><span class="new badge" data-badge-caption="@emp.Formalizacoes.Value"></span>@emp.Formalizacoes.Key</li>
-                        <li class="collection-item"><span class="new badge" data-badge-caption="@emp.Baixas.Value"></span>@emp.Baixas.Key</li>
-                    }
-                </ul>
-
-                @if (Model.Input.Mes == "00")
-                {
-                    <p></p>
-                    <ul class="collection z-depth-1">
-                        <li class="collection-item"><i class="material-icons left">analytics</i>Variação Mensal<span class="new badge blue" data-badge-caption="@emp.EmpresasAtivas.Value">@Model.Input.Situacao</span></li>
-
-                        @foreach (var op in emp.ListaMensal)
-                        {
-                            float v1 = op.Value;
-                            float v2 = emp.EmpresasAtivas.Value;
-                            float r = (v1 / v2) * 100;
-                            <li class="collection-item"><span class="new badge" data-badge-caption="@op.Value (@r.ToString("N2")%)"></span>@op.Key</li>
-                        }
-
-                    </ul>
-                }
-
-                @if (Model.Input.Mes == "99")
-                {
-                    <p></p>
-                    <ul class="collection z-depth-1">
-                        <li class="collection-item"><i class="material-icons left">analytics</i>Situação<span class="new badge blue" data-badge-caption="@emp.TotalEmpresas.Value">Empresas</span></li>
-
-                        @foreach (var op in emp.ListaSituacao)
-                        {
-                            float v1 = op.Value;
-                            float v2 = emp.EmpresasAtivas.Value;
-                            float r = (v1 / v2) * 100;
-                            <li class="collection-item"><span class="new badge" data-badge-caption="@op.Value (@r.ToString("N2")%)"></span>@op.Key</li>
-                        }
-
-                    </ul>
-                }
-
-                <p></p>
-                <ul class="collection z-depth-1">
-                    <li class="collection-item"><i class="material-icons left">factory</i>Porte</li>
-                    @foreach (var p in emp.Porte)
-                    {
-                        float v1 = p.Value;
-                        float v2 = emp.EmpresasAtivas.Value;
-                        float r = (v1 / v2) * 100;
-                        <li class="collection-item"><span class="new badge" data-badge-caption="@p.Value (@r.ToString("N2")%)"></span>@p.Key</li>
-                    }
-                </ul>
-                <p></p>
-                <ul class="collection z-depth-1">
-                    <li class="collection-item"><i class="material-icons left">factory</i>Optantes Simples Nacional<span class="new badge blue" data-badge-caption="@emp.SimplesNacional.Value">@Model.Input.Situacao</span></li>
-                    @{
-                        float s1 = emp.OptanteMEI.Value;
-                        float s2 = emp.SimplesNacional.Value;
-                        float rs = (s1 / s2) * 100;
-                    }
-
-                    <li class="collection-item"><span class="new badge" data-badge-caption="@emp.OptanteMEI.Value (@rs.ToString("N2")%)"></span>@emp.OptanteMEI.Key</li>
-                </ul>
-                <p></p>
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div class="col l6 m6 s12 ">
-                <ul class="collapsible white">
-                    <li class="active">
-                        <div class="collapsible-header">
-                            <i class="material-icons left">handyman</i>Atividades Primárias (10+ Ocorrências)
-                        </div>
-                        <div class="collapsible-body">
-                            <ul class="collection z-depth-1">
+            <div class="col s12 m4 l4">
+                <div class="card hoverable">
+                    <table class="centered">
+                        <thead>
+                            <tr>
+                                <th class="card-header grey-text darken-3">@emp.Formalizacoes.Key @Model.Input.Ano</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var tx in emp.ListaMortalidadeEmpresas)
+                            {
+                                <tr>
+                                    <td>
+                                        <h5 class="green-text darken-1">@emp.Formalizacoes.Value</h5>
+                                    </td>
+                                </tr>
 
-                                @{int v = 0;}
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col s12 m4 l4">
+                <div class="card hoverable">
+                    <table class="centered">
+                        <thead>
+                            <tr>
+                                <th class="card-header grey-text darken-3">@emp.Baixas.Key @Model.Input.Ano</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var tx in emp.ListaMortalidadeEmpresas)
+                            {
+                                <tr>
+                                    <td>
+                                        <h5 class="materialize-red-text darken-1">@emp.Baixas.Value</h5>
+                                    </td>
+                                </tr>
 
-                                @foreach (var op in emp.ListaAtividades)
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="card hoverable">
+                    <div class="card-header grey-text darken-3 center">
+                        Empresas Formalizadas @Model.Input.Ano
+                    </div>
+                    <table class="responsive-table centered">
+                        <thead>
+                            <tr>
+                                @foreach (var op in emp.ListaMensal)
                                 {
-                                    if (v < 10)
+                                    <th class="grey-text darken-3">@op.Key</th>
+                                }
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                @foreach (var op in emp.ListaMensal)
+                                {
+                                    float v1 = op.Value;
+                                    float v2 = emp.EmpresasAtivas.Value;
+                                    float r = (v1 / v2) * 100;
+                                    <td class="blue-text darken-3">@op.Value <span class="purple-text">(@r.ToString("N2")%)</span></td>
+                                }
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s12 m8 l8">
+                <div class="card hoverable">
+                    <div class="card-header grey-text darken-3 center">
+                        Porte
+                    </div>
+                    <table class="responsive-table centered">
+                        <thead>
+                            <tr>
+                                @foreach (var op in emp.Porte)
+                                {
+                                    <th class="grey-text darken-3">@op.Key</th>
+                                }
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                @foreach (var op in emp.Porte)
+                                {
+                                    float v1 = op.Value;
+                                    float v2 = emp.EmpresasAtivas.Value;
+                                    float r = (v1 / v2) * 100;
+                                    <td class="blue-text darken-3">@op.Value <span class="purple-text">(@r.ToString("N2")%)</span></td>
+                                }
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col s12 m4 l4">
+                <div class="card hoverable">
+                    <div class="card-header grey-text darken-3 center">
+                        @emp.SimplesNacional.Key
+                    </div>
+                    <table class="responsive-table centered">
+                        <thead>
+                            <tr>
+                                <th class="grey-text darken-3">Optantes</th>
+                                <th class="grey-text darken-3">@emp.OptanteMEI.Key</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+
+                                @{
+                                    float opm = emp.OptanteMEI.Value;
+                                    float ops = emp.SimplesNacional.Value;
+                                    float sn = ops - opm;
+                                    float res1 = (sn / ops) * 100;
+
+                                    float s1 = emp.OptanteMEI.Value;
+                                    float s2 = emp.SimplesNacional.Value;
+                                    float rs = (s1 / s2) * 100;
+                                    float rsn = emp.SimplesNacional.Value - emp.OptanteMEI.Value;
+                                }
+                                <td class="blue-text darken-3">@emp.SimplesNacional.Value</td>
+                                <td class="blue-text darken-3">@emp.OptanteMEI.Value <span class="purple-text">(@rs.ToString("N2")%)</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s12">
+                <div class="card hoverable">
+                    <div class="card-header grey-text center">Distribuição por Setor</div>
+                    <table class="responsive-table centered">
+                        <thead>
+                            <tr>
+                                @foreach (var st in emp.ListaSetores)
+                                {
+                                    <th class="grey-text">@st.Key</th>
+                                }
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                @foreach (var st in emp.ListaSetores)
+                                {
+                                    float v1 = st.Value;
+                                    float v2 = emp.EmpresasAtivas.Value;
+                                    float r = (v1 / v2) * 100;
+                                    <td class="blue-text">@st.Value <span class="purple-text">(@r.ToString("N2")%)</span></td>
+                                }
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            @{ var count = 0; var sz = "m3 l3";}
+
+            @foreach (var str in emp.ListaSetores)
+            {
+                if(count == 0 || count == 4)
+                {
+                    sz = "m3 l3";
+                }
+                else
+                    sz = "m2 l2";
+
+                count++;
+
+                <div class="col s12 @sz">
+                    <div class="card hoverable">
+                        <ul class="collection">
+                            @if (str.Key == "Serviços")
+                            {
+                                int c = 0;
+                                <li class="collection-item grey-text truncate"><b>@str.Key (10+ Ocorrências)</b></li>
+                                @foreach (var at in emp.Servicos)
+                                {
+                                    if (c < 5)
                                     {
-                                        <li class="collection-item"><span class="new badge" data-badge-caption="@op.Value"></span>@op.Key</li>
+                                        <li class="collection-item truncate"><span class="badge purple-text" data-badge-caption="@at.Value"></span>@at.Key</li>
                                     }
                                     else
-                                    {
                                         break;
-                                    }
-                                    v++;
+                                    c++;
                                 }
+                            }
+                            @if (str.Key == "Comércio")
+                            {
+                                int c = 0;
+                                <li class="collection-item grey-text truncate"><b>@str.Key (10+ Ocorrências)</b></li>                                
 
-                            </ul>
-                        </div>
-                    </li>
+                                @foreach (var at in emp.Comercio)
+                                {
+                                    if (c < 5)
+                                    {
+                                        <li class="collection-item truncate"><span class="badge purple-text" data-badge-caption="@at.Value"></span>@at.Key</li>
+                                    }
+                                    else
+                                        break;
+                                    c++;
+                                }
+                            }
+                            @if (str.Key == "Indústria")
+                            {
+                                int c = 0;
+                                <li class="collection-item grey-text truncate"><b>@str.Key (10+ Ocorrências)</b></li>
+                                
+                                @foreach (var at in emp.Indistria)
+                                {
+                                    if (c < 5)
+                                    {
+                                        <li class="collection-item truncate"><span class="badge purple-text" data-badge-caption="@at.Value"></span>@at.Key</li>
+                                    }
+                                    else
+                                        break;
+                                    c++;
+                                }
+                            }
+                            @if (str.Key == "Construção")
+                            {
+                                int c = 0;
+                                <li class="collection-item grey-text truncate"><b>@str.Key (10+ Ocorrências)</b></li>
+                                
+                                @foreach (var at in emp.Construcao)
+                                {
+                                    if (c < 5)
+                                    {
+                                        <li class="collection-item truncate"><span class="badge purple-text" data-badge-caption="@at.Value"></span>@at.Key</li>
+                                    }
+                                    else
+                                        break;
+                                    c++;
+                                }
+                            }
+                            @if (str.Key == "Agropecuária")
+                            {
+                                int c = 0;
+                                <li class="collection-item grey-text truncate"><b>@str.Key (10+ Ocorrências)</b></li>
+                                
+                                @foreach (var at in emp.Agro)
+                                {
+                                    if (c < 5)
+                                    {
+                                        <li class="collection-item truncate"><span class="badge purple-text" data-badge-caption="@at.Value"></span>@at.Key</li>
+                                    }
+                                    else
+                                        break;
+                                    c++;
+                                }
+                            }
+                        </ul>
+                    </div>
+                </div>
+            }
 
-                    @foreach (var op in emp.ListaSetores)
-                    {
-                        float v1 = op.Value;
-                        float v2 = emp.EmpresasAtivas.Value;
-                        float r = (v1 / v2) * 100;
-                        <li>
-                            <div class="collapsible-header">@op.Key<span class="new badge " data-badge-caption="@op.Value (@r.ToString("N2")%)"></span></div>
-                            <div class="collapsible-body">
-                                <p>5+ ocorrências no setor</p>
-                                <ul class="collection z-depth-1">
-                                    @if (op.Key == "Serviços")
-                                    {
-                                        int c = 0;
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <div class="card hoverable">
+                    <ul class="collection">
+                        <li class="collection-item grey-text truncate"><b>Atividades Primárias (10+ Ocorrências no geral)</b></li>
+                        @{int v = 0;}
 
-                                        @foreach (var at in emp.Servicos)
-                                        {
-                                            if (c < 5)
-                                            {
-                                                <li class="collection-item"><span class="new badge lighten-1" data-badge-caption="@at.Value"></span>@at.Key</li>
-                                            }
-                                            else
-                                                break;
-                                            c++;
-                                        }
-                                    }
-                                    @if (op.Key == "Comércio")
-                                    {
-                                        int c = 0;
-
-                                        @foreach (var at in emp.Comercio)
-                                        {
-                                            if (c < 5)
-                                            {
-                                                <li class="collection-item"><span class="new badge lighten-1" data-badge-caption="@at.Value"></span>@at.Key</li>
-                                            }
-                                            else
-                                                break;
-                                            c++;
-                                        }
-                                    }
-                                    @if (op.Key == "Indústria")
-                                    {
-                                        int c = 0;
-                                        @foreach (var at in emp.Indistria)
-                                        {
-                                            if (c < 5)
-                                            {
-                                                <li class="collection-item"><span class="new badge lighten-1" data-badge-caption="@at.Value"></span>@at.Key</li>
-                                            }
-                                            else
-                                                break;
-                                            c++;
-                                        }
-                                    }
-                                    @if (op.Key == "Construção")
-                                    {
-                                        int c = 0;
-                                        @foreach (var at in emp.Construcao)
-                                        {
-                                            if (c < 5)
-                                            {
-                                                <li class="collection-item"><span class="new badge lighten-1" data-badge-caption="@at.Value"></span>@at.Key</li>
-                                            }
-                                            else
-                                                break;
-                                            c++;
-                                        }
-                                    }
-                                    @if (op.Key == "Agropecuária")
-                                    {
-                                        int c = 0;
-                                        @foreach (var at in emp.Agro)
-                                        {
-                                            if (c < 5)
-                                            {
-                                                <li class="collection-item"><span class="new badge lighten-1" data-badge-caption="@at.Value"></span>@at.Key</li>
-                                            }
-                                            else
-                                                break;
-                                            c++;
-                                        }
-                                    }
-                                </ul>
-                            </div>
-                        </li>
-                    }
-
-                </ul>
+                        @foreach (var op in emp.ListaAtividades)
+                        {
+                            if (v < 10)
+                            {
+                                <li class="collection-item truncate"><span class="badge purple-text" data-badge-caption="@op.Value"></span>@op.Key</li>
+                            }
+                            else
+                            {
+                                break;
+                            }
+                            v++;
+                        }
+                    </ul>
+                </div>
             </div>
-            <div class="col s12 m12 l12">                
-                <div id="piechart" class="col  white z-depth-1" hidden></div>
-                <div id="chart2" class="col  white z-depth-1" hidden></div>
-            </div>
-        }
-    </div>
+        </div>
+
+        <div class="col s12 m12 l12">
+            <div id="piechart" class="col  white z-depth-1" hidden></div>
+            <div id="chart2" class="col  white z-depth-1" hidden></div>
+        </div>
+    }
+</div>
 }
 
-<p class="grey-text darken-2">Informações extraidas da base de dados da RFB em 18-11-2021</p>
+
 
 <!-- Modal Structure -->
 <div id="viewmodal" class="modal modal-fixed-footer">
@@ -230,11 +371,13 @@ else
         $(function () {
             $(".modal-trigger").click(function () {
                 var param1 = $(this).data('id');
-                var param2 = $('#municip').val(); // document.getElementById('#municip');
+                var param2 = $('#municip').val();
+                var param3 = $('#situacaocad').val();
                 $(".showcollection").empty();
-                $.getJSON(`/SimBI/Empresas?c=${param1}&m=${param2}&handler=Preview`, function (data) {
+                $.getJSON(`/SimBI/Empresas?c=${param1}&m=${param2}&a=${param3}&handler=Preview`, function (data) {
                     $.each(data, function (i, item) {
-                        $(".showcollection").append(`<li class="collection-item"><span class="new badge green" data-badge-caption="${item.id.value}"></span>${item.cnpj.key}</li>`);
+
+                        $(".showcollection").append(`<li class="collection-item"><a href="/Censo/Empresas/Detalhe?id=${item.value}" target="_blank"><span class="new badge" data-badge-caption="Perfil Completo"></span></a>${item.key}</li>`);
 
                     });
                 });
@@ -243,7 +386,7 @@ else
 
         $(function () {
             $("#submit").click(function () {
-                document.forms[0].submit();
+                document.forms[0].submit();                
                 return false;
             });
         });

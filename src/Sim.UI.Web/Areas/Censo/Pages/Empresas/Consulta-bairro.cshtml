@@ -10,34 +10,28 @@
 <!--<partial name="_StatusMessage" model="Model.StatusMessage" />-->
 
 <div class="card">
-    <form method="post" class="row" style="border-bottom:solid 1px #efefef; margin-bottom:0px;">
-        <div class="col m6 l6 s12">
+    <form method="post" class="row" style="border-bottom:solid 1px #efefef; margin-bottom:0px;">        
             <nav class="z-depth-0">
-                <div class="nav-wrapper white">
-                    <div class="input-field">
+                <div class="nav-wrapper white row">
+                    <div class="input-field col s3 m6 l6">
                         <input asp-for="Input.Bairro" type="search" placeholder="Digite o Bairro" required>
                         <label class="label-icon" asp-for="Input.Bairro"><i class="black-text material-icons">search</i></label>
                     </div>
+                    <div class="input-field col s3 l2 m2 valign-wrapper">
+                        <select asp-for="Input.Municipio" class="browser-default" asp-items="@Model.ListaMunicipios"></select>
+                    </div>
+                    <div class="input-field col s3 l2 m2 valign-wrapper">
+                        <select asp-for="Input.Situacao" class="browser-default">
+                            <option selected>Ativa</option>
+                            <option>Nula</option>
+                            <option>Suspensa</option>
+                            <option>Inapta</option>
+                            <option>Baixada</option>
+                        </select>
+                    </div>
+                    <button class="input-field btn waves-effect z-depth-0 waves-light right" type="submit" name="action">Pesquisar</button>
                 </div>
             </nav>
-        </div>
-        <div class="col valign-wrapper" style="height:64px;">
-            <div class="col">
-                <select asp-for="Input.Municipio" class="browser-default" asp-items="@Model.ListaMunicipios"></select>
-            </div>
-            <div class="col">
-                <select asp-for="Input.Situacao" class="browser-default">
-                    <option selected>Ativa</option>
-                    <option>Nula</option>
-                    <option>Suspensa</option>
-                    <option>Inapta</option>
-                    <option>Baixada</option>
-                </select>
-            </div>
-            <div class="col">
-                <button class="btn waves-effect waves-green" type="submit" role="button">Pesquisar</button>
-            </div>            
-        </div>
     </form>
     <partial name="_EmpresaList" model="Model.Input.ListaEmpresas" />
 </div>

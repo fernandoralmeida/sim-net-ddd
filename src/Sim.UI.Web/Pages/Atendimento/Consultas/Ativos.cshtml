@@ -68,7 +68,7 @@
                             @Html.DisplayFor(modelItem => item.Owner_AppUser_Id)
                         </td>
                         <td>
-                            <a asp-page="./Atendimento.Cancelar" asp-route-id="@item.Id" class="btn btn-small red lighten-1 waves-effect" title="Cancelar Atendimento"><i class="material-icons">cancel</i></a>
+                            <a asp-page="/Atendimento/Atendimento.Cancelar" asp-route-id="@item.Id" class="btn btn-small red lighten-1 waves-effect" title="Cancelar Atendimento"><i class="material-icons">cancel</i></a>
                         </td>
                     </tr>
                 }}

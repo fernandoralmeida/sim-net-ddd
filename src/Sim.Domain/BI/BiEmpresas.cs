@@ -24,6 +24,7 @@ namespace Sim.Domain.BI
         public KeyValuePair<string, int> OptanteMEI { get; set; }
         public IEnumerable<KeyValuePair<string, int>> Porte { get; set; }
         public IEnumerable<KeyValuePair<string, int>> ListaMensal { get; set; }
+        public IEnumerable<KeyValuePair<string, string>> ListaMortalidadeEmpresas { get; set; }
     }
 }
 
