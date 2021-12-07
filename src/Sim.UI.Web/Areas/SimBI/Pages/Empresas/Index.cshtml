@@ -29,7 +29,7 @@ else
                     <table class="centered">
                         <thead>
                             <tr>
-                                <th class="card-header grey-text darken-3">Mortalidade de Empresas abertas nos ultimos 24 meses</th>
+                                <th class="card-header grey-text darken-3" title="Mortalidade de Empresas abertas nos ultimos 24 meses"><span>Mortalidade de Empresas abertas nos ultimos 24 meses</span></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -92,40 +92,93 @@ else
             </div>
         </div>
 
+
+
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="card hoverable">
-                    <div class="card-header grey-text darken-3 center">
-                        Empresas Formalizadas @Model.Input.Ano
-                    </div>
-                    <table class="responsive-table centered">
-                        <thead>
-                            <tr>
-                                @foreach (var op in emp.ListaMensal)
-                                {
-                                    <th class="grey-text darken-3">@op.Key</th>
-                                }
-                            </tr>
-                        </thead>
+                    @if (Model.Input.Mes == "99")
+                    {
 
-                        <tbody>
-                            <tr>
-                                @foreach (var op in emp.ListaMensal)
-                                {
-                                    float v1 = op.Value;
-                                    float v2 = emp.EmpresasAtivas.Value;
-                                    float r = (v1 / v2) * 100;
-                                    <td class="blue-text darken-3">@op.Value <span class="purple-text">(@r.ToString("N2")%)</span></td>
-                                }
-                            </tr>
-                        </tbody>
-                    </table>
+                        <div class="card-header grey-text darken-3 center">
+                            Demostrativo Geral
+                        </div>
+                        <table class="responsive-table centered">
+                            <thead>
+                                <tr>
+                                    @foreach (var op in emp.ListaSituacao)
+                                    {
+                                        if (op.Key != "Baixada")
+                                        {
+                                            <th class="grey-text darken-3">@op.Key</th>
+                                        }
+                                    }
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    @{ var cst = 0;} 
+
+                                    @foreach(var c in emp.ListaSituacao)
+                                    {
+                                        if (c.Key != "Baixada")
+                                        {
+                                            cst += c.Value;
+                                        }
+                                    }
+
+
+                                    @foreach (var op in emp.ListaSituacao)
+                                    {
+                                        if (op.Key != "Baixada")
+                                        {
+                                            float v1 = op.Value;
+                                            float v2 = cst;
+                                            float r = (v1 / v2) * 100;
+                                            <td class="blue-text darken-3">@op.Value <span class="purple-text">(@r.ToString("N2")%)</span></td>
+                                        }
+
+                                    }
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    }
+                    else if(Model.Input.Mes == "00")
+                    {
+                        <div class="card-header grey-text darken-3 center">
+                            Empresas Formalizadas @Model.Input.Ano
+                        </div>
+                        <table class="responsive-table centered">
+                            <thead>
+                                <tr>
+                                    @foreach (var op in emp.ListaMensal)
+                                    {
+                                        <th class="grey-text darken-3">@op.Key</th>
+                                    }
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    @foreach (var op in emp.ListaMensal)
+                                    {
+                                        float v1 = op.Value;
+                                        float v2 = emp.EmpresasAtivas.Value;
+                                        float r = (v1 / v2) * 100;
+                                        <td class="blue-text darken-3">@op.Value <span class="purple-text">(@r.ToString("N2")%)</span></td>
+                                    }
+                                </tr>
+                            </tbody>
+                        </table>
+                    }
                 </div>
             </div>
         </div>
 
         <div class="row">
-            <div class="col s12 m8 l8">
+            <div class="col s12 m6 l6">
                 <div class="card hoverable">
                     <div class="card-header grey-text darken-3 center">
                         Porte
@@ -154,16 +207,17 @@ else
                     </table>
                 </div>
             </div>
-            <div class="col s12 m4 l4">
+            <div class="col s12 m6 l6">
                 <div class="card hoverable">
                     <div class="card-header grey-text darken-3 center">
-                        @emp.SimplesNacional.Key
+                        Regime Tributário
                     </div>
                     <table class="responsive-table centered">
                         <thead>
                             <tr>
-                                <th class="grey-text darken-3">Optantes</th>
-                                <th class="grey-text darken-3">@emp.OptanteMEI.Key</th>
+                                <th class="grey-text darken-3" title="Lucro Real ou Presumido">Lucro RP</th>
+                                <th class="grey-text darken-3">Simples Nacional</th>
+                                <th class="grey-text darken-3">Optante MEI</th>
                             </tr>
                         </thead>
 
@@ -171,18 +225,18 @@ else
                             <tr>
 
                                 @{
-                                    float opm = emp.OptanteMEI.Value;
-                                    float ops = emp.SimplesNacional.Value;
-                                    float sn = ops - opm;
-                                    float res1 = (sn / ops) * 100;
+                                    float et = emp.EmpresasAtivas.Value;
+                                    float osn = emp.SimplesNacional.Value - emp.OptanteMEI.Value;
+                                    float mei = emp.OptanteMEI.Value;
+                                    float lrp = emp.EmpresasAtivas.Value - emp.SimplesNacional.Value;
 
-                                    float s1 = emp.OptanteMEI.Value;
-                                    float s2 = emp.SimplesNacional.Value;
-                                    float rs = (s1 / s2) * 100;
-                                    float rsn = emp.SimplesNacional.Value - emp.OptanteMEI.Value;
+                                    float vlrp = (lrp / et) * 100;
+                                    float vsn = (osn / et) * 100;
+                                    float vmei = (mei / et) * 100;
                                 }
-                                <td class="blue-text darken-3">@emp.SimplesNacional.Value</td>
-                                <td class="blue-text darken-3">@emp.OptanteMEI.Value <span class="purple-text">(@rs.ToString("N2")%)</span></td>
+                                <td class="blue-text darken-3">@lrp <span class="purple-text">(@vlrp.ToString("N2")%)</span></td>
+                                <td class="blue-text darken-3">@osn <span class="purple-text">(@vsn.ToString("N2")%)</span></td>
+                                <td class="blue-text darken-3">@emp.OptanteMEI.Value <span class="purple-text">(@vmei.ToString("N2")%)</span></td>
                             </tr>
                         </tbody>
                     </table>
@@ -245,7 +299,7 @@ else
                                 {
                                     if (c < 5)
                                     {
-                                        <li class="collection-item truncate"><span class="badge purple-text" data-badge-caption="@at.Value"></span>@at.Key</li>
+                                        <li class="collection-item truncate" title="@at.Key"><span class="badge purple-text" data-badge-caption="@at.Value"></span>@at.Key</li>
                                     }
                                     else
                                         break;
@@ -261,7 +315,7 @@ else
                                 {
                                     if (c < 5)
                                     {
-                                        <li class="collection-item truncate"><span class="badge purple-text" data-badge-caption="@at.Value"></span>@at.Key</li>
+                                        <li class="collection-item truncate" title="@at.Key"><span class="badge purple-text" data-badge-caption="@at.Value"></span>@at.Key</li>
                                     }
                                     else
                                         break;
@@ -277,7 +331,7 @@ else
                                 {
                                     if (c < 5)
                                     {
-                                        <li class="collection-item truncate"><span class="badge purple-text" data-badge-caption="@at.Value"></span>@at.Key</li>
+                                        <li class="collection-item truncate" title="@at.Key"><span class="badge purple-text" data-badge-caption="@at.Value"></span>@at.Key</li>
                                     }
                                     else
                                         break;
@@ -293,7 +347,7 @@ else
                                 {
                                     if (c < 5)
                                     {
-                                        <li class="collection-item truncate"><span class="badge purple-text" data-badge-caption="@at.Value"></span>@at.Key</li>
+                                        <li class="collection-item truncate" title="@at.Key"><span class="badge purple-text" data-badge-caption="@at.Value"></span>@at.Key</li>
                                     }
                                     else
                                         break;
@@ -309,7 +363,7 @@ else
                                 {
                                     if (c < 5)
                                     {
-                                        <li class="collection-item truncate"><span class="badge purple-text" data-badge-caption="@at.Value"></span>@at.Key</li>
+                                        <li class="collection-item truncate" title="@at.Key"><span class="badge purple-text" data-badge-caption="@at.Value"></span>@at.Key</li>
                                     }
                                     else
                                         break;
