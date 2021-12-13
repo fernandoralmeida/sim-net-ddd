@@ -294,7 +294,7 @@ else
                             @if (str.Key == "Serviços")
                             {
                                 int c = 0;
-                                <li class="collection-item grey-text truncate"><b>@str.Key (10+ Ocorrências)</b></li>
+                                <li class="collection-item grey-text truncate" title="@str.Key (@str.Value)"><b>@str.Key (@str.Value)</b></li>
                                 @foreach (var at in emp.Servicos)
                                 {
                                     if (c < 5)
@@ -309,7 +309,7 @@ else
                             @if (str.Key == "Comércio")
                             {
                                 int c = 0;
-                                <li class="collection-item grey-text truncate"><b>@str.Key (10+ Ocorrências)</b></li>                                
+                                <li class="collection-item grey-text truncate" title="@str.Key (@str.Value)"><b>@str.Key (@str.Value)</b></li>                                
 
                                 @foreach (var at in emp.Comercio)
                                 {
@@ -325,7 +325,7 @@ else
                             @if (str.Key == "Indústria")
                             {
                                 int c = 0;
-                                <li class="collection-item grey-text truncate"><b>@str.Key (10+ Ocorrências)</b></li>
+                                <li class="collection-item grey-text truncate" title="@str.Key (@str.Value)"><b>@str.Key (@str.Value)</b></li>
                                 
                                 @foreach (var at in emp.Indistria)
                                 {
@@ -341,7 +341,7 @@ else
                             @if (str.Key == "Construção")
                             {
                                 int c = 0;
-                                <li class="collection-item grey-text truncate"><b>@str.Key (10+ Ocorrências)</b></li>
+                                <li class="collection-item grey-text truncate" title="@str.Key (@str.Value)"><b>@str.Key (@str.Value)</b></li>
                                 
                                 @foreach (var at in emp.Construcao)
                                 {
@@ -357,7 +357,7 @@ else
                             @if (str.Key == "Agropecuária")
                             {
                                 int c = 0;
-                                <li class="collection-item grey-text truncate"><b>@str.Key (10+ Ocorrências)</b></li>
+                                <li class="collection-item grey-text truncate" title="@str.Key (@str.Value)"><b>@str.Key (@str.Value)</b></li>
                                 
                                 @foreach (var at in emp.Agro)
                                 {

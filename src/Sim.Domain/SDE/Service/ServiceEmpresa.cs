@@ -684,7 +684,7 @@ namespace Sim.Domain.SDE.Service
                         if (sec >= 01 && sec <= 03)
                         {
                             sec_count += s.Count;
-                            secao = new KeyValuePair<string, int>("AGRICULTURA, PECUÁRIA, PRODUÇÃO FLORESTAL, PESCA E AQÜICULTURA", sec_count);
+                            secao = new KeyValuePair<string, int>("AGRICULTURA, PECUÁRIA, PRODUÇÃO FLORESTAL, PESCA E AQUICULTURA", sec_count);
                             
                             if (i == 01 && sec == 01)
                             {
@@ -701,7 +701,7 @@ namespace Sim.Domain.SDE.Service
                             if (i == 03 && sec == 03)
                             {
                                 sub_sec_count += s.Count;
-                                n_cnae.Classe = new KeyValuePair<string, int>("03 PESCA E AQÜICULTURA", sub_sec_count);
+                                n_cnae.Classe = new KeyValuePair<string, int>("03 PESCA E AQUICULTURA", sub_sec_count);
                                 n_cnae.ListaSubClasse.Add(new KeyValuePair<string, int>(s.Value, s.Count));
                             }
                         }                        
