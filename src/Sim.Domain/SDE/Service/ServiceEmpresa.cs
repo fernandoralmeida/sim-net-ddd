@@ -1824,13 +1824,15 @@ namespace Sim.Domain.SDE.Service
             foreach (var s in emp)
             {
                 if (s.Estabelecimento.SituacaoCadastral == situacao)
-                    lista.Add(new KeyValuePair<string, string>(string.Format("CNPJ:{0}/{1}-{2} {3} TEL:{4}{5}",
+                    lista.Add(new KeyValuePair<string, string>(string.Format("CNPJ:{0}/{1}-{2} RS:{3} NF:{4} TEL:{5} {6} EMAIL:{7}",
                         s.Estabelecimento.CNPJBase,
                         s.Estabelecimento.CNPJOrdem,
                         s.Estabelecimento.CNPJDV,
                         s.Empresa.RazaoSocial,
+                        s.Estabelecimento.NomeFantasia,
                         s.Estabelecimento.DDD1,
-                        s.Estabelecimento.Telefone1),
+                        s.Estabelecimento.Telefone1,
+                        s.Estabelecimento.CorreioEletronico),
                         string.Format("{0}{1}{2}",
                         s.Estabelecimento.CNPJBase,
                         s.Estabelecimento.CNPJOrdem,
