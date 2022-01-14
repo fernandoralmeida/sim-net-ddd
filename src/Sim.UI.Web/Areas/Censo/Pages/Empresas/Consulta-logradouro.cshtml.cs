@@ -113,6 +113,10 @@ namespace Sim.UI.Web.Areas.Censo.Pages.Empresas
                             t = await _appServiceCNPJ.EmpresasBaixadas(emp);
                             break;
 
+                        case "Geral":
+                            t = emp;
+                            break;
+
                         default:
                             break;
                     }

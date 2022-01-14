@@ -216,20 +216,49 @@ namespace Sim.Cross.Data.Repository.Cnpj
             var t = Task.Run(() =>
             {
 
-                var qry = (from est in db.Estabelecimentos
-                           from emp in db.Empresas.Where(s => s.CNPJBase == est.CNPJBase)
-                           from sn in db.Simples.Where(s => s.CNPJBase == est.CNPJBase).DefaultIfEmpty()
-                           select new { est, emp, sn })
-                          .Where(s => s.est.Logradouro.Contains(logradouro) && s.est.Municipio.Contains(muinicipio)).Distinct();
+                
 
-                foreach (var e in qry)
+                if (logradouro.Contains(","))
                 {
-                    var _cnpj = string.Format("{0}{1}{2}", e.est.CNPJBase, e.est.CNPJOrdem, e.est.CNPJDV);
+
+                    var ruanumero = logradouro.Split(',');
+
+                    var qry = (from est in db.Estabelecimentos
+                               from emp in db.Empresas.Where(s => s.CNPJBase == est.CNPJBase)
+                               from sn in db.Simples.Where(s => s.CNPJBase == est.CNPJBase).DefaultIfEmpty()
+                               select new { est, emp, sn })
+                               .Where(s => s.est.Logradouro.Contains(ruanumero[0]) && s.est.Numero == ruanumero[1].Trim() && s.est.Municipio.Contains(muinicipio)).Distinct();
+
+                    foreach (var e in qry)
+                    {
+                        var _cnpj = string.Format("{0}{1}{2}", e.est.CNPJBase, e.est.CNPJOrdem, e.est.CNPJDV);
 
 
-                    brf.Add(new BaseReceitaFederal(
-                        0, _cnpj, e.emp, e.est, null, e.sn, null, null, null, null, null, null));
+                        brf.Add(new BaseReceitaFederal(
+                            0, _cnpj, e.emp, e.est, null, e.sn, null, null, null, null, null, null));
+                    }
+
                 }
+                else
+                {
+                    var qry = (from est in db.Estabelecimentos
+                               from emp in db.Empresas.Where(s => s.CNPJBase == est.CNPJBase)
+                               from sn in db.Simples.Where(s => s.CNPJBase == est.CNPJBase).DefaultIfEmpty()
+                               select new { est, emp, sn })
+                               .Where(s => s.est.Logradouro.Contains(logradouro) && s.est.Municipio.Contains(muinicipio)).Distinct();
+
+                    foreach (var e in qry)
+                    {
+                        var _cnpj = string.Format("{0}{1}{2}", e.est.CNPJBase, e.est.CNPJOrdem, e.est.CNPJDV);
+
+
+                        brf.Add(new BaseReceitaFederal(
+                            0, _cnpj, e.emp, e.est, null, e.sn, null, null, null, null, null, null));
+                    }
+                }
+
+
+
 
             });
             await t;
