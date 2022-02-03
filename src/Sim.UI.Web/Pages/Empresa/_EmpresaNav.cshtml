@@ -3,10 +3,11 @@
 <div class="navbar navbar-fixed">
     <nav class="navbar">
         <div class="nav-wrapper white">
-            <span class="brand-logo grey-text" style="margin-left:10px;">Empresas</span>
+            <a href="#" data-target="sidenav-left" class="sidenav-trigger grey-text"><i class="material-icons">menu</i></a>
+            <span class="navbar-page-name grey-text">Empresas</span>
 
 
-            <ul class="right hide-on-med-and-down">
+            <ul class="right">
 
                 <li>
                     <a class="dropdown-trigger @EmpresaNavPages.ConsultaNomeNavClass(ViewContext) grey-text" data-target="dropdownemp" href="#">Consulta Simples<i class="material-icons right">arrow_drop_down</i></a>
@@ -20,11 +21,11 @@
                     <a class="dropdown-trigger @EmpresaNavPages.ConsultaNomeNavClass(ViewContext) grey-text" data-target="dropdownrfb" href="#">Consulta Avançada<i class="material-icons right">arrow_drop_down</i></a>
                     <ul id="dropdownrfb" class="dropdown-content">
                         <li><a asp-area="Censo" asp-page="/Empresas/Index">por CNPJ</a></li>
-                        <li><a asp-area="Censo"  asp-page="/Empresas/Consulta-razao-social">Razao Social</a></li>
-                        <li><a asp-area="Censo"  asp-page="/Empresas/Consulta-socio">Nome Sócio</a></li>
-                        <li><a asp-area="Censo"  asp-page="/Empresas/Consulta-cnae">Atividade</a></li>
-                        <li><a asp-area="Censo"  asp-page="/Empresas/Consulta-logradouro">Logradouro</a></li>
-                        <li><a asp-area="Censo"  asp-page="/Empresas/Consulta-bairro">Bairro</a></li>
+                        <li><a asp-area="Censo" asp-page="/Empresas/Consulta-razao-social">Razao Social</a></li>
+                        <li><a asp-area="Censo" asp-page="/Empresas/Consulta-socio">Nome Sócio</a></li>
+                        <li><a asp-area="Censo" asp-page="/Empresas/Consulta-cnae">Atividade</a></li>
+                        <li><a asp-area="Censo" asp-page="/Empresas/Consulta-logradouro">Logradouro</a></li>
+                        <li><a asp-area="Censo" asp-page="/Empresas/Consulta-bairro">Bairro</a></li>
                     </ul>
                 </li>
 

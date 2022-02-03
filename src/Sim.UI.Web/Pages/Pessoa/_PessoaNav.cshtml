@@ -3,7 +3,8 @@
 <div class="navbar navbar-fixed">
     <nav class="navbar">
         <div class="nav-wrapper white">
-            <span class="brand-logo grey-text" style="margin-left:10px;">Pessoas</span>
+            <a href="#" data-target="sidenav-left" class="sidenav-trigger grey-text"><i class="material-icons">menu</i></a>
+            <span class="navbar-page-name grey-text">Pessoas</span>
             <ul class="right">
                 <li>
                     <a class="dropdown-trigger @PessoaNavPages.ConsultaNomeNavClass(ViewContext) @PessoaNavPages.ConsultaCPFNavClass(ViewContext) grey-text" data-target="dropdownpe">Consultar<i class="material-icons right">arrow_drop_down</i></a>
@@ -16,11 +17,11 @@
 
                 </li>
                 <!--
-    <li class="blue lighten-1 waves-effect waves-light">
-        <form>
-            <a asp-area="" asp-page="./Novo">Adicionar Pessoa</a>
-        </form>
-    </li>-->
+        <li class="blue lighten-1 waves-effect waves-light">
+            <form>
+                <a asp-area="" asp-page="./Novo">Adicionar Pessoa</a>
+            </form>
+        </li>-->
             </ul>
         </div>
     </nav>

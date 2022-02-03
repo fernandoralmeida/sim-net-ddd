@@ -16,8 +16,6 @@ namespace Sim.UI.Web.Areas.Censo.Pages.Empresas
 
     using Sim.Application.Interface;
 
-
-
     [Authorize(Roles = "Administrador,M_RFB")]
     public class Consulta_logradouroModel : PageModel
     {

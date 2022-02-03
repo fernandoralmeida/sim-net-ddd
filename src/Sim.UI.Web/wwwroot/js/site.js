@@ -51,5 +51,10 @@ $(document).ready(function () {
         });
     }
 
+    /*
+    $('.sidenav li').click(() => {
+        $('.sidenav').sidenav('close');
+    })*/
+
 });
 

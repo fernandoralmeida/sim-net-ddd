@@ -27,6 +27,11 @@ html {
     padding-right:4px;
 }
 
+/* Navbar Page Name */
+.navbar-page-name {
+    margin-left: 10px;
+    font-size:large;
+}
 
 /* materialize */
 .sidenav {
