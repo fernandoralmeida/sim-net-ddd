@@ -29,6 +29,15 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Atendimentos
         [TempData]
         public DateTime Periodo { get; set; }
 
+        [BindProperty]
+        public InputModel InputDate { get; set; }
+
+        public class InputModel
+        {
+            public string Mes { get; set; }
+            public int Ano { get; set; }
+        }
+
         [TempData]
         public string ButtonPressed { get; set; }
 
@@ -36,7 +45,7 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Atendimentos
             IAppServiceSetor appsetores)
         {
             _appAtendimento = appAtendimento;
-            _appSetores = appsetores;
+            _appSetores = appsetores;            
         }
 
         private async Task LoadAsyncMonth(DateTime date)
