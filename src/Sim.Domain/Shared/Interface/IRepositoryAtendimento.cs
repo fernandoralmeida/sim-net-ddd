@@ -27,5 +27,6 @@ namespace Sim.Domain.Shared.Interface
         Task<IEnumerable<Atendimento>> GetByUserName(string username);
         Task<IEnumerable<Atendimento>> GetByUserNamePeriodo(string username, DateTime? date);
         Task<IEnumerable<Atendimento>> ListAtendimentosAtivos();
+        Task<IEnumerable<Atendimento>> ListByParam(List<object> lparam);
     }
 }

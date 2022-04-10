@@ -39,5 +39,6 @@ namespace Sim.Application.Shared.Interface
         Task<IEnumerable<KeyValuePair<string, int>>> ByCanal(string canal, string setor, DateTime periodo);
         Task<IEnumerable<KeyValuePair<string, int>>> ByCanalMonth(string canal, string setor, DateTime periodo);
         Task<IEnumerable<Atendimento>> ListAtendimentosAtivos();
+        Task<IEnumerable<Atendimento>> ListByParam(List<object> lparam);
     }
 }

@@ -9,22 +9,99 @@
 
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
-<div class="card">
-    <form method="post" asp-page-handler="ListByData">
-    <nav class="z-depth-0" style="border-bottom:solid 1px #efefef">
-        <div class="nav-wrapper white row">
-            <div class="input-field col">
-                <input asp-for="Input.DataI" type="search" id="inputDataI" required>
-                <label class="label-icon"><i class="black-text material-icons">date_range</i></label>
+<form method="post" >
+
+    <div class="card">
+
+        <div class="row">
+            <div class="col s12">
+                <div class="input-field col s6 m4 xl2">
+                    <input asp-for="Input.DataI" />
+                    <label asp-for="Input.DataI"></label>
+                </div>
+                <div class="input-field col s6 m4 xl2">
+                    <input asp-for="Input.DataF" />
+                    <label asp-for="Input.DataF"></label>
+                </div>
+                <div class="input-field col s6 m4 xl2">
+                    <input asp-for="Input.CPF" id="inputCPF" />
+                    <label asp-for="Input.CPF"></label>
+                </div>
+                <div class="input-field col s6 m4 xl2">
+                    <input asp-for="Input.Nome" />
+                    <label asp-for="Input.Nome"></label>
+                </div>
+                <div class="input-field col s6 m4 xl2">
+                    <input asp-for="Input.CNPJ" id="inputCNPJ" />
+                    <label asp-for="Input.CNPJ"></label>
+                </div>
+                <div class="input-field col s6 m4 xl2">
+                    <input asp-for="Input.RazaSocial" />
+                    <label asp-for="Input.RazaSocial"></label>
+                </div>
+                <div class="input-field col s6 m4 xl2">
+                    <input asp-for="Input.CNAE" id="inputCNAE" />
+                    <label asp-for="Input.CNAE"></label>
+                </div>
+                <div class="input-field col s6 m4 xl2">
+                    <select asp-for="Input.Servico" asp-items="@Model.ListaServicos">
+                        <option selected></option>
+                    </select>
+                    <label asp-for="Input.Servico"></label>
+                </div>
+                @{
+                    if (User.IsInRole("Administrador"))
+                    {
+                        <div class="input-field col s6 m4">
+                            <select asp-for="Input.Atendente" asp-items="@Model.ListaAtendentes">
+                                <option selected></option>
+                            </select>
+                            <label asp-for="Input.Atendente"></label>
+                        </div>
+                    }
+                }
             </div>
-            <div class="input-field col s4">
-                <input asp-for="Input.DataF" type="search" id="inputDataF" required>
-                <label class="label-icon"><i class="black-text material-icons">date_range</i></label>
-            </div>
-            <button class="input-field btn waves-effect waves-light right z-depth-0">Pesquisar</button>
         </div>
-    </nav>
-    </form>
+        <div class="card-action">
+            <button class="btn orange waves-effect waves-light s6 m4" asp-page-handler="AtPendentes">Pendentes</button>
+            <button class="btn red waves-effect waves-light s6 m4" asp-page-handler="AtCancelados">Cancelados</button>
+            <button class="btn waves-effect waves-light right" asp-page-handler="ListByData">Pesquisar</button>
+        </div>
+        
+    </div>
+
+        <!--
+
+                    <nav class="z-depth-0" style="border-bottom:solid 1px #efefef">
+            <div class="nav-wrapper white row">
+                <div class="input-field col">
+                    <input asp-for="Input.DataI" type="search" id="inputDataI" required>
+                    <label class="label-icon"><i class="black-text material-icons">date_range</i></label>
+                </div>
+                <div class="input-field col s4">
+                    <input asp-for="Input.DataF" type="search" id="inputDataF" required>
+                    <label class="label-icon"><i class="black-text material-icons">date_range</i></label>
+                </div>
+                <button class="input-field btn waves-effect waves-light right z-depth-0">Pesquisar</button>
+            </div>
+        </nav>
+    </div>
+
+    <ul class="collapsible">
+        <li>
+            <div class="collapsible-header">Consulta<span class="new badge"><button class="btn waves-effect waves-light">Pesquisar</button></span></div>
+            <div class="collapsible-body">
+
+            </div>
+        </li>
+    </ul>
+
+        -->
+
+</form>
+
+
+<div class="card">
     <partial name="_AtendimentoList" model="Model.Input.ListaAtendimento" />
 </div>
 
@@ -33,6 +110,9 @@
     <script>
         $('#inputDataI').mask('00/00/0000', { placeholder: "data inicial" });
         $('#inputDataF').mask('00/00/0000', { placeholder: "data final" });
+        $('#inputCPF').mask('000.000.000-00');
+        $('#inputCNPJ').mask('00.000.000/0000-00');
+        $('#inputCNAE').mask('00.00-0-00');
     </script>
     <script>
         $(function () {

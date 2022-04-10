@@ -10,7 +10,7 @@
                 <!--
     <li>
         <a class="@AtendimentoNavPages.InicioNavClass(ViewContext)" asp-page="./Index">Meus Atendimentos</a>
-    </li>-->
+    </li>
 
                 @{
                     if (User.IsInRole("Administrador"))
@@ -30,13 +30,13 @@
                 <li><a asp-page="/Atendimento/Consulta.Cancelados">Meus Atendimentos Cancelados</a></li>
                 <li><a asp-page="/Atendimento/Consultas/Ativos">Atendimentos Ativos</a></li>
             </ul>
-        </li>
-        <li class="blue lighten-1 waves-effect waves-light">
-            <form>
-                <a asp-area="" asp-page="/Pessoa/Index">Novo Atendimento</a>
-            </form>
-        </li>
-        </ul>
+        </li>-->
+                <li class="blue lighten-1 waves-effect waves-light">
+                    <form>
+                        <a asp-area="" asp-page="/Pessoa/Index">Novo Atendimento</a>
+                    </form>
+                </li>
+            </ul>
         </div>
     </nav>
 </div>

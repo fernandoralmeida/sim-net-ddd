@@ -90,6 +90,12 @@ namespace Sim.UI.Web.Pages.Atendimento
 
             var atendimemnto_ativio = _appServiceAtendimento.GetAtendimento((Guid)id);
 
+            if(atendimemnto_ativio.Owner_AppUser_Id != User.Identity.Name)
+            {
+                StatusMessage = "Erro : Atendimento pertence a outro atendente!";
+                return RedirectToPage("./Index");
+            }
+
             if (atendimemnto_ativio == null)
             {
                 StatusMessage = "Erro inesperado, tente novamente!";

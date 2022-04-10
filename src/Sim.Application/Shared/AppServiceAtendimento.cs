@@ -162,5 +162,10 @@ namespace Sim.Application.Shared
         {
             return await _atendimento.ListAtendimentosAtivos();
         }
+
+        public async Task<IEnumerable<Atendimento>> ListByParam(List<object> lparam)
+        {
+            return await _atendimento.ListByParam(lparam);
+        }
     }
 }
