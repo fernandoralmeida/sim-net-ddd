@@ -53,7 +53,9 @@ namespace Sim.UI.Web.Pages.Atendimento
         [Required(ErrorMessage = "Selecione o setor do atendimento!")]
         [BindProperty(SupportsGet = true)]
         public string GetSetor { get; set; }
-       
+
+        [BindProperty]
+        public string GetCNPJ { get; set; }
         public SelectList Setores { get; set; }
 
         public string GetServico { get; set; }

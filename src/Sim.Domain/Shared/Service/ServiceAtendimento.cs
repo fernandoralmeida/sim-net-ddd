@@ -143,27 +143,33 @@ namespace Sim.Domain.Shared.Service
                     foreach (Atendimento at in list)
                     {
 
-
-                        if (at.Setor == "Espaço do Empreendedor")
-                            at.Setor = "Sala do Empreendedor";
-
-                        if (at.Servicos != null)
+                        if (at.Data.Value.Year == periodo.Year)
                         {
-                            string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
 
-                            foreach (string sv in words)
+
+
+                            if (at.Setor == "Espaço do Empreendedor")
+                                at.Setor = "Sala do Empreendedor";
+
+                            if (at.Servicos != null)
                             {
-                                if (sv != null && sv != string.Empty)
-                                    _servico.Add("Servico-" + sv);
+                                string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
+
+                                foreach (string sv in words)
+                                {
+                                    if (sv != null && sv != string.Empty)
+                                        _servico.Add("Servico-" + sv);
+                                }
                             }
+
+                            if (at.Canal != null)
+                                _canal.Add("Canal-" + at.Canal);
+
+                            _setor.Add(at.Setor);
+
+                            _operador.Add("User-" + at.Owner_AppUser_Id);
+
                         }
-
-                        if (at.Canal != null)
-                            _canal.Add("Canal-" + at.Canal);
-
-                        _setor.Add(at.Setor);
-
-                        _operador.Add("User-" + at.Owner_AppUser_Id);
 
                     }
 
@@ -244,26 +250,30 @@ namespace Sim.Domain.Shared.Service
                     foreach (Atendimento at in list)
                     {
 
-                        if (at.Setor == "Espaço do Empreendedor")
-                            at.Setor = "Sala do Empreendedor";
-
-                        if (at.Servicos != null)
+                        if (at.Data.Value.Year == periodo.Year)
                         {
-                            string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
 
-                            foreach (string sv in words)
+                            if (at.Setor == "Espaço do Empreendedor")
+                                at.Setor = "Sala do Empreendedor";
+
+                            if (at.Servicos != null)
                             {
-                                if (sv != null && sv != string.Empty)
-                                    _servico.Add("Servico-" + sv);
+                                string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
+
+                                foreach (string sv in words)
+                                {
+                                    if (sv != null && sv != string.Empty)
+                                        _servico.Add("Servico-" + sv);
+                                }
                             }
+
+                            if (at.Canal != null)
+                                _canal.Add("Canal-" + at.Canal);
+
+                            _setor.Add("Geral");
+
+                            _operador.Add("User-" + at.Owner_AppUser_Id);
                         }
-
-                        if (at.Canal != null)
-                            _canal.Add("Canal-" + at.Canal);
-
-                        _setor.Add("Geral");
-
-                        _operador.Add("User-" + at.Owner_AppUser_Id);
 
                     }
 
@@ -336,21 +346,23 @@ namespace Sim.Domain.Shared.Service
 
                 foreach (Atendimento at in t.Result)
                 {
-                    _atendimento.Add(at.Owner_AppUser_Id);
-
-                    //_ano.Add(at.Data.Value.Year.ToString());
-
-                    if (at.Servicos != null)
+                    if(at.Data.Value.Year == periodo.Year)
                     {
-                        string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
+                        _atendimento.Add(at.Owner_AppUser_Id);
 
-                        foreach (string sv in words)
+                        //_ano.Add(at.Data.Value.Year.ToString());
+
+                        if (at.Servicos != null)
                         {
-                            if (sv != null && sv != string.Empty)
-                                _servico.Add(sv);
+                            string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
+
+                            foreach (string sv in words)
+                            {
+                                if (sv != null && sv != string.Empty)
+                                    _servico.Add(sv);
+                            }
                         }
                     }
-
                 }
 
                 r_user.Add(new KeyValuePair<string, int>(username, _atendimento.Count()));
@@ -388,22 +400,26 @@ namespace Sim.Domain.Shared.Service
 
                 foreach (Atendimento at in t.Result)
                 {
-                    if (at.Servicos != null)
+                    if(at.Data.Value.Year == periodo.Year)
                     {
-                        string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
-
-                        foreach (string sv in words)
+                        if (at.Servicos != null)
                         {
-                            if (sv != null && sv != string.Empty)
-                                if (sv == servico)
-                                {
-                                    _user.Add(at.Owner_AppUser_Id);
-                                    _servico.Add(sv);
-                                }
-                        }
-                    }
+                            string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
 
+                            foreach (string sv in words)
+                            {
+                                if (sv != null && sv != string.Empty)
+                                    if (sv == servico)
+                                    {
+                                        _user.Add(at.Owner_AppUser_Id);
+                                        _servico.Add(sv);
+                                    }
+                            }
+                        }
+
+                    }
                     //_ano.Add(at.Data.Value.Year.ToString());
+
                 }
 
                 r_servico.Add(new KeyValuePair<string, int>(servico, _servico.Count()));
@@ -439,24 +455,26 @@ namespace Sim.Domain.Shared.Service
 
                 foreach (Atendimento at in t.Result)
                 {
+                    if(at.Data.Value.Year == periodo.Year)
+                    {
+                        _atendimento.Add("Atendimentos");
 
-                    _atendimento.Add("Atendimentos");
+                        if (at.Setor == "Espaço do Empreendedor")
+                            at.Setor = "Sala do Empreendedor";
 
-                    if (at.Setor == "Espaço do Empreendedor")
-                        at.Setor = "Sala do Empreendedor";
-
-                    if (at.Setor == setor || setor == "Geral")
-                        if (at.Servicos != null)
-                        {
-                            string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
-
-                            foreach (string sv in words)
+                        if (at.Setor == setor || setor == "Geral")
+                            if (at.Servicos != null)
                             {
-                                if (sv != null && sv != string.Empty)
-                                    _servico.Add(sv);
-                            }
-                        }
+                                string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
 
+                                foreach (string sv in words)
+                                {
+                                    if (sv != null && sv != string.Empty)
+                                        _servico.Add(sv);
+                                }
+                            }
+
+                    }
                 }
 
                 var c_atendimento = from x in _atendimento
@@ -532,29 +550,33 @@ namespace Sim.Domain.Shared.Service
 
                     foreach (Atendimento at in list)
                     {
-                        if (at.Data.Value.Month == periodo.Month)
+                        if(at.Data.Value.Year == periodo.Year)
                         {
 
-                            if (at.Setor == "Espaço do Empreendedor")
-                                at.Setor = "Sala do Empreendedor";
-
-                            if (at.Servicos != null)
+                            if (at.Data.Value.Month == periodo.Month)
                             {
-                                string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
 
-                                foreach (string sv in words)
+                                if (at.Setor == "Espaço do Empreendedor")
+                                    at.Setor = "Sala do Empreendedor";
+
+                                if (at.Servicos != null)
                                 {
-                                    if (sv != null && sv != string.Empty)
-                                        _servico.Add("Servico-" + sv);
+                                    string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
+
+                                    foreach (string sv in words)
+                                    {
+                                        if (sv != null && sv != string.Empty)
+                                            _servico.Add("Servico-" + sv);
+                                    }
                                 }
+
+                                if (at.Canal != null)
+                                    _canal.Add("Canal-" + at.Canal);
+
+                                _setor.Add(at.Setor);
+
+                                _operador.Add("User-" + at.Owner_AppUser_Id);
                             }
-
-                            if (at.Canal != null)
-                                _canal.Add("Canal-" + at.Canal);
-
-                            _setor.Add(at.Setor);
-
-                            _operador.Add("User-" + at.Owner_AppUser_Id);
                         }
 
                     }
@@ -633,26 +655,29 @@ namespace Sim.Domain.Shared.Service
                     foreach (Atendimento at in list)
                     {
 
-                        if (at.Setor == "Espaço do Empreendedor")
-                            at.Setor = "Sala do Empreendedor";
-
-                        if (at.Servicos != null)
+                        if(at.Data.Value.Year == periodo.Year)
                         {
-                            string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
+                            if (at.Setor == "Espaço do Empreendedor")
+                                at.Setor = "Sala do Empreendedor";
 
-                            foreach (string sv in words)
+                            if (at.Servicos != null)
                             {
-                                if (sv != null && sv != string.Empty)
-                                    _servico.Add("Servico-" + sv);
+                                string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
+
+                                foreach (string sv in words)
+                                {
+                                    if (sv != null && sv != string.Empty)
+                                        _servico.Add("Servico-" + sv);
+                                }
                             }
+
+                            if (at.Canal != null)
+                                _canal.Add("Canal-" + at.Canal);
+
+                            _setor.Add("Geral");
+
+                            _operador.Add("User-" + at.Owner_AppUser_Id);
                         }
-
-                        if (at.Canal != null)
-                            _canal.Add("Canal-" + at.Canal);
-
-                        _setor.Add("Geral");
-
-                        _operador.Add("User-" + at.Owner_AppUser_Id);
 
                     }
 

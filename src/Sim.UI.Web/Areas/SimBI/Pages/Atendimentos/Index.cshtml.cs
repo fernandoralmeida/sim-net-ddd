@@ -29,14 +29,11 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Atendimentos
         [TempData]
         public DateTime Periodo { get; set; }
 
-        [BindProperty]
-        public InputModel InputDate { get; set; }
+        [TempData]
+        public string Mes { get; set; }
 
-        public class InputModel
-        {
-            public string Mes { get; set; }
-            public int Ano { get; set; }
-        }
+        [TempData]
+        public int Ano { get; set; }
 
         [TempData]
         public string ButtonPressed { get; set; }
@@ -45,7 +42,7 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Atendimentos
             IAppServiceSetor appsetores)
         {
             _appAtendimento = appAtendimento;
-            _appSetores = appsetores;            
+            _appSetores = appsetores;                
         }
 
         private async Task LoadAsyncMonth(DateTime date)
@@ -90,7 +87,7 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Atendimentos
 
         public async Task<IActionResult> OnGetAsync()
         {
-            Periodo = DateTime.Now;
+            Periodo = DateTime.Now; 
             await LoadAsync(Periodo, Functions.DateTimeExtensions.ToShortMonthName(DateTime.Now));
             return Page();
         }
@@ -98,7 +95,7 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Atendimentos
         public JsonResult OnGetPreview(string id, string id2, string mth)
         {
             JsonResult rjson;
-
+            Periodo = DateTime.Now;
             ButtonPressed = mth;
             GetPeriod(mth);
 
@@ -121,7 +118,7 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Atendimentos
         public JsonResult OnGetServicoPreview(string id, string mth)
         {
             JsonResult rjson;
-
+            Periodo = DateTime.Now;
             ButtonPressed = mth;
             GetPeriod(mth);
 
@@ -144,7 +141,7 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Atendimentos
         public JsonResult OnGetCanalPreview(string id, string id2, string mth)
         {
             JsonResult rjson;
-
+            Periodo = DateTime.Now;
             ButtonPressed = mth;
             GetPeriod(mth);
 
@@ -182,51 +179,51 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Atendimentos
             switch (param)
             {
                 case "jan":
-                    Periodo = new DateTime(DateTime.Now.Year, 01, 01);
+                    Periodo = new DateTime(Periodo.Year, 01, 01);
                     break;
 
                 case "fev":
-                    Periodo = new DateTime(DateTime.Now.Year, 02, 01);
+                    Periodo = new DateTime(Periodo.Year, 02, 01);
                     break;
 
                 case "mar":
-                    Periodo = new DateTime(DateTime.Now.Year, 03, 01);
+                    Periodo = new DateTime(Periodo.Year, 03, 01);
                     break;
 
                 case "abr":
-                    Periodo = new DateTime(DateTime.Now.Year, 04, 01);
+                    Periodo = new DateTime(Periodo.Year, 04, 01);
                     break;
 
                 case "mai":
-                    Periodo = new DateTime(DateTime.Now.Year, 05, 01);
+                    Periodo = new DateTime(Periodo.Year, 05, 01);
                     break;
 
                 case "jun":
-                    Periodo = new DateTime(DateTime.Now.Year, 06, 01);
+                    Periodo = new DateTime(Periodo.Year, 06, 01);
                     break;
 
                 case "jul":
-                    Periodo = new DateTime(DateTime.Now.Year, 07, 01);
+                    Periodo = new DateTime(Periodo.Year, 07, 01);
                     break;
 
                 case "ago":
-                    Periodo = new DateTime(DateTime.Now.Year, 08, 01);
+                    Periodo = new DateTime(Periodo.Year, 08, 01);
                     break;
 
                 case "set":
-                    Periodo = new DateTime(DateTime.Now.Year, 09, 01);
+                    Periodo = new DateTime(Periodo.Year, 09, 01);
                     break;
 
                 case "out":
-                    Periodo = new DateTime(DateTime.Now.Year, 10, 01);
+                    Periodo = new DateTime(Periodo.Year, 10, 01);
                     break;
 
                 case "nov":
-                    Periodo = new DateTime(DateTime.Now.Year, 11, 01);
+                    Periodo = new DateTime(Periodo.Year, 11, 01);
                     break;
 
                 case "dez":
-                    Periodo = new DateTime(DateTime.Now.Year, 12, 01);
+                    Periodo = new DateTime(Periodo.Year, 12, 01);
                     break;
 
                 default:
