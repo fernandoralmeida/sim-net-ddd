@@ -2,12 +2,91 @@
 @model Sim.UI.Web.Pages.Empresa.IndexModel
 
 @{
-    ViewData["Title"] = "Lista";
+    ViewData["Title"] = "Empresa/Consulta";
+    ViewData["ActivePage"] = EmpresaNavPages.Inicio;
 }
 
 <!--<partial name="_StatusMessage" model="Model.StatusMessage" />-->
 
+<form method="post">
+
     <div class="card">
+
+        <div class="row">
+            <div class="col s12">
+                <div class="input-field col s6 m4 xl2">
+                    <input asp-for="Input.DataI" />
+                    <label asp-for="Input.DataI"></label>
+                </div>
+                <div class="input-field col s6 m4 xl2">
+                    <input asp-for="Input.DataF" />
+                    <label asp-for="Input.DataF"></label>
+                </div>
+                <div class="input-field col s6 m4 xl2">
+                    <select asp-for="Input.Base">
+                        <option value="0" selected>SIM</option>
+                        <option value="1">RFB</option>
+                    </select>
+                    <label asp-for="Input.Base"></label>
+                </div>
+                <div class="input-field col s6 m4 xl2">
+                    <input asp-for="Input.CNAE" id="inputCNAE" />
+                    <label asp-for="Input.CNAE"></label>
+                </div>
+                <div class="input-field col s6 m4 xl2">
+                    <select asp-for="Input.Situacao">
+                        <option selected></option>
+                        <option>Ativa</option>
+                        <option>Nula</option>
+                        <option>Suspensa</option>
+                        <option>Inapta</option>
+                        <option>Baixada</option>
+                    </select>
+                    <label asp-for="Input.Situacao"></label>
+                </div>
+                <div class="input-field col s6 m4 xl2">
+                    <input asp-for="Input.Logradouro" />
+                    <label asp-for="Input.Logradouro"></label>
+                </div>
+                <div class="input-field col s6 m4 xl2">
+                    <input asp-for="Input.Bairro" />
+                    <label asp-for="Input.Bairro"></label>
+                </div>
+                <div class="input-field col s6 m4 xl2">
+                    <select asp-for="Input.Municipio" asp-items="@Model.Municipios">
+                        <option selected></option>
+                    </select>
+                    <label asp-for="Input.Municipio"></label>
+                </div>
+
+            </div>
+        </div>
+        <div class="card-action">
+
+             <button class="btn waves-effect waves-light" asp-page-handler="ListByData">Pesquisar</button>
+            @{
+                if (User.IsInRole("Administrador"))
+                {
+                    if (Model.Input.ListaEmpresasRFB != null)
+                    {
+                        if (Model.Input.ListaEmpresasRFB.Count > 0)
+                        {
+                            <a class="btn waves-effect waves-light blue right" asp-page="/Empresa/Consulta/Print" asp-route-p1="0" asp-route-p2="0" asp-route-p3="0" asp-route-p4="0" asp-route-p5="0" asp-route-p6="0" asp-route-p7="0" asp-route-p8="0" asp-route-p9="0" target="_blank">Ver Lista</a>
+                        }
+
+                    }
+                }
+            }
+           
+        </div>
+
+    </div>
+
+
+</form>
+
+    <div class="card">
+        <!--
         <div class="card-title">
             <nav class="z-depth-0" style="border-bottom:solid 1px #efefef">
                 <div class="nav-wrapper white">
@@ -20,7 +99,7 @@
                     </form>
                 </div>
             </nav>
-        </div>
+        </div>-->
 
         <table class="responsive-table">
             <thead>

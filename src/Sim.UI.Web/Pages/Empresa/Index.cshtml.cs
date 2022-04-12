@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
 
 namespace Sim.UI.Web.Pages.Empresa
 {
     using Sim.Domain.SDE.Entity;
     using Sim.Application.SDE.Interface;
-    using System.ComponentModel.DataAnnotations;
+    using Sim.Domain.Cnpj.Entity;
+    using Functions;
 
     [Authorize]
     public class IndexModel : PageModel
@@ -26,6 +29,8 @@ namespace Sim.UI.Web.Pages.Empresa
         [TempData]
         public string StatusMessage { get; set; }
 
+        public SelectList Municipios { get; set; }
+
         [BindProperty]
         public InputModel Input { get; set; }
         public class InputModel
@@ -38,12 +43,46 @@ namespace Sim.UI.Web.Pages.Empresa
             [DisplayName("Razao Social")]
             public string RazaoSocial { get; set; }
 
+            [DisplayName("Data Inicial")]
+            [DataType(DataType.Date)]
+            public DateTime? DataI { get; set; }
+
+            [DisplayName("Data Final")]
+            [DataType(DataType.Date)]
+            public DateTime? DataF { get; set; }
+
+            public string Base { get; set; }
+
+            public string CNAE { get; set; }
+
+            public string Situacao { get; set; }
+
+            public string Logradouro { get; set; }
+
+            public string Bairro { get; set; }
+
+            public string Municipio { get; set; }
+
+            public string Socio { get; set; }
+
+            [DisplayName("Regime Tributário")]
+            public string RegimeTributario { get; set; }
+
             public IEnumerable<Empresas> ListaEmpresas { get; set; }
 
-            [TempData]
-            public string StatusMessage { get; set; }
-
+            public ICollection<BaseReceitaFederal> ListaEmpresasRFB { get; set; }
             public string CNPJRes { get; set; }
+        }
+
+        private async Task LoadMunicipios()
+        {
+            var t = Task.Run(() => _empresaApp.MicroRegiaoJahu());
+            await t;
+
+            if (t != null)
+            {
+                Municipios = new SelectList(t.Result, nameof(Municipio.Codigo), nameof(Municipio.Descricao), null);
+            }
         }
 
         private async Task LoadAsync()
@@ -60,6 +99,7 @@ namespace Sim.UI.Web.Pages.Empresa
 
         public async Task<IActionResult> OnGetAsync()
         {
+            await LoadMunicipios();
             await LoadAsync();
             return Page();
         }
@@ -77,7 +117,7 @@ namespace Sim.UI.Web.Pages.Empresa
                     Input = new InputModel
                     {
                         ListaEmpresas = emp.Result,
-                        CNPJRes = new Functions.Mask().Remove(Input.CNPJ)
+                        CNPJRes = Input.CNPJ.MaskRemove()
 
                     };
                 }
