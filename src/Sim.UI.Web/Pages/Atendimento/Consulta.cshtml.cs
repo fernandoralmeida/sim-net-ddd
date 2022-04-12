@@ -14,6 +14,7 @@ namespace Sim.UI.Web.Pages.Atendimento
     using Sim.Domain.Shared.Entity;
     using Sim.Application.Shared.Interface;
     using Sim.Cross.Identity;
+    using Functions;
 
     [Authorize]
     public class ConsultaModel : PageModel
@@ -28,6 +29,8 @@ namespace Sim.UI.Web.Pages.Atendimento
         [BindProperty(SupportsGet = true)]
         public InputModel Input { get; set; }
 
+        public ParamModel GetParam { get; set; }
+
         public SelectList ListaAtendentes { get; set; }
 
         public SelectList ListaServicos { get; set; }
@@ -38,7 +41,7 @@ namespace Sim.UI.Web.Pages.Atendimento
             [DataType(DataType.Date)]
             public DateTime? DataI { get; set; }
 
-            [DisplayName("Data Inicial")]
+            [DisplayName("Data Final")]
             [DataType(DataType.Date)]
             public DateTime? DataF { get; set; }
 
@@ -60,6 +63,18 @@ namespace Sim.UI.Web.Pages.Atendimento
             public ICollection<Atendimento> ListaAtendimento { get; set; }
         }
 
+        public class ParamModel
+        {
+            public string param1 { get; set; }
+            public string param2 { get; set; }
+            public string param3 { get; set; }
+            public string param4 { get; set; }
+            public string param5 { get; set; }
+            public string param6 { get; set; }
+            public string param7 { get; set; }
+            public string param8 { get; set; }
+            public string param9 { get; set; }
+        }
 
         public ConsultaModel(IAppServiceAtendimento appServiceAtendimento,
             IAppServiceUser appServiceUser,
@@ -69,6 +84,7 @@ namespace Sim.UI.Web.Pages.Atendimento
             _appIdentity = appServiceUser;
             _appServiceServico = appServiceServico;
             Input = new();
+            GetParam = new();
         }
 
         public void OnGet()
@@ -123,6 +139,20 @@ namespace Sim.UI.Web.Pages.Atendimento
                 var lista = await _appServiceAtendimento.ListByParam(param);
                 
                 Input.ListaAtendimento = lista.ToList();
+
+                string d1 = Input.DataI.Value.Date.ToShortDateString();
+                string d2 = Input.DataF.Value.Date.ToShortDateString();
+
+                GetParam.param1 = d1.MaskRemove();
+                GetParam.param2 = d2.MaskRemove();
+                GetParam.param3 = Input.CPF != null ? Input.CPF.MaskRemove() : "0";
+                GetParam.param4 = Input.Nome != null ? Input.Nome : "0";
+                GetParam.param5 = Input.CNPJ != null ? Input.CNPJ.MaskRemove() : "0";
+                GetParam.param6 = Input.RazaSocial != null ? Input.RazaSocial : "0";
+                GetParam.param7 = Input.CNAE != null ? Input.CNAE.MaskRemove() : "0";
+                GetParam.param8 = Input.Servico != null ? Input.Servico : "0";
+                GetParam.param9 = Input.Atendente != null ? Input.Atendente : "0";
+
             }
             catch(Exception ex)
             {
@@ -168,7 +198,6 @@ namespace Sim.UI.Web.Pages.Atendimento
             }
 
         }
-
 
         public async Task OnPostListByPessoaAsync()
         {

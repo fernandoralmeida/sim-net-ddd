@@ -31,5 +31,7 @@ namespace Sim.Domain.SDE.Interface
 
         Task<IEnumerable<Municipio>> ListMinicipios();
 
+        Task<IEnumerable<BaseReceitaFederal>> ListByParam(List<object> lparam);
+
     }
 }

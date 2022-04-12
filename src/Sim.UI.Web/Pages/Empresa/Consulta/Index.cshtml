@@ -1,10 +1,8 @@
 ﻿@page
-@model Sim.UI.Web.Pages.Atendimento.ConsultaModel
+@model Sim.UI.Web.Pages.Empresa.Consulta.IndexModel
 @{
-    Layout = "_Layout.cshtml";
-    ViewData["Title"] = "Consultas por Periodos";
-
-    ViewData["ActivePageLi"] = Web.Pages.Shared.LayoutNavPages.AtendimentoConsulta;
+    ViewData["Title"] = "Empresa/Consulta";
+    ViewData["ActivePage"] = EmpresaNavPages.Inicio;
 }
 
 <partial name="_StatusMessage" model="Model.StatusMessage" />
@@ -24,42 +22,42 @@
                     <label asp-for="Input.DataF"></label>
                 </div>
                 <div class="input-field col s6 m4 xl2">
-                    <input asp-for="Input.CPF" id="inputCPF" />
-                    <label asp-for="Input.CPF"></label>
-                </div>
-                <div class="input-field col s6 m4 xl2">
-                    <input asp-for="Input.Nome" />
-                    <label asp-for="Input.Nome"></label>
-                </div>
-                <div class="input-field col s6 m4 xl2">
-                    <input asp-for="Input.CNPJ" id="inputCNPJ" />
-                    <label asp-for="Input.CNPJ"></label>
-                </div>
-                <div class="input-field col s6 m4 xl2">
-                    <input asp-for="Input.RazaSocial" />
-                    <label asp-for="Input.RazaSocial"></label>
+                    <select asp-for="Input.Base">
+                        <option value="0" selected>SIM</option>
+                        <option value="1">RFB</option>
+                    </select>
+                    <label asp-for="Input.Base"></label>
                 </div>
                 <div class="input-field col s6 m4 xl2">
                     <input asp-for="Input.CNAE" id="inputCNAE" />
                     <label asp-for="Input.CNAE"></label>
                 </div>
                 <div class="input-field col s6 m4 xl2">
-                    <select asp-for="Input.Servico" asp-items="@Model.ListaServicos">
+                    <select asp-for="Input.Situacao">
+                        <option selected></option>
+                        <option>Ativa</option>
+                        <option>Nula</option>
+                        <option>Suspensa</option>
+                        <option>Inapta</option>
+                        <option>Baixada</option>
+                    </select>
+                    <label asp-for="Input.Situacao"></label>
+                </div>
+                <div class="input-field col s6 m4 xl2">
+                    <input asp-for="Input.Logradouro" />
+                    <label asp-for="Input.Logradouro"></label>
+                </div>
+                <div class="input-field col s6 m4 xl2">
+                    <input asp-for="Input.Bairro" />
+                    <label asp-for="Input.Bairro"></label>
+                </div>
+                <div class="input-field col s6 m4 xl2">
+                    <select asp-for="Input.Municipio" asp-items="@Model.Municipios">
                         <option selected></option>
                     </select>
-                    <label asp-for="Input.Servico"></label>
+                    <label asp-for="Input.Municipio"></label>
                 </div>
-                @{
-                    if (User.IsInRole("Administrador"))
-                    {
-                        <div class="input-field col s6 m4">
-                            <select asp-for="Input.Atendente" asp-items="@Model.ListaAtendentes">
-                                <option selected></option>
-                            </select>
-                            <label asp-for="Input.Atendente"></label>
-                        </div>
-                    }
-                }
+
             </div>
         </div>
         <div class="card-action">
@@ -67,15 +65,15 @@
             <button class="btn red waves-effect waves-light" asp-page-handler="AtCancelados">Cancelados</button>
 
             @{
-                if(User.IsInRole("Administrador"))
-            {
-
-            
-                if (Model.Input.ListaAtendimento != null)
+                if (User.IsInRole("Administrador"))
                 {
-                    if (Model.Input.ListaAtendimento.Count > 0)
+
+
+                    if (Model.Input.ListaEmpresas != null)
                     {
-                        <a class="btn waves-effect waves-light blue right" asp-page="/Atendimento/Consultas/Lista" asp-route-p1="@Model.GetParam.param1" asp-route-p2="@Model.GetParam.param2" asp-route-p3="@Model.GetParam.param3" asp-route-p4="@Model.GetParam.param4" asp-route-p5="@Model.GetParam.param5" asp-route-p6="@Model.GetParam.param6" asp-route-p7="@Model.GetParam.param7" asp-route-p8="@Model.GetParam.param8" asp-route-p9="@Model.GetParam.param9" target="_blank">Ver Lista</a>
+                        if (Model.Input.ListaEmpresas.Count > 0)
+                        {
+                            <a class="btn waves-effect waves-light blue right" asp-page="/Atendimento/Consultas/Lista" asp-route-p1="0" asp-route-p2="0" asp-route-p3="0" asp-route-p4="0" asp-route-p5="0" asp-route-p6="0" asp-route-p7="0" asp-route-p8="0" asp-route-p9="0" target="_blank">Ver Lista</a>
                         }
 
                     }
@@ -91,7 +89,7 @@
 
 
 <div class="card">
-    <partial name="_AtendimentoList" model="Model.Input.ListaAtendimento" />
+    <!--<partial name="_AtendimentoList" model="Model.Input.ListaEmpresas" />-->
 </div>
 
 @section scripts{

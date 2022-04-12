@@ -444,5 +444,38 @@ namespace Sim.Cross.Data.Repository.SDE
 
             return brf;
         }
+
+        public async Task<IEnumerable<BaseReceitaFederal>> ListByParam(List<object> lparam)
+        {
+            var brf = new List<BaseReceitaFederal>();
+
+            var t = Task.Run(() =>
+            {
+
+                var qry = (from est in db.Estabelecimentos
+                           from emp in db.Empresas.Where(s => s.CNPJBase == est.CNPJBase)
+                           from atv in db.CNAEs.Where(s => est.CnaeFiscalPrincipal == s.Codigo)
+                           from sn in db.Simples.Where(s => s.CNPJBase == est.CNPJBase).DefaultIfEmpty()
+                           from so in db.Socios.Where(s => s.CNPJBase == est.CNPJBase).DefaultIfEmpty()
+                           select new { est, emp, sn, so, atv })
+                          .Where(s => s.est.Municipio.Contains("") && s.est.SituacaoCadastral.Contains("")).Distinct();
+
+                int i = 0;
+
+                foreach (var e in qry)
+                {
+                    var _cnpj = string.Format("{0}{1}{2}", e.est.CNPJBase, e.est.CNPJOrdem, e.est.CNPJDV);
+
+                    i++;
+
+                    brf.Add(new BaseReceitaFederal(
+                        i, _cnpj, e.emp, e.est, null, e.sn, e.atv, null, null, null, null, null));
+                }
+
+            });
+            await t;
+
+            return brf;
+        }
     }
 }
