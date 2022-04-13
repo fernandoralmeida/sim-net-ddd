@@ -24,6 +24,7 @@ namespace Sim.UI.Web.Pages.Empresa
         public IndexModel(IAppServiceEmpresa appServiceEmpresa)
         {
             _empresaApp = appServiceEmpresa;
+            Input = new();
         }
 
         [TempData]
@@ -33,10 +34,13 @@ namespace Sim.UI.Web.Pages.Empresa
 
         [BindProperty]
         public InputModel Input { get; set; }
+
+        [BindProperty]
+        public ParamModel GetParam { get; set; }
+
         public class InputModel
         {
-
-            [Required]
+            
             [DisplayName("CNPJ")]
             public string CNPJ { get; set; }
 
@@ -74,6 +78,19 @@ namespace Sim.UI.Web.Pages.Empresa
             public string CNPJRes { get; set; }
         }
 
+        public class ParamModel
+        {
+            public string param1 { get; set; }
+            public string param2 { get; set; }
+            public string param3 { get; set; }
+            public string param4 { get; set; }
+            public string param5 { get; set; }
+            public string param6 { get; set; }
+            public string param7 { get; set; }
+            public string param8 { get; set; }
+            public string param9 { get; set; }
+        }
+
         private async Task LoadMunicipios()
         {
             var t = Task.Run(() => _empresaApp.MicroRegiaoJahu());
@@ -91,16 +108,14 @@ namespace Sim.UI.Web.Pages.Empresa
 
             await t;
 
-            Input = new InputModel
-            {
-                ListaEmpresas = await _empresaApp.ListTop20()
-            };
+            Input.ListaEmpresasRFB = new List<BaseReceitaFederal>();// await _empresaApp.ListTop20();
         }
 
         public async Task<IActionResult> OnGetAsync()
         {
             await LoadMunicipios();
             await LoadAsync();
+            Input.Municipio = "6607";
             return Page();
         }
 
@@ -110,16 +125,34 @@ namespace Sim.UI.Web.Pages.Empresa
             {
                 if (ModelState.IsValid)
                 {
-                    var emp = Task.Run(() => _empresaApp.ConsultaByCNPJ(Input.CNPJ));
+                    await LoadMunicipios();
 
-                    await emp;
+                    var param = new List<object>() {
+                    Input.Base,
+                    Input.CNPJ.MaskRemove(),
+                    Input.RazaoSocial,
+                    Input.CNAE.MaskRemove(),
+                    Input.Situacao,
+                    Input.Logradouro,
+                    Input.Bairro,
+                    Input.Socio,
+                    Input.Municipio};
 
-                    Input = new InputModel
-                    {
-                        ListaEmpresas = emp.Result,
-                        CNPJRes = Input.CNPJ.MaskRemove()
+                    var lista = await _empresaApp.ListByParam(param);
 
-                    };
+                    Input.ListaEmpresasRFB = lista.ToList();
+
+                    GetParam.param1 = (string)param[0];
+                    GetParam.param2 = (string)param[1] != null ? (string)param[1] : "0";
+                    GetParam.param3 = (string)param[2] != null ? (string)param[2] : "0";
+                    GetParam.param4 = (string)param[3] != null ? (string)param[3] : "0";
+                    GetParam.param5 = (string)param[4] != null ? (string)param[4] : "0";
+                    GetParam.param6 = (string)param[5] != null ? (string)param[5] : "0";
+                    GetParam.param7 = (string)param[6] != null ? (string)param[6] : "0";
+                    GetParam.param8 = (string)param[7] != null ? (string)param[7] : "0";
+                    GetParam.param9 = (string)param[8] != null ? (string)param[8] : "0";
+
+                    Input.CNPJRes = Input.CNPJ.MaskRemove();
                 }
 
             }

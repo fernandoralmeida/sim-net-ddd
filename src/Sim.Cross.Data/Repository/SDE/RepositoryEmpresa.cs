@@ -449,16 +449,28 @@ namespace Sim.Cross.Data.Repository.SDE
         {
             var brf = new List<BaseReceitaFederal>();
 
+            var cnpj = lparam[1] != null ? (string)lparam[1] : "#";
+            var razaosocial = lparam[2] != null ? (string)lparam[2] : "#";
+            var cnae = lparam[3] != null ? (string)lparam[3] : "#";
+            var situacao = lparam[4] != null ? (string)lparam[4] : "";
+            var logradouro = lparam[5] != null ? (string)lparam[5] : "#";
+            var bairro = lparam[6] != null ? (string)lparam[6] : "#";
+            var socio = lparam[7] != null ? (string)lparam[7] : "#";
+            var municipio = lparam[8] != null ? (string)lparam[8] : "#";
+
+            if (cnpj.Length > 1)
+                cnpj.Remove(8, 6);
+
             var t = Task.Run(() =>
             {
 
                 var qry = (from est in db.Estabelecimentos
                            from emp in db.Empresas.Where(s => s.CNPJBase == est.CNPJBase)
-                           from atv in db.CNAEs.Where(s => est.CnaeFiscalPrincipal == s.Codigo)
+                           from atv in db.CNAEs.Where(s => s.Codigo == est.CnaeFiscalPrincipal)
                            from sn in db.Simples.Where(s => s.CNPJBase == est.CNPJBase).DefaultIfEmpty()
                            from so in db.Socios.Where(s => s.CNPJBase == est.CNPJBase).DefaultIfEmpty()
                            select new { est, emp, sn, so, atv })
-                          .Where(s => s.est.Municipio.Contains("") && s.est.SituacaoCadastral.Contains("")).Distinct();
+                          .Where((s => s.est.CNPJBase.Contains(cnpj) || s.emp.RazaoSocial.Contains(razaosocial) || s.est.CnaeFiscalPrincipal.Contains(cnae) || (s.est.Logradouro.Contains(logradouro) || s.est.Bairro.Contains(bairro) && s.est.Municipio.Contains(municipio)) && (s.est.SituacaoCadastral.Contains(situacao)))).Distinct();
 
                 int i = 0;
 
