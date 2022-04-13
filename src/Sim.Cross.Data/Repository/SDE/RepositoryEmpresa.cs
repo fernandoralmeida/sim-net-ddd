@@ -312,11 +312,11 @@ namespace Sim.Cross.Data.Repository.SDE
             {
 
                 var qry = (
-                           from est in db.Estabelecimentos
+                           from est in db.Estabelecimentos.Distinct()
                            from emp in db.Empresas.Where(s => s.CNPJBase == est.CNPJBase)
                            from sco in db.Socios.Where(s => s.CNPJBase == est.CNPJBase)
                            select new { est, emp, sco })
-                          .Where(s => s.sco.NomeRazaoSocio.Contains(nomesocio) || s.sco.NomeRepresentante.Contains(nomesocio)).Distinct();
+                          .Where(s => s.sco.NomeRazaoSocio.Contains(nomesocio));
 
                 foreach (var e in qry)
                 {
@@ -470,7 +470,7 @@ namespace Sim.Cross.Data.Repository.SDE
                            from sn in db.Simples.Where(s => s.CNPJBase == est.CNPJBase).DefaultIfEmpty()
                            from so in db.Socios.Where(s => s.CNPJBase == est.CNPJBase).DefaultIfEmpty()
                            select new { est, emp, sn, so, atv })
-                          .Where((s => s.est.CNPJBase.Contains(cnpj) || s.emp.RazaoSocial.Contains(razaosocial) || s.est.CnaeFiscalPrincipal.Contains(cnae) || (s.est.Logradouro.Contains(logradouro) || s.est.Bairro.Contains(bairro) && s.est.Municipio.Contains(municipio)) && (s.est.SituacaoCadastral.Contains(situacao)))).Distinct();
+                          .Where((s => s.est.CNPJBase.Contains(cnpj) || s.emp.RazaoSocial.Contains(razaosocial) || s.est.CnaeFiscalPrincipal.Contains(cnae) || s.so.NomeRazaoSocio.Contains(socio) || (s.est.Logradouro.Contains(logradouro) || s.est.Bairro.Contains(bairro) && s.est.Municipio.Contains(municipio)) && (s.est.SituacaoCadastral.Contains(situacao)))).Distinct();
 
                 int i = 0;
 
@@ -478,10 +478,13 @@ namespace Sim.Cross.Data.Repository.SDE
                 {
                     var _cnpj = string.Format("{0}{1}{2}", e.est.CNPJBase, e.est.CNPJOrdem, e.est.CNPJDV);
 
-                    i++;
+                    if (!brf.Any(s => s.CNPJ == _cnpj))
+                    {
+                        i++;
 
-                    brf.Add(new BaseReceitaFederal(
-                        i, _cnpj, e.emp, e.est, null, e.sn, e.atv, null, null, null, null, null));
+                        brf.Add(new BaseReceitaFederal(
+                            i, _cnpj, e.emp, e.est, null, e.sn, e.atv, null, null, null, null, null));
+                    }
                 }
 
             });

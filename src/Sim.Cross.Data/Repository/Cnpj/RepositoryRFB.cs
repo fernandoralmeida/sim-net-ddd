@@ -324,7 +324,7 @@ namespace Sim.Cross.Data.Repository.Cnpj
 
         public async Task<IEnumerable<BaseReceitaFederal>> ListBySociosAsync(string nomesocio)
         {
-            var brf = new List<BaseReceitaFederal>();
+            var brf = new List<BaseReceitaFederal>();            
 
             var t = Task.Run(() =>
             {
@@ -333,16 +333,21 @@ namespace Sim.Cross.Data.Repository.Cnpj
                            from est in db.Estabelecimentos
                            from emp in db.Empresas.Where(s => s.CNPJBase == est.CNPJBase)
                            from sco in db.Socios.Where(s => s.CNPJBase == est.CNPJBase)
-                           select new { est, emp, sco })
+                           select new { est, emp, sco }).Distinct()
                           .Where(s => s.sco.NomeRazaoSocio.Contains(nomesocio) || s.sco.NomeRepresentante.Contains(nomesocio)).Distinct();
+
+                int i = 0;
 
                 foreach (var e in qry)
                 {
                     var _cnpj = string.Format("{0}{1}{2}", e.est.CNPJBase, e.est.CNPJOrdem, e.est.CNPJDV);
 
-
-                    brf.Add(new BaseReceitaFederal(
-                        0, _cnpj, e.emp, e.est, null, null, null, null, null, null, null, null));
+                    if (!brf.Any(s => s.CNPJ == _cnpj))
+                    {
+                        i++;
+                        brf.Add(new BaseReceitaFederal(
+                            i, _cnpj, e.emp, e.est, null, null, null, null, null, null, null, null));
+                    }
                 }
 
             });
