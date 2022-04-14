@@ -41,6 +41,7 @@ namespace Sim.Cross.Data.Context
             {
                 optionsBuilder.UseSqlServer(SqlServerConnect());
             }
+            
             /*get the configuration from the app settings
             var config = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
@@ -57,9 +58,11 @@ namespace Sim.Cross.Data.Context
         }
         public void RegisterDataContext(IServiceCollection services, IConfiguration config, string connection)
         {
-            _sqlserverconnect = config.GetConnectionString(connection);
+            _sqlserverconnect = config.GetConnectionString(connection);            
 
             services.AddDbContext<RFBContext>(options => options.UseSqlServer(config.GetConnectionString(connection)));
+
+            services.AddSession(o => { o.IdleTimeout = System.TimeSpan.FromSeconds(120); });
 
             services.AddScoped<DbContext, RFBContext>();
         }

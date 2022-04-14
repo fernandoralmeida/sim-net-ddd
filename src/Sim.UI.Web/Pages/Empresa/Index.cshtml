@@ -14,30 +14,15 @@
 
         <div class="row">
             <div class="col s12">
-                <div class="input-field col s6 m4 xl2">
+                <div class="input-field col s4 m4 xl2">
                     <select asp-for="Input.Base">
                         <option value="0" selected>SIM</option>
                         <option value="1">RFB</option>
                     </select>
                     <label asp-for="Input.Base"></label>
                 </div>
-                <div class="input-field col s6 m4 xl2">
-                    <input asp-for="Input.CNPJ" />
-                    <label asp-for="Input.CNPJ"></label>
-                    <button class="btn btn-small prefix"><i class="material-icons">search</i></button>
-                </div>
-                <div class="input-field col s6 m4 xl2">
-                    <input asp-for="Input.RazaoSocial" />
-                    <label asp-for="Input.RazaoSocial"></label>
-                    <button class="btn btn-small prefix"><i class="material-icons">search</i></button>
-                </div>
-                <div class="input-field col s6 m4 xl2">
-                    <input asp-for="Input.CNAE" id="inputCNAE" />
-                    <label asp-for="Input.CNAE"></label>
-                </div>
-                <div class="input-field col s6 m4 xl2">
+                <div class="input-field col s4 m4 xl2">
                     <select asp-for="Input.Situacao">
-                        <option value=""></option>
                         <option value="02" selected>Ativa</option>
                         <option value="01">Nula</option>
                         <option value="03">Suspensa</option>
@@ -46,25 +31,43 @@
                     </select>
                     <label asp-for="Input.Situacao"></label>
                 </div>
-                <div class="input-field col s6 m4 xl2">
-                    <input asp-for="Input.Logradouro" />
-                    <label asp-for="Input.Logradouro"></label>
-                </div>
-                <div class="input-field col s6 m4 xl2">
-                    <input asp-for="Input.Bairro" />
-                    <label asp-for="Input.Bairro"></label>
-                </div>
-                <div class="input-field col s6 m4 xl2">
-                    <input asp-for="Input.Socio" />
-                    <label asp-for="Input.Socio"></label>
-                </div>
-                <div class="input-field col s6 m4 xl2">
+                <div class="input-field col s4 m4 xl2">
                     <select asp-for="Input.Municipio" asp-items="@Model.Municipios">
                         <option selected></option>
                     </select>
                     <label asp-for="Input.Municipio"></label>
                 </div>
+                <div class="input-field col s6 m4 xl3 valign-wrapper">
+                    <input asp-for="Input.CNPJ" />
+                    <label asp-for="Input.CNPJ"></label>
+                    <button class="waves-effect waves-light btn btn-small blue-grey"><i class="material-icons">search</i></button>
+                </div>
+                <div class="input-field col s6 m4 xl3 valign-wrapper">
+                    <input asp-for="Input.RazaoSocial" />
+                    <label asp-for="Input.RazaoSocial"></label>
+                    <button class="waves-effect waves-light btn btn-small blue-grey"><i class="material-icons">search</i></button>
+                </div>
+                <div class="input-field col s6 m4 xl2 valign-wrapper">
+                    <input asp-for="Input.CNAE" id="inputCNAE" />
+                    <label asp-for="Input.CNAE"></label>
+                    <button class="waves-effect waves-light btn btn-small blue-grey"><i class="material-icons">search</i></button>
+                </div>
 
+                <div class="input-field col s6 m4 xl4 valign-wrapper">
+                    <input asp-for="Input.Logradouro" />
+                    <label asp-for="Input.Logradouro"></label>
+                    <button class="waves-effect waves-light btn btn-small blue-grey"><i class="material-icons">search</i></button>
+                </div>
+                <div class="input-field col s6 m4 xl3 valign-wrapper">
+                    <input asp-for="Input.Bairro" />
+                    <label asp-for="Input.Bairro"></label>
+                    <button class="waves-effect waves-light btn btn-small blue-grey"><i class="material-icons">search</i></button>
+                </div>
+                <div class="input-field col s6 m4 xl3 valign-wrapper">
+                    <input asp-for="Input.Socio" />
+                    <label asp-for="Input.Socio"></label>
+                    <button class="waves-effect waves-light btn btn-small blue-grey"><i class="material-icons">search</i></button>
+                </div>
             </div>
         </div>
         <div class="card-action center">
@@ -110,7 +113,7 @@
     <table class="responsive-table">
         <thead>
             <tr>
-                <th></th>
+                <th>#</th>
                 <th>
                     CNPJ
                 </th>
@@ -129,20 +132,17 @@
                 <th>
                     Situação
                 </th>
-                <th>Ação</th>
+                <th>Endereço</th>
+                <th>Socio</th>
             </tr>
         </thead>
         <tbody>
-            @{
-                int cont = 0;
-            }
 
             @foreach (var item in Model.Input.ListaEmpresasRFB)
             {
             <tr>
                 <td>
-                    @{ cont++; }
-                    @cont
+                    @Html.DisplayFor(modelItem => item.Id)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.CNPJ)
@@ -158,11 +158,14 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Estabelecimento.CorreioEletronico)
                 </td>
-                <th>
-                    @Html.DisplayFor(modelItem => item.Estabelecimento.SituacaoCadastral)
-                </th>
                 <td>
-                    <a asp-page="./Update" asp-route-id="@item.Id" class="btn btn-small waves-effect" title="Alterar informações"><i class="material-icons">edit</i></a>
+                    @Html.DisplayFor(modelItem => item.Estabelecimento.SituacaoCadastral)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estabelecimento.Logradouro) @Html.DisplayFor(modelItem => item.Estabelecimento.Municipio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AtividadePrincipal.Codigo) @Html.DisplayFor(modelItem => item.AtividadePrincipal.Descricao)
                 </td>
             </tr>
             }
