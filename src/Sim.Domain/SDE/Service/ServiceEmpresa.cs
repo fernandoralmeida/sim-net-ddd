@@ -1815,6 +1815,7 @@ namespace Sim.Domain.SDE.Service
             return await _repositoryEmpresa.ListForBICnaeAsync(municipio);
         }
 
+        /*
         public async Task<IEnumerable<KeyValuePair<string, string>>> ListforCnaeJsonAsync(string cnae, string municipio, string situacao)
         {
             var emp = await _repositoryEmpresa.ListByCNAEAsync(cnae, municipio);
@@ -1837,6 +1838,26 @@ namespace Sim.Domain.SDE.Service
                         s.Estabelecimento.CNPJBase,
                         s.Estabelecimento.CNPJOrdem,
                         s.Estabelecimento.CNPJDV)));
+            }
+
+            return lista;
+        }*/
+
+        public async Task<IEnumerable<Empresas>> ListforCnaeJsonAsync(string cnae, string municipio, string situacao)
+        {
+            var emp = await _repositoryEmpresa.ListByCNAEAsync(cnae, municipio);
+
+            var lista = new List<Empresas>();
+
+            foreach (var s in emp)
+            {
+                if (s.Estabelecimento.SituacaoCadastral == situacao)
+                    lista.Add(new Empresas() {                    
+                        CNPJ = s.CNPJ,
+                        Nome_Empresarial = s.Empresa.RazaoSocial,
+                        Telefone= String.Format("{0}-{1}", s.Estabelecimento.DDD1, s.Estabelecimento.Telefone1),
+                        Email = s.Estabelecimento.CorreioEletronico
+                    });
             }
 
             return lista;

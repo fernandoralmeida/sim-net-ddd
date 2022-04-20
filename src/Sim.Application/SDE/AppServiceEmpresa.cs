@@ -117,7 +117,7 @@ namespace Sim.Application.SDE
             return await _empresa.ListForBICnaeAsync(municipio);
         }
 
-        public async Task<IEnumerable<KeyValuePair<string, string>>> ListforCnaeJsonAsync(string cnae, string municipio, string situacao)
+        public async Task<IEnumerable<Empresas>> ListforCnaeJsonAsync(string cnae, string municipio, string situacao)
         {
             return await _empresa.ListforCnaeJsonAsync(cnae, municipio, situacao);
         }

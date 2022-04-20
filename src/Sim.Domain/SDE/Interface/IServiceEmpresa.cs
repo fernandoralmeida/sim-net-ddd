@@ -36,7 +36,7 @@ namespace Sim.Domain.SDE.Interface
         Task<IEnumerable<BiEmpresas>> BiEmpresasAsync(string municipio, string situacao, string ano, string mes);
         Task<IEnumerable<BaseReceitaFederal>> ListForBICnaeAsync(string municipio);
         Task<IEnumerable<BiCnae>> ListBICnae(string municipio);
-        Task<IEnumerable<KeyValuePair<string,string>>> ListforCnaeJsonAsync(string cnae, string municipio, string situacao);
+        Task<IEnumerable<Empresas>> ListforCnaeJsonAsync(string cnae, string municipio, string situacao);
         Task<IEnumerable<BaseReceitaFederal>> ListByParam(List<object> lparam);
     }
 }

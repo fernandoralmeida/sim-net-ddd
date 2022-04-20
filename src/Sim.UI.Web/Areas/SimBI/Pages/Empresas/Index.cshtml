@@ -431,7 +431,7 @@ else
                 $.getJSON(`/SimBI/Empresas?c=${param1}&m=${param2}&a=${param3}&handler=Preview`, function (data) {
                     $.each(data, function (i, item) {
 
-                        $(".showcollection").append(`<li class="collection-item"><a href="/Censo/Empresas/Detalhe?id=${item.value}" target="_blank"><span class="new badge" data-badge-caption="Perfil Completo"></span></a>${item.key}</li>`);
+                        $(".showcollection").append(`<li class="collection-item"><a href="/Censo/Empresas/Detalhe?id=${item.cnpj}" target="_blank"><span class="new badge" data-badge-caption="Perfil Completo"></span></a>${item.razao_social}</li>`);
 
                     });
                 });
