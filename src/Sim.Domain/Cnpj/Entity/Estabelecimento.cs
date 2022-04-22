@@ -144,6 +144,10 @@ namespace Sim.Domain.Cnpj.Entity
 
         private string StringDateTime(string valor)
         {
+            if (valor == "0")
+                valor = _datainicio;
+
+
             valor = valor.Insert(4, "-");
             valor = valor.Insert(7, "-");
             return valor;
