@@ -1852,12 +1852,15 @@ namespace Sim.Domain.SDE.Service
             foreach (var s in emp)
             {
                 if (s.Estabelecimento.SituacaoCadastral == situacao)
+                {                
+
                     lista.Add(new Empresas() {                    
                         CNPJ = s.CNPJ,
                         Nome_Empresarial = s.Empresa.RazaoSocial,
-                        Telefone= String.Format("{0}-{1}", s.Estabelecimento.DDD1, s.Estabelecimento.Telefone1),
+                        Telefone= String.Format("{0} {1}", s.Estabelecimento.DDD1, s.Estabelecimento.Telefone1),
                         Email = s.Estabelecimento.CorreioEletronico
                     });
+                }
             }
 
             return lista;

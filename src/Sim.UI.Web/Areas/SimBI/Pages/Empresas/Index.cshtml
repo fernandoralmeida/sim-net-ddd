@@ -411,9 +411,29 @@ else
 
 
 <!-- Modal Structure -->
+<!--
 <div id="viewmodal" class="modal modal-fixed-footer">
     <div class="modal-content">
         <ul class="collection showcollection"></ul>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close btn waves-effect">Fechar</a>
+    </div>
+</div>-->
+
+<div id="viewmodal" class="modal modal-fixed-footer">
+    <div class="modal-content">
+        <table class="striped" style="font-size:12px;">
+        <thead>
+          <tr>
+              <th>CNPJ</th>
+              <th>Razão Social</th>
+              <th>Tel</th>
+              <th>Email</th>
+          </tr>
+        </thead>
+        <tbody class="showcollection"></tbody>
+      </table>
     </div>
     <div class="modal-footer">
         <a href="#!" class="modal-close btn waves-effect">Fechar</a>
@@ -431,8 +451,23 @@ else
                 $.getJSON(`/SimBI/Empresas?c=${param1}&m=${param2}&a=${param3}&handler=Preview`, function (data) {
                     $.each(data, function (i, item) {
 
-                        $(".showcollection").append(`<li class="collection-item"><a href="/Censo/Empresas/Detalhe?id=${item.cnpj}" target="_blank"><span class="new badge" data-badge-caption="Perfil Completo"></span></a>${item.razao_social}</li>`);
+                        var v1 = item.cnpj;
+                        var vm = v1.slice(0,2) + "." + v1.slice(2,5) + "." + v1.slice(5,8) + "/" + v1.slice(8,12) + "-" + v1.slice(12,14);
+                        var v2 = item.nome_Empresarial;
+                        var v3 = item.telefone != null? item.telefone: "";
+                        var v4 = item.email != null? item.email: "";
+                        $(".showcollection").append(
+                            
+                            `<tr>
+                            <td><a href="/Censo/Empresas/Detalhe?id=${v1}" target="_blank">${vm}</a></td>
+                            <td>${v2}</td>
+                            <td>${v3}</td>
+                            <td>${v4}</td>
+                            </tr>`
+                        
+                        );
 
+                        //$(".showcollection").append(`<li class="collection-item"><a href="/Censo/Empresas/Detalhe?id=${v1}" target="_blank"><span class="new badge" data-badge-caption="Perfil Completo"></span></a>${data.nome_Empresarial}</li>`);
                     });
                 });
             });
