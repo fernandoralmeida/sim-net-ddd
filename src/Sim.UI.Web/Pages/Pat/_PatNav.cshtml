@@ -1,0 +1,21 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@using Sim.UI.Web.Pages.Pat
+
+<div class="navbar navbar-fixed" >
+    <nav class="navbar">
+        <div class="nav-wrapper white">
+            <a href="#" data-target="sidenav-left" class="sidenav-trigger grey-text"><i class="material-icons">menu</i></a>
+            <a class="navbar-page-name grey-text">PAT</a>
+            <ul class="right">
+                <li><a asp-page="/SebraeAqui/Index" class="grey-text @PatNav.InicioNavClass(ViewContext)">Não Lançados</a></li>
+                <li><a asp-page="/SebraeAqui/Rae.Lancados" class="grey-text @PatNav.AtendiementoNavClass(ViewContext)">Lançados</a></li>
+                <li class="blue lighten-1 waves-effect waves-light"><a asp-area="" asp-page="/Pessoa/Index">Novo Atendimento</a></li>
+            </ul>
+        </div>
+    </nav>
+</div>
