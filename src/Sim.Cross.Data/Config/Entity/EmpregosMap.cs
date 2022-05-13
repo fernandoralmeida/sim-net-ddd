@@ -18,8 +18,8 @@ namespace Sim.Cross.Data.Config.Entity
             builder.Property(c => c.Ocupacao)
                 .HasColumnType("varchar(max)");
 
-            builder.Property(c => c.Salario)
-                .HasColumnType("varchar(max)");
+            builder.Property(c => c.Pagamento)
+                .HasColumnType("varchar(50)");
 
         }
     }

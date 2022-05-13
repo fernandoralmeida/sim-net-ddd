@@ -20,18 +20,19 @@ namespace Sim.UI.Web.Pages.Pat
         [DisplayName("Ocupação")]
         public string Ocupacao { get; set; }
 
-        [Required(ErrorMessage = "Experiência exigida!")]
         [DisplayName("Experiência")]
-        public string Experiencia { get; set; }
+        public bool Experiencia { get; set; }
 
-        [DisplayName("Salário Médio")]
-        public string Salario { get; set; }
+        [DisplayName("Salário Médio / Forma de pagamento")]
+        public decimal Salario { get; set; }
+
+        [DisplayName("Forma Pagamento")]
+        public string Pagamento { get; set; }
 
         [Required(ErrorMessage = "Informe a quantidade de vagas!")]
         [DisplayName("Vagas Disponível")]
-        public string Vagas { get; set; }
+        public int Vagas { get; set; }
 
-        [DisplayName("Empresa")]
         public Empresas Empresa { get; set; }
     }
 }

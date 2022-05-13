@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Sim.Cross.Data.Context;
 
 namespace Sim.Cross.Data.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20220513153910_AP0015")]
+    partial class AP0015
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -133,10 +135,11 @@ namespace Sim.Cross.Data.Migrations
                         .HasColumnType("varchar(max)");
 
                     b.Property<string>("Pagamento")
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Salario")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<string>("Salario")
+                        .IsRequired()
+                        .HasColumnType("varchar(max)");
 
                     b.Property<int>("Vagas")
                         .HasColumnType("int");

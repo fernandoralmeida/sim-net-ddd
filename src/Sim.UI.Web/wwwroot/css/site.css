@@ -22,6 +22,21 @@ html {
     /*font-size: 14px;*/
 }
 
+.mgn-t-4{
+    margin-top:4px;
+}
+.mgn-t-10 {
+    margin-top: 10px;
+}
+
+.mgn-b-4{
+    margin-bottom:4px;
+}
+
+.pdn-b-4{
+    padding-bottom:4px;
+}
+
 .pdn-h-4{
     padding-left:4px;
     padding-right:4px;

@@ -19,22 +19,70 @@
                         <div class="input-field col s12 m6 l4 valign-wrapper">
                             <input asp-for="Input.Empresa.CNPJ" id="inputCNPJ">
                             <label asp-for="Input.Empresa.CNPJ" for="inputCNPJ"></label>           
-                            <button asp-page-handler="RWS" class="btn waves-effect" type="submit"><i class="material-icons">search</i></button>
+                            <button asp-page-handler="CNPJ" class="btn waves-effect" type="submit"><i class="material-icons">search</i></button>
                         </div>
                                             
                         <div class="input-field col s12 m6 l8">
-                            <input asp-for="Input.Empresa.Nome_Empresarial" id="inputAbertura" />
-                            <label asp-for="Input.Empresa.Nome_Empresarial" for="inputAbertura"></label>
+                            <input asp-for="Input.Empresa.Nome_Empresarial" />
+                            <label asp-for="Input.Empresa.Nome_Empresarial"></label>
                         </div>
                         
                         <div class="input-field col s3 m3 l2">
-                            <input asp-for="Input.Empresa.CNAE_Principal" id="inputAbertura" />
-                            <label asp-for="Input.Empresa.CNAE_Principal" for="inputAbertura"></label>
+                            <input asp-for="Input.Empresa.CNAE_Principal" id="inputCNAE"/>
+                            <label asp-for="Input.Empresa.CNAE_Principal" for="inputCNAE"></label>
                         </div>
 
                         <div class="input-field col s9 m9 l10">
-                            <input asp-for="Input.Empresa.Atividade_Principal" id="inputAbertura" />
-                            <label asp-for="Input.Empresa.Atividade_Principal" for="inputAbertura"></label>
+                            <input asp-for="Input.Empresa.Atividade_Principal"/>
+                            <label asp-for="Input.Empresa.Atividade_Principal"></label>
+                        </div>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="card">
+            <div class="row">
+                <div class="col s12">
+                    
+                        <div class="input-field col s12 m12 l12">
+                            <input asp-for="Input.Ocupacao" >
+                            <label asp-for="Input.Ocupacao"></label>
+                        </div>
+                        
+                        <div class="input-field col s6 m3 l3">
+                            <input asp-for="Input.Vagas" />
+                            <label asp-for="Input.Vagas" ></label>
+                        </div>
+
+                        <div class="input-field col s6 m5 l5 valign-wrapper">
+                            <span class="prefix" style="font-size:20px;">R$</span>
+                            <input asp-for="Input.Salario" />                            
+                            <label asp-for="Input.Salario" ></label>
+                            <select asp-for="Input.Pagamento">
+                                <option selected></option>
+                                <option>Mês</option>
+                                <option>Quinzena</option>
+                                <option>Semana</option>
+                                <option>Dia</option>
+                                <option>Hora</option>
+                            </select>  
+                        </div>
+                        
+                        <div class="col s6 m2 l2 center-align">
+                            <label asp-for="Input.Experiencia"></label>                            
+                            <div class="mgn-t-10">
+                            <label>
+                                <input class="filled-in" asp-for="Input.Experiencia" type="checkbox" />                                
+                                <span></span>
+                            </label>  
+                            </div>
+                        </div>
+
+                        <div class="input-field col s6 m2 l2">
+                            <input asp-for="Input.Data" />
+                            <label asp-for="Input.Data" ></label>
                         </div>
                     
                 </div>
@@ -42,3 +90,14 @@
         </div>
     </section>
 </form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/jquery.mask.min.js"></script>
+    <script src="~/js/jquery.mask.min.js"></script>
+    <script>
+        $('#inputCPF').mask('000.000.000-00');
+        $('#inputCNPJ').mask('00.000.000/0000-00');
+        $('#inputCNAE').mask('00.00-0-00');
+    </script>
+}
