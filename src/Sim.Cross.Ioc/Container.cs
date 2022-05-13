@@ -57,6 +57,7 @@ namespace Sim.Cross.Ioc
             RegisterTiposInscricaoEventos(services);
             RegisterPlanner(services);
             RegisterParceiro(services);
+            RegisterEmpregos(services);
         }
 
         private static void RegisterPessoa(IServiceCollection services)
@@ -249,6 +250,18 @@ namespace Sim.Cross.Ioc
 
             services.AddScoped<IRepositoryBase<Parceiro>, RepositoryBase<Parceiro>>();
             services.AddScoped<IRepositoryParceiro, RepositoryParceiro>();
+        }
+
+        private static void RegisterEmpregos(IServiceCollection services)
+        {
+            services.AddScoped<IAppServiceBase<Empregos>, AppServiceBase<Empregos>>();
+            services.AddScoped<IAppServiceEmpregos, AppServiceEmpregos>();
+
+            services.AddScoped<IServiceBase<Empregos>, ServiceBase<Empregos>>();
+            services.AddScoped<IServiceEmpregos, ServiceEmpregos>();
+
+            services.AddScoped<IRepositoryBase<Empregos>, RepositoryBase<Empregos>>();
+            services.AddScoped<IRepositoryEmpregos, RepositoryEmpregos>();
         }
     }
 }

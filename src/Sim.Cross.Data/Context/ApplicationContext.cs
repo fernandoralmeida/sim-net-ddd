@@ -27,6 +27,7 @@ namespace Sim.Cross.Data.Context
         public DbSet<Pessoa> Pessoa { get; set; }
         //public DbSet<QSA> QSA { get; set; }
         public DbSet<RaeSebrae> Sebrae { get; set; }
+        public DbSet<Empregos> Emprego { get; set; }
 
         //Shared
         public DbSet<Atendimento> Atendimento { get; set; }
@@ -69,6 +70,7 @@ namespace Sim.Cross.Data.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Ambulante>().ToTable("Ambulante");
+            modelBuilder.Entity<Empregos>().ToTable("Empregos");
             modelBuilder.Entity<DIA>().ToTable("DIA");
             modelBuilder.Entity<Pessoa>().ToTable("Pessoa");
             modelBuilder.Entity<Empresas>().ToTable("Empresa");
@@ -88,6 +90,7 @@ namespace Sim.Cross.Data.Context
 
 
             modelBuilder.ApplyConfiguration(new Config.Entity.AmbulanteMap());
+            modelBuilder.ApplyConfiguration(new Config.Entity.EmpregosMap());
             modelBuilder.ApplyConfiguration(new Config.Entity.AtendimentoMap());
             modelBuilder.ApplyConfiguration(new Config.Entity.CanalMap());
             modelBuilder.ApplyConfiguration(new Config.Entity.DIAMap());

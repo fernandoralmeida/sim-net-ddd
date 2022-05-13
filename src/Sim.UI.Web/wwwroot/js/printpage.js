@@ -8,8 +8,3 @@
         window.print()
         printButton.style.visibility = 'visible';
 }
-
-function viewloading() {
-    var vloading = document.getElementById("progress");
-    vloading.style.visibility = 'visible';
-}
