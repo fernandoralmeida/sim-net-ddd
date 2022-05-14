@@ -21,7 +21,7 @@ namespace Sim.UI.Web.Pages.Pat
 
         [BindProperty]
         public string CNPJ { get; set; }
-        public ICollection<Empregos> ListaEmpregos { get; set; }
+        public IEnumerable<Empregos> ListaEmpregos { get; set; }
         public IEnumerable<Empresas> ListaEmpresas { get; set; }
 
         public IndexModel(IAppServiceEmpregos appServiceEmpregos,
@@ -37,6 +37,7 @@ namespace Sim.UI.Web.Pages.Pat
 
         public void OnPost()
         {
+            ListaEmpregos = appEmpregos.GetAllEmpregosAsync(CNPJ).Result;
             ListaEmpresas = Task.Run(() => appEmpresa.ConsultaByCNPJ(CNPJ)).Result;
         }
     }

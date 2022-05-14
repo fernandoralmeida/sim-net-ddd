@@ -2,13 +2,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System;
 
 namespace Sim.UI.Web.Pages.Pat.Add
 {
     using Sim.Application.SDE.Interface;
     using Sim.Domain.SDE.Entity;
     using Functions;
-    using System;
+    
 
     public class IndexModel : PageModel
     {
@@ -26,38 +27,44 @@ namespace Sim.UI.Web.Pages.Pat.Add
         
             _appServiceEmpresa = appServiceEmpresa;
             _appServiceEmpregos = appServiceEmpregos;
-
         }
 
-        private async void GetCNPJ(Guid cnpj)
+        public async Task<IActionResult> OnGetAsync(Guid id)
         {
-
-                var t = Task.Run(() => _appServiceEmpresa.GetById(cnpj));
-
-                await t;
-
-                
-                    Input.Empresa.Nome_Empresarial = t.Result.Nome_Empresarial;
-                    Input.Empresa.CNAE_Principal = t.Result.CNAE_Principal;
-                    Input.Empresa.Atividade_Principal = t.Result.Atividade_Principal;
-                
-
+            Input = new();
+            Input.Data = DateTime.Now;            
+            var t = Task.Run(() => _appServiceEmpresa.GetById(id));
+            await t;
+            Input.Empresa = t.Result;
+            return Page();
         }
 
-        public void OnGet(Guid id)
+        public async Task<IActionResult> OnPostAsync()
         {
-            Input.Data = DateTime.Now;
-            GetCNPJ(id);            
+            if (!ModelState.IsValid)
+            { return Page(); }
+
+            var t = Task.Run(() =>
+            {
+                var empresa = _appServiceEmpresa.GetById(Input.Empresa.Id);
+
+                var emprego = new Empregos()
+                {
+                    Empresa = empresa,
+                    Data = Input.Data,
+                    Experiencia = Input.Experiencia,
+                    Vagas = Input.Vagas,
+                    Ocupacao = Input.Ocupacao,
+                    Pagamento = Input.Pagamento,
+                    Salario = Input.Salario
+                };
+
+                _appServiceEmpregos.Add(emprego);
+
+            } );
+            await t;
+
+            return RedirectToPage("/Pat/Index");
         }
-
-        public IActionResult OnPostCNPJ()
-        {
-            if (Input.Empresa != null)
-                return RedirectToPage("/Pat/Add/Index", new { id = Input.Empresa.CNPJ.MaskRemove() });
-            else
-                return Page();
-
-        }
-
     }
 }

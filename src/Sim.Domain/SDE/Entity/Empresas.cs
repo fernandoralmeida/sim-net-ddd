@@ -34,6 +34,7 @@ namespace Sim.Domain.SDE.Entity
 
         public virtual ICollection<Atendimento> Atendimentos { get; set; }
         public virtual ICollection<Inscricao> Inscricoes { get; set; }
+        public virtual ICollection<Empregos> VagasEmpregos { get; set; }
 
         public bool UltimasFormalizacoes(Empresas obj)
         {

@@ -16,15 +16,16 @@ namespace Sim.Cross.Data.Repository.SDE
 
         public async Task<IEnumerable<Empregos>> GetAllEmpregosAsync()
         {
-            var t = _db.Emprego.ToListAsync();
+            var t = _db.Emprego.Include(e => e.Empresa).ToListAsync();
             await t;
             return t.Result;
         }
 
-        public Task<IEnumerable<Empregos>> GetAllEmpregosAsync(string cnpj)
+        public async Task<IEnumerable<Empregos>> GetAllEmpregosAsync(string cnpj)
         {
-            var t = Task.Run(() => _db.Emprego.Where(s => s.Empresa.CNPJ == cnpj));
-            return (Task<IEnumerable<Empregos>>)t.Result;
+            var t = Task.Run(() => _db.Emprego.Include(e => e.Empresa).Where(s => s.Empresa.CNPJ == cnpj));
+            await t;
+            return t.Result;
         }
     }
 }
