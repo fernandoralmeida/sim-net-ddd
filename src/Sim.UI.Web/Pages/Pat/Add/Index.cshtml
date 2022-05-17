@@ -57,7 +57,7 @@
 
                         <div class="input-field col s6 m5 l5 valign-wrapper">
                             <span class="prefix" style="font-size:20px;">R$</span>
-                            <input asp-for="Input.Salario" />                            
+                            <input asp-for="Input.Salario" onkeypress="return(moeda(this,'.',',',event))"/>                            
                             <label asp-for="Input.Salario" ></label>
                             <select asp-for="Input.Pagamento">
                                 <option selected></option>
@@ -101,6 +101,7 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script src="~/js/jquery.mask.min.js"></script>
     <script src="~/js/jquery.mask.min.js"></script>
+    <script src="~/js/fcurrency.js"></script>
     <script>
         $('#inputCPF').mask('000.000.000-00');
         $('#inputCNPJ').mask('00.000.000/0000-00');

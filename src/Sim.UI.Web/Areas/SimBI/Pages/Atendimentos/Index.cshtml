@@ -11,19 +11,20 @@
 
 <div class="row">
     <form method="post" class="row center">
-        <button class="@NavPages.JanNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="jan">Jan</button>
-        <button class="@NavPages.FevNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="fev">Fev</button>
-        <button class="@NavPages.MarNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="mar">Mar</button>
-        <button class="@NavPages.AbrNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="abr">Abr</button>
-        <button class="@NavPages.MaiNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="mai">Mai</button>
-        <button class="@NavPages.JunNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="jun">Jun</button>
-        <button class="@NavPages.JulNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="jul">Jul</button>
-        <button class="@NavPages.AgoNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="ago">Ago</button>
-        <button class="@NavPages.SetNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="set">Set</button>
-        <button class="@NavPages.OutNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="out">Out</button>
-        <button class="@NavPages.NovNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="nov">Nov</button>
-        <button class="@NavPages.DezNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="dez">Dez</button>
-        <button class="@NavPages.YearNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Year">Anual</button>
+        <input asp-for="Ano" />
+        <button class="@NavPages.JanNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="jan" asp-route-y="@Model.Ano">Jan</button>
+        <button class="@NavPages.FevNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="fev" asp-route-y="@Model.Ano">Fev</button>
+        <button class="@NavPages.MarNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="mar" asp-route-y="@Model.Ano">Mar</button>
+        <button class="@NavPages.AbrNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="abr" asp-route-y="@Model.Ano">Abr</button>
+        <button class="@NavPages.MaiNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="mai" asp-route-y="@Model.Ano">Mai</button>
+        <button class="@NavPages.JunNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="jun" asp-route-y="@Model.Ano">Jun</button>
+        <button class="@NavPages.JulNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="jul" asp-route-y="@Model.Ano">Jul</button>
+        <button class="@NavPages.AgoNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="ago" asp-route-y="@Model.Ano">Ago</button>
+        <button class="@NavPages.SetNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="set" asp-route-y="@Model.Ano">Set</button>
+        <button class="@NavPages.OutNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="out" asp-route-y="@Model.Ano">Out</button>
+        <button class="@NavPages.NovNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="nov" asp-route-y="@Model.Ano">Nov</button>
+        <button class="@NavPages.DezNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="dez" asp-route-y="@Model.Ano">Dez</button>
+        <button class="@NavPages.YearNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Year" asp-route-y="@Model.Ano">Anual</button>        
     </form>
     <ul class="collapsible popout">
         @{

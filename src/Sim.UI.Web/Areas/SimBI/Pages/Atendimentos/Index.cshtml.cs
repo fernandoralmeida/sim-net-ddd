@@ -42,7 +42,7 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Atendimentos
             IAppServiceSetor appsetores)
         {
             _appAtendimento = appAtendimento;
-            _appSetores = appsetores;                
+            _appSetores = appsetores;            
         }
 
         private async Task LoadAsyncMonth(DateTime date)
@@ -60,7 +60,7 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Atendimentos
                     Input.Add(setor);
             }
         }
-        private async Task LoadAsync(DateTime date, string month)
+        private async Task LoadAsync(DateTime date, string month, int ano)
         {
             ButtonPressed = month;
 
@@ -85,10 +85,17 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Atendimentos
                 await LoadAsyncMonth(Periodo);
         }
 
-        public async Task<IActionResult> OnGetAsync()
+        public async Task<IActionResult> OnGetAsync(string id, int y)
         {
+            if (y != 0)
+            {
+                Ano = DateTime.Now.Year;
+            }
+            else
+                Ano = y;
+
             Periodo = DateTime.Now; 
-            await LoadAsync(Periodo, Functions.DateTimeExtensions.ToShortMonthName(DateTime.Now));
+            await LoadAsync(Periodo, Functions.DateTimeExtensions.ToShortMonthName(DateTime.Now), Ano);
             return Page();
         }
 
@@ -161,16 +168,16 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Atendimentos
             return rjson;
         }
 
-        public async Task<IActionResult> OnPostMonth(string id)
+        public async Task<IActionResult> OnPostMonth(string id, int y)
         {
-            await LoadAsync(Periodo, id);
+            await LoadAsync(Periodo, id, y);
             return Page();
         }
 
-        public async Task<IActionResult> OnPostYear(string id)
+        public async Task<IActionResult> OnPostYear(string id, int y)
         {
             Periodo = DateTime.Now;
-            await LoadAsync(Periodo, id);
+            await LoadAsync(Periodo, id, y);
             return Page();
         }
 
