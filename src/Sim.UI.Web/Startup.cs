@@ -17,6 +17,7 @@ namespace Sim.UI.Web
     using Sim.Cross.Ioc;
     using Sim.Service.CNPJ.WebService;
     using Sim.Cross.Data.Context;
+    using System.Globalization;
 
     public class Startup
     {

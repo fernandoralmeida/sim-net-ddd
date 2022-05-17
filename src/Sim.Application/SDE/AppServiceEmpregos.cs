@@ -22,5 +22,10 @@ namespace Sim.Application.SDE
         {
             return _db.GetAllEmpregosAsync(cnpj);
         }
+
+        public Task<IEnumerable<Empregos>> GetByIdAsync(Guid id)
+        {
+            return _db.GetByIdAsync(id);
+        }
     }
 }

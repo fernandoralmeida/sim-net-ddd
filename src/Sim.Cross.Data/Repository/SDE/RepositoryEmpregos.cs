@@ -27,5 +27,12 @@ namespace Sim.Cross.Data.Repository.SDE
             await t;
             return t.Result;
         }
+
+        public async Task<IEnumerable<Empregos>> GetByIdAsync(Guid id)
+        {
+            var t = Task.Run(() => _db.Emprego.Include(e => e.Empresa).Where(s => s.Id == id));
+            await t;
+            return t.Result;
+        }
     }
 }

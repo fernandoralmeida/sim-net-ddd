@@ -12,5 +12,6 @@ namespace Sim.Application.SDE.Interface
     {
         Task<IEnumerable<Empregos>> GetAllEmpregosAsync();
         Task<IEnumerable<Empregos>> GetAllEmpregosAsync(string cnpj);
+        Task<IEnumerable<Empregos>> GetByIdAsync(Guid id);
     }
 }

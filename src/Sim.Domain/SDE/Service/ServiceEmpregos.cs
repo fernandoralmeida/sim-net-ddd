@@ -28,5 +28,10 @@ namespace Sim.Domain.SDE.Service
         {
             return repositoryEmpregos.GetAllEmpregosAsync(cnpj);
         }
+
+        public Task<IEnumerable<Empregos>> GetByIdAsync(Guid id)
+        {
+            return repositoryEmpregos.GetByIdAsync(id);
+        }
     }
 }

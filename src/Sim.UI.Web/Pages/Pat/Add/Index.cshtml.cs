@@ -8,8 +8,7 @@ namespace Sim.UI.Web.Pages.Pat.Add
 {
     using Sim.Application.SDE.Interface;
     using Sim.Domain.SDE.Entity;
-    using Functions;
-    
+    using Functions;    
 
     public class IndexModel : PageModel
     {
