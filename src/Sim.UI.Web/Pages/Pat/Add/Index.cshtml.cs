@@ -3,13 +3,15 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Sim.UI.Web.Pages.Pat.Add
 {
     using Sim.Application.SDE.Interface;
     using Sim.Domain.SDE.Entity;
-    using Functions;    
+    using Functions;   
 
+    [Authorize(Roles = "Administrador,M_Pat")]
     public class IndexModel : PageModel
     {
         private readonly IAppServiceEmpresa _appServiceEmpresa;

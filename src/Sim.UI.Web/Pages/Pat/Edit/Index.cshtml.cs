@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Sim.UI.Web.Pages.Pat.Edit
 {
@@ -10,6 +11,7 @@ namespace Sim.UI.Web.Pages.Pat.Edit
     using Sim.Domain.SDE.Entity;
     using Functions;
 
+    [Authorize(Roles = "Administrador,M_Pat")]
     public class IndexModel : PageModel
     {
         

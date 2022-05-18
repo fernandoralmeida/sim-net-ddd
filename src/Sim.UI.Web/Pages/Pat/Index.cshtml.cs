@@ -8,9 +8,9 @@ namespace Sim.UI.Web.Pages.Pat
 {
     using Sim.Application.SDE.Interface;
     using Sim.Domain.SDE.Entity;
-    
 
-    [Authorize]
+
+    [Authorize(Roles = "Administrador,M_Pat")]
     public class IndexModel : PageModel
     {
         private readonly IAppServiceEmpregos appEmpregos;
