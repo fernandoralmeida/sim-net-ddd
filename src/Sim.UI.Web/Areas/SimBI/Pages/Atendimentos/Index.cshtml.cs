@@ -6,6 +6,7 @@ using System.Globalization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Authorization;
+using System.ComponentModel.DataAnnotations;
 
 namespace Sim.UI.Web.Areas.SimBI.Pages.Atendimentos
 {
@@ -13,6 +14,7 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Atendimentos
     using Sim.Application.Shared.Interface;
     using Sim.Domain.Shared.Entity;
     using System;
+
 
     [Authorize]
     public class IndexModel : PageModel
@@ -26,49 +28,27 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Atendimentos
         [TempData]
         public string StatusMessage { get; set; }
 
-        [TempData]
-        public DateTime Periodo { get; set; }
+        [BindProperty(SupportsGet = true)]
+        public int Mes { get; set; }
 
-        [TempData]
-        public string Mes { get; set; }
-
-        [TempData]
+        [BindProperty(SupportsGet = true)]
         public int Ano { get; set; }
-
-        [TempData]
-        public string ButtonPressed { get; set; }
 
         public IndexModel(IAppServiceAtendimento appAtendimento,
             IAppServiceSetor appsetores)
         {
             _appAtendimento = appAtendimento;
-            _appSetores = appsetores;            
+            _appSetores = appsetores;  
         }
 
-        private async Task LoadAsyncMonth(DateTime date)
+        private async Task LoadAsync()
         {
-            var l_all_atendimentos = await _appAtendimento.ByAllMonth(date);
 
-            Input.Add(l_all_atendimentos);
-
-            var setores = _appSetores.List();
-
-            foreach (Setor s in setores)
+            if(Mes == 0)
             {
-                var setor = await _appAtendimento.BySetorMonth(s.Nome, date);
-                if (setor.Count() > 1)
-                    Input.Add(setor);
-            }
-        }
-        private async Task LoadAsync(DateTime date, string month, int ano)
-        {
-            ButtonPressed = month;
+                var periodo = new DateTime(Ano, 1, 1);
 
-            GetPeriod(month);
-
-            if(ButtonPressed == "Year")
-            {
-                var l_all_atendimentos = await _appAtendimento.ByAll(date);
+                var l_all_atendimentos = await _appAtendimento.ByAll(periodo);
 
                 Input.Add(l_all_atendimentos);
 
@@ -76,45 +56,53 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Atendimentos
 
                 foreach (Setor s in setores)
                 {
-                    var setor = await _appAtendimento.BySetor(s.Nome, date);
+                    var setor = await _appAtendimento.BySetor(s.Nome, periodo);
                     if (setor.Count() > 1)
                         Input.Add(setor);
                 }
             }
             else
-                await LoadAsyncMonth(Periodo);
+            {
+                var p = new DateTime(Ano, Mes, 1);
+
+                var l_all_atendimentos = await _appAtendimento.ByAllMonth(p);
+
+                Input.Add(l_all_atendimentos);
+
+                var setores = _appSetores.List();
+
+                foreach (Setor s in setores)
+                {
+                    var setor = await _appAtendimento.BySetorMonth(s.Nome, p);
+                    if (setor.Count() > 1)
+                        Input.Add(setor);
+                }
+            }
         }
 
-        public async Task<IActionResult> OnGetAsync(string id, int y)
+        public async Task<IActionResult> OnGetAsync()
         {
-            if (y != 0)
-            {
-                Ano = DateTime.Now.Year;
-            }
-            else
-                Ano = y;
-
-            Periodo = DateTime.Now; 
-            await LoadAsync(Periodo, Functions.DateTimeExtensions.ToShortMonthName(DateTime.Now), Ano);
+            Ano = DateTime.Now.Year;
+            Mes = DateTime.Now.Month;
+            await LoadAsync();
             return Page();
         }
 
         public JsonResult OnGetPreview(string id, string id2, string mth)
         {
             JsonResult rjson;
-            Periodo = DateTime.Now;
-            ButtonPressed = mth;
-            GetPeriod(mth);
 
-            if (ButtonPressed == "Year")
-            {                
-                var user_atendimentos = Task.Run(() => _appAtendimento.ByUserName(id, Periodo));
+            if (Mes == 0)
+            {
+                var periodo = new DateTime(Ano, 1, 1);
+                var user_atendimentos = Task.Run(() => _appAtendimento.ByUserName(id, periodo));
                 user_atendimentos.Wait();
                 rjson = new JsonResult(user_atendimentos.Result);
             }
             else
             {
-                var user_atendimentos = Task.Run(() => _appAtendimento.ByUserNameMonth(id, id2, Periodo));
+                var p = new DateTime(Ano, Mes, 1);
+                var user_atendimentos = Task.Run(() => _appAtendimento.ByUserNameMonth(id, id2, p));
                 user_atendimentos.Wait();
                 rjson = new JsonResult(user_atendimentos.Result);
             }
@@ -125,19 +113,18 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Atendimentos
         public JsonResult OnGetServicoPreview(string id, string mth)
         {
             JsonResult rjson;
-            Periodo = DateTime.Now;
-            ButtonPressed = mth;
-            GetPeriod(mth);
 
-            if (ButtonPressed == "Year")
+            if (Mes == 0)
             {
-                var user_atendimentos = Task.Run(() => _appAtendimento.ByServicos(id, Periodo));
+                var periodo = new DateTime(Ano, 1, 1);
+                var user_atendimentos = Task.Run(() => _appAtendimento.ByServicos(id, periodo));
                 user_atendimentos.Wait();
                 rjson = new JsonResult(user_atendimentos.Result);
             }
             else
             {
-                var user_atendimentos = Task.Run(() => _appAtendimento.ByServicosMonth(id, Periodo));
+                var periodo = new DateTime(Ano, Mes, 1);
+                var user_atendimentos = Task.Run(() => _appAtendimento.ByServicosMonth(id, periodo));
                 user_atendimentos.Wait();
                 rjson = new JsonResult(user_atendimentos.Result);
             }
@@ -148,19 +135,18 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Atendimentos
         public JsonResult OnGetCanalPreview(string id, string id2, string mth)
         {
             JsonResult rjson;
-            Periodo = DateTime.Now;
-            ButtonPressed = mth;
-            GetPeriod(mth);
 
-            if (ButtonPressed == "Year")
+            if (Mes == 0)
             {
-                var user_atendimentos = Task.Run(() => _appAtendimento.ByCanal(id, id2, Periodo));
+                var periodo = new DateTime(Ano, 1, 1);
+                var user_atendimentos = Task.Run(() => _appAtendimento.ByCanal(id, id2, periodo));
                 user_atendimentos.Wait();
                 rjson = new JsonResult(user_atendimentos.Result);
             }
             else
             {
-                var user_atendimentos = Task.Run(() => _appAtendimento.ByCanalMonth(id, id2, Periodo));
+                var periodo = new DateTime(Ano, Ano, 1);
+                var user_atendimentos = Task.Run(() => _appAtendimento.ByCanalMonth(id, id2, periodo));
                 user_atendimentos.Wait();
                 rjson = new JsonResult(user_atendimentos.Result);
             }
@@ -168,75 +154,16 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Atendimentos
             return rjson;
         }
 
-        public async Task<IActionResult> OnPostMonth(string id, int y)
+        public async Task<IActionResult> OnPostMonth()
         {
-            await LoadAsync(Periodo, id, y);
+            await LoadAsync();
             return Page();
         }
 
-        public async Task<IActionResult> OnPostYear(string id, int y)
+        public async Task<IActionResult> OnPostYear()
         {
-            Periodo = DateTime.Now;
-            await LoadAsync(Periodo, id, y);
+            await LoadAsync();
             return Page();
-        }
-
-        private void GetPeriod(string param)
-        {
-            switch (param)
-            {
-                case "jan":
-                    Periodo = new DateTime(Periodo.Year, 01, 01);
-                    break;
-
-                case "fev":
-                    Periodo = new DateTime(Periodo.Year, 02, 01);
-                    break;
-
-                case "mar":
-                    Periodo = new DateTime(Periodo.Year, 03, 01);
-                    break;
-
-                case "abr":
-                    Periodo = new DateTime(Periodo.Year, 04, 01);
-                    break;
-
-                case "mai":
-                    Periodo = new DateTime(Periodo.Year, 05, 01);
-                    break;
-
-                case "jun":
-                    Periodo = new DateTime(Periodo.Year, 06, 01);
-                    break;
-
-                case "jul":
-                    Periodo = new DateTime(Periodo.Year, 07, 01);
-                    break;
-
-                case "ago":
-                    Periodo = new DateTime(Periodo.Year, 08, 01);
-                    break;
-
-                case "set":
-                    Periodo = new DateTime(Periodo.Year, 09, 01);
-                    break;
-
-                case "out":
-                    Periodo = new DateTime(Periodo.Year, 10, 01);
-                    break;
-
-                case "nov":
-                    Periodo = new DateTime(Periodo.Year, 11, 01);
-                    break;
-
-                case "dez":
-                    Periodo = new DateTime(Periodo.Year, 12, 01);
-                    break;
-
-                default:
-                    ButtonPressed = "Year";
-                    break;
-            }
         }
     }
 }

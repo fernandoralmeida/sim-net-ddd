@@ -4,27 +4,34 @@
 @{
     Layout = "_Layout.cshtml";
     ViewData["Title"] = "Index";
-    ViewData["ActiveButton"] = Model.ButtonPressed;
 }
 
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
 <div class="row">
     <form method="post" class="row center">
+
+    <div class="input-field col s12 l3 m3 valign-wrapper">
+        <select asp-for="Mes">
+            <option value="0">ano</option>
+            <option value="1">jan</option>
+            <option value="2">fev</option>
+            <option value="3">mar</option>
+            <option value="4">abr</option>
+            <option value="5">mai</option>
+            <option value="6">jun</option>
+            <option value="7">jul</option>
+            <option value="8">ago</option>
+            <option value="9">set</option>
+            <option value="10">out</option>
+            <option value="11">nov</option>
+            <option value="12">dev</option>
+        </select>
         <input asp-for="Ano" />
-        <button class="@NavPages.JanNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="jan" asp-route-y="@Model.Ano">Jan</button>
-        <button class="@NavPages.FevNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="fev" asp-route-y="@Model.Ano">Fev</button>
-        <button class="@NavPages.MarNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="mar" asp-route-y="@Model.Ano">Mar</button>
-        <button class="@NavPages.AbrNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="abr" asp-route-y="@Model.Ano">Abr</button>
-        <button class="@NavPages.MaiNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="mai" asp-route-y="@Model.Ano">Mai</button>
-        <button class="@NavPages.JunNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="jun" asp-route-y="@Model.Ano">Jun</button>
-        <button class="@NavPages.JulNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="jul" asp-route-y="@Model.Ano">Jul</button>
-        <button class="@NavPages.AgoNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="ago" asp-route-y="@Model.Ano">Ago</button>
-        <button class="@NavPages.SetNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="set" asp-route-y="@Model.Ano">Set</button>
-        <button class="@NavPages.OutNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="out" asp-route-y="@Model.Ano">Out</button>
-        <button class="@NavPages.NovNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="nov" asp-route-y="@Model.Ano">Nov</button>
-        <button class="@NavPages.DezNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Month" asp-route-id="dez" asp-route-y="@Model.Ano">Dez</button>
-        <button class="@NavPages.YearNavClass(ViewContext) waves-effect waves-light" asp-page-handler="Year" asp-route-y="@Model.Ano">Anual</button>        
+        <button class="btn waves-effect waves-light" asp-page-handler="Month"><i class="material-icons">refresh</i></button> 
+    </div>
+
+
     </form>
     <ul class="collapsible popout">
         @{
@@ -48,7 +55,7 @@
                                 {
                                     @if (op.Key.Contains("Servico-"))
                                     {
-                                        <li class="collection-item"><span class="new badge green lighten-1" data-badge-caption="@op.Value"></span><a class="modal-trigger blue-grey-text" href="#viewmodal" data-hdlr="ServicoPreview" data-id="@op.Key.Replace("Servico-", "")" data-mth="@Model.ButtonPressed" title="Detalhar serviço">@op.Key.Replace("Servico-", "")</a></li>
+                                        <li class="collection-item"><span class="new badge green lighten-1" data-badge-caption="@op.Value"></span><a class="modal-trigger blue-grey-text" href="#viewmodal" data-hdlr="ServicoPreview" data-id="@op.Key.Replace("Servico-", "")" data-mth="m" title="Detalhar serviço">@op.Key.Replace("Servico-", "")</a></li>
                                     }
                                 }
                             </ul>
@@ -60,7 +67,7 @@
                                 {
                                     @if (op.Key.Contains("Canal-"))
                                     {
-                                        <li class="collection-item"><span class="new badge blue lighten-1" data-badge-caption="@op.Value"></span><a class="modal-trigger blue-grey-text" href="#viewmodalcanal" data-hdlr="CanalPreview" data-id="@op.Key.Replace("Canal-", "")" data-id2="@setor.FirstOrDefault().Key" data-mth="@Model.ButtonPressed"  title="Detalhar canal de atendimento">@op.Key.Replace("Canal-", "")</a></li>
+                                        <li class="collection-item"><span class="new badge blue lighten-1" data-badge-caption="@op.Value"></span><a class="modal-trigger blue-grey-text" href="#viewmodalcanal" data-hdlr="CanalPreview" data-id="@op.Key.Replace("Canal-", "")" data-id2="@setor.FirstOrDefault().Key" data-mth="m"  title="Detalhar canal de atendimento">@op.Key.Replace("Canal-", "")</a></li>
                                     }
                                 }
                             </ul>
@@ -72,7 +79,7 @@
                                 {
                                     @if (op.Key.Contains("User-"))
                                     {
-                                        <li class="collection-item"><span class="new badge blue lighten-1" data-badge-caption="@op.Value"></span><a class="modal-trigger blue-grey-text" href="#viewmodaluser" data-hdlr="Preview" data-id="@op.Key.Replace("User-", "")" data-id2="@setor.FirstOrDefault().Key" data-mth="@Model.ButtonPressed" title="Detalhar atendimentos">@op.Key.Replace("User-", "")</a></li>
+                                        <li class="collection-item"><span class="new badge blue lighten-1" data-badge-caption="@op.Value"></span><a class="modal-trigger blue-grey-text" href="#viewmodaluser" data-hdlr="Preview" data-id="@op.Key.Replace("User-", "")" data-id2="@setor.FirstOrDefault().Key" data-mth="m" title="Detalhar atendimentos">@op.Key.Replace("User-", "")</a></li>
                                     }
                                 }
                             </ul>
