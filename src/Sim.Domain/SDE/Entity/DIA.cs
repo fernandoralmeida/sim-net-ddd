@@ -18,7 +18,6 @@ namespace Sim.Domain.SDE.Entity
 
         //public string Atividade { get; set; }
         //public string FormaAtuacao { get; set; }
-
         public string Veiculo { get; set; }
         public DateTime? Emissao { get; set; }
         public DateTime? Validade { get; set; }
