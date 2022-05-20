@@ -100,18 +100,16 @@
                     <div class="card-action center-align">
                     <div class="row">
                          <div class="col s6 m6 l6">    
-                         
+                         <h6>Clientes</h6>
                          <a href="#" class="btn blue waves-effect waves-light btn-large">
                          @Model.Atendimentos_List.Antendimentos_Ano.Value
-                         </a>
-                         <h6>Clientes</h6>
+                         </a>                         
                          </div>
                          <div class="col s6 m6 l6">
-                         
+                         <h6>Serviços</h6>
                          <a href="#" class="btn blue darken-4 waves-effect waves-light btn-large">
                          @Model.Atendimentos_List.Servicos_Ano.Value
-                         </a>
-                         <h6>Serviços</h6>
+                         </a>                         
                          </div>
                     </div>
                     </div>
@@ -121,13 +119,20 @@
                 <div class="card hoverable orange lighten-5">
                     <div class="card-header center">Pessoas [@Model.Ano]</div>
                     <div class="card-action center-align">
-                    <a href="#" class="btn orange waves-effect waves-light btn-large tooltipped">
-                    @Model.Atendimentos_List.Pessoas_Ano.Value
-                    </a>
-                    |
-                    <a href="#" class="btn deep-orange waves-effect waves-light btn-large tooltipped">
-                    @Model.Atendimentos_List.Pessoas_Servicos_Ano.Value
-                    </a>
+                    <div class="row">
+                         <div class="col s6 m6 l6">    
+                         <h6>Atendidas</h6>
+                         <a href="#" class="btn orange waves-effect waves-light btn-large">
+                         @Model.Atendimentos_List.Pessoas_Ano.Value
+                         </a>                         
+                         </div>
+                         <div class="col s6 m6 l6">
+                         <h6>Serviços</h6>
+                         <a href="#" class="btn deep-orange waves-effect waves-light btn-large">
+                         @Model.Atendimentos_List.Pessoas_Servicos_Ano.Value
+                         </a>                         
+                         </div>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -135,13 +140,20 @@
                 <div class="card hoverable purple lighten-5">
                     <div class="card-header center">Empresas [@Model.Ano]</div>
                     <div class="card-action center-align">
-                    <a href="#" class="btn purple waves-effect waves-light btn-large tooltipped">
-                    @Model.Atendimentos_List.Empresas_Ano.Value
-                    </a>
-                    |
-                    <a href="#" class="btn deep-purple waves-effect waves-light btn-large tooltipped">
-                    @Model.Atendimentos_List.Empresas_Servicos_Ano.Value
-                    </a>
+                    <div class="row">
+                         <div class="col s6 m6 l6">    
+                         <h6>Atendidas</h6>
+                         <a href="#" class="btn purple waves-effect waves-light btn-large">
+                         @Model.Atendimentos_List.Empresas_Ano.Value
+                         </a>                         
+                         </div>
+                         <div class="col s6 m6 l6">
+                         <h6>Serviços</h6>
+                         <a href="#" class="btn deep-purple waves-effect waves-light btn-large">
+                         @Model.Atendimentos_List.Empresas_Servicos_Ano.Value
+                         </a>                         
+                         </div>
+                    </div>
                     </div>
                 </div>
             </div>
