@@ -8,6 +8,7 @@ namespace Sim.Application.Shared
 {
     using Domain.Shared.Entity;
     using Domain.Shared.Interface;
+    using Domain.BI;
     using Interface;
     public class AppServiceAtendimento : AppServiceBase<Atendimento>, IAppServiceAtendimento
     {
@@ -169,9 +170,9 @@ namespace Sim.Application.Shared
         }
 
         /** BI **/
-        public Task<IEnumerable<KeyValuePair<string, int>>> BI_Atendimentos(DateTime periodo)
+        public Task<BiAtendimentos> BI_Atendimentos(DateTime periodo)
         {
-            throw new NotImplementedException();
+            return _atendimento.BI_Atendimentos(periodo);
         }
 
         public Task<IEnumerable<KeyValuePair<string, int>>> BI_Atendimentos_SA(DateTime periodo)

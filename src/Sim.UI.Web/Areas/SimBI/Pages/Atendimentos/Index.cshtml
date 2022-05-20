@@ -89,9 +89,32 @@
         }
     </ul>
 
-    <div class="card">
-        
+    <div class="row">
+        @if(Model.Atendimentos_List != null)
+        {
+            <div class="col s12 m4 l3">
+                <div class="card hoverable blue">
+                    <div class="card-header center">Atendimentos</div>
+                    <div class="card-content center"> 
+                        <span class="h3 white-text">
+                           @Model.Atendimentos_List.Antendimentos_Ano.Value  
+                        </span>                                                                     
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m4 l3">
+                <div class="card hoverable green">
+                    <div class="card-header center">Serviços</div>
+                    <div class="card-content center"> 
+                        <span class="h3 blue-text">
+                           @Model.Atendimentos_List.Servicos_Ano.Value  
+                        </span>                                                                     
+                    </div>
+                </div>
+            </div>
+        }
     </div>
+
 </div>
 
 <!-- Modal Structure -->

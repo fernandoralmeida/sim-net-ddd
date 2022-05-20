@@ -936,9 +936,426 @@ namespace Sim.Domain.Shared.Service
         }
 
         /** BI **/
-        public Task<IEnumerable<KeyValuePair<string, int>>> BI_Atendimentos(DateTime periodo)
+        public async Task<BI.BiAtendimentos> BI_Atendimentos(DateTime periodo)
         {
-            throw new NotImplementedException();
+            var d1 = new DateTime(periodo.Year, 01, 01);
+            var d2 = new DateTime(periodo.Year, 12, 31);
+
+            var list = _atendimento.ListByPeriodo(d1, d2);
+
+            var r_all = new BI.BiAtendimentos();
+
+            var t = Task.Run(() => {
+
+                try
+                {
+                    var _atendimentos = new List<string>();
+                    var _servicos = new List<string>();
+
+                    var _a_pessoas = new List<string>();
+                    var _s_pessoas = new List<string>();
+
+                    var _a_empresas = new List<string>();
+                    var _s_empresas = new List<string>();
+
+                    foreach (Atendimento at in list)
+                    {
+                        _atendimentos.Add("Atendimentos");
+
+                        if (at.Empresa != null)
+                            _a_empresas.Add("A_Empresas");
+                        else
+                            _a_pessoas.Add("A_Pessoas");
+
+                        if (at.Servicos != null)
+                        {
+                            string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
+
+                            foreach (string sv in words)
+                            {
+                                if (sv != null && sv != string.Empty)
+                                {
+                                    _servicos.Add("Serviços");
+                                    if (at.Empresa != null)
+                                        _s_empresas.Add("S_Empresas");
+                                    else
+                                        _s_pessoas.Add("S_Pessoas");
+                                }
+                            }
+                        }
+                        #region Meses
+                        // mes servicos 
+                        /*
+                        switch (at.Data.Value.Month)
+                        {
+                            case 1:
+                                if (at.Empresa != null)
+                                    _empresas_mes.Add("Empresas-S");
+                                else
+                                    _pessoas_mes.Add("Pessoas-S");
+
+                                if (at.Servicos != null)
+                                {
+                                    string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
+
+                                    foreach (string sv in words)
+                                    {
+                                        if (sv != null && sv != string.Empty)
+                                        {
+                                            _mes_servicos.Add("Serv " + at.Data.Value.ToString("MMM"));
+                                            if (at.Empresa != null)
+                                                _empresas_mes_servicos.Add("Empresas-" + at.Data.Value.ToString("MMM"));
+                                            else
+                                                _pessoas_mes_servicos.Add("Pessoas-" + at.Data.Value.ToString("MMM"));
+                                        }
+                                            
+                                    }
+                                }
+                                break;
+
+                            case 2:
+                                if (at.Empresa != null)
+                                    _empresas_mes.Add("Empresas");
+                                else
+                                    _pessoas_mes.Add("Pessoas");
+
+                                if (at.Servicos != null)
+                                {
+                                    string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
+
+                                    foreach (string sv in words)
+                                    {
+                                        if (sv != null && sv != string.Empty)
+                                        {
+                                            _mes_servicos.Add("Serv " + at.Data.Value.Date.ToString("MMM"));
+                                            if (at.Empresa != null)
+                                                _empresas_mes_servicos.Add("Empresas-" + at.Data.Value.ToString("MMM"));
+                                            else
+                                                _pessoas_mes_servicos.Add("Pessoas-" + at.Data.Value.ToString("MMM"));
+                                        }
+
+                                    }
+                                }
+                                break;
+
+                            case 3:
+                                if (at.Empresa != null)
+                                    _empresas_mes.Add("Empresas");
+                                else
+                                    _pessoas_mes.Add("Pessoas");
+
+                                if (at.Servicos != null)
+                                {
+                                    string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
+
+                                    foreach (string sv in words)
+                                    {
+                                        if (sv != null && sv != string.Empty)
+                                        {
+                                            _mes_servicos.Add("Serv " + at.Data.Value.Date.ToString("MMM"));
+                                            if (at.Empresa != null)
+                                                _empresas_mes_servicos.Add("Empresas-" + at.Data.Value.ToString("MMM"));
+                                            else
+                                                _pessoas_mes_servicos.Add("Pessoas-" + at.Data.Value.ToString("MMM"));
+                                        }
+
+                                    }
+                                }
+                                break;
+
+                            case 4:
+                                if (at.Empresa != null)
+                                    _empresas_mes.Add("Empresas");
+                                else
+                                    _pessoas_mes.Add("Pessoas");
+
+                                if (at.Servicos != null)
+                                {
+                                    string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
+
+                                    foreach (string sv in words)
+                                    {
+                                        if (sv != null && sv != string.Empty)
+                                        {
+                                            _mes_servicos.Add("Serv " + at.Data.Value.Date.ToString("MMM"));
+                                            if (at.Empresa != null)
+                                                _empresas_mes_servicos.Add("Empresas-" + at.Data.Value.ToString("MMM"));
+                                            else
+                                                _pessoas_mes_servicos.Add("Pessoas-" + at.Data.Value.ToString("MMM"));
+                                        }
+
+                                    }
+                                }
+                                break;
+
+                            case 5:
+                                if (at.Empresa != null)
+                                    _empresas_mes.Add("Empresas");
+                                else
+                                    _pessoas_mes.Add("Pessoas");
+
+                                if (at.Servicos != null)
+                                {
+                                    string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
+
+                                    foreach (string sv in words)
+                                    {
+                                        if (sv != null && sv != string.Empty)
+                                        {
+                                            _mes_servicos.Add("Serv " + at.Data.Value.Date.ToString("MMM"));
+                                            if (at.Empresa != null)
+                                                _empresas_mes_servicos.Add("Empresas-" + at.Data.Value.ToString("MMM"));
+                                            else
+                                                _pessoas_mes_servicos.Add("Pessoas-" + at.Data.Value.ToString("MMM"));
+                                        }
+
+                                    }
+                                }
+                                break;
+
+                            case 6:
+                                if (at.Empresa != null)
+                                    _empresas_mes.Add("Empresas");
+                                else
+                                    _pessoas_mes.Add("Pessoas");
+
+                                if (at.Servicos != null)
+                                {
+                                    string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
+
+                                    foreach (string sv in words)
+                                    {
+                                        if (sv != null && sv != string.Empty)
+                                        {
+                                            _mes_servicos.Add("Serv " + at.Data.Value.Date.ToString("MMM"));
+                                            if (at.Empresa != null)
+                                                _empresas_mes_servicos.Add("Empresas-" + at.Data.Value.ToString("MMM"));
+                                            else
+                                                _pessoas_mes_servicos.Add("Pessoas-" + at.Data.Value.ToString("MMM"));
+                                        }
+
+                                    }
+                                }
+                                break;
+
+                            case 7:
+                                if (at.Empresa != null)
+                                    _empresas_mes.Add("Empresas");
+                                else
+                                    _pessoas_mes.Add("Pessoas");
+
+                                if (at.Servicos != null)
+                                {
+                                    string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
+
+                                    foreach (string sv in words)
+                                    {
+                                        if (sv != null && sv != string.Empty)
+                                        {
+                                            _mes_servicos.Add("Serv " + at.Data.Value.Date.ToString("MMM"));
+                                            if (at.Empresa != null)
+                                                _empresas_mes_servicos.Add("Empresas-" + at.Data.Value.ToString("MMM"));
+                                            else
+                                                _pessoas_mes_servicos.Add("Pessoas-" + at.Data.Value.ToString("MMM"));
+                                        }
+
+                                    }
+                                }
+                                break;
+
+                            case 8:
+                                if (at.Empresa != null)
+                                    _empresas_mes.Add("Empresas");
+                                else
+                                    _pessoas_mes.Add("Pessoas");
+
+                                if (at.Servicos != null)
+                                {
+                                    string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
+
+                                    foreach (string sv in words)
+                                    {
+                                        if (sv != null && sv != string.Empty)
+                                        {
+                                            _mes_servicos.Add("Serv " + at.Data.Value.Date.ToString("MMM"));
+                                            if (at.Empresa != null)
+                                                _empresas_mes_servicos.Add("Empresas-" + at.Data.Value.ToString("MMM"));
+                                            else
+                                                _pessoas_mes_servicos.Add("Pessoas-" + at.Data.Value.ToString("MMM"));
+                                        }
+
+                                    }
+                                }
+                                break;
+
+                            case 9:
+                                if (at.Empresa != null)
+                                    _empresas_mes.Add("Empresas");
+                                else
+                                    _pessoas_mes.Add("Pessoas");
+
+                                if (at.Servicos != null)
+                                {
+                                    string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
+
+                                    foreach (string sv in words)
+                                    {
+                                        if (sv != null && sv != string.Empty)
+                                        {
+                                            _mes_servicos.Add("Serv " + at.Data.Value.Date.ToString("MMM"));
+                                            if (at.Empresa != null)
+                                                _empresas_mes_servicos.Add("Empresas-" + at.Data.Value.ToString("MMM"));
+                                            else
+                                                _pessoas_mes_servicos.Add("Pessoas-" + at.Data.Value.ToString("MMM"));
+                                        }
+
+                                    }
+                                }
+                                break;
+
+                            case 10:
+                                if (at.Empresa != null)
+                                    _empresas_mes.Add("Empresas");
+                                else
+                                    _pessoas_mes.Add("Pessoas");
+
+                                if (at.Servicos != null)
+                                {
+                                    string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
+
+                                    foreach (string sv in words)
+                                    {
+                                        if (sv != null && sv != string.Empty)
+                                        {
+                                            _mes_servicos.Add("Serv " + at.Data.Value.Date.ToString("MMM"));
+                                            if (at.Empresa != null)
+                                                _empresas_mes_servicos.Add("Empresas-" + at.Data.Value.ToString("MMM"));
+                                            else
+                                                _pessoas_mes_servicos.Add("Pessoas-" + at.Data.Value.ToString("MMM"));
+                                        }
+
+                                    }
+                                }
+                                break;
+
+                            case 11:
+                                if (at.Empresa != null)
+                                    _empresas_mes.Add("Empresas");
+                                else
+                                    _pessoas_mes.Add("Pessoas");
+
+                                if (at.Servicos != null)
+                                {
+                                    string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
+
+                                    foreach (string sv in words)
+                                    {
+                                        if (sv != null && sv != string.Empty)
+                                        {
+                                            _mes_servicos.Add("Serv " + at.Data.Value.Date.ToString("MMM"));
+                                            if (at.Empresa != null)
+                                                _empresas_mes_servicos.Add("Empresas-" + at.Data.Value.ToString("MMM"));
+                                            else
+                                                _pessoas_mes_servicos.Add("Pessoas-" + at.Data.Value.ToString("MMM"));
+                                        }
+
+                                    }
+                                }
+                                break;
+
+                            case 12:
+                                if (at.Empresa != null)
+                                    _empresas_mes.Add("Empresas");
+                                else
+                                    _pessoas_mes.Add("Pessoas");
+
+                                if (at.Servicos != null)
+                                {
+                                    string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
+
+                                    foreach (string sv in words)
+                                    {
+                                        if (sv != null && sv != string.Empty)
+                                        {
+                                            _mes_servicos.Add("Serv " + at.Data.Value.Date.ToString("MMM"));
+                                            if (at.Empresa != null)
+                                                _empresas_mes_servicos.Add("Empresas-" + at.Data.Value.ToString("MMM"));
+                                            else
+                                                _pessoas_mes_servicos.Add("Pessoas-" + at.Data.Value.ToString("MMM"));
+                                        }
+
+                                    }
+                                }
+                                break;
+
+                            default:
+                                break;
+                        }
+                        */
+                        #endregion
+                    }
+
+                    foreach (var x in from x in _atendimentos
+                                      group x by x into g
+                                      let count = g.Count()
+                                      //orderby count descending
+                                      select new { Value = g.Key, Count = count })
+                    {
+                        r_all.Antendimentos_Ano = new KeyValuePair<string, int>("Atendimentos", x.Count);
+                    }
+
+                    foreach (var x in from x in _servicos
+                                      group x by x into g
+                                      let count = g.Count()
+                                      //orderby count descending
+                                      select new { Value = g.Key, Count = count })
+                    {
+                        r_all.Servicos_Ano = new KeyValuePair<string, int>("Serviços", x.Count);
+                    }
+
+                    foreach (var x in from x in _a_pessoas
+                                      group x by x into g
+                                      let count = g.Count()
+                                      orderby count descending
+                                      select new { Value = g.Key, Count = count })
+                    {
+                        r_all.Pessoas_Ano = new KeyValuePair<string, int>("Atendimentos", x.Count);
+                    }
+
+                    foreach (var x in from x in _s_pessoas
+                                      group x by x into g
+                                      let count = g.Count()
+                                      orderby count descending
+                                      select new { Value = g.Key, Count = count })
+                    {
+                        r_all.Pessoas_Servicos_Ano = new KeyValuePair<string, int>("Serviços", x.Count);
+                    }
+
+
+                    foreach (var x in from x in _a_empresas
+                                      group x by x into g
+                                      let count = g.Count()
+                                      orderby count descending
+                                      select new { Value = g.Key, Count = count })
+                    {
+                        r_all.Pessoas_Servicos_Ano = new KeyValuePair<string, int>("Atendimentos", x.Count);
+                    }
+
+                    foreach (var x in from x in _s_empresas
+                                      group x by x into g
+                                      let count = g.Count()
+                                      orderby count descending
+                                      select new { Value = g.Key, Count = count })
+                    {
+                        r_all.Pessoas_Servicos_Ano = new KeyValuePair<string, int>("Serviços", x.Count);
+                    }
+                }
+                catch { }
+
+            });
+            await t;
+
+            return r_all;
         }
 
         public Task<IEnumerable<KeyValuePair<string, int>>> BI_Atendimentos_SA(DateTime periodo)

@@ -8,6 +8,7 @@ namespace Sim.Domain.Shared.Interface
 {
     using Entity;
     using Domain.Interface;
+    using Domain.BI;
     public interface IServiceAtendimento : IServiceBase<Atendimento>
     {
         IEnumerable<Atendimento> GetByPessoa(string cpf);
@@ -42,7 +43,7 @@ namespace Sim.Domain.Shared.Interface
         Task<IEnumerable<Atendimento>> ListByParam(List<object> lparam);
 
         /** BI **/
-        Task<IEnumerable<KeyValuePair<string, int>>> BI_Atendimentos(DateTime periodo);
+        Task<BiAtendimentos> BI_Atendimentos(DateTime periodo);
         Task<IEnumerable<KeyValuePair<string, int>>> BI_Atendimentos_SA(DateTime periodo);
         Task<IEnumerable<KeyValuePair<string, int>>> BI_Atendimentos_SE(DateTime periodo);
         Task<IEnumerable<KeyValuePair<string, int>>> BI_Atendimentos_BP(DateTime periodo);

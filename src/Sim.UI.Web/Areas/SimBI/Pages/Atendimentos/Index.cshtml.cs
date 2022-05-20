@@ -13,6 +13,7 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Atendimentos
 
     using Sim.Application.Shared.Interface;
     using Sim.Domain.Shared.Entity;
+    using Sim.Domain.BI;
     using System;
 
 
@@ -24,6 +25,9 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Atendimentos
 
         [BindProperty(SupportsGet = true)]
         public List<IEnumerable<KeyValuePair<string, int>>> Input { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public BiAtendimentos Atendimentos_List { get; set; }
 
         [TempData]
         public string StatusMessage { get; set; }
@@ -78,6 +82,10 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Atendimentos
                         Input.Add(setor);
                 }
             }
+
+            var nperiodo = new DateTime(Ano, 1, 1);
+            Atendimentos_List  = await _appAtendimento.BI_Atendimentos(nperiodo);
+
         }
 
         public async Task<IActionResult> OnGetAsync()
