@@ -1338,7 +1338,7 @@ namespace Sim.Domain.Shared.Service
                                       orderby count descending
                                       select new { Value = g.Key, Count = count })
                     {
-                        r_all.Pessoas_Servicos_Ano = new KeyValuePair<string, int>("Atendimentos", x.Count);
+                        r_all.Empresas_Ano = new KeyValuePair<string, int>("Atendimentos", x.Count);
                     }
 
                     foreach (var x in from x in _s_empresas
@@ -1347,7 +1347,7 @@ namespace Sim.Domain.Shared.Service
                                       orderby count descending
                                       select new { Value = g.Key, Count = count })
                     {
-                        r_all.Pessoas_Servicos_Ano = new KeyValuePair<string, int>("Serviços", x.Count);
+                        r_all.Empresas_Servicos_Ano = new KeyValuePair<string, int>("Serviços", x.Count);
                     }
                 }
                 catch { }

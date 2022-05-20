@@ -47,7 +47,7 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Atendimentos
 
         private async Task LoadAsync()
         {
-
+            /*
             if(Mes == 0)
             {
                 var periodo = new DateTime(Ano, 1, 1);
@@ -83,6 +83,7 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Atendimentos
                 }
             }
 
+            */
             var nperiodo = new DateTime(Ano, 1, 1);
             Atendimentos_List  = await _appAtendimento.BI_Atendimentos(nperiodo);
 
