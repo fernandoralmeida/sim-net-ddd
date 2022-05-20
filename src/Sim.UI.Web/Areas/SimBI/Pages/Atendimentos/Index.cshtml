@@ -91,12 +91,12 @@
     </ul>
 
     <div class="row">
-        @{        
+                
         @if(Model.Atendimentos_List != null)
         {
             <div class="col s12 m4 l4">
-                <div class="card hoverable blue lighten-5">
-                    <div class="card-header center">Atendimentos [@Model.Ano]</div>
+                <div class="card hoverable">
+                    <div class="card-header grey-text darken-3 center">Atendimentos [@Model.Ano]</div>
                     <div class="card-action center-align">
                     <div class="row">
                          <div class="col s6 m6 l6">    
@@ -116,8 +116,8 @@
                 </div>
             </div>
             <div class="col s12 m4 l4">
-                <div class="card hoverable orange lighten-5">
-                    <div class="card-header center">Pessoas [@Model.Ano]</div>
+                <div class="card hoverable">
+                    <div class="card-header grey-text darken-3 center">Pessoas [@Model.Ano]</div>
                     <div class="card-action center-align">
                     <div class="row">
                          <div class="col s6 m6 l6">    
@@ -137,8 +137,8 @@
                 </div>
             </div>
             <div class="col s12 m4 l4">
-                <div class="card hoverable purple lighten-5">
-                    <div class="card-header center">Empresas [@Model.Ano]</div>
+                <div class="card hoverable">
+                    <div class="card-header grey-text darken-3 center">Empresas [@Model.Ano]</div>
                     <div class="card-action center-align">
                     <div class="row">
                          <div class="col s6 m6 l6">    
@@ -157,10 +157,8 @@
                     </div>
                 </div>
             </div>
-        }
-        }
+        }        
     </div>
-
 </div>
 
 <!-- Modal Structure -->

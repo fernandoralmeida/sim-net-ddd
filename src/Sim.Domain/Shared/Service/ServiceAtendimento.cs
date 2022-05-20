@@ -1349,6 +1349,11 @@ namespace Sim.Domain.Shared.Service
                     {
                         r_all.Empresas_Servicos_Ano = new KeyValuePair<string, int>("Serviços", x.Count);
                     }
+
+                    GC.Collect();
+
+
+
                 }
                 catch { }
 
@@ -1358,9 +1363,46 @@ namespace Sim.Domain.Shared.Service
             return r_all;
         }
 
-        public Task<IEnumerable<KeyValuePair<string, int>>> BI_Atendimentos_SA(DateTime periodo)
+        public async Task<IEnumerable<KeyValuePair<string, int>>> BI_Atendimentos_SA(DateTime periodo)
         {
-            throw new NotImplementedException();
+            var d1 = new DateTime(periodo.Year, 01, 01);
+            var d2 = new DateTime(periodo.Year, 12, 31);
+
+            var t = Task.Run(() => {
+
+                var list = _atendimento.GetBySetor("Sebrae Aqui");
+
+                try
+                {
+
+
+                    foreach (var at in list.Where(d => d.Data.Value.Year == d1.Year))
+                    {
+                        switch(at.Data.Value.Month)
+                        {
+                            case 1:
+
+                                sa.Add()
+                                
+
+                                break;
+
+
+                            default:
+                                break;
+                        }
+
+
+                    }
+
+
+                }
+                catch { }
+            });
+
+            await t;
+
+            return null;
         }
 
         public Task<IEnumerable<KeyValuePair<string, int>>> BI_Atendimentos_SE(DateTime periodo)
