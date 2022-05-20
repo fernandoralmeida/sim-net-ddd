@@ -934,5 +934,41 @@ namespace Sim.Domain.Shared.Service
         {
             return await _atendimento.ListByParam(lparam);
         }
+
+        /** BI **/
+        public Task<IEnumerable<KeyValuePair<string, int>>> BI_Atendimentos(DateTime periodo)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<KeyValuePair<string, int>>> BI_Atendimentos_SA(DateTime periodo)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<KeyValuePair<string, int>>> BI_Atendimentos_SE(DateTime periodo)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<KeyValuePair<string, int>>> BI_Atendimentos_BP(DateTime periodo)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<KeyValuePair<string, int>>> BI_Atendimentos_PT(DateTime periodo)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<KeyValuePair<string, int>>> BI_Atendimentos_EP(DateTime periodo)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<KeyValuePair<string, int>>> BI_Atendimentos_AppUser(DateTime periodo)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

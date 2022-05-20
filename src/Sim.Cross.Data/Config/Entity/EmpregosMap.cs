@@ -21,6 +21,12 @@ namespace Sim.Cross.Data.Config.Entity
             builder.Property(c => c.Pagamento)
                 .HasColumnType("varchar(50)");
 
+            builder.Property(c => c.Status)
+                .HasColumnType("varchar(50)");
+
+            builder.Property(c => c.Salario)
+                .HasColumnType("decimal(18,2)");
+
         }
     }
 }

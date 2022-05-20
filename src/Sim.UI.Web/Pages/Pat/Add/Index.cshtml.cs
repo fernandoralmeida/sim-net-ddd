@@ -57,7 +57,8 @@ namespace Sim.UI.Web.Pages.Pat.Add
                     Vagas = Input.Vagas,
                     Ocupacao = Input.Ocupacao,
                     Pagamento = Input.Pagamento,
-                    Salario = Input.Salario
+                    Salario = Input.Salario,
+                    Status = Input.Status
                 };
 
                 _appServiceEmpregos.Add(emprego);

@@ -41,6 +41,7 @@
                 <th>
                     Vagas
                 </th>
+                <th>Status</th>
                 <th>
                     Ação
                 </th>
@@ -94,6 +95,7 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Vagas)
                     </td>
+                    <td>@Html.DisplayFor(modelitem => item.Status)</td>
                     <td>
                         <a class="btn btn-small waves-effect" asp-page="/Pat/Edit/Index" asp-route-id="@item.Id"><i class="material-icons">edit</i></a>
                     </td>

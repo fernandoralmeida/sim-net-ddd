@@ -15,10 +15,8 @@ namespace Sim.Domain.SDE.Entity
         public bool Experiencia { get; set; }
         public decimal Salario { get; set; }
         public string Pagamento { get; set; }
-        public int Vagas { get; set; }        
-        //public int Ocupadas { get; set; }
-        public string AppUserID { get; set; }
-        
+        public int Vagas { get; set; }      
+        public string Status { get;set; }
         public virtual Empresas Empresa { get; set; }
     }
 }

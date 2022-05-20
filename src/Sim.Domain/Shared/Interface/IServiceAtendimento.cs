@@ -40,5 +40,14 @@ namespace Sim.Domain.Shared.Interface
         Task<IEnumerable<KeyValuePair<string, int>>> ByCanalMonth(string canal, string setor, DateTime periodo);
         Task<IEnumerable<Atendimento>> ListAtendimentosAtivos();
         Task<IEnumerable<Atendimento>> ListByParam(List<object> lparam);
+
+        /** BI **/
+        Task<IEnumerable<KeyValuePair<string, int>>> BI_Atendimentos(DateTime periodo);
+        Task<IEnumerable<KeyValuePair<string, int>>> BI_Atendimentos_SA(DateTime periodo);
+        Task<IEnumerable<KeyValuePair<string, int>>> BI_Atendimentos_SE(DateTime periodo);
+        Task<IEnumerable<KeyValuePair<string, int>>> BI_Atendimentos_BP(DateTime periodo);
+        Task<IEnumerable<KeyValuePair<string, int>>> BI_Atendimentos_PT(DateTime periodo);
+        Task<IEnumerable<KeyValuePair<string, int>>> BI_Atendimentos_EP(DateTime periodo);
+        Task<IEnumerable<KeyValuePair<string, int>>> BI_Atendimentos_AppUser(DateTime periodo);
     }
 }

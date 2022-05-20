@@ -45,38 +45,48 @@
             <div class="row">
                 
                     
-                        <div class="input-field col s12 m12 l12">
-                            <input asp-for="Input.Ocupacao" >
+                        <div class="input-field col s12 m10 l10">
+                            <input asp-for="Input.Ocupacao" />
                             <label asp-for="Input.Ocupacao"></label>
                         </div>
+
+                        <div class="input-field col s6 m2 l2">                            
+                            <select asp-for="Input.Experiencia">
+                                <option value="True">Sim</option>
+                                <option value="False">Não</option>
+                            </select>  
+                            <label asp-for="Input.Experiencia"></label>  
+                        </div>
                         
-                        <div class="input-field col s6 m3 l3">
+                        <div class="input-field col s6 m2 l2">
                             <input asp-for="Input.Vagas" />
                             <label asp-for="Input.Vagas" ></label>
                         </div>
 
-                        <div class="input-field col s6 m5 l5 valign-wrapper">
-                            <span class="prefix" style="font-size:20px;">R$</span>
-                            <input asp-for="Input.Salario" onkeypress="return(moeda(this,'.',',',event))"/>                            
+                        <div class="input-field col s6 m2 l2">
+                            <i class="prefix" style="font-size:20px;">R$</i>
+                            <input asp-for="Input.Salario" onkeypress="return(moeda(this,'.',',',event))" />
                             <label asp-for="Input.Salario" ></label>
+                        </div>
+
+                        <div class="input-field col s6 m3 l3">
                             <select asp-for="Input.Pagamento">
-                                <option selected></option>
                                 <option>Mês</option>
                                 <option>Quinzena</option>
                                 <option>Semana</option>
                                 <option>Dia</option>
                                 <option>Hora</option>
                             </select>  
+                            <label asp-for="Input.Pagamento" ></label>
                         </div>
-                        
-                        <div class="col s6 m2 l2 center-align">
-                            <label asp-for="Input.Experiencia"></label>                            
-                            <div class="mgn-t-10">
-                            <label>
-                                <input class="filled-in" asp-for="Input.Experiencia" type="checkbox" />                                
-                                <span></span>
-                            </label>  
-                            </div>
+
+                        <div class="input-field col s6 m3 l3">                            
+                            <select asp-for="Input.Status">
+                                <option>Ativo</option>
+                                <option>Finalizado</option>
+                                <option>Cancelado</option>
+                            </select>
+                            <label asp-for="Input.Status"></label> 
                         </div>
 
                         <div class="input-field col s6 m2 l2">

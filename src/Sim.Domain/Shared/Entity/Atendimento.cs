@@ -36,7 +36,7 @@ namespace Sim.Domain.Shared.Entity
 
         public bool RaeNaoLancados(Atendimento obj)
         {
-            return obj.Sebrae == null && obj.Status != "Cancelado" && obj.Setor == "Sebrae Aqui";
+            return obj.Sebrae == null && obj.Status != "Cancelado" && obj.Setor == "Sebrae Aqui" && obj.Data.Value.Year == DateTime.Now.Year;
         }
 
         public bool BySetor(Atendimento obj, string setor_name)

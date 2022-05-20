@@ -14,7 +14,7 @@ namespace Sim.UI.Web.Pages.Pat
 
         [DisplayName("Data")]
         [DataType(DataType.Date)]
-        public DateTime Data { get; set; }
+        public DateTime? Data { get; set; }
 
         [Required(ErrorMessage = "Ocupação exigida!")]
         [DisplayName("Ocupação")]
@@ -23,16 +23,18 @@ namespace Sim.UI.Web.Pages.Pat
         [DisplayName("Experiência")]
         public bool Experiencia { get; set; }
 
-        [DisplayName("Salário Médio / Forma de pagamento")]
+        [DisplayName("Salário Médio")]
         [DataType(DataType.Currency)]
         public decimal Salario { get; set; }
-        
+
+        [DisplayName("Forma de pagamento")]
         public string Pagamento { get; set; }
 
         [Required(ErrorMessage = "Informe a quantidade de vagas!")]
         [DisplayName("Vagas Disponível")]
         public int Vagas { get; set; }
-
+        public string Status { get;set; }
+        public string AppUserID { get; set; }
         public virtual Empresas Empresa { get; set; }
     }
 }

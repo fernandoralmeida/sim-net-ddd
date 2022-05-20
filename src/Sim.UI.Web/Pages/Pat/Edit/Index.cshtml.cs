@@ -42,6 +42,7 @@ namespace Sim.UI.Web.Pages.Pat.Edit
                 Input.Salario = e.Salario;
                 Input.Pagamento = e.Pagamento;
                 Input.Experiencia = e.Experiencia;
+                Input.Status = e.Status;
                 Input.Data = e.Data;
             }       
             return Page();
@@ -60,7 +61,8 @@ namespace Sim.UI.Web.Pages.Pat.Edit
                     Vagas = Input.Vagas,
                     Ocupacao = Input.Ocupacao,
                     Pagamento = Input.Pagamento,
-                    Salario = Input.Salario
+                    Salario = Input.Salario,
+                    Status = Input.Status                    
                 };
                 _appServiceEmpregos.Remove(emprego);
             });
@@ -87,7 +89,8 @@ namespace Sim.UI.Web.Pages.Pat.Edit
                     Vagas = Input.Vagas,
                     Ocupacao = Input.Ocupacao,
                     Pagamento = Input.Pagamento,
-                    Salario = Input.Salario
+                    Salario = Input.Salario,
+                    Status = Input.Status
                 };
 
                 _appServiceEmpregos.Update(emprego);
