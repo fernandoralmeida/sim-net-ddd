@@ -964,6 +964,8 @@ namespace Sim.Domain.Shared.Service
                     var _pessoas_mes_servicos = new List<string>();
                     var _empresas_mes_servicos = new List<string>();
 
+                    var _meses_t = new List<(string Nome, int Atendimento, int Servico)>();
+
                     foreach (Atendimento at in list)
                     {
                         _atendimentos++;
@@ -989,336 +991,61 @@ namespace Sim.Domain.Shared.Service
                                 }
                             }
                         }
-                        #region Meses                        
-
-                        switch (at.Data.Value.Month)
+                        #region Meses                
+                        
+                        if(at.Servicos!=null)
                         {
-                            case 1:
-                                _meses.Add(at.Data.Value.ToString("MMM"));
+                            string[] servicos = at.Servicos.ToString().Split(new char[] { ';', ',' });
 
-                                if (at.Empresa != null)
-                                    _empresas_mes.Add(at.Data.Value.Month + "Empresas");
-                                else
-                                    _pessoas_mes.Add(at.Data.Value.Month + "Pessoas");
+                            switch(at.Data.Value.Month)
+                            {
+                                case 1:
+                                    _meses.Add(at.Data.Value.ToString("MMM"));
 
-                                if (at.Servicos != null)
-                                {
-                                    string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
-
-                                    foreach (string sv in words)
+                                    if (at.Empresa != null)
+                                        _empresas_mes.Add(at.Data.Value.Month + "Empresas");
+                                    else
+                                        _pessoas_mes.Add(at.Data.Value.Month + "Pessoas");
+                                    
+                                    foreach (string sv in servicos)
                                     {
                                         if (sv != null && sv != string.Empty)
                                         {
                                             _mes_servicos.Add(at.Data.Value.Month + "Servicos");
+
                                             if (at.Empresa != null)
                                                 _empresas_mes_servicos.Add(at.Data.Value.Month + "Servicos");
                                             else
                                                 _pessoas_mes_servicos.Add(at.Data.Value.Month + "Servicos");
                                         }
-                                            
                                     }
-                                }
-                                break;
+                                    break;
 
-                            case 2:
-                                _meses.Add(at.Data.Value.ToString("MMM"));
+                                case 2:
+                                    _meses.Add(at.Data.Value.ToString("MMM"));
 
-                                if (at.Empresa != null)
-                                    _empresas_mes.Add(at.Data.Value.Month + "Empresas");
-                                else
-                                    _pessoas_mes.Add(at.Data.Value.Month + "Pessoas");
+                                    if (at.Empresa != null)
+                                        _empresas_mes.Add(at.Data.Value.Month + "Empresas");
+                                    else
+                                        _pessoas_mes.Add(at.Data.Value.Month + "Pessoas");
 
-                                if (at.Servicos != null)
-                                {
-                                    string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
-
-                                    foreach (string sv in words)
+                                    foreach (string sv in servicos)
                                     {
                                         if (sv != null && sv != string.Empty)
                                         {
                                             _mes_servicos.Add(at.Data.Value.Month + "Servicos");
+
                                             if (at.Empresa != null)
                                                 _empresas_mes_servicos.Add(at.Data.Value.Month + "Servicos");
                                             else
                                                 _pessoas_mes_servicos.Add(at.Data.Value.Month + "Servicos");
                                         }
-
                                     }
-                                }
-                                break;
+                                    break;
 
-                            case 3:
-                                _meses.Add(at.Data.Value.ToString("MMM"));
-
-                                if (at.Empresa != null)
-                                    _empresas_mes.Add(at.Data.Value.Month + "Empresas");
-                                else
-                                    _pessoas_mes.Add(at.Data.Value.Month + "Pessoas");
-
-                                if (at.Servicos != null)
-                                {
-                                    string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
-
-                                    foreach (string sv in words)
-                                    {
-                                        if (sv != null && sv != string.Empty)
-                                        {
-                                            _mes_servicos.Add(at.Data.Value.Month + "Servicos");
-                                            if (at.Empresa != null)
-                                                _empresas_mes_servicos.Add(at.Data.Value.Month + "Servicos");
-                                            else
-                                                _pessoas_mes_servicos.Add(at.Data.Value.Month + "Servicos");
-                                        }
-
-                                    }
-                                }
-                                break;
-
-                            case 4:
-                                _meses.Add(at.Data.Value.ToString("MMM"));
-
-                                if (at.Empresa != null)
-                                    _empresas_mes.Add(at.Data.Value.Month + "Empresas");
-                                else
-                                    _pessoas_mes.Add(at.Data.Value.Month + "Pessoas");
-
-                                if (at.Servicos != null)
-                                {
-                                    string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
-
-                                    foreach (string sv in words)
-                                    {
-                                        if (sv != null && sv != string.Empty)
-                                        {
-                                            _mes_servicos.Add(at.Data.Value.Month + "Servicos");
-                                            if (at.Empresa != null)
-                                                _empresas_mes_servicos.Add(at.Data.Value.Month + "Servicos");
-                                            else
-                                                _pessoas_mes_servicos.Add(at.Data.Value.Month + "Servicos");
-                                        }
-
-                                    }
-                                }
-                                break;
-
-                            case 5:
-                                _meses.Add(at.Data.Value.ToString("MMM"));
-
-                                if (at.Empresa != null)
-                                    _empresas_mes.Add(at.Data.Value.Month + "Empresas");
-                                else
-                                    _pessoas_mes.Add(at.Data.Value.Month + "Pessoas");
-
-                                if (at.Servicos != null)
-                                {
-                                    string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
-
-                                    foreach (string sv in words)
-                                    {
-                                        if (sv != null && sv != string.Empty)
-                                        {
-                                            _mes_servicos.Add(at.Data.Value.Month + "Servicos");
-                                            if (at.Empresa != null)
-                                                _empresas_mes_servicos.Add(at.Data.Value.Month + "Servicos");
-                                            else
-                                                _pessoas_mes_servicos.Add(at.Data.Value.Month + "Servicos");
-                                        }
-
-                                    }
-                                }
-                                break;
-
-                            case 6:
-                                _meses.Add(at.Data.Value.ToString("MMM"));
-
-                                if (at.Empresa != null)
-                                    _empresas_mes.Add(at.Data.Value.Month + "Empresas");
-                                else
-                                    _pessoas_mes.Add(at.Data.Value.Month + "Pessoas");
-
-                                if (at.Servicos != null)
-                                {
-                                    string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
-
-                                    foreach (string sv in words)
-                                    {
-                                        if (sv != null && sv != string.Empty)
-                                        {
-                                            _mes_servicos.Add(at.Data.Value.Month + "Servicos");
-                                            if (at.Empresa != null)
-                                                _empresas_mes_servicos.Add(at.Data.Value.Month + "Servicos");
-                                            else
-                                                _pessoas_mes_servicos.Add(at.Data.Value.Month + "Servicos");
-                                        }
-
-                                    }
-                                }
-                                break;
-
-                            case 7:
-                                _meses.Add(at.Data.Value.ToString("MMM"));
-
-                                if (at.Empresa != null)
-                                    _empresas_mes.Add(at.Data.Value.Month + "Empresas");
-                                else
-                                    _pessoas_mes.Add(at.Data.Value.Month + "Pessoas");
-
-                                if (at.Servicos != null)
-                                {
-                                    string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
-
-                                    foreach (string sv in words)
-                                    {
-                                        if (sv != null && sv != string.Empty)
-                                        {
-                                            _mes_servicos.Add(at.Data.Value.Month + "Servicos");
-                                            if (at.Empresa != null)
-                                                _empresas_mes_servicos.Add(at.Data.Value.Month + "Servicos");
-                                            else
-                                                _pessoas_mes_servicos.Add(at.Data.Value.Month + "Servicos");
-                                        }
-
-                                    }
-                                }
-                                break;
-
-                            case 8:
-                                _meses.Add(at.Data.Value.ToString("MMM"));
-
-                                if (at.Empresa != null)
-                                    _empresas_mes.Add(at.Data.Value.Month + "Empresas");
-                                else
-                                    _pessoas_mes.Add(at.Data.Value.Month + "Pessoas");
-
-                                if (at.Servicos != null)
-                                {
-                                    string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
-
-                                    foreach (string sv in words)
-                                    {
-                                        if (sv != null && sv != string.Empty)
-                                        {
-                                            _mes_servicos.Add(at.Data.Value.Month + "Servicos");
-                                            if (at.Empresa != null)
-                                                _empresas_mes_servicos.Add(at.Data.Value.Month + "Servicos");
-                                            else
-                                                _pessoas_mes_servicos.Add(at.Data.Value.Month + "Servicos");
-                                        }
-
-                                    }
-                                }
-                                break;
-
-                            case 9:
-                                _meses.Add(at.Data.Value.ToString("MMM"));
-
-                                if (at.Empresa != null)
-                                    _empresas_mes.Add(at.Data.Value.Month + "Empresas");
-                                else
-                                    _pessoas_mes.Add(at.Data.Value.Month + "Pessoas");
-
-                                if (at.Servicos != null)
-                                {
-                                    string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
-
-                                    foreach (string sv in words)
-                                    {
-                                        if (sv != null && sv != string.Empty)
-                                        {
-                                            _mes_servicos.Add(at.Data.Value.Month + "Servicos");
-                                            if (at.Empresa != null)
-                                                _empresas_mes_servicos.Add(at.Data.Value.Month + "Servicos");
-                                            else
-                                                _pessoas_mes_servicos.Add(at.Data.Value.Month + "Servicos");
-                                        }
-
-                                    }
-                                }
-                                break;
-
-                            case 10:
-                                _meses.Add(at.Data.Value.ToString("MMM"));
-
-                                if (at.Empresa != null)
-                                    _empresas_mes.Add(at.Data.Value.Month + "Empresas");
-                                else
-                                    _pessoas_mes.Add(at.Data.Value.Month + "Pessoas");
-
-                                if (at.Servicos != null)
-                                {
-                                    string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
-
-                                    foreach (string sv in words)
-                                    {
-                                        if (sv != null && sv != string.Empty)
-                                        {
-                                            _mes_servicos.Add(at.Data.Value.Month + "Servicos");
-                                            if (at.Empresa != null)
-                                                _empresas_mes_servicos.Add(at.Data.Value.Month + "Servicos");
-                                            else
-                                                _pessoas_mes_servicos.Add(at.Data.Value.Month + "Servicos");
-                                        }
-
-                                    }
-                                }
-                                break;
-
-                            case 11:
-                                _meses.Add(at.Data.Value.ToString("MMM"));
-
-                                if (at.Empresa != null)
-                                    _empresas_mes.Add(at.Data.Value.Month + "Empresas");
-                                else
-                                    _pessoas_mes.Add(at.Data.Value.Month + "Pessoas");
-
-                                if (at.Servicos != null)
-                                {
-                                    string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
-
-                                    foreach (string sv in words)
-                                    {
-                                        if (sv != null && sv != string.Empty)
-                                        {
-                                            _mes_servicos.Add(at.Data.Value.Month + "Servicos");
-                                            if (at.Empresa != null)
-                                                _empresas_mes_servicos.Add(at.Data.Value.Month + "Servicos");
-                                            else
-                                                _pessoas_mes_servicos.Add(at.Data.Value.Month + "Servicos");
-                                        }
-
-                                    }
-                                }
-                                break;
-
-                            case 12:
-                                _meses.Add(at.Data.Value.ToString("MMM"));
-
-                                if (at.Empresa != null)
-                                    _empresas_mes.Add(at.Data.Value.Month + "Empresas");
-                                else
-                                    _pessoas_mes.Add(at.Data.Value.Month + "Pessoas");
-
-                                if (at.Servicos != null)
-                                {
-                                    string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
-
-                                    foreach (string sv in words)
-                                    {
-                                        if (sv != null && sv != string.Empty)
-                                        {
-                                            _mes_servicos.Add(at.Data.Value.Month + "Servicos");
-                                            if (at.Empresa != null)
-                                                _empresas_mes_servicos.Add(at.Data.Value.Month + "Servicos");
-                                            else
-                                                _pessoas_mes_servicos.Add(at.Data.Value.Month + "Servicos");
-                                        }
-
-                                    }
-                                }
-                                break;
-
-                            default:
-                                break;
+                                default:
+                                    break;
+                            }
                         }
                         
                         #endregion
