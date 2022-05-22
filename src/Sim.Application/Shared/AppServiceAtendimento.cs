@@ -180,7 +180,7 @@ namespace Sim.Application.Shared
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<KeyValuePair<string, int>>> BI_Atendimentos_Setor(DateTime periodo, string setor)
+        public Task<BiAtendimentos> BI_Atendimentos_Setor(DateTime periodo, string setor)
         {
             return _atendimento.BI_Atendimentos_Setor(periodo, setor);
         }

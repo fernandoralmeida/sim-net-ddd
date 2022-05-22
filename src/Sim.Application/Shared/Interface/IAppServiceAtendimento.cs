@@ -44,7 +44,7 @@ namespace Sim.Application.Shared.Interface
 
         /** BI **/
         Task<BiAtendimentos> BI_Atendimentos(DateTime periodo);
-        Task<IEnumerable<KeyValuePair<string, int>>> BI_Atendimentos_Setor(DateTime periodo,string setor);
+        Task<BiAtendimentos> BI_Atendimentos_Setor(DateTime periodo,string setor);
         Task<IEnumerable<KeyValuePair<string, int>>> BI_Atendimentos_AppUser(DateTime periodo);
     }
 }

@@ -936,6 +936,33 @@ namespace Sim.Domain.Shared.Service
         }
 
         /** BI **/
+        private readonly List<string> _meses = new();
+        private readonly List<string> _pessoas_mes = new();
+        private readonly List<string> _empresas_mes = new();
+        private readonly List<string> _mes_servicos = new();
+        private readonly List<string> _pessoas_mes_servicos = new();
+        private readonly List<string> _empresas_mes_servicos = new();
+
+        private void ConstruirMeses(Atendimento at_param, string[] serv_param)
+        {
+            _meses.Add(at_param.Data.Value.ToString("MMM"));
+
+            if (at_param.Empresa != null)
+                _empresas_mes.Add(at_param.Data.Value.ToString("MMM") + " Empresas");
+            else
+                _pessoas_mes.Add(at_param.Data.Value.ToString("MMM") + " Pessoas");
+
+            foreach (string sv in serv_param.Where(s => s.Any()))
+            {
+                _mes_servicos.Add(at_param.Data.Value.ToString("MMM") + " Servicos");
+
+                if (at_param.Empresa != null)
+                    _empresas_mes_servicos.Add(at_param.Data.Value.Month + "Servicos");
+                else
+                    _pessoas_mes_servicos.Add(at_param.Data.Value.Month + "Servicos");
+            }
+        }
+
         public async Task<BI.BiAtendimentos> BI_Atendimentos(DateTime periodo)
         {
             var d1 = new DateTime(periodo.Year, 01, 01);
@@ -949,121 +976,36 @@ namespace Sim.Domain.Shared.Service
 
                 try
                 {
-                    var _atendimentos = 0;
-                    var _servicos = 0;
-                    var _a_pessoas = 0;
-                    var _s_pessoas = 0;
-                    var _a_empresas = 0;
-                    var _s_empresas = 0;
+                    _meses.Clear();
+                    _pessoas_mes.Clear();
+                    _empresas_mes.Clear();
 
-                    var _meses = new List<string>();
-                    var _pessoas_mes = new List<string>();
-                    var _empresas_mes = new List<string>();
+                    _mes_servicos.Clear();
+                    _pessoas_mes_servicos.Clear();
+                    _empresas_mes_servicos.Clear();
 
-                    var _mes_servicos = new List<string>();
-                    var _pessoas_mes_servicos = new List<string>();
-                    var _empresas_mes_servicos = new List<string>();
+                    var _meses_t = new List<(string Nome, string Atendimento, string Servico)>();
 
-                    var _meses_t = new List<(string Nome, int Atendimento, int Servico)>();
-
-                    foreach (Atendimento at in list)
+                    foreach (Atendimento at in list.Where(s => s.Servicos != null))
                     {
-                        _atendimentos++;
+                        string[] servicos = at.Servicos.ToString().Split(new char[] { ';', ',' });
+                        for (int i = 1; i < 13; i++)
+                            if (at.Data.Value.Month == i)
+                                ConstruirMeses(at, servicos);
+                    }                  
+           
+                    r_all.Cliente = ("Clientes", _meses.Count, _mes_servicos.Count);
+                    r_all.ClientePF = ("Pessoas", _pessoas_mes.Count, _pessoas_mes_servicos.Count);
+                    r_all.ClientePJ = ("Empresas", _empresas_mes.Count, _empresas_mes_servicos.Count);
 
-                        if (at.Empresa != null)
-                            _a_empresas++;
-                        else
-                            _a_pessoas++;
+                    var mlist = new List<(string Mes, int Atendimentos, int Servicos)>();              
 
-                        if (at.Servicos != null)
-                        {
-                            string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
-
-                            foreach (string sv in words)
-                            {
-                                if (sv != null && sv != string.Empty)
-                                {
-                                    _servicos++;
-                                    if (at.Empresa != null)
-                                        _s_empresas++;
-                                    else
-                                        _s_pessoas++;
-                                }
-                            }
-                        }
-                        #region Meses                
-                        
-                        if(at.Servicos!=null)
-                        {
-                            string[] servicos = at.Servicos.ToString().Split(new char[] { ';', ',' });
-
-                            switch(at.Data.Value.Month)
-                            {
-                                case 1:
-                                    _meses.Add(at.Data.Value.ToString("MMM"));
-
-                                    if (at.Empresa != null)
-                                        _empresas_mes.Add(at.Data.Value.Month + "Empresas");
-                                    else
-                                        _pessoas_mes.Add(at.Data.Value.Month + "Pessoas");
-                                    
-                                    foreach (string sv in servicos)
-                                    {
-                                        if (sv != null && sv != string.Empty)
-                                        {
-                                            _mes_servicos.Add(at.Data.Value.Month + "Servicos");
-
-                                            if (at.Empresa != null)
-                                                _empresas_mes_servicos.Add(at.Data.Value.Month + "Servicos");
-                                            else
-                                                _pessoas_mes_servicos.Add(at.Data.Value.Month + "Servicos");
-                                        }
-                                    }
-                                    break;
-
-                                case 2:
-                                    _meses.Add(at.Data.Value.ToString("MMM"));
-
-                                    if (at.Empresa != null)
-                                        _empresas_mes.Add(at.Data.Value.Month + "Empresas");
-                                    else
-                                        _pessoas_mes.Add(at.Data.Value.Month + "Pessoas");
-
-                                    foreach (string sv in servicos)
-                                    {
-                                        if (sv != null && sv != string.Empty)
-                                        {
-                                            _mes_servicos.Add(at.Data.Value.Month + "Servicos");
-
-                                            if (at.Empresa != null)
-                                                _empresas_mes_servicos.Add(at.Data.Value.Month + "Servicos");
-                                            else
-                                                _pessoas_mes_servicos.Add(at.Data.Value.Month + "Servicos");
-                                        }
-                                    }
-                                    break;
-
-                                default:
-                                    break;
-                            }
-                        }
-                        
-                        #endregion
-                    }
-
-                    r_all.Cliente = ("Clientes", _atendimentos, _servicos);
-                    r_all.ClientePF = ("Pessoas", _a_pessoas, _s_pessoas);
-                    r_all.ClientePJ = ("Empresas", _a_empresas, _s_empresas);
-
-                    var mlist = new List<(string Mes, int Atendimentos, int Servicos)>();
-
-                    foreach (var x in from x in _meses
-                                      group x by x into g
-                                      let count = g.Count()
-                                      //orderby count descending
-                                      select new { Value = g.Key, Count = count })
+                    foreach (var x in from a in _meses
+                                      group a by a into g
+                                      let count = g.Count()                                      
+                                      select new { Mes = g.Key, Atend = count })
                     {
-                        mlist.Add((x.Value, x.Count, 1));// = new KeyValuePair<string, int>("Atendimentos", x.Count);
+                        mlist.Add((x.Mes, x.Atend, _mes_servicos.Where(s=>s.Contains(x.Mes)).Count()));
                     }
 
                     r_all.ListaMensal = mlist;
@@ -1079,208 +1021,59 @@ namespace Sim.Domain.Shared.Service
             return r_all;
         }
 
-        public async Task<IEnumerable<KeyValuePair<string, int>>> BI_Atendimentos_Setor(DateTime periodo, string setor)
+        public async Task<BI.BiAtendimentos> BI_Atendimentos_Setor(DateTime periodo, string setor)
         {
-            var d1 = new DateTime(periodo.Year, 01, 01);
-            var d2 = new DateTime(periodo.Year, 12, 31);
+            var list = _atendimento.GetBySetor(setor);
 
-            var r_list = new List<KeyValuePair<string, int>>();
+            var r_all = new BI.BiAtendimentos();
 
             var t = Task.Run(() => {
 
-                var list = _atendimento.GetBySetor(setor);
-
                 try
                 {
-                    var _clientes = new List<string>();
-                    var _clientes_servicos = new List<string>();
-                    var _pessoas = new List<string>();
-                    var _pessoas_servicos = new List<string>();
-                    var _empresas = new List<string>();
-                    var _empresas_servicos = new List<string>();
+                    _meses.Clear();
+                    _pessoas_mes.Clear();
+                    _empresas_mes.Clear();
 
-                    //meses
-                    var _clientes_mes = new List<string>();
-                    var _clientes_mes_servicos = new List<string>();
-                    var _pessoas_mes = new List<string>();
-                    var _pessoas_mes_servicos = new List<string>();
-                    var _empresas_mes = new List<string>();
-                    var _empresas_mes_servicos = new List<string>();
+                    _mes_servicos.Clear();
+                    _pessoas_mes_servicos.Clear();
+                    _empresas_mes_servicos.Clear();
 
-                    foreach (var at in list.Where(d => d.Data.Value.Year == d1.Year).OrderBy(d => d.Data))
+                    var _meses_t = new List<(string Nome, string Atendimento, string Servico)>();
+
+                    foreach (Atendimento at in list.Where(s => s.Servicos != null && s.Data.Value.Year == periodo.Year))
                     {
-
-                        _clientes.Add("Atendimentos");
-                        
-                        if (at.Empresa != null)
-                            _empresas.Add("Empresas");
-                        else
-                            _pessoas.Add("Pessoas");
-
-                        if (at.Servicos != null)
-                        {
-                            string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
-
-                            foreach (string sv in words)
-                            {
-                                if (sv != null && sv != string.Empty)
-                                {
-                                    _clientes_servicos.Add("Serviços");
-                                    if (at.Empresa != null)
-                                        _empresas_servicos.Add("S_Empresas");
-                                    else
-                                        _pessoas_servicos.Add("S_Pessoas");
-                                }
-                            }
-                        }                 
-
-                        switch (at.Data.Value.Month)
-                        {
-                            case 1:
-                                _clientes_mes.Add(at.Data.Value.ToString("MMMM"));
-
-                                if (at.Empresa != null)
-                                    _empresas_mes.Add(at.Data.Value.Month + "Empresas");
-                                else
-                                    _pessoas_mes.Add(at.Data.Value.Month + "Pessoas");
-
-                                if (at.Servicos != null)
-                                {
-                                    string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
-
-                                    foreach (string sv in words)
-                                    {
-                                        if (sv != null && sv != string.Empty)
-                                        {
-                                            _clientes_mes_servicos.Add(at.Data.Value.Month + "Serviços");
-                                            if (at.Empresa != null)
-                                                _empresas_mes_servicos.Add(at.Data.Value.Month + "S_Empresas");
-                                            else
-                                                _pessoas_mes_servicos.Add(at.Data.Value.Month + "S_Pessoas");
-                                        }
-                                    }
-                                }
-                                break;
-
-                            default:
-                                break;
-                        }
-
+                        string[] servicos = at.Servicos.ToString().Split(new char[] { ';', ',' });
+                        for (int i = 1; i < 13; i++)
+                            if (at.Data.Value.Month == i)
+                                ConstruirMeses(at, servicos);
                     }
 
-                    foreach (var x in from x in _clientes
-                                      group x by x into g
+                    r_all.Cliente = ("Clientes", _meses.Count, _mes_servicos.Count);
+                    r_all.ClientePF = ("Pessoas", _pessoas_mes.Count, _pessoas_mes_servicos.Count);
+                    r_all.ClientePJ = ("Empresas", _empresas_mes.Count, _empresas_mes_servicos.Count);
+
+                    var mlist = new List<(string Mes, int Atendimentos, int Servicos)>();
+
+                    foreach (var x in from a in _meses
+                                      group a by a into g
                                       let count = g.Count()
-                                      //orderby count descending
-                                      select new { Value = g.Key, Count = count })
+                                      select new { Mes = g.Key, Atend = count })
                     {
-                        r_list.Add(new KeyValuePair<string, int>(x.Value, x.Count));
+                        mlist.Add((x.Mes, x.Atend, _mes_servicos.Where(s => s.Contains(x.Mes)).Count()));
                     }
 
-                    foreach (var x in from x in _clientes_servicos
-                                      group x by x into g
-                                      let count = g.Count()
-                                      //orderby count descending
-                                      select new { Value = g.Key, Count = count })
-                    {
-                        r_list.Add(new KeyValuePair<string, int>(x.Value, x.Count));
-                    }
+                    r_all.ListaMensal = mlist;
 
-                    foreach (var x in from x in _pessoas
-                                      group x by x into g
-                                      let count = g.Count()
-                                      //orderby count descending
-                                      select new { Value = g.Key, Count = count })
-                    {
-                        r_list.Add(new KeyValuePair<string, int>(x.Value, x.Count));
-                    }
-
-                    foreach (var x in from x in _pessoas_servicos
-                                      group x by x into g
-                                      let count = g.Count()
-                                      //orderby count descending
-                                      select new { Value = g.Key, Count = count })
-                    {
-                        r_list.Add(new KeyValuePair<string, int>(x.Value, x.Count));
-                    }
-
-                    foreach (var x in from x in _empresas
-                                      group x by x into g
-                                      let count = g.Count()
-                                      //orderby count descending
-                                      select new { Value = g.Key, Count = count })
-                    {
-                        r_list.Add(new KeyValuePair<string, int>(x.Value, x.Count));
-                    }
-
-                    foreach (var x in from x in _empresas_servicos
-                                      group x by x into g
-                                      let count = g.Count()
-                                      //orderby count descending
-                                      select new { Value = g.Key, Count = count })
-                    {
-                        r_list.Add(new KeyValuePair<string, int>(x.Value, x.Count));
-                    }
-
-                    //Meses
-                    foreach (var x in from x in _clientes_mes
-                                      group x by x into g
-                                      let count = g.Count()
-                                      //orderby count descending
-                                      select new { Value = g.Key, Count = count })
-                    {
-                        r_list.Add(new KeyValuePair<string, int>(x.Value, x.Count));
-                    }
-
-                    foreach (var x in from x in _clientes_mes
-                                      group x by x into g
-                                      let count = g.Count()
-                                      //orderby count descending
-                                      select new { Value = g.Key, Count = count })
-                    {
-                        r_list.Add(new KeyValuePair<string, int>(x.Value, x.Count));
-                    }
-
-                    foreach (var x in from x in _pessoas_mes
-                                      group x by x into g
-                                      let count = g.Count()
-                                      //orderby count descending
-                                      select new { Value = g.Key, Count = count })
-                    {
-                        r_list.Add(new KeyValuePair<string, int>(x.Value, x.Count));
-                    }
-                    foreach (var x in from x in _pessoas_mes_servicos
-                                      group x by x into g
-                                      let count = g.Count()
-                                      //orderby count descending
-                                      select new { Value = g.Key, Count = count })
-                    {
-                        r_list.Add(new KeyValuePair<string, int>(x.Value, x.Count));
-                    }
-                    foreach (var x in from x in _empresas_mes
-                                      group x by x into g
-                                      let count = g.Count()
-                                      //orderby count descending
-                                      select new { Value = g.Key, Count = count })
-                    {
-                        r_list.Add(new KeyValuePair<string, int>(x.Value, x.Count));
-                    }
-                    foreach (var x in from x in _empresas_mes_servicos
-                                      group x by x into g
-                                      let count = g.Count()
-                                      //orderby count descending
-                                      select new { Value = g.Key, Count = count })
-                    {
-                        r_list.Add(new KeyValuePair<string, int>(x.Value, x.Count));
-                    }
+                    GC.Collect();
 
                 }
                 catch { }
-            });
 
+            });
             await t;
 
-            return r_list;
+            return r_all;
         }
 
         public Task<IEnumerable<KeyValuePair<string, int>>> BI_Atendimentos_AppUser(DateTime periodo)

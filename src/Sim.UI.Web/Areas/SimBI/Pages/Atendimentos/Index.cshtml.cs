@@ -24,16 +24,13 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Atendimentos
         private readonly IAppServiceSetor _appSetores;
 
         [BindProperty(SupportsGet = true)]
-        public IEnumerable<KeyValuePair<string, int>> Sebrae { get; set; }
+        public IEnumerable<BiAtendimentos> Setores { get; set; }
 
         [BindProperty(SupportsGet = true)]
         public BiAtendimentos Atendimentos_List { get; set; }
 
         [TempData]
         public string StatusMessage { get; set; }
-
-        [BindProperty(SupportsGet = true)]
-        public int Mes { get; set; }
 
         [BindProperty(SupportsGet = true)]
         public int Ano { get; set; }
@@ -46,10 +43,16 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Atendimentos
         }
 
         private async Task LoadAsync()
-        {
+        {            
             var nperiodo = new DateTime(Ano, 1, 1);
             Atendimentos_List  = await _appAtendimento.BI_Atendimentos(nperiodo);
-            Sebrae = await _appAtendimento.BI_Atendimentos_Setor(nperiodo, "Sebrae Aqui");
+            var _list = new List<BiAtendimentos>();
+            var setores = _appSetores.GetByOwner("Secretaria de Desenvolvimento Econômico e Empreendedorismo");
+            foreach(var s in setores)
+            {
+                _list.Add(await _appAtendimento.BI_Atendimentos_Setor(nperiodo, s.Nome));
+            }
+            Setores = _list;
         }
 
         public async Task<IActionResult> OnGetAsync()
