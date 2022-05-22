@@ -33,83 +33,28 @@
 
     </form>
 
-    <ul class="collapsible popout">
-        @{
-            var ativo = "active";
-        }
-
-        @foreach (var setor in Model.Input)
-        {
-
-            <li class="@ativo">
-
-                @{ ativo = string.Empty; }
-
-                <div class="collapsible-header waves-effect waves-green">@setor.FirstOrDefault().Key<span class="new badge blue" data-badge-caption="@setor.FirstOrDefault().Value">Atendimentos</span></div>
-                <div class="collapsible-body white">
-                    <div class="row">
-                        <div class="col s12 m4 l4">
-                            <ul class="collection z-depth-1">
-                                <li class="collection-item"><i class="material-icons left">handyman</i>Serviços Executados</li>
-                                @foreach (var op in setor)
-                                {
-                                    @if (op.Key.Contains("Servico-"))
-                                    {
-                                        <li class="collection-item"><span class="new badge green lighten-1" data-badge-caption="@op.Value"></span><a class="modal-trigger blue-grey-text" href="#viewmodal" data-hdlr="ServicoPreview" data-id="@op.Key.Replace("Servico-", "")" data-mth="@Model.Mes" data-y="@Model.Ano" title="Detalhar serviço">@op.Key.Replace("Servico-", "")</a></li>
-                                    }
-                                }
-                            </ul>
-                        </div>
-                        <div class="col s12 m4 l4">
-                            <ul class="collection z-depth-1">
-                                <li class="collection-item"><i class="material-icons left">desktop_windows</i>Canais de Atendimento</li>
-                                @foreach (var op in setor)
-                                {
-                                    @if (op.Key.Contains("Canal-"))
-                                    {
-                                        <li class="collection-item"><span class="new badge blue lighten-1" data-badge-caption="@op.Value"></span><a class="modal-trigger blue-grey-text" href="#viewmodalcanal" data-hdlr="CanalPreview" data-id="@op.Key.Replace("Canal-", "")" data-id2="@setor.FirstOrDefault().Key" data-mth="@Model.Mes" data-y="@Model.Ano" title="Detalhar canal de atendimento">@op.Key.Replace("Canal-", "")</a></li>
-                                    }
-                                }
-                            </ul>
-                        </div>
-                        <div class="col s12 m4 l4">
-                            <ul class="collection z-depth-1">
-                                <li class="collection-item"><i class="material-icons left">account_box</i>Antendentes</li>
-                                @foreach (var op in setor)
-                                {
-                                    @if (op.Key.Contains("User-"))
-                                    {
-                                        <li class="collection-item"><span class="new badge blue lighten-1" data-badge-caption="@op.Value"></span><a class="modal-trigger blue-grey-text" href="#viewmodaluser" data-hdlr="Preview" data-id="@op.Key.Replace("User-", "")" data-id2="@setor.FirstOrDefault().Key" data-mth="@Model.Mes" data-y="@Model.Ano" title="Detalhar atendimentos">@op.Key.Replace("User-", "")</a></li>
-                                    }
-                                }
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </li>
-        }
-    </ul>
-
     <div class="row">
                 
         @if(Model.Atendimentos_List != null)
         {
             <div class="col s12 m4 l4">
                 <div class="card hoverable">
-                    <div class="card-header grey-text darken-3 center">Atendimentos [@Model.Ano]</div>
-                    <div class="card-action center-align">
-                    <div class="row">
+                    <div class="card-header grey-text darken-3 center">Clientes [@Model.Ano]</div>
+                    <div class="card-content">
+                    <div class="row center-align">
                          <div class="col s6 m6 l6">    
-                         <h6>Clientes</h6>
-                         <a href="#" class="btn blue waves-effect waves-light btn-large">
-                         @Model.Atendimentos_List.Antendimentos_Ano.Value
-                         </a>                         
+                         <h6 class="grey-text">Atendimentos</h6>
+                         <h5 >
+                         <a href="#" class="blue-text">
+                         @Model.Atendimentos_List.Cliente.Atendimentos
+                         </a></h5>                         
                          </div>
                          <div class="col s6 m6 l6">
-                         <h6>Serviços</h6>
-                         <a href="#" class="btn blue darken-4 waves-effect waves-light btn-large">
-                         @Model.Atendimentos_List.Servicos_Ano.Value
-                         </a>                         
+                         <h6 class="grey-text">Serviços</h6>
+                         <h5 >
+                         <a href="#" class="blue-text text-darken-4">
+                         @Model.Atendimentos_List.Cliente.Servicos
+                         </a></h5>                         
                          </div>
                     </div>
                     </div>
@@ -118,19 +63,21 @@
             <div class="col s12 m4 l4">
                 <div class="card hoverable">
                     <div class="card-header grey-text darken-3 center">Pessoas [@Model.Ano]</div>
-                    <div class="card-action center-align">
-                    <div class="row">
+                    <div class="card-content">
+                    <div class="row center-align">
                          <div class="col s6 m6 l6">    
-                         <h6>Atendidas</h6>
-                         <a href="#" class="btn orange waves-effect waves-light btn-large">
-                         @Model.Atendimentos_List.Pessoas_Ano.Value
-                         </a>                         
+                         <h6 class="grey-text">Atendidas</h6>
+                         <h5>
+                         <a href="#" class="orange-text">
+                         @Model.Atendimentos_List.ClientePF.Atendimentos
+                         </a></h5>                         
                          </div>
                          <div class="col s6 m6 l6">
-                         <h6>Serviços</h6>
-                         <a href="#" class="btn deep-orange waves-effect waves-light btn-large">
-                         @Model.Atendimentos_List.Pessoas_Servicos_Ano.Value
-                         </a>                         
+                         <h6 class="grey-text">Serviços</h6>
+                         <h5>
+                         <a href="#" class="deep-orange-text">
+                         @Model.Atendimentos_List.ClientePF.Servicos
+                         </a></h5>                         
                          </div>
                     </div>
                     </div>
@@ -139,26 +86,60 @@
             <div class="col s12 m4 l4">
                 <div class="card hoverable">
                     <div class="card-header grey-text darken-3 center">Empresas [@Model.Ano]</div>
-                    <div class="card-action center-align">
-                    <div class="row">
+                    <div class="card-content">
+                    <div class="row center-align">
                          <div class="col s6 m6 l6">    
-                         <h6>Atendidas</h6>
-                         <a href="#" class="btn purple waves-effect waves-light btn-large">
-                         @Model.Atendimentos_List.Empresas_Ano.Value
-                         </a>                         
+                         <h6 class="grey-text">Atendidas</h6>
+                         <h5>
+                         <a href="#" class="purple-text">
+                         @Model.Atendimentos_List.ClientePJ.Atendimentos
+                         </a></h5>                         
                          </div>
                          <div class="col s6 m6 l6">
-                         <h6>Serviços</h6>
-                         <a href="#" class="btn deep-purple waves-effect waves-light btn-large">
-                         @Model.Atendimentos_List.Empresas_Servicos_Ano.Value
-                         </a>                         
+                         <h6 class="grey-text">Serviços</h6>
+                         <h5>
+                         <a href="#" class="deep-purple-text">
+                         @Model.Atendimentos_List.ClientePJ.Servicos
+                         </a></h5>                         
                          </div>
                     </div>
                     </div>
                 </div>
             </div>
-        }        
-    </div>
+        }      
+
+            <div class="col s12 m12 l12">
+                <div class="card hoverable">
+                    <div class="card-header grey-text darken-4 center">Sebrae</div>
+                    <div class="card-content">
+
+                    @if(Model.Atendimentos_List.ListaMensal != null)
+                    {
+                    <table class="centered responsive-table">
+                        <thead>
+                            <tr>
+                                @foreach(var m in Model.Atendimentos_List.ListaMensal)
+                                    {
+                                      <th class="grey-text darken-3"><span>@m.Mes</span></th>  
+                                    }                                   
+
+                            </tr>                           
+                        </thead>
+                        <tbody>
+                            <tr>
+                                @foreach(var m in Model.Atendimentos_List.ListaMensal)
+                                    {
+                                      <td class="grey-text darken-3"><span class="blue-text">@m.Atendimentos</span> | <span class="green-text darken-3">@m.Servicos</span></td>
+                                    }   
+                            </tr>
+                        </tbody>
+                    </table>
+                    }
+                    </div>
+                </div>
+            </div>
+        
+    </div>    
 </div>
 
 <!-- Modal Structure -->

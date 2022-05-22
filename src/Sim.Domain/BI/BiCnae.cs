@@ -16,19 +16,7 @@ namespace Sim.Domain.BI
         public KeyValuePair<string, int> Secao { get; set; }
         public List<CnaeClasse> ListaClasse { get; set; }
     }
-    /*
-    public class CnaeDivisao
-    {
-        public KeyValuePair<string, int> Divisao { get; set; }
-        public IEnumerable<CnaeGrupo> ListaGrupo { get; set; }
-    }
 
-    public class CnaeGrupo
-    {
-        public KeyValuePair<string, int> Grupo { get; set; }
-        public IEnumerable<CnaeClasse> ListaClasse { get; set; }
-    }
-    */
     public class CnaeClasse
     {
         public KeyValuePair<string, int> Classe { get; set; }

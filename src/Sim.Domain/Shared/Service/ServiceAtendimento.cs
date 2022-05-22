@@ -949,23 +949,29 @@ namespace Sim.Domain.Shared.Service
 
                 try
                 {
-                    var _atendimentos = new List<string>();
-                    var _servicos = new List<string>();
+                    var _atendimentos = 0;
+                    var _servicos = 0;
+                    var _a_pessoas = 0;
+                    var _s_pessoas = 0;
+                    var _a_empresas = 0;
+                    var _s_empresas = 0;
 
-                    var _a_pessoas = new List<string>();
-                    var _s_pessoas = new List<string>();
+                    var _meses = new List<string>();
+                    var _pessoas_mes = new List<string>();
+                    var _empresas_mes = new List<string>();
 
-                    var _a_empresas = new List<string>();
-                    var _s_empresas = new List<string>();
+                    var _mes_servicos = new List<string>();
+                    var _pessoas_mes_servicos = new List<string>();
+                    var _empresas_mes_servicos = new List<string>();
 
                     foreach (Atendimento at in list)
                     {
-                        _atendimentos.Add("Atendimentos");
+                        _atendimentos++;
 
                         if (at.Empresa != null)
-                            _a_empresas.Add("A_Empresas");
+                            _a_empresas++;
                         else
-                            _a_pessoas.Add("A_Pessoas");
+                            _a_pessoas++;
 
                         if (at.Servicos != null)
                         {
@@ -975,24 +981,25 @@ namespace Sim.Domain.Shared.Service
                             {
                                 if (sv != null && sv != string.Empty)
                                 {
-                                    _servicos.Add("Serviços");
+                                    _servicos++;
                                     if (at.Empresa != null)
-                                        _s_empresas.Add("S_Empresas");
+                                        _s_empresas++;
                                     else
-                                        _s_pessoas.Add("S_Pessoas");
+                                        _s_pessoas++;
                                 }
                             }
                         }
-                        #region Meses
-                        // mes servicos 
-                        /*
+                        #region Meses                        
+
                         switch (at.Data.Value.Month)
                         {
                             case 1:
+                                _meses.Add(at.Data.Value.ToString("MMM"));
+
                                 if (at.Empresa != null)
-                                    _empresas_mes.Add("Empresas-S");
+                                    _empresas_mes.Add(at.Data.Value.Month + "Empresas");
                                 else
-                                    _pessoas_mes.Add("Pessoas-S");
+                                    _pessoas_mes.Add(at.Data.Value.Month + "Pessoas");
 
                                 if (at.Servicos != null)
                                 {
@@ -1002,11 +1009,11 @@ namespace Sim.Domain.Shared.Service
                                     {
                                         if (sv != null && sv != string.Empty)
                                         {
-                                            _mes_servicos.Add("Serv " + at.Data.Value.ToString("MMM"));
+                                            _mes_servicos.Add(at.Data.Value.Month + "Servicos");
                                             if (at.Empresa != null)
-                                                _empresas_mes_servicos.Add("Empresas-" + at.Data.Value.ToString("MMM"));
+                                                _empresas_mes_servicos.Add(at.Data.Value.Month + "Servicos");
                                             else
-                                                _pessoas_mes_servicos.Add("Pessoas-" + at.Data.Value.ToString("MMM"));
+                                                _pessoas_mes_servicos.Add(at.Data.Value.Month + "Servicos");
                                         }
                                             
                                     }
@@ -1014,10 +1021,12 @@ namespace Sim.Domain.Shared.Service
                                 break;
 
                             case 2:
+                                _meses.Add(at.Data.Value.ToString("MMM"));
+
                                 if (at.Empresa != null)
-                                    _empresas_mes.Add("Empresas");
+                                    _empresas_mes.Add(at.Data.Value.Month + "Empresas");
                                 else
-                                    _pessoas_mes.Add("Pessoas");
+                                    _pessoas_mes.Add(at.Data.Value.Month + "Pessoas");
 
                                 if (at.Servicos != null)
                                 {
@@ -1027,11 +1036,11 @@ namespace Sim.Domain.Shared.Service
                                     {
                                         if (sv != null && sv != string.Empty)
                                         {
-                                            _mes_servicos.Add("Serv " + at.Data.Value.Date.ToString("MMM"));
+                                            _mes_servicos.Add(at.Data.Value.Month + "Servicos");
                                             if (at.Empresa != null)
-                                                _empresas_mes_servicos.Add("Empresas-" + at.Data.Value.ToString("MMM"));
+                                                _empresas_mes_servicos.Add(at.Data.Value.Month + "Servicos");
                                             else
-                                                _pessoas_mes_servicos.Add("Pessoas-" + at.Data.Value.ToString("MMM"));
+                                                _pessoas_mes_servicos.Add(at.Data.Value.Month + "Servicos");
                                         }
 
                                     }
@@ -1039,10 +1048,12 @@ namespace Sim.Domain.Shared.Service
                                 break;
 
                             case 3:
+                                _meses.Add(at.Data.Value.ToString("MMM"));
+
                                 if (at.Empresa != null)
-                                    _empresas_mes.Add("Empresas");
+                                    _empresas_mes.Add(at.Data.Value.Month + "Empresas");
                                 else
-                                    _pessoas_mes.Add("Pessoas");
+                                    _pessoas_mes.Add(at.Data.Value.Month + "Pessoas");
 
                                 if (at.Servicos != null)
                                 {
@@ -1052,11 +1063,11 @@ namespace Sim.Domain.Shared.Service
                                     {
                                         if (sv != null && sv != string.Empty)
                                         {
-                                            _mes_servicos.Add("Serv " + at.Data.Value.Date.ToString("MMM"));
+                                            _mes_servicos.Add(at.Data.Value.Month + "Servicos");
                                             if (at.Empresa != null)
-                                                _empresas_mes_servicos.Add("Empresas-" + at.Data.Value.ToString("MMM"));
+                                                _empresas_mes_servicos.Add(at.Data.Value.Month + "Servicos");
                                             else
-                                                _pessoas_mes_servicos.Add("Pessoas-" + at.Data.Value.ToString("MMM"));
+                                                _pessoas_mes_servicos.Add(at.Data.Value.Month + "Servicos");
                                         }
 
                                     }
@@ -1064,10 +1075,12 @@ namespace Sim.Domain.Shared.Service
                                 break;
 
                             case 4:
+                                _meses.Add(at.Data.Value.ToString("MMM"));
+
                                 if (at.Empresa != null)
-                                    _empresas_mes.Add("Empresas");
+                                    _empresas_mes.Add(at.Data.Value.Month + "Empresas");
                                 else
-                                    _pessoas_mes.Add("Pessoas");
+                                    _pessoas_mes.Add(at.Data.Value.Month + "Pessoas");
 
                                 if (at.Servicos != null)
                                 {
@@ -1077,11 +1090,11 @@ namespace Sim.Domain.Shared.Service
                                     {
                                         if (sv != null && sv != string.Empty)
                                         {
-                                            _mes_servicos.Add("Serv " + at.Data.Value.Date.ToString("MMM"));
+                                            _mes_servicos.Add(at.Data.Value.Month + "Servicos");
                                             if (at.Empresa != null)
-                                                _empresas_mes_servicos.Add("Empresas-" + at.Data.Value.ToString("MMM"));
+                                                _empresas_mes_servicos.Add(at.Data.Value.Month + "Servicos");
                                             else
-                                                _pessoas_mes_servicos.Add("Pessoas-" + at.Data.Value.ToString("MMM"));
+                                                _pessoas_mes_servicos.Add(at.Data.Value.Month + "Servicos");
                                         }
 
                                     }
@@ -1089,10 +1102,12 @@ namespace Sim.Domain.Shared.Service
                                 break;
 
                             case 5:
+                                _meses.Add(at.Data.Value.ToString("MMM"));
+
                                 if (at.Empresa != null)
-                                    _empresas_mes.Add("Empresas");
+                                    _empresas_mes.Add(at.Data.Value.Month + "Empresas");
                                 else
-                                    _pessoas_mes.Add("Pessoas");
+                                    _pessoas_mes.Add(at.Data.Value.Month + "Pessoas");
 
                                 if (at.Servicos != null)
                                 {
@@ -1102,11 +1117,11 @@ namespace Sim.Domain.Shared.Service
                                     {
                                         if (sv != null && sv != string.Empty)
                                         {
-                                            _mes_servicos.Add("Serv " + at.Data.Value.Date.ToString("MMM"));
+                                            _mes_servicos.Add(at.Data.Value.Month + "Servicos");
                                             if (at.Empresa != null)
-                                                _empresas_mes_servicos.Add("Empresas-" + at.Data.Value.ToString("MMM"));
+                                                _empresas_mes_servicos.Add(at.Data.Value.Month + "Servicos");
                                             else
-                                                _pessoas_mes_servicos.Add("Pessoas-" + at.Data.Value.ToString("MMM"));
+                                                _pessoas_mes_servicos.Add(at.Data.Value.Month + "Servicos");
                                         }
 
                                     }
@@ -1114,10 +1129,12 @@ namespace Sim.Domain.Shared.Service
                                 break;
 
                             case 6:
+                                _meses.Add(at.Data.Value.ToString("MMM"));
+
                                 if (at.Empresa != null)
-                                    _empresas_mes.Add("Empresas");
+                                    _empresas_mes.Add(at.Data.Value.Month + "Empresas");
                                 else
-                                    _pessoas_mes.Add("Pessoas");
+                                    _pessoas_mes.Add(at.Data.Value.Month + "Pessoas");
 
                                 if (at.Servicos != null)
                                 {
@@ -1127,11 +1144,11 @@ namespace Sim.Domain.Shared.Service
                                     {
                                         if (sv != null && sv != string.Empty)
                                         {
-                                            _mes_servicos.Add("Serv " + at.Data.Value.Date.ToString("MMM"));
+                                            _mes_servicos.Add(at.Data.Value.Month + "Servicos");
                                             if (at.Empresa != null)
-                                                _empresas_mes_servicos.Add("Empresas-" + at.Data.Value.ToString("MMM"));
+                                                _empresas_mes_servicos.Add(at.Data.Value.Month + "Servicos");
                                             else
-                                                _pessoas_mes_servicos.Add("Pessoas-" + at.Data.Value.ToString("MMM"));
+                                                _pessoas_mes_servicos.Add(at.Data.Value.Month + "Servicos");
                                         }
 
                                     }
@@ -1139,10 +1156,12 @@ namespace Sim.Domain.Shared.Service
                                 break;
 
                             case 7:
+                                _meses.Add(at.Data.Value.ToString("MMM"));
+
                                 if (at.Empresa != null)
-                                    _empresas_mes.Add("Empresas");
+                                    _empresas_mes.Add(at.Data.Value.Month + "Empresas");
                                 else
-                                    _pessoas_mes.Add("Pessoas");
+                                    _pessoas_mes.Add(at.Data.Value.Month + "Pessoas");
 
                                 if (at.Servicos != null)
                                 {
@@ -1152,11 +1171,11 @@ namespace Sim.Domain.Shared.Service
                                     {
                                         if (sv != null && sv != string.Empty)
                                         {
-                                            _mes_servicos.Add("Serv " + at.Data.Value.Date.ToString("MMM"));
+                                            _mes_servicos.Add(at.Data.Value.Month + "Servicos");
                                             if (at.Empresa != null)
-                                                _empresas_mes_servicos.Add("Empresas-" + at.Data.Value.ToString("MMM"));
+                                                _empresas_mes_servicos.Add(at.Data.Value.Month + "Servicos");
                                             else
-                                                _pessoas_mes_servicos.Add("Pessoas-" + at.Data.Value.ToString("MMM"));
+                                                _pessoas_mes_servicos.Add(at.Data.Value.Month + "Servicos");
                                         }
 
                                     }
@@ -1164,10 +1183,12 @@ namespace Sim.Domain.Shared.Service
                                 break;
 
                             case 8:
+                                _meses.Add(at.Data.Value.ToString("MMM"));
+
                                 if (at.Empresa != null)
-                                    _empresas_mes.Add("Empresas");
+                                    _empresas_mes.Add(at.Data.Value.Month + "Empresas");
                                 else
-                                    _pessoas_mes.Add("Pessoas");
+                                    _pessoas_mes.Add(at.Data.Value.Month + "Pessoas");
 
                                 if (at.Servicos != null)
                                 {
@@ -1177,11 +1198,11 @@ namespace Sim.Domain.Shared.Service
                                     {
                                         if (sv != null && sv != string.Empty)
                                         {
-                                            _mes_servicos.Add("Serv " + at.Data.Value.Date.ToString("MMM"));
+                                            _mes_servicos.Add(at.Data.Value.Month + "Servicos");
                                             if (at.Empresa != null)
-                                                _empresas_mes_servicos.Add("Empresas-" + at.Data.Value.ToString("MMM"));
+                                                _empresas_mes_servicos.Add(at.Data.Value.Month + "Servicos");
                                             else
-                                                _pessoas_mes_servicos.Add("Pessoas-" + at.Data.Value.ToString("MMM"));
+                                                _pessoas_mes_servicos.Add(at.Data.Value.Month + "Servicos");
                                         }
 
                                     }
@@ -1189,10 +1210,12 @@ namespace Sim.Domain.Shared.Service
                                 break;
 
                             case 9:
+                                _meses.Add(at.Data.Value.ToString("MMM"));
+
                                 if (at.Empresa != null)
-                                    _empresas_mes.Add("Empresas");
+                                    _empresas_mes.Add(at.Data.Value.Month + "Empresas");
                                 else
-                                    _pessoas_mes.Add("Pessoas");
+                                    _pessoas_mes.Add(at.Data.Value.Month + "Pessoas");
 
                                 if (at.Servicos != null)
                                 {
@@ -1202,11 +1225,11 @@ namespace Sim.Domain.Shared.Service
                                     {
                                         if (sv != null && sv != string.Empty)
                                         {
-                                            _mes_servicos.Add("Serv " + at.Data.Value.Date.ToString("MMM"));
+                                            _mes_servicos.Add(at.Data.Value.Month + "Servicos");
                                             if (at.Empresa != null)
-                                                _empresas_mes_servicos.Add("Empresas-" + at.Data.Value.ToString("MMM"));
+                                                _empresas_mes_servicos.Add(at.Data.Value.Month + "Servicos");
                                             else
-                                                _pessoas_mes_servicos.Add("Pessoas-" + at.Data.Value.ToString("MMM"));
+                                                _pessoas_mes_servicos.Add(at.Data.Value.Month + "Servicos");
                                         }
 
                                     }
@@ -1214,10 +1237,12 @@ namespace Sim.Domain.Shared.Service
                                 break;
 
                             case 10:
+                                _meses.Add(at.Data.Value.ToString("MMM"));
+
                                 if (at.Empresa != null)
-                                    _empresas_mes.Add("Empresas");
+                                    _empresas_mes.Add(at.Data.Value.Month + "Empresas");
                                 else
-                                    _pessoas_mes.Add("Pessoas");
+                                    _pessoas_mes.Add(at.Data.Value.Month + "Pessoas");
 
                                 if (at.Servicos != null)
                                 {
@@ -1227,11 +1252,11 @@ namespace Sim.Domain.Shared.Service
                                     {
                                         if (sv != null && sv != string.Empty)
                                         {
-                                            _mes_servicos.Add("Serv " + at.Data.Value.Date.ToString("MMM"));
+                                            _mes_servicos.Add(at.Data.Value.Month + "Servicos");
                                             if (at.Empresa != null)
-                                                _empresas_mes_servicos.Add("Empresas-" + at.Data.Value.ToString("MMM"));
+                                                _empresas_mes_servicos.Add(at.Data.Value.Month + "Servicos");
                                             else
-                                                _pessoas_mes_servicos.Add("Pessoas-" + at.Data.Value.ToString("MMM"));
+                                                _pessoas_mes_servicos.Add(at.Data.Value.Month + "Servicos");
                                         }
 
                                     }
@@ -1239,10 +1264,12 @@ namespace Sim.Domain.Shared.Service
                                 break;
 
                             case 11:
+                                _meses.Add(at.Data.Value.ToString("MMM"));
+
                                 if (at.Empresa != null)
-                                    _empresas_mes.Add("Empresas");
+                                    _empresas_mes.Add(at.Data.Value.Month + "Empresas");
                                 else
-                                    _pessoas_mes.Add("Pessoas");
+                                    _pessoas_mes.Add(at.Data.Value.Month + "Pessoas");
 
                                 if (at.Servicos != null)
                                 {
@@ -1252,11 +1279,11 @@ namespace Sim.Domain.Shared.Service
                                     {
                                         if (sv != null && sv != string.Empty)
                                         {
-                                            _mes_servicos.Add("Serv " + at.Data.Value.Date.ToString("MMM"));
+                                            _mes_servicos.Add(at.Data.Value.Month + "Servicos");
                                             if (at.Empresa != null)
-                                                _empresas_mes_servicos.Add("Empresas-" + at.Data.Value.ToString("MMM"));
+                                                _empresas_mes_servicos.Add(at.Data.Value.Month + "Servicos");
                                             else
-                                                _pessoas_mes_servicos.Add("Pessoas-" + at.Data.Value.ToString("MMM"));
+                                                _pessoas_mes_servicos.Add(at.Data.Value.Month + "Servicos");
                                         }
 
                                     }
@@ -1264,10 +1291,12 @@ namespace Sim.Domain.Shared.Service
                                 break;
 
                             case 12:
+                                _meses.Add(at.Data.Value.ToString("MMM"));
+
                                 if (at.Empresa != null)
-                                    _empresas_mes.Add("Empresas");
+                                    _empresas_mes.Add(at.Data.Value.Month + "Empresas");
                                 else
-                                    _pessoas_mes.Add("Pessoas");
+                                    _pessoas_mes.Add(at.Data.Value.Month + "Pessoas");
 
                                 if (at.Servicos != null)
                                 {
@@ -1277,11 +1306,11 @@ namespace Sim.Domain.Shared.Service
                                     {
                                         if (sv != null && sv != string.Empty)
                                         {
-                                            _mes_servicos.Add("Serv " + at.Data.Value.Date.ToString("MMM"));
+                                            _mes_servicos.Add(at.Data.Value.Month + "Servicos");
                                             if (at.Empresa != null)
-                                                _empresas_mes_servicos.Add("Empresas-" + at.Data.Value.ToString("MMM"));
+                                                _empresas_mes_servicos.Add(at.Data.Value.Month + "Servicos");
                                             else
-                                                _pessoas_mes_servicos.Add("Pessoas-" + at.Data.Value.ToString("MMM"));
+                                                _pessoas_mes_servicos.Add(at.Data.Value.Month + "Servicos");
                                         }
 
                                     }
@@ -1291,68 +1320,28 @@ namespace Sim.Domain.Shared.Service
                             default:
                                 break;
                         }
-                        */
+                        
                         #endregion
                     }
 
-                    foreach (var x in from x in _atendimentos
+                    r_all.Cliente = ("Clientes", _atendimentos, _servicos);
+                    r_all.ClientePF = ("Pessoas", _a_pessoas, _s_pessoas);
+                    r_all.ClientePJ = ("Empresas", _a_empresas, _s_empresas);
+
+                    var mlist = new List<(string Mes, int Atendimentos, int Servicos)>();
+
+                    foreach (var x in from x in _meses
                                       group x by x into g
                                       let count = g.Count()
                                       //orderby count descending
                                       select new { Value = g.Key, Count = count })
                     {
-                        r_all.Antendimentos_Ano = new KeyValuePair<string, int>("Atendimentos", x.Count);
+                        mlist.Add((x.Value, x.Count, 1));// = new KeyValuePair<string, int>("Atendimentos", x.Count);
                     }
 
-                    foreach (var x in from x in _servicos
-                                      group x by x into g
-                                      let count = g.Count()
-                                      //orderby count descending
-                                      select new { Value = g.Key, Count = count })
-                    {
-                        r_all.Servicos_Ano = new KeyValuePair<string, int>("Serviços", x.Count);
-                    }
-
-                    foreach (var x in from x in _a_pessoas
-                                      group x by x into g
-                                      let count = g.Count()
-                                      orderby count descending
-                                      select new { Value = g.Key, Count = count })
-                    {
-                        r_all.Pessoas_Ano = new KeyValuePair<string, int>("Atendimentos", x.Count);
-                    }
-
-                    foreach (var x in from x in _s_pessoas
-                                      group x by x into g
-                                      let count = g.Count()
-                                      orderby count descending
-                                      select new { Value = g.Key, Count = count })
-                    {
-                        r_all.Pessoas_Servicos_Ano = new KeyValuePair<string, int>("Serviços", x.Count);
-                    }
-
-
-                    foreach (var x in from x in _a_empresas
-                                      group x by x into g
-                                      let count = g.Count()
-                                      orderby count descending
-                                      select new { Value = g.Key, Count = count })
-                    {
-                        r_all.Empresas_Ano = new KeyValuePair<string, int>("Atendimentos", x.Count);
-                    }
-
-                    foreach (var x in from x in _s_empresas
-                                      group x by x into g
-                                      let count = g.Count()
-                                      orderby count descending
-                                      select new { Value = g.Key, Count = count })
-                    {
-                        r_all.Empresas_Servicos_Ano = new KeyValuePair<string, int>("Serviços", x.Count);
-                    }
+                    r_all.ListaMensal = mlist;
 
                     GC.Collect();
-
-
 
                 }
                 catch { }
@@ -1363,38 +1352,200 @@ namespace Sim.Domain.Shared.Service
             return r_all;
         }
 
-        public async Task<IEnumerable<KeyValuePair<string, int>>> BI_Atendimentos_SA(DateTime periodo)
+        public async Task<IEnumerable<KeyValuePair<string, int>>> BI_Atendimentos_Setor(DateTime periodo, string setor)
         {
             var d1 = new DateTime(periodo.Year, 01, 01);
             var d2 = new DateTime(periodo.Year, 12, 31);
 
+            var r_list = new List<KeyValuePair<string, int>>();
+
             var t = Task.Run(() => {
 
-                var list = _atendimento.GetBySetor("Sebrae Aqui");
+                var list = _atendimento.GetBySetor(setor);
 
                 try
                 {
+                    var _clientes = new List<string>();
+                    var _clientes_servicos = new List<string>();
+                    var _pessoas = new List<string>();
+                    var _pessoas_servicos = new List<string>();
+                    var _empresas = new List<string>();
+                    var _empresas_servicos = new List<string>();
 
+                    //meses
+                    var _clientes_mes = new List<string>();
+                    var _clientes_mes_servicos = new List<string>();
+                    var _pessoas_mes = new List<string>();
+                    var _pessoas_mes_servicos = new List<string>();
+                    var _empresas_mes = new List<string>();
+                    var _empresas_mes_servicos = new List<string>();
 
-                    foreach (var at in list.Where(d => d.Data.Value.Year == d1.Year))
+                    foreach (var at in list.Where(d => d.Data.Value.Year == d1.Year).OrderBy(d => d.Data))
                     {
-                        switch(at.Data.Value.Month)
+
+                        _clientes.Add("Atendimentos");
+                        
+                        if (at.Empresa != null)
+                            _empresas.Add("Empresas");
+                        else
+                            _pessoas.Add("Pessoas");
+
+                        if (at.Servicos != null)
+                        {
+                            string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
+
+                            foreach (string sv in words)
+                            {
+                                if (sv != null && sv != string.Empty)
+                                {
+                                    _clientes_servicos.Add("Serviços");
+                                    if (at.Empresa != null)
+                                        _empresas_servicos.Add("S_Empresas");
+                                    else
+                                        _pessoas_servicos.Add("S_Pessoas");
+                                }
+                            }
+                        }                 
+
+                        switch (at.Data.Value.Month)
                         {
                             case 1:
+                                _clientes_mes.Add(at.Data.Value.ToString("MMMM"));
 
-                                sa.Add()
-                                
+                                if (at.Empresa != null)
+                                    _empresas_mes.Add(at.Data.Value.Month + "Empresas");
+                                else
+                                    _pessoas_mes.Add(at.Data.Value.Month + "Pessoas");
 
+                                if (at.Servicos != null)
+                                {
+                                    string[] words = at.Servicos.ToString().Split(new char[] { ';', ',' });
+
+                                    foreach (string sv in words)
+                                    {
+                                        if (sv != null && sv != string.Empty)
+                                        {
+                                            _clientes_mes_servicos.Add(at.Data.Value.Month + "Serviços");
+                                            if (at.Empresa != null)
+                                                _empresas_mes_servicos.Add(at.Data.Value.Month + "S_Empresas");
+                                            else
+                                                _pessoas_mes_servicos.Add(at.Data.Value.Month + "S_Pessoas");
+                                        }
+                                    }
+                                }
                                 break;
-
 
                             default:
                                 break;
                         }
 
-
                     }
 
+                    foreach (var x in from x in _clientes
+                                      group x by x into g
+                                      let count = g.Count()
+                                      //orderby count descending
+                                      select new { Value = g.Key, Count = count })
+                    {
+                        r_list.Add(new KeyValuePair<string, int>(x.Value, x.Count));
+                    }
+
+                    foreach (var x in from x in _clientes_servicos
+                                      group x by x into g
+                                      let count = g.Count()
+                                      //orderby count descending
+                                      select new { Value = g.Key, Count = count })
+                    {
+                        r_list.Add(new KeyValuePair<string, int>(x.Value, x.Count));
+                    }
+
+                    foreach (var x in from x in _pessoas
+                                      group x by x into g
+                                      let count = g.Count()
+                                      //orderby count descending
+                                      select new { Value = g.Key, Count = count })
+                    {
+                        r_list.Add(new KeyValuePair<string, int>(x.Value, x.Count));
+                    }
+
+                    foreach (var x in from x in _pessoas_servicos
+                                      group x by x into g
+                                      let count = g.Count()
+                                      //orderby count descending
+                                      select new { Value = g.Key, Count = count })
+                    {
+                        r_list.Add(new KeyValuePair<string, int>(x.Value, x.Count));
+                    }
+
+                    foreach (var x in from x in _empresas
+                                      group x by x into g
+                                      let count = g.Count()
+                                      //orderby count descending
+                                      select new { Value = g.Key, Count = count })
+                    {
+                        r_list.Add(new KeyValuePair<string, int>(x.Value, x.Count));
+                    }
+
+                    foreach (var x in from x in _empresas_servicos
+                                      group x by x into g
+                                      let count = g.Count()
+                                      //orderby count descending
+                                      select new { Value = g.Key, Count = count })
+                    {
+                        r_list.Add(new KeyValuePair<string, int>(x.Value, x.Count));
+                    }
+
+                    //Meses
+                    foreach (var x in from x in _clientes_mes
+                                      group x by x into g
+                                      let count = g.Count()
+                                      //orderby count descending
+                                      select new { Value = g.Key, Count = count })
+                    {
+                        r_list.Add(new KeyValuePair<string, int>(x.Value, x.Count));
+                    }
+
+                    foreach (var x in from x in _clientes_mes
+                                      group x by x into g
+                                      let count = g.Count()
+                                      //orderby count descending
+                                      select new { Value = g.Key, Count = count })
+                    {
+                        r_list.Add(new KeyValuePair<string, int>(x.Value, x.Count));
+                    }
+
+                    foreach (var x in from x in _pessoas_mes
+                                      group x by x into g
+                                      let count = g.Count()
+                                      //orderby count descending
+                                      select new { Value = g.Key, Count = count })
+                    {
+                        r_list.Add(new KeyValuePair<string, int>(x.Value, x.Count));
+                    }
+                    foreach (var x in from x in _pessoas_mes_servicos
+                                      group x by x into g
+                                      let count = g.Count()
+                                      //orderby count descending
+                                      select new { Value = g.Key, Count = count })
+                    {
+                        r_list.Add(new KeyValuePair<string, int>(x.Value, x.Count));
+                    }
+                    foreach (var x in from x in _empresas_mes
+                                      group x by x into g
+                                      let count = g.Count()
+                                      //orderby count descending
+                                      select new { Value = g.Key, Count = count })
+                    {
+                        r_list.Add(new KeyValuePair<string, int>(x.Value, x.Count));
+                    }
+                    foreach (var x in from x in _empresas_mes_servicos
+                                      group x by x into g
+                                      let count = g.Count()
+                                      //orderby count descending
+                                      select new { Value = g.Key, Count = count })
+                    {
+                        r_list.Add(new KeyValuePair<string, int>(x.Value, x.Count));
+                    }
 
                 }
                 catch { }
@@ -1402,27 +1553,7 @@ namespace Sim.Domain.Shared.Service
 
             await t;
 
-            return null;
-        }
-
-        public Task<IEnumerable<KeyValuePair<string, int>>> BI_Atendimentos_SE(DateTime periodo)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<KeyValuePair<string, int>>> BI_Atendimentos_BP(DateTime periodo)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<KeyValuePair<string, int>>> BI_Atendimentos_PT(DateTime periodo)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<KeyValuePair<string, int>>> BI_Atendimentos_EP(DateTime periodo)
-        {
-            throw new NotImplementedException();
+            return r_list;
         }
 
         public Task<IEnumerable<KeyValuePair<string, int>>> BI_Atendimentos_AppUser(DateTime periodo)

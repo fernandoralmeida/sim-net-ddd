@@ -24,7 +24,7 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Atendimentos
         private readonly IAppServiceSetor _appSetores;
 
         [BindProperty(SupportsGet = true)]
-        public List<IEnumerable<KeyValuePair<string, int>>> Input { get; set; }
+        public IEnumerable<KeyValuePair<string, int>> Sebrae { get; set; }
 
         [BindProperty(SupportsGet = true)]
         public BiAtendimentos Atendimentos_List { get; set; }
@@ -47,45 +47,9 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Atendimentos
 
         private async Task LoadAsync()
         {
-            /*
-            if(Mes == 0)
-            {
-                var periodo = new DateTime(Ano, 1, 1);
-
-                var l_all_atendimentos = await _appAtendimento.ByAll(periodo);
-
-                Input.Add(l_all_atendimentos);
-
-                var setores = _appSetores.List();
-
-                foreach (Setor s in setores)
-                {
-                    var setor = await _appAtendimento.BySetor(s.Nome, periodo);
-                    if (setor.Count() > 1)
-                        Input.Add(setor);
-                }
-            }
-            else
-            {
-                var p = new DateTime(Ano, Mes, 1);
-
-                var l_all_atendimentos = await _appAtendimento.ByAllMonth(p);
-
-                Input.Add(l_all_atendimentos);
-
-                var setores = _appSetores.List();
-
-                foreach (Setor s in setores)
-                {
-                    var setor = await _appAtendimento.BySetorMonth(s.Nome, p);
-                    if (setor.Count() > 1)
-                        Input.Add(setor);
-                }
-            }
-
-            */
             var nperiodo = new DateTime(Ano, 1, 1);
             Atendimentos_List  = await _appAtendimento.BI_Atendimentos(nperiodo);
+            Sebrae = await _appAtendimento.BI_Atendimentos_Setor(nperiodo, "Sebrae Aqui");
         }
 
         public async Task<IActionResult> OnGetAsync()
