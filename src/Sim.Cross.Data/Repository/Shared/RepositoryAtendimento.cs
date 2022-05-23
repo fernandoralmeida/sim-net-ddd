@@ -195,7 +195,7 @@ namespace Sim.Cross.Data.Repository.Shared
             .Where(a => a.Data.Value.Date >= dataI
             && a.Data.Value.Date <= dataF && a.Status == "Finalizado" && a.Ativo == true &&
             (a.Pessoa.CPF == cpf || a.Pessoa.Nome.Contains(nome) ||
-            a.Empresa.CNPJ == cnpj || a.Empresa.Nome_Empresarial.Contains(razaosocial) || a.Empresa.CNAE_Principal == cnae ||
+            a.Empresa.CNPJ == cnpj || a.Empresa.Nome_Empresarial.Contains(razaosocial) || a.Empresa.CNAE_Principal.Contains(cnae) ||
             a.Servicos.Contains(servico) ||
             a.Owner_AppUser_Id == user))
             .OrderBy(o => o.Data));
