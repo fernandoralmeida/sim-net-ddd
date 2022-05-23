@@ -9,25 +9,26 @@
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
 <div class="row">
-    <form method="post" class="row center">
-        
-    <div class="input-field col s12 l5 m5">
-        <select asp-for="Sec.Nome" asp-items="Model.Secretarias" class="browser-default"></select>
-    </div>
-    <div class="input-field col s12 l3 m3 valign-wrapper">
-        <input asp-for="Ano" />
-        <button class="btn waves-effect waves-light" asp-page-handler="Month"><i class="material-icons">refresh</i></button> 
-    </div>
 
-    </form>
 
-    <div class="row">
+    
                 
         @if(Model.Atendimentos_List != null)
         {
             <div class="col s12">
                 <div class="card hoverable">
-                    <table class="centered striped">
+                        <form method="post" class="center-align">
+                            <div class="input-field col s12 l5 m5" hidden>
+                                <select asp-for="Sec.Nome" asp-items="Model.Secretarias" class="browser-default"></select>
+                            </div>
+                            <div class="col s3 l4"></div>
+                            <div class="input-field col s6 l4 valign-wrapper">
+                                <input asp-for="Ano" />
+                                <button class="btn waves-effect waves-light" asp-page-handler="Month"><i class="material-icons">refresh</i></button>
+                            </div>
+                            <div class="col s3 l4"></div>
+                        </form>
+                    <table class="centered">
                              <thead class="grey-text darken-3">
                                  <tr>
                                      <th>Atendimentos</th>
@@ -51,7 +52,8 @@
                     </table>
                     @if(Model.Atendimentos_List.ListaMensal != null)
                     {
-                    <table class="centered responsive-table striped">
+                    <div style="overflow-x:auto;">
+                    <table class="centered striped">
                         <thead>
                             <tr>
                                 @foreach(var m in Model.Atendimentos_List.ListaMensal)
@@ -70,6 +72,7 @@
                             </tr>
                         </tbody>
                     </table>
+                    </div>
                     }
                 </div>
             </div>
@@ -82,7 +85,7 @@
 
                <div class="col s12">
                 <div class="card hoverable">
-                    <table class="centered striped">
+                    <table class="centered">
                         <caption class="grey-text">@set.Cliente.Titulo</caption>
                              <thead class="grey-text darken-3">                                 
                                  <tr>
@@ -107,7 +110,8 @@
                     </table>
                     @if(set.ListaMensal != null)
                     {
-                    <table class="centered responsive-table striped">
+                    <div style="overflow-x:auto;">
+                    <table class="centered striped">
                         <thead>
                             <tr>
                                 @foreach(var m in set.ListaMensal)
@@ -126,13 +130,44 @@
                             </tr>
                         </tbody>
                     </table>
+                    </div>
                     }
-
                 </div>
             </div>
             }
         }
-    </div>
+    
+    @if (Model.AppUsers != null)
+    {
+        <div class="col s12">
+            <div class="card hoverable" style="overflow-x:auto;">
+                    @if(Model.AppUsers.ListaAppUser != null)
+                    {
+                    <table class="centered striped">
+                        <caption class="grey-text">Usuários</caption>
+                        <thead>
+                            <tr>
+                                @foreach(var m in Model.AppUsers.ListaAppUser)
+                                    {
+                                      <th class="grey-text darken-3"><span>@m.Nome</span></th>  
+                                    }                                   
+
+                            </tr>                           
+                        </thead>
+                        <tbody>
+                            <tr>
+                                @foreach(var m in Model.AppUsers.ListaAppUser)
+                                    {
+                                      <td class="grey-text darken-3"><span class="blue-text">@m.Atendimentos</span> / <span class="teal-text">@m.Servicos</span></td>
+                                    }   
+                            </tr>
+                        </tbody>
+                    </table>
+                    }
+            </div>
+        </div>
+    }
+
 </div>
 
 <!-- Modal Structure -->

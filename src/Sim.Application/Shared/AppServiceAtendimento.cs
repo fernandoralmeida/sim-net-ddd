@@ -99,56 +99,6 @@ namespace Sim.Application.Shared
             return await _atendimento.GetByUserName(username);
         }
 
-        public async Task<IEnumerable<KeyValuePair<string, int>>> BySetor(string setor, DateTime periodo)
-        {
-            return await _atendimento.BySetor(setor, periodo);
-        }
-
-        public async Task<IEnumerable<KeyValuePair<string, int>>> ByAll(DateTime periodo)
-        {
-            return await _atendimento.ByAll(periodo);
-        }
-
-        public async Task<IEnumerable<KeyValuePair<string, int>>> ByUserName(string username, DateTime periodo)
-        {
-            return await _atendimento.ByUserName(username, periodo);
-        }
-
-        public async Task<IEnumerable<KeyValuePair<string, int>>> ByServicos(string servico, DateTime periodo)
-        {
-            return await _atendimento.ByServicos(servico, periodo);
-        }
-
-        public async Task<IEnumerable<KeyValuePair<string, int>>> ByCanal(string canal, string setor, DateTime periodo)
-        {
-            return await _atendimento.ByCanal(canal, setor, periodo);
-        }
-
-        public async Task<IEnumerable<KeyValuePair<string, int>>> BySetorMonth(string setor, DateTime periodo)
-        {
-            return await _atendimento.BySetorMonth(setor, periodo);
-        }
-
-        public async Task<IEnumerable<KeyValuePair<string, int>>> ByAllMonth(DateTime periodo)
-        {
-            return await _atendimento.ByAllMonth(periodo);
-        }
-
-        public async Task<IEnumerable<KeyValuePair<string, int>>> ByUserNameMonth(string username, string setor, DateTime periodo)
-        {
-            return await _atendimento.ByUserNameMonth(username, setor, periodo);
-        }
-
-        public async Task<IEnumerable<KeyValuePair<string, int>>> ByServicosMonth(string servico, DateTime periodo)
-        {
-            return await _atendimento.ByServicosMonth(servico, periodo);
-        }
-
-        public async Task<IEnumerable<KeyValuePair<string, int>>> ByCanalMonth(string canal, string setor, DateTime periodo)
-        {
-            return await _atendimento.ByCanalMonth(canal, setor, periodo);
-        }
-
         public async Task<IEnumerable<Atendimento>> ListByMonth(DateTime? month)
         {
             return await _atendimento.ListByMonth(month);
@@ -175,9 +125,9 @@ namespace Sim.Application.Shared
             return _atendimento.BI_Atendimentos(periodo);
         }
 
-        public Task<IEnumerable<KeyValuePair<string, int>>> BI_Atendimentos_AppUser(DateTime periodo)
+        public Task<BiAtendimentos> BI_Atendimentos_AppUser(DateTime periodo)
         {
-            throw new NotImplementedException();
+            return _atendimento.BI_Atendimentos_AppUser(periodo);
         }
 
         public Task<BiAtendimentos> BI_Atendimentos_Setor(DateTime periodo, string setor)

@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Sim.UI.Web.Areas.SimBI.Pages.Atendimentos
 {
-
     using Sim.Application.Shared.Interface;
     using Sim.Domain.Shared.Entity;
     using Sim.Domain.BI;
@@ -29,6 +28,9 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Atendimentos
 
         [BindProperty(SupportsGet = true)]
         public IEnumerable<BiAtendimentos> Setores { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public BiAtendimentos AppUsers { get; set; }
 
         [BindProperty(SupportsGet = true)]
         public BiAtendimentos Atendimentos_List { get; set; }
@@ -71,6 +73,7 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Atendimentos
                 _list.Add(await _appAtendimento.BI_Atendimentos_Setor(nperiodo, s.Nome));
             }
             Setores = _list;
+            AppUsers = await _appAtendimento.BI_Atendimentos_AppUser(nperiodo);
         }
 
         public async Task<IActionResult> OnGetAsync()
@@ -85,67 +88,22 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Atendimentos
         {
             JsonResult rjson;
 
-            if (mth == "0")
-            {
-                var periodo = new DateTime(y, 1, 1);
-                var user_atendimentos = _appAtendimento.ByUserName(id, periodo);
-                user_atendimentos.Wait();
-                rjson = new JsonResult(user_atendimentos.Result);
-            }
-            else
-            {
-                var p = new DateTime(y, Convert.ToInt32(mth), 1);
-                var user_atendimentos = _appAtendimento.ByUserNameMonth(id, id2, p);
-                user_atendimentos.Wait();
-                rjson = new JsonResult(user_atendimentos.Result);
-            }
 
-            return rjson;
+            return null;
         }
 
         public JsonResult OnGetServicoPreview(string id, string mth, int y)
         {
             JsonResult rjson;
                         
-
-            if (mth == "0")
-            {
-                var periodo = new DateTime(y, 1, 1);
-                var user_atendimentos =  _appAtendimento.ByServicos(id, periodo);
-                user_atendimentos.Wait();
-                rjson = new JsonResult(user_atendimentos.Result);                
-            }
-            else
-            {
-                var periodo = new DateTime(y, Convert.ToInt32(mth), 1);
-                var user_atendimentos = _appAtendimento.ByServicosMonth(id, periodo);
-                user_atendimentos.Wait();
-                rjson = new JsonResult(user_atendimentos.Result);
-            }
-
-            return rjson;
+            return null;
         }
 
         public JsonResult OnGetCanalPreview(string id, string id2,  string mth, int y)
         {
             JsonResult rjson;            
 
-            if (mth == "0")
-            {                
-                var periodo = new DateTime(y, 1, 1);
-                var user_atendimentos = _appAtendimento.ByCanal(id, id2, periodo);
-                user_atendimentos.Wait();
-                rjson = new JsonResult(user_atendimentos.Result);
-            }
-            else
-            {
-                var periodo = new DateTime(y, Convert.ToInt32(mth), 1);
-                var user_atendimentos = _appAtendimento.ByCanalMonth(id, id2, periodo);
-                user_atendimentos.Wait();
-                rjson = new JsonResult(user_atendimentos.Result);
-            }
-
-            return rjson;
+            return null;
         }
 
         public async Task<IActionResult> OnPostMonth()

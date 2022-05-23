@@ -26,7 +26,7 @@ else
         <div class="row">
             <div class="col s12 m4 l4">
                 <div class="card hoverable">
-                    <table class="centered">
+                    <table class="centered striped">
                         <thead>
                             <tr>
                                 <th class="card-header grey-text darken-3" title="Mortalidade de Empresas abertas nos ultimos 24 meses"><span>Mortalidade</span></th>
@@ -48,7 +48,7 @@ else
             </div>
             <div class="col s12 m4 l4">
                 <div class="card hoverable">
-                    <table class="centered">
+                    <table class="centered striped">
                         <thead>
                             <tr>
                                 <th class="card-header grey-text darken-3">@emp.Formalizacoes.Key @Model.Input.Ano</th>
@@ -70,7 +70,7 @@ else
             </div>
             <div class="col s12 m4 l4">
                 <div class="card hoverable">
-                    <table class="centered">
+                    <table class="centered striped">
                         <thead>
                             <tr>
                                 <th class="card-header grey-text darken-3">@emp.Baixas.Key @Model.Input.Ano</th>
@@ -100,10 +100,8 @@ else
                     @if (Model.Input.Mes == "99")
                     {
 
-                        <div class="card-header grey-text darken-3 center">
-                            Demostrativo Geral
-                        </div>
-                        <table class="responsive-table centered">
+                        <table class="responsive-table striped centered">
+                            <caption class="grey-text">Demostrativo Geral</caption>
                             <thead>
                                 <tr>
                                     @foreach (var op in emp.ListaSituacao)
@@ -147,10 +145,8 @@ else
                     }
                     else if(Model.Input.Mes == "00")
                     {
-                        <div class="card-header grey-text darken-3 center">
-                            Empresas Formalizadas @Model.Input.Ano
-                        </div>
-                        <table class="responsive-table centered">
+                        <table class="responsive-table striped centered">
+                            <caption class="grey-text">Empresas Formalizadas @Model.Input.Ano</caption>
                             <thead>
                                 <tr>
                                     @foreach (var op in emp.ListaMensal)
@@ -180,10 +176,8 @@ else
         <div class="row">
             <div class="col s12 m6 l6">
                 <div class="card hoverable">
-                    <div class="card-header grey-text darken-3 center">
-                        Porte
-                    </div>
-                    <table class="responsive-table centered">
+                    <table class="responsive-table striped centered">
+                        <caption class="grey-text">Porte</caption>
                         <thead>
                             <tr>
                                 @foreach (var op in emp.Porte)
@@ -209,10 +203,8 @@ else
             </div>
             <div class="col s12 m6 l6">
                 <div class="card hoverable">
-                    <div class="card-header grey-text darken-3 center">
-                        Regime Tributário
-                    </div>
-                    <table class="responsive-table centered">
+                    <table class="responsive-table striped centered">
+                        <caption class="grey-text">Regime Tributário</caption>
                         <thead>
                             <tr>
                                 <th class="grey-text darken-3" title="Lucro Real ou Presumido">Lucro RP</th>
@@ -247,8 +239,8 @@ else
         <div class="row">
             <div class="col s12">
                 <div class="card hoverable">
-                    <div class="card-header grey-text center">Distribuição por Setor</div>
-                    <table class="responsive-table centered">
+                    <table class="responsive-table striped centered">
+                        <caption class="grey-text">Distribuição por Setor</caption>
                         <thead>
                             <tr>
                                 @foreach (var st in emp.ListaSetores)
@@ -379,7 +371,7 @@ else
         <div class="row">
             <div class="col s12">
                 <div class="card hoverable">
-                    <ul class="collection">
+                    <ul class="collection striped">
                         <li class="collection-item grey-text truncate"><b>Atividades Primárias (10+ Ocorrências no geral)</b></li>
                         @{int v = 0;}
 
