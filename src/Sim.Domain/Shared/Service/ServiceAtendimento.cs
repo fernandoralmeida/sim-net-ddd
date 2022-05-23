@@ -1049,7 +1049,7 @@ namespace Sim.Domain.Shared.Service
                                 ConstruirMeses(at, servicos);
                     }
 
-                    r_all.Cliente = ("Clientes", _meses.Count, _mes_servicos.Count);
+                    r_all.Cliente = (setor, _meses.Count, _mes_servicos.Count);
                     r_all.ClientePF = ("Pessoas", _pessoas_mes.Count, _pessoas_mes_servicos.Count);
                     r_all.ClientePJ = ("Empresas", _empresas_mes.Count, _empresas_mes_servicos.Count);
 

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Authorization;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Sim.UI.Web.Areas.SimBI.Pages.Atendimentos
 {
@@ -16,12 +17,15 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Atendimentos
     using Sim.Domain.BI;
     using System;
 
-
     [Authorize]
     public class IndexModel : PageModel
     {
         private readonly IAppServiceAtendimento _appAtendimento;
         private readonly IAppServiceSetor _appSetores;
+        private readonly IAppServiceSecretaria _appServiceSecretaria;
+
+        [BindProperty(SupportsGet = true)]
+        public Secretaria Sec { get; set; } //Secretaria
 
         [BindProperty(SupportsGet = true)]
         public IEnumerable<BiAtendimentos> Setores { get; set; }
@@ -35,11 +39,25 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Atendimentos
         [BindProperty(SupportsGet = true)]
         public int Ano { get; set; }
 
+        public SelectList Secretarias { get; set; }
+
         public IndexModel(IAppServiceAtendimento appAtendimento,
+            IAppServiceSecretaria appServiceSecretaria,
             IAppServiceSetor appsetores)
         {
             _appAtendimento = appAtendimento;
+            _appServiceSecretaria = appServiceSecretaria;
             _appSetores = appsetores;  
+        }
+
+        private async Task LoadSecretaria()
+        {
+            var s = Task.Run(() => _appServiceSecretaria.List());
+            await s;
+            if (s.Result != null)
+                Secretarias = new SelectList(s.Result, nameof(Sec.Nome), nameof(Sec.Nome), null);
+
+            Sec.Nome = Secretarias.SingleOrDefault().Text;
         }
 
         private async Task LoadAsync()
@@ -47,7 +65,7 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Atendimentos
             var nperiodo = new DateTime(Ano, 1, 1);
             Atendimentos_List  = await _appAtendimento.BI_Atendimentos(nperiodo);
             var _list = new List<BiAtendimentos>();
-            var setores = _appSetores.GetByOwner("Secretaria de Desenvolvimento Econômico e Empreendedorismo");
+            var setores = _appSetores.GetByOwner(Sec.Nome);
             foreach(var s in setores)
             {
                 _list.Add(await _appAtendimento.BI_Atendimentos_Setor(nperiodo, s.Nome));
@@ -58,7 +76,7 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Atendimentos
         public async Task<IActionResult> OnGetAsync()
         {
             Ano = DateTime.Now.Year;
-            Mes = DateTime.Now.Month;
+            await LoadSecretaria();
             await LoadAsync();
             return Page();
         }
@@ -132,6 +150,7 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Atendimentos
 
         public async Task<IActionResult> OnPostMonth()
         {
+            await LoadSecretaria();
             await LoadAsync();
             return Page();
         }

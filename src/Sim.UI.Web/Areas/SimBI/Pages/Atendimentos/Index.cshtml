@@ -10,23 +10,11 @@
 
 <div class="row">
     <form method="post" class="row center">
-
-    <div class="input-field col s12 l6 m12 valign-wrapper">
-        <select asp-for="Mes">
-            <option value="0">ano</option>
-            <option value="1">jan</option>
-            <option value="2">fev</option>
-            <option value="3">mar</option>
-            <option value="4">abr</option>
-            <option value="5">mai</option>
-            <option value="6">jun</option>
-            <option value="7">jul</option>
-            <option value="8">ago</option>
-            <option value="9">set</option>
-            <option value="10">out</option>
-            <option value="11">nov</option>
-            <option value="12">dev</option>
-        </select>
+        
+    <div class="input-field col s12 l5 m5">
+        <select asp-for="Sec.Nome" asp-items="Model.Secretarias" class="browser-default"></select>
+    </div>
+    <div class="input-field col s12 l3 m3 valign-wrapper">
         <input asp-for="Ano" />
         <button class="btn waves-effect waves-light" asp-page-handler="Month"><i class="material-icons">refresh</i></button> 
     </div>
@@ -48,25 +36,19 @@
                              </thead>
                              <tbody class="grey-text darken-3">
                                  <tr>
-                                     <td><h4><a href="#" class="blue-text">@Model.Atendimentos_List.Cliente.Atendimentos</a></h4></td>
-                                     <td><h4><a href="#" class="blue-text text-darken-4">@Model.Atendimentos_List.Cliente.Servicos</a></h4></td>                                     
+                                     <td><h5><a href="#" class="blue-text">@Model.Atendimentos_List.Cliente.Atendimentos</a></h5></td>
+                                     <td><h5><a href="#" class="teal-text">@Model.Atendimentos_List.Cliente.Servicos</a></h5></td>                                     
                                  </tr>
-                                 <tr>
-                                     <td>PF( <span class="orange-text">@Model.Atendimentos_List.ClientePF.Atendimentos</span> )</td>
-                                     <td>PF( <span class="deep-orange-text">@Model.Atendimentos_List.ClientePF.Servicos</span> )</td>
+                                 <tr class="orange-text">
+                                     <td>PF( <span class="blue-text text-lighten-1">@Model.Atendimentos_List.ClientePF.Atendimentos</span> )</td>
+                                     <td>PF( <span class="teal-text text-lighten-1">@Model.Atendimentos_List.ClientePF.Servicos</span> )</td>
                                  </tr>
-                                 <tr>
-                                     <td>PJ( <span class="purple-text">@Model.Atendimentos_List.ClientePJ.Atendimentos</span> )</td>
-                                     <td>PJ( <span class="deep-purple-text">@Model.Atendimentos_List.ClientePJ.Servicos</span> )</td>
+                                 <tr class="purple-text">
+                                     <td>PJ( <span class="blue-text text-lighten-2">@Model.Atendimentos_List.ClientePJ.Atendimentos</span> )</td>
+                                     <td>PJ( <span class="teal-text text-lighten-2">@Model.Atendimentos_List.ClientePJ.Servicos</span> )</td>
                                  </tr>
                              </tbody>
                     </table>
-                </div>
-            </div>
-            <div class="col s12 m12 l12">
-                <div class="card hoverable">
-
-
                     @if(Model.Atendimentos_List.ListaMensal != null)
                     {
                     <table class="centered responsive-table striped">
@@ -83,15 +65,73 @@
                             <tr>
                                 @foreach(var m in Model.Atendimentos_List.ListaMensal)
                                     {
-                                      <td class="grey-text darken-3"><span class="blue-text">@m.Atendimentos</span> | <span class="green-text darken-3">@m.Servicos</span></td>
+                                      <td class="grey-text darken-3"><span class="blue-text">@m.Atendimentos</span> / <span class="teal-text">@m.Servicos</span></td>
                                     }   
                             </tr>
                         </tbody>
                     </table>
                     }
-                 </div>        
+                </div>
             </div>
         }   
+
+        @if(Model.Setores != null)
+        {
+            @foreach(var set in Model.Setores.Where(s => s.Cliente.Atendimentos > 0))
+            {                
+
+               <div class="col s12">
+                <div class="card hoverable">
+                    <table class="centered striped">
+                        <caption class="grey-text">@set.Cliente.Titulo</caption>
+                             <thead class="grey-text darken-3">                                 
+                                 <tr>
+                                     <th>Atendimentos</th>
+                                     <th>Serviços</th>
+                                 </tr>
+                             </thead>
+                             <tbody class="grey-text darken-3">
+                                 <tr>
+                                     <td><h5><a href="#" class="blue-text">@set.Cliente.Atendimentos</a></h5></td>
+                                     <td><h5><a href="#" class="teal-text">@set.Cliente.Servicos</a></h5></td>                                     
+                                 </tr>
+                                 <tr class="orange-text">
+                                     <td >PF( <span class="blue-text text-lighten-1">@set.ClientePF.Atendimentos</span> )</td>
+                                     <td>PF( <span class="teal-text text-lighten-1">@set.ClientePF.Servicos</span> )</td>
+                                 </tr>
+                                 <tr class="purple-text">
+                                     <td>PJ( <span class="blue-text text-lighten-2">@set.ClientePJ.Atendimentos</span> )</td>
+                                     <td>PJ( <span class="teal-text text-lighten-2">@set.ClientePJ.Servicos</span> )</td>
+                                 </tr>
+                             </tbody>
+                    </table>
+                    @if(set.ListaMensal != null)
+                    {
+                    <table class="centered responsive-table striped">
+                        <thead>
+                            <tr>
+                                @foreach(var m in set.ListaMensal)
+                                    {
+                                      <th class="grey-text darken-3"><span>@m.Mes</span></th>  
+                                    }                                  
+
+                            </tr>                           
+                        </thead>
+                        <tbody>
+                            <tr>
+                                @foreach(var m in set.ListaMensal)
+                                    {
+                                      <td class="grey-text darken-3"><span class="blue-text">@m.Atendimentos</span> / <span class="teal-text">@m.Servicos</span></td>
+                                    }   
+                            </tr>
+                        </tbody>
+                    </table>
+                    }
+
+                </div>
+            </div>
+            }
+        }
     </div>
 </div>
 
