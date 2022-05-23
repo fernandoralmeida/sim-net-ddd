@@ -25,9 +25,7 @@ namespace Sim.UI.Web.Pages.Empresa.Consulta
 
         [BindProperty(SupportsGet = true)]
         public InputModel Input { get; set; }
-
-        public SelectList Municipios { get; set; }
-        
+       
         public class InputModel
         {
             [DisplayName("Data Inicial")]
@@ -38,22 +36,11 @@ namespace Sim.UI.Web.Pages.Empresa.Consulta
             [DataType(DataType.Date)]
             public DateTime? DataF { get; set; }
 
-            public string Base { get; set; }
-
             public string CNAE { get; set; }            
-
-            public string Situacao { get; set; }
             
             public string Logradouro { get; set; }
 
             public string Bairro { get; set; }
-
-            public string Municipio { get; set; }
-
-            public string Socio { get; set; }
-
-            [DisplayName("Regime Tributário")]
-            public string RegimeTributario { get; set; }
 
             public ICollection<BaseReceitaFederal> ListaEmpresas { get; set; }
         }
@@ -63,20 +50,9 @@ namespace Sim.UI.Web.Pages.Empresa.Consulta
             _appServiceEmpresa = appServiceEmpresa;
         }
 
-        private async Task LoadMunicipios()
-        {
-            var t = Task.Run(() => _appServiceEmpresa.MicroRegiaoJahu());
-            await t;
-
-            if (t != null)
-            {
-                Municipios = new SelectList(t.Result, nameof(Municipio.Codigo), nameof(Municipio.Descricao), null);
-            }
-        }
-
         public void OnGet()
         {
-            LoadMunicipios().Wait();
+
         }
     }
 }

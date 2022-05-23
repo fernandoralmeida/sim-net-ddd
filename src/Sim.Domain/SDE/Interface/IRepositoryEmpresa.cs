@@ -28,10 +28,8 @@ namespace Sim.Domain.SDE.Interface
         Task<IEnumerable<BaseReceitaFederal>> ListBySociosAsync(string nomesocio);
         Task<IEnumerable<BaseReceitaFederal>> ListForBIAsync(string municipio, string situacao, string ano, string mes);
         Task<IEnumerable<BaseReceitaFederal>> ListForBICnaeAsync(string municipio);
-
         Task<IEnumerable<Municipio>> ListMinicipios();
-
-        Task<IEnumerable<BaseReceitaFederal>> ListByParam(List<object> lparam);
+        Task<IEnumerable<Empresas>> ListByParam(List<object> lparam);
 
     }
 }

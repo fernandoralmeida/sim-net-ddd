@@ -11,164 +11,102 @@
 <form method="post">
 
     <div class="card">
-
         <div class="row">
             <div class="col s12">
-                <div class="input-field col s4 m4 xl2">
-                    <select asp-for="Input.Base">
-                        <option value="0" selected>SIM</option>
-                        <option value="1">RFB</option>
-                    </select>
-                    <label asp-for="Input.Base"></label>
-                </div>
-                <div class="input-field col s4 m4 xl2">
-                    <select asp-for="Input.Situacao">
-                        <option value="02" selected>Ativa</option>
-                        <option value="01">Nula</option>
-                        <option value="03">Suspensa</option>
-                        <option value="04">Inapta</option>
-                        <option value="08">Baixada</option>
-                    </select>
-                    <label asp-for="Input.Situacao"></label>
-                </div>
-                <div class="input-field col s4 m4 xl2">
-                    <select asp-for="Input.Municipio" asp-items="@Model.Municipios">
-                        <option selected></option>
-                    </select>
-                    <label asp-for="Input.Municipio"></label>
-                </div>
                 <div class="input-field col s6 m4 xl3">
                     <input asp-for="Input.CNPJ" />
                     <label asp-for="Input.CNPJ"></label>
-                    <button class="waves-effect waves-light btn btn-small blue-grey prefix" asp-page-handler="sCnpj"><i class="material-icons">search</i></button>
                 </div>
-                <div class="input-field col s6 m4 xl3 valign-wrapper">
+                <div class="input-field col s6 m4 xl3">
                     <input asp-for="Input.RazaoSocial" />
                     <label asp-for="Input.RazaoSocial"></label>
-                    <button class="waves-effect waves-light btn btn-small blue-grey" asp-page-handler="sRazaSocial"><i class="material-icons">search</i></button>
                 </div>
-                <div class="input-field col s6 m4 xl2 valign-wrapper">
+                <div class="input-field col s6 m4 xl2">
                     <input asp-for="Input.CNAE" id="inputCNAE" />
                     <label asp-for="Input.CNAE"></label>
-                    <button class="waves-effect waves-light btn btn-small blue-grey" asp-page-handler="sCNAE"><i class="material-icons">search</i></button>
                 </div>
-
-                <div class="input-field col s6 m4 xl4 valign-wrapper">
+                <div class="input-field col s6 m4 xl4">
                     <input asp-for="Input.Logradouro" />
                     <label asp-for="Input.Logradouro"></label>
-                    <button class="waves-effect waves-light btn btn-small blue-grey" asp-page-handler="sLogradouro"><i class="material-icons">search</i></button>
                 </div>
-                <div class="input-field col s6 m4 xl3 valign-wrapper">
+                <div class="input-field col s6 m4 xl3">
                     <input asp-for="Input.Bairro" />
                     <label asp-for="Input.Bairro"></label>
-                    <button class="waves-effect waves-light btn btn-small blue-grey" asp-page-handler="sBairro"><i class="material-icons">search</i></button>
-                </div>
-                <div class="input-field col s6 m4 xl3 valign-wrapper">
-                    <input asp-for="Input.Socio" />
-                    <label asp-for="Input.Socio"></label>
-                    <button class="waves-effect waves-light btn btn-small blue-grey" asp-page-handler="sSocio"><i class="material-icons">search</i></button>
                 </div>
             </div>
         </div>
-        @{
+        <div class="card-action">
+                <button class="btn waves-effect waves-light">Pesquisar</button>
+                @{
                 if (User.IsInRole("Administrador"))
                 {
-                    if (Model.Input.ListaEmpresasRFB != null)
+                    if (Model.Input.ListaEmpresas != null)
                     {
-                        if (Model.Input.ListaEmpresasRFB.Count > 0)
+                        if (Model.Input.ListaEmpresas.Count() > 0)
                         {
-                                  <div class="card-action center">
-
-            <button class="btn waves-effect waves-light">Pesquisar</button> 
-                            
-                            
                             <a class="btn waves-effect waves-light blue right" asp-page="/Empresa/Consulta/Print" asp-route-p1="0" asp-route-p2="0" asp-route-p3="0" asp-route-p4="0" asp-route-p5="0" asp-route-p6="0" asp-route-p7="0" asp-route-p8="0" asp-route-p9="0" target="_blank">Ver Lista</a>
-                        </div>
                         }
-
                     }
                 }
-         }
+                }                
+        </div>
+
     </div>
 
 
 </form>
 
-<div class="card">
-    <!--
-    <div class="card-title">
-        <nav class="z-depth-0" style="border-bottom:solid 1px #efefef">
-            <div class="nav-wrapper white">
-                <form method="post" class="row">
-                    <div class="input-field col s6 l6 m6">
-                        <input asp-for="Input.CNPJ" type="search" id="inputCNPJ" required>
-                        <label class="label-icon" asp-for="Input.CNPJ"><i class="black-text material-icons">search</i></label>
-                    </div>
-                    <button class="input-field btn waves-effect z-depth-0 waves-light right" type="submit" name="action">Pesquisar</button>
-                </form>
-            </div>
-        </nav>
-    </div>-->
+<div class="card" style="overflow-y:auto;">
 
-    <table class="responsive-table">
+    <table class="striped">
         <thead>
             <tr>
                 <th>#</th>
-                <th>
-                    CNPJ
-                </th>
-
-                <th>
-                    Nome Empresarial
-                </th>
-
-                <th>
-                    Tel
-                </th>
-
-                <th>
-                    E-mail
-                </th>
-                <th>
-                    Situação
-                </th>
+                <th>CNPJ</th>
+                <th>Nome Empresarial</th>
+                <th>Tel</th>
+                <th>E-mail</th>
+                <th>Situação</th>
                 <th>Endereço</th>
-                <th>Socio</th>
+                <th>Atividade</th>
             </tr>
         </thead>
         <tbody>
-
-            @foreach (var item in Model.Input.ListaEmpresasRFB)
+            @{ var cont = 0;}
+            @if(Model.Input.ListaEmpresas != null)
             {
+                @foreach (var item in Model.Input.ListaEmpresas)
+            {
+                    cont++;
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Id)
+                    @Html.DisplayFor(modelItem => cont)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.CNPJ)
                 </td>
-
                 <td>
-                    @Html.DisplayFor(modelItem => item.Empresa.RazaoSocial)
-                </td>
-
-                <td>
-                    @Html.DisplayFor(modelItem => item.Estabelecimento.DDD1) @Html.DisplayFor(modelItem => item.Estabelecimento.Telefone1)
+                    @Html.DisplayFor(modelItem => item.Nome_Empresarial)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Estabelecimento.CorreioEletronico)
+                    @Html.DisplayFor(modelItem => item.Telefone)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Estabelecimento.SituacaoCadastral)
+                    @Html.DisplayFor(modelItem => item.Email)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Estabelecimento.Logradouro) @Html.DisplayFor(modelItem => item.Estabelecimento.Municipio)
+                    @Html.DisplayFor(modelItem => item.Situacao_Cadastral)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.AtividadePrincipal.Codigo) @Html.DisplayFor(modelItem => item.AtividadePrincipal.Descricao)
+                    @Html.DisplayFor(modelItem => item.Logradouro) 
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CNAE_Principal) @Html.DisplayFor(modelItem => item.Atividade_Principal)
                 </td>
             </tr>
             }
+            }
+            
         </tbody>
     </table>
 </div>

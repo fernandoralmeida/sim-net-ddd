@@ -22,26 +22,8 @@
                     <label asp-for="Input.DataF"></label>
                 </div>
                 <div class="input-field col s6 m4 xl2">
-                    <select asp-for="Input.Base">
-                        <option value="0" selected>SIM</option>
-                        <option value="1">RFB</option>
-                    </select>
-                    <label asp-for="Input.Base"></label>
-                </div>
-                <div class="input-field col s6 m4 xl2">
                     <input asp-for="Input.CNAE" id="inputCNAE" />
                     <label asp-for="Input.CNAE"></label>
-                </div>
-                <div class="input-field col s6 m4 xl2">
-                    <select asp-for="Input.Situacao">
-                        <option selected></option>
-                        <option>Ativa</option>
-                        <option>Nula</option>
-                        <option>Suspensa</option>
-                        <option>Inapta</option>
-                        <option>Baixada</option>
-                    </select>
-                    <label asp-for="Input.Situacao"></label>
                 </div>
                 <div class="input-field col s6 m4 xl2">
                     <input asp-for="Input.Logradouro" />
@@ -51,13 +33,6 @@
                     <input asp-for="Input.Bairro" />
                     <label asp-for="Input.Bairro"></label>
                 </div>
-                <div class="input-field col s6 m4 xl2">
-                    <select asp-for="Input.Municipio" asp-items="@Model.Municipios">
-                        <option selected></option>
-                    </select>
-                    <label asp-for="Input.Municipio"></label>
-                </div>
-
             </div>
         </div>
         <div class="card-action">

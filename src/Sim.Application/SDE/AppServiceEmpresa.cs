@@ -122,7 +122,7 @@ namespace Sim.Application.SDE
             return await _empresa.ListforCnaeJsonAsync(cnae, municipio, situacao);
         }
 
-        public async Task<IEnumerable<BaseReceitaFederal>> ListByParam(List<object> lparam)
+        public async Task<IEnumerable<Empresas>> ListByParam(List<object> lparam)
         {
             return await _empresa.ListByParam(lparam);
         }

@@ -1866,7 +1866,7 @@ namespace Sim.Domain.SDE.Service
             return lista;
         }
 
-        public async Task<IEnumerable<BaseReceitaFederal>> ListByParam(List<object> lparam)
+        public async Task<IEnumerable<Empresas>> ListByParam(List<object> lparam)
         {
             return await _repositoryEmpresa.ListByParam(lparam);
         }

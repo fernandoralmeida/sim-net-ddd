@@ -36,6 +36,6 @@ namespace Sim.Application.SDE.Interface
         Task<IEnumerable<BaseReceitaFederal>> ListForBICnaeAsync(string municipio);
         Task<IEnumerable<BiCnae>> ListBICnae(string municipio);
         Task<IEnumerable<Empresas>> ListforCnaeJsonAsync(string cnae, string municipio, string situacao);
-        Task<IEnumerable<BaseReceitaFederal>> ListByParam(List<object> lparam);
+        Task<IEnumerable<Empresas>> ListByParam(List<object> lparam);
     }
 }

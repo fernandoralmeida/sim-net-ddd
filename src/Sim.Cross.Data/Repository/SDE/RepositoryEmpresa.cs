@@ -445,60 +445,25 @@ namespace Sim.Cross.Data.Repository.SDE
             return brf;
         }
 
-        public async Task<IEnumerable<BaseReceitaFederal>> ListByParam(List<object> lparam)
+        public async Task<IEnumerable<Empresas>> ListByParam(List<object> lparam)
         {
-            var brf = new List<BaseReceitaFederal>();
+            var brf = new List<Empresas>();
 
-            var cnpj = lparam[1] != null ? (string)lparam[1] : "#";
-            var razaosocial = lparam[2] != null ? (string)lparam[2] : "#";
-            var cnae = lparam[3] != null ? (string)lparam[3] : "#";
-            var situacao = lparam[4] != null ? (string)lparam[4] : "#";
-            var logradouro = lparam[5] != null ? (string)lparam[5] : "#";
-            var bairro = lparam[6] != null ? (string)lparam[6] : "#";
-            var socio = lparam[7] != null ? (string)lparam[7] : "#";
-            var municipio = lparam[8] != null ? (string)lparam[8] : "#";
+            var cnpj = lparam[0] != null ? (string)lparam[0] : "#";
+            var razaosocial = lparam[1] != null ? (string)lparam[1] : "#";
+            var cnae = lparam[2] != null ? (string)lparam[2] : "#";
+            var logradouro = lparam[3] != null ? (string)lparam[3] : "#";
+            var bairro = lparam[4] != null ? (string)lparam[4] : "#";
 
-            if (cnpj.Length > 1)
-                cnpj.Remove(8, 6);
+            var t = Task.Run(() => _db.Empresa.Where(s => s.CNPJ == cnpj
+            || s.Nome_Empresarial.Contains(razaosocial)
+            || s.CNAE_Principal.Contains(cnae)
+            || s.Logradouro.Contains(logradouro)
+            || s.Bairro.Contains(bairro)));
 
-            var t = Task.Run(() =>
-            {
-
-                var qry = (from est in db.Estabelecimentos
-                           from emp in db.Empresas.Where(s => s.CNPJBase == est.CNPJBase)
-                           from atv in db.CNAEs.Where(s => s.Codigo == est.CnaeFiscalPrincipal)
-                           from sn in db.Simples.Where(s => s.CNPJBase == est.CNPJBase).DefaultIfEmpty()
-                           from so in db.Socios.Where(s => s.CNPJBase == est.CNPJBase).DefaultIfEmpty()
-                           select new { est, emp, sn, so, atv })
-                          .Where(
-                    (s => s.est.CNPJBase == cnpj || 
-                    s.emp.RazaoSocial.Contains(razaosocial) || 
-                    s.est.CnaeFiscalPrincipal == cnae || 
-                    (s.est.Logradouro.Contains(logradouro) && s.est.Municipio == municipio) || 
-                    (s.est.Bairro.Contains(bairro) && s.est.Municipio == municipio) &&
-                    s.est.SituacaoCadastral == situacao
-
-                          )).Distinct();
-
-                int i = 0;
-
-                foreach (var e in qry)
-                {
-                    var _cnpj = string.Format("{0}{1}{2}", e.est.CNPJBase, e.est.CNPJOrdem, e.est.CNPJDV);
-
-                    if (!brf.Any(s => s.CNPJ == _cnpj))
-                    {
-                        i++;
-
-                        brf.Add(new BaseReceitaFederal(
-                            i, _cnpj, e.emp, e.est, null, e.sn, e.atv, null, null, null, null, null));
-                    }
-                }
-
-            });
             await t;
 
-            return brf;
+            return t.Result;
         }
     }
 }
