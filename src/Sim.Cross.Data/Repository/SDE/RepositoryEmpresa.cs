@@ -459,7 +459,7 @@ namespace Sim.Cross.Data.Repository.SDE
             || s.Nome_Empresarial.Contains(razaosocial)
             || s.CNAE_Principal.Contains(cnae)
             || s.Logradouro.Contains(logradouro)
-            || s.Bairro.Contains(bairro)));
+            || s.Bairro.Contains(bairro)).OrderByDescending(o => o.Data_Abertura));
 
             await t;
 

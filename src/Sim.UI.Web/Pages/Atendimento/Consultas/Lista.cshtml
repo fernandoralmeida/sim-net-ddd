@@ -46,6 +46,7 @@
                 <th>
                     Serviço
                 </th>
+                <th>Descrição</th>
                 <th>
                     Setor
                 </th>
@@ -84,12 +85,11 @@
                     @Html.DisplayFor(modelItem => item.Empresa.Atividade_Principal)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Pessoa.Tel_Movel) <br /> @Html.DisplayFor(modelItem => item.Empresa.Telefone)
+                    @{var contato = string.Format("{0} {1}", item.Pessoa.Tel_Movel, item.Empresa.Telefone);}
+                    @Html.DisplayFor(modelItem => contato)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Servicos)
-                    <br />@Html.DisplayFor(modelItem => item.Descricao)
-                </td>
+                <td>@Html.DisplayFor(modelItem => item.Servicos)</td>
+                <td>@Html.DisplayFor(modelItem => item.Descricao)</td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Setor)
                 </td>

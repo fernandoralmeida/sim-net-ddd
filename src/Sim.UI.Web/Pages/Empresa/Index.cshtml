@@ -35,7 +35,7 @@
                 </div>
             </div>
         </div>
-        <div class="card-action">
+        <div class="card-action right-align">
                 <button class="btn waves-effect waves-light">Pesquisar</button>
                 @{
                 if (User.IsInRole("Administrador"))
@@ -44,7 +44,7 @@
                     {
                         if (Model.Input.ListaEmpresas.Count() > 0)
                         {
-                            <a class="btn waves-effect waves-light blue right" asp-page="/Empresa/Consulta/Print" asp-route-p1="0" asp-route-p2="0" asp-route-p3="0" asp-route-p4="0" asp-route-p5="0" asp-route-p6="0" asp-route-p7="0" asp-route-p8="0" asp-route-p9="0" target="_blank">Ver Lista</a>
+                                <a class="btn waves-effect waves-light blue right" asp-page="/Empresa/Consulta/Print" asp-route-p1="0" asp-route-p2="0" asp-route-p3="0" asp-route-p4="0" asp-route-p5="0" asp-route-p6="0" asp-route-p7="0" asp-route-p8="0" asp-route-p9="0" target="_blank">Ver Lista</a>
                         }
                     }
                 }
@@ -62,12 +62,14 @@
         <thead>
             <tr>
                 <th>#</th>
-                <th>CNPJ</th>
+                <th>Ano</th>
+                <th>CNPJ</th>                
                 <th>Nome Empresarial</th>
                 <th>Tel</th>
                 <th>E-mail</th>
                 <th>Situação</th>
                 <th>Endereço</th>
+                <th>Município</th>
                 <th>Atividade</th>
             </tr>
         </thead>
@@ -81,6 +83,10 @@
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => cont)
+                </td>
+                <td>
+                    @{ var ano = item.Data_Abertura.Value.Year; }
+                    @Html.DisplayFor(modelItem => ano)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.CNPJ)
@@ -98,8 +104,10 @@
                     @Html.DisplayFor(modelItem => item.Situacao_Cadastral)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Logradouro) 
+                    @{var end = string.Format("{0}, {1}",item.Logradouro, item.Numero);}
+                    @Html.DisplayFor(modelItem => end) 
                 </td>
+                <td>@Html.DisplayFor(modelItem => item.Municipio)</td>
                 <td>
                     @Html.DisplayFor(modelItem => item.CNAE_Principal) @Html.DisplayFor(modelItem => item.Atividade_Principal)
                 </td>
