@@ -85,8 +85,8 @@
                     @Html.DisplayFor(modelItem => item.Empresa.Atividade_Principal)
                 </td>
                 <td>
-                    @{var contato = string.Format("{0} {1}", item.Pessoa.Tel_Movel, item.Empresa.Telefone);}
-                    @Html.DisplayFor(modelItem => contato)
+                    @Html.DisplayFor(modelItem => item.Pessoa.Tel_Movel)
+                    @Html.DisplayFor(modelItem => item.Empresa.Telefone)
                 </td>
                 <td>@Html.DisplayFor(modelItem => item.Servicos)</td>
                 <td>@Html.DisplayFor(modelItem => item.Descricao)</td>

@@ -4,17 +4,40 @@
 
 <div class="row">
 
+    @{ var cor ="blue-grey"; }
+
     @if (Model != null)
     {
+       
+
         foreach (var item in Model)
         {
+
+
+            @if((int)item.Data.Value.Subtract(DateTime.Today).TotalDays > 20)
+            {
+                cor = "green";
+            }
+            else if((int)item.Data.Value.Subtract(DateTime.Today).TotalDays < 20 && (int)item.Data.Value.Subtract(DateTime.Today).TotalDays > 7)
+            {
+                cor = "orange";
+            }
+            else if((int)item.Data.Value.Subtract(DateTime.Today).TotalDays < 7 && (int)item.Data.Value.Subtract(DateTime.Today).TotalDays > 0)
+            {
+                cor = "materialize-red";
+            }
+            else if((int)item.Data.Value.Subtract(DateTime.Today).TotalDays == 0)
+            {
+                cor = "blue-gray";
+            }
+
             <div class="col s12 m6 l4 xl3">
                 <div class="card hoverable">
-                    <div class="card-image blue-grey lighten-2">
+                    <div class="card-image @cor lighten-2">
                         <div style="height:100px;"><span style="font-size:12px; color:#fff; margin-left:10px;">@item.Tipo</span></div>   
                         
                         <span class="card-title truncate white-text">@item.Nome</span>
-                        <a class="btn-floating halfway-fab waves-effect waves-light red" asp-page="./Inscricao.Evento" asp-route-id="@item.Codigo" title="Inscrever"><i class="material-icons">add</i></a>
+                        <a class="btn-floating halfway-fab waves-effect waves-light blue" asp-page="./Inscricao.Evento" asp-route-id="@item.Codigo" title="Inscrever"><i class="material-icons">add</i></a>
                     </div>
                     <div class="card-content truncate">
                         Formato: @item.Formato

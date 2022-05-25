@@ -15,6 +15,8 @@ namespace Sim.UI.Web.Pages.Atendimento
     using Sim.Application.Shared.Interface;
     using Sim.Cross.Identity;
     using Functions;
+    using System.IO;
+    using OfficeOpenXml;
 
     [Authorize]
     public class ConsultaModel : PageModel
@@ -63,19 +65,6 @@ namespace Sim.UI.Web.Pages.Atendimento
             public ICollection<Atendimento> ListaAtendimento { get; set; }
         }
 
-        public class ParamModel
-        {
-            public string param1 { get; set; }
-            public string param2 { get; set; }
-            public string param3 { get; set; }
-            public string param4 { get; set; }
-            public string param5 { get; set; }
-            public string param6 { get; set; }
-            public string param7 { get; set; }
-            public string param8 { get; set; }
-            public string param9 { get; set; }
-        }
-
         public ConsultaModel(IAppServiceAtendimento appServiceAtendimento,
             IAppServiceUser appServiceUser,
             IAppServiceServico appServiceServico)
@@ -89,9 +78,6 @@ namespace Sim.UI.Web.Pages.Atendimento
 
         public void OnGet()
         {
-            //var lista = Task.Run(() => _appServiceAtendimento.ListAll());
-            //await lista;
-            //Input.ListaAtendimento = lista.Result.ToList();
             Input.DataI = new DateTime(DateTime.Now.Year, 1, 1);
             Input.DataF = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
             Input.ListaAtendimento = new List<Atendimento>();
@@ -121,7 +107,70 @@ namespace Sim.UI.Web.Pages.Atendimento
             }
         }
 
-        public async Task OnPostListByDataAsync()
+        public IActionResult OnPostExport()
+        {
+            var stream = new MemoryStream();
+            var t = Task.Run(() =>
+            {
+                var param = new List<object>() {
+                    Input.DataI.Value.Date,
+                    Input.DataF.Value.Date,
+                    Input.CPF,
+                    Input.Nome,
+                    Input.CNPJ,
+                    Input.RazaSocial,
+                    Input.CNAE,
+                    Input.Servico,
+                    Input.Atendente  };
+
+                var list = new List<ExportModel>();
+                var cont = 1;
+                foreach (var e in _appServiceAtendimento.ListByParam(param).Result)
+                {
+                    if (e.Empresa != null)
+                        list.Add(new ExportModel
+                        {
+                            N = cont++,
+                            Data = e.Data.Value.ToString("MMMyyyy"),
+                            Cliente = e.Pessoa.Nome,
+                            Empresa = e.Empresa.CNPJ,
+                            Atividade = e.Empresa.Atividade_Principal,
+                            Contato = e.Pessoa.Tel_Movel,
+                            Servico = e.Servicos,
+                            Descricao = e.Descricao,
+                            Setor = e.Setor
+                        });
+                    else
+                        list.Add(new ExportModel
+                        {
+                            N = cont++,
+                            Data = e.Data.Value.ToString("MMMyyyy"),
+                            Cliente = e.Pessoa.Nome,
+                            Empresa = "",
+                            Atividade = "",
+                            Contato = e.Pessoa.Tel_Movel,
+                            Servico = e.Servicos,
+                            Descricao = e.Descricao,
+                            Setor = e.Setor
+                        });
+                }
+                return list;
+            });
+
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+            using var epackage = new ExcelPackage(stream);
+            var worksheet = epackage.Workbook.Worksheets.Add("Lista");
+            worksheet.Cells.LoadFromCollection(t.Result, true);
+            epackage.SaveAsync();
+
+            stream.Position = 0;
+            string excelname = $"lista-atend-{User.Identity.Name}-{DateTime.Now:yyyyMMddHHmmss}.xlsx";
+
+            return File(stream, "application/vnd.openxmlformat-officedocument.spreadsheetml.sheet", excelname);
+        }
+
+        public async Task OnPostViewAsync()
         {
             try
             {
@@ -139,20 +188,6 @@ namespace Sim.UI.Web.Pages.Atendimento
                 var lista = await _appServiceAtendimento.ListByParam(param);
                 
                 Input.ListaAtendimento = lista.ToList();
-
-                string d1 = Input.DataI.Value.Date.ToShortDateString();
-                string d2 = Input.DataF.Value.Date.ToShortDateString();
-
-                GetParam.param1 = d1.MaskRemove();
-                GetParam.param2 = d2.MaskRemove();
-                GetParam.param3 = Input.CPF != null ? Input.CPF.MaskRemove() : "0";
-                GetParam.param4 = Input.Nome != null ? Input.Nome : "0";
-                GetParam.param5 = Input.CNPJ != null ? Input.CNPJ.MaskRemove() : "0";
-                GetParam.param6 = Input.RazaSocial != null ? Input.RazaSocial : "0";
-                GetParam.param7 = Input.CNAE != null ? Input.CNAE.MaskRemove() : "0";
-                GetParam.param8 = Input.Servico != null ? Input.Servico : "0";
-                GetParam.param9 = Input.Atendente != null ? Input.Atendente : "0";
-
             }
             catch(Exception ex)
             {
@@ -197,19 +232,6 @@ namespace Sim.UI.Web.Pages.Atendimento
                 Input.ListaAtendimento = new List<Atendimento>();
             }
 
-        }
-
-        public async Task OnPostListByPessoaAsync()
-        {
-            var lista = Task.Run(() => _appServiceAtendimento.GetByPessoa(Input.CPF));
-            await lista;
-            Input.ListaAtendimento = lista.Result.ToList();
-        }
-        public async Task OnPostListByEmpresaAsync()
-        {
-            var lista = Task.Run(() => _appServiceAtendimento.GetByEmpresa(Input.CNPJ));
-            await lista;
-            Input.ListaAtendimento = lista.Result.ToList();
         }
     }
 }

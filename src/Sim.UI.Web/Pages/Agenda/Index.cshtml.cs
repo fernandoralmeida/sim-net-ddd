@@ -53,5 +53,10 @@ namespace Sim.UI.Web.Pages.Agenda
             await t;
             Input.ListaEventos = _mapper.Map<IEnumerable<InputModelEvento>>(t.Result);
         }
+
+        private int QuantosDiasFaltam(DateTime dataalvo)
+        {
+            return (int)dataalvo.Subtract(DateTime.Today).TotalDays;
+        }
     }
 }

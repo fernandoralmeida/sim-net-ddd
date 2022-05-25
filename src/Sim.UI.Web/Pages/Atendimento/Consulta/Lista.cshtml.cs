@@ -29,7 +29,7 @@ namespace Sim.UI.Web.Pages.Atendimento.Consultas
         [TempData]
         public string StatusMessage { get; set; }
 
-        public ConsultaModel.ParamModel GetParam { get; set; } 
+        public ParamModel GetParam { get; set; } 
 
         public ICollection<Atendimento> ListaAtendimento { get; set; }
 

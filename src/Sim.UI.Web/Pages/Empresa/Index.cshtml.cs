@@ -7,7 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 
 namespace Sim.UI.Web.Pages.Empresa
 {
@@ -15,6 +17,7 @@ namespace Sim.UI.Web.Pages.Empresa
     using Sim.Application.SDE.Interface;
     using Sim.Domain.Cnpj.Entity;
     using Functions;
+    using OfficeOpenXml;
 
     [Authorize]
     public class IndexModel : PageModel
@@ -34,9 +37,6 @@ namespace Sim.UI.Web.Pages.Empresa
         [BindProperty(SupportsGet = true)]
         public InputModel Input { get; set; }
 
-        [BindProperty(SupportsGet = true)]
-        public ParamModel GetParam { get; set; }
-
         public class InputModel
         {
             
@@ -51,19 +51,57 @@ namespace Sim.UI.Web.Pages.Empresa
             public IEnumerable<Empresas> ListaEmpresas { get; set; }
         }
 
-        public class ParamModel
-        {
-            public string Param1 { get; set; }
-            public string Param2 { get; set; }
-            public string Param3 { get; set; }
-            public string Param4 { get; set; }
-            public string Param5 { get; set; }
-        }
-
-        public void OnGetAsync()
+        public void OnGet()
         {        }
 
-        public async Task<IActionResult> OnPostAsync()
+        public IActionResult OnPostExport()
+        {
+            var stream = new MemoryStream();
+            var t = Task.Run(() =>
+            {
+                var param = new List<object>() {
+                    Input.CNPJ,
+                    Input.RazaoSocial,
+                    Input.CNAE,
+                    Input.Logradouro,
+                    Input.Bairro
+                };
+
+                var list = new List<InputExport>();
+                var cont = 1;
+                foreach (var e in _empresaApp.ListByParam(param).Result)
+                {
+                    list.Add(new InputExport
+                    {
+                        N = cont++,
+                        Ano = e.Data_Abertura.Value.Year,
+                        Cnpj = e.CNPJ,
+                        Empresa = e.Nome_Empresarial,
+                        Telefone = e.Telefone,
+                        Email = e.Email,
+                        Situacao = e.Situacao_Cadastral,
+                        Endereco = string.Format("{0}, {1}", e.Logradouro, e.Numero),
+                        Municipio = e.Municipio,
+                        Atividade = string.Format("{0} - {1}", e.CNAE_Principal, e.Atividade_Principal)
+                    });
+                }
+                return list;
+            });
+
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+            using var epackage = new ExcelPackage(stream);
+            var worksheet = epackage.Workbook.Worksheets.Add("Lista");
+            worksheet.Cells.LoadFromCollection(t.Result, true);
+            epackage.SaveAsync();
+
+            stream.Position = 0;
+            string excelname = $"lista-emp-{User.Identity.Name}-{DateTime.Now:yyyyMMddHHmmss}.xlsx";
+
+            return File(stream, "application/vnd.openxmlformat-officedocument.spreadsheetml.sheet", excelname);
+        }
+
+        public async Task OnPostViewAsync()
         {
             try
             {
@@ -76,21 +114,13 @@ namespace Sim.UI.Web.Pages.Empresa
                     Input.Logradouro,
                     Input.Bairro};
 
-                    Input.ListaEmpresas = await _empresaApp.ListByParam(param);                    
-
-                    GetParam.Param1 = (string)param[0];
-                    GetParam.Param2 = (string)param[1] != null ? (string)param[1] : "0";
-                    GetParam.Param3 = (string)param[2] != null ? (string)param[2] : "0";
-                    GetParam.Param4 = (string)param[3] != null ? (string)param[3] : "0";
-                    GetParam.Param5 = (string)param[4] != null ? (string)param[4] : "0";
+                    Input.ListaEmpresas = await _empresaApp.ListByParam(param);
                 }
             }
             catch (Exception ex)
             {
                 StatusMessage = "Erro: " + ex.Message;
             }
-
-            return Page();
         }
     }
 }
