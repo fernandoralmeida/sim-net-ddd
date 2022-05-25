@@ -3,32 +3,34 @@
 
 
 <div class="row">
-
-    @{ var cor ="blue-grey"; }
-
+    
     @if (Model != null)
     {
-       
+        var cor = "blue-grey";
 
         foreach (var item in Model)
         {
-
+            var ret = (int)item.Data.Value.Subtract(DateTime.Today).TotalDays; 
 
             @if((int)item.Data.Value.Subtract(DateTime.Today).TotalDays > 20)
             {
                 cor = "green";
             }
-            else if((int)item.Data.Value.Subtract(DateTime.Today).TotalDays < 20 && (int)item.Data.Value.Subtract(DateTime.Today).TotalDays > 7)
+            else if((int)item.Data.Value.Subtract(DateTime.Today).TotalDays <= 20 && (int)item.Data.Value.Subtract(DateTime.Today).TotalDays > 7)
             {
                 cor = "orange";
             }
-            else if((int)item.Data.Value.Subtract(DateTime.Today).TotalDays < 7 && (int)item.Data.Value.Subtract(DateTime.Today).TotalDays > 0)
+            else if((int)item.Data.Value.Subtract(DateTime.Today).TotalDays <= 7 && (int)item.Data.Value.Subtract(DateTime.Today).TotalDays > 1)
             {
                 cor = "materialize-red";
             }
-            else if((int)item.Data.Value.Subtract(DateTime.Today).TotalDays == 0)
+            else if((int)item.Data.Value.Subtract(DateTime.Today).TotalDays <= 1 && (int)item.Data.Value.Subtract(DateTime.Today).TotalDays >= 0)
             {
-                cor = "blue-gray";
+                cor = "purple";
+            }
+            else
+            {
+                cor = "blue-grey";
             }
 
             <div class="col s12 m6 l4 xl3">
@@ -44,6 +46,7 @@
                         <br />Data: @item.Data
                         <br />Setor: @item.Owner
                         <br />Vagas: @item.Vagas
+                        <br />T: @ret @cor
                     </div>
                     <div class="card-action">
                         <a class="blue-text" asp-page="./Edit" asp-route-id="@item.Id">Gerenciar</a><a asp-page="./Inscricao.Remove" asp-route-id="@item.Codigo"><span class="new badge" data-badge-caption="inscritos">@item.NumeroInscritos</span></a>
