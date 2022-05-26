@@ -44,7 +44,6 @@ namespace Sim.UI.Web.Pages.Agenda
 
         public async Task OnGet()
         {
-            //var t = Task.Run(() => _appServiceEvento.ListAll());
             Input.Ano = DateTime.Now.Year;
             var t = await _appServiceEvento.EventosAtivos();
             Input.ListaEventos = _mapper.Map<IEnumerable<InputModelEvento>>(t);
@@ -52,9 +51,11 @@ namespace Sim.UI.Web.Pages.Agenda
 
         public async Task OnPostAsync()
         {
-            var t = Task.Run(()=> _appServiceEvento.GetByNome(Input.Evento));
+            var t = Task.Run(() =>
+            {
+                Input.ListaEventos = _mapper.Map<IEnumerable<InputModelEvento>>(_appServiceEvento.GetByNome(Input.Evento));
+            });
             await t;
-            Input.ListaEventos = _mapper.Map<IEnumerable<InputModelEvento>>(t.Result);
         }
 
         private int QuantosDiasFaltam(DateTime dataalvo)
