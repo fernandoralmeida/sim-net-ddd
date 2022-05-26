@@ -6,17 +6,22 @@
 
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
-<nav style="margin-bottom:20px;">
-    <div class="nav-wrapper white">
-        <form method="post" class="row">
-            <div class="input-field col s6 m6 l6">
-                <input asp-for="Input.Evento" type="search" placeholder="Consultar Evento" required>
-                <label class="label-icon" asp-for="Input.Evento"><i class="black-text material-icons">search</i></label>
-            </div>
-            <button class="input-field btn waves-effect waves-light right z-depth-0" type="submit" name="action">Pesquisar</button>
-        </form>
-    </div>
-</nav>
+<div class="card">
+    <form method="post" class="row valign-wrapper">
+        <div class="input-field col s4 m3 l2 valign-wrapper">
+            <input asp-for="Input.Ano" required>
+            <label asp-for="Input.Ano"></label>
+        </div>
+        <div class="input-field col s8 m5 l4 valign-wrapper">
+            <input asp-for="Input.Evento" placeholder="Nome Evento">
+            <button class="btn waves-effect waves-light"><i class="material-icons">search</i></button>
+        </div>
+        <div class="col s12 m4 l6 right-align">
+            <button class="btn btn-floating waves-effect waves-light green" asp-page-handler="EventAvailable"><i class="material-icons">event_available</i></button>
+            <button class="btn btn-floating waves-effect waves-light materialize-red" asp-page-handler="OldEvent"><i class="material-icons">event_repeat</i></button>
+        </div>
+    </form>
+</div>
 
 <partial name="_AgendaList" model="Model.Input.ListaEventos" />
 

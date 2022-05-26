@@ -27,6 +27,8 @@ namespace Sim.UI.Web.Pages.Agenda
         {
             [DisplayName("Nome")]
             public string Evento { get; set; }
+
+            public int Ano { get; set; }
             public IEnumerable<InputModelEvento> ListaEventos { get; set; }
         }
 
@@ -43,6 +45,7 @@ namespace Sim.UI.Web.Pages.Agenda
         public async Task OnGet()
         {
             //var t = Task.Run(() => _appServiceEvento.ListAll());
+            Input.Ano = DateTime.Now.Year;
             var t = await _appServiceEvento.EventosAtivos();
             Input.ListaEventos = _mapper.Map<IEnumerable<InputModelEvento>>(t);
         }
