@@ -47,7 +47,7 @@
                         <br />Vagas: @item.Vagas
                     </div>
                     <div class="card-action">
-                        <a class="blue-text" asp-page="./Edit" asp-route-id="@item.Id">Gerenciar</a><a asp-page="./Inscricao.Remove" asp-route-id="@item.Codigo"><span class="new badge" data-badge-caption="inscritos">@item.NumeroInscritos</span></a>
+                        <a class="blue-text" asp-page="/Agenda/Eventos/Edit/Index" asp-route-id="@item.Id">Gerenciar</a><a asp-page="./Inscricao.Remove" asp-route-id="@item.Codigo"><span class="new badge" data-badge-caption="inscritos">@item.NumeroInscritos</span></a>
                     </div>
                 </div>
             </div>
