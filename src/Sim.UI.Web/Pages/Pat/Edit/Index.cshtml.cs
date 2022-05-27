@@ -39,7 +39,7 @@ namespace Sim.UI.Web.Pages.Pat.Edit
                 Input.Empresa = e.Empresa;
                 Input.Ocupacao = e.Ocupacao;
                 Input.Vagas = e.Vagas;
-                Input.Salario = e.Salario;
+                Input.Salario = e.Salario.ToString();
                 Input.Pagamento = e.Pagamento;
                 Input.Experiencia = e.Experiencia;
                 Input.Status = e.Status;
@@ -61,7 +61,7 @@ namespace Sim.UI.Web.Pages.Pat.Edit
                     Vagas = Input.Vagas,
                     Ocupacao = Input.Ocupacao,
                     Pagamento = Input.Pagamento,
-                    Salario = Input.Salario,
+                    Salario = Convert.ToDecimal(Input.Salario),
                     Status = Input.Status                    
                 };
                 _appServiceEmpregos.Remove(emprego);
@@ -89,7 +89,7 @@ namespace Sim.UI.Web.Pages.Pat.Edit
                     Vagas = Input.Vagas,
                     Ocupacao = Input.Ocupacao,
                     Pagamento = Input.Pagamento,
-                    Salario = Input.Salario,
+                    Salario = Convert.ToDecimal(Input.Salario),
                     Status = Input.Status
                 };
 

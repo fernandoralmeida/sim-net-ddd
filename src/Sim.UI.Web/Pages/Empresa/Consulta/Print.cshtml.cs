@@ -11,6 +11,7 @@ namespace Sim.UI.Web.Pages.Empresa.Consultas
     {
         public void OnGet()
         {
+
         }
     }
 }

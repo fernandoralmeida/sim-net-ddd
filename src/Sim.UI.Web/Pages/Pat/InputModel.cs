@@ -25,7 +25,7 @@ namespace Sim.UI.Web.Pages.Pat
 
         [DisplayName("Salário Médio")]
         [DataType(DataType.Currency)]
-        public decimal Salario { get; set; }
+        public string Salario { get; set; }
 
         [DisplayName("Forma de pagamento")]
         public string Pagamento { get; set; }

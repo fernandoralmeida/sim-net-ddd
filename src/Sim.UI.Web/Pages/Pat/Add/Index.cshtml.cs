@@ -37,6 +37,7 @@ namespace Sim.UI.Web.Pages.Pat.Add
             var t = Task.Run(() => _appServiceEmpresa.GetById(id));
             await t;
             Input.Empresa = t.Result;
+            Input.Salario = "0,00";
             return Page();
         }
 
@@ -57,7 +58,7 @@ namespace Sim.UI.Web.Pages.Pat.Add
                     Vagas = Input.Vagas,
                     Ocupacao = Input.Ocupacao,
                     Pagamento = Input.Pagamento,
-                    Salario = Input.Salario,
+                    Salario = Convert.ToDecimal(Input.Salario),
                     Status = Input.Status
                 };
 

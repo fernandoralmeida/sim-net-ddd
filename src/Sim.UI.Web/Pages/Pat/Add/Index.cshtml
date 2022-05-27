@@ -65,7 +65,7 @@
 
                         <div class="input-field col s6 m2 l2">
                             <i class="prefix" style="font-size:20px;">R$</i>
-                            <input asp-for="Input.Salario" onkeypress="return(moeda(this,'.',',',event))" />
+                            <input asp-for="Input.Salario" asp-format="{0:#,###.00}" onkeypress="return(moeda(this,'.',',',event))" />
                             <label asp-for="Input.Salario" ></label>
                         </div>
 
@@ -110,6 +110,7 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/jquery.validation.js"></script>
     <script src="~/js/jquery.mask.min.js"></script>
     <script src="~/js/jquery.mask.min.js"></script>
     <script src="~/js/fcurrency.js"></script>
