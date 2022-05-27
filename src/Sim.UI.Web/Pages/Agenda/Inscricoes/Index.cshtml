@@ -1,7 +1,7 @@
 ﻿@page
-@model Sim.UI.Web.Pages.Agenda.Inscricao_RemoveModel
+@model Sim.UI.Web.Pages.Agenda.Inscricoes.IndexModel
 @{
-    ViewData["Title"] = "Inscrição";
+    ViewData["Title"] = "Lista de Participantes";
 }
 
 <div class="row">
@@ -87,8 +87,8 @@
         </table>
     </form>
     <div class="card-action">
-        <a asp-page="./Index" class="btn waves-effect waves-light">Voltar</a>
-        <a asp-page="./Inscritos.List" asp-route-id="@Model.Input.Codigo" class="btn waves-effect waves-light right" target="_blank">Visualizar Lista</a>
+        <a asp-page="/Agenda/Index" class="btn waves-effect waves-light">Voltar</a>
+        <a asp-page="/Agenda/Inscricoes/Lista/Index" asp-route-id="@Model.Input.Codigo" class="btn waves-effect waves-light right" target="_blank">Visualizar Lista</a>
     </div>
 </div>
 

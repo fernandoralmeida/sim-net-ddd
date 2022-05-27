@@ -5,12 +5,15 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 using AutoMapper;
 
 namespace Sim.UI.Web.Pages.Agenda.Eventos.Edit
 {
     using Sim.Application.Shared.Interface;
     using Sim.Domain.Shared.Entity;
+
+    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly IAppServiceTipo _appServiceTipo;

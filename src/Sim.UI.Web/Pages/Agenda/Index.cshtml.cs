@@ -17,6 +17,7 @@ namespace Sim.UI.Web.Pages.Agenda
     [Authorize]
     public class IndexModel : PageModel
     {
+        private readonly IAppServiceInscricao _appServiceInscricao;
         private readonly IAppServiceEvento _appServiceEvento;
         private readonly IMapper _mapper;
 
@@ -25,9 +26,8 @@ namespace Sim.UI.Web.Pages.Agenda
 
         public class InputModelIndex
         {
-            [DisplayName("Nome")]
+            [DisplayName("Nome Evento")]
             public string Evento { get; set; }
-
             public int Ano { get; set; }
             public IEnumerable<InputModelEvento> ListaEventos { get; set; }
         }
@@ -36,20 +36,22 @@ namespace Sim.UI.Web.Pages.Agenda
         public string StatusMessage { get; set; }
 
         public IndexModel(IAppServiceEvento appServiceEvento,
+            IAppServiceInscricao appServiceInscricao,
             IMapper mapper)
         {
             _mapper = mapper;
             _appServiceEvento = appServiceEvento;
+            _appServiceInscricao = appServiceInscricao;
         }
 
-        public async Task OnGet()
+        public async Task OnGetAsync()
         {
             Input.Ano = DateTime.Now.Year;
             var t = await _appServiceEvento.EventosAtivos();
             Input.ListaEventos = _mapper.Map<IEnumerable<InputModelEvento>>(t);
         }
 
-        public async Task OnPostAsync()
+        public async Task OnPostEventAsync()
         {
             var t = Task.Run(() =>
             {
@@ -58,7 +60,7 @@ namespace Sim.UI.Web.Pages.Agenda
             });
             await t;
         }
-        public async Task OnPostEventAvailableAsync()
+        public async Task OnPostEventAvailAsync()
         {
             var t = Task.Run(() =>
             {
@@ -68,7 +70,7 @@ namespace Sim.UI.Web.Pages.Agenda
             await t;
         }
 
-        public async Task OnPostEventOldsAsync()
+        public async Task OnPostEventOldAsync()
         {
             var t = Task.Run(() =>
             {

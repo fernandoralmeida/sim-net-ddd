@@ -10,24 +10,21 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using AutoMapper;
 
-namespace Sim.UI.Web.Pages.Agenda
+namespace Sim.UI.Web.Pages.Agenda.Inscricoes.Novo
 {
     using Sim.Domain.Shared.Entity;
-    using Sim.Domain.SDE.Entity;
     using Sim.Application.Shared.Interface;
     using Sim.Application.SDE.Interface;
-    using Sim.Cross.Identity;
 
     [Authorize]
-    public class Inscricao_EventoModel : PageModel
+    public class IndexModel : PageModel
     {
-        //private readonly UserManager<ApplicationUser> _userManager;
         private readonly IAppServiceInscricao _appServiceInscricao;
         private readonly IAppServiceEvento _appServiceEvento;
         private readonly IAppServicePessoa _appServicePessoa;
         private readonly IAppServiceEmpresa _appServiceEmpresa;
-        
-        public Inscricao_EventoModel(IAppServiceInscricao appServiceInscricao,
+
+        public IndexModel(IAppServiceInscricao appServiceInscricao,
             IAppServiceEvento appServiceEvento,
             IAppServiceEmpresa appServiceEmpresa,
             IAppServicePessoa appServicePessoa)
@@ -36,7 +33,6 @@ namespace Sim.UI.Web.Pages.Agenda
             _appServiceInscricao = appServiceInscricao;
             _appServiceEmpresa = appServiceEmpresa;
             _appServicePessoa = appServicePessoa;
-            //_userManager = userManager;
         }
 
         [BindProperty]
@@ -77,7 +73,7 @@ namespace Sim.UI.Web.Pages.Agenda
         {
             var t = Task.Run(() => _appServicePessoa.ConsultaByCPF(GetCPF));
             await t;
-            
+
             foreach (var p in t.Result)
             {
                 Input.Participante = p;
@@ -199,11 +195,11 @@ namespace Sim.UI.Web.Pages.Agenda
 
             await t;
 
-            if (ja_inscricao)                
+            if (ja_inscricao)
                 return Page();
             else
-                return RedirectToPage("./Index");
-            
+                return RedirectToPage("/Agenda/Index");
+
         }
     }
 }

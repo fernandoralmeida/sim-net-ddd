@@ -2,28 +2,27 @@
 @model Sim.UI.Web.Pages.Atendimento.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Meus Atendimentos";
     ViewData["ActivePageLi"] = Web.Pages.Shared.LayoutNavPages.AtendimentoDiario;
 }
 
 <!---->
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
+    <div class="card center">
+        <form method="post" class="row valign-wrapper">
+            <div class="col s4 m4 l4"></div>
+            <div class="input-field col">
+                <i class="material-icons prefix">event</i>
+                <input asp-for="Input.DataAtendimento" />                
+            </div>
+            <button class="btn waves-effect waves-light"><i class="material-icons">refresh</i></button>
+            <div class="col s4 m4 l4"></div>
+        </form>
+    </div>
+
 <div class="card">
 
-    <div class="card-title">
-        <nav class="z-depth-0" style="border-bottom:solid 1px #efefef">
-            <div class="nav-wrapper white">
-                <form method="post" class="row" asp-page-handler="ListByPessoa">
-                    <div class="input-field col s6 l6 m6">
-                        <input asp-for="Input.DataAtendimento" type="search" id="inputData" required>
-                        <label class="label-icon"><i class="black-text material-icons">search</i></label>
-                    </div>
-                    <button class="input-field btn waves-effect waves-light right z-depth-0" type="submit" name="action">Pesquisar</button>
-                </form>
-            </div>
-        </nav>
-    </div>
     <table class="responsive-table striped">
         <thead>
             <tr>

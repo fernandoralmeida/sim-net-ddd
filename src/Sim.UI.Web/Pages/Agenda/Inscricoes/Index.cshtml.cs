@@ -4,20 +4,23 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using AutoMapper;
 
-namespace Sim.UI.Web.Pages.Agenda
+namespace Sim.UI.Web.Pages.Agenda.Inscricoes
 {
     using Sim.Application.Shared.Interface;
 
     [Authorize]
-    public class Inscricao_RemoveModel : PageModel
+    public class IndexModel : PageModel
     {
         private readonly IAppServiceEvento _appServiceEvento;
         private readonly IAppServiceInscricao _appServiceInscricao;
         private readonly IMapper _mapper;
-        public Inscricao_RemoveModel(IAppServiceEvento appServiceEvento,
+        public IndexModel(IAppServiceEvento appServiceEvento,
             IAppServiceInscricao appServiceInscricao,
             IMapper mapper)
         {
@@ -48,7 +51,7 @@ namespace Sim.UI.Web.Pages.Agenda
             var t = Task.Run(() => _appServiceInscricao.Remove(inscrito.Result));
             await t;
 
-            return RedirectToPage("./Inscricao.Remove", new { id = ide });
+            return RedirectToPage("./Index", new { id = ide });
         }
 
         public async Task<IActionResult> OnPostPresenteAsync(Guid id, int ide)
@@ -67,7 +70,7 @@ namespace Sim.UI.Web.Pages.Agenda
             await update;
 
 
-            return RedirectToPage("./Inscricao.Remove", new { id = ide });
+            return RedirectToPage("./Index", new { id = ide });
         }
 
         public async Task<JsonResult> OnGetDetalheInscrito(string id)

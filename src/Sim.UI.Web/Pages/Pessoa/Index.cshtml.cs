@@ -28,21 +28,15 @@ namespace Sim.UI.Web.Pages.Pessoa
 
         public bool CpfValido = false;
 
-        [BindProperty]
+        [BindProperty(SupportsGet = true)]
         public InputModel Input { get; set; }
         public class InputModel
-        {
-         
-            [Required]
+        {         
             [DisplayName("Informe o CPF")]            
             public string CPF { get; set; }
-
+            public string Nome { get; set; }
             public string RouteCPF { get; set; }
-
             public IEnumerable<Pessoa> ListaPessoas { get; set; }
-
-            [TempData]
-            public string StatusMessage { get; set; }
         }
 
         private void Load()
@@ -67,25 +61,34 @@ namespace Sim.UI.Web.Pages.Pessoa
             {
                 if (ModelState.IsValid)
                 {
-                    if (Functions.Validate.IsCpf(Input.CPF))
+                    if (Input.CPF != null)
                     {
-                        StatusMessage = "";
-                        CpfValido = true;
+                        if (Functions.Validate.IsCpf(Input.CPF))
+                        {
+                            StatusMessage = "";
+                            CpfValido = true;
+                        }
+                        else
+                        {
+                            StatusMessage = "Erro: CPF inválido!";
+                            CpfValido = false;
+                        }
+
+                        var pessoa = _pessoaApp.ConsultaByCPF(Input.CPF);
+
+                        Input = new InputModel
+                        {
+                            RouteCPF = new Functions.Mask().Remove(Input.CPF),
+                            ListaPessoas = pessoa
+                        };
                     }
                     else
                     {
-                        StatusMessage = "Erro: CPF inválido!";
-                        CpfValido = false;
-                    }                       
-
-
-                    var pessoa = _pessoaApp.ConsultaByCPF(Input.CPF);
-
-                    Input = new InputModel
-                    {
-                        RouteCPF = new Functions.Mask().Remove(Input.CPF),
-                        ListaPessoas = pessoa
-                    };
+                        Input = new InputModel
+                        {
+                            ListaPessoas = _pessoaApp.ConsultaByNome(Input.Nome)
+                        };
+                    }
 
                 }                
             }

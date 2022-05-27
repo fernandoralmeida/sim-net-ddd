@@ -7,13 +7,13 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Authorization;
 using AutoMapper;
 
-namespace Sim.UI.Web.Pages.Agenda
+namespace Sim.UI.Web.Pages.Agenda.Inscricoes.Lista
 {
     using Sim.Application.Shared.Interface;
     using System.ComponentModel;
 
     [Authorize]
-    public class Evento_ListModel : PageModel
+    public class ParticipanteModel : PageModel
     {
         private readonly IAppServiceInscricao _appServiceInscricao;
         private readonly IMapper _mapper;
@@ -23,7 +23,7 @@ namespace Sim.UI.Web.Pages.Agenda
 
         public class InputModelIndex
         {
-            [DisplayName("Nome")]
+            [DisplayName("CPF Participante")]
             public string GetCPF { get; set; }
             public IEnumerable<InputModelInscricao> ListaInscricoes { get; set; }
         }
@@ -31,7 +31,7 @@ namespace Sim.UI.Web.Pages.Agenda
         [TempData]
         public string StatusMessage { get; set; }
 
-        public Evento_ListModel(IAppServiceInscricao appServiceEvento,
+        public ParticipanteModel(IAppServiceInscricao appServiceEvento,
             IMapper mapper)
         {
             _mapper = mapper;
@@ -39,7 +39,7 @@ namespace Sim.UI.Web.Pages.Agenda
         }
 
         public void OnGet()
-        {      }
+        { }
 
         public async Task OnPostAsync()
         {

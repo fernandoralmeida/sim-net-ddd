@@ -113,7 +113,7 @@
             <table class="responsive-table striped">
                 <thead>
                     <tr>
-                        <th>Add</th>
+                        <th>Ação</th>
                         <th>CNPJ</th>
                         <th>Empresa</th>
                         <th>Contato</th>
@@ -125,7 +125,7 @@
                     foreach (var item in Model.ListaEmpresas)
                     {
                         <tr>
-                            <td><a class="btn btn-small waves-effect" asp-page="/Pat/Add/Index" asp-route-id="@item.Id"><i class="material-icons">timer</i></a></td>
+                            <td><a class="btn btn-small waves-effect" asp-page="/Pat/Add/Index" asp-route-id="@item.Id" title="Nova vaga de emprego!"><i class="material-icons">add_circle</i></a></td>
                             <td><a class="modal-trigger" href="#viewmodal" data-id="@item.Id">@Html.DisplayFor(modelItem => item.CNPJ)</a></td>
                             <td>@Html.DisplayFor(modelItem => item.Nome_Empresarial)</td>
                             <td>@Html.DisplayFor(modelItem => item.Telefone)</td>

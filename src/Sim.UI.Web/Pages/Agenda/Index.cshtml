@@ -6,52 +6,30 @@
 
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 
-<div class="card">
-    <form method="post" class="row valign-wrapper">
-        <div class="input-field col s4 m3 l2 valign-wrapper">
-            <input asp-for="Input.Ano" required>
+<form method="post">
+    <div class="card row valign-wrapper">
+        <div class="input-field col s3 m3 l2 valign-wrapper">
+            <input asp-for="Input.Ano" />
             <label asp-for="Input.Ano"></label>
         </div>
-        <div class="input-field col s8 m5 l4 valign-wrapper">
-            <input asp-for="Input.Evento" placeholder="Nome Evento">
-            <button class="btn waves-effect waves-light"><i class="material-icons">search</i></button>
+        <div class="input-field col s5 m6 l8 valign-wrapper">
+            <input asp-for="Input.Evento"/>
+            <label asp-for="Input.Evento"></label>
+            <button class="btn waves-effect waves-light" asp-page-handler="Event"><i class="material-icons">search</i></button>
         </div>
-        <div class="col s12 m4 l6 right-align">
-            <button class="btn btn-floating waves-effect waves-light green" asp-page-handler="EventAvailable" title="Eventos Ativos"><i class="material-icons">event_available</i></button>
-            <button class="btn btn-floating waves-effect waves-light materialize-red" asp-page-handler="EventOlds" title="Eventos Finalizados"><i class="material-icons">event_repeat</i></button>
+        <div class="col s4 m3 l2 right-align">
+            <button class="btn btn-floating waves-effect waves-light green" asp-page-handler="EventAvail" title="Eventos Ativos"><i class="material-icons">event_available</i></button>
+            <button class="btn btn-floating waves-effect waves-light materialize-red" asp-page-handler="EventOld" title="Eventos Finalizados"><i class="material-icons">event_repeat</i></button>
         </div>
-    </form>
-</div>
+    </div>
+</form>
 
 <partial name="_AgendaList" model="Model.Input.ListaEventos" />
 
-<!-- Modal -->
-<div class="modal fade" id="viewmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="viewmodalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h6 class="modal-title" id="viewmodalLabel">Detalhes</h6>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p id="viewmodalData"></p>
-            </div>
-        </div>
-    </div>
-</div>
-
 @section scripts
 {
+    <script src="~/js/jquery.mask.min.js"></script>
     <script type="text/javascript">
-        $(".viewbutton").on("click", function () {
-            var customerId = $(this).data('id');
-            var secao = $(this).data('secao');
-            var acao = $(this).data('acao');
-            $.ajax({
-                url: "/" + secao + "/" + acao + "?id=" + customerId,
-                cache: false
-            }).done(function (data) {
-                $("#viewmodalData").html(data);
-            });
-        });</script>
+        $('#inputCPF').mask('000.000.000-00');        
+    </script>
 }

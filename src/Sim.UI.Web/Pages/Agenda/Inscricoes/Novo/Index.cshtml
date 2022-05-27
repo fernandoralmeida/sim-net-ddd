@@ -1,5 +1,5 @@
 ﻿@page
-@model Sim.UI.Web.Pages.Agenda.Inscricao_EventoModel
+@model Sim.UI.Web.Pages.Agenda.Inscricoes.Novo.IndexModel
 @{
     ViewData["Title"] = "Inscrição";
 }
@@ -33,21 +33,21 @@
                     <label asp-for="Input.Evento.Id"></label>
                     <input asp-for="Input.Evento.Id" />
                 </div>
-                <div class="input-field col s12 m5 l2">
-                    <label class="form-label" asp-for="Input.Evento.Tipo"></label>
+                <div class="input-field col s12 m5 l2">                    
                     <input class="form-control" asp-for="Input.Evento.Tipo" />
+                    <label class="form-label" asp-for="Input.Evento.Tipo"></label>
                 </div>
-                <div class="input-field col s12 m6 l3">
-                    <label class="form-label" asp-for="Input.Evento.Nome"></label>
+                <div class="input-field col s12 m6 l3">                    
                     <input class="form-control" asp-for="Input.Evento.Nome" />
+                    <label class="form-label" asp-for="Input.Evento.Nome"></label>
                 </div>
-                <div class="input-field col s12 m5 l2">
-                    <label class="form-label" asp-for="Input.Evento.Formato"></label>
+                <div class="input-field col s12 m5 l2">                    
                     <input class="form-control" asp-for="Input.Evento.Formato" />
+                    <label class="form-label" asp-for="Input.Evento.Formato"></label>
                 </div>
-                <div class="input-field col s12 m6 l3">
-                    <label class="form-label" asp-for="Input.Evento.Data"></label>
+                <div class="input-field col s12 m6 l3">                    
                     <input class="form-control" asp-for="Input.Evento.Data" />
+                    <label class="form-label" asp-for="Input.Evento.Data"></label>
                 </div>
                 <div class="input-field col s12 m2 l2">
                     <button class="btn waves-effect waves-light" type="submit" asp-page-handler="RemoverEvento">Remover</button>
@@ -78,25 +78,25 @@
         else
         {
             <div class="row">
-                <div class="col-md-2" hidden>
-                    <label class="form-label" asp-for="Input.Participante.Id"></label>
+                <div class="col-md-2" hidden>                   
                     <input class="form-control" asp-for="Input.Participante.Id" />
+                     <label class="form-label" asp-for="Input.Participante.Id"></label>
                 </div>
-                <div class="input-field col s12 m5 l2">
-                    <label class="form-label" asp-for="Input.Participante.CPF"></label>
+                <div class="input-field col s12 m5 l2">                    
                     <input class="form-control" asp-for="Input.Participante.CPF" />
+                    <label class="form-label" asp-for="Input.Participante.CPF"></label>
                 </div>
-                <div class="input-field col s12 m6 l3">
-                    <label class="form-label" asp-for="Input.Participante.Nome"></label>
+                <div class="input-field col s12 m6 l3">                    
                     <input class="form-control" asp-for="Input.Participante.Nome" />
+                    <label class="form-label" asp-for="Input.Participante.Nome"></label>
                 </div>
-                <div class="input-field col s12 m6 l3">
-                    <label class="form-label" asp-for="Input.Participante.Email"></label>
+                <div class="input-field col s12 m6 l3">                    
                     <input class="form-control" asp-for="Input.Participante.Email" />
+                    <label class="form-label" asp-for="Input.Participante.Email"></label>
                 </div>
-                <div class="input-field col s12 m5 l2">
-                    <label class="form-label" asp-for="Input.Participante.Tel_Movel"></label>
+                <div class="input-field col s12 m5 l2">                    
                     <input class="form-control" asp-for="Input.Participante.Tel_Movel" />
+                    <label class="form-label" asp-for="Input.Participante.Tel_Movel"></label>
                 </div>
                 <div class="input-field col s12 m2 l2">
                     <button class="btn red lighten-1 waves-effect waves-light" type="submit" asp-page-handler="RemoverPessoa">Remover</button>
@@ -164,7 +164,7 @@
     </div>
     <div class="card-action">
         <button type="submit" asp-page-handler="Save" class="btn waves-effect waves-light">Realizar Inscrição</button> 
-        <a asp-page="./Index" class="btn grey waves-effect waves-light">Voltar</a>
+        <a asp-page="/Agenda/Index" class="btn grey waves-effect waves-light">Voltar</a>
     </div>
 
 </form>

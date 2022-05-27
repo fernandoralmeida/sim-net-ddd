@@ -38,6 +38,7 @@ namespace Sim.UI.Web.Pages.Atendimento
        
         public class InputModel
         {
+            [DisplayName("Data")]
             [DataType(DataType.Date)]
             public DateTime? DataAtendimento { get; set; }
 

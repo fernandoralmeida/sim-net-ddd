@@ -61,7 +61,7 @@ namespace Sim.UI.Web.Pages.Agenda
                 if (Inscritos == null) 
                     return 0; 
                 else 
-                    return Inscritos.Count();
+                    return Inscritos.Count;
             }
         }
 
@@ -72,7 +72,7 @@ namespace Sim.UI.Web.Pages.Agenda
                 if (Inscritos == null)
                     return Lotacao;
                 else
-                    return Lotacao - Inscritos.Count();
+                    return Lotacao - Inscritos.Count;
             }
         }
     }
