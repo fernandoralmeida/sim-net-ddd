@@ -106,7 +106,7 @@
             $(".modal-trigger").click(function () {
                 var customerId = $(this).data('id');
                 $(".modal-content").empty();
-                $.getJSON(`/Agenda/Inscricao.Remove?id=${customerId}&handler=DetalheInscrito`, (data) => {
+                $.getJSON(`/Agenda/Inscricoes/Index?id=${customerId}&handler=DetalheInscrito`, (data) => {
                     $.each(data, function (i, item) {
                         $(".modal-content").append(`<div>Código: ${item.evento.codigo}</div>`);
                         $(".modal-content").append(`<div>Evento: ${item.evento.tipo} ${item.evento.nome}</div>`);

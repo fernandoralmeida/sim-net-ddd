@@ -7,13 +7,13 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Authorization;
 using AutoMapper;
 
-namespace Sim.UI.Web.Pages.Agenda.Inscricoes.Lista
+namespace Sim.UI.Web.Pages.Agenda.Inscricoes.Consulta
 {
     using Sim.Application.Shared.Interface;
     using System.ComponentModel;
 
     [Authorize]
-    public class ParticipanteModel : PageModel
+    public class IndexModel : PageModel
     {
         private readonly IAppServiceInscricao _appServiceInscricao;
         private readonly IMapper _mapper;
@@ -31,7 +31,7 @@ namespace Sim.UI.Web.Pages.Agenda.Inscricoes.Lista
         [TempData]
         public string StatusMessage { get; set; }
 
-        public ParticipanteModel(IAppServiceInscricao appServiceEvento,
+        public IndexModel(IAppServiceInscricao appServiceEvento,
             IMapper mapper)
         {
             _mapper = mapper;

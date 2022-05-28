@@ -11,109 +11,88 @@
 <form class="card" method="post">
 
     <div class="section">
-
+        <div class="row center">
+            <h6 class="grey-text">Noto Atendimento</h6>
+        </div>
+        <div class="divider"></div>
         @if (Model.Input.Pessoa == null)
         {
-
-            <div class="row">
-                <div class="col">
-                    <div class="input-field">
-                        <input asp-for="GetCPF" id="inputCPF">
-                        <label for="inputCPF">CPF</label>
-                    </div>
+            <div class="row valign-wrapper">
+                <div class="input-field col">
+                    <input asp-for="GetCPF" id="inputCPF"/>
+                    <label asp-for="GetCPF">CPF</label>                   
                 </div>
-                <div class="col">
-                    <div class="input-field">
-                        <button asp-page-handler="IncluirPessoa" class="btn waves-effect" type="submit">Incluir</button>
-                    </div>
-                </div>
+                 <button asp-page-handler="IncluirPessoa" class="btn waves-effect">Incluir</button>
             </div>
         }
         else
         {
-
-            <div class="row">
-                <div class="col-md-2" hidden>
+            <div class="row" hidden>
+                <div class="input-field col">
                     <input asp-for="Input.Pessoa.Id" />
-                    <label asp-for="Input.Pessoa.Id" for="Input_Pessoa_Id"></label>
-                </div>
-                <div class="input-field col s12 m6 l3">
-                    <input asp-for="Input.Pessoa.CPF" />
-                    <label asp-for="Input.Pessoa.CPF"></label>
-                </div>
-                <div class="input-field col s12 m6 l3">
-                    <input asp-for="Input.Pessoa.Nome" />
-                    <label asp-for="Input.Pessoa.Nome"></label>
-                </div>
-                <div class="input-field col s12 m6 l3">
-                    <input asp-for="Input.Pessoa.Email" />
-                    <label asp-for="Input.Pessoa.Email"></label>
-                </div>
-                <div class="input-field col s12 m6 l3">
-                    <input asp-for="Input.Pessoa.Tel_Movel" />
-                    <label asp-for="Input.Pessoa.Tel_Movel"></label>
-                </div>
-                <div class="col-md align-self-end" hidden>
-                    <button class="btn btn-danger" type="submit" asp-page-handler="RemoverPessoa">Remover</button>
+                    <label asp-for="Input.Pessoa.Id"></label>
                 </div>
             </div>
+            <table class="responsive-table striped">                
+                <thead>
+                    <tr>
+                        <th>Tipo</th>
+                        <th>CPF/CNPJ</th>
+                        <th>Cliente</th>
+                        <th>Email</th>
+                        <th>Tel.</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><i class="material-icons blue-text">people</i></td>
+                        <td>@Html.DisplayFor(modelitem => modelitem.Input.Pessoa.CPF)</td>
+                        <td>@Html.DisplayFor(modelitem => modelitem.Input.Pessoa.Nome)</td>
+                        <td>@Html.DisplayFor(modelitem => modelitem.Input.Pessoa.Email)</td>
+                        <td>@Html.DisplayFor(modelitem => modelitem.Input.Pessoa.Tel_Movel)</td>
+                        <td></td>
+                    </tr>
+                    @if(Model.Input.Empresa!=null)
+                    {
+                        <tr>
+                            <td><i class="material-icons amber-text">business</i></td>
+                            <td>@Html.DisplayFor(modelitem => modelitem.Input.Empresa.CNPJ)</td>
+                            <td>@Html.DisplayFor(modelitem => modelitem.Input.Empresa.Nome_Empresarial)</td>
+                            <td>@Html.DisplayFor(modelitem => modelitem.Input.Empresa.Email)</td>
+                            <td>@Html.DisplayFor(modelitem => modelitem.Input.Empresa.Telefone)</td>
+                            <td><button class="btn red lighten-1 waves-effect waves-light btn-small" asp-page-handler="RemoverEmpresa">Remover</button></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
         }
-    </div>
-    <div class="divider"></div>
-    <div class="section">
-
+        
         @if (Model.Input.Empresa == null)
         {
-            <div class="row">
-                <div class="col">
-                    <div class="input-field">
-                        <input asp-for="GetCNPJ" id="inputCNPJ">
-                        <label for="inputCNPJ">CNPJ</label>
-                    </div>
+            <div class="row valign-wrapper">
+                <div class="input-field col">
+                    <input asp-for="GetCNPJ" id="inputCNPJ"/>
+                    <label asp-for="GetCNPJ"></label>
                 </div>
-                <div class="col">
-                    <div class="input-field">
-                        <button asp-page-handler="IncluirEmpresa" class="btn waves-effect" type="submit">Incluir</button>
-                    </div>
-                </div>
+                <button asp-page-handler="IncluirEmpresa" class="btn waves-effect" type="submit">Incluir</button>
             </div>
         }
         else
         {
-            <div class="row">
-                <div class="input-field col s12 m6 l3" hidden>
-                    <label asp-for="Input.Empresa.Id"></label>
+            <div class="row" hidden>
+                <div class="input-field col">
                     <input asp-for="Input.Empresa.Id" />
-                </div>
-                <div class="input-field col s12 m5 l2">
-                    <label asp-for="Input.Empresa.CNPJ"></label>
-                    <input asp-for="Input.Empresa.CNPJ" />
-                </div>
-                <div class="input-field col s12 m6 l3">
-                    <label asp-for="Input.Empresa.Nome_Empresarial"></label>
-                    <input asp-for="Input.Empresa.Nome_Empresarial" />
-                </div>
-                <div class="input-field col s12 m6 l3">
-                    <label asp-for="Input.Empresa.Email"></label>
-                    <input asp-for="Input.Empresa.Email" />
-                </div>
-                <div class="input-field col s12 m5 l2">
-                    <label asp-for="Input.Empresa.Telefone"></label>
-                    <input asp-for="Input.Empresa.Telefone" />
-                </div>
-                <div class="input-field col s12 m2 l2">
-                    <button class="btn red lighten-1" type="submit" asp-page-handler="RemoverEmpresa">Remover</button>
+                    <label asp-for="Input.Empresa.Id"></label>
                 </div>
             </div>
         }
     </div>
     <div class="card-action">
-
-        <button asp-page-handler="Save" type="submit" class="btn waves-effect">Iniciar Atendimento</button>
-        <a asp-page="/Atendimento/Index" class="btn waves-effect red lighten-1">Cancelar</a>
-
+        <button asp-page-handler="Save" type="submit" class="btn-large waves-effect waves-light" title="Iniciar Atendimento Pessoa">Pessoa</button>
+        <button asp-page-handler="Save" type="submit" class="btn-large waves-effect waves-light" title="Iniciar Atendimento Empresa">Empresa</button>
+        <a asp-page="/Atendimento/Index" class="red btn-large waves-effect right"><i class="material-icons">cancel</i></a>
     </div>
-
 </form>
 
 @section Scripts {
