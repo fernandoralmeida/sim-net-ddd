@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Authorization;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Sim.UI.Web.Pages.Atendimento
 {
@@ -135,14 +136,15 @@ namespace Sim.UI.Web.Pages.Atendimento
             try
             {
                 var t = Task.Run(() =>
-                {                 
+                {
                     atendimento.Pessoa = _appServicePessoa.GetById(Input.Pessoa.Id);
-                    atendimento.Empresa = _appServiceEmpresa.GetById(Input.Empresa.Id);
+                    if(Input.Empresa != null)
+                        atendimento.Empresa = _appServiceEmpresa.GetById(Input.Empresa.Id);
                     _appServiceAtendimento.Add(atendimento);
                 });
                 await t;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 StatusMessage = "Erro: " + ex.Message;
             }

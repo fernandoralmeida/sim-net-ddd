@@ -10,6 +10,48 @@
 
 <form class="card" method="post">
 
+    <div class="row">
+
+        @if(Model.Input.Pessoa != null)
+        {
+            <div class="col s12 m12 l6">
+                <div class="card hoverable">
+            <div class="row">
+                <div class="input-field col s6" hidden>
+                    <input asp-for="Input.Pessoa.Id" />
+                    <label asp-for="Input.Pessoa.Id"></label>
+                </div>
+                <div class="input-field col s6">
+                    <input asp-for="Input.Pessoa.CPF" />
+                    <label asp-for="Input.Pessoa.CPF"></label>
+                </div>
+                <div class="input-field col s6">
+                    <input asp-for="Input.Pessoa.Nome" />
+                    <label asp-for="Input.Pessoa.Nome"></label>
+                </div>
+                <div class="input-field col s6">
+                    <input asp-for="Input.Pessoa.Tel_Movel" />
+                    <label asp-for="Input.Pessoa.Tel_Movel"></label>
+                </div>
+            </div>
+            <div class="card-action">
+                <div class="row valign-wrapper">
+                <div class="input-field col">
+                    <input asp-for="GetCNPJ" id="inputCNPJ"/>
+                    <label asp-for="GetCNPJ"></label>
+                </div>
+                <button asp-page-handler="IncluirEmpresa" class="btn btn-small waves-effect" type="submit">Incluir</button>
+            </div>
+            </div>
+        </div>
+            </div>
+        }
+
+
+
+    </div>
+
+
     <div class="section">
         <div class="row center">
             <h6 class="grey-text">Noto Atendimento</h6>
@@ -41,7 +83,6 @@
                         <th>Cliente</th>
                         <th>Email</th>
                         <th>Tel.</th>
-                        <th>Ação</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -51,17 +92,16 @@
                         <td>@Html.DisplayFor(modelitem => modelitem.Input.Pessoa.Nome)</td>
                         <td>@Html.DisplayFor(modelitem => modelitem.Input.Pessoa.Email)</td>
                         <td>@Html.DisplayFor(modelitem => modelitem.Input.Pessoa.Tel_Movel)</td>
-                        <td></td>
                     </tr>
                     @if(Model.Input.Empresa!=null)
                     {
                         <tr>
-                            <td><i class="material-icons amber-text">business</i></td>
+                            <td><button class="btn red lighten-1 waves-effect waves-light btn-small" asp-page-handler="RemoverEmpresa" title="Somente pessoa física"><i class="material-icons">cancel</i></button></td>
+                            <!-- <td><i class="material-icons amber-text">business</i></td>-->
                             <td>@Html.DisplayFor(modelitem => modelitem.Input.Empresa.CNPJ)</td>
                             <td>@Html.DisplayFor(modelitem => modelitem.Input.Empresa.Nome_Empresarial)</td>
                             <td>@Html.DisplayFor(modelitem => modelitem.Input.Empresa.Email)</td>
                             <td>@Html.DisplayFor(modelitem => modelitem.Input.Empresa.Telefone)</td>
-                            <td><button class="btn red lighten-1 waves-effect waves-light btn-small" asp-page-handler="RemoverEmpresa">Remover</button></td>
                         </tr>
                     }
                 </tbody>
@@ -89,9 +129,8 @@
         }
     </div>
     <div class="card-action">
-        <button asp-page-handler="Save" type="submit" class="btn-large waves-effect waves-light" title="Iniciar Atendimento Pessoa">Pessoa</button>
-        <button asp-page-handler="Save" type="submit" class="btn-large waves-effect waves-light" title="Iniciar Atendimento Empresa">Empresa</button>
-        <a asp-page="/Atendimento/Index" class="red btn-large waves-effect right"><i class="material-icons">cancel</i></a>
+        <button asp-page-handler="Save" type="submit" class="btn-large waves-effect waves-light" title="Iniciar Atendimento">Iniciar Atendimento</button>     
+        <a asp-page="/Atendimento/Index" class="grey btn-large waves-effect right"><i class="material-icons">cancel</i></a>
     </div>
 </form>
 

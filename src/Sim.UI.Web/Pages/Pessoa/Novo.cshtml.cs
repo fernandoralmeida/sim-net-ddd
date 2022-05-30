@@ -124,10 +124,12 @@ namespace Sim.UI.Web.Pages.Pessoa
                 Ativo = true                
             };
 
+            StatusMessage = string.Empty;
+
             if(!Functions.Validate.IsCpf(id))
             {
                 StatusMessage = "Erro: CPF inválido!";
-                return RedirectToPage("./Index");
+                return RedirectToPage("/Pessoa/Index");
             }
             else                
                 return Page();
@@ -159,7 +161,7 @@ namespace Sim.UI.Web.Pages.Pessoa
 
                 _pessoa.Add(pessoa);
 
-                return RedirectToPage("./Index");
+                return RedirectToPage("/Pessoa/Index");
 
             }
             catch (Exception ex)

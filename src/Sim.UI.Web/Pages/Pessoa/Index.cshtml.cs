@@ -31,8 +31,7 @@ namespace Sim.UI.Web.Pages.Pessoa
         [BindProperty(SupportsGet = true)]
         public InputModel Input { get; set; }
         public class InputModel
-        {         
-            [DisplayName("Informe o CPF")]            
+        {                  
             public string CPF { get; set; }
             public string Nome { get; set; }
             public string RouteCPF { get; set; }
@@ -81,6 +80,9 @@ namespace Sim.UI.Web.Pages.Pessoa
                             RouteCPF = new Functions.Mask().Remove(Input.CPF),
                             ListaPessoas = pessoa
                         };
+
+                        if(CpfValido && !pessoa.Any())
+                            StatusMessage = "Pessoa não cadastrada!";
                     }
                     else
                     {
