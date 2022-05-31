@@ -15,6 +15,7 @@ namespace Sim.UI.Web.Pages.Agenda.Inscricoes.Novo
     using Sim.Domain.Shared.Entity;
     using Sim.Application.Shared.Interface;
     using Sim.Application.SDE.Interface;
+    using Functions;
 
     [Authorize]
     public class IndexModel : PageModel
@@ -81,7 +82,7 @@ namespace Sim.UI.Web.Pages.Agenda.Inscricoes.Novo
 
             if (Input.Participante != null)
             {
-                var e = Task.Run(() => _appServiceEmpresa.ConsultaByRazaoSocial(new Functions.Mask().Remove(Input.Participante.CPF)));
+                var e = Task.Run(() => _appServiceEmpresa.ConsultaByRazaoSocial(Input.Participante.CPF.MaskRemove()));
                 await e;
 
                 foreach (var emp in e.Result)

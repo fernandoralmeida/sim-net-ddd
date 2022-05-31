@@ -14,6 +14,7 @@ namespace Sim.UI.Web.Pages.Empresa
     using Sim.Application.SDE.Interface;
     using Sim.Domain.SDE.Entity;
     using Sim.Service.CNPJ.WebService;
+    using Functions;
 
     [Authorize]
     public class UpdateModel : PageModel
@@ -84,7 +85,7 @@ namespace Sim.UI.Web.Pages.Empresa
         {
             try
             {
-                var cnpj = new Functions.Mask().Remove(Input.CNPJ);
+                var cnpj = Input.CNPJ.MaskRemove();
 
                 await LoadAsync(cnpj, Input.Id);
 

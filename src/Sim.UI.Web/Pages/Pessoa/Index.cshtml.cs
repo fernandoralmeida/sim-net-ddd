@@ -12,6 +12,7 @@ namespace Sim.UI.Web.Pages.Pessoa
 {
     using Sim.Domain.SDE.Entity;
     using Sim.Application.SDE.Interface;
+    using Functions;
 
     [Authorize]
     public class IndexModel : PageModel
@@ -77,7 +78,7 @@ namespace Sim.UI.Web.Pages.Pessoa
 
                         Input = new InputModel
                         {
-                            RouteCPF = new Functions.Mask().Remove(Input.CPF),
+                            RouteCPF = Input.CPF.MaskRemove(),
                             ListaPessoas = pessoa
                         };
 

@@ -16,7 +16,7 @@ namespace Sim.UI.Web.Pages.Empresa
     using Sim.Domain.SDE.Entity;
     using Sim.Service.CNPJ.WebService;
     using Sim.Service.CNPJ.Entity;
-
+    using Functions;
 
     [Authorize]
     public class AddModel : PageModel
@@ -90,7 +90,7 @@ namespace Sim.UI.Web.Pages.Empresa
             await emp;
             if(emp.Result == null)
             {
-                var cnpj = new Functions.Mask().Remove(Input.CNPJ);
+                var cnpj = Input.CNPJ.MaskRemove();
                 
                 return RedirectToPage("./Add", new { id = cnpj });
             }

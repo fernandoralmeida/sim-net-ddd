@@ -12,7 +12,7 @@ namespace Sim.UI.Web.Areas.Censo.Pages.Empresas
 {
     using Sim.Domain.Cnpj.Entity;
     using Sim.Domain.Cnpj.Interface;
-
+    using Functions;
     using Sim.Application.Interface;
 
 
@@ -65,7 +65,7 @@ namespace Sim.UI.Web.Areas.Censo.Pages.Empresas
                     Input = new InputModel
                     {
                         ListaEmpresas = emp,
-                        CNPJRes = new Functions.Mask().Remove(Input.CNPJ)                       
+                        CNPJRes = Input.CNPJ.MaskRemove()                       
                         
                     };
                 }
