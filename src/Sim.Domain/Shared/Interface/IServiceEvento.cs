@@ -18,5 +18,6 @@ namespace Sim.Domain.Shared.Interface
         Task<IEnumerable<Evento>> EventosAtivos(IEnumerable<Evento> eventos);
         Task<IEnumerable<Evento>> EventosPassados(IEnumerable<Evento> eventos);
         Evento GetByCodigo_Participantes(int codigo);
+        Task<IEnumerable<((string Mes, int Qtde), IEnumerable<Evento>)>> ListarEventosPorMes(IEnumerable<Evento> eventos);
     }
 }

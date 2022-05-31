@@ -57,5 +57,10 @@ namespace Sim.Application.Shared
         {
             return _evento.ListAll();
         }
+
+        public Task<IEnumerable<((string Mes, int Qtde), IEnumerable<Evento>)>> ListarEventosPorMes(IEnumerable<Evento> eventos)
+        {
+            return _evento.ListarEventosPorMes(eventos);
+        }
     }
 }

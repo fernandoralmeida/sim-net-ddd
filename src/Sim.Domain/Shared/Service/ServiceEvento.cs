@@ -65,5 +65,29 @@ namespace Sim.Domain.Shared.Service
         {
             return _evento.ListAll();
         }
+
+        /// <summary>
+        /// Lista eventos classificados por mês
+        /// </summary>
+        /// <param name="eventos">Lista de eventos</param>
+        /// <returns>Lista de eventos por mês</returns>
+        public Task<IEnumerable<((string Mes, int Qtde), IEnumerable<Evento>)>> ListarEventosPorMes(IEnumerable<Evento> eventos)
+        {
+            try
+            {
+                var lista_meses = new List<((string Mes, int Qtde), List<Evento>)>();
+                var meses = new List<(string Mes, int Qtde)>();
+
+                foreach(var e in eventos)
+                {
+
+                }
+            }
+            catch
+            {
+
+            }
+            return null;
+        }
     }
 }
