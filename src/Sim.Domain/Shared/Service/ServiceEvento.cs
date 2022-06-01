@@ -71,23 +71,36 @@ namespace Sim.Domain.Shared.Service
         /// </summary>
         /// <param name="eventos">Lista de eventos</param>
         /// <returns>Lista de eventos por mês</returns>
-        public Task<IEnumerable<((string Mes, int Qtde), IEnumerable<Evento>)>> ListarEventosPorMes(IEnumerable<Evento> eventos)
+        public async Task<IEnumerable<(string Mes, int Qtde, IEnumerable<Evento>)>> ListarEventosPorMes(IEnumerable<Evento> eventos)
         {
             try
             {
-                var lista_meses = new List<((string Mes, int Qtde), List<Evento>)>();
-                var meses = new List<(string Mes, int Qtde)>();
-
-                foreach(var e in eventos)
+                var t = Task.Run(() =>
                 {
+                    var _lista_meses = new List<(string Mes, int Qtde, IEnumerable<Evento>)>();
+                    var _eventos = new List<Evento>();
+                    var _meses = new List<(string Mes, int Qtde)>();
+                    var _mes = new List<string>();
 
-                }
+                    for (int i = 1; i < 13; i++)
+                    {
+                        _eventos = eventos.Where(s => s.Data.Value.Month == i).ToList();
+                        if(_eventos.Any())
+                            _lista_meses.Add((_eventos.FirstOrDefault().Data.Value.ToString("MMM"), _eventos.Count, _eventos));
+                    }
+
+                    return _lista_meses;
+                });
+
+                await t;
+
+                return t.Result;
+
             }
             catch
             {
-
+                return null;
             }
-            return null;
         }
     }
 }

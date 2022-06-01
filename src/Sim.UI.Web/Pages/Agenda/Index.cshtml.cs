@@ -30,6 +30,7 @@ namespace Sim.UI.Web.Pages.Agenda
             public string Evento { get; set; }
             public int Ano { get; set; }
             public IEnumerable<InputModelEvento> ListaEventos { get; set; }
+            public IEnumerable<(string Mes, int Qtde, IEnumerable<Evento>)> ListaEventosMes { get; set; }
         }
 
         [TempData]
@@ -47,37 +48,22 @@ namespace Sim.UI.Web.Pages.Agenda
         public async Task OnGetAsync()
         {
             Input.Ano = DateTime.Now.Year;
-            var t = await _appServiceEvento.EventosAtivos();
-            Input.ListaEventos = _mapper.Map<IEnumerable<InputModelEvento>>(t);
+            Input.ListaEventosMes = await _appServiceEvento.ListarEventosPorMes(await _appServiceEvento.EventosAtivos(Input.Ano));
         }
 
         public async Task OnPostEventAsync()
         {
-            var t = Task.Run(() =>
-            {
-                Input.ListaEventos = _mapper.Map<IEnumerable<InputModelEvento>>
-                (_appServiceEvento.GetByNome(Input.Evento));
-            });
-            await t;
+            Input.ListaEventosMes = await _appServiceEvento.ListarEventosPorMes(_appServiceEvento.GetByNome(Input.Evento, Input.Ano));
         }
         public async Task OnPostEventAvailAsync()
         {
-            var t = Task.Run(() =>
-            {
-                Input.ListaEventos = _mapper.Map<IEnumerable<InputModelEvento>>
-                (_appServiceEvento.EventosAtivos().Result);
-            });
-            await t;
+            Input.ListaEventosMes = await _appServiceEvento.ListarEventosPorMes(await _appServiceEvento.EventosAtivos(Input.Ano));
         }
 
         public async Task OnPostEventOldAsync()
         {
-            var t = Task.Run(() =>
-            {
-                Input.ListaEventos = _mapper.Map<IEnumerable<InputModelEvento>>
-                (_appServiceEvento.EventosPassados().Result);
-            });
-            await t;
+
+            Input.ListaEventosMes = await _appServiceEvento.ListarEventosPorMes(await _appServiceEvento.EventosPassados(Input.Ano));
         }
 
         private int QuantosDiasFaltam(DateTime dataalvo)

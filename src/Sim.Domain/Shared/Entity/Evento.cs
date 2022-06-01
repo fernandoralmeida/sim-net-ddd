@@ -26,17 +26,11 @@ namespace Sim.Domain.Shared.Entity
 
         public int Inscricoes()
         {
-            if (Inscritos == null)
-                return 0;
-            else
-                return Inscritos.Count();
+            return Inscritos == null ? 0 : Inscritos.Count;
         }
         public int Vagas()
         {
-            if (Inscritos == null)
-                return Lotacao;
-            else
-                return Lotacao - Inscritos.Count();
+            return Inscritos == null ? Lotacao : Lotacao - Inscritos.Count;
         }
 
         public bool EventosAtivos(Evento obj)

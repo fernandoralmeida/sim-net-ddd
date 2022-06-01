@@ -12,13 +12,13 @@ namespace Sim.Application.Shared.Interface
     {
         IEnumerable<Evento> ListAll();
         IEnumerable<Evento> GetByOwner(string setor);
-        IEnumerable<Evento> GetByNome(string nome);
+        IEnumerable<Evento> GetByNome(string nome, int ano);
         Evento GetByCodigo(int codigo);
         int LastCodigo();
-        Task<IEnumerable<Evento>> EventosAtivos();
-        Task<IEnumerable<Evento>> EventosPassados();
+        Task<IEnumerable<Evento>> EventosAtivos(int ano);
+        Task<IEnumerable<Evento>> EventosPassados(int ano);
         Evento GetByCodigo_Participantes(int codigo);
-        Task<IEnumerable<((string Mes, int Qtde), IEnumerable<Evento>)>> ListarEventosPorMes(IEnumerable<Evento> eventos);
+        Task<IEnumerable<(string Mes, int Qtde, IEnumerable<Evento>)>> ListarEventosPorMes(IEnumerable<Evento> eventos);
 
     }
 }

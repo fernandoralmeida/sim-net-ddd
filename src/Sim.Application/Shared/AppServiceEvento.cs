@@ -18,14 +18,14 @@ namespace Sim.Application.Shared
             _evento = evento;
         }
 
-        public async Task<IEnumerable<Evento>> EventosAtivos()
+        public async Task<IEnumerable<Evento>> EventosAtivos(int ano)
         {
-            return await _evento.EventosAtivos(ListAll());
+            return await _evento.EventosAtivos(ListAll().Where(s => s.Data.Value.Year == ano));
         }
 
-        public async Task<IEnumerable<Evento>> EventosPassados()
+        public async Task<IEnumerable<Evento>> EventosPassados(int ano)
         {
-            return await _evento.EventosPassados(ListAll());
+            return await _evento.EventosPassados(ListAll().Where(s => s.Data.Value.Year == ano));
         }
 
         public Evento GetByCodigo(int codigo)
@@ -38,9 +38,9 @@ namespace Sim.Application.Shared
             return _evento.GetByCodigo_Participantes(codigo);
         }
 
-        public IEnumerable<Evento> GetByNome(string nome)
+        public IEnumerable<Evento> GetByNome(string nome, int ano)
         {
-            return _evento.GetByNome(nome);
+            return _evento.GetByNome(nome).Where(s => s.Data.Value.Year == ano);
         }
 
         public IEnumerable<Evento> GetByOwner(string setor)
@@ -58,7 +58,7 @@ namespace Sim.Application.Shared
             return _evento.ListAll();
         }
 
-        public Task<IEnumerable<((string Mes, int Qtde), IEnumerable<Evento>)>> ListarEventosPorMes(IEnumerable<Evento> eventos)
+        public Task<IEnumerable<(string Mes, int Qtde, IEnumerable<Evento>)>> ListarEventosPorMes(IEnumerable<Evento> eventos)
         {
             return _evento.ListarEventosPorMes(eventos);
         }
