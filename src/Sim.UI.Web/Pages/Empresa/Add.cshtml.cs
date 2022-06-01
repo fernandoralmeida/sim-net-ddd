@@ -62,7 +62,7 @@ namespace Sim.UI.Web.Pages.Empresa
             {
                 var empresa = _mapper.Map<Empresas>(Input);
                 _appServiceEmpresa.Add(empresa);
-                StatusMessage = "Empresa adicionada com sucesso!";
+                StatusMessage = "Empresa sincronizada com sucesso!";
             });
             await t;
         }
@@ -95,9 +95,8 @@ namespace Sim.UI.Web.Pages.Empresa
                 return RedirectToPage("./Add", new { id = cnpj });
             }
             else
-            {
                 return RedirectToPage("./Update", new { id = emp.Result.Id });
-            }            
+                       
         }
 
         public async Task<IActionResult> OnPostAsync()
