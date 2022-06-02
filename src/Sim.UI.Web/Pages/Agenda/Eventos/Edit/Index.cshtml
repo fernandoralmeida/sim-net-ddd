@@ -10,55 +10,62 @@
 
 <div class="row">
     <form method="post" class="card">
-        <div class="row card-content">
-            <div class="col-md-2 mb-3" hidden>
-                <label asp-for="Input.Id"></label>
-                <input asp-for="Input.Id" />
-            </div>
-            <div class="col-md-2 mb-3" hidden>
-                <label asp-for="Input.Codigo"></label>
-                <input asp-for="Input.Codigo" />
-            </div>
-            <div class="col s12 m6 l6 input-field">
-                <select asp-for="Input.Tipo" asp-items="Model.TipoEventos">
-                    <option selected value=''>--Tipo do Evento--</option>
-                </select>
-                <label asp-for="Input.Tipo"></label>
-            </div>
-            <div class="col s12 m6 l6 input-field">
-                <input asp-for="Input.Nome" />
-                <label class="form-label" asp-for="Input.Nome"></label>
-            </div>
-            <div class="col s12 m3 l4 input-field">
-                <input asp-for="Input.Data" />
-            </div>
-            <div class="col s12 m3 l4 input-field">
-                <select asp-for="Input.Formato">
-                    <option selected value=''>--Tipo do Evento--</option>
-                    <option value='Online'>Online</option>
-                    <option value='Presencial'>Presencial</option>
-                </select>
-                <label asp-for="Input.Formato"></label>
-            </div>
-            <div class="col s12 m2 l4 input-field">
-                <input asp-for="Input.Lotacao" />
-                <label asp-for="Input.Lotacao"></label>
-            </div>
-            <div class="col s12 m6 l6 input-field">
-                <select asp-for="Input.Owner" asp-items="Model.Setores">
-                    <option selected value=''>------Setor------</option>
-                </select>
-                <label asp-for="Input.Owner"></label>
-            </div>
-            <div class="col s12 m6 l6 input-field">
-                <select asp-for="Input.Parceiro" asp-items="Model.Parceiros">
-                    <option selected>--Parceiro--</option>
-                </select>
-                <label asp-for="Input.Parceiro"></label>
-            </div>
-            <div class="col s12 input-field">
-                <textarea asp-for="Input.Descricao" class="materialize-textarea" rows="2"></textarea>
-                <label asp-for="Input.Descricao"></label>
+        <div class="card-content">
+            <div class="row">
+                <div class="row" hidden>
+                    <input asp-for="Input.Id" />
+                    <label asp-for="Input.Id"></label>
+                </div>
+                <div class="row" hidden> 
+                    <input asp-for="Input.Codigo" />
+                    <label asp-for="Input.Codigo"></label>
+                </div>
+                <div class="col s12 m4 l4 input-field">
+                    <select asp-for="Input.Tipo" asp-items="Model.TipoEventos" required>
+                        <option selected></option>
+                    </select>
+                    <label asp-for="Input.Tipo"></label>
+                </div>
+                <div class="col s12 m8 l8 input-field">
+                    <input asp-for="Input.Nome" required />
+                    <label asp-for="Input.Nome"></label>
+                </div>
+                <div class="col s12 m3 l4 input-field">
+                    <input asp-for="Input.Data" id="dataid" required />
+                </div>
+                <div class="col s12 m3 l4 input-field">
+                    <select asp-for="Input.Formato" required>
+                        <option selected></option>
+                        <option value="Online">Online</option>
+                        <option value="Presencial">Presencial</option>
+                    </select>
+                    <label asp-for="Input.Formato"></label>
+                </div>
+                <div class="col s12 m2 l4 input-field">
+                    <input asp-for="Input.Lotacao" />
+                    <label asp-for="Input.Lotacao"></label>
+                </div>
+                <div class="col s12 m4 l4 input-field">
+                    <select asp-for="Input.Owner" asp-items="Model.Setores" required>
+                        <option selected></option>
+                    </select>
+                    <label asp-for="Input.Owner"></label>
+                </div>
+                <div class="col s12 m4 l4 input-field">
+                    <select asp-for="Input.Parceiro" asp-items="Model.Parceiros">
+                        <option selected></option>
+                    </select>
+                    <label asp-for="Input.Parceiro"></label>
+                </div>
+                <div class="col s12 m4 l4 input-field">
+                    <select asp-for="Input.Situacao" asp-items="Model.Situacoes">
+                    </select>
+                    <label asp-for="Input.Situacao"></label>
+                </div>
+                <div class="col s12 input-field">
+                    <textarea asp-for="Input.Descricao" class="materialize-textarea" rows="2"></textarea>
+                    <label asp-for="Input.Descricao"></label>
+                </div>
             </div>
         </div>
         <div class="card-action">

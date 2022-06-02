@@ -42,8 +42,9 @@ namespace Sim.UI.Web.Pages.Agenda.Eventos
         public SelectList TipoEventos { get; set; }
         public SelectList Setores { get; set; }
         public SelectList Parceiros { get; set; }
+        public SelectList Situacoes { get; set; }
 
-        public async Task OnGet()
+        private async Task Onload()
         {
             var t = Task.Run(() => _appServiceTipo.List());
             await t;
@@ -68,6 +69,12 @@ namespace Sim.UI.Web.Pages.Agenda.Eventos
             {
                 Parceiros = new SelectList(p.Result, nameof(Parceiro.Nome), nameof(Parceiro.Nome), null);
             }
+
+            Situacoes = new SelectList(Enum.GetNames(typeof(Evento.ESituacao)));
+        }
+        public async Task OnGet()
+        {
+            await Onload();
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -75,7 +82,11 @@ namespace Sim.UI.Web.Pages.Agenda.Eventos
             try
             {
                 if (!ModelState.IsValid)
-                { return Page(); }
+                {
+                    StatusMessage = "Verifique o preenchimento correto do formulário!";
+                    await Onload();
+                    return Page();
+                }
 
                 var cod = Task.Run(() => _appServiceEvento.LastCodigo());
                 await cod;
@@ -84,8 +95,6 @@ namespace Sim.UI.Web.Pages.Agenda.Eventos
                     Input.Codigo = 210001;
                 else
                     Input.Codigo = cod.Result + 1;
-
-                Input.Ativo = true;
 
                 var t = Task.Run(() => _appServiceEvento.Add(_mapper.Map<Evento>(Input)));
 

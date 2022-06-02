@@ -16,7 +16,8 @@ namespace Sim.Application.Shared.Interface
         Evento GetByCodigo(int codigo);
         int LastCodigo();
         Task<IEnumerable<Evento>> EventosAtivos(int ano);
-        Task<IEnumerable<Evento>> EventosPassados(int ano);
+        Task<IEnumerable<Evento>> EventosFinalizados(int ano);
+        Task<IEnumerable<Evento>> EventosCancelados(int ano);
         Evento GetByCodigo_Participantes(int codigo);
         Task<IEnumerable<(string Mes, int Qtde, IEnumerable<Evento>)>> ListarEventosPorMes(IEnumerable<Evento> eventos);
 

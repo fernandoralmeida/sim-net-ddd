@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace Sim.Domain.Shared.Entity
 {
+    
     public class Evento
     {
+        public enum ESituacao { Ativo = 1, Finalizado = 2, Cancelado = 3 }
+        public enum EFormato { Presencial = 1, OnLine = 2 }
         public Evento()
         {     }
         public Guid Id { get; set; }
@@ -20,7 +23,7 @@ namespace Sim.Domain.Shared.Entity
         public string Owner { get; set; }
         public string Parceiro { get; set; }
         public int Lotacao { get; set; }
-        public bool Ativo { get; set; }
+        public ESituacao Situacao { get; set; }
 
         public virtual ICollection<Inscricao> Inscritos { get; set; }
 
@@ -32,15 +35,20 @@ namespace Sim.Domain.Shared.Entity
         {
             return Inscritos == null ? Lotacao : Lotacao - Inscritos.Count;
         }
-
+        
         public bool EventosAtivos(Evento obj)
         {
-            return obj.Data >=  DateTime.Now;
+            return obj.Situacao <= ESituacao.Ativo;
         }
 
-        public bool EventosPassados(Evento obj)
+        public bool EventosFinalizados(Evento obj)
         {
-            return obj.Data < DateTime.Now;
+            return obj.Situacao == ESituacao.Finalizado;
+        }
+
+        public bool EventosCancelados(Evento obj)
+        {
+            return obj.Situacao == ESituacao.Cancelado;
         }
     }
 }

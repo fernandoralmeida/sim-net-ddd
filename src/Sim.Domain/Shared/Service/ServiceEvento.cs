@@ -27,15 +27,22 @@ namespace Sim.Domain.Shared.Service
             return t.Result;
         }
 
-        public async Task<IEnumerable<Evento>> EventosPassados(IEnumerable<Evento> eventos)
+        public async Task<IEnumerable<Evento>> EventosCancelados(IEnumerable<Evento> eventos)
         {
-            var t = Task.Run(() => eventos.Where(s => s.EventosPassados(s)).OrderByDescending(o => o.Data));
+            var t = Task.Run(() => eventos.Where(s => s.EventosCancelados(s)).OrderByDescending(o => o.Data));
 
             await t;
 
             return t.Result;
         }
+        public async Task<IEnumerable<Evento>> EventosFinalizados(IEnumerable<Evento> eventos)
+        {
+            var t = Task.Run(() => eventos.Where(s => s.EventosFinalizados(s)).OrderByDescending(o => o.Data));
 
+            await t;
+
+            return t.Result;
+        }
         public Evento GetByCodigo(int codigo)
         {
             return _evento.GetByCodigo(codigo);

@@ -55,15 +55,21 @@ namespace Sim.UI.Web.Pages.Agenda
         {
             Input.ListaEventosMes = await _appServiceEvento.ListarEventosPorMes(_appServiceEvento.GetByNome(Input.Evento, Input.Ano));
         }
-        public async Task OnPostEventAvailAsync()
+        public async Task OnPostAvailableAsync()
         {
             Input.ListaEventosMes = await _appServiceEvento.ListarEventosPorMes(await _appServiceEvento.EventosAtivos(Input.Ano));
         }
 
-        public async Task OnPostEventOldAsync()
+        public async Task OnPostFinalizedAsync()
         {
 
-            Input.ListaEventosMes = await _appServiceEvento.ListarEventosPorMes(await _appServiceEvento.EventosPassados(Input.Ano));
+            Input.ListaEventosMes = await _appServiceEvento.ListarEventosPorMes(await _appServiceEvento.EventosFinalizados(Input.Ano));
+        }
+
+        public async Task OnPostCanceledAsync()
+        {
+
+            Input.ListaEventosMes = await _appServiceEvento.ListarEventosPorMes(await _appServiceEvento.EventosCancelados(Input.Ano));
         }
 
         private int QuantosDiasFaltam(DateTime dataalvo)

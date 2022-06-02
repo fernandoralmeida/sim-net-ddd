@@ -23,9 +23,14 @@ namespace Sim.Application.Shared
             return await _evento.EventosAtivos(ListAll().Where(s => s.Data.Value.Year == ano));
         }
 
-        public async Task<IEnumerable<Evento>> EventosPassados(int ano)
+        public async Task<IEnumerable<Evento>> EventosFinalizados(int ano)
         {
-            return await _evento.EventosPassados(ListAll().Where(s => s.Data.Value.Year == ano));
+            return await _evento.EventosFinalizados(ListAll().Where(s => s.Data.Value.Year == ano));
+        }
+
+        public async Task<IEnumerable<Evento>> EventosCancelados(int ano)
+        {
+            return await _evento.EventosCancelados(ListAll().Where(s => s.Data.Value.Year == ano));
         }
 
         public Evento GetByCodigo(int codigo)

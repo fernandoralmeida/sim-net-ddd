@@ -9,6 +9,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Sim.UI.Web.Pages.Agenda
 {
+    using Domain.Shared.Entity;
     public class InputModelEvento
     {
         [Key]
@@ -43,14 +44,14 @@ namespace Sim.UI.Web.Pages.Agenda
         [DisplayName("Setor Responsável")]
         public string Owner { get; set; }
 
-        [Required]
         [DisplayName("Parceiro")]
         public string Parceiro { get; set; }
 
         [DisplayName("Lotação")]
         public int Lotacao { get; set; }
 
-        public bool Ativo { get; set; }
+        [DisplayName("Situação")]
+        public Evento.ESituacao Situacao { get; set; }
 
         public virtual ICollection<InputModelInscricao> Inscritos { get; set; }
 

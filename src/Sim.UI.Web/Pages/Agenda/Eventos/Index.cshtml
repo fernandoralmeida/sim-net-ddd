@@ -13,13 +13,13 @@
                     <input asp-for="Input.Id" />
                     <label asp-for="Input.Id"></label>
                 </div>
-                <div class="col s12 m6 l6 input-field">
-                    <select asp-for="Input.Tipo" asp-items="Model.TipoEventos">
-                        <option selected>--Tipo do Evento--</option>
+                <div class="col s12 m4 l4 input-field">
+                    <select asp-for="Input.Tipo" asp-items="Model.TipoEventos" required>
+                        <option selected></option>
                     </select>
                     <label asp-for="Input.Tipo"></label>
                 </div>
-                <div class="col s12 m6 l6 input-field">
+                <div class="col s12 m8 l8 input-field">
                     <input asp-for="Input.Nome" required />
                     <label asp-for="Input.Nome"></label>
                 </div>
@@ -27,8 +27,8 @@
                     <input asp-for="Input.Data" id="dataid" required />
                 </div>
                 <div class="col s12 m3 l4 input-field">
-                    <select asp-for="Input.Formato">
-                        <option selected>--Formato--</option>
+                    <select asp-for="Input.Formato" required>
+                        <option selected></option>
                         <option value="Online">Online</option>
                         <option value="Presencial">Presencial</option>
                     </select>
@@ -38,17 +38,22 @@
                     <input asp-for="Input.Lotacao" />
                     <label asp-for="Input.Lotacao"></label>
                 </div>
-                <div class="col s12 m6 l6 input-field">
-                    <select asp-for="Input.Owner" asp-items="Model.Setores">
-                        <option selected>--Setor--</option>
+                <div class="col s12 m4 l4 input-field">
+                    <select asp-for="Input.Owner" asp-items="Model.Setores" required>
+                        <option selected></option>
                     </select>
                     <label asp-for="Input.Owner"></label>
                 </div>
-                <div class="col s12 m6 l6 input-field">
+                <div class="col s12 m4 l4 input-field">
                     <select asp-for="Input.Parceiro" asp-items="Model.Parceiros">
-                        <option selected>--Parceiro--</option>
+                        <option selected></option>
                     </select>
                     <label asp-for="Input.Parceiro"></label>
+                </div>
+                <div class="col s12 m4 l4 input-field">
+                    <select asp-for="Input.Situacao" asp-items="Model.Situacoes">
+                    </select>
+                    <label asp-for="Input.Situacao"></label>
                 </div>
                 <div class="col s12 input-field">
                     <textarea asp-for="Input.Descricao" class="materialize-textarea" rows="2"></textarea>
