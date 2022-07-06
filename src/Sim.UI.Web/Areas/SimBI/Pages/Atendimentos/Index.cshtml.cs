@@ -86,23 +86,19 @@ namespace Sim.UI.Web.Areas.SimBI.Pages.Atendimentos
 
         public JsonResult OnGetPreview(string id, string id2, string mth, int y)
         {
-            JsonResult rjson;
-
-
+            //JsonResult rjson;
             return null;
         }
 
         public JsonResult OnGetServicoPreview(string id, string mth, int y)
         {
-            JsonResult rjson;
-                        
+            //JsonResult rjson;                        
             return null;
         }
 
         public JsonResult OnGetCanalPreview(string id, string id2,  string mth, int y)
         {
-            JsonResult rjson;            
-
+            //JsonResult rjson;
             return null;
         }
 
