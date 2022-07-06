@@ -102,6 +102,7 @@ namespace Sim.Cross.Data.Context
             modelBuilder.ApplyConfiguration(new Config.Entity.TipoMap());
             modelBuilder.ApplyConfiguration(new Config.Entity.ContadorMap());
             modelBuilder.ApplyConfiguration(new Config.Entity.StatusAtendimentoMap());
+            modelBuilder.ApplyConfiguration(new Config.Entity.EventoMap());
 
             base.OnModelCreating(modelBuilder);
         } 
